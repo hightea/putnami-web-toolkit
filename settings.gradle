@@ -1,0 +1,24 @@
+include 'core'
+include 'doc'
+
+// Add all the plugins projects
+include new File(settingsDir, 'plugins').listFiles().findAll { 
+     it.isDirectory() 
+    }.collect { 
+        it.getName() 
+    }.toArray(new java.lang.String[0])
+
+// Rename the projects
+rootProject.children.each {project ->
+	if ("${project.name}" == 'core') {
+		project.name = 'pwt'
+	} else if ("${project.name}" == 'doc') {
+		project.name = 'pwt-doc'
+	} else {
+		String projectDirName = "plugins/${project.name}"
+		project.projectDir = new File(settingsDir, projectDirName)
+		project.name = "pwt-${project.name}"
+		assert project.projectDir.isDirectory()
+	}
+}
+

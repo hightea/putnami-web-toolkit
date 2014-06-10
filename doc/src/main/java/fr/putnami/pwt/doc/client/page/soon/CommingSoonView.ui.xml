@@ -1,0 +1,251 @@
+<!--
+
+    This file is part of pwt-doc.
+
+    pwt-doc is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt-doc is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client"
+	>
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel>
+		<w:Header ui:field="header">
+			<w:Heading level="1" navSpy="{tableOfContent}">Comming soon...</w:Heading>
+			<p class="lead">
+			<strong>PWT</strong> is not over. A lot of good stuff are in the pipe. 
+			All the following features will be planned  in the next releases. 
+			The priorities are not fixed yet, we can replan if required.
+			</p>
+		</w:Header>
+		<w:HTMLPanel ui:field="content">
+		
+			<w:Heading level="2" navSpy="{tableOfContent}">Documentation</w:Heading>
+			<p>We will continue our efforts to complete and correct the documentation. 
+			As you may have noticed we are not native english speakers, so any help in correcting typos will be welcome. </p>
+			<w:Heading level="3" navSpy="{tableOfContent}">Javadoc</w:Heading>
+			<p>Because of the non quality of the actual javadoc, we voluntarily withdrew it from the sources. 
+				We will provide the necessary efforts to deliver a good Javadoc in next releases.</p>
+				
+				
+			<w:Heading level="2" navSpy="{tableOfContent}">Injection</w:Heading>
+			<p>The next step for reduce code is the code generation with rebinding and injection.</p>
+
+	 		<w:Heading level="3" navSpy="{tableOfContent}">@PostConstruct</w:Heading>
+			<p>
+			Because of the injection, the annotation <code>@PostConstruct</code> is required.
+			The  <code>@PostConstruct</code> annoted method will be called after the injection process.
+			</p>
+			
+	 		<w:Heading level="3" navSpy="{tableOfContent}">@Model</w:Heading>
+			<p>The <code>@Model</code> annotation will replace non productive code to declare Model.</p>
+			<div class="showcase-sample-block">
+				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+public interface GroupModel extends Model<Group> {}
+Model<Group> MODEL = GWT.create(GroupModel.class);
+]]></pre>
+				</c:StaticCode>
+				<div class="showcase-sample">
+					<strong>Becomes:</strong>
+				</div>
+				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@Model 
+Model<Group> MODEL; 
+]]></pre>
+				</c:StaticCode>
+			</div>
+			<w:Heading level="3" navSpy="{tableOfContent}">@Service</w:Heading>
+			<p>The <code>@Service</code> annotation will help to construct and bind an rpc service.</p>
+			<div class="showcase-sample-block">
+				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+public class MyView {
+	interface MyRemoteService extends ServiceProxy<MyView, MyService>, MyService {
+	}
+	private final MyRemoteService myService = GWT.create(MyRemoteService.class);
+	
+	public MyView() {
+		myService.bindService(this);
+	}
+}
+]]></pre>
+				</c:StaticCode>
+				<div class="showcase-sample">
+					<strong>Becomes:</strong>
+				</div>
+				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+public class MyView {
+	@Service 
+	MyService myService;
+}
+]]></pre>
+				</c:StaticCode>
+			</div>
+			
+			
+			<w:Heading level="3" navSpy="{tableOfContent}">@Templated</w:Heading>
+			<p>
+				The <code>@Templated</code> annoted view will be auto binded whith the template.
+			</p>
+			<div class="showcase-sample-block">
+				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+public class MyView extends Composite implements View<ViewPlace> {
+	interface Binder extends UiBinderLocalized<Widget, MyView> {}
+	private final UiBinderLocalized<Widget, MyView> binder = GWT.create(Binder.class);
+	
+	public MyView() {
+		initWidget(binder.createAndBindUi(this));
+	}
+}
+]]></pre>
+				</c:StaticCode>
+				<div class="showcase-sample">
+					<strong>Becomes:</strong>
+				</div>
+				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@Templated
+public class MyView { }
+]]></pre>
+				</c:StaticCode>
+			</div>
+			<w:Heading level="3" navSpy="{tableOfContent}">@ErrorHandler</w:Heading>
+			<p>
+				<code>@ErrorHandler</code> annotation will help to bind uncaught exceptions directly on the view when loaded.
+			</p>
+			<div class="showcase-sample-block">
+				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@ErrorHandler
+void onUncaughtException(Throwable e) {
+	//Do something.
+}
+]]></pre>
+				</c:StaticCode>
+			</div>
+				
+			<w:Heading level="2" navSpy="{tableOfContent}">Components</w:Heading>
+			<p>We will keep on our efforts to provide rich components. 
+				We know that some important components are missing, such as the followings and for sure many others are required. 
+				Any other suggestions are welcome and will be discussed.
+			</p>
+			<w:Heading level="3" navSpy="{tableOfContent}">Image</w:Heading>
+			
+			<w:Heading level="3" navSpy="{tableOfContent}">Rich text editor</w:Heading>
+			<p>Because xe're not satisfied with the GWT's richtext editor we didn't want to implement it. 
+				We're going to provide you a new one making cleaner HTML code.</p>
+				
+			<w:Heading level="3" navSpy="{tableOfContent}">Drag and Drop support</w:Heading>
+			<p>We're going to provide  an easy  drag and drop support. We don't know how yet, but we will find a solution.</p>
+			
+			<w:Heading level="3" navSpy="{tableOfContent}">AbstractInputSelect extentions</w:Heading>
+			<p>We're going to provide more selection widgets.</p>
+			<ul>
+				<li>InputSwitch</li>
+				<li>InputRadio</li>
+				<li>InputCheckbox</li>
+			</ul>
+			
+			<w:Heading level="3" navSpy="{tableOfContent}">Icon customisation</w:Heading>
+			<p>Fontello provides a nice way to make icon sets. We provide a full set but we're going to make possible to replace it with your own.
+			</p>
+			
+			<w:Heading level="3" navSpy="{tableOfContent}">Progress bar</w:Heading>
+			<p>Simple implementation of the Bootstrap progress bar.</p>
+
+			<w:Heading level="3" navSpy="{tableOfContent}">File upload</w:Heading>
+			<p>We're going to provide a sexy File upload widget. This control will get the following features : </p>
+			<ul>
+				<li>Live upload progress bar.</li>
+				<li>Multi upload.</li>
+				<li>Drag and Drop system files / folder.</li>
+			</ul>
+			
+			<w:Heading level="3" navSpy="{tableOfContent}">Template logic</w:Heading>
+			<p>Based on data binding, the template logic will help to make easily dynamic forms.
+				All needs hasn't been fixed, but we're  thinking about it.
+			</p>
+			<div class="showcase-sample-block">
+				<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<l:ConditionTrue path="valid" >
+	<!-- display a widget if the valid property is true -->
+</l:ConditionTrue>
+<l:ConditionEquals value="user.name" other="otherValue" >
+	<!-- display a widget -->
+</l:ConditionEquals>
+...	
+]]></pre>
+				</c:StaticCode>
+			</div>
+	
+			<w:Heading level="2" navSpy="{tableOfContent}">Server Integration</w:Heading>
+			<p>We're going to implement new <code>CommandServices</code> allowing an easy integration on servers. 
+			</p>
+			<ul>
+				<li>J2EE CommandService resolving services in the JNDI</li>
+				<li>Spring CommandService resolving services in the ApplicationContext</li>
+			</ul>
+			
+	
+			<w:Heading level="2" navSpy="{tableOfContent}">Security</w:Heading>
+			<p>Because the security is an important thing, we're going to provide the possibility to manage it on View, Services and Components.</p>
+			<div class="showcase-sample-block">
+				<div class="showcase-sample">
+					<strong>On templates</strong>
+				</div>
+				<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<s:Secure negate="true" hasRole="admin" >
+	<!-- display a widget if the current user is not an admin -->
+</s:Secure:>
+]]></pre>
+				</c:StaticCode>
+				<div class="showcase-sample">
+					<strong>On java views or services</strong>
+				</div>
+				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@Secure({"admin", "user"})
+public class MyView{}
+]]></pre>
+				</c:StaticCode>
+			</div>
+	
+			<w:Heading level="2" navSpy="{tableOfContent}">New plugins</w:Heading>
+			<p>Those plugin's are ideas of what we'll maybe need a close day.</p>
+			<ul>
+				<li><strong>Social plugins :</strong> Make easy the integration with the most common social networks.</li>
+				<li><strong>MarkDown editor :</strong> Make easy to write and read markdown text.</li>
+			</ul>
+	
+			<w:Heading level="2" navSpy="{tableOfContent}">Conclusions</w:Heading>
+			<p>Yes there are still months of works. Implementing new features, fixing bugs.
+				But we're pretty sure that PWT will help you tomorrow to build great web apps, it already helps us every days.
+			</p>
+	
+		</w:HTMLPanel>
+	</w:HTMLPanel>
+</ui:UiBinder>

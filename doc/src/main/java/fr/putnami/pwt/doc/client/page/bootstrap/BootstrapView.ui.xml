@@ -1,0 +1,54 @@
+<!--
+
+    This file is part of pwt-doc.
+
+    pwt-doc is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt-doc is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client">
+
+	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+	<w:HTMLPanel>
+		<w:Header ui:field="header">
+			<w:Heading level="1" navSpy="{tableOfContent}">Bootstrap</w:Heading>
+			<p class="lead"><strong title="Putnami Web Toolkit">PWT</strong> is fully based on Twitter bootstrap Css framework. So it is fully responsive and fully themable.</p>
+		</w:Header>
+		<w:HTMLPanel ui:field="content">
+			<w:Heading level="2" navSpy="{tableOfContent}">Bootstrap Theming</w:Heading>
+			<p>Use the following button to apply themes to this showcase.</p>
+			<div>
+				<w:Button ui:field="yetiBtn" text="Theme 1" />
+				<w:Button ui:field="amaliaBtn" text="Theme 2" />
+				<w:Button ui:field="bootstrapBtn" text="Bootstrap default Theme" />
+				<w:Button ui:field="clearBtn" text="Clear" />
+			</div>
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Global component theming</w:Heading>
+			<p>You may want to theme a particular component specifically. Therefore we set on each component a specific CSS class which is the component simple class name prefixed by "p-" (to avoid collision with existing CSS class).</p>
+			<p>For instance the <code>Container</code> component has a <code>p-container</code> CSS class and the <code>HTMLPanel</code> component has a <code>p-h-t-m-l-panel</code> CSS class (the class name is in lower-hyphen case)</p>
+			<w:Alert type="INFO">
+				<h4>Note :</h4>
+				<p>We never use those specific CSS classes to theme our components. It's fully dedicated to your usage.</p>
+			</w:Alert>
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Particular components</w:Heading>
+			<p>In <strong title="Putnami Web Toolkit">PWT</strong>, we created some components using Bootstrap like theme. If you apply a particular Bootstrap theme, you may want to theme our componenents (like <code>NavSpy</code>, <code>InputSlider</code>, etc.) too.</p>
+			<p>All our Css customization are in the <code>pwt-core.css</code> file.</p>
+			<p>Eventually some plugin can provide their own CSS file (like Code editor with <code>pwt-code-editor.css</code> ).</p>
+		</w:HTMLPanel>
+	</w:HTMLPanel>
+
+</ui:UiBinder>

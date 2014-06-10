@@ -1,0 +1,290 @@
+<!--
+
+    This file is part of pwt-doc.
+
+    pwt-doc is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt-doc is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel>
+		<w:Heading level="2" navSpy="{navSpy}">Navbar</w:Heading>
+		<p class="lead">A convenient navigation component which collapse when screen is to small</p>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Basic usage</w:Heading>
+		<p>Set the <code>brand</code> property and add <code>Nav</code> child with <code>NavLink</code> children.</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:Navbar>
+					<w:Brand>
+						<w:Anchor text="PWT"/>
+					</w:Brand>
+					<w:Nav>
+						<w:NavLink active="true" label="Home"/>
+						<w:NavLink label="Profile"/>
+						<w:NavLink label="Message"/>
+					</w:Nav>
+				</w:Navbar>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:Navbar>
+	<w:Brand>
+		<w:Anchor text="PWT"/>
+	</w:Brand>
+	<w:Nav>
+		<w:NavLink active="true" label="Home"/>
+		<w:NavLink label="Profile"/>
+		<w:NavLink label="Message"/>
+	</w:Nav>
+</w:Navbar>]]></pre>
+			</c:StaticCode>
+		</div>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Type</w:Heading>
+		<p>Use <code>Navbar.Type.INVERSE</code> to inverse the navbar type</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:Navbar type="INVERSE">
+					<w:Brand>
+						<w:Anchor text="PWT"/>
+					</w:Brand>
+					<w:Nav>
+						<w:NavLink active="true" label="Home"/>
+						<w:NavLink label="Profile"/>
+						<w:NavLink label="Message"/>
+					</w:Nav>
+				</w:Navbar>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:Navbar>
+	<w:Brand>
+		<w:Anchor text="PWT"/>
+	</w:Brand>
+	<w:Nav>
+		<w:NavLink active="true" label="Home"/>
+		<w:NavLink label="Profile"/>
+		<w:NavLink label="Message"/>
+	</w:Nav>
+</w:Navbar>]]></pre>
+			</c:StaticCode>
+		</div>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Dropdown use</w:Heading>
+		<p>Add <code>NavDropdown</code> children to extends the navbar display with dropdowns.</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:Navbar>
+					<w:Brand>
+						<w:Anchor text="PWT"/>
+					</w:Brand>
+					<w:Nav>
+						<w:NavLink label="Home"/>
+						<w:NavLink label="Profile"/>
+						<w:NavLink label="Message"/>
+						<w:NavDropdown label="Third Part" active="true">
+							<w:DropdownHeader label="First Header"/>
+							<w:NavLink label="Account" active="true"/>
+							<w:NavDivider/>
+							<w:DropdownHeader label="Second Header"/>
+							<w:NavLink label="Settings"/>
+							<w:NavLink label="Display"/>
+						</w:NavDropdown>
+					</w:Nav>
+				</w:Navbar>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:Navbar>
+	<w:Brand>
+		<w:Anchor text="PWT"/>
+	</w:Brand>
+	<w:Nav>
+		<w:NavLink label="Home"/>
+		<w:NavLink label="Profile"/>
+		<w:NavLink label="Message"/>
+		<w:NavDropdown label="Third Part" active="true">
+			<w:DropdownHeader label="First Header"/>
+			<w:NavLink label="Account" active="true"/>
+			<w:NavDivider/>
+			<w:DropdownHeader label="Second Header"/>
+			<w:NavLink label="Settings"/>
+			<w:NavLink label="Display"/>
+		</w:NavDropdown>
+	</w:Nav>
+</w:Navbar>]]></pre>
+			</c:StaticCode>
+		</div>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Icon customization</w:Heading>
+		<p><code>NavLink</code> and <code>NavDropdown</code> can be customize with <code>iconType</code> property like <code>ButtonDropdown</code>.</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:Navbar>
+					<w:Brand>
+						<w:Anchor text="PWT"/>
+					</w:Brand>
+					<w:Nav>
+						<w:NavLink iconType="HOME" label="Home"/>
+						<w:NavLink label="Profile"/>
+						<w:NavLink label="Message"/>
+						<w:NavDropdown iconType="USER" label="Third Part" active="true">
+							<w:DropdownHeader label="First Header"/>
+							<w:NavLink label="Account" active="true"/>
+							<w:NavDivider/>
+							<w:DropdownHeader label="Second Header"/>
+							<w:NavLink iconType="COG" label="Settings"/>
+							<w:NavLink label="Display"/>
+						</w:NavDropdown>
+					</w:Nav>
+				</w:Navbar>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:Navbar>
+	<w:Brand>
+		<w:Anchor text="PWT"/>
+	</w:Brand>
+	<w:Nav>
+		<w:NavLink iconType="HOME" label="Home"/>
+		<w:NavLink label="Profile"/>
+		<w:NavLink label="Message"/>
+		<w:NavDropdown iconType="USER" label="Third Part" active="true">
+			<w:DropdownHeader label="First Header"/>
+			<w:NavLink label="Account" active="true"/>
+			<w:NavDivider/>
+			<w:DropdownHeader label="Second Header"/>
+			<w:NavLink iconType="COG" label="Settings"/>
+			<w:NavLink label="Display"/>
+		</w:NavDropdown>
+	</w:Nav>
+</w:Navbar>]]></pre>
+			</c:StaticCode>
+		</div>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Button use</w:Heading>
+		<p>Add <code>Button</code> or <code>ButtonGroup</code> children.</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:Navbar>
+					<w:Brand>
+						<w:Anchor text="PWT"/>
+					</w:Brand>
+					<w:Nav>
+						<w:NavLink active="true" label="Home"/>
+					</w:Nav>
+					<w:Button type="PRIMARY" text="Default" />
+					<w:ButtonGroup>
+						<w:Button text="Left" iconType="SAVE" type="PRIMARY"/>
+						<w:Button text="middle" type="DANGER" active="true"/>
+						<w:Button text="right" iconType="VIEW" disabled="true"/>
+					</w:ButtonGroup>
+				</w:Navbar>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:Navbar>
+	<w:Brand>
+		<w:Anchor text="PWT"/>
+	</w:Brand>
+	<w:Nav>
+		<w:NavLink active="true" label="Home"/>
+	</w:Nav>
+	<w:Button type="PRIMARY" text="Default" />
+	<w:ButtonGroup>
+		<w:Button text="Left" iconType="SAVE" type="PRIMARY"/>
+		<w:Button text="middle" type="DANGER" active="true"/>
+		<w:Button text="right" iconType="VIEW" disabled="true"/>
+	</w:ButtonGroup>
+</w:Navbar>]]></pre>
+			</c:StaticCode>
+		</div>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Alignment</w:Heading>
+		<p>Use <code>left</code> and <code>right</code> children to pull left or right Navbar content.</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:Navbar>
+					<w:Brand>
+						<w:Anchor text="PWT"/>
+					</w:Brand>
+					<w:Nav>
+						<w:NavLink active="true" label="Home"/>
+					</w:Nav>
+					<w:right>
+						<w:Button type="PRIMARY" text="Default" />
+					</w:right>
+				</w:Navbar>
+				<w:Navbar>
+					<w:Brand>
+						<w:Anchor text="PWT"/>
+					</w:Brand>
+					<w:right>
+						<w:Nav>
+							<w:NavLink label="Blog"/>
+							<w:NavLink label="Demo"/>
+						</w:Nav>
+					</w:right>
+					<w:left>
+						<w:Nav>
+							<w:NavLink active="true" label="Home"/>
+							<w:NavLink label="Profile"/>
+							<w:NavLink label="Message"/>
+						</w:Nav>
+					</w:left>
+				</w:Navbar>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:Navbar>
+	<w:Brand>
+		<w:Anchor text="PWT"/>
+	</w:Brand>
+	<w:Nav>
+		<w:NavLink active="true" label="Home"/>
+	</w:Nav>
+	<w:right>
+		<w:Button type="PRIMARY" text="Default" />
+	</w:right>
+</w:Navbar>
+<w:Navbar>
+	<w:Brand>
+		<w:Anchor text="PWT"/>
+	</w:Brand>
+	<w:right>
+		<w:Nav>
+			<w:NavLink label="Blog"/>
+			<w:NavLink label="Demo"/>
+		</w:Nav>
+	</w:right>
+	<w:left>
+		<w:Nav>
+			<w:NavLink active="true" label="Home"/>
+			<w:NavLink label="Profile"/>
+			<w:NavLink label="Message"/>
+		</w:Nav>
+	</w:left>
+</w:Navbar>]]></pre>
+			</c:StaticCode>
+		</div>
+	</w:HTMLPanel>
+</ui:UiBinder>

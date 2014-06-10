@@ -1,0 +1,95 @@
+<!--
+
+    This file is part of pwt-doc.
+
+    pwt-doc is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt-doc is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+
+	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel>
+		<w:Heading level="2" navSpy="{navSpy}">NavSpy</w:Heading>
+		<p class="lead">A <code>NavSpy</code> contains a link to registered <code>Heading</code> widgets, and listen to the scroll of the body or of a particular widget to display the curent active heading.</p>
+					
+		<w:Heading level="3" navSpy="{navSpy}">Basic usage</w:Heading>
+		<p>The <code>Heading</code> you want to display in the <code>NavSpy</code> have to be manualy registered with the <code>navSpy</code> property. After all registering you need to call the <code>redraw</code> method on the <code>NavSpy</code> in order to display it.</p>
+		<p>Use the <code>scrollWidget</code> property to set the targeting scroll widget. If no one is set, the the <code>body</code> element will be used.</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:NavSpy ui:field="sampleNavSpy"/>
+				<br/>
+				
+				<w:HTMLPanel ui:field="scrollTarget" styleName="pre-scrollable">
+					<w:Heading level="1" navSpy="{sampleNavSpy}">First header</w:Heading>
+					<w:Heading level="2" navSpy="{sampleNavSpy}">First sub header</w:Heading>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium facilisis nisi ut tempor. Morbi vestibulum turpis et elit faucibus interdum. Etiam sodales diam ut suscipit egestas. Nulla lacinia posuere viverra. Nam et pulvinar turpis. Nam purus massa, porttitor vitae mauris nec, tempus varius quam. Sed ac scelerisque elit. In velit nibh, aliquam ut felis eu, pulvinar suscipit leo. Proin eget sagittis lectus. Maecenas facilisis sem arcu, non consectetur nulla placerat quis.</p>
+					<w:Heading level="2" navSpy="{sampleNavSpy}">Second sub header</w:Heading>
+					<p>Nam odio neque, consectetur sit amet semper a, interdum eget nisi. Praesent a justo ut nisl ultricies suscipit. In condimentum porta aliquet. Etiam ornare libero justo, sit amet dictum dui rutrum sit amet. Cras egestas laoreet lorem, sit amet tempus dolor ornare eget. Proin libero quam, accumsan et consectetur quis, vulputate quis augue. Aenean venenatis magna eu vehicula lobortis. Suspendisse lorem purus, porttitor at tortor sit amet, ultrices mattis magna. Nullam condimentum a diam non tempus. Mauris id rhoncus eros, eu venenatis purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque eleifend rutrum nunc, vulputate vehicula justo tempus non. Proin consectetur dui at nisl viverra convallis. Proin metus elit, pretium eu mauris quis, tincidunt venenatis sapien.</p>
+					
+					<w:Heading level="1" navSpy="{sampleNavSpy}">Second header</w:Heading>
+					<w:Heading level="2" navSpy="{sampleNavSpy}">First sub header</w:Heading>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium facilisis nisi ut tempor. Morbi vestibulum turpis et elit faucibus interdum. Etiam sodales diam ut suscipit egestas. Nulla lacinia posuere viverra. Nam et pulvinar turpis. Nam purus massa, porttitor vitae mauris nec, tempus varius quam. Sed ac scelerisque elit. In velit nibh, aliquam ut felis eu, pulvinar suscipit leo. Proin eget sagittis lectus. Maecenas facilisis sem arcu, non consectetur nulla placerat quis.</p>
+					<w:Heading level="2" navSpy="{sampleNavSpy}">Second sub header</w:Heading>
+					<p>Nam odio neque, consectetur sit amet semper a, interdum eget nisi. Praesent a justo ut nisl ultricies suscipit. In condimentum porta aliquet. Etiam ornare libero justo, sit amet dictum dui rutrum sit amet. Cras egestas laoreet lorem, sit amet tempus dolor ornare eget. Proin libero quam, accumsan et consectetur quis, vulputate quis augue. Aenean venenatis magna eu vehicula lobortis. Suspendisse lorem purus, porttitor at tortor sit amet, ultrices mattis magna. Nullam condimentum a diam non tempus. Mauris id rhoncus eros, eu venenatis purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque eleifend rutrum nunc, vulputate vehicula justo tempus non. Proin consectetur dui at nisl viverra convallis. Proin metus elit, pretium eu mauris quis, tincidunt venenatis sapien.</p>
+					<w:Heading level="2" navSpy="{sampleNavSpy}">Third sub header</w:Heading>
+					<p>Nam eu purus ante. Proin dignissim purus nec dolor volutpat porttitor. Aenean quis ante at velit rhoncus tincidunt. Phasellus id justo nec neque vestibulum auctor nec egestas urna. Vivamus sed rhoncus dolor. Donec dapibus semper aliquam. Fusce ac congue libero, non dictum leo. Aliquam porttitor et massa non cursus. Donec pretium ligula sit amet congue molestie. Aenean sit amet est sed magna pretium suscipit. Vivamus rhoncus eros eget justo ultrices, eu euismod odio malesuada. Vivamus aliquet nunc massa, quis pretium justo faucibus at. Proin eget tortor quam. Duis a mauris dictum, bibendum velit sit amet, dictum libero.</p>
+					<p></p>
+				</w:HTMLPanel>
+				
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:NavSpy ui:field="sampleNavSpy"/>
+<w:HTMLPanel ui:field="scrollTarget" styleName="pre-scrollable">
+	<w:Heading level="1" navSpy="{sampleNavSpy}">First header</w:Heading>
+	<w:Heading level="2" navSpy="{sampleNavSpy}">First sub header</w:Heading>
+	<p>...</p>
+	<w:Heading level="2" navSpy="{sampleNavSpy}">Second sub header</w:Heading>
+	<p>...</p>
+	
+	<w:Heading level="1" navSpy="{sampleNavSpy}">Second header</w:Heading>
+	<w:Heading level="2" navSpy="{sampleNavSpy}">First sub header</w:Heading>
+	<p>...</p>
+	<w:Heading level="2" navSpy="{sampleNavSpy}">Second sub header</w:Heading>
+	<p>...</p>
+	<w:Heading level="2" navSpy="{sampleNavSpy}">Third sub header</w:Heading>
+	<p>...</p>
+</w:HTMLPanel>]]></pre>
+			</c:StaticCode>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@UiField
+NavSpy sampleNavSpy;
+@UiField
+HTMLPanel scrollTarget;
+	...
+sampleNavSpy.redraw();
+sampleNavSpy.setScrollWidget(scrollTarget);
+]]></pre>
+			</c:StaticCode>
+		</div>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Spy offset</w:Heading>
+		<p>Eventually you may want to apply an offset to the top of the scroll widget to spy the scroll or to navigate to the selected <code>Heading</code>. Use the <code>spyOffset</code> property.</p>
+		<p>We use this spy offset in this sample to take into account the navbar height when scrolling and spying scroll on the body</p>
+	</w:HTMLPanel>
+</ui:UiBinder>

@@ -1,0 +1,49 @@
+<!--
+
+    This file is part of pwt-doc.
+
+    pwt-doc is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt-doc is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel>
+		<w:Heading level="2" navSpy="{navSpy}">Heading</w:Heading>
+		<p class="lead">This widget renders HTML headings from <code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code></p>
+					
+		<w:Heading level="3">Basic usage</w:Heading>
+		<p>Define the level whit the <code>level</code> property.</p>
+		<p>Use the <code>text</code> and <code>subtext</code> properties, or the <code>HasHTML</code> html child usage.</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:Heading level="1" text="Text" subtext="this is subtext" />
+				<w:Heading level="2" text="Text" />
+				<w:Heading level="3"><strong>HTML</strong> Child <small>with subtext</small></w:Heading>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:Heading level="1" text="Text" subtext="this is subtext" />
+<w:Heading level="2" text="Text" />
+<w:Heading level="3"><strong>HTML</strong> Child <small>with subtext</small></w:Heading>]]></pre>
+			</c:StaticCode>
+		</div>
+	</w:HTMLPanel>
+</ui:UiBinder>

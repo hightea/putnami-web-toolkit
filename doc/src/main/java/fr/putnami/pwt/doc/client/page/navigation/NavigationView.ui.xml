@@ -1,0 +1,202 @@
+<!--
+
+    This file is part of pwt-doc.
+
+    pwt-doc is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt-doc is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client"
+	>
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+	<w:HTMLPanel>
+		<w:Header ui:field="header">
+				<w:Heading level="1" navSpy="{tableOfContent}">Navigation</w:Heading>
+				<p class="lead">
+				<strong title="Putnami Web Toolkit">PWT</strong> offer a simple navigation framework. 
+				<br/>
+				Based on the <abbr title="Model View Presenter">MVP</abbr> pattern, this framework allows to easily create view and go through them.
+				<br/>
+				It equally allows to handle the browser history. 
+				<br/>
+				And finally makes your web app scalable without any efforts.
+				</p>
+		</w:Header>
+		<w:HTMLPanel ui:field="content">
+			<w:Heading level="2" navSpy="{tableOfContent}">What's MVP</w:Heading>
+			<p>
+			The <abbr title="Model View Presenter">MVP</abbr> is a derived of the well-known <abbr title="Model View Controller">MVC</abbr> pattern. 
+			It keeps the same goals, but evicts the views's interactions, for reduce coupling of  the application.
+			<br/>
+			The <abbr title="Model View Presenter">MVP</abbr> allows a better scalability for the complex web app. 
+			<br/>
+			You can have a full description of the <abbr title="Model View Presenter">MVP</abbr> pattern on the <a href="http://www.gwtproject.org/articles/mvp-architecture.html" target="_BLANK">GWT documentation</a>.
+			<br/>
+			</p>
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">PWT's MVP framework</w:Heading>
+			<p>
+			In the main lines, the <strong title="Punami Web Toolkit">PWT</strong>'s <abbr title="Model View Presenter">MVP</abbr> framework ideas are :
+			</p>
+			<ul>
+				<li><code>MvpController</code> dispaches the wished <code>Place</code> through the <code>MvpActivity</code>.</li>
+				<li><code>MvpController</code> handles event from the  <code>EventBus</code> and starts a <code>MvpActivity</code>.</li>
+				<li><code>MvpController</code> deals with the <code>MvpActivity</code> life cyle, start, mayStop and stop the <code>MvpActivity</code>.</li>
+				<li><code>MvpController</code> manages the <code>PlaceHistoryMapper</code> for managing the browser history tokens.</li>
+				<li><code>MvpActivity</code> is in charge of presenting the view and place it in a displayer.</li>
+			</ul>
+				
+			<w:Heading level="2" navSpy="{tableOfContent}">By the practice</w:Heading>
+			<p>
+				In the following sample, you can see a simple implementation of blog place / view mechanism.
+			</p>
+			<w:Heading level="3" navSpy="{tableOfContent}">Init the framwork</w:Heading>
+			<div class="showcase-sample-block">
+				<div class="showcase-sample">
+					To Initialize the framework. you have to : 
+					<ul>
+						<li><strong>Set the display :</strong> The display is a <code>AcceptsOneWidget</code> which will recieve the view when presented.</li>
+						<li><strong>Set the default place :</strong> The place to present when no place are presented.</li>
+						<li><strong>Register acitivity :</strong> All activities are created from the registered place.</li>
+						<li><strong>Handle the current history :</strong> Handle the current history token or go to the default place.</li>
+					</ul>
+				</div>
+				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+public class MyApp implements EntryPoint {
+	public void onModuleLoad() {
+		MvpController controller = MvpController.get();
+
+		AcceptsOneWidget display = new SimplePanel();
+		controller.setDisplay(display);
+
+		controller.setDefaultPlace(new WelcomePlace());
+		
+		controller.registerActivity(new BlogPlace(null));
+		controller.handleCurrentHistory();
+	}
+}
+]]></pre>
+				</c:StaticCode>
+			</div>
+			
+			<w:Heading level="3" navSpy="{tableOfContent}">Create a Place</w:Heading>
+			<div class="showcase-sample-block">
+				<div class="showcase-sample">
+					The place's roles are
+					<ul>
+						<li>Place factory in order to build place from the history token.</li>
+						<li>Host <code>ProxyView</code> to get the view to display.</li>
+						<li>Place Tokenizer in order to register the token in the browser history.</li>
+					</ul>
+				</div>
+				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+public class BlogPlace extends MvpPlace {
+	public BlogPlace(String postId) {
+		super((ViewProxy) GWT.create(BlogView.class), postId);
+	}
+	@Override
+	public MvpPlace getPlace(String token) {
+		return new  BlogPlace(String token);
+	}
+}
+]]></pre>
+				</c:StaticCode>
+			</div>
+			
+			<w:Heading level="3" navSpy="{tableOfContent}">Build a View</w:Heading>
+			<div class="showcase-sample-block">
+				<div class="showcase-sample">
+					Build a view which implements <code>View&lt;PLACE&gt;</code> in order to present your place.
+					<w:Alert>
+						<h4>Note :</h4>
+						<p>All server calls during the view presentation are collected and send once to the server. Please see <a href="#ServerCalls">Server calls</a> for mor details about it.</p>
+					</w:Alert>
+				</div>
+				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+public class BlogView extends Composite extends View<BlogPlace> {
+	public BlogView(){
+		//Build your view.
+	}
+	
+	@Override
+	public void present(BlogPlace place) {
+		String blogId = place.getToken();
+		// get the post on the server and display it.
+	}
+	
+}
+]]></pre>
+				</c:StaticCode>
+			</div>
+			
+			<w:Heading level="3" navSpy="{tableOfContent}">Go to a Place</w:Heading>
+			<div class="showcase-sample-block">
+				<div class="showcase-sample">
+					Then, you can go to any place by invoking the <code>MvController.goTo(...)</code> method.
+				</div>
+				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+MvpController.get().goTo(new BlogPlace("myPost"));
+]]></pre>
+				</c:StaticCode>
+			</div>
+
+
+			<w:Heading level="2" navSpy="{tableOfContent}">Scaling the web app</w:Heading>
+			<p>Thanks to the <strong title="Punami Web Toolkit">PWT</strong>'s <abbr title="Model View Presenter">MVP</abbr> framwork, 
+				you don't have to care about scaling your web app. 
+				<br/> 
+				Each Places generates a <code>ViewProxy</code> from the <code>View</code> which use the <code>GWT.runAsync(...)</code> mechanism.
+				This mechanism allows to split your application in chunks. All the JavaScript is no more downloaded at once, but is got back during the user session.
+			</p>
+			<div class="showcase-sample-block">
+				<div  class="showcase-sample">
+					<strong class="showcase-sample">ViewProxy generated</strong>
+				</div>
+				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+public class MyView_ProxyView implements ViewProxy {
+    private static MyView view;
+    
+    public void getView(final ViewProxy.Callback callback) {
+      GWT.runAsync(MyView.class, new RunAsyncCallback() {
+        public void onFailure(Throwable reason) {
+          throw new RuntimeException(reason);
+        }
+        public void onSuccess() {
+          if(view == null){
+            view = new MyView();
+          }
+          callback.showView(view);
+        }
+      });
+    }
+}
+]]></pre>
+				</c:StaticCode>
+			</div>
+			
+		</w:HTMLPanel>
+	</w:HTMLPanel>
+
+</ui:UiBinder>

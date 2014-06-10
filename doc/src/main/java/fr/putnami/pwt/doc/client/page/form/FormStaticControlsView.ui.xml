@@ -1,0 +1,169 @@
+<!--
+
+    This file is part of pwt-doc.
+
+    pwt-doc is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt-doc is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client"
+	>
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel>
+			
+		<w:Form ui:field="editorOutputControls">
+			<w:Heading level="2" navSpy="{navSpy}">Static controls</w:Heading>
+			<p>Static controls are implementations of EditorOutput. Those components allow to bind data with an readonly state.
+			</p>
+				
+			<!-- OutputText -->
+			<div>
+				<w:Heading level="3" navSpy="{navSpy}">OutputText</w:Heading>
+				<p>The <code>OutputText</code> is a simple text render. If tag attribute is not set, the text is wrapped in <code>&lt;p&gt;</code> tag. 
+				It also accept style attribute such as <code>BADGE</code> or <code>LABEL</code>.</p>
+				
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:OutputText path="name" />
+						<w:OutputText path="name" style="BADGE" />
+						<w:OutputText path="name" tag="span" style="LABEL" />
+						<w:OutputText path="name" tag="div" style="LABEL_PRIMARY" />
+						<w:OutputText path="name" style="LABEL_SUCCESS" />
+						<w:OutputText path="name" style="LABEL_INFO" />
+						<w:OutputText path="name" style="LABEL_WARNING" />
+						<w:OutputText path="name" tag="footer" style="LABEL_DANGER" />
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:OutputText />
+<w:OutputText style="BADGE" />
+<w:OutputText tag="span" style="LABEL" />
+<w:OutputText tag="div" style="LABEL_PRIMARY" />
+<w:OutputText style="LABEL_SUCCESS" />
+<w:OutputText style="LABEL_INFO" />
+<w:OutputText style="LABEL_WARNING" />
+<w:OutputText tag="footer" style="LABEL_DANGER" />]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+			
+			<!-- OutputNumber -->
+			<div>
+				<w:Heading level="3" navSpy="{navSpy}">OutputNumber</w:Heading>
+				<p>The <code>OutputNumber</code> is an <code>OutputText</code> accepting custom number format.</p>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:OutputNumber path="height"  />
+						<w:OutputNumber path="height" format="#,##.0"  />
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:OutputNumber />
+<w:OutputNumber format="#,##.0" />]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+			
+			<!-- OutputDate -->
+			<div>
+				<w:Heading level="3" navSpy="{navSpy}">OutputDate</w:Heading>
+				<p>The <code>OutputDate</code> is an <code>OutputText</code> accepting custom date format.
+				</p>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:OutputDate path="birthdate" />
+						<w:OutputDate path="birthdate" format="E dd MMMM yyyy" />
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:OutputDate />
+<w:OutputDate format="E dd MMMM yyyy"/>	]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+			
+			<!-- OutputEnum -->
+			<div>
+				<w:Heading level="3" navSpy="{navSpy}">OutputEnum</w:Heading>
+				<p>The <code>OutputEnum</code> is an <code>OutputText</code> with an <code>EnumRenderer</code> generated with the <code>MessageHelper</code></p>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:OutputEnum path="gender" />
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:OutputEnum />]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+			
+			<!-- OutputBoolean -->
+			<div>
+				<w:Heading level="3" navSpy="{navSpy}">OutputBoolean</w:Heading>
+				<p>The <code>OutputBoolean</code> can customize the rendered value when true or false.</p>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:OutputBoolean path="major" trueLabel="I am major" falseLabel="I am minor"/>
+						<w:OutputBoolean path="notMajor" trueLabel="I am major" falseLabel="I am minor"/>
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:OutputBoolean path="major" trueLabel="I am major" falseLabel="I am minor"/>
+<w:OutputBoolean path="notMajor"  trueLabel="I am major" falseLabel="I am minor" />]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+			
+			<!-- OutputEmail -->
+			<div>
+				<w:Heading level="3" navSpy="{navSpy}">OutputEmail</w:Heading>
+				<p>The <code>OuputEmail</code> wrapper the text mailto anchor.</p>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:OutputEmail path="email" />
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:OutputEmail />]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+			
+			<!-- OutputList -->
+			<div>
+				<w:Heading level="3" navSpy="{navSpy}">OutputList</w:Heading>
+				<p>The <code>OutputList</code> render Collection in list. For each value it will generate a new EditorOutput. 
+					If the EditorOutput is not specified, the <code>OuputList</code> guess the output editor with the property type.</p>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:OutputList path="groups" type="INLINE" />
+						<w:OutputList path="groups" type="LIST" />
+						<w:OutputList path="groups" type="LIST_GROUP"/>
+						<w:OutputList path="emails">
+							<w:OutputEmail />
+						</w:OutputList>
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:OutputList path="groups" type="INLINE" />
+<w:OutputList path="groups" type="LIST" />
+<w:OutputList path="groups" type="LIST_GROUP"/>
+<w:OutputList path="emails">
+	<w:OutputEmail />
+</w:OutputList>]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+		</w:Form>
+			
+	</w:HTMLPanel>
+</ui:UiBinder>

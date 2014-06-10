@@ -1,0 +1,277 @@
+<!--
+
+    This file is part of pwt-doc.
+
+    pwt-doc is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt-doc is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+	
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel>
+		<w:Header ui:field="header">
+			<w:Heading level="1" navSpy="{tableOfContent}">Code editor Plugin</w:Heading>
+			<p class="lead">
+			The code editor plugin provides a way to display highlighted String, and an ability to edit the String with completion. 
+			</p>
+		</w:Header>
+		<w:HTMLPanel ui:field="content">
+			<w:Heading level="2" navSpy="{tableOfContent}">Getting started</w:Heading>
+			<p> The code editor plugin provides 3 components :</p>
+			<dl class="dl-horizontal">
+				<dt>A code input</dt>
+				<dd>A <code>InputCode</code> is a component displaying the highlighted string and switch on focus to a TextArea able to edit the String.
+				On blur, the highlighted string is displayed.</dd>
+				<dd>A CodeAssist aspect can be applyied to the TextArea to assist typping.</dd>
+				<dd>The <code>InputCode</code> is compatible with the PWT's Data binding core fonctionality (extends <code>AbstractInput</code>).</dd>
+				<dt>A static code output</dt>
+				<dd>A <code>StaticOutputCode</code> is a component displaying the highlighted string.</dd>
+				<dt>A code output</dt>
+				<dd>A <code>OutputCode</code> is a <code>StaticOutputCode</code> compatible with the PWT's Data binding core fonctionality.</dd>
+			</dl>
+			
+			<p>Each of those components contains a <code>CodeInput</code> and / or a <code>CodeOutput</code>. They are internal components respectively in charge of handling the String input and displaying the string</p>
+			
+			<w:Heading level="2">Example</w:Heading>
+			<w:Heading level="3" subtext="edit on focus">InputCode</w:Heading>
+			<c:InputCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+/**
+* Main method of the sample.
+*/
+@Override
+public static void main (String[] args) {
+	/* Print all args */
+	for (String s: args) {
+		System.out.println(s);
+	} // End of the for loop
+}]]></pre>
+			</c:InputCode>
+			
+			<w:Heading level="3">OutputCode / StaticCode</w:Heading>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+/**
+* Main method of the sample.
+*/
+@Override
+public static void main (String[] args) {
+	/* Print all args */
+	for (String s: args) {
+		System.out.println(s);
+	} // End of the for loop
+}]]></pre>
+			</c:StaticCode>
+			
+			<br/>
+			<br/>
+			<w:Heading level="2" navSpy="{tableOfContent}">Configuration</w:Heading>
+			<p>All the 3 components need a <code>CodeEditorConfiguration</code> to highlight the string and eventually assist the typping.</p>
+			<p>A configuration contains a list of aspects to apply to the CodeInput or CodeOutput. It provides the ability to easily extends the fonctionalities in the future.</p>
+			<p>Today, we provide two aspects :</p>
+			<dl class="dl-horizontal">
+				<dt>Text render aspect</dt>
+				<dd>This aspect enable the syntax highlighting for the <code>CodeOutput</code></dd>
+				<dt>Content assist aspect</dt>
+				<dd>This aspect enable the content assist for the <code>CodeInput</code></dd>
+		  	</dl>
+		  	
+			<br/>
+		  	<w:Heading level="3" navSpy="{tableOfContent}">Text render</w:Heading>
+		  	<p>Text highlighting uses String tokenization.</p>
+		  	<p>To define a syntax highlighting configuration, we just need to define the tokenizers and associate the CSS class to render the tokens.</p>
+		  	<p>There are two text render aspects : One simple (<code>TextRenderAspect</code>) which associate a token with a css class and one a little bit more complicated (<code>PartitionnedTextRenderAspect</code>) which at split the text in partitions and then tokenize independenly every partition.
+		  	This last aspect allows to differently highlight partitions (example given : in XML files the content of the tags are not highlighted as their children)</p>
+		  	
+		  	<br/>
+		  	<p>The tokenizer are visited in their declaration order. Only one Token can be extracted from a set of chars (Token other than UNDEFINED).</p>
+		  	<w:Heading level="4" navSpy="{tableOfContent}">Provided tokenizer</w:Heading>
+		  	<p>A tokenizer is a <code>TokenEvaluator</code>. It goes through the String char by char via a char scanner (which retains the current scanner position) and return a Token corresponding to the input. This token is Undefined if the tokenizer didn't find anything.</p>
+		  	<p>We provide a bunch of TokenEvaluator, but you can easily create your own if needed.</p>
+		  	<p>Provided <code>TokenEvaluator</code> are : </p>
+		  	<dl class="dl-horizontal">
+				<dt>Whitespace evaluator</dt>
+				<dd>Used to detect the whitespaces</dd>
+				<dt>Words evaluator</dt>
+				<dd>Used to detect particular words (keywords, regExp, etc...). A word is defined by the <code>WordDetector</code> in charge of delimiting the start and end of the word.</dd>
+				<dt>Pattern evaluator</dt>
+				<dd>Used to detect token starting with a pattern (not a regexp) and eventualy ending with another pattern or with the end of the current line or the current file.</dd>
+				<dd>It can be used to detect tokens on single line or on multi lines</dd>
+				<dt>Balanced Pattern evaluator</dt>
+				<dd>Particular Pattern evaluator used to detect token like parenthesis or curly brace eclosed expressions : starting with a pattern (not a regexp) and ending with another pattern but each start pattern must have a corresponding endPattern..</dd>
+		  	</dl>
+		  	<w:Heading level="4" navSpy="{tableOfContent}">Example</w:Heading>
+		  	<w:Heading level="5">Java text render</w:Heading>
+		  	<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+/* Create the Renderer Aspect */
+TextRendererAspect renderAspect = new TextRendererAspect();
+
+/* Java String tokenizer (between double quotes) and associate the "code-editor-java-string" CSS class */
+renderAspect.registerEvaluator(new SingleLineTokenEvaluator("\"", "\"", new CssRendererTokenContent("code-editor-java-string"), '\\'));
+
+/* Single line comment tokenizer and associate the "code-editor-java-single-line-comment" CSS class */
+renderAspect.registerEvaluator(new EndOfLineTokenEvaluator("//", new CssRendererTokenContent("code-editor-java-single-line-comment")));
+
+/* Create a keyword tokenizer with a default CSS class associated to null (so all the non matching inputs are rendered as is).*/
+KeywordsTokenEvaluator wordTokenEvaluator = new KeywordsTokenEvaluator(CssRendererTokenContent.DEFAULT_CSS_TOKEN_CONTENT);
+/* Associate keywords to a CSS class */
+wordTokenEvaluator.addWords(new CssRendererTokenContent("code-editor-java-keyword"), "abstract", "assert", "boolean" /* ... */);
+/* Associate eventualy other keywords to an other CSS class */
+wordTokenEvaluator.addWords(new CssRendererTokenContent("code-editor-java-keyword-other"), "true", "false", "null");
+
+/* Add the keyword tokenizer to the Aspect */
+renderAspect.registerEvaluator(wordTokenEvaluator);]]></pre>
+		  	</c:StaticCode>
+		  	
+		  	<br/>
+		  	<w:Heading level="5">XML text render</w:Heading>
+		  	<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+/* Create the Partitionned Renderer Aspect */
+PartitionnedTextRendererAspect renderAspect = new PartitionnedTextRendererAspect(true);
+/* The {@code true} parameter here indicates the if a partition have not inner scanners, 
+* the css token associated with the partition should be used to render the entire partition
+* (example : XML comment) */
+
+/* Detect and Render Xml Comment */
+renderAspect.registerPartitionner(new MultiLineTokenEvaluator("<!--", "-->", new CssRendererTokenContent("code-editor-xml-comment"), (char) 0, true));
+
+/* Detect Xml tag */
+renderAspect.registerPartitionner(new MultiLineTokenEvaluator("<", ">", XmlPartitionTokenContent.INNER_TAG, (char) 0, true));
+
+
+/* Detect and render start and end Xml tag */
+WordsTokenEvaluator tagTokenEvaluator = new WordsTokenEvaluator(XMLTagWordDetector.INSTANCE, null);
+tagTokenEvaluator.addWordMatcher(new XMLStartTagDetector(new CssRendererTokenContent("code-editor-xml-tag")));
+tagTokenEvaluator.addWordMatcher(new XMLEndTagDetector(new CssRendererTokenContent("code-editor-xml-tag")));
+
+/* Detect and render inner Tag word token */
+WordsTokenEvaluator wordTokenEvaluator = new WordsTokenEvaluator(new CssRendererTokenContent("code-editor-xml-attribute"));
+/* Detect and render inner Tag Strings */
+SingleLineTokenEvaluator stringTokenEvaluator = new SingleLineTokenEvaluator("\"", "\"", new CssRendererTokenContent("code-editor-xml-attribute-value"), '\\');
+
+/* Register inner tag detectors and renderers. */
+renderAspect.registerPartitionScanners(XmlPartitionTokenContent.INNER_TAG, stringTokenEvaluator, tagTokenEvaluator, wordTokenEvaluator);]]></pre>
+		  	</c:StaticCode>
+		  	
+		  	<br/>
+		  	<w:Heading level="3" navSpy="{tableOfContent}">Content assist</w:Heading>
+		  	<p>To activate content assist on the input, you must add a <code>ContentAssistAspect</code> on the configuration</p>
+		  	<p>The content assist aspect need a <code>ContentAssistHandler</code> in charge of maintaining the oracle, extracting the query to provide to the oracle, keeping the oracle suggestion size limit and handling the oracle suggestion applyance.</p>
+		  	<p>We provide some assist handler (like <code>JavaKeywordAssistHandler</code> which provide code assist to insert java keyword, but no matter where you are in the java class you're writing) but you'll need to write your own to obtain what you want.</p>
+		  	<p>In order to write your assist handler you may want to follow these steps :</p>
+		  	<ol>
+		  		<li>Extends <code>AbstractContentAssistHandler</code></li>
+		  		<li>Override the <code>getQueryText</code> method and update the oracle in this method. Indeed you can parse the input content to know the context (example : you are in a java method so you can know that you should probably not suggest the "import" keyword, and you can extract previous method and field names, etc..)
+		  			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+						<pre><![CDATA[
+@Override
+public String getQueryText(IsWidget textInput) {
+	CodeInput codeInput = (CodeInput) textInput;
+	String currentText = codeInput.getText();
+	int cursorPos = codeInput.getCursorPosition();
+	// Parse text to extract information you want
+	// Update the oracle suggestions
+	// extract and return the String you'll use as query for the oracle (mostly current started word)
+}]]></pre>
+		  			</c:StaticCode>
+		  		</li>
+		  		<li>Override the <code>handleSuggestionSelected</code> method in order to insert the selected suggestion in the input and set the cursor position.
+		  			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+						<pre><![CDATA[
+@Override
+public void handleSuggestionSelected(IsWidget textInput, Suggestion suggestion) {
+	CodeInput codeInput = (CodeInput) textInput;
+	String currentText = codeInput.getText();
+	int cursorPos = codeInput.getCursorPosition();
+	String newText = // set the new text with currentText, cursorPos, suggestion.getReplacementString(), etc.
+	int newCursorPos = // set the new cursor position with currentText, cursorPos, suggestion.getReplacementString(), etc.
+	codeInput.setText(newText);
+	codeInput.setCursorPosition(newCursorPos);
+}]]></pre>
+		  			</c:StaticCode>
+		  		</li>
+		  	</ol>
+		  	<w:Alert type="INFO">
+		  		<h4><em>Note :</em></h4>
+		  		<p><em>When you parse the input content you can use the tokenizer functionality used for <code>TextRenderAspect</code>.</em></p>
+		  	</w:Alert>
+		  	
+		  	
+		  	<w:Heading level="2" navSpy="{tableOfContent}">Code editor usage</w:Heading>
+		  	<w:Heading level="3">Code editor configuration</w:Heading>
+		  	<p>In order to use the code editor you just need to provide him a <code>CodeEditorConfiguration</code>. Either you write your own, either you use one of the provided ones.</p>
+		  	<p>Today we provide two configurations :</p>
+		  	<dl class="dl-horizontal">
+				<dt>Xml Configuration</dt>
+				<dd>Provides a XML syntax highlighting (used in this Showcase)</dd>
+				<dt>Java Configuration</dt>
+				<dd>Provides a Java syntax highlighting (used in this Showcase) and a simple Java keyword content assist</dd>
+		  	</dl>
+		  	<br/>
+		  	<p>The configuration can be applyied in the ui.xml files by importing the static value :</p>
+		  	<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<!-- Import the static field -->
+<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	...
+	
+<c:StaticCode configuration="{XML_CONFIGURATION}">]]></pre>
+		  	</c:StaticCode>
+		  	<br/>
+		  	<p>The configuration can also be applyied in the java class </p>
+		  	<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@UiField
+StaticCode staticCode;
+
+	...
+	
+staticCode.applyConfiguration(XmlConfiguration.XML_CONFIGURATION);]]></pre>
+		  	</c:StaticCode>
+		  	<br/>
+		  	<w:Heading level="3">Code editor value</w:Heading>
+		  	<p>The code editor value can be set programmaticaly with the <code>edit(String)</code> method. This can be automated with the <code>Editor</code> core fonctionnality for <code>InputCode</code> and <code>OutputCode</code></p>
+		  	<p>The code editor implements HasHTML in order to allow value definition in ui.xml files. However, in most cases, the text indent and all the text format is important to render. So instead of encode every newline and tabulation char we use a hook including the <code>&lt;pre&gt;</code> tag and the <code>&lt;![CDATA[]]&gt;</code> content.</p>
+		  	<p>Actually, GWT's ui parser keep text format only inside the <code>&lt;pre&gt;</code> tag so we define the value in this tag. But we do not want our code editor value to be parsed as HTML so we include it in a <code>&lt;![CDATA[]]&gt;</code> child.</p>
+		  	<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+	<pre><![CDATA[
+/**
+* Main method of the sample.
+*/
+@Override
+public static void main (String[] args) {
+	/* Print all args */
+	for (String s: args) {
+		System.out.println(s);
+	} // End of the for loop
+}]]]><![CDATA[]></pre>
+</c:StaticCode>]]></pre>
+		  	</c:StaticCode>
+		  	<br/>
+		  	<w:Heading level="3">Code editor customization</w:Heading>
+		  	<p>The provided highlightings  can be customize overriding the <code>pwt-code-editor.css</code> file content.</p>
+		</w:HTMLPanel>
+	</w:HTMLPanel>
+</ui:UiBinder>

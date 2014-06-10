@@ -1,0 +1,183 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+buildscript {
+	repositories {
+		maven {
+            url 'http://repo.putnami.org/'
+        }
+		mavenLocal()
+		mavenCentral()
+	}
+	dependencies {
+		classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.4-PWT_patched'
+		classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.7.0'
+	}
+}
+
+task publishAll
+task publishAllToMavenLocal
+task publishAllLibs
+task publishAllLibsToMavenLocal
+task licenseAll
+task licenseFormatAll
+
+ext {
+	libProjects = subprojects.findAll { it.name != 'pwt-doc' } 
+	releaseVersion = '1.0.0-RC1'
+	snapshotVersion = '1.0.0-SNAPSHOT'
+	gwtVersion = '2.6.1'
+	guavaVersion = '15.0'
+}
+
+task generateReadMe(type: Copy) {
+	from '.'
+    into '.'
+	include('README.md.build')
+    rename ('README.md.build', 'README.md')
+	filter(ReplaceTokens, tokens: project.ext.getProperties())
+}
+
+publishAll.dependsOn generateReadMe
+publishAllToMavenLocal.dependsOn generateReadMe
+publishAllLibs.dependsOn generateReadMe
+publishAllLibsToMavenLocal.dependsOn generateReadMe
+
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'maven'
+	apply plugin: 'maven-publish'
+	apply plugin: 'eclipse'
+	apply plugin: 'idea'
+	apply plugin: 'license'
+	
+
+	group = 'fr.putnami.pwt'
+	version = rootProject.releaseVersion
+
+	sourceCompatibility = 1.7
+	targetCompatibility = 1.7
+
+	//Include all non java (like *.gwt.xml) files from 'src/main/java' folder in resources
+	sourceSets.main.resources.srcDir 'src/main/java'
+
+	eclipse {
+		classpath {
+			downloadSources=true
+		}
+	}
+	configurations {
+		log4j
+	}
+	
+	repositories {
+		mavenLocal()
+		mavenCentral()
+	}
+	
+	dependencies {	
+		log4j 'org.slf4j:slf4j-api:1.6.1'
+		log4j 'org.slf4j:jcl-over-slf4j:1.6.1'
+		log4j 'org.slf4j:slf4j-log4j12:1.6.1'
+		log4j 'log4j:log4j:1.2.16'
+	
+		compile "com.google.guava:guava:$guavaVersion"
+		compile "com.google.guava:guava-gwt:$guavaVersion"
+		runtime configurations.log4j
+	
+		testCompile 'junit:junit:4.+'
+	
+	}
+
+	license {
+		skipExistingHeaders = true
+		header rootProject.file('LICENSE_HEADER')
+		ext.projectName = project.name
+	}
+
+	publishing {
+		repositories {
+			maven {
+				url new File(rootProject.buildDir, 'repo').toURI()
+			}
+		}
+		publications {
+			mavenJava(MavenPublication) {
+				pom.withXml {
+					// Keep the 'compile' scope of the dependencies 
+				    asNode().dependencies.'*'.findAll() {
+				        it.scope.text() == 'runtime' && project.configurations.compile.allDependencies.find { dep ->
+				            dep.name == it.artifactId.text()
+				        }
+				    }.each() {
+				        it.scope*.value = 'compile'
+				    }
+					asNode().appendNode('inceptionYear', '2014')
+					def license = asNode().appendNode('licenses').appendNode('license')
+					license.appendNode('name', 'GNU Lesser General Public License')
+					license.appendNode('url', 'http://www.gnu.org/licenses/lgpl-3.0.html')
+				}
+			}
+		}
+	}
+	
+	if (project in libProjects) {
+		apply plugin: 'gwt-base'
+
+		// Add all sources in jar (needed for GWT compilation using this library
+		jar {
+			from sourceSets.main.allJava
+		}
+
+		publishing {
+			publications {
+				mavenJava(MavenPublication) {
+				    from components.java
+				}
+			}
+		}
+		rootProject.tasks.publishAllLibs.dependsOn project.tasks.publish
+		rootProject.tasks.publishAllLibsToMavenLocal.dependsOn project.tasks.publishToMavenLocal
+		
+	} else { //Doc project
+		apply plugin: 'gwt'
+		apply plugin: 'jetty'
+	
+		gwt {
+			gwtDev {
+				jvmArgs('-Xdebug',  '-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000')
+			}
+			superDev {
+				noPrecompile=true
+			}
+		}
+		
+		task jettyDraftWar(type: JettyRunWar) {
+			dependsOn draftWar
+			dependsOn.remove('war')
+			webApp=draftWar.archivePath
+		}
+
+		publishing {
+			publications {
+				mavenJava(MavenPublication) {
+				    from components.web
+				}
+			}
+		}
+		
+	}
+
+	gwt {
+		gwtVersion =  rootProject.gwtVersion
+		eclipse{
+			addGwtContainer=false
+		}
+	}
+
+	project.tasks.publish.dependsOn project.tasks.licenseFormat
+	project.tasks.publishToMavenLocal.dependsOn project.tasks.licenseFormat
+	rootProject.tasks.publishAll.dependsOn project.tasks.publish
+	rootProject.tasks.publishAllToMavenLocal.dependsOn project.tasks.publishToMavenLocal
+	rootProject.tasks.licenseAll.dependsOn project.tasks.license
+	rootProject.tasks.licenseFormatAll.dependsOn project.tasks.licenseFormat
+}

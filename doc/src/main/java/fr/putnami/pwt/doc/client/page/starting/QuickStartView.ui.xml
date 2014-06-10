@@ -1,0 +1,540 @@
+<!--
+
+    This file is part of pwt-doc.
+
+    pwt-doc is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt-doc is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel>
+		<w:Heading level="2" navSpy="{navSpy}">Quick start</w:Heading>
+		<p>To use this framework, simply add a dependency to the core jar (<em>pwt-core.jar</em>) and eventually to the needed plugin jars (<em>pwt-code-editor.jar</em> and/or <em>pwt-google-analytics.jar</em>).</p>
+		<p>We release those jar on our maven repository hosted on github reachable via the following URL : <a href="http://repo.putnami.org">http://repo.putnami.org</a></p>
+
+		<p>We provide two sample apps in the github repo in the <a href="https://github.com/Putnami/putnami-pwt/tree/master/samples">samples</a> folder :</p>
+		<ul>
+			<li>One is a GWT library using PWT</li>
+			<li>One is a GWT Web application using PWT</li>
+		</ul>
+		<p>In each project, you'll find gradle and maven build files.</p>
+		
+		<div>
+			<w:Heading level="3" navSpy="{navSpy}">Maven usage</w:Heading>
+			<p>Add our maven repository (or install the artifacts in yours) :</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<repositories>
+	<repository>
+		<id>putnami.org</id>
+		<url>http://repo.putnami.org/</url>
+	</repository>
+</repositories>]]></pre>
+			</c:StaticCode>
+			
+			<p>Set the needed properties</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<properties>
+	...
+	<gwt.version>@gwtVersion@</gwt.version>
+	<pwt.version>@releaseVersion@</pwt.version>
+	<project.compiler.source>1.7</project.compiler.source>
+	<project.compiler.target>1.7</project.compiler.target>
+	<project.sourceEncoding>UTF-8</project.sourceEncoding>
+	...
+</properties>]]></pre>
+			</c:StaticCode>
+			
+			<p>Then add the desired dependencies as well as  GWT's</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<dependencies>
+	...
+	<dependency>
+		<groupId>fr.putnami.pwt</groupId>
+		<artifactId>pwt</artifactId>
+		<version>${pwt.version}</version>
+	</dependency>
+	<!-- You may want to use these plugins -->
+	<dependency>
+		<groupId>fr.putnami.pwt</groupId>
+		<artifactId>pwt-code-editor</artifactId>
+		<version>${pwt.version}0</version>
+	</dependency>
+	<dependency>
+		<groupId>fr.putnami.pwt</groupId>
+		<artifactId>pwt-google-analytics</artifactId>
+		<version>${pwt.version}</version>
+	</dependency>
+	
+	<!-- GWT dependencies-->
+	<dependency>
+		<groupId>com.google.gwt</groupId>
+		<artifactId>gwt-user</artifactId>
+		<version>${gwt.version}</version>
+		<scope>provided</scope>
+	</dependency>
+	<dependency>
+		<groupId>com.google.gwt</groupId>
+		<artifactId>gwt-servlet</artifactId>
+		<version>${gwt.version}</version>
+	</dependency>
+	...
+</dependencies>]]></pre>
+			</c:StaticCode>
+			
+			<p>Then configure the Maven plugins</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<build>
+	<pluginManagement>
+		<plugins>
+			...
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>${project.compiler.source}</source>
+					<target>${project.compiler.target}</target>
+					<encoding>${project.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<version>${gwt.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			...
+		</plugins>
+	</pluginManagement>
+	<plugins>
+		...
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+		</plugin>
+		<plugin>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>gwt-maven-plugin</artifactId>
+		</plugin>
+		...
+	</plugins>
+</build>]]></pre>
+			</c:StaticCode>
+			
+			
+			<w:Heading level="4" navSpy="{navSpy}">Library usage</w:Heading>
+			<p>Optionally add the gwt-dev dependency if needed</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<dependency>
+	<groupId>com.google.gwt</groupId>
+	<artifactId>gwt-dev</artifactId>
+	<version>${gwt.version}</version>
+	<scope>provided</scope>
+</dependency>]]></pre>
+			</c:StaticCode>
+			
+			<p>And add the <em>resources</em> goal to Maven plugin in order to include java sources files in the generated jar (nedded for GWT compilation).</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+...
+<plugin>
+	<groupId>org.codehaus.mojo</groupId>
+	<artifactId>gwt-maven-plugin</artifactId>
+	<version>${gwt.version}</version>
+	<executions>
+		<execution>
+			<goals>
+				<goal>resources</goal>
+				<goal>compile</goal>
+			</goals>
+		</execution>
+	</executions>
+</plugin>
+...]]></pre>
+			</c:StaticCode>
+			
+			<w:Heading level="4" navSpy="{navSpy}">Web application usage</w:Heading>
+			<p>Set the needed properties</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<properties>
+	...
+	<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+	...
+</properties>]]></pre>
+			</c:StaticCode>
+			
+			<p>Configure the needed Maven plugins</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<build>
+	<outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
+	<pluginManagement>
+		<plugins>
+			...
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>exploded</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<webappDirectory>${webappDirectory}</webappDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<version>${gwt.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<configuration>
+						<runTarget>... Your host Page if using dev mode ...</runTarget>
+						<modules>
+							<module>... Your module ...</module>
+						</modules>
+					</configuration>
+					<hostedWebapp>${webappDirectory}</hostedWebapp>
+				</configuration>
+			</plugin>
+			...
+		</plugins>
+	</pluginManagement>
+	<plugins>
+		...
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+		</plugin>
+		<plugin>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>gwt-maven-plugin</artifactId>
+		</plugin>
+		...
+	</plugins>
+</build>]]></pre>
+			</c:StaticCode>
+			
+			<w:Heading level="5" navSpy="{navSpy}">Running in standard DevMode</w:Heading>
+			<w:Alert ><h4>Note :</h4><p>The standard DevMode is no more supported on Chrome for Linux or on Firefox</p></w:Alert>
+			
+			<p>Use <kbd>mvn gwt:run</kbd></p>
+			
+			<w:Heading level="5" navSpy="{navSpy}">Running in SuperDevMode</w:Heading>
+			<p>To run the SuperDevMode you'll need the maven jetty plugin.</p>
+			
+			<p>Set the needed properties</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<properties>
+	...
+	<jetty.plugin.version>9.2.0.v20140526</jetty.plugin.version>
+	...
+</properties>]]></pre>
+			</c:StaticCode>
+			
+			<p>Then configure the Maven plugins</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<build>
+	<pluginManagement>
+		<plugins>
+			...
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>${jetty.plugin.version}</version>
+				<configuration>
+					<webAppSourceDirectory>${webappDirectory}</webAppSourceDirectory>
+					<contextPath>/</contextPath>
+				</configuration>
+			</plugin>
+			...
+		</plugins>
+	</pluginManagement>
+	<plugins>
+		...
+		<plugin>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-maven-plugin</artifactId>
+		</plugin>
+		...
+	</plugins>
+</build>]]></pre>
+			</c:StaticCode>
+			
+			<p>To use different GWT module .xml files for development tasks, we use a maven profile</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<profiles>
+	<profile>
+		<id>dev</id>
+		<build>
+			<plugins>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>gwt-maven-plugin</artifactId>
+					<executions>
+						<execution>
+							<phase>compile</phase>
+							<goals>
+								<goal>compile</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<modules>
+							<module>... Your Dev module ...</module>
+						</modules>
+						<draftCompile>true</draftCompile>
+					</configuration>
+				</plugin>
+			</plugins>
+		</build>
+	</profile>
+</profiles>]]></pre>
+			</c:StaticCode>
+			
+			<p>Running in SuperDevMode :</p>
+			<ul>
+				<li>Run the code server <kbd>mvn -Pdev gwt:run-codeserver</kbd></li>
+				<li>Go to http://localhost:9876 and save the generated bookmarklets</li>
+				<li>In Parallel, run Jetty (with a draft compile) : <kbd>mvn -Pdev jetty:run</kbd></li>
+				<li>Go to http://localhost:8080/ (the link is provided on the maven console) and use the SuperDev bookmaklets to recompile the modules</li>
+			</ul>
+		</div>
+		
+		<div>
+			<w:Heading level="3" navSpy="{navSpy}">Gradle usage</w:Heading>
+			<p>Add our maven repository (or install the artifacts in yours) :</p>
+			<pre>
+repositories {
+	maven {
+		url 'http://repo.putnami.org'
+	}
+	/* Use the standard repositories for other dependencies */
+	mavenLocal()
+	mavenCentral()
+}</pre>
+	
+			<p>Set the needed property</p>
+			<pre>
+ext {
+	...
+	pwtVersion = '@releaseVersion@'
+	...
+}</pre>
+			
+			<p>Then add the desired dependencies</p>
+			<pre>
+dependencies {
+	...
+	"fr.putnami.pwt:pwt:$pwtVersion"
+	/* You may want to use these plugins */
+	"fr.putnami.pwt:pwt-code-editor:$pwtVersion"
+	"fr.putnami.pwt:pwt-google-analytics:$pwtVersion"
+	...
+}</pre>
+
+			<p>There is no official GWT support in Gradle. However, there is a very nice plugin hosted on Github : <a href="https://github.com/steffenschaefer/gwt-gradle-plugin">Steffen Schäffer's gwt-gradle plugin</a>.
+			Unfortunately, today there is a little typo in the source code making impossible to define different modules between production tasks (like compile) and dev tasks (like GWT's SuperDevMode).</p>
+			
+			<p>To work, the GWT's SuperDevMode needs some specific configuration in the module gwt.xml file (like a specific linker, etc...). So it is necessary to have the ability to define different modules between dev and production.</p>
+			
+			<p>Therefore we've fork this plugin to bugfix it (and we did fill a bug indicating it) until the next release of this plugin. We host it in our maven repo with the following version : *0.4-PWT_patched*.</p>
+			
+			<p>To use this plugin, add the corresponding dependency in the buildscript :</p>
+			<pre>
+buildscript {
+	repositories {
+		maven {
+		    url 'http://repo.putnami.org/'
+		}
+		mavenLocal()
+		mavenCentral()
+	}
+	dependencies {
+		classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.4-PWT_patched'
+	}
+}</pre>
+			
+			<w:Heading level="4" navSpy="{navSpy}">Library usage</w:Heading>
+			<pre>
+apply plugin: 'gwt-base'
+
+//Include all non java (like *.gwt.xml) files from 'src/main/java' folder in resources
+sourceSets.main.resources.srcDir 'src/main/java'
+
+// Add all sources in jar (needed for GWT compilation using this library)
+jar {
+	from sourceSets.main.allJava
+}
+
+gwt {
+	gwtVersion = '@gwtVersion@'
+	eclipse{
+		// Set True if you use the Google Eclipse plugin
+		addGwtContainer=false
+	}
+}</pre>
+			
+			<w:Heading level="4" navSpy="{navSpy}">Web application usage</w:Heading>
+			<pre>
+apply plugin: 'gwt'
+
+gwt {
+	gwtVersion = '@gwtVersion@'
+	
+	eclipse{
+		// Set True if you use the Google Eclipse plugin
+		addGwtContainer=false
+	}
+	
+	// Allows to use the standard Dev mode (no more supported on Chrome for Linux or on Firefox)
+	gwtDev {
+		jvmArgs("-Xdebug",  "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000")
+	}
+	
+	// Modules used in production
+	modules = ['...', '...']
+	// Modules used in dev mode
+	devModules = ['...', '...']
+	
+	superDev {
+		noPrecompile=true
+	}
+}</pre>
+			
+			
+			<w:Heading level="5" navSpy="{navSpy}">Running in standard DevMode</w:Heading>
+			<w:Alert ><h4>Note :</h4><p>The standard DevMode is no more supported on Chrome for Linux or on Firefox</p></w:Alert>
+			
+			<p>Use <kbd>gradle gwtDev</kbd></p>
+			
+			<w:Heading level="5" navSpy="{navSpy}">Running in SuperDevMode</w:Heading>
+			
+			<w:Heading level="6" navSpy="{navSpy}">Using Gradle Jetty plugin</w:Heading>
+			<p>Add the following configuration to Gradle build script</p>
+			<pre>
+apply plugin: 'jetty'
+
+task jettyDraftWar(type: JettyRunWar) {
+	dependsOn draftWar
+	dependsOn.remove('war')
+	webApp=draftWar.archivePath
+}</pre>
+			<p>Running in SuperDevMode :</p>
+			<ul>
+				<li>Run the code server <kbd>gradle gwtSuperDev</kbd></li>
+				<li>Go to http://localhost:9876 and save the generated bookmarklets</li>
+				<li>In Parallel, run Jetty (with a draft compile) : <kbd>gradle jettyDraftWar</kbd></li>
+				<li>Go to http://localhost:8080/{projectName} (the link is provided on the gradle console) and use the SuperDev bookmaklets to recompile the modules</li>
+			</ul>
+
+			
+			<w:Heading level="6" navSpy="{navSpy}">Using Cargo plugin</w:Heading>
+			<p>If you prefer to use Cargo plugin to deploy your application in SuperDevMode, add the following configuration to Gradle build script</p>
+			<pre><![CDATA[
+buildscript {
+	repositories {
+	    ...
+		jcenter()
+	}
+	dependencies {
+		classpath 'org.gradle.api.plugins:gradle-cargo-plugin:1.5'
+	}
+}
+
+apply plugin: 'cargo'
+
+ext {
+	// Define the cargo config home dir (else in temp folder)
+	cargoConfigHomeDir = file("$buildDir/cargo/conf")
+}
+cargo {
+	// If you want to use Jetty
+	containerId = "jetty9x"
+	port = 8080
+	
+	deployable {
+		file = tasks.draftWar.archivePath
+		context = "/"
+	}
+	
+	local {
+		installer {
+	 		// Link to download Jetty distribution
+			installUrl = 'http://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/9.1.5.v20140505/jetty-distribution-9.1.5.v20140505.tar.gz'
+	
+			downloadDir = file("$projectDir/cargo/download")
+			extractDir = file("$projectDir/cargo/extract")
+		}
+		//If you want to provide your own distribution
+		//homeDir = file("$projectDir/cargo/extract/jetty-distribution-9.1.5.v20140505/jetty-distribution-9.1.5.v20140505")
+	    // Define the cargo config home dir (else in temp folder)
+		configHomeDir = file("$cargoConfigHomeDir")
+	    // Cargo output log file
+		outputFile = file("$buildDir/cargo/cargoOutput.log")
+	}
+}
+
+task cargoCreateConfigHomeDir << {
+	file("$cargoConfigHomeDir").mkdirs()
+}
+
+// Auto run draftWar when cargo is launching
+afterEvaluate {
+	tasks.cargoStartLocal.dependsOn(tasks.draftWar, tasks.cargoCreateConfigHomeDir)
+	tasks.cargoRunLocal.dependsOn(tasks.draftWar, tasks.cargoCreateConfigHomeDir)
+}]]></pre>
+			<p>Running in SuperDevMode :</p>
+			<ul>
+				<li>Run the code server <kbd>gradle gwtSuperDev</kbd></li>
+				<li>Go to http://localhost:9876 and save the generated bookmarklets</li>
+				<li>In Parallel, run Cargo (with a draft compile) : <kbd>gradle cargoRunLocal</kbd></li>
+				<li>Go to http://localhost:8080/{projectName} (the link is provided on the gradle console) and use the SuperDev bookmaklets to recompile the modules</li>
+			</ul>
+		</div>
+	</w:HTMLPanel>
+</ui:UiBinder>

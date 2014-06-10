@@ -1,0 +1,127 @@
+<!--
+
+    This file is part of pwt-doc.
+
+    pwt-doc is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt-doc is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel>
+		<w:Heading level="2" navSpy="{navSpy}">Buttons</w:Heading>
+		<p class="lead">A button is a <code>Button</code> widget which can be styled with properties like <code>type</code> or <code>size</code>.</p>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Types and size</w:Heading>
+		<p>Use the <code>type</code> attribute to stylize a button.</p>
+		<p>Use the <code>size</code> attribute to change the size.</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:Button type="DEFAULT" text="Default" />
+				<w:Button type="PRIMARY" text="Primary" />
+				<w:Button type="INFO" text="Info" />
+				<w:Button type="WARNING" text="Warning" />
+				<w:Button type="DANGER" text="Danger" />
+				<w:Button type="LINK" text="Link" />
+				<w:Button type="ICON" iconType="VIEW" />
+				<w:Button type="DEFAULT" text="Extra small" size="X_SMALL" />
+				<w:Button type="PRIMARY" text="Small" size="SMALL" />
+				<w:Button type="INFO" text="Default" size="DEFAULT" />
+				<w:Button type="WARNING" text="Large" size="LARGE" />
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:Button type="DEFAULT" text="Default" />
+<w:Button type="PRIMARY" text="Primary" />
+<w:Button type="INFO" text="Info" />
+<w:Button type="WARNING" text="Warning" />
+<w:Button type="DANGER" text="Danger" />
+<w:Button type="LINK" text="Link" />
+<w:Button type="ICON" iconType="VIEW" />
+<w:Button type="DEFAULT" text="Extra small" size="X_SMALL" />
+<w:Button type="PRIMARY" text="Small" size="SMALL" />
+<w:Button type="INFO" text="Default" size="DEFAULT" />
+<w:Button type="WARNING" text="Large" size="LARGE" />]]></pre>
+			</c:StaticCode>
+		</div>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Icon customization</w:Heading>
+		<p>Set the <code>iconType</code> property to customize the button with an icon.</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:Button type="DEFAULT" iconType="VIEW" text="Default" />
+				<w:Button type="PRIMARY" iconType="VIEW" text="Primary" />
+				<w:Button type="INFO" iconType="VIEW" text="Info" />
+				<w:Button type="WARNING" iconType="VIEW" text="Warning" />
+				<w:Button type="DANGER" iconType="VIEW" text="Danger" />
+				<w:Button type="LINK" iconType="VIEW" text="Link" />
+				<w:Button type="DEFAULT" iconType="VIEW" />
+				<w:Button type="PRIMARY" iconType="VIEW" />
+				<w:Button type="INFO" iconType="VIEW" />
+				<w:Button type="WARNING" iconType="VIEW" />
+				<w:Button type="DANGER" iconType="VIEW" />
+				<w:Button type="LINK" iconType="VIEW" />
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:Button type="DEFAULT" iconType="VIEW" text="Default" />
+<w:Button type="PRIMARY" iconType="VIEW" text="Primary" />
+<w:Button type="INFO" iconType="VIEW" text="Info" />
+<w:Button type="WARNING" iconType="VIEW" text="Warning" />
+<w:Button type="DANGER" iconType="VIEW" text="Danger" />
+<w:Button type="LINK" iconType="VIEW" text="Link" />
+<w:Button type="DEFAULT" iconType="VIEW" />
+<w:Button type="PRIMARY" iconType="VIEW" />
+<w:Button type="INFO" iconType="VIEW" />
+<w:Button type="WARNING" iconType="VIEW" />
+<w:Button type="DANGER" iconType="VIEW" />
+<w:Button type="LINK" iconType="VIEW" />]]></pre>
+			</c:StaticCode>
+		</div>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Button states</w:Heading>
+		<p>Set the <code>active</code> property to <code>true</code> for the button appears pressed.</p>
+		<p>Set the <code>disabled</code> property to <code>true</code> to disable the button.</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:Button type="DEFAULT" iconType="VIEW" text="Default" />
+				<w:Button type="DEFAULT" iconType="VIEW" text="Active" active="true"/>
+				<w:Button type="PRIMARY" iconType="VIEW" text="Primary" />
+				<w:Button type="PRIMARY" iconType="VIEW" text="Primary Active" active="true"/>
+				<w:Button type="DEFAULT" iconType="VIEW" text="Default" />
+				<w:Button type="DEFAULT" iconType="VIEW" text="Disabled" disabled="true"/>
+				<w:Button type="PRIMARY" iconType="VIEW" text="Primary" />
+				<w:Button type="PRIMARY" iconType="VIEW" text="Primary Disabled" disabled="true"/>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:Button type="DEFAULT" iconType="VIEW" text="Default" />
+<w:Button type="DEFAULT" iconType="VIEW" text="Active" active="true"/>
+<w:Button type="PRIMARY" iconType="VIEW" text="Primary" />
+<w:Button type="PRIMARY" iconType="VIEW" text="Primary Active" active="true"/>
+<w:Button type="DEFAULT" iconType="VIEW" text="Default" />
+<w:Button type="DEFAULT" iconType="VIEW" text="Disabled}" disabled="true"/>
+<w:Button type="PRIMARY" iconType="VIEW" text="Primary" />
+<w:Button type="PRIMARY" iconType="VIEW" text="Primary Disabled" disabled="true"/>]]></pre>
+			</c:StaticCode>
+		</div>
+		
+	</w:HTMLPanel>
+</ui:UiBinder>

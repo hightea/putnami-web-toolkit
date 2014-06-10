@@ -1,0 +1,51 @@
+<!--
+
+    This file is part of pwt-doc.
+
+    pwt-doc is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt-doc is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+
+	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel>
+		<w:Heading level="2" navSpy="{navSpy}">Localized templates</w:Heading>
+		<p class="lead">Use one Ui template per locale!</p>
+					
+		<w:Heading level="3" navSpy="{navSpy}">Basic usage</w:Heading>
+		<p>Instead of using <code>Constants</code> to translate your application, you can use one template per locale. It allows you to change the Ui between locales. It makes also easier to maintain some translations.</p>
+		<p>However you can still use the GWT <code>Constants</code> in your locale based templates.</p>
+		<p>To use the localised templates, suffix the template name with the locale. If no one is found for the locale, the default one is used (without suffix) : It follow the same rules as the constants i18n functionnality.</p>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Example</w:Heading>
+		<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+interface Binder extends UiBinderLocalized<Widget, TemplateView> {
+	Binder BINDER = GWT.create(Binder.class);
+}]]></pre>
+		</c:StaticCode>
+		<p>And create the following templates :</p>
+		<ul>
+			<li><strong>TemplateView.ui.xml</strong> : The default template</li>
+			<li><strong>TemplateView_fr.ui.xml</strong> : The French locale template</li>
+			<li><strong>TemplateView_fr_CA.ui.xml</strong> : The French-speaking Canada locale template</li>
+		</ul>
+	</w:HTMLPanel>
+</ui:UiBinder>

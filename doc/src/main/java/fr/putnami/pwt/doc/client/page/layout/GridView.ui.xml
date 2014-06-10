@@ -1,0 +1,156 @@
+<!--
+
+    This file is part of pwt-doc.
+
+    pwt-doc is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt-doc is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel>
+		<w:Heading level="2" navSpy="{navSpy}">Grid system</w:Heading>
+		<p class="lead">A <code>GridRow</code> represents a <code>&lt;div class="row"&gt;</code> and a column is represented by a <code>GridColumn</code> whith <code>size</code> and <code>offset</code> attributes.</p>
+					
+		<w:Heading level="3" navSpy="{navSpy}">Example</w:Heading>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample grid-sample">
+				<w:GridRow>
+					<w:GridColumn size="1">size ONE</w:GridColumn>
+					<w:GridColumn size="1">size ONE</w:GridColumn>
+					<w:GridColumn size="1">size ONE</w:GridColumn>
+					<w:GridColumn size="1">size ONE</w:GridColumn>
+					<w:GridColumn size="1">size ONE</w:GridColumn>
+					<w:GridColumn size="1">size ONE</w:GridColumn>
+					<w:GridColumn size="1">size ONE</w:GridColumn>
+					<w:GridColumn size="1">size ONE</w:GridColumn>
+					<w:GridColumn size="1">size ONE</w:GridColumn>
+					<w:GridColumn size="1">size ONE</w:GridColumn>
+					<w:GridColumn size="1">size ONE</w:GridColumn>
+					<w:GridColumn size="1">size ONE</w:GridColumn>
+				</w:GridRow>
+				<w:GridRow>
+				 	<w:GridColumn size="8">size EIGHT</w:GridColumn>
+				  	<w:GridColumn size="4">size FOUR</w:GridColumn>
+				</w:GridRow>
+				<w:GridRow>
+				  	<w:GridColumn size="4">size FOUR</w:GridColumn>
+				  	<w:GridColumn size="4">size FOUR</w:GridColumn>
+				 	<w:GridColumn size="4">size FOUR</w:GridColumn>
+				</w:GridRow>
+				<w:GridRow>
+				  	<w:GridColumn size="6">size SIX</w:GridColumn>
+				  	<w:GridColumn size="6">size SIX</w:GridColumn>
+				</w:GridRow>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:GridRow>
+	<w:GridColumn size="1">size ONE</w:GridColumn>
+	<w:GridColumn size="1">size ONE</w:GridColumn>
+	<w:GridColumn size="1">size ONE</w:GridColumn>
+	<w:GridColumn size="1">size ONE</w:GridColumn>
+	<w:GridColumn size="1">size ONE</w:GridColumn>
+	<w:GridColumn size="1">size ONE</w:GridColumn>
+	<w:GridColumn size="1">size ONE</w:GridColumn>
+	<w:GridColumn size="1">size ONE</w:GridColumn>
+	<w:GridColumn size="1">size ONE</w:GridColumn>
+	<w:GridColumn size="1">size ONE</w:GridColumn>
+	<w:GridColumn size="1">size ONE</w:GridColumn>
+	<w:GridColumn size="1">size ONE</w:GridColumn>
+</w:GridRow>
+<w:GridRow>
+ 	<w:GridColumn size="8">size EIGHT</w:GridColumn>
+  	<w:GridColumn size="4">size FOUR</w:GridColumn>
+</w:GridRow>
+<w:GridRow>
+  	<w:GridColumn size="4">size FOUR</w:GridColumn>
+  	<w:GridColumn size="4">size FOUR</w:GridColumn>
+ 	<w:GridColumn size="4">size FOUR</w:GridColumn>
+</w:GridRow>
+<w:GridRow>
+  	<w:GridColumn size="6">size SIX</w:GridColumn>
+  	<w:GridColumn size="6">size SIX</w:GridColumn>
+</w:GridRow>]]></pre>
+			</c:StaticCode>
+		</div>		
+						
+		<w:Heading level="3" navSpy="{navSpy}">Offsetting columns</w:Heading>
+		<p>With the <code>offset</code> attribute you can easily specify the column offset.</p>
+		<p>The <code>size</code> and <code>offset</code> attributes are shortcuts for <code>sizeMd</code> and <code>offsetMd</code> attributes. You can also use the <code>sizeXs</code>, <code>sizeSm</code>, <code>sizeLg</code> and <code>offsetXs</code>, <code>offsetSm</code>, <code>offsetLg</code> attribute (see Bootrap documentation fore more information).</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample grid-sample">
+				<w:GridRow>
+				  	<w:GridColumn size="4">size FOUR</w:GridColumn>
+				  	<w:GridColumn size="4" offset="4">size FOUR offset FOUR</w:GridColumn>
+				</w:GridRow>
+				<w:GridRow>
+				  	<w:GridColumn size="3" offset="3">size THREE offset THREE</w:GridColumn>
+				  	<w:GridColumn size="3" offset="3">size THREE offset THREE</w:GridColumn>
+				</w:GridRow>
+				<w:GridRow>
+				  	<w:GridColumn size="6" offset="3">size SIX offset THREE</w:GridColumn>
+				</w:GridRow>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}" >
+<pre><![CDATA[
+<w:GridRow>
+  	<w:GridColumn size="4">size FOUR</w:GridColumn>
+  	<w:GridColumn size="4" offset="4">size FOUR offset FOUR</w:GridColumn>
+</w:GridRow>
+<w:GridRow>
+  	<w:GridColumn size="3" offset="3">size THREE offset THREE</w:GridColumn>
+  	<w:GridColumn size="3" offset="3">size THREE offset THREE</w:GridColumn>
+</w:GridRow>
+<w:GridRow>
+  	<w:GridColumn size="6" offset="3">size SIX offset THREE</w:GridColumn>
+</w:GridRow>]]></pre>
+			</c:StaticCode>
+		</div>
+				
+		<w:Heading level="3" navSpy="{navSpy}">Nesting columns</w:Heading>
+		<p>Like in Twitter''s Bootstrap the grids can be nested.</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample grid-sample">
+				<w:GridRow>
+				  	<w:GridColumn size="9">
+				  	Level ONE size NINE
+				  		<w:GridRow>
+					  		<w:GridColumn size="6">Level TWO size SIX</w:GridColumn>
+					 		<w:GridColumn size="6">Level TWO size SIX</w:GridColumn>
+						</w:GridRow>
+				  	</w:GridColumn>
+				</w:GridRow>
+			</div>			
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:GridRow>
+  	<w:GridColumn size="9">
+  	Level ONE size NINE
+  		<w:GridRow>
+	  		<w:GridColumn size="6">Level TWO size SIX</w:GridColumn>
+	 		<w:GridColumn size="6">Level TWO size SIX</w:GridColumn>
+		</w:GridRow>
+  	</w:GridColumn>
+</w:GridRow>]]></pre>
+			</c:StaticCode>
+		</div>
+	</w:HTMLPanel>
+</ui:UiBinder>

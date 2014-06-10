@@ -1,0 +1,81 @@
+<!--
+
+    This file is part of pwt-doc.
+
+    pwt-doc is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt-doc is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	>
+
+	<w:HTMLPanel styleName="putnami-showcase">
+		<header id="pwt-header">
+			<div class="pwt-top-header">
+				<div id="pwt-title" class="container" title="PWT - Putnami Web Tool Kit">
+					<img src="assets/img/putnami.png" alt="Putnami Logo" /> PWT <small>Putnami Web Toolkit</small>
+				</div>
+			</div>
+			<w:Affix ui:field="affixMenu" styleName="pwt-menu-affix">
+				<w:Navbar position="STATIC_TOP" styleName="container pwt-menu">
+					<w:Brand>
+						<w:Anchor text="PWT" link="#" />
+					</w:Brand>
+					<w:Nav>
+						<w:NavLink label="Getting started" link="#GettingStarted"/>
+						<w:NavDropdown label="Look and feel" >
+							<w:NavLink label="Bootstrap" link="#Bootstrap"/>
+							<w:NavLink label="Layouts" link="#Layouts"/>
+							<w:NavLink label="Components" link="#Components"/>
+							<w:NavLink label="Forms" link="#Forms"/>
+							<w:NavLink label="Tables" link="#Tables" />
+							<w:NavLink label="More" link="#More" />
+						</w:NavDropdown>
+						<w:NavDropdown label="Framework" >
+							<w:NavLink label="Navigation" link="#Navigation"/>
+							<w:NavLink label="Data Binding" link="#DataBinding" />
+							<w:NavLink label="Internationalization" link="#Internationalization" />
+							<w:NavLink label="Server calls" link="#ServerCalls" />
+							<w:NavLink label="Errors handling" link="#Errors" />
+						</w:NavDropdown>
+						<w:NavDropdown label="Plugins" >
+							<w:NavLink label="Code editor" link="#CodeEditor"/>
+						</w:NavDropdown>
+						<w:NavDropdown label="Samples" >
+							<w:NavLink label="Contacts table" link="#ContactsTable"/>
+							<w:NavLink label="Address book" link="#AddressBook"/>
+						</w:NavDropdown>
+						<w:NavLink label="Comming soon ..." link="#CommingSoon" />
+					</w:Nav>
+				</w:Navbar>
+			</w:Affix>
+		</header>
+		<div class="showcase-section">
+			<w:OneWidgetPanel tag="div" ui:field="viewContainer"  styleName="container" />
+		</div>
+		<footer id="pwt-footer">
+			<p>Designed and made with all our love by <a href="https://github.com/hightea" target="_blank">@tcharbonnier</a> and <a href="https://github.com/fdumay" target="_blank">@fdumay</a></p>
+			<p>Licensed under <a href="https://www.gnu.org/licenses/lgpl-3.0.txt" target="_blank">LGPL v 3.0</a></p>
+			<ul class="list-inline">
+			  <li><a href="https://github.com/putnami" target="_blank">Putnami Team</a></li>
+			  <li>current version @releaseVersion@</li>
+			  <li><a href="https://github.com/putnami/putnami-pwt" target="_blank">GitHub</a></li>
+			  <li><a href="#Samples">Samples</a></li>
+			  <li><a href="https://github.com/putnami/putnami-pwt/issues" target="_blank">Issues</a></li>
+			  <li><a href="download.html">Download</a></li>
+			</ul>
+		</footer>
+	</w:HTMLPanel>
+</ui:UiBinder>

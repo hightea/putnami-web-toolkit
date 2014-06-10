@@ -50,8 +50,8 @@ Set the needed properties
 ```xml
 <properties>
     ...
-    <gwt.version>2.6.1</gwt.version>
-    <pwt.version>1.0.0-RC1</pwt.version>
+    <gwt.version>@gwtVersion@</gwt.version>
+    <pwt.version>@releaseVersion@</pwt.version>
     <project.compiler.source>1.7</project.compiler.source>
     <project.compiler.target>1.7</project.compiler.target>
     <project.sourceEncoding>UTF-8</project.sourceEncoding>
@@ -346,7 +346,7 @@ Set the needed property
 ```
 ext {
     ...
-	pwtVersion = '1.0.0-RC1'
+	pwtVersion = '@releaseVersion@'
     ...
 }
 ```
@@ -399,7 +399,7 @@ jar {
 }
 
 gwt {
-	gwtVersion="2.6.1"
+	gwtVersion="@gwtVersion@"
 	eclipse{
         // Set True if you use the Google Eclipse plugin
 		addGwtContainer=false
@@ -413,7 +413,7 @@ gwt {
 apply plugin: "gwt"
 
 gwt {
-	gwtVersion="2.6.1"
+	gwtVersion="@gwtVersion@"
 
     eclipse{
         // Set True if you use the Google Eclipse plugin

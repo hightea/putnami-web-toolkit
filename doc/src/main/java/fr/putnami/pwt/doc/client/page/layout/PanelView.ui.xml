@@ -1,0 +1,255 @@
+<!--
+
+    This file is part of pwt-doc.
+
+    pwt-doc is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt-doc is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel>
+		<w:Heading level="1" navSpy="{navSpy}">Panel</w:Heading>
+		<p class="lead">A <code>Panel</code> is a widget with a header, a body and a footer. It uses the Header and Footer from his children.</p>
+					
+		<w:Heading level="2" navSpy="{navSpy}">BasicUsage</w:Heading>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:Panel>
+					<w:Header>
+						<w:Heading level="3">Panel content Header</w:Heading>
+					</w:Header>
+					<w:HTMLPanel>
+						<p>Panel Content</p>
+					</w:HTMLPanel>
+					<w:Footer>
+						<w:Text>Panel content Footer</w:Text>
+					</w:Footer>
+				</w:Panel>
+				<w:Panel>
+					<w:Header>Panel content Header</w:Header>
+					<w:HTMLPanel>Panel Content without footer</w:HTMLPanel>
+				</w:Panel>
+				<w:Panel>
+					<w:HTMLPanel>Panel Content without header</w:HTMLPanel>
+					<w:Footer>Panel content Footer</w:Footer>
+				</w:Panel>
+				<w:Panel>
+					<w:HTMLPanel>Panel Content without header nor footer</w:HTMLPanel>
+				</w:Panel>
+				<w:Panel>
+					<w:Header>Panel without Content Header</w:Header>
+					<w:Footer>Panel without Content Footer</w:Footer>
+				</w:Panel>
+				<w:Panel>
+					<w:Header>Panel without Content nor Footer Header</w:Header>
+				</w:Panel>
+				<w:Panel>
+					<w:Footer>Panel without Content nor Header Footer</w:Footer>
+				</w:Panel>
+				<w:Panel>
+					<w:Form>
+						<w:Header>Form header</w:Header>
+						<w:HTMLPanel>
+							<p>Form Content</p>
+						</w:HTMLPanel>
+						<w:Footer>Form Footer</w:Footer>
+					</w:Form>
+				</w:Panel>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:Panel>
+	<w:Header>
+		<w:Heading level="3">Panel content Header</w:Heading>
+	</w:Header>
+	<w:HTMLPanel>
+		<p>Panel Content</p>
+	</w:HTMLPanel>
+	<w:Footer>
+		<w:Text>Panel content Footer</w:Text>
+	</w:Footer>
+</w:Panel>
+<w:Panel>
+	<w:Header>Panel content Header</w:Header>
+	<w:HTMLPanel>Panel Content without footer</w:HTMLPanel>
+</w:Panel>
+<w:Panel>
+	<w:HTMLPanel>Panel Content without header</w:HTMLPanel>
+	<w:Footer>Panel content Footer</w:Footer>
+</w:Panel>
+<w:Panel>
+	<w:HTMLPanel>Panel Content without header nor footer</w:HTMLPanel>
+</w:Panel>
+<w:Panel>
+	<w:Header>Panel without Content Header</w:Header>
+	<w:Footer>Panel without Content Footer</w:Footer>
+</w:Panel>
+<w:Panel>
+	<w:Header>Panel without Content nor Footer Header</w:Header>
+</w:Panel>
+<w:Panel>
+	<w:Footer>Panel without Content nor Header Footer</w:Footer>
+</w:Panel>
+<w:Panel>
+	<w:Form>
+		<w:Header>Form header</w:Header>
+		<w:HTMLPanel>
+			<p>Form Content</p>
+		</w:HTMLPanel>
+		<w:Footer>Form Footer</w:Footer>
+	</w:Form>
+</w:Panel>]]></pre>
+			</c:StaticCode>
+		</div>
+		
+		<w:Heading level="2" navSpy="{navSpy}">Customization</w:Heading>
+		<p>Use the <code>color</code> property to customize the panel.</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:Panel color="PRIMARY">
+					<w:Header>Panel Header</w:Header>
+					<w:HTMLPanel>
+						<p>Panel Content</p>
+					</w:HTMLPanel>
+					<w:Footer>Panel Footer</w:Footer>
+				</w:Panel>
+				<w:Panel color="SUCCESS">
+					<w:Header>Panel Header</w:Header>
+					<w:HTMLPanel>
+						<p>Panel Content</p>
+					</w:HTMLPanel>
+					<w:Footer>Panel Footer</w:Footer>
+				</w:Panel>
+				<w:Panel color="INFO">
+					<w:Header>Panel Header</w:Header>
+					<w:HTMLPanel>
+						<p>Panel Content</p>
+					</w:HTMLPanel>
+					<w:Footer>Panel Footer</w:Footer>
+				</w:Panel>
+				<w:Panel color="WARNING">
+					<w:Header>Panel Header</w:Header>
+					<w:HTMLPanel>
+						<p>Panel Content</p>
+					</w:HTMLPanel>
+					<w:Footer>Panel Footer</w:Footer>
+				</w:Panel>
+				<w:Panel color="DANGER">
+					<w:Header>Panel Header</w:Header>
+					<w:HTMLPanel>
+						<p>Panel Content</p>
+					</w:HTMLPanel>
+					<w:Footer>Panel Footer</w:Footer>
+				</w:Panel>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:Panel color="PRIMARY">
+	<w:Header>Panel Header</w:Header>
+	<w:HTMLPanel>
+		<p>Panel Content</p>
+	</w:HTMLPanel>
+	<w:Footer>Panel Footer</w:Footer>
+</w:Panel>
+<w:Panel color="SUCCESS">
+	<w:Header>Panel Header</w:Header>
+	<w:HTMLPanel>
+		<p>Panel Content</p>
+	</w:HTMLPanel>
+	<w:Footer>Panel Footer</w:Footer>
+</w:Panel>
+<w:Panel color="INFO">
+	<w:Header>Panel Header</w:Header>
+	<w:HTMLPanel>
+		<p>Panel Content</p>
+	</w:HTMLPanel>
+	<w:Footer>Panel Footer</w:Footer>
+</w:Panel>
+<w:Panel color="WARNING">
+	<w:Header>Panel Header</w:Header>
+	<w:HTMLPanel>
+		<p>Panel Content</p>
+	</w:HTMLPanel>
+	<w:Footer>Panel Footer</w:Footer>
+</w:Panel>
+<w:Panel color="DANGER">
+	<w:Header>Panel Header</w:Header>
+	<w:HTMLPanel>
+		<p>Panel Content</p>
+	</w:HTMLPanel>
+	<w:Footer>Panel Footer</w:Footer>
+</w:Panel>]]></pre>
+			</c:StaticCode>
+		</div>
+		
+		<w:Heading level="2" navSpy="{navSpy}">Panel collapse</w:Heading>
+		<p>Use the <code>collapsible</code> property to allow the panel to be collapsed, and set the <code>collapse</code> property to initialy collapse the panel.</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:Panel collapsible="true">
+					<w:Header>Panel Header</w:Header>
+					<w:HTMLPanel>
+						<p>Panel Content</p>
+					</w:HTMLPanel>
+					<w:Footer>Panel Footer</w:Footer>
+				</w:Panel>
+				<w:Panel collapsible="true" collapse="true">
+					<w:Header>Panel Header</w:Header>
+					<w:HTMLPanel>
+						<p>Panel Content</p>
+					</w:HTMLPanel>
+					<w:Footer>Panel Footer</w:Footer>
+				</w:Panel>
+				<w:Panel collapsible="true" collapse="false">
+					<w:Header>Panel Header</w:Header>
+					<w:HTMLPanel>
+						<p>Panel Content</p>
+					</w:HTMLPanel>
+					<w:Footer>Panel Footer</w:Footer>
+				</w:Panel>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:Panel collapsible="true">
+	<w:Header>Panel Header</w:Header>
+	<w:HTMLPanel>
+		<p>Panel Content</p>
+	</w:HTMLPanel>
+	<w:Footer>Panel Footer</w:Footer>
+</w:Panel>
+<w:Panel collapsible="true" collapse="true">
+	<w:Header>Panel Header</w:Header>
+	<w:HTMLPanel>
+		<p>Panel Content</p>
+	</w:HTMLPanel>
+	<w:Footer>Panel Footer</w:Footer>
+</w:Panel>
+<w:Panel collapsible="true" collapse="false">
+	<w:Header>Panel Header</w:Header>
+	<w:HTMLPanel>
+		<p>Panel Content</p>
+	</w:HTMLPanel>
+	<w:Footer>Panel Footer</w:Footer>
+</w:Panel>]]></pre>
+			</c:StaticCode>
+		</div>
+	</w:HTMLPanel>
+</ui:UiBinder>

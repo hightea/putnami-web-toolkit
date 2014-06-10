@@ -1,0 +1,169 @@
+<!--
+
+    This file is part of pwt-doc.
+
+    pwt-doc is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt-doc is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client"
+	>
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel>
+		<w:Heading level="2" navSpy="{navSpy}">Form groups</w:Heading>
+		<p>
+			The <code>FormGroup</code> is a smart component that help you build <code>Forms</code>. 
+			Drived by the <code>FormLayout</code> it position components such as a <code>Label</code>, 
+			<code>EditorInput</code> or <code>EditorOutput</code>, <code>Tooltip</code>, 
+			<code>Help</code>, and <code>ErrorGroup</code> in the right order.
+			If setted as readonly,  the input field is automaticaly switch to an output field.  <br/>
+			You can declare every sub components in the template, but the <code>FormGroup</code> can also guess a lot of thing by itself. 
+				<code>Label</code>, <code>Help</code>, and <code>Tooltip</code> can be resolved by convention thanks to a <code>MessageHelper</code>.
+				The <code>EditorInput</code> and the <code>EditorOutput</code> are guessed with the property type.
+		</p>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Editable Control</w:Heading>
+		<p>
+			<code>FormGroup</code> exemple with all declarable components.  
+			<ul>
+				<li><code>Label</code></li>
+				<li><code>Tooltip</code></li>
+				<li><code>Help</code></li>
+				<li><code>EditorInput</code></li>
+				<li><code>EditorOutput</code></li>
+			</ul>
+			The  attribute <code>path="email"</code> allow the <code>FormGroup</code> and sub components to be binded on the email field of the editied bean. 
+		</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:Form ui:field="formEditable" type="BASIC" >
+					<w:FormGroup path="email">
+						<w:Label htmlFor="emailInput">Email</w:Label>
+						<w:Tooltip text="Please enter your address email" placement="TOP" >
+							<w:InputEmail htmlId="emailInput" placeholder="Enter email" />
+						</w:Tooltip>
+						<w:OutputEmail />
+						<w:Help text="An friendly help message" />
+					</w:FormGroup>
+				</w:Form>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+				<pre><![CDATA[<w:Form type="BASIC">
+	<w:FormGroup path="email">
+		<w:Label htmlFor="emailInput">Email</w:Label>
+		<w:Tooltip text="Please enter your address email" placement="TOP" >
+			<w:InputEmail htmlId="emailInput" placeholder="Enter email" />
+		</w:Tooltip>
+		<w:OutputEmail />
+		<w:Help text="An friendly help message" />
+	</w:FormGroup>
+</w:Form>]]></pre>
+			</c:StaticCode>
+		</div>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Readonly control</w:Heading>
+		<p>
+			When set to readonly, the form group present the <code>OutputEditor</code>
+		</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:Form ui:field="formReadonly" type="BASIC">
+					<w:FormGroup path="email" readonly="true">
+						<w:Label htmlFor="emailInput">Email</w:Label>
+						<w:OutputEmail />
+					</w:FormGroup>
+				</w:Form>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+				<pre><![CDATA[<w:Form type="BASIC">
+	<w:FormGroup path="email" readonly="true">
+		...
+		<w:OutputEmail />
+	</w:FormGroup>
+</w:Form>]]></pre>
+			</c:StaticCode>
+		</div>
+
+		<w:Heading level="3" navSpy="{navSpy}">Magic FormGroup</w:Heading>
+		<p>
+			Are the FormGroup magic?  no... <br/>
+			In this example all <code>Label</code>, <code>Tooltip</code>, and <code>Help</code> are resolved with a <code>MessageHelper</code> initialized with contants.
+			This feature is really usefull for code reuse.<br/>
+			Further more, the <code>EditorInput</code> and the <code>EditorOutput</code> are generated thanks the property type, in this case <code>String</code> are mapped with an <code>InputText</code> and an <code>OutputText</code>.
+			If the default editor for the the type doesn't exists or is not appropriate you can declare it manually.
+		</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:Form ui:field="formMagic" type="BASIC">
+					<w:FormGroup path="name" />
+				</w:Form>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+				<pre><![CDATA[<!-- In the template ui.xml -->
+<w:Form type="BASIC">
+	<w:FormGroup path="name" />
+</w:Form>]]></pre>
+			</c:StaticCode>
+	 		<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+	<pre><![CDATA[// In the java
+public interface Constants extends ConstantsWithLookup {
+	@DefaultStringValue("Name")
+	String nameLabel();
+
+	@DefaultStringValue("Enter your name")
+	String namePlaceholder();
+
+	@DefaultStringValue("Kindly message for name field")
+	String nameHelp();
+}
+...
+@UiField
+Form<Bean> formMagic;
+...
+MessageHelper messageHelper = new MessageHelper((ConstantsWithLookup) GWT.create(Constants.class));
+formMagic.setMessageHelper(messageHelper);
+...]]></pre>
+			</c:StaticCode>
+		</div>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Errors</w:Heading>
+		<p>
+			The errors are automaticaly displayed in the responsible <code>FormGroup</code>.
+		</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<div class="form" role="form">
+					<div class="form-group has-error">
+						<label class="control-label" for="uid-1">Email address</label>
+						<input type="text" class="gwt-TextBox form-control" placeholder="Enter email" id="uid-1" value="@gmail.com"/>
+						<ul class="bg-danger">
+							<li>must be a valid email address</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+	 		<c:StaticCode configuration="{XML_CONFIGURATION}">
+				<pre><![CDATA[<w:FormGroup path="email" readonly="true">
+	<w:OutputEmail />
+</w:FormGroup>]]></pre>
+			</c:StaticCode>
+		</div>
+ 	</w:HTMLPanel>
+</ui:UiBinder>

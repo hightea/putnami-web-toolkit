@@ -1,0 +1,312 @@
+/**
+ * This file is part of pwt.
+ *
+ * pwt is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * pwt is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/*
+* Hook Icon fontello
+*/
+[class^="icon-"]:before, [class*=" icon-"]:before {
+	line-height: inherit;
+	font-size: inherit;
+}
+/*
+* No Selection
+*/
+.no-selection {
+	user-select: none;
+}
+/*
+* Suggest
+*/
+.scrollable-dropdown {
+	max-height: 10em;
+	overflow-y: auto;
+}
+/*
+* Dropdown
+*/
+.open-up .dropdown-menu {
+	top: auto;
+	margin-bottom: 2px;
+	bottom: 100%;
+}
+
+.open-left .dropdown-menu {
+	left: auto;
+	right: 0;
+}
+/*
+* ListEditor
+*/
+.list-element-container {
+	display: table-cell;
+	width: 1%;
+}
+
+/*
+* DatePicker
+*/
+.datepicker{
+	font-size: small;
+	display: table;
+	padding: 10px;
+	border: 1px solid #CCC; 
+}
+.datepicker-popup{
+	background-color: #FFF;
+	padding: 10px;
+	border: 1px solid #CCC; 
+	z-index:1100;
+}
+.datepicker-popup:focus{
+	border:0;
+}
+
+.datepicker .datepicker-header{
+	display: block;
+	margin-bottom: 5px;
+}
+.datepicker .month-picker-button{
+	display: inline-block;
+	height: 2em;
+	padding: 3px;
+	vertical-align: baseline;
+	cursor: pointer;
+}
+.datepicker .month-picker-button .caret {
+	margin-left: 10px;
+}
+.datepicker .month-picker{
+	border: 1px solid #428bca; 
+	position: relative;
+	overflow: scroll;
+	height: 9em;
+}
+
+.datepicker .month-picker .year-button{
+	background-color: #F9F9F9;
+	border-bottom: 1px solid #CCC; 
+	font-weight: normal;
+	padding: 5px;
+	clear: both;
+	cursor: pointer;
+}
+
+.datepicker .month-picker ul{
+	border-bottom: 1px solid #CCC; 
+	height: 6.8em;
+	padding:0;
+	margin:0;
+}
+
+.datepicker .month-picker ul li:hover{
+	background-color: #f4f8fa;
+}
+.datepicker .month-picker ul li{
+	display: inline;
+	float: left;
+	width: 33%;
+	height: 1.7em;
+	padding: 0.2;
+	text-align: center;
+	cursor: pointer;
+}
+
+.datepicker .month-pager {
+	display: inline-block;
+	padding-left: 0;
+	margin: 0;
+	float: right;
+}
+
+.datepicker .month-pager li {
+	font-size: smaller;
+	display: inline;
+	float: left;
+	width: 2em;
+	height: 2em;
+	text-align: center;
+	padding: 3px;
+	margin: 2px;
+
+	color: #777;
+	border: 1px solid #CCC;
+	border-radius: 2;
+	background-image: linear-gradient(to bottom, #f3f3f3 0, #ebebeb 100%);
+	
+	cursor: pointer;
+}
+.datepicker .calendar-picker{
+	
+}
+.datepicker table.calendar-picker {
+	border: 1px solid #428bca; 
+}
+.datepicker table.calendar-picker th{
+	background-color: #F9F9F9;
+	border-bottom: 1px solid #CCC; 
+	font-weight: normal;
+	padding: 5px;
+	font-size: small;
+}
+.datepicker table.calendar-picker td{
+	font-size: small;
+	text-align: center;
+	padding: 2px 5px;
+	cursor: pointer;
+}
+.datepicker table.calendar-picker td:hover{
+	background-color: #f4f8fa;
+}
+.datepicker table.calendar-picker td.muted{
+	color: #999999;
+}
+.datepicker table.calendar-picker td.selected{
+	background-color: #f4f8fa;
+}
+.datepicker table.calendar-picker td.today{
+	border: 1px solid #666; 
+}
+
+.datepicker .month-picker {
+}
+
+/**
+* InputSlider
+*/
+.input-slider-background {
+	position: relative;
+	width: 100%;
+	height: 50%;
+	top: 25%;
+	border-radius: 4px;
+	background-color: #ddd;
+}
+.input-slider-handle {
+	position: relative;
+	width: 10px;
+	height: 100%;
+	top: -50%;
+	margin-left: -5px;
+	padding: 0;
+	border-radius: 4px;
+	background-color: #428bca;
+	cursor: pointer;
+}
+
+/**
+* InputSelect
+*/
+.input-select .dropdown-toggle {
+	text-align : left;
+	position: relative;
+}
+.input-select .dropdown-toggle .caret {
+	position: absolute;
+	top: 50%;
+	margin-top: -2px;
+	right: 8px;
+}
+.input-select .dropdown-menu {
+	min-width: 100%;
+	overflow-y: auto;
+	max-height: 350px;
+}
+.input-select li a {
+	min-height: 1.8em;
+	padding-left: 25px; 
+}
+
+.input-select .input-select-selected a:before {
+	content: '\2714\00a0';
+	margin-left : -1.1em;
+}
+
+.input-select .input-select-highlighted a,
+.input-select .input-select-highlighted a:hover,
+.input-select .input-select-highlighted a:focus {
+	background-image: -webkit-linear-gradient(top, #8bca42 0%, #7ebd35 100%);
+  	background-image: linear-gradient(to bottom, #8bca42 0%, #7ebd35 100%);
+  	background-repeat: repeat-x;
+  	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff8bca42', endColorstr='#ff7ebd35', GradientType=0);
+  	background-color: #7ebd35;
+ 	color : #FFF;
+}
+ 
+/** 
+* NavSpy
+*/
+@media ( min-width :768px) {
+	.nav-spy {
+		padding-left: 20px"
+	}
+}
+.nav-spy .nav>li>a {
+	display: block;
+	font-size: 13px;
+	font-weight: 500;
+	color: #999;
+	padding: 4px 20px
+}
+
+.nav-spy .nav>li>a:hover,
+.nav-spy .nav>li>a:focus {
+	padding-left: 19px;
+	color: #563d7c;
+	text-decoration: none;
+	background-color: transparent;
+	border-left: 1px solid #563d7c
+}
+
+.nav-spy .nav>.active>a,
+.nav-spy .nav>.active:hover>a,
+.nav-spy .nav>.active:focus>a {
+	padding-left: 18px;
+	font-weight: 700;
+	color: #563d7c;
+	background-color: transparent;
+	border-left: 2px solid #563d7c
+}
+
+.nav-spy .nav>.active>.nav,
+.nav-spy .nav>li:hover>.nav {
+	display: block;
+}
+
+.nav-spy .nav .nav {
+	display: none;
+	padding-bottom: 10px
+}
+
+.nav-spy .nav .nav>li>a {
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-left: 30px;
+	font-size: 12px;
+	font-weight: 400
+}
+
+.nav-spy .nav .nav>li>a:hover,
+.nav-spy .nav .nav>li>a:focus {
+	padding-left: 29px
+}
+
+.nav-spy .nav .nav>.active>a,
+.nav-spy .nav .nav>.active:hover>a,
+.nav-spy .nav .nav>.active:focus>a {
+	font-weight: 500;
+	padding-left: 28px
+}

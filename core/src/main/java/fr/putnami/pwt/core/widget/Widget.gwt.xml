@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    This file is part of pwt.
+
+    pwt is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<module>
+	<inherits name="com.google.gwt.user.User" />
+	<inherits name="com.google.gwt.i18n.I18N"/>
+	<inherits name="com.google.gwt.resources.Resources" />
+	
+	<inherits name="fr.putnami.pwt.core.common.Common"/>
+	<inherits name="fr.putnami.pwt.core.editor.Editor"/>
+	<inherits name="fr.putnami.pwt.core.model.Model"/>
+	<inherits name="fr.putnami.pwt.core.theme.Theme"/>
+
+	<entry-point class="fr.putnami.pwt.core.widget.client.boot.WidgetBoot"/>
+
+
+	<source path="client"/>
+	<source path="incubating"/>
+	<source path="shared"/>
+
+	<set-configuration-property name="locale.useragent" value="Y"/>
+	<set-configuration-property name="locale.searchorder" value="queryparam,cookie,meta,useragent"/>
+	
+	<replace-with class="fr.putnami.pwt.core.widget.client.factory.DefaultEditorFactoryManager">
+		<when-type-is class="fr.putnami.pwt.core.model.client.factory.EditorFactoryManager"/>
+	</replace-with>
+	
+	<generate-with class="fr.putnami.pwt.core.widget.rebind.UiBinderLocalizedGenerator">
+		<when-type-assignable class="fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized" />
+	</generate-with>
+	
+</module>

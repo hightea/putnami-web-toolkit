@@ -1,0 +1,73 @@
+<!--
+
+    This file is part of pwt-doc.
+
+    pwt-doc is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt-doc is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel>
+		<w:Heading level="2" navSpy="{navSpy}">Icon</w:Heading>
+		<p class="lead"><strong title="Putnami Web Toolkit">PWT</strong> privides a bunch of icons based on fontello's (<a href="http://fontello.com/" target="_blank">http://fontello.com</a>). Those icons are webfonts so easily resizeable.</p>
+					
+		<w:Heading level="3">Basic usage</w:Heading>
+		<p>Set the icon with the <code>type</code> attribute referencing the <code>IconType</code> enumeration.</p>
+		<p>The icon color can be customize with the <code>color</code> attribute. As the icon are webfonts, the color use the <code>text-*</code> CSS classe.s</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:Icon type="OK" color="SUCCESS"/>
+				<w:Icon type="CANCEL" color="DANGER"/>
+				<w:Icon type="PLUS" color="INFO"/>
+				<w:Icon type="MINUS" color="WARNING"/>
+				<w:Icon type="LEFT_OPEN" color="MUTED"/>
+				<w:Icon type="RIGHT_OPEN"  color="DEFAULT"/>
+				<w:Icon type="UP_OPEN" />
+				<w:Icon type="DOWN_OPEN" />
+				<w:Icon type="ANDROID" />
+				<w:Icon type="BITBUCKET" />
+				<w:Icon type="GITHUB" />
+				<w:Icon type="CALENDAR" />
+				<w:Icon type="FEMALE" />
+				<w:Icon type="MALE" />
+				<w:Icon type="INFO" />
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:Icon type="OK" color="SUCCESS"/>
+<w:Icon type="CANCEL" color="DANGER"/>
+<w:Icon type="PLUS" color="INFO"/>
+<w:Icon type="MINUS" color="WARNING"/>
+<w:Icon type="LEFT_OPEN" color="MUTED"/>
+<w:Icon type="RIGHT_OPEN"  color="DEFAULT"/>
+<w:Icon type="UP_OPEN" />
+<w:Icon type="DOWN_OPEN" />
+<w:Icon type="ANDROID" />
+<w:Icon type="BITBUCKET" />
+<w:Icon type="GITHUB" />
+<w:Icon type="CALENDAR" />
+<w:Icon type="FEMALE" />
+<w:Icon type="MALE" />
+<w:Icon type="INFO" />]]></pre>
+			</c:StaticCode>
+		</div>
+	</w:HTMLPanel>
+</ui:UiBinder>

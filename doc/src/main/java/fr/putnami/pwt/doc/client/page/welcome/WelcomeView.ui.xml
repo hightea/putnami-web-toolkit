@@ -1,0 +1,173 @@
+<!--
+
+    This file is part of pwt-doc.
+
+    pwt-doc is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt-doc is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client">
+
+	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+	<w:HTMLPanel>
+		<w:Header ui:field="header">
+			<div ui:field="jumbotronDiv" class="jumbotron teaser">
+				<div class="forkMeOnGitHub">
+					<a href="https://github.com/putnami/putnami-pwt" target="_BLANK"><img src="assets/img/forkMe.png" /></a>
+				</div>
+				<w:Heading level="1">Putnami Web Toolkit</w:Heading>
+				<w:GridRow>
+					<w:GridColumn size="6">
+						<w:Icon type="LOCK_OPEN" />
+						Open Source
+					</w:GridColumn>
+					<w:GridColumn size="6">
+						<w:Icon type="SIGNAL" />
+						Raise your productivity
+					</w:GridColumn>
+				</w:GridRow>
+				<w:GridRow>
+					<w:GridColumn size="6">
+						<w:Icon type="THUMBS_UP_ALT" />
+						GWT is now easy
+					</w:GridColumn>
+					<w:GridColumn size="6">
+						<w:Icon type="DOLLAR" />
+						Reduce your costs
+					</w:GridColumn>
+				</w:GridRow>
+				<w:GridRow>
+					<w:GridColumn size="6">
+						<w:Icon type="HEART" />
+						Get better application
+					</w:GridColumn>
+					<w:GridColumn size="6">
+						<w:Icon type="CODE" />
+						Do less code
+					</w:GridColumn>
+				</w:GridRow>
+				<w:GridRow>
+					<w:GridColumn size="6">
+						<w:Icon type="USERS" />
+						Made by coders, for coders
+					</w:GridColumn>
+					<w:GridColumn size="6">
+						<w:Icon type="PUZZLE" />
+						Extensible
+					</w:GridColumn>
+				</w:GridRow>
+			</div>
+		</w:Header>
+		<w:HTMLPanel ui:field="content">
+			<w:Heading level="2" navSpy="{tableOfContent}" >What is PWT?</w:Heading>
+			<p>
+				<strong title="Putnami Web Toolkit">PWT</strong> is a powerfull <abbr title="Google Web Toolkit">GWT</abbr> framework.
+				Open source we built <strong title="Putnami Web Toolkit">PWT</strong> to be lightweight and efficient.
+				<br/>
+				<strong title="Putnami Web Toolkit">PWT</strong> provides new graphical components based on a solid architecture.
+			</p>
+			<ul>
+				<li>Thanks to <a href="http://getbootstrap.com/" target="_BLANK">Twitter 's Bootstrap</a>, your applications are responsive and easily themable.</li>
+				<li>The nice <strong>graphical components</strong> are easy to extend and to customize.</li>
+				<li>The <a href="#DataBinding">data binding</a> is a pushover, making form and dynamic tables is so simple.</li>
+				<li><a href="#ServerCalls">Server calls</a> are simplified and optimized. Multiplex your queries, and say good bye to the useless Async interfaces.</li>
+				<li><a href="#Navigation">Navigation</a> is done on a simplified MVP. <strong>Split</strong> and <strong>scale</strong> your application without even knowing.</li>
+				<li>No third librairies, No external JS. Which provides <strong>security</strong> and serenity on your achievements and our future.</li>
+			</ul>
+			<p>
+				Focused on the useless code removal, all the graphical design is no more described in the java, but nicely lay on a UI template.
+			</p>
+			<p>
+				<strong>Easy to start</strong>, we think we are a serious alternative for your next web application developments.
+			</p>
+
+			<w:Heading level="2" navSpy="{tableOfContent}" >New framework, again! <small>but why?</small></w:Heading>
+			<p>
+				Before we've started <strong title="Putnami Web Toolkit">PWT</strong>, our primary needs were to build rich web applications, lightweight, robust, and maintainable.
+				So we were looking for a nice web framework.
+				<br/>
+				Comming from the java world, disliking the javascript, experemented on GWT, the techno was an evidence.
+				<br/>
+				As many techno, <a href="http://http://www.gwtproject.org" >GWT</a> alone can be a nightmare, widgets are not so rich, and despite the UiBinding, the interface descriptions are very verbose! Have you even tried to make a data based table?
+				<br/>
+				Need a framework? Yes definitly! But what do we exactly require? Nice widgets, a solid architecture, ease of use, fullness, lightweight!
+				<br/>
+				 Woah we're so exigent!
+				<p>
+				Well what were the market possibilities :
+				</p>
+				<ul>
+					<li><strong>JS wrapper</strong> such as <a href="">GXT</a> or <a href="http://www.smartclient.com/product/smartgwt.jsp" target="_BLANK">SMARTGWT</a> are not enough maintainable and evolutive for us.
+						Also it can be sight as a corruption of the GWT's phylosophy.</li>
+					<li><strong>Components oriented</strong> such as <a href="https://github.com/gwtbootstrap3/gwtbootstrap3" target="_BLANK">GWT bootstrap</a> are sexy but doesn't provide any solid framework to build apps.</li>
+					<li><strong>Framework oriented</strong> sush as <a href="http://erraiframework.org/" target="_BLANK">ERRAI</a> or <a href="http://github.com/ArcBees/GWTP" target="_BLANK">GWTP</a> unfortunatly doesn't provide nice components.
+						<br/>
+						And in the details <a href="http://erraiframework.org/" target="_BLANK">ERRAI</a> provides a lot of good things, but it's so heavy! A basic sample give a 80MB War...
+						<br/>
+						Unlike <a href="http://github.com/ArcBees/GWTP" target="_BLANK">GWTP</a> is realy lightweight but mainly provide a good MVP framework.</li>
+					<li><strong>Server side</strong> such as <a href="http://vaadin.com">Vaadin</a>. Sounds realy great, make GWT on server side is realy great idea.
+						It's realy good! But also it's far from our habits and seems difficult to extend. Above all it's truly magical. Is it still GWT ?</li>
+				</ul>
+				<p>
+				Well, clearly we've seen alot of good things. But all our needs weren't present at once in a same framwork.
+				We would maybe try to put some of those framework togethers, and finally with a bit of luck make it work.
+				But at the end, the result would be a lot of compromises, not clear, not mastered, and so alot of wasted time.
+				</p>
+				<p>
+					Ok <strong>Let's start!</strong> make good things, without any compromise, keep the clear head. Here we go...
+				</p>
+				<p>
+					That sure we made it for us.
+					Since we are quietly proud of the result and that we reckon that it may help someone else, we decided to share it by making it open source, Here we are.
+				</p>
+			</p>
+
+			<w:Heading level="2" navSpy="{tableOfContent}" >Just use it ! <small>maybe help us?</small></w:Heading>
+			<p>
+				Well you can see <strong title="Putnami Web Toolkit">PWT</strong> just as an another offer within all GWT frameworks, and finally wonder why do not use an other one.
+			</p>
+			<p>
+				Fine we know that <strong title="Putnami Web Toolkit">PWT</strong> is young, that we come from nowhere or close to.
+				<br/>
+				So let us the benefit of the doubt.
+			</p>
+			<ul>
+				<li>Visit this showcase.</li>
+				<li>Go arround the <a href="#AddressBook">Address book</a>.</li>
+				<li>You want to try, read the <a href="#GettingStarted">Getting Started</a> page and let you go.</li>
+				<li>Have a look on the code, check out it or fork it on <a href="https://github.com/putnami/putnami-pwt">GitHub</a> to have a look on it or even fork it.</li>
+			</ul>
+			<p>
+				If you like it, and want to help us, Great :). So please, we would be glad that you:
+			</p>
+			<ul>
+				<li>Speak about it and spread it around you and beyond.</li>
+				<li>Try and maybe use it on your next applications.</li>
+				<li><a href="https://github.com/putnami/putnami-pwt/issues">Report bugs</a> to make it better.</li>
+				<li>Submit ideas to get new amazing features.</li>
+			</ul>
+			<p>
+				All your feedback are really precious and will be taken into account with the utmost consideration.
+			</p>
+			<p>
+				Thank you for the visit. We hope to see you again soon.
+			</p>
+			<p class="pull-right">
+				Best regards.
+				<a href="https://github.com/putnami"><strong>@Putnami team</strong></a><br/>
+			</p>
+		</w:HTMLPanel>
+	</w:HTMLPanel>
+</ui:UiBinder>

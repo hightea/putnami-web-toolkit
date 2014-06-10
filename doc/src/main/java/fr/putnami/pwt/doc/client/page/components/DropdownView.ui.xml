@@ -1,0 +1,100 @@
+<!--
+
+    This file is part of pwt-doc.
+
+    pwt-doc is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt-doc is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel>
+		<w:Heading level="2" navSpy="{navSpy}">Dropdown Button</w:Heading>
+		<p class="lead">"A dropdown button is a button with a contextual menu for displaying lists of links with eventual titles and dividers.</p>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Basic usage</w:Heading>
+		<p>Add any of <code>NavLink</code>, <code>DropdownHeader</code> or <code>NavDivider</code> to the context menu.</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:ButtonDropdown label="Dropdown button" type="PRIMARY" size="LARGE">
+					<w:DropdownHeader label="First Header"/>
+					<w:NavLink label="Layout"/>
+					<w:NavDivider/>
+					<w:DropdownHeader label="Second Header"/>
+					<w:NavLink label="Component"/>
+					<w:NavLink active="true" label="Overview"/>
+				</w:ButtonDropdown>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:ButtonDropdown label="Dropdown button" type="PRIMARY" size="LARGE">
+	<w:DropdownHeader label="First Header"/>
+	<w:NavLink label="Layout"/>
+	<w:NavDivider/>
+	<w:DropdownHeader label="Second Header"/>
+	<w:NavLink label="Component"/>
+	<w:NavLink active="true" label="Overview"/>
+</w:ButtonDropdown>]]></pre>
+			</c:StaticCode>
+		</div>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Icon customization</w:Heading>
+		<p>With the <code>iconType</code> property, add an icon to the dropdown. The <code>label</code> is not mandatory.</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:ButtonDropdown iconType="VIEW" label="Dropdown button" type="PRIMARY" size="LARGE">
+					<w:DropdownHeader label="First Header"/>
+					<w:NavLink label="Layout"/>
+					<w:NavDivider/>
+					<w:DropdownHeader label="Second Header"/>
+					<w:NavLink iconType="USERS" label="Component"/>
+					<w:NavLink active="true" label="Overview"/>
+				</w:ButtonDropdown>
+				<w:ButtonDropdown iconType="VIEW" type="PRIMARY" size="LARGE">
+					<w:DropdownHeader label="First Header"/>
+					<w:NavLink label="Layout"/>
+					<w:NavDivider/>
+					<w:DropdownHeader label="Second Header"/>
+					<w:NavLink iconType="ADD" label="Component"/>
+					<w:NavLink active="true" label="Overview"/>
+				</w:ButtonDropdown>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:ButtonDropdown iconType="VIEW" label="Dropdown button" type="PRIMARY" size="LARGE">
+	<w:DropdownHeader label="First Header"/>
+	<w:NavLink label="Layout"/>
+	<w:NavDivider/>
+	<w:DropdownHeader label="Second Header"/>
+	<w:NavLink iconType="USERS" label="Component"/>
+	<w:NavLink active="true" label="Overview"/>
+</w:ButtonDropdown>
+<w:ButtonDropdown iconType="VIEW" type="PRIMARY" size="LARGE">
+	<w:DropdownHeader label="First Header"/>
+	<w:NavLink label="Layout"/>
+	<w:NavDivider/>
+	<w:DropdownHeader label="Second Header"/>
+	<w:NavLink iconType="ADD" label="Component"/>
+	<w:NavLink active="true" label="Overview"/>
+</w:ButtonDropdown>]]></pre>
+			</c:StaticCode>
+		</div>
+	</w:HTMLPanel>
+</ui:UiBinder>

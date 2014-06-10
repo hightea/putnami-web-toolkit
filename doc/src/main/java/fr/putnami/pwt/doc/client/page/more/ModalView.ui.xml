@@ -1,0 +1,133 @@
+<!--
+
+    This file is part of pwt-doc.
+
+    pwt-doc is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt-doc is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel>
+		<w:Heading level="2" navSpy="{navSpy}">Modal</w:Heading>
+		<p class="lead">We provide a full bootstrap's Carousel support, allowing auto-play, pause on hover and display left and right navigation buttons.</p>
+					
+		<w:Heading level="3" >Basic usage</w:Heading>
+		<p>A <code>Modal</code> contains one child widget. if this widget has a <code>Header</code> or a <code>Footer</code>, the <code>Modal</code> use them. Else you can add a <code>Header</code> or a <code>Footer</code>. Footer and header can only be set <em>once</em>.</p>
+		<p>If no <code>Header</code> is set you can use the <code>title</code> property to set the modal title.</p>
+		<p>If the <code>dismissable</code> property is set to <code>true</code>, a close button is added on the top-right corner to close the modal. In other cases, you should take care of closing the modal whith a button or something else.</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<div class="text-center">
+					<w:Button ui:field="openModalFormBtn">Open a Modal containing a form</w:Button>
+				</div>
+				<br/>
+				<w:Modal ui:field="modalForm" dismissable="true">
+					<w:Form>
+						<w:Header>Form header</w:Header>
+						<w:HTMLPanel>
+							<p>Form Content</p>
+						</w:HTMLPanel>
+						<w:Footer>Form Footer</w:Footer>
+					</w:Form>
+	 			</w:Modal>
+	 			
+	 			<div class="text-center">
+					<w:Button ui:field="openModalTitleBtn">Open a Modal containing a widget and a footer</w:Button>
+				</div>
+				<br/>
+				
+				<w:Modal ui:field="modalTitle" title="Modal title without header">
+					<w:HTMLPanel>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium facilisis nisi ut tempor. Morbi vestibulum turpis et elit faucibus interdum. Etiam sodales diam ut suscipit egestas. Nulla lacinia posuere viverra. Nam et pulvinar turpis. Nam purus massa, porttitor vitae mauris nec, tempus varius quam. Sed ac scelerisque elit. In velit nibh, aliquam ut felis eu, pulvinar suscipit leo. Proin eget sagittis lectus. Maecenas facilisis sem arcu, non consectetur nulla placerat quis.</p>
+						<p>Nam odio neque, consectetur sit amet semper a, interdum eget nisi. Praesent a justo ut nisl ultricies suscipit. In condimentum porta aliquet. Etiam ornare libero justo, sit amet dictum dui rutrum sit amet. Cras egestas laoreet lorem, sit amet tempus dolor ornare eget. Proin libero quam, accumsan et consectetur quis, vulputate quis augue. Aenean venenatis magna eu vehicula lobortis. Suspendisse lorem purus, porttitor at tortor sit amet, ultrices mattis magna. Nullam condimentum a diam non tempus. Mauris id rhoncus eros, eu venenatis purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque eleifend rutrum nunc, vulputate vehicula justo tempus non. Proin consectetur dui at nisl viverra convallis. Proin metus elit, pretium eu mauris quis, tincidunt venenatis sapien.</p>
+						<p>Nam eu purus ante. Proin dignissim purus nec dolor volutpat porttitor. Aenean quis ante at velit rhoncus tincidunt. Phasellus id justo nec neque vestibulum auctor nec egestas urna. Vivamus sed rhoncus dolor. Donec dapibus semper aliquam. Fusce ac congue libero, non dictum leo. Aliquam porttitor et massa non cursus. Donec pretium ligula sit amet congue molestie. Aenean sit amet est sed magna pretium suscipit. Vivamus rhoncus eros eget justo ultrices, eu euismod odio malesuada. Vivamus aliquet nunc massa, quis pretium justo faucibus at. Proin eget tortor quam. Duis a mauris dictum, bibendum velit sit amet, dictum libero.</p>
+					</w:HTMLPanel>
+					<w:Footer>
+						<w:Button ui:field="closeModalTitleBtn" text="Close Modal"/>
+					</w:Footer>
+	 			</w:Modal>
+	 			
+	 			<div class="text-center">
+					<w:Button ui:field="openModalWidgetDismissableBtn">Open a dismissable Modal containing only a widget</w:Button>
+				</div>
+				<br/>
+				
+				<w:Modal ui:field="modalWidgetDismissable" dismissable="true">
+					<w:HTMLPanel>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium facilisis nisi ut tempor. Morbi vestibulum turpis et elit faucibus interdum. Etiam sodales diam ut suscipit egestas. Nulla lacinia posuere viverra. Nam et pulvinar turpis. Nam purus massa, porttitor vitae mauris nec, tempus varius quam. Sed ac scelerisque elit. In velit nibh, aliquam ut felis eu, pulvinar suscipit leo. Proin eget sagittis lectus. Maecenas facilisis sem arcu, non consectetur nulla placerat quis.</p>
+						<p>Nam odio neque, consectetur sit amet semper a, interdum eget nisi. Praesent a justo ut nisl ultricies suscipit. In condimentum porta aliquet. Etiam ornare libero justo, sit amet dictum dui rutrum sit amet. Cras egestas laoreet lorem, sit amet tempus dolor ornare eget. Proin libero quam, accumsan et consectetur quis, vulputate quis augue. Aenean venenatis magna eu vehicula lobortis. Suspendisse lorem purus, porttitor at tortor sit amet, ultrices mattis magna. Nullam condimentum a diam non tempus. Mauris id rhoncus eros, eu venenatis purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque eleifend rutrum nunc, vulputate vehicula justo tempus non. Proin consectetur dui at nisl viverra convallis. Proin metus elit, pretium eu mauris quis, tincidunt venenatis sapien.</p>
+						<p>Nam eu purus ante. Proin dignissim purus nec dolor volutpat porttitor. Aenean quis ante at velit rhoncus tincidunt. Phasellus id justo nec neque vestibulum auctor nec egestas urna. Vivamus sed rhoncus dolor. Donec dapibus semper aliquam. Fusce ac congue libero, non dictum leo. Aliquam porttitor et massa non cursus. Donec pretium ligula sit amet congue molestie. Aenean sit amet est sed magna pretium suscipit. Vivamus rhoncus eros eget justo ultrices, eu euismod odio malesuada. Vivamus aliquet nunc massa, quis pretium justo faucibus at. Proin eget tortor quam. Duis a mauris dictum, bibendum velit sit amet, dictum libero.</p>
+					</w:HTMLPanel>
+	 			</w:Modal>
+	 			
+	 			<div class="text-center">
+					<w:Button ui:field="openModalWidgetBtn">Open a Modal containing only a widget</w:Button>
+				</div>
+				<br/>
+				
+				<w:Modal ui:field="modalWidget">
+					<w:HTMLPanel>
+						<p>This Modal is not dismissable but we can close it with this button</p>
+						<w:Button ui:field="closeModalWidgetBtn" text="Close Modal"/>
+						<br/>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium facilisis nisi ut tempor. Morbi vestibulum turpis et elit faucibus interdum. Etiam sodales diam ut suscipit egestas. Nulla lacinia posuere viverra. Nam et pulvinar turpis. Nam purus massa, porttitor vitae mauris nec, tempus varius quam. Sed ac scelerisque elit. In velit nibh, aliquam ut felis eu, pulvinar suscipit leo. Proin eget sagittis lectus. Maecenas facilisis sem arcu, non consectetur nulla placerat quis.</p>
+						<p>Nam odio neque, consectetur sit amet semper a, interdum eget nisi. Praesent a justo ut nisl ultricies suscipit. In condimentum porta aliquet. Etiam ornare libero justo, sit amet dictum dui rutrum sit amet. Cras egestas laoreet lorem, sit amet tempus dolor ornare eget. Proin libero quam, accumsan et consectetur quis, vulputate quis augue. Aenean venenatis magna eu vehicula lobortis. Suspendisse lorem purus, porttitor at tortor sit amet, ultrices mattis magna. Nullam condimentum a diam non tempus. Mauris id rhoncus eros, eu venenatis purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque eleifend rutrum nunc, vulputate vehicula justo tempus non. Proin consectetur dui at nisl viverra convallis. Proin metus elit, pretium eu mauris quis, tincidunt venenatis sapien.</p>
+						<p>Nam eu purus ante. Proin dignissim purus nec dolor volutpat porttitor. Aenean quis ante at velit rhoncus tincidunt. Phasellus id justo nec neque vestibulum auctor nec egestas urna. Vivamus sed rhoncus dolor. Donec dapibus semper aliquam. Fusce ac congue libero, non dictum leo. Aliquam porttitor et massa non cursus. Donec pretium ligula sit amet congue molestie. Aenean sit amet est sed magna pretium suscipit. Vivamus rhoncus eros eget justo ultrices, eu euismod odio malesuada. Vivamus aliquet nunc massa, quis pretium justo faucibus at. Proin eget tortor quam. Duis a mauris dictum, bibendum velit sit amet, dictum libero.</p>
+					</w:HTMLPanel>
+	 			</w:Modal>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:Modal dismissable="true">
+	<w:Form>
+		<w:Header>Form header</w:Header>
+		<w:HTMLPanel>
+			<p>Form Content</p>
+		</w:HTMLPanel>
+		<w:Footer>Form Footer</w:Footer>
+	</w:Form>
+</w:Modal>
+
+<w:Modal title="Modal title without header">
+	<w:HTMLPanel>
+		<p>... content ...</p>
+	</w:HTMLPanel>
+	<w:Footer>
+		<w:Button text="Close Modal"/>
+	</w:Footer>
+</w:Modal>
+
+<w:Modal dismissable="true">
+	<w:HTMLPanel>
+		<p>... content ...</p>
+	</w:HTMLPanel>
+</w:Modal>
+	
+<w:Modal>
+	<w:HTMLPanel>
+		<p>This Modal is not dismissable but we can close it with this button</p>
+		<w:Button text="Close Modal"/>
+	</w:HTMLPanel>
+</w:Modal>]]></pre>
+			</c:StaticCode>
+		</div>
+	</w:HTMLPanel>
+</ui:UiBinder>

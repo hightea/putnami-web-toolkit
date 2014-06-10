@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    This file is part of pwt.
+
+    pwt is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<module>
+	<inherits name="com.google.gwt.user.User" />
+	<inherits name="com.google.common.primitives.Primitives" />
+	<inherits name="com.google.common.collect.Collect" />
+
+	<inherits name="fr.putnami.pwt.core.editor.Editor" />
+	
+	<source path="client"/>
+	
+	<replace-with class="fr.putnami.pwt.core.model.client.ModelDriver.DefaultContextFactory" > 
+		<when-type-is class="fr.putnami.pwt.core.model.client.factory.ContextFactory" />
+	</replace-with>
+
+	<generate-with class="fr.putnami.pwt.core.model.rebind.ModelGenerator">
+		<when-type-assignable class="fr.putnami.pwt.core.model.client.model.Model" />
+	</generate-with>
+	
+</module>

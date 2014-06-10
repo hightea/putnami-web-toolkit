@@ -1,0 +1,254 @@
+<!--
+
+    This file is part of pwt-doc.
+
+    pwt-doc is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt-doc is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel>
+		<w:Heading level="2" navSpy="{navSpy}">Button group</w:Heading>
+		<p class="lead">Group a serie of buttons together on a single line.</p>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Basic usage</w:Heading>
+		<p>Add <code>Button</code> to the <code>ButtonGroup</code>.</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:ButtonGroup>
+					<w:Button text="Left"/>
+					<w:Button text="middle"/>
+					<w:Button text="right"/>
+				</w:ButtonGroup>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:ButtonGroup>
+	<w:Button text="Left"/>
+	<w:Button text="middle"/>
+	<w:Button text="right"/>
+</w:ButtonGroup>]]></pre>
+			</c:StaticCode>
+		</div>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Size</w:Heading>
+		<p>Use any of these <code>ButtonGroup.Size</code> to change the size.</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:ButtonGroup size="LARGE">
+					<w:Button text="Left"/>
+					<w:Button text="middle"/>
+					<w:Button text="right"/>
+				</w:ButtonGroup>
+				<w:ButtonGroup size="DEFAULT">
+					<w:Button text="Left"/>
+					<w:Button text="middle"/>
+					<w:Button text="right"/>
+				</w:ButtonGroup>
+				<w:ButtonGroup size="SMALL">
+					<w:Button text="Left"/>
+					<w:Button text="middle"/>
+					<w:Button text="right"/>
+				</w:ButtonGroup>
+				<w:ButtonGroup size="X_SMALL">
+					<w:Button text="Left"/>
+					<w:Button text="middle"/>
+					<w:Button text="right"/>
+				</w:ButtonGroup>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:ButtonGroup size="LARGE">
+	<w:Button text="Left"/>
+	<w:Button text="middle"/>
+	<w:Button text="right"/>
+</w:ButtonGroup>
+<w:ButtonGroup size="DEFAULT">
+	<w:Button text="Left"/>
+	<w:Button text="middle"/>
+	<w:Button text="right"/>
+</w:ButtonGroup>
+<w:ButtonGroup size="SMALL">
+	<w:Button text="Left"/>
+	<w:Button text="middle"/>
+	<w:Button text="right"/>
+</w:ButtonGroup>
+<w:ButtonGroup size="X_SMALL">
+	<w:Button text="Left"/>
+	<w:Button text="middle"/>
+	<w:Button text="right"/>
+</w:ButtonGroup>]]></pre>
+			</c:StaticCode>
+		</div>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Button customization</w:Heading>
+		<p>Each <code>Button</code> can be customize independently (<code>type</code>, <code>iconType</code> or <code>active</code> and <code>disabled</code> properties).</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:ButtonGroup size="LARGE">
+					<w:Button text="Left" iconType="SAVE" type="PRIMARY"/>
+					<w:Button text="middle" type="DANGER" active="true"/>
+					<w:Button text="right" iconType="VIEW" disabled="true"/>
+				</w:ButtonGroup>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:ButtonGroup size="LARGE">
+	<w:Button text="Left" iconType="SAVE" type="PRIMARY"/>
+	<w:Button text="middle" type="DANGER" active="true"/>
+	<w:Button text="right" iconType="VIEW" disabled="true"/>
+</w:ButtonGroup>]]></pre>
+			</c:StaticCode>
+		</div>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Dropdown use</w:Heading>
+		<p>A <code>ButtonGroup</code> can contains <code>Button</code> and <code>DropdownButton</code>.</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:ButtonGroup>
+					<w:Button text="Left" />
+					<w:Button text="Middle" />
+					<w:ButtonDropdown label="Middle button">
+						<w:DropdownHeader label="First Middle Header"/>
+						<w:NavLink label="Top"/>
+						<w:NavDivider/>
+						<w:DropdownHeader label="Second Middle Header"/>
+						<w:NavLink label="Bottom"/>
+					</w:ButtonDropdown>
+					<w:ButtonDropdown label="Right button">
+						<w:DropdownHeader label="First Header"/>
+						<w:NavLink label="Top"/>
+						<w:NavDivider/>
+						<w:DropdownHeader label="Second Header"/>
+						<w:NavLink label="Middle"/>
+						<w:NavLink label="Bottom"/>
+					</w:ButtonDropdown>
+				</w:ButtonGroup>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:ButtonGroup>
+	<w:Button text="Left" />
+	<w:Button text="Middle" />
+	<w:ButtonDropdown label="Middle button">
+		<w:DropdownHeader label="First Middle Header"/>
+		<w:NavLink label="Top"/>
+		<w:NavDivider/>
+		<w:DropdownHeader label="Second Middle Header"/>
+		<w:NavLink label="Bottom"/>
+	</w:ButtonDropdown>
+	<w:ButtonDropdown label="Right button">
+		<w:DropdownHeader label="First Header"/>
+		<w:NavLink label="Top"/>
+		<w:NavDivider/>
+		<w:DropdownHeader label="Second Header"/>
+		<w:NavLink label="Middle"/>
+		<w:NavLink label="Bottom"/>
+	</w:ButtonDropdown>
+</w:ButtonGroup>]]></pre>
+			</c:StaticCode>
+		</div>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Button toolbar</w:Heading>
+		<p>Combine a set of <code>ButtonGroup</code>.</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:ButtonGroup type="TOOLBAR">
+					<w:ButtonGroup>
+						<w:Button text="1" />
+						<w:Button text="2" />
+						<w:Button text="3" />
+						<w:Button text="4" />
+					</w:ButtonGroup>
+					<w:ButtonGroup>
+						<w:Button text="5" />
+						<w:Button text="6" />
+						<w:Button text="7" />
+					</w:ButtonGroup>
+					<w:ButtonGroup>
+						<w:Button text="8" />
+					</w:ButtonGroup>
+				</w:ButtonGroup>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:ButtonGroup type="TOOLBAR">
+	<w:ButtonGroup>
+		<w:Button text="1" />
+		<w:Button text="2" />
+		<w:Button text="3" />
+		<w:Button text="4" />
+	</w:ButtonGroup>
+	<w:ButtonGroup>
+		<w:Button text="5" />
+		<w:Button text="6" />
+		<w:Button text="7" />
+	</w:ButtonGroup>
+	<w:ButtonGroup>
+		<w:Button text="8" />
+	</w:ButtonGroup>
+</w:ButtonGroup>]]></pre>
+			</c:StaticCode>
+		</div>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Vertical variation</w:Heading>
+		<p>Use the <code>ButtonGroup.Type.VERTICAL</code>to make the set of <code>Button</code> appears verticaly.</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:ButtonGroup type="VERTICAL">
+					<w:Button text="Top" />
+					<w:Button text="Middle Top" />
+					<w:Button text="Middle Bottom" />
+					<w:Button text="Bottom" />
+				</w:ButtonGroup>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:ButtonGroup type="VERTICAL">
+	<w:Button text="Top" />
+	<w:Button text="Middle Top" />
+	<w:Button text="Middle Bottom" />
+	<w:Button text="Bottom" />
+</w:ButtonGroup>]]></pre>
+			</c:StaticCode>
+		</div>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Justified variation</w:Heading>
+		<p>Set the <code>justified</code> property to  <code>true</code> to make the group stretch at his parents width.</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:ButtonGroup justified="true">
+					<w:Button text="Left" />
+					<w:Button text="Middle" />
+					<w:Button text="Right" />
+				</w:ButtonGroup>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:ButtonGroup justified="true">
+	<w:Button text="Left" />
+	<w:Button text="Middle" />
+	<w:Button text="Right" />
+</w:ButtonGroup>]]></pre>
+			</c:StaticCode>
+		</div>
+	</w:HTMLPanel>
+</ui:UiBinder>

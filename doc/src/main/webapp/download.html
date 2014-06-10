@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    	<link rel="stylesheet" href="Documentation/theme/default/style/bootstrap.min.css">
+    	<link rel="stylesheet" href="Documentation/theme/default/style/fontello.css">
+    	<link rel="stylesheet" href="Documentation/theme/doc/style/pwt-doc.css">
+    	<title>PWT - Putnami Web Toolkit Download Center</title>
+	</head>
+	<body> 
+		<header id="pwt-header"> 
+			<div class="pwt-top-header">
+				<div class="container" id="pwt-title" title="Putnami Download Centert">
+					<img src="assets/img/putnami.png" alt="Putnami Logo" /> 
+					PWT Download Center <small>Download  our artifacts</small> 
+				</div>
+			</div>
+			<div class="pwt-menu-affix" style="height:0;">
+			</div>
+		</header>
+		
+		<div class="showcase-section">
+			<div class="container">
+<!-- 				<h1>PWT <small>Putnami Web Toolkit</small></h1> -->
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1">
+						<h2>Releases</h2>
+						<div class="row">
+							<div class="col-sm-4">
+								<h3>PWT Core library</h3>
+								<p>Core framework library.</p>
+								<a href="http://repo.putnami.org/fr/putnami/pwt/pwt/@releaseVersion@/pwt-@releaseVersion@.jar" class="btn btn-default">Download</a>
+							</div>
+							<div class="col-sm-4">
+								<h3>PWT Code Editor plugin</h3>
+								<p>Plugin providing a code editor component.</p>
+								<a href="http://repo.putnami.org/fr/putnami/pwt/pwt-code-editor/@releaseVersion@/pwt-code-editor-@releaseVersion@.jar" class="btn btn-default">Download</a>
+							</div>
+							<div class="col-sm-4">
+								<h3>PWT Google Analytics library</h3>
+								<p>Plugn providing Google Analytics support.</p>
+								<a href="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/@releaseVersion@/pwt-google-analytics-@releaseVersion@.jar" class="btn btn-default">Download</a>
+							</div>	
+						</div>
+						<p>Current version <span class="label label-info">@releaseVersion@</span></p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1">
+						<h2>Maven usage</h2>
+						<p>Add our maven repository (or install the artifacts in yours) :</p>
+<pre>
+&lt;repositories&gt;
+	&lt;repository&gt;
+		&lt;id&gt;putnami.org&lt;/id&gt;
+		&lt;url&gt;http://repo.putnami.org/&lt;/url&gt;
+	&lt;/repository&gt;
+&lt;/repositories&gt;
+</pre>
+
+						<p>Then add the desired dependencies</p>
+<pre>
+&lt;dependencies&gt;
+	...
+	&lt;dependency&gt;
+		&lt;groupId&gt;fr.putnami.pwt&lt;/groupId&gt;
+		&lt;artifactId&gt;pwt&lt;/artifactId&gt;
+		&lt;version&gt;@releaseVersion@&lt;/version&gt;
+	&lt;/dependency&gt;
+	&lt;!-- You may want to use these plugins --&gt;
+	&lt;dependency&gt;
+		&lt;groupId&gt;fr.putnami.pwt&lt;/groupId&gt;
+		&lt;artifactId&gt;pwt-code-editor&lt;/artifactId&gt;
+		&lt;version&gt;@releaseVersion@&lt;/version&gt;
+	&lt;/dependency&gt;
+	&lt;dependency&gt;
+		&lt;groupId&gt;fr.putnami.pwt&lt;/groupId&gt;
+		&lt;artifactId&gt;pwt-google-analytics&lt;/artifactId&gt;
+		&lt;version&gt;@releaseVersion@&lt;/version&gt;
+	&lt;/dependency&gt;
+	...
+&lt;/dependencies&gt;
+</pre>
+						<div class="alert alert-info">
+							<p><em>Note :</em> You can use the snapshot <span class="label label-info">@snapshotVersion@</span></p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1">
+						<h2>Gradle usage</h2>
+						<p>Add our maven repository (or install the artifacts in yours) :</p>
+<pre>
+repositories {
+	maven {
+		url &#39;http://repo.putnami.org&#39;
+	}
+	/* Use the standard repositories for other dependencies */
+	mavenLocal()
+	mavenCentral()
+}
+</pre>
+
+						<p>Then add the desired dependencies</p>
+<pre>
+dependencies {
+	...
+	&#39;fr.putnami.pwt:pwt:@releaseVersion@&#39;
+	/* You may want to use these plugins */
+	&#39;fr.putnami.pwt:pwt-code-editor:@releaseVersion@&#39;
+	&#39;fr.putnami.pwt:pwt-google-analytics:@releaseVersion@&#39;
+	...
+}
+</pre>
+						<div class="alert alert-info">
+							<p><em>Note :</em> You can use the snapshot <span class="label label-info">@snapshotVersion@</span></p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1">
+						<h2>Detailed usage</h2>
+						<div class="alert alert-info">
+							<h4>More details</h4>
+							<p>If you want more details with the maven or gradle usage of PWT, go to the <a href="index.html#GettingStarted">Getting started guide</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer id="pwt-footer">
+			<p>Designed and made with all our love by <a href="https://github.com/hightea" target="_blank">@tcharbonnier</a> and <a href="https://github.com/fdumay" target="_blank">@fdumay</a></p>
+			<p>Licensed under <a href="https://www.gnu.org/licenses/lgpl-3.0.txt" target="_blank">LGPL v 3.0</a> </p> 
+			<ul class="list-inline">
+				<li><a href="https://github.com/putnami" target="_blank">Putnami Team</a></li>
+				<li>current version @releaseVersion@</li>
+				<li><a href="https://github.com/putnami/putnami-pwt" target="_blank">GitHub</a></li>
+				<li><a href="index.html#Samples">Samples</a></li>
+				<li><a href="https://github.com/putnami/putnami-pwt/issues" target="_blank">Issues</a></li>
+				<li><a href="download.html">Download</a></li>
+			</ul> 
+		</footer>
+	</body>
+</html>

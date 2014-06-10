@@ -1,0 +1,160 @@
+<!--
+
+    This file is part of pwt-doc.
+
+    pwt-doc is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt-doc is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+
+	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel>
+		<w:Heading level="2" navSpy="{navSpy}">Popover and tooltip</w:Heading>
+		<p class="lead"></p>
+					
+		<w:Heading level="3" navSpy="{navSpy}">Basic usage</w:Heading>
+		<p>A <code>Popover</code> or a <code>Tooltip</code> contains only one widget.</p>
+		<p>Use the <code>text</code> property to set the popover / tooltip content, and the <code>title</code> property to set the popover title.</p>
+		<p>Use the <code>placement</code> property to set the popover / tooltip position (default is set to <code>TOP</code>).</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample text-center">
+				<w:Popover title="Left popover" text="this is a popover on left" placement="LEFT">
+					<w:Button text="Popover on left" />
+				</w:Popover>
+				<w:Popover text="this is a popover on top without title">
+					<w:Button text="Popover on top" />
+				</w:Popover>
+				<w:Popover title="Bottom popover" text="this is a popover on bottom" placement="BOTTOM">
+					<w:Button text="Popover on bottom" />
+				</w:Popover>
+				<w:Popover title="Right popover" text="this is a popover on right" placement="RIGHT">
+					<w:Button text="Popover on right" />
+				</w:Popover>
+				
+				<br/>
+				<br/>
+				
+				<w:Tooltip text="this is a tooltip on left" placement="LEFT">
+					<w:Button text="Tooltip on left" />
+				</w:Tooltip>
+				<w:Tooltip text="this is a tooltip on top">
+					<w:Button text="Tooltip on top" />
+				</w:Tooltip>
+				<w:Tooltip text="this is a tooltip on bottom" placement="BOTTOM">
+					<w:Button text="Tooltip on bottom" />
+				</w:Tooltip>
+				<w:Tooltip text="this is a tooltip on right" placement="RIGHT">
+					<w:Button text="Tooltip on right" />
+				</w:Tooltip>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:Popover title="Left popover" text="this is a popover on left" placement="LEFT">
+	<w:Button text="Popover on left" />
+</w:Popover>
+<w:Popover text="this is a popover on top without title">
+	<w:Button text="Popover on top" />
+</w:Popover>
+<w:Popover title="Bottom popover" text="this is a popover on bottom" placement="BOTTOM">
+	<w:Button text="Popover on bottom" />
+</w:Popover>
+<w:Popover title="Right popover" text="this is a popover on right" placement="RIGHT">
+	<w:Button text="Popover on right" />
+</w:Popover>
+
+<w:Tooltip text="this is a tooltip on left" placement="LEFT">
+	<w:Button text="Tooltip on left" />
+</w:Tooltip>
+<w:Tooltip text="this is a tooltip on top">
+	<w:Button text="Tooltip on top" />
+</w:Tooltip>
+<w:Tooltip text="this is a tooltip on bottom" placement="BOTTOM">
+	<w:Button text="Tooltip on bottom" />
+</w:Tooltip>
+<w:Tooltip text="this is a tooltip on right" placement="RIGHT">
+	<w:Button text="Tooltip on right" />
+</w:Tooltip>]]></pre>
+			</c:StaticCode>
+		</div>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Popover / tooltip trigger</w:Heading>
+		<p>Default behaviour is to trigger the popover / tooltip on mouse over. Use the <code>trigger</code> property to chose between <code>HOVER</code>, <code>FOCUS</code> or <code>MANUAL</code> trigger.</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample text-center">
+				<w:Popover text="Popover on focus" placement="LEFT" trigger="FOCUS">
+					<w:Button text="Popover on focus" />
+				</w:Popover>
+				
+				<w:Tooltip text="Tooltip on focus" placement="TOP" trigger="FOCUS">
+					<w:Button text="Tooltip on focus" />
+				</w:Tooltip>
+				
+				<br/>
+				<br/>
+				
+				<w:Popover ui:field="manualPopover" text="Popover Manual" placement="BOTTOM" trigger="MANUAL">
+					<w:Button ui:field="manualPopoverBtn" text="Click to toggle popover" />
+				</w:Popover>
+				
+				<w:Tooltip ui:field="manualTooltip" text="Tooltip manual" placement="RIGHT" trigger="MANUAL">
+					<w:Button ui:field="manualTooltipBtn" text="Click to toggle tooltip" />
+				</w:Tooltip>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:Popover text="Popover on focus" placement="LEFT" trigger="FOCUS">
+	<w:Button text="Popover on focus" />
+</w:Popover>
+
+<w:Tooltip text="Tooltip on focus" placement="TOP" trigger="FOCUS">
+	<w:Button text="Tooltip on focus" />
+</w:Tooltip>
+
+<w:Popover ui:field="manualPopover" text="Popover Manual" placement="BOTTOM" trigger="MANUAL">
+	<w:Button ui:field="manualPopoverBtn" text="Click to toggle popover" />
+</w:Popover>
+
+<w:Tooltip ui:field="manualTooltip" text="Tooltip manual" placement="RIGHT" trigger="MANUAL">
+	<w:Button ui:field="manualTooltipBtn" text="Click to toggle tooltip" />
+</w:Tooltip>]]></pre>
+			</c:StaticCode>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@UiField
+Popover manualPopover;
+@UiField
+Tooltip manualTooltip;
+
+	...
+	
+@UiHandler("manualPopoverBtn")
+public void onManualPopoverBtnClick(ButtonEvent event) {
+	manualPopover.toggleVisibility();
+}
+
+@UiHandler("manualTooltipBtn")
+public void onManualTooltipBtnClick(ButtonEvent event) {
+	manualTooltip.toggleVisibility();
+}]]></pre>
+			</c:StaticCode>
+		</div>
+	</w:HTMLPanel>
+</ui:UiBinder>

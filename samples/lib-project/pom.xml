@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>fr.putnami.pwt</groupId>
+	<artifactId>pwt-sample-lib</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>Putnami Web Toolkit sample library app</name>
+
+	<properties>
+		<gwt.version>2.6.1</gwt.version>
+		<pwt.version>1.0.0-SNAPSHOT</pwt.version>
+		<project.compiler.source>1.7</project.compiler.source>
+		<project.compiler.target>1.7</project.compiler.target>
+		<project.sourceEncoding>UTF-8</project.sourceEncoding>
+	</properties>
+
+	<dependencies>
+	<dependency>
+			<groupId>fr.putnami.pwt</groupId>
+			<artifactId>pwt</artifactId>
+			<version>${pwt.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>fr.putnami.pwt</groupId>
+			<artifactId>pwt-code-editor</artifactId>
+			<version>${pwt.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<version>${gwt.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
+			<version>${gwt.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.1</version>
+					<configuration>
+						<source>${project.compiler.source}</source>
+						<target>${project.compiler.target}</target>
+						<encoding>${project.sourceEncoding}</encoding>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>gwt-maven-plugin</artifactId>
+					<version>${gwt.version}</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>resources</goal>
+								<goal>compile</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>
