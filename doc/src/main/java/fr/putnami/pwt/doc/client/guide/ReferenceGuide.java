@@ -56,6 +56,7 @@ import fr.putnami.pwt.doc.client.page.soon.CommingSoonView;
 import fr.putnami.pwt.doc.client.page.starting.GettingStartedView;
 import fr.putnami.pwt.doc.client.page.table.TablesView;
 import fr.putnami.pwt.doc.client.page.welcome.WelcomeView;
+import fr.putnami.pwt.plugin.ga.client.GoogleAnalytics;
 
 public class ReferenceGuide extends Composite implements EntryPoint {
 	private final Logger LOGGER = Logger.getLogger(ReferenceGuide.class.getSimpleName());
@@ -151,6 +152,8 @@ public class ReferenceGuide extends Composite implements EntryPoint {
 		errorDisplayer.setConstants((ConstantsWithLookup) GWT.create(ErrorConstants.class));
 		ErrorManager.get().setErrorDisplayer(errorDisplayer);
 		ErrorManager.get().registerErrorHandler(new UmbrellaExceptionHandler());
+
+		GoogleAnalytics.get("UA-51591008-1").trackPage();
 
 		addHeading("Putnami Web Toolkit", 1);
 		addContent(new WelcomeView(), 0);
