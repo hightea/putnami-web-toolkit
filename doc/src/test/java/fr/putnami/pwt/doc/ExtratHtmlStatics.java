@@ -1,6 +1,8 @@
 package fr.putnami.pwt.doc;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
@@ -35,6 +37,7 @@ public class ExtratHtmlStatics {
 
 	private static final String host = "http://localhost:8080/pwt-doc/";
 	private static final String outFolder = "build/htmlStatics/";
+	private static final File siteMap = new File(outFolder + "sitemap.txt");
 
 	public static void main(String[] args) {
 		final WebClient webClient = new WebClient(BrowserVersion.CHROME);
@@ -62,7 +65,7 @@ public class ExtratHtmlStatics {
 			extractPage(webClient, CommingSoonPlace.class);
 		}
 		catch (FailingHttpStatusCodeException | IOException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 
 	}
@@ -71,13 +74,12 @@ public class ExtratHtmlStatics {
 			throws FailingHttpStatusCodeException, MalformedURLException, IOException {
 		String tokenName = null;
 		HtmlPage page = null;
+		String url = host;
 		if (place != null) {
 			tokenName = place.getSimpleName().replace("Place", "");
-			page = webClient.getPage(host + "#!" + tokenName);
+			url += "#!" + tokenName;
 		}
-		else {
-			page = webClient.getPage(host);
-		}
+		page = webClient.getPage(url);
 
 		for (DomNode node : page.getHead().getChildren()) {
 			if ("script".equals(node.getNodeName())) {
@@ -95,6 +97,10 @@ public class ExtratHtmlStatics {
 		PrintWriter out = new PrintWriter(outFile);
 		out.print(pageData);
 		out.close();
+
+		PrintWriter siteMapWriter = new PrintWriter(new BufferedWriter(new FileWriter(siteMap, true)));
+		siteMapWriter.println(url);
+		siteMapWriter.close();
 
 	}
 }
