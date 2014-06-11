@@ -25,8 +25,8 @@
 						<a:Anchor text="PWT - Sample Web app" link="#" />
 					</a:Brand>
 					<a:Nav>
-						<a:NavLink label="Contacts List" link="#Contacts"/>
-						<a:NavLink label="Address book" link="#AddressBook"/>
+						<a:NavLink label="Contacts List" link="#!Contacts"/>
+						<a:NavLink label="Address book" link="#!AddressBook"/>
 					</a:Nav>
 				</a:Navbar>
 			</a:HTMLPanel>
