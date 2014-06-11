@@ -19,64 +19,106 @@ package fr.putnami.pwt.plugin.ga.client;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.ScriptElement;
-import com.google.gwt.user.client.Window;
 
 import fr.putnami.pwt.core.mvp.client.MvpController;
 import fr.putnami.pwt.core.mvp.client.event.StartActivityEvent;
 
 public class GoogleAnalyticsImpl extends GoogleAnalytics implements StartActivityEvent.Handler {
 
-	private static final String SCRIPT_HTTP = "http://www.google-analytics.com/ga.js";
-	private static final String SCRIPT_HTTPS = "https://ssl.google-analytics.com/ga.js";
+	private static final String SCRIPT_URL = "//www.google-analytics.com/analytics.js";
 
-	private static boolean jsLoaded = false;
+	private static boolean isInit = false;
 
-	private void insertFirstScriptElement(ScriptElement script) {
+	private void loadAnalyticsScript() {
+		ScriptElement script = Document.get().createScriptElement();
+		script.setSrc(SCRIPT_URL);
+		script.setType("text/javascript");
+		script.setAttribute("async", "true");
+
 		Element firstScript = Document.get().getElementsByTagName("script").getItem(0);
 		firstScript.getParentNode().insertBefore(script, firstScript);
 	}
 
-	private void loadGoogleAnalyticsScript() {
-		if (jsLoaded) {
+	private void initScript() {
+		if (isInit) {
 			return;
 		}
-		jsLoaded = true;
-		ScriptElement script = Document.get().createScriptElement();
-		boolean secured = "https:".equals(Window.Location.getProtocol());
-		script.setSrc(secured ? SCRIPT_HTTPS : SCRIPT_HTTP);
-		script.setType("text/javascript");
-		script.setAttribute("async", "true");
-
-		insertFirstScriptElement(script);
+		isInit = true;
+		createGaObject();
+		loadAnalyticsScript();
 	}
 
 	@Override
 	protected void initialize(String account) {
-		String gaSession = "var __ga = __ga || [];__ga.push(['_setAccount', '" + account + "']);";
-		ScriptElement config = Document.get().createScriptElement(gaSession);
-		loadGoogleAnalyticsScript();
-		insertFirstScriptElement(config);
-		loadGoogleAnalyticsScript();
+		initScript();
 		MvpController.get().addStartActivityHandler(this);
-		trackPage();
+		createTracker(account);
 	}
 
 	@Override
 	public void onStartActivity(StartActivityEvent event) {
 		String placeToken = MvpController.get().getToken(event.getPlace());
-		trackPlace("/" + placeToken);
+		trackPage("/" + placeToken);
 	}
 
-	@Override
-	public native void trackPlace(String placeName)
+	private native void createGaObject()
 	/*-{
-	    $wnd.__ga.push([ '_trackPageview', placeName ]);
+	  	// store the name of the Analytics object
+		$wnd['GoogleAnalyticsObject'] = 'ga';
+
+		//Init the queu function
+		$wnd.ga = $wnd.ga || function(){
+			($wnd.ga.q = $wnd.ga.q || []).push(arguments)
+		}
+		//Init the time
+		$wnd.ga.l = 1 * new Date();
+	}-*/;
+
+	private native void createTracker(String account)
+	/*-{
+		$wnd.ga('create', account, 'auto');
+	}-*/;
+
+	private native void createLocalhostTracker(String account)
+	/*-{
+		$wnd.ga('create', account, {
+		  'cookieDomain': 'none'
+		});
+	}-*/;
+
+	@Override
+	public native void forceSSL(boolean force)
+	/*-{
+	    $wnd.ga('set', 'forceSSL', force);
 	}-*/;
 
 	@Override
 	public native void trackPage()
 	/*-{
-	    $wnd.__ga.push([ '_trackPageview' ]);
+	    $wnd.ga('send', 'pageview');
 	}-*/;
 
+	@Override
+	public native void trackPage(String pageName)
+	/*-{
+	    $wnd.ga('send', 'pageview', pageName);
+	}-*/;
+
+	@Override
+	public native void trackEvent(String category, String action)
+	/*-{
+	   $wnd.ga('send', 'event', category, action);
+	}-*/;
+
+	@Override
+	public native void trackEvent(String category, String action, String label)
+	/*-{
+	   $wnd.ga('send', 'event', category, action, label);
+	}-*/;
+
+	@Override
+	public native void trackEvent(String category, String action, String label, int value)
+	/*-{
+	   $wnd.ga('send', 'event', category, action, label, value);
+	}-*/;
 }

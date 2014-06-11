@@ -36,8 +36,16 @@ public abstract class GoogleAnalytics {
 
 	protected abstract void initialize(String account);
 
-	protected abstract void trackPage();
+	public abstract void forceSSL(boolean force);
 
-	protected abstract void trackPlace(String placeName);
+	public abstract void trackPage();
+
+	public abstract void trackPage(String pageName);
+
+	public abstract void trackEvent(String category, String action);
+
+	public abstract void trackEvent(String category, String action, String label);
+
+	public abstract void trackEvent(String category, String action, String label, int value);
 
 }
