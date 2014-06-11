@@ -52,7 +52,7 @@ subprojects {
 	
 
 	group = 'fr.putnami.pwt'
-	version = rootProject.releaseVersion
+	version = rootProject.snapshotVersion
 
 	sourceCompatibility = 1.7
 	targetCompatibility = 1.7
