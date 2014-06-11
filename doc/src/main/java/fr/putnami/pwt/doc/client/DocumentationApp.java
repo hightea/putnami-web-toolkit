@@ -28,6 +28,7 @@ import fr.putnami.pwt.core.mvp.client.MvpController;
 import fr.putnami.pwt.core.theme.client.CssLink;
 import fr.putnami.pwt.core.theme.client.Theme;
 import fr.putnami.pwt.core.theme.client.ThemeController;
+import fr.putnami.pwt.doc.client.application.ApplicationConfig;
 import fr.putnami.pwt.doc.client.application.DocumentationDisplay;
 import fr.putnami.pwt.doc.client.application.error.ErrorConstants;
 import fr.putnami.pwt.doc.client.application.error.UmbrellaExceptionHandler;
@@ -55,14 +56,14 @@ public class DocumentationApp implements EntryPoint {
 
 	@Override
 	public void onModuleLoad() {
-		if(redirectIfNotIndexPage()){
+		if (redirectIfNotIndexPage()) {
 			return;
 		}
 		RootPanel staticContent = RootPanel.get("pwt-static-content");
-		if(staticContent != null &&  staticContent.getElement() != null){
+		if (staticContent != null && staticContent.getElement() != null) {
 			staticContent.getElement().removeFromParent();
 		}
-		
+
 		Theme theme = new Theme();
 		theme.addLink(new CssLink("theme/doc/style/pwt-doc.css", 0));
 		ThemeController.get().installTheme(theme);
@@ -70,7 +71,7 @@ public class DocumentationApp implements EntryPoint {
 		DocumentationDisplay display = new DocumentationDisplay();
 		RootPanel.get().add(display);
 
-		GoogleAnalytics.get("UA-51591008-1");
+		GoogleAnalytics.get(ApplicationConfig.ANALYTICS_TRACKER_ID).forceSSL(true);
 
 		SimpleErrorDisplayer errorDisplayer = new SimpleErrorDisplayer();
 		errorDisplayer.setConstants((ConstantsWithLookup) GWT.create(ErrorConstants.class));
@@ -103,15 +104,15 @@ public class DocumentationApp implements EntryPoint {
 
 		controller.handleCurrentHistory();
 	}
-	
-	private boolean redirectIfNotIndexPage(){
+
+	private boolean redirectIfNotIndexPage() {
 		String params = "";
 		String pageUrl = Window.Location.getHref();
-		if(pageUrl.contains("?")){
+		if (pageUrl.contains("?")) {
 			params = Window.Location.getQueryString();
 			pageUrl = pageUrl.replace(params, "");
 		}
-		if(pageUrl.endsWith(".html")){
+		if (pageUrl.endsWith(".html")) {
 			String newUrl = GWT.getHostPageBaseURL().substring(0, GWT.getHostPageBaseURL().lastIndexOf("/"));
 			Window.Location.replace(newUrl + params);
 			return true;

@@ -37,6 +37,7 @@ import fr.putnami.pwt.core.widget.client.GridColumn;
 import fr.putnami.pwt.core.widget.client.Heading;
 import fr.putnami.pwt.core.widget.client.NavSpy;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
+import fr.putnami.pwt.doc.client.application.ApplicationConfig;
 import fr.putnami.pwt.doc.client.application.HasTableOfContent;
 import fr.putnami.pwt.doc.client.application.Page;
 import fr.putnami.pwt.doc.client.application.error.ErrorConstants;
@@ -153,7 +154,7 @@ public class ReferenceGuide extends Composite implements EntryPoint {
 		ErrorManager.get().setErrorDisplayer(errorDisplayer);
 		ErrorManager.get().registerErrorHandler(new UmbrellaExceptionHandler());
 
-		GoogleAnalytics.get("UA-51591008-1").trackPage();
+		GoogleAnalytics.get(ApplicationConfig.ANALYTICS_TRACKER_ID).trackPage();
 
 		addHeading("Putnami Web Toolkit", 1);
 		addContent(new WelcomeView(), 0);
