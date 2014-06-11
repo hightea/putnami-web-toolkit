@@ -7,9 +7,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
 
+import org.junit.Assert;
+import org.junit.Test;
+import org.w3c.dom.NamedNodeMap;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.DomAttr;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.google.common.io.Files;
@@ -42,6 +48,13 @@ public class ExtratHtmlStatics {
 	private static final File siteMap = new File(outFolder + "sitemap.txt");
 	private static WebClient webClient;
 	
+//	@Test
+//	public void test(){
+//		String s = "<a href=\"#!DataBinding\">";
+//		s = s.replaceAll("#\\!([a-zA-Z]*)", targetHost + "$1.html" );
+//		Assert.assertEquals("<a href=\"http://gwt.putnami.org/DataBinding.html\">", s);
+//		
+//}
 	public static void main(String[] args) {
 		 webClient = new WebClient(BrowserVersion.CHROME);
 		siteMap.delete();
@@ -90,8 +103,21 @@ public class ExtratHtmlStatics {
 //				node.remove();
 //			}
 //		}
+		for (DomNode node : page.getBody().getChildren()) {
+			if ("div".equals(node.getNodeName() )) {
+				NamedNodeMap attributes = node.getAttributes();
+				DomAttr classAttr = (DomAttr) attributes.getNamedItem("class");
+				if(classAttr != null 
+						&& classAttr.getValue() != null && classAttr.getValue().contains("putnami-showcase")){
+					DomElement domElement = (DomElement) node;
+					domElement.setAttribute("id", "pwt-static-content");
+				}
+			}
+		}
+		
 		String pageData = page.asXml();
 		pageData = pageData.replaceAll(host, "");
+		pageData = pageData.replaceAll("#\\!([a-zA-Z]*)", targetHost + "$1.html");
 
 		String outFile = outFolder ;
 		if (tokenName != null) {

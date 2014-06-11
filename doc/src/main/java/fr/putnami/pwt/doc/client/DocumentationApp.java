@@ -58,6 +58,10 @@ public class DocumentationApp implements EntryPoint {
 		if(redirectIfNotIndexPage()){
 			return;
 		}
+		RootPanel staticContent = RootPanel.get("pwt-static-content");
+		if(staticContent != null &&  staticContent.getElement() != null){
+			staticContent.getElement().removeFromParent();
+		}
 		
 		Theme theme = new Theme();
 		theme.addLink(new CssLink("theme/doc/style/pwt-doc.css", 0));
