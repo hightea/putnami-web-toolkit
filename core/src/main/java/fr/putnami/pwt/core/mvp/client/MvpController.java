@@ -215,7 +215,7 @@ public class MvpController extends PlaceController implements
 	}
 
 	private String getPlacePrefix(Place place) {
-		return place.getClass().getSimpleName().replace("Place", "");
+		return "!" + place.getClass().getSimpleName().replace("Place", "");
 	}
 
 }
