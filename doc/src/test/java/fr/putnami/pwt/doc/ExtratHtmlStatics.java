@@ -12,6 +12,7 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.google.common.io.Files;
 
 import fr.putnami.pwt.core.mvp.client.MvpPlace;
 import fr.putnami.pwt.doc.client.page.binding.DataBindingPlace;
@@ -35,34 +36,37 @@ import fr.putnami.pwt.doc.client.page.welcome.WelcomePlace;
 
 public class ExtratHtmlStatics {
 
+	private static final String targetHost = "http://gwt.putnami.org/";
 	private static final String host = "http://localhost:8080/pwt-doc/";
 	private static final String outFolder = "build/htmlStatics/";
 	private static final File siteMap = new File(outFolder + "sitemap.txt");
-
+	private static WebClient webClient;
+	
 	public static void main(String[] args) {
-		final WebClient webClient = new WebClient(BrowserVersion.CHROME);
-
+		 webClient = new WebClient(BrowserVersion.CHROME);
+		siteMap.delete();
 		new File(outFolder).mkdirs();
 		try {
-			extractPage(webClient, null);
-			extractPage(webClient, WelcomePlace.class);
-			extractPage(webClient, GettingStartedPlace.class);
-			extractPage(webClient, BootstrapPlace.class);
-			extractPage(webClient, LayoutsPlace.class);
-			extractPage(webClient, ComponentsPlace.class);
-			extractPage(webClient, FormsPlace.class);
-			extractPage(webClient, TablesPlace.class);
-			extractPage(webClient, MorePlace.class);
-			extractPage(webClient, DataBindingPlace.class);
-			extractPage(webClient, InternationalizationPlace.class);
-			extractPage(webClient, NavigationPlace.class);
-			extractPage(webClient, ServerCallsPlace.class);
-			extractPage(webClient, ErrorsPlace.class);
-			extractPage(webClient, CodeEditorPlace.class);
-			extractPage(webClient, SamplesPlace.class);
-			extractPage(webClient, ContactsTablePlace.class);
-			extractPage(webClient, AddressBookPlace.class);
-			extractPage(webClient, CommingSoonPlace.class);
+			extractPage( WelcomePlace.class);
+			extractPage(GettingStartedPlace.class);
+			extractPage(BootstrapPlace.class);
+			extractPage(LayoutsPlace.class);
+			extractPage(ComponentsPlace.class);
+			extractPage(FormsPlace.class);
+			extractPage(TablesPlace.class);
+			extractPage(MorePlace.class);
+			extractPage(DataBindingPlace.class);
+			extractPage(InternationalizationPlace.class);
+			extractPage(NavigationPlace.class);
+			extractPage(ServerCallsPlace.class);
+			extractPage(ErrorsPlace.class);
+			extractPage(CodeEditorPlace.class);
+			extractPage(SamplesPlace.class);
+			extractPage(ContactsTablePlace.class);
+			extractPage(AddressBookPlace.class);
+			extractPage(CommingSoonPlace.class);
+			
+			Files.copy(new File(outFolder + "Welcome.html"), new File(outFolder + "index.html"));
 		}
 		catch (FailingHttpStatusCodeException | IOException e) {
 			throw new RuntimeException(e);
@@ -70,8 +74,9 @@ public class ExtratHtmlStatics {
 
 	}
 
-	private static void extractPage(WebClient webClient, Class<? extends MvpPlace> place)
+	private static void extractPage(Class<? extends MvpPlace> place)
 			throws FailingHttpStatusCodeException, MalformedURLException, IOException {
+
 		String tokenName = null;
 		HtmlPage page = null;
 		String url = host;
@@ -80,27 +85,27 @@ public class ExtratHtmlStatics {
 			url += "#!" + tokenName;
 		}
 		page = webClient.getPage(url);
-
-		for (DomNode node : page.getHead().getChildren()) {
-			if ("script".equals(node.getNodeName())) {
-				node.remove();
-			}
-		}
-
+//		for (DomNode node : page.getHead().getChildren()) {
+//			if ("script".equals(node.getNodeName())) {
+//				node.remove();
+//			}
+//		}
 		String pageData = page.asXml();
 		pageData = pageData.replaceAll(host, "");
 
-		String outFile = outFolder + "?_escaped_fragment_";
+		String outFile = outFolder ;
 		if (tokenName != null) {
-			outFile += "=" + tokenName;
+			outFile += tokenName;
 		}
+		outFile += ".html";
 		PrintWriter out = new PrintWriter(outFile);
 		out.print(pageData);
 		out.close();
 
 		PrintWriter siteMapWriter = new PrintWriter(new BufferedWriter(new FileWriter(siteMap, true)));
-		siteMapWriter.println(url);
+		siteMapWriter.println(targetHost + tokenName + ".html");
 		siteMapWriter.close();
 
+		webClient.closeAllWindows();
 	}
 }
