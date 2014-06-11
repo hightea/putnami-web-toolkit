@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
+import java.util.List;
 
 import org.w3c.dom.NamedNodeMap;
 
@@ -15,7 +16,12 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlDivision;
+import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
+import com.gargoylesoftware.htmlunit.html.HtmlItalic;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlScript;
+import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 
 import fr.putnami.pwt.core.mvp.client.MvpPlace;
@@ -103,8 +109,13 @@ public class ExtratHtmlStatics {
 //				node.remove();
 //			}
 //		}
+
+		// Elements to remove
+		List<DomNode> elementsToRemove = Lists.newArrayList();
+
+		// Add an id to the putnami-showcase div
 		for (DomNode node : page.getBody().getChildren()) {
-			if ("div".equals(node.getNodeName())) {
+			if (HtmlDivision.TAG_NAME.equals(node.getNodeName())) {
 				NamedNodeMap attributes = node.getAttributes();
 				DomAttr classAttr = (DomAttr) attributes.getNamedItem("class");
 				if (classAttr != null
@@ -113,6 +124,28 @@ public class ExtratHtmlStatics {
 					domElement.setAttribute("id", "pwt-static-content");
 				}
 			}
+			else if (HtmlInlineFrame.TAG_NAME.equals(node.getNodeName())) {
+				// Remove the iframe
+				elementsToRemove.add(node);
+			}
+		}
+
+		// Remove the permutation script
+		for (DomElement elem : page.getHead().getElementsByTagName(HtmlScript.TAG_NAME)) {
+			HtmlScript scriptElem = (HtmlScript) elem;
+			if (scriptElem.getAttribute("src") != null) {
+				if (scriptElem.getAttribute("src").endsWith(".cache.js") || scriptElem.getAttribute("src").endsWith("google-analytics.com/analytics.js")) {
+					elementsToRemove.add(scriptElem);
+				}
+			}
+		}
+
+		// Remove all the <i> tag because GWT doesn't handle them properly
+		elementsToRemove.addAll(page.getBody().getElementsByTagName(HtmlItalic.TAG_NAME));
+
+		// Remove all the needed elements
+		for (DomNode elem : elementsToRemove) {
+			elem.remove();
 		}
 
 		String pageData = page.asXml();
