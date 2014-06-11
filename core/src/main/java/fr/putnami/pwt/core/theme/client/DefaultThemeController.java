@@ -23,6 +23,8 @@ import com.google.common.collect.Lists;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.HeadElement;
+import com.google.gwt.dom.client.LinkElement;
+import com.google.gwt.dom.client.NodeList;
 
 public class DefaultThemeController extends ThemeController {
 
@@ -30,6 +32,8 @@ public class DefaultThemeController extends ThemeController {
 
 	private final List<CssLink> defaultLinks = Lists.newArrayList();
 	private Theme currentTheme;
+
+	private boolean isInit = false;
 
 	@Override
 	public void addDefaultStyle(CssLink link) {
@@ -40,6 +44,7 @@ public class DefaultThemeController extends ThemeController {
 
 	@Override
 	public void installTheme(Theme theme) {
+		initThemeController();
 		if (currentTheme != null) {
 			for (CssLink link : currentTheme.getLinks()) {
 				link.getLink().removeFromParent();
@@ -49,6 +54,19 @@ public class DefaultThemeController extends ThemeController {
 		this.currentTheme = theme;
 		for (CssLink link : theme.getLinks()) {
 			getHead().appendChild(link.getLink());
+		}
+	}
+
+	private void initThemeController() {
+		if (isInit) {
+			return;
+		}
+		isInit = true;
+		// Remove all existing link element
+		NodeList<Element> links = getHead().getElementsByTagName(LinkElement.TAG);
+		int size = links.getLength();
+		for (int i = 0; i < size; i++) {
+			links.getItem(0).removeFromParent();
 		}
 	}
 
