@@ -19,6 +19,7 @@ package fr.putnami.pwt.doc.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import fr.putnami.pwt.core.common.client.error.ErrorManager;
@@ -54,6 +55,10 @@ public class DocumentationApp implements EntryPoint {
 
 	@Override
 	public void onModuleLoad() {
+		if(redirectIfNotIndexPage()){
+			return;
+		}
+		
 		Theme theme = new Theme();
 		theme.addLink(new CssLink("theme/doc/style/pwt-doc.css", 0));
 		ThemeController.get().installTheme(theme);
@@ -93,5 +98,20 @@ public class DocumentationApp implements EntryPoint {
 		controller.registerActivity(CommingSoonPlace.INSTANCE);
 
 		controller.handleCurrentHistory();
+	}
+	
+	private boolean redirectIfNotIndexPage(){
+		String params = "";
+		String pageUrl = Window.Location.getHref();
+		if(pageUrl.contains("?")){
+			params = Window.Location.getQueryString();
+			pageUrl = pageUrl.replace(params, "");
+		}
+		if(pageUrl.endsWith(".html")){
+			String newUrl = GWT.getHostPageBaseURL().substring(0, GWT.getHostPageBaseURL().lastIndexOf("/"));
+			Window.Location.replace(newUrl + params);
+			return true;
+		}
+		return false;
 	}
 }
