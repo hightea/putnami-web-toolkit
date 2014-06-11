@@ -35,7 +35,5 @@
 			<li>Guava and Guava-gwt version @guavaVersion@</li>
 			<li>Latest version of Twitter's Bootstrap Css file (currently 3.1.1) (Note : We do not use the Javascript files, all is natively developped in <abbr title="Google Web Toolkit">GWT</abbr>)</li>
 		</ul>
-		<br/>
-		<p>We use <a href="http://www.gradle.org">Gradle</a> to build our framework, but thank to the <a href="http://www.gradle.org/docs/current/userguide/gradle_wrapper.html">wrapper</a> you can build it without knowing it !</p>
 	</w:HTMLPanel>
 </ui:UiBinder>
