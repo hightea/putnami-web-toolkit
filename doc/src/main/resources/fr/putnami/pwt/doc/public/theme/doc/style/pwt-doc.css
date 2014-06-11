@@ -105,7 +105,7 @@ pre{
 
 #pwt-header .pwt-menu-affix .pwt-menu{
 	border-bottom: 1px solid transparent;
-	height: 50px;
+	min-height: 50px;
 	background-color: inherit;
 	color: #4db848;
 }
