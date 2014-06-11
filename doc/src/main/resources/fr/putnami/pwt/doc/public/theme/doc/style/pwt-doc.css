@@ -405,4 +405,30 @@ pre.code-editor div.code-editor-line {
 	color: #f9cc21;
 }
 
+@media (max-width: 767px) {
+	.teaser{
+		font-weight: 300;
+		font-size: 1.3em;
+		padding: 20px 10px;
+	}
+	
+	.teaser h1{
+		font-size: 1.2em;
+		
+	}
+	
+	.teaser .forkMeOnGitHub{
+		display: none;
+	}
+
+	.teaser .row{
+		margin: 0 -15px 0 -15px; 
+	}
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .hidden-sm {
+    display: none !important;
+  }
+}
 
