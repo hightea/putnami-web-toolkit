@@ -58,6 +58,7 @@
 							<w:NavLink label="Address book" link="#!AddressBook"/>
 						</w:NavDropdown>
 						<w:NavLink label="Comming soon ..." link="#!CommingSoon" />
+						<w:NavLink label="Download" link="#!Download" />
 					</w:Nav>
 				</w:Navbar>
 			</w:Affix>
@@ -74,7 +75,7 @@
 			  <li><a href="https://github.com/putnami/putnami-pwt" target="_blank">GitHub</a></li>
 			  <li><a href="#!Samples">Samples</a></li>
 			  <li><a href="https://github.com/putnami/putnami-pwt/issues" target="_blank">Issues</a></li>
-			  <li><a href="download.html">Download</a></li>
+			  <li><a href="#!Download">Download</a></li>
 			</ul>
 		</footer>
 	</w:HTMLPanel>

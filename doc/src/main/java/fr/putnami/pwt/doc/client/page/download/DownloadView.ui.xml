@@ -1,0 +1,60 @@
+<!--
+
+    This file is part of pwt-doc.
+
+    pwt-doc is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt-doc is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	>
+	
+	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel>
+		<w:Header ui:field="header">
+			<w:Heading level="1" navSpy="{tableOfContent}">Download center</w:Heading>
+		</w:Header>
+		<w:HTMLPanel ui:field="content">
+			<w:Heading level="2" navSpy="{tableOfContent}">Releases</w:Heading>
+			<w:GridRow styleName="text-left">
+				<w:GridColumn sizeSm="4" size="4">
+					<w:Heading level="3">PWT Core library</w:Heading>
+					<p>Core framework library.</p>
+					<w:Anchor ui:field="coreBtn" link="http://repo.putnami.org/fr/putnami/pwt/pwt/@releaseVersion@/pwt-@releaseVersion@.jar" styleName="btn btn-default" text="Download" />
+				</w:GridColumn>
+				<w:GridColumn sizeSm="4" size="4">
+					<w:Heading level="3">PWT Code Editor plugin</w:Heading>
+					<p>Plugin providing a code editor component.</p>
+					<w:Anchor ui:field="codeBtn" link="http://repo.putnami.org/fr/putnami/pwt/pwt-code-editor/@releaseVersion@/pwt-code-editor-@releaseVersion@.jar" styleName="btn btn-default" text="Download" />
+				</w:GridColumn>
+				<w:GridColumn sizeSm="4" size="4">
+					<w:Heading level="3">PWT Google Analytics library</w:Heading>
+					<p>Plugin providing Google Analytics support.</p>
+					<w:Anchor ui:field="gaBtn" link="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/@releaseVersion@/pwt-google-analytics-@releaseVersion@.jar" styleName="btn btn-default" text="Download" />
+				</w:GridColumn>
+			</w:GridRow>
+			<p>Current version <span class="label label-info">@releaseVersion@</span></p>
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Usage</w:Heading>
+			<w:Alert type="INFO">
+				<w:Heading level="4">Releases</w:Heading>
+				<p>If you want more details with the maven or gradle usage of PWT, go to the <w:Anchor link="#!GettingStarted" text="Getting started guide" /></p>
+				<p><em>Note :</em> You can use the snapshot <span class="label label-info">@snapshotVersion@</span></p>
+			</w:Alert>
+		</w:HTMLPanel>
+	</w:HTMLPanel>
+
+</ui:UiBinder>

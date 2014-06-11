@@ -35,6 +35,7 @@ import fr.putnami.pwt.doc.client.application.error.UmbrellaExceptionHandler;
 import fr.putnami.pwt.doc.client.page.binding.DataBindingPlace;
 import fr.putnami.pwt.doc.client.page.bootstrap.BootstrapPlace;
 import fr.putnami.pwt.doc.client.page.components.ComponentsPlace;
+import fr.putnami.pwt.doc.client.page.download.DownloadPlace;
 import fr.putnami.pwt.doc.client.page.errors.ErrorsPlace;
 import fr.putnami.pwt.doc.client.page.form.FormsPlace;
 import fr.putnami.pwt.doc.client.page.i18n.InternationalizationPlace;
@@ -101,6 +102,7 @@ public class DocumentationApp implements EntryPoint {
 		controller.registerActivity(ContactsTablePlace.INSTANCE);
 		controller.registerActivity(AddressBookPlace.INSTANCE);
 		controller.registerActivity(CommingSoonPlace.INSTANCE);
+		controller.registerActivity(DownloadPlace.INSTANCE);
 
 		controller.handleCurrentHistory();
 	}

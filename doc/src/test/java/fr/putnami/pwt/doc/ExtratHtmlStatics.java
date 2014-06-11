@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
 
-import org.junit.Assert;
-import org.junit.Test;
 import org.w3c.dom.NamedNodeMap;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -24,6 +22,7 @@ import fr.putnami.pwt.core.mvp.client.MvpPlace;
 import fr.putnami.pwt.doc.client.page.binding.DataBindingPlace;
 import fr.putnami.pwt.doc.client.page.bootstrap.BootstrapPlace;
 import fr.putnami.pwt.doc.client.page.components.ComponentsPlace;
+import fr.putnami.pwt.doc.client.page.download.DownloadPlace;
 import fr.putnami.pwt.doc.client.page.errors.ErrorsPlace;
 import fr.putnami.pwt.doc.client.page.form.FormsPlace;
 import fr.putnami.pwt.doc.client.page.i18n.InternationalizationPlace;
@@ -47,7 +46,7 @@ public class ExtratHtmlStatics {
 	private static final String outFolder = "build/htmlStatics/";
 	private static final File siteMap = new File(outFolder + "sitemap.txt");
 	private static WebClient webClient;
-	
+
 //	@Test
 //	public void test(){
 //		String s = "<a href=\"#!DataBinding\">";
@@ -56,11 +55,11 @@ public class ExtratHtmlStatics {
 //		
 //}
 	public static void main(String[] args) {
-		 webClient = new WebClient(BrowserVersion.CHROME);
+		webClient = new WebClient(BrowserVersion.CHROME);
 		siteMap.delete();
 		new File(outFolder).mkdirs();
 		try {
-			extractPage( WelcomePlace.class);
+			extractPage(WelcomePlace.class);
 			extractPage(GettingStartedPlace.class);
 			extractPage(BootstrapPlace.class);
 			extractPage(LayoutsPlace.class);
@@ -78,7 +77,8 @@ public class ExtratHtmlStatics {
 			extractPage(ContactsTablePlace.class);
 			extractPage(AddressBookPlace.class);
 			extractPage(CommingSoonPlace.class);
-			
+			extractPage(DownloadPlace.class);
+
 			Files.copy(new File(outFolder + "Welcome.html"), new File(outFolder + "index.html"));
 		}
 		catch (FailingHttpStatusCodeException | IOException e) {
@@ -104,22 +104,22 @@ public class ExtratHtmlStatics {
 //			}
 //		}
 		for (DomNode node : page.getBody().getChildren()) {
-			if ("div".equals(node.getNodeName() )) {
+			if ("div".equals(node.getNodeName())) {
 				NamedNodeMap attributes = node.getAttributes();
 				DomAttr classAttr = (DomAttr) attributes.getNamedItem("class");
-				if(classAttr != null 
-						&& classAttr.getValue() != null && classAttr.getValue().contains("putnami-showcase")){
+				if (classAttr != null
+						&& classAttr.getValue() != null && classAttr.getValue().contains("putnami-showcase")) {
 					DomElement domElement = (DomElement) node;
 					domElement.setAttribute("id", "pwt-static-content");
 				}
 			}
 		}
-		
+
 		String pageData = page.asXml();
 		pageData = pageData.replaceAll(host, "");
 		pageData = pageData.replaceAll("#\\!([a-zA-Z]*)", targetHost + "$1.html");
 
-		String outFile = outFolder ;
+		String outFile = outFolder;
 		if (tokenName != null) {
 			outFile += tokenName;
 		}
