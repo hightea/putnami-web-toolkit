@@ -31,7 +31,7 @@
 			<p class="lead">
 				<strong title="Putnami Web Toolkit">PWT</strong> provide a full components set in order to build nice and efficient forms.<br />
 				This framework allow to easily bind data with views, then flush data from views. <br />
-				The <code>Data Binding</code> is fully descrided in this <a href="#DataBinding">dedecated page.</a><br/>
+				The <code>Data Binding</code> is fully descrided in this <a href="#!DataBinding">dedecated page.</a><br/>
 			</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">

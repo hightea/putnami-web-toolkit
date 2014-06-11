@@ -54,10 +54,6 @@ public class DocumentationApp implements EntryPoint {
 
 	@Override
 	public void onModuleLoad() {
-		RootPanel staticContent = RootPanel.get("pwt-static");
-		staticContent.getElement().setInnerHTML("");
-		staticContent.getElement().removeFromParent();
-
 		Theme theme = new Theme();
 		theme.addLink(new CssLink("theme/doc/style/pwt-doc.css", 0));
 		ThemeController.get().installTheme(theme);

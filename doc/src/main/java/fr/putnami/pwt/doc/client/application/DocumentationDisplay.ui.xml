@@ -31,33 +31,33 @@
 			<w:Affix ui:field="affixMenu" styleName="pwt-menu-affix">
 				<w:Navbar position="STATIC_TOP" styleName="container pwt-menu">
 					<w:Brand>
-						<w:Anchor text="PWT" link="#" />
+						<w:Anchor text="PWT" link="#!" />
 					</w:Brand>
 					<w:Nav>
-						<w:NavLink label="Getting started" link="#GettingStarted"/>
+						<w:NavLink label="Getting started" link="#!GettingStarted"/>
 						<w:NavDropdown label="Look and feel" >
-							<w:NavLink label="Bootstrap" link="#Bootstrap"/>
-							<w:NavLink label="Layouts" link="#Layouts"/>
-							<w:NavLink label="Components" link="#Components"/>
-							<w:NavLink label="Forms" link="#Forms"/>
-							<w:NavLink label="Tables" link="#Tables" />
-							<w:NavLink label="More" link="#More" />
+							<w:NavLink label="Bootstrap" link="#!Bootstrap"/>
+							<w:NavLink label="Layouts" link="#!Layouts"/>
+							<w:NavLink label="Components" link="#!Components"/>
+							<w:NavLink label="Forms" link="#!Forms"/>
+							<w:NavLink label="Tables" link="#!Tables" />
+							<w:NavLink label="More" link="#!More" />
 						</w:NavDropdown>
 						<w:NavDropdown label="Framework" >
-							<w:NavLink label="Navigation" link="#Navigation"/>
-							<w:NavLink label="Data Binding" link="#DataBinding" />
-							<w:NavLink label="Internationalization" link="#Internationalization" />
-							<w:NavLink label="Server calls" link="#ServerCalls" />
-							<w:NavLink label="Errors handling" link="#Errors" />
+							<w:NavLink label="Navigation" link="#!Navigation"/>
+							<w:NavLink label="Data Binding" link="#!DataBinding" />
+							<w:NavLink label="Internationalization" link="#!Internationalization" />
+							<w:NavLink label="Server calls" link="#!ServerCalls" />
+							<w:NavLink label="Errors handling" link="#!Errors" />
 						</w:NavDropdown>
 						<w:NavDropdown label="Plugins" >
-							<w:NavLink label="Code editor" link="#CodeEditor"/>
+							<w:NavLink label="Code editor" link="#!CodeEditor"/>
 						</w:NavDropdown>
 						<w:NavDropdown label="Samples" >
-							<w:NavLink label="Contacts table" link="#ContactsTable"/>
-							<w:NavLink label="Address book" link="#AddressBook"/>
+							<w:NavLink label="Contacts table" link="#!ContactsTable"/>
+							<w:NavLink label="Address book" link="#!AddressBook"/>
 						</w:NavDropdown>
-						<w:NavLink label="Comming soon ..." link="#CommingSoon" />
+						<w:NavLink label="Comming soon ..." link="#!CommingSoon" />
 					</w:Nav>
 				</w:Navbar>
 			</w:Affix>
@@ -72,7 +72,7 @@
 			  <li><a href="https://github.com/putnami" target="_blank">Putnami Team</a></li>
 			  <li>current version @releaseVersion@</li>
 			  <li><a href="https://github.com/putnami/putnami-pwt" target="_blank">GitHub</a></li>
-			  <li><a href="#Samples">Samples</a></li>
+			  <li><a href="#!Samples">Samples</a></li>
 			  <li><a href="https://github.com/putnami/putnami-pwt/issues" target="_blank">Issues</a></li>
 			  <li><a href="download.html">Download</a></li>
 			</ul>

@@ -83,7 +83,7 @@
 		</div>
 		
 		<w:Heading level="3" navSpy="{navSpy}">Tab Style</w:Heading>
-		<p>The <code>Nav</code> Style can be customized. More informations on the <w:Anchor link="#Components" text="Components Page"/>.</p>
+		<p>The <code>Nav</code> Style can be customized. More informations on the <w:Anchor link="#!Components" text="Components Page"/>.</p>
 		<p>Default <code>style</code> property value is <code>Nav.Style.TABS</code>.</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">

@@ -27,8 +27,8 @@
 					<w:Heading level="1" styleName="page-header">PWT Samples</w:Heading>
 					<p>List of PWT sample apps</p>
 					<w:List tag="ul" type="LIST_GROUP">
-						<w:ListItem><w:Anchor link="#ContactsTable" text="Contacts Table"/></w:ListItem>
-						<w:ListItem><w:Anchor link="#AddressBook" text="Address book"/></w:ListItem>
+						<w:ListItem><w:Anchor link="#!ContactsTable" text="Contacts Table"/></w:ListItem>
+						<w:ListItem><w:Anchor link="#!AddressBook" text="Address book"/></w:ListItem>
 					</w:List>
 				</w:HTMLPanel>
 			</w:GridColumn>

@@ -34,12 +34,12 @@
 		<p>Anchor text can be customize with <code>text</code> property or with children widgets (as a Panel)</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
-				<w:Anchor text="PWT - GettingStarted" link="#GettingStarted" /><br/>
+				<w:Anchor text="PWT - GettingStarted" link="#!GettingStarted" /><br/>
 				<w:Anchor link="https://github.com/putnami/putnami-pwt"><w:Icon type="GITHUB_CIRCLED"/><w:Text text="PWT's github repo"/></w:Anchor>
 			</div>
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
 <pre><![CDATA[
-<w:Anchor text="PWT - GettingStarted" link="#GettingStarted" />
+<w:Anchor text="PWT - GettingStarted" link="#!GettingStarted" />
 <w:Anchor link="https://github.com/Putnami/putnami-gwt"><w:Icon type="GITHUB_CIRCLED"/><w:Text text="- PWT's github repo"/></w:Anchor>]]></pre>
 			</c:StaticCode>
 		</div>

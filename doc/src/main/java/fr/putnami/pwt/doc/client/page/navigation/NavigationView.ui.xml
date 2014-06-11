@@ -128,7 +128,7 @@ public class BlogPlace extends MvpPlace {
 					Build a view which implements <code>View&lt;PLACE&gt;</code> in order to present your place.
 					<w:Alert>
 						<h4>Note :</h4>
-						<p>All server calls during the view presentation are collected and send once to the server. Please see <a href="#ServerCalls">Server calls</a> for mor details about it.</p>
+						<p>All server calls during the view presentation are collected and send once to the server. Please see <a href="#!ServerCalls">Server calls</a> for mor details about it.</p>
 					</w:Alert>
 				</div>
 				<c:StaticCode configuration="{JAVA_CONFIGURATION}">

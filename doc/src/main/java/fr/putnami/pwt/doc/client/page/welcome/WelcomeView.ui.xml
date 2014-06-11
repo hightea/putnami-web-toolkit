@@ -81,9 +81,9 @@
 			<ul>
 				<li>Thanks to <a href="http://getbootstrap.com/" target="_BLANK">Twitter 's Bootstrap</a>, your applications are responsive and easily themable.</li>
 				<li>The nice <strong>graphical components</strong> are easy to extend and to customize.</li>
-				<li>The <a href="#DataBinding">data binding</a> is a pushover, making form and dynamic tables is so simple.</li>
-				<li><a href="#ServerCalls">Server calls</a> are simplified and optimized. Multiplex your queries, and say good bye to the useless Async interfaces.</li>
-				<li><a href="#Navigation">Navigation</a> is done on a simplified MVP. <strong>Split</strong> and <strong>scale</strong> your application without even knowing.</li>
+				<li>The <a href="#!DataBinding">data binding</a> is a pushover, making form and dynamic tables is so simple.</li>
+				<li><a href="#!ServerCalls">Server calls</a> are simplified and optimized. Multiplex your queries, and say good bye to the useless Async interfaces.</li>
+				<li><a href="#!Navigation">Navigation</a> is done on a simplified MVP. <strong>Split</strong> and <strong>scale</strong> your application without even knowing.</li>
 				<li>No third librairies, No external JS. Which provides <strong>security</strong> and serenity on your achievements and our future.</li>
 			</ul>
 			<p>
@@ -145,8 +145,8 @@
 			</p>
 			<ul>
 				<li>Visit this showcase.</li>
-				<li>Go arround the <a href="#AddressBook">Address book</a>.</li>
-				<li>You want to try, read the <a href="#GettingStarted">Getting Started</a> page and let you go.</li>
+				<li>Go arround the <a href="#!AddressBook">Address book</a>.</li>
+				<li>You want to try, read the <a href="#!GettingStarted">Getting Started</a> page and let you go.</li>
 				<li>Have a look on the code, check out it or fork it on <a href="https://github.com/putnami/putnami-pwt">GitHub</a> to have a look on it or even fork it.</li>
 			</ul>
 			<p>
