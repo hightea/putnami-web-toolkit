@@ -26,7 +26,7 @@
 
 	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
 
-	<w:HTMLPanel>
+	<w:HTMLPanel title="PWT - Errors management">
 		<w:Header ui:field="header">
 			<w:Heading level="1" navSpy="{tableOfContent}">Errors Handling</w:Heading>
 			<p class="lead">

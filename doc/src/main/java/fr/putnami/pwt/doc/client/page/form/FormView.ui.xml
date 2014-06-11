@@ -23,7 +23,7 @@
 	>
 
 	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-	<w:HTMLPanel>
+	<w:HTMLPanel title="PWT - Form UI Components">
 		<w:Header ui:field="header">
 			<w:Heading level="1" navSpy="{tableOfContent}">
 				Forms

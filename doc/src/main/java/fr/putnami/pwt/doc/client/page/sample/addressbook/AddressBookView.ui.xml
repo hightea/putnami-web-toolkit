@@ -21,7 +21,7 @@
 		xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
         >
 
-	<w:HTMLPanel>
+	<w:HTMLPanel title="GWT - Adress book sample">
 		<w:GridRow>
 			<w:GridColumn size="3">
 				<div class="form-group">

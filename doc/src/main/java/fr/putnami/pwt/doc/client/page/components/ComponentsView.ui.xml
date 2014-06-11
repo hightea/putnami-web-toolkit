@@ -22,7 +22,8 @@
 	xmlns:c="urn:import:fr.putnami.pwt.doc.client.page.components">
 
 	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-	<w:HTMLPanel stylePrimaryName="container">
+	
+	<w:HTMLPanel stylePrimaryName="container" title="PWT - UI Components">
 		<w:Header ui:field="header">
 			<w:Heading level="1" navSpy="{tableOfContent}">User interface Components</w:Heading>
 			<p class="lead"><strong title="Putnami Web Toolkit">PWT</strong> provides Bootstrap based UI widget</p>

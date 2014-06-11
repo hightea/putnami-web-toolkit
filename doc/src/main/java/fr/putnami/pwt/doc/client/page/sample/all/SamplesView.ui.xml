@@ -20,7 +20,7 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client">
 
-	<w:HTMLPanel>
+	<w:HTMLPanel title="PWT - Data binding Framework">
 		<w:GridRow>
 			<w:GridColumn size="8" offset="2" styleName="text-justify">
 				<w:HTMLPanel>

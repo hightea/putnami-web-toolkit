@@ -17,6 +17,7 @@
 package fr.putnami.pwt.doc.client.application;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
@@ -52,19 +53,29 @@ public abstract class Page<P extends MvpPlace> extends Composite implements View
 	public Header header;
 	@UiField
 	public Widget content;
+	
+	private Widget page;
 
 	public Page() {
 		initWidget(Binder.BINDER.createAndBindUi(pageLayout));
+		
+		
 		this.tableOfContent = pageLayout.tableOfContent;
-		getBinder().createAndBindUi(this);
-		pageLayout.headerContainer.add(header);
+		page = (Widget)getBinder().createAndBindUi(this);
+			pageLayout.headerContainer.add(header);
 		pageLayout.contentContainer.add(content);
 		tableOfContent.redraw();
 	}
 
 	@Override
 	public void present(P place) {
-		// Nothing to do
+		String title = page.getElement().getTitle();
+		if(title != null && title.length()>0){
+			Document.get().setTitle(title);
+		}
+		else{
+			Document.get().setTitle("PWT - Putnami Web Toolkit");
+		}
 	}
 
 	@Override

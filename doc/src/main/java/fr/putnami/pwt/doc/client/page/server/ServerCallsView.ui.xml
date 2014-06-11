@@ -27,7 +27,7 @@
 
 	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
 
-	<w:HTMLPanel>
+	<w:HTMLPanel title="PWT - Server Calls RPC Framework">
 		<w:Header ui:field="header">
 			<w:Heading level="1" navSpy="{tableOfContent}">Server calls</w:Heading>
 			<p class="lead">

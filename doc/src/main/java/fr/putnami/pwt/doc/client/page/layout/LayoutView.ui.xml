@@ -24,7 +24,8 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
 	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-	<w:HTMLPanel>
+	
+	<w:HTMLPanel title="PWT - UI Layouts components">
 		<w:Header ui:field="header">
 			<w:Heading level="1" navSpy="{tableOfContent}">Layout</w:Heading>
 			<p class="lead"><strong title="Putnami Web Toolkit">PWT</strong> use Twitter's Bootstrap, so every bootstrap css layout can be applied. However we provide some usefull widgets wrapping those CSS components.</p>

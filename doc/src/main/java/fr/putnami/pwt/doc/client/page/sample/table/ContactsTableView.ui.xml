@@ -27,7 +27,7 @@
 
 	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
 
-	<w:HTMLPanel>
+	<w:HTMLPanel title="PWT - Contact table sample">
 		<w:Header ui:field="header">
 			<w:Heading level="1">Contacts <small>manage your friends</small></w:Heading>
 		</w:Header>

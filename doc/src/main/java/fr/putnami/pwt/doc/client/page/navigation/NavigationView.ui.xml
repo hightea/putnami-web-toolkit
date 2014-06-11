@@ -26,7 +26,7 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
 	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-	<w:HTMLPanel>
+	<w:HTMLPanel title="PWT - Navigation MVP Framework">
 		<w:Header ui:field="header">
 				<w:Heading level="1" navSpy="{tableOfContent}">Navigation</w:Heading>
 				<p class="lead">
@@ -67,7 +67,7 @@
 			<p>
 				In the following sample, you can see a simple implementation of blog place / view mechanism.
 			</p>
-			<w:Heading level="3" navSpy="{tableOfContent}">Init the framwork</w:Heading>
+			<w:Heading level="3" navSpy="{tableOfContent}">Init the Framework</w:Heading>
 			<div class="showcase-sample-block">
 				<div class="showcase-sample">
 					To Initialize the framework. you have to : 
@@ -163,7 +163,7 @@ MvpController.get().goTo(new BlogPlace("myPost"));
 
 
 			<w:Heading level="2" navSpy="{tableOfContent}">Scaling the web app</w:Heading>
-			<p>Thanks to the <strong title="Punami Web Toolkit">PWT</strong>'s <abbr title="Model View Presenter">MVP</abbr> framwork, 
+			<p>Thanks to the <strong title="Punami Web Toolkit">PWT</strong>'s <abbr title="Model View Presenter">MVP</abbr> Framework, 
 				you don't have to care about scaling your web app. 
 				<br/> 
 				Each Places generates a <code>ViewProxy</code> from the <code>View</code> which use the <code>GWT.runAsync(...)</code> mechanism.

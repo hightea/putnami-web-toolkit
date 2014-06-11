@@ -21,7 +21,7 @@
 	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client">
 
 	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-	<w:HTMLPanel>
+	<w:HTMLPanel title="PWT - Putnami Web Toolkit - Open source GWT Framework">
 		<w:Header ui:field="header">
 			<div ui:field="jumbotronDiv" class="jumbotron teaser">
 				<div class="forkMeOnGitHub">
@@ -121,7 +121,7 @@
 						It's realy good! But also it's far from our habits and seems difficult to extend. Above all it's truly magical. Is it still GWT ?</li>
 				</ul>
 				<p>
-				Well, clearly we've seen alot of good things. But all our needs weren't present at once in a same framwork.
+				Well, clearly we've seen alot of good things. But all our needs weren't present at once in a same Framework.
 				We would maybe try to put some of those framework togethers, and finally with a bit of luck make it work.
 				But at the end, the result would be a lot of compromises, not clear, not mastered, and so alot of wasted time.
 				</p>
