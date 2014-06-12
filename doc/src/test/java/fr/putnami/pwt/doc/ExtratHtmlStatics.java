@@ -63,7 +63,7 @@ import fr.putnami.pwt.doc.client.page.welcome.WelcomePlace;
 
 public class ExtratHtmlStatics {
 
-	private static final String targetHost = "http://gwt.putnami.org/";
+	private static final String targetHost = "http://pwt.putnami.org/";
 	private static final String host = "http://localhost:8080/pwt-doc/";
 	private static final String outFolder = "build/htmlStatics/";
 	private static final File siteMap = new File(outFolder + "sitemap.txt");
