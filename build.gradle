@@ -2,10 +2,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 buildscript {
 	repositories {
-		maven {
-            url 'http://repo.putnami.org/'
-        }
-		mavenLocal()
+		maven (){ url 'http://repo.putnami.org' }
 		mavenCentral()
 	}
 	dependencies {
@@ -22,7 +19,6 @@ task licenseAll
 task licenseFormatAll
 
 ext {
-	libProjects = subprojects.findAll { it.name != 'pwt-doc' } 
 	releaseVersion = '1.0.0-RC1'
 	snapshotVersion = '1.0.0-SNAPSHOT'
 	gwtVersion = '2.6.1'
@@ -46,9 +42,8 @@ subprojects {
 	apply plugin: 'java'
 	apply plugin: 'maven'
 	apply plugin: 'maven-publish'
-	apply plugin: 'eclipse'
-	apply plugin: 'idea'
 	apply plugin: 'license'
+	apply plugin: 'gwt-base'
 	
 
 	group = 'fr.putnami.pwt'
@@ -57,14 +52,6 @@ subprojects {
 	sourceCompatibility = 1.7
 	targetCompatibility = 1.7
 
-	//Include all non java (like *.gwt.xml) files from 'src/main/java' folder in resources
-	sourceSets.main.resources.srcDir 'src/main/java'
-
-	eclipse {
-		classpath {
-			downloadSources=true
-		}
-	}
 	configurations {
 		log4j
 	}
@@ -119,59 +106,9 @@ subprojects {
 			}
 		}
 	}
-	
-	if (project in libProjects) {
-		apply plugin: 'gwt-base'
-
-		// Add all sources in jar (needed for GWT compilation using this library
-		jar {
-			from sourceSets.main.allJava
-		}
-
-		publishing {
-			publications {
-				mavenJava(MavenPublication) {
-				    from components.java
-				}
-			}
-		}
-		rootProject.tasks.publishAllLibs.dependsOn project.tasks.publish
-		rootProject.tasks.publishAllLibsToMavenLocal.dependsOn project.tasks.publishToMavenLocal
-		
-	} else { //Doc project
-		apply plugin: 'gwt'
-		apply plugin: 'jetty'
-	
-		gwt {
-			gwtDev {
-				jvmArgs('-Xdebug',  '-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000')
-			}
-			superDev {
-				noPrecompile=true
-			}
-		}
-		
-		task jettyDraftWar(type: JettyRunWar) {
-			dependsOn draftWar
-			dependsOn.remove('war')
-			webApp=draftWar.archivePath
-		}
-
-		publishing {
-			publications {
-				mavenJava(MavenPublication) {
-				    from components.web
-				}
-			}
-		}
-		
-	}
 
 	gwt {
 		gwtVersion =  rootProject.gwtVersion
-		eclipse{
-			addGwtContainer=false
-		}
 	}
 
 	project.tasks.publish.dependsOn project.tasks.licenseFormat
@@ -181,3 +118,24 @@ subprojects {
 	rootProject.tasks.licenseAll.dependsOn project.tasks.license
 	rootProject.tasks.licenseFormatAll.dependsOn project.tasks.licenseFormat
 }
+
+configure(subprojects.findAll { it.name != 'pwt-doc' } ){
+	//Include all non java (like *.gwt.xml) files from 'src/main/java' folder in resources
+	sourceSets.main.resources.srcDir 'src/main/java'
+
+	// Add all sources in jar (needed for GWT compilation using this library
+	jar {
+		from sourceSets.main.allJava
+	}
+
+	publishing {
+		publications {
+			mavenJava(MavenPublication) {
+			    from components.java
+			}
+		}
+	}
+	rootProject.tasks.publishAllLibs.dependsOn project.tasks.publish
+	rootProject.tasks.publishAllLibsToMavenLocal.dependsOn project.tasks.publishToMavenLocal
+}
+ 

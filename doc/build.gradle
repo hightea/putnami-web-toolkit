@@ -1,5 +1,10 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
+apply plugin: 'gwt'
+apply plugin: 'jetty'
+
+//FIXME sourceSets.main.resources.srcDir 'src/main/java'
+
 dependencies {
 	compile project(':pwt')
 	compile project(':pwt-code-editor')
@@ -7,10 +12,20 @@ dependencies {
 }
 
 gwt {
+	maxHeapSize = "2G";
+
 	modules = ['fr.putnami.pwt.doc.Documentation']
 	devModules = ['fr.putnami.pwt.doc.DocumentationDev']
 	// We just invert the order of the sources files to use the processed ressources first in GWT compilation
 	src =  files(sourceSets.main.output.resourcesDir, sourceSets.main.java.srcDirs)
+	
+	 
+	gwtDev {
+		jvmArgs('-Xdebug',  '-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000')
+	}
+	superDev {
+		noPrecompile=true
+	}
 }
 
 processResources {
@@ -34,5 +49,19 @@ draftWar {
 	}
 	from(webAppDirName) {
 		exclude '**/*.html' 
+	}
+}
+
+task jettyDraftWar(type: JettyRunWar) {
+	dependsOn draftWar
+	dependsOn.remove('war')
+	webApp=draftWar.archivePath
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+		    from components.web
+		}
 	}
 }

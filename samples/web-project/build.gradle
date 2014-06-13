@@ -1,25 +1,19 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
 apply plugin: 'gwt'
 apply plugin: 'jetty'
 
 
 group = 'fr.putnami.pwt'
-version = '1.0.0-SNAPSHOT'
+version = '1.0.0-RC1'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 buildscript {
 	repositories {
-		maven {
-		    url 'http://repo.putnami.org'
-		}
-		mavenLocal()
-		mavenCentral()
+		maven(){ url 'http://repo.putnami.org' }
 	}
 	dependencies {
 		classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.4-PWT_patched'
@@ -27,7 +21,7 @@ buildscript {
 }
 
 ext {
-	pwtVersion = '1.0.0-SNAPSHOT'
+	pwtVersion = '1.0.0-RC1'
 }
 	
 configurations {
@@ -35,9 +29,7 @@ configurations {
 }
 
 repositories {
-	maven {
-        url 'http://repo.putnami.org'
-    }
+	maven(){ url 'http://repo.putnami.org' }
 	mavenLocal()
 	mavenCentral()
 }
@@ -51,14 +43,10 @@ dependencies {
 	runtime configurations.log4j	
 
 	compile "fr.putnami.pwt:pwt:$pwtVersion"
+	compile "javax.validation:validation-api:1.0.0.GA"
 	
 	testCompile 'junit:junit:4.+'
 	
-}
-eclipse {
-	classpath {
-		downloadSources=true
-	}
 }
 
 gwt {
@@ -73,10 +61,6 @@ gwt {
 
 	superDev {
 		noPrecompile=true
-	}
-
-	eclipse{
-		addGwtContainer=false
 	}
 }
 
@@ -96,3 +80,4 @@ task jettyDraftWar(type: JettyRunWar) {
 	dependsOn.remove('war')
 	webApp=draftWar.archivePath
 }
+

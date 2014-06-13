@@ -1,8 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
 apply plugin: 'gwt'
 apply plugin: 'cargo'
 
@@ -15,12 +13,7 @@ targetCompatibility = 1.7
 
 buildscript {
 	repositories {
-		maven {
-		    url 'http://repo.putnami.org'
-		}
-		mavenLocal()
-		mavenCentral()
-		// for cargo plugin
+		maven (){ url 'http://repo.putnami.org' }
 		jcenter()
 	}
 	dependencies {
@@ -38,9 +31,7 @@ configurations {
 }
 
 repositories {
-	maven {
-        url 'http://repo.putnami.org'
-    }
+	maven (){ url 'http://repo.putnami.org' }
 	mavenLocal()
 	mavenCentral()
 }
@@ -58,11 +49,6 @@ dependencies {
 	testCompile 'junit:junit:4.+'
 	
 }
-eclipse {
-	classpath {
-		downloadSources=true
-	}
-}
 
 gwt {
 	gwtVersion='2.6.0'
@@ -76,10 +62,6 @@ gwt {
 
 	superDev {
 		noPrecompile=true
-	}
-	
-	eclipse{
-		addGwtContainer=false
 	}
 }
 

@@ -47,9 +47,9 @@ public class DownloadView extends Page<DownloadPlace> {
 	public void onCodeLinkClick(ClickEvent evt) {
 		GoogleAnalytics.get(ApplicationConfig.ANALYTICS_TRACKER_ID).trackEvent("download", "code-editor-jar");
 	}
-
-	@UiHandler("gaBtn")
-	public void onGaLinkClick(ClickEvent evt) {
-		GoogleAnalytics.get(ApplicationConfig.ANALYTICS_TRACKER_ID).trackEvent("download", "google-analytics-jar");
-	}
+//
+//	@UiHandler("gaBtn")
+//	public void onGaLinkClick(ClickEvent evt) {
+//		GoogleAnalytics.get(ApplicationConfig.ANALYTICS_TRACKER_ID).trackEvent("download", "google-analytics-jar");
+//	}
 }

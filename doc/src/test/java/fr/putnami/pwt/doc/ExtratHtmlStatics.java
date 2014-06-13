@@ -69,13 +69,6 @@ public class ExtratHtmlStatics {
 	private static final File siteMap = new File(outFolder + "sitemap.txt");
 	private static WebClient webClient;
 
-//	@Test
-//	public void test(){
-//		String s = "<a href=\"#!DataBinding\">";
-//		s = s.replaceAll("#\\!([a-zA-Z]*)", targetHost + "$1.html" );
-//		Assert.assertEquals("<a href=\"http://gwt.putnami.org/DataBinding.html\">", s);
-//		
-//}
 	public static void main(String[] args) {
 		webClient = new WebClient(BrowserVersion.CHROME);
 		siteMap.delete();

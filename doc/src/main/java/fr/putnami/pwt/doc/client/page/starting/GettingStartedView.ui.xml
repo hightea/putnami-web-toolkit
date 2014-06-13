@@ -32,7 +32,9 @@
 		<w:HTMLPanel ui:field="content">
 			<c:ThankYouView navSpy="{tableOfContent}" />
 			<c:RequirementsView navSpy="{tableOfContent}" />
-			<c:QuickStartView navSpy="{tableOfContent}" />
+			<c:StartSamplesView navSpy="{tableOfContent}" />
+			<c:StartGradleView navSpy="{tableOfContent}" />
+			<c:StartMavenView navSpy="{tableOfContent}" />
 		</w:HTMLPanel>
 	</w:HTMLPanel>
 </ui:UiBinder>

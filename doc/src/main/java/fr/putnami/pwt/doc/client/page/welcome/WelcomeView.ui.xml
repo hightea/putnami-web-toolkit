@@ -81,19 +81,19 @@
 			<ul>
 				<li>Thanks to <a href="http://getbootstrap.com/" target="_BLANK">Twitter 's Bootstrap</a>, your applications are responsive and easily themable.</li>
 				<li>The nice <strong>graphical components</strong> are easy to extend and to customize.</li>
-				<li>The <a href="#!DataBinding">data binding</a> is a pushover, making form and dynamic tables is so simple.</li>
+				<li>The <a href="#!DataBinding">data binding</a> is a pushover, build form and dynamic tables is now so simple.</li>
 				<li><a href="#!ServerCalls">Server calls</a> are simplified and optimized. Multiplex your queries, and say good bye to the useless Async interfaces.</li>
-				<li><a href="#!Navigation">Navigation</a> is done on a simplified MVP. <strong>Split</strong> and <strong>scale</strong> your application without even knowing.</li>
-				<li>No third librairies, No external JS. Which provides <strong>security</strong> and serenity on your achievements and our future.</li>
+				<li>The <a href="#!Navigation">Navigation</a> is done to simplified MVP. <strong>Split</strong> and <strong>scale</strong> your application without even knowing.</li>
+				<li>Neither third librairies nor  external JS are required. Neither third librairies nor  external JS are required, to Provide <strong>security</strong> and serenity for your achievements and our future.</li>
 			</ul>
 			<p>
-				Focused on the useless code removal, all the graphical design is no more described in the java, but nicely lay on a UI template.
+				Focused on the useless code removal, all the graphical design is now fully described with the gwt's UiBinding templates.
 			</p>
 			<p>
-				<strong>Easy to start</strong>, we think we are a serious alternative for your next web application developments.
+				<strong>Easy to start</strong>, we think <strong>PWT</strong> is a serious alternative for your next web app developments.
 			</p>
 
-			<w:Heading level="2" navSpy="{tableOfContent}" >New framework, again! <small>but why?</small></w:Heading>
+			<w:Heading level="2" navSpy="{tableOfContent}" >A new framework, again! <small>but why?</small></w:Heading>
 			<p>
 				Before we've started <strong title="Putnami Web Toolkit">PWT</strong>, our primary needs were to build rich web applications, lightweight, robust, and maintainable.
 				So we were looking for a nice web framework.
@@ -121,16 +121,16 @@
 						It's realy good! But also it's far from our habits and seems difficult to extend. Above all it's truly magical. Is it still GWT ?</li>
 				</ul>
 				<p>
-				Well, clearly we've seen alot of good things. But all our needs weren't present at once in a same Framework.
+				Well, clearly we've seen alot of good things. But all our needs weren't present at once.
 				We would maybe try to put some of those framework togethers, and finally with a bit of luck make it work.
-				But at the end, the result would be a lot of compromises, not clear, not mastered, and so alot of wasted time.
+				But at the end, we would made a lot of compromises, for a not sure result but above all not mastered, so finally alot of wasted time.
 				</p>
 				<p>
-					Ok <strong>Let's start!</strong> make good things, without any compromise, keep the clear head. Here we go...
+					Ok <strong>Let's start!</strong> Trying to do good stuff, without any compromise, keeping a clear ideas. Here we go...
 				</p>
 				<p>
 					That sure we made it for us.
-					Since we are quietly proud of the result and that we reckon that it may help someone else, we decided to share it by making it open source, Here we are.
+					But since we are quietly proud of the result and that we reckon that it may help someone else, we decided to share it by making it open source, Here we are.
 				</p>
 			</p>
 
@@ -147,14 +147,14 @@
 				<li>Visit this showcase.</li>
 				<li>Go arround the <a href="#!AddressBook">Address book</a>.</li>
 				<li>You want to try, read the <a href="#!GettingStarted">Getting Started</a> page and let you go.</li>
-				<li>Have a look on the code, check out it or fork it on <a href="https://github.com/putnami/putnami-pwt">GitHub</a> to have a look on it or even fork it.</li>
+				<li>Have a look on the code, check out it or fork it on <a href="https://github.com/putnami/putnami-pwt">GitHub</a>.</li>
 			</ul>
 			<p>
 				If you like it, and want to help us, Great :). So please, we would be glad that you:
 			</p>
 			<ul>
 				<li>Speak about it and spread it around you and beyond.</li>
-				<li>Try and maybe use it on your next applications.</li>
+				<li>Try and maybe use it on your next web app.</li>
 				<li><a href="https://github.com/putnami/putnami-pwt/issues">Report bugs</a> to make it better.</li>
 				<li>Submit ideas to get new amazing features.</li>
 			</ul>
@@ -166,6 +166,8 @@
 			</p>
 			<p class="pull-right">
 				Best regards.
+			</p>
+			<p class="pull-right">
 				<a href="https://github.com/putnami"><strong>@Putnami team</strong></a><br/>
 			</p>
 		</w:HTMLPanel>

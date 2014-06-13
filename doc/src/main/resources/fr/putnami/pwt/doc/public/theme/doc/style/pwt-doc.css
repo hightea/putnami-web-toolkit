@@ -26,7 +26,25 @@ h1 {
 }
 h2, h3, h4, h5, h6{
 	color: #89c786;
+}
+h2{
 	margin-top: 40px;
+}
+h3{
+	padding-left: 15px;
+	margin-top: 30px;
+}
+h4{
+	padding-left: 30px;
+	margin-top: 20px;
+}
+h5{
+	padding-left: 45px;
+	margin-top: 20px;
+}
+h6{
+	margin-top: 20px;
+	padding-left: 50px;
 }
 
 a:focus,
@@ -55,6 +73,11 @@ input[type="checkbox"]:focus,
 
 pre{
 	word-wrap: break-word;
+	-moz-tab-size:    3;
+    -o-tab-size:      3;
+    -webkit-tab-size: 3;
+    -ms-tab-size:     3;
+    tab-size:         3;
 }
 
 /**
@@ -62,7 +85,7 @@ pre{
 */
 .alert{
 	border-width: 0 0 0 6px;
-	background-color: #eee;
+	background-color: #ddd;
 	border-radius: 0;
 }
 .btn:focus{

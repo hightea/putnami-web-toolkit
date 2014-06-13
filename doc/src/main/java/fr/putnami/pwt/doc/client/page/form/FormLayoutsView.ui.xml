@@ -29,15 +29,16 @@
 	<w:HTMLPanel>
 		<w:Heading level="2" navSpy="{navSpy}">Forms</w:Heading>
 		<p>
-			<code>Forms</code> are composed with sub-<code>Form</code>, <code>Fieldset</code>, <code>FormGroup</code> or <code>EditorInput</code> and <code>EditorInput</code>.
-			The form can drive how the <code>FormGroup</code> is rendered. As you can see in the following exemples, there 3 layouts possibles (<code>BASIC</code>, <code>INLINE</code>, <code>HORIZONTAL</code>).
-			Each sub components can manage his layout by itself.<br/>
-			As <code>Form</code> extends an <code>AbstractHTMLPanel</code> you have all the needed flexibility.
+			<code>Forms</code> are composed with sub-<code>Form</code>, <code>Fieldset</code>, <code>FormGroup</code> or <code>EditorInput</code> and <code>EditorOutput</code>.
+			The form can drive how the <code>FormGroup</code> is rendered. 
+			As you can see in the following examples, there are 3 layouts possibles (<code>BASIC</code>, <code>INLINE</code>, <code>HORIZONTAL</code>).
+			Each sub components manages his own layout if setted.<br/>
+			The <code>AbstractHTMLPanel</code> inheritance provide a good design flexibility.
 		</p>
 		
 		<w:Heading level="3" navSpy="{navSpy}">Basic form</w:Heading>
 		<p>
-			With the <code>BASIC</code> layout, all are set to <code>width: 100%;</code> by default.
+			With the <code>BASIC</code> layout, all components are set to <code>width: 100%;</code>.
 		</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
@@ -57,13 +58,15 @@
 				<span class="clearfix" />
 			</div>
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
-				<pre><![CDATA[<w:Form type="BASIC"> 
+				<pre><![CDATA[
+<w:Form type="BASIC"> 
 	<w:FormGroup path="email">
 		<w:Label>Email address</w:Label>
 		<w:InputEmail placeholder="Enter email" />
 	</w:FormGroup>
 ...
-</w:Form> ]]></pre> 
+</w:Form>
+]]></pre> 
 			</c:StaticCode>
 		</div>
 		
@@ -87,7 +90,8 @@
 				<span class="clearfix" />
 			</div>
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
-				<pre><![CDATA[<w:Form type="INLINE"> 
+<pre><![CDATA[
+<w:Form type="INLINE"> 
 	<w:FormGroup path="email">
 		<w:Label>Email address</w:Label>
 		<w:InputEmail placeholder="Enter email" />
@@ -97,7 +101,8 @@
 		<w:InputPassword placeholder="Password" />
 	</w:FormGroup>
 	<w:Button>Sign in</w:Button> 
-</w:Form>]]></pre>
+</w:Form>
+]]></pre>
 			</c:StaticCode>
 		</div>
 
@@ -121,13 +126,15 @@
 				<span class="clearfix" />
 			</div>
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
-				<pre><![CDATA[<w:Form type="HORIZONTAL"> 
+				<pre><![CDATA[
+<w:Form type="HORIZONTAL"> 
 	<w:FormGroup path="email">
 		<w:Label>Email address</w:Label>
 		<w:InputEmail placeholder="Enter email" />
 	</w:FormGroup>
  	... 
-</w:Form>]]></pre> 
+</w:Form>
+]]></pre> 
 			</c:StaticCode>
 		</div>
 
@@ -151,14 +158,16 @@
 				<span class="clearfix" />
 			</div>
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
-				<pre><![CDATA[<w:Form type="BASIC" readonly="true"> 
+				<pre><![CDATA[
+<w:Form type="BASIC" readonly="true"> 
 	<w:FormGroup path="email">
 		<w:Label>Email address</w:Label>
 		<w:OutputEmail placeholder="Enter email" />
 		<w:InputEmail placeholder="Enter email" />
 	</w:FormGroup>
  	... 
-</w:Form>]]></pre> 
+</w:Form>
+]]></pre> 
 			</c:StaticCode>
 		</div>
 

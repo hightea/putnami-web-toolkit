@@ -318,7 +318,7 @@ interface PersonRemoteService extends ServiceProxy<PersonView, PersonService>, P
 						Events are fired when <code>CommandController</code> sent and received request. <br/>
 					</p>
 					<p>
-						Usage exemples:
+						Usage examples:
 					</p>
 					<ul>
 						<li>Make stats.</li>

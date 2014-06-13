@@ -25,9 +25,9 @@ import com.google.gwt.user.client.ui.Widget;
 import fr.putnami.pwt.core.widget.client.NavSpy;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 
-public class QuickStartView extends Composite {
+public class StartMavenView extends Composite {
 
-	interface Binder extends UiBinderLocalized<Widget, QuickStartView> {
+	interface Binder extends UiBinderLocalized<Widget, StartMavenView> {
 
 		Binder BINDER = GWT.create(Binder.class);
 	}
@@ -36,7 +36,7 @@ public class QuickStartView extends Composite {
 	final NavSpy navSpy;
 
 	@UiConstructor
-	public QuickStartView(NavSpy navSpy) {
+	public StartMavenView(NavSpy navSpy) {
 		this.navSpy = navSpy;
 		initWidget(Binder.BINDER.createAndBindUi(this));
 	}

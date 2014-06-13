@@ -1,8 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
 apply plugin: 'gwt-base'
 
 
@@ -14,11 +12,7 @@ targetCompatibility = 1.7
 
 buildscript {
 	repositories {
-		maven {
-		    url 'http://repo.putnami.org'
-		}
-		mavenLocal()
-		mavenCentral()
+		maven (){ url 'http://repo.putnami.org' }
 	}
 	dependencies {
 		classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.4-PWT_patched'
@@ -26,7 +20,7 @@ buildscript {
 }
 
 ext {
-	pwtVersion = '1.0.0-SNAPSHOT'
+	pwtVersion = '1.0.0-RC1'
 }
 	
 configurations {
@@ -34,9 +28,7 @@ configurations {
 }
 
 repositories {
-	maven {
-        url 'http://repo.putnami.org'
-    }
+	maven (){ url 'http://repo.putnami.org' }
 	mavenLocal()
 	mavenCentral()
 }
@@ -53,11 +45,6 @@ dependencies {
 	
 	testCompile 'junit:junit:4.+'
 }
-eclipse {
-	classpath {
-		downloadSources=true
-	}
-}
 
 //Include all non java (like *.gwt.xml) files from 'src/main/java' folder in resources
 sourceSets.main.resources.srcDir 'src/main/java'
@@ -69,10 +56,6 @@ jar {
 
 gwt {
 	gwtVersion='2.6.1'
-
-	eclipse{
-		addGwtContainer=false
-	}
 }
 
 publishing {

@@ -30,21 +30,21 @@
 		<w:HTMLPanel ui:field="content">
 			<w:Heading level="2" navSpy="{tableOfContent}">Releases</w:Heading>
 			<w:GridRow styleName="text-left">
-				<w:GridColumn sizeSm="4" size="4">
+				<w:GridColumn sizeSm="6" size="6">
 					<w:Heading level="3">PWT Core library</w:Heading>
 					<p>Core framework library.</p>
 					<w:Anchor ui:field="coreBtn" link="http://repo.putnami.org/fr/putnami/pwt/pwt/@releaseVersion@/pwt-@releaseVersion@.jar" styleName="btn btn-default" text="Download" />
 				</w:GridColumn>
-				<w:GridColumn sizeSm="4" size="4">
+				<w:GridColumn sizeSm="6" size="6">
 					<w:Heading level="3">PWT Code Editor plugin</w:Heading>
 					<p>Plugin providing a code editor component.</p>
 					<w:Anchor ui:field="codeBtn" link="http://repo.putnami.org/fr/putnami/pwt/pwt-code-editor/@releaseVersion@/pwt-code-editor-@releaseVersion@.jar" styleName="btn btn-default" text="Download" />
 				</w:GridColumn>
-				<w:GridColumn sizeSm="4" size="4">
-					<w:Heading level="3">PWT Google Analytics library</w:Heading>
-					<p>Plugin providing Google Analytics support.</p>
-					<w:Anchor ui:field="gaBtn" link="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/@releaseVersion@/pwt-google-analytics-@releaseVersion@.jar" styleName="btn btn-default" text="Download" />
-				</w:GridColumn>
+<!-- 				<w:GridColumn sizeSm="4" size="4"> -->
+<!-- 					<w:Heading level="3">PWT Google Analytics library</w:Heading> -->
+<!-- 					<p>Plugin providing Google Analytics support.</p> -->
+<!-- 					<w:Anchor ui:field="gaBtn" link="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/@releaseVersion@/pwt-google-analytics-@releaseVersion@.jar" styleName="btn btn-default" text="Download" /> -->
+<!-- 				</w:GridColumn> -->
 			</w:GridRow>
 			<p>Current version <span class="label label-info">@releaseVersion@</span></p>
 			

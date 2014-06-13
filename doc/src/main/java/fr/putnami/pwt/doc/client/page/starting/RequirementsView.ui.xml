@@ -26,14 +26,36 @@
 	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
 
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">Requirement</w:Heading>
+		<w:Heading level="2" navSpy="{navSpy}">Requirements</w:Heading>
 		<p class="lead"><strong title="Putnami Web Toolkit">PWT</strong> is mostly built on top of <abbr title="Google Web Toolkit">GWT</abbr> with Java 7</p>
 					
+		<w:Heading level="3" navSpy="{navSpy}">PWT Dependencies</w:Heading>
 		<p>We've try to minimize the dependencies to the strictly necessary libraries. Those dependencies are : </p>
 		<ul>
 			<li>Latest version of <abbr title="Google Web Toolkit">GWT</abbr> (currently @gwtVersion@)</li>
 			<li>Guava and Guava-gwt version @guavaVersion@</li>
 			<li>Latest version of Twitter's Bootstrap Css file (currently 3.1.1) (Note : We do not use the Javascript files, all is natively developped in <abbr title="Google Web Toolkit">GWT</abbr>)</li>
 		</ul>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Java</w:Heading>
+		<p>PWT require Java 7. You can download it on the <a href="https://www.java.com/fr/download/">https://www.java.com/fr/download/</a>.</p>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Git</w:Heading>
+		<p>The sources are available on a GitHub repository. You can find the Git documentation on <a href="http://git-scm.com/">http://git-scm.com/</a>.</p>
+		<p>You can clone the repository with the command</p>
+		<pre>git clone git@github.com:Putnami/putnami-pwt.git</pre>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Gradle</w:Heading>
+		<p>PWT is built with Gradle. You cat buil</p>
+		<p>Once you get the sources you can build PWT with the command:</p>
+		<pre>gradle build</pre>
+		<p>To use it with maven, you can also push the artifact in your lacal maven repository with the command:</p>
+		<pre>gradle build publishToMavenLocal</pre>
+		
+		<w:Heading level="3" navSpy="{navSpy}">PWT's artifacts</w:Heading>
+		<p>To use this framework, simply add a dependency to the core jar (<em>pwt-core.jar</em>) and eventually to the needed plugin jars (<em>pwt-code-editor.jar</em>).</p>
+		<p>We release those jar on our maven repository hosted on github reachable via the following URL : <a href="http://repo.putnami.org">http://repo.putnami.org</a></p>
+		<p>You can also download those artifacts on the <a href="#!Download">download page</a></p>
+
 	</w:HTMLPanel>
 </ui:UiBinder>

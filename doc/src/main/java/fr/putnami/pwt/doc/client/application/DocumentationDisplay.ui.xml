@@ -58,7 +58,6 @@
 							<w:NavLink label="Address book" link="#!AddressBook"/>
 						</w:NavDropdown>
 						<w:NavLink label="Comming soon ..." link="#!CommingSoon" />
-						<w:NavLink label="Download" link="#!Download" />
 					</w:Nav>
 				</w:Navbar>
 			</w:Affix>
