@@ -42,6 +42,7 @@ subprojects {
 	apply plugin: 'java'
 	apply plugin: 'maven'
 	apply plugin: 'maven-publish'
+	apply plugin: 'eclipse'
 	apply plugin: 'license'
 	apply plugin: 'gwt-base'
 	
@@ -51,6 +52,12 @@ subprojects {
 
 	sourceCompatibility = 1.7
 	targetCompatibility = 1.7
+
+	eclipse {
+		classpath {
+			downloadSources=true
+		}
+	}
 
 	configurations {
 		log4j
@@ -109,6 +116,9 @@ subprojects {
 
 	gwt {
 		gwtVersion =  rootProject.gwtVersion
+		eclipse{
+			addGwtContainer=false
+		}
 	}
 
 	project.tasks.publish.dependsOn project.tasks.licenseFormat
