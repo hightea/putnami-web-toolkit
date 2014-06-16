@@ -72,12 +72,12 @@ import fr.putnami.pwt.core.widget.client.util.KeyEventUtils;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class InputDatePicker extends FocusWidget implements
-		EditorLeaf,
-		EditorInput<Date>,
-		HasHtmlId,
-		HasDrawable,
-		HasValue<Date>,
-		HasValueChangeHandlers<Date> {
+EditorLeaf,
+EditorInput<Date>,
+HasHtmlId,
+HasDrawable,
+HasValue<Date>,
+HasValueChangeHandlers<Date> {
 
 	private static final CssStyle STYLE_DATEPICKER = new SimpleStyle("datepicker");
 	private static final CssStyle STYLE_POPUP = new SimpleStyle("datepicker-popup");
@@ -184,10 +184,11 @@ public class InputDatePicker extends FocusWidget implements
 		TableRowElement headRow = Document.get().createTRElement();
 		calendarTable.appendChild(head);
 		head.appendChild(headRow);
-		for (int i = DATE_TIME_FORMAT_INFO.firstDayOfTheWeek(); i < DAYS.length + 1; i++) {
+		for (int i = 0; i < 7; i++) {
 			TableCellElement th = Document.get().createTHElement();
-			th.setInnerText(DAYS[i % DAYS.length]);
 			headRow.appendChild(th);
+			int dayToDisplay = (i + DATE_TIME_FORMAT_INFO.firstDayOfTheWeek()) % DAYS.length;
+			th.setInnerText(DAYS[dayToDisplay]);
 		}
 		/* DayPicker Body */
 		calendarTable.appendChild(calendatBody);
@@ -385,7 +386,7 @@ public class InputDatePicker extends FocusWidget implements
 		// drow calendarTable
 		TableRowElement headRow = null;
 		while (dateToDrow.getMonth() != lastMonthToDisplay || dateToDrow.getDay() != lastDayOfWeek
-				|| (dateToDrow.getDate() == 1 && dateToDrow.getDay() == firstDayOfWeek)) {
+				|| dateToDrow.getDate() == 1 && dateToDrow.getDay() == firstDayOfWeek) {
 			if (headRow == null || dateToDrow.getDay() == firstDayOfWeek) {
 				headRow = Document.get().createTRElement();
 				calendatBody.appendChild(headRow);
