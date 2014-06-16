@@ -53,6 +53,10 @@ public class GoogleAnalyticsImpl extends GoogleAnalytics implements StartActivit
 		initScript();
 		MvpController.get().addStartActivityHandler(this);
 		createTracker(account);
+		String referrerUrl = Document.get().getReferrer();
+		if(referrerUrl != null && referrerUrl.length()>0){
+			setReferrer(referrerUrl);
+		}
 		trackPage();
 	}
 
@@ -78,6 +82,11 @@ public class GoogleAnalyticsImpl extends GoogleAnalytics implements StartActivit
 	private native void createTracker(String account)
 	/*-{
 		$wnd.ga('create', account, 'auto');
+	}-*/;
+
+	private native void setReferrer(String referrerUrl)
+	/*-{
+		$wnd.ga('set', 'referrer', referrerUrl);
 	}-*/;
 
 	private native void createLocalhostTracker(String account)
