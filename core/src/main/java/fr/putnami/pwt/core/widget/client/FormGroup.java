@@ -53,7 +53,9 @@ public class FormGroup<T> extends AbstractPanel implements
 		HasOutputEditorFactory<T>,
 		HasInputEditorFactory<T>,
 		HasReadonly,
-		EditorLabel, EditorError {
+		EditorLabel,
+		EditorError
+{
 
 	private static final CssStyle STYLE_FORM_GROUP = new SimpleStyle("form-group");
 	private static final CssStyle STYLE_ERROR = new SimpleStyle("has-error");
@@ -243,14 +245,14 @@ public class FormGroup<T> extends AbstractPanel implements
 	}
 
 	private void addIfNotNull(Editor e, int size, int offset, boolean wrap) {
-		if (e != null) {
+		if (e instanceof IsWidget) {
 			boolean wrapInCol = wrap;
 			wrapInCol &= type == Type.HORIZONTAL;
 
-			Widget toAdd = ((IsWidget) e).asWidget();
+			Widget toAdd = asWidgetOrNull((IsWidget) e);
 			if (wrapInCol) {
 				GridColumn column = new GridColumn();
-				column.add((IsWidget) e);
+				column.add(toAdd);
 				column.setSize(size);
 				column.setOffset(offset);
 				toAdd = column;

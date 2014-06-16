@@ -270,9 +270,13 @@ public abstract class AbstractHover implements IsWidget, HasWidgets, HasOneWidge
 		}
 		final Element toDisplayElement = getHoverWidget().getElement();
 		final Element target = getWidget().getElement();
+		final Widget parent = getWidget().getParent();
+		if(parent == null){
+			return;
+		}
 		switch (order) {
 		case SHOW:
-			target.getParentElement().insertAfter(toDisplayElement, target);
+			parent.getElement().insertAfter(toDisplayElement, target);
 			toDisplayElement.getStyle().setDisplay(Display.BLOCK);
 			resetPosition(toDisplayElement, getWidget(), placement);
 			StyleUtils.addStyle(getHoverWidget(), placement);
@@ -349,20 +353,20 @@ public abstract class AbstractHover implements IsWidget, HasWidgets, HasOneWidge
 		elementStyle.setPosition(Position.ABSOLUTE);
 		switch (placement) {
 		case TOP:
-			elementStyle.setLeft(targetLeft + (targetWidth / 2) - (tooltipWidth / 2), Unit.PX);
+			elementStyle.setLeft(targetLeft + targetWidth / 2 - tooltipWidth / 2, Unit.PX);
 			elementStyle.setTop(targetTop - tooltipHeight, Unit.PX);
 			break;
 		case BOTTOM:
-			elementStyle.setLeft(targetLeft + (targetWidth / 2) - (tooltipWidth / 2), Unit.PX);
+			elementStyle.setLeft(targetLeft + targetWidth / 2 - tooltipWidth / 2, Unit.PX);
 			elementStyle.setTop(targetTop + targetHeight, Unit.PX);
 			break;
 		case LEFT:
 			elementStyle.setLeft(targetLeft - tooltipWidth, Unit.PX);
-			elementStyle.setTop(targetTop + (targetHeight / 2) - (tooltipHeight / 2), Unit.PX);
+			elementStyle.setTop(targetTop + targetHeight / 2 - tooltipHeight / 2, Unit.PX);
 			break;
 		case RIGHT:
 			elementStyle.setLeft(targetLeft + targetWidth, Unit.PX);
-			elementStyle.setTop(targetTop + (targetHeight / 2) - (tooltipHeight / 2), Unit.PX);
+			elementStyle.setTop(targetTop + targetHeight / 2 - tooltipHeight / 2, Unit.PX);
 			break;
 
 		}
