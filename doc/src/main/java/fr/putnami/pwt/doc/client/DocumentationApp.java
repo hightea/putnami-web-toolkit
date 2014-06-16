@@ -47,7 +47,7 @@ import fr.putnami.pwt.doc.client.page.sample.addressbook.AddressBookPlace;
 import fr.putnami.pwt.doc.client.page.sample.all.SamplesPlace;
 import fr.putnami.pwt.doc.client.page.sample.table.ContactsTablePlace;
 import fr.putnami.pwt.doc.client.page.server.ServerCallsPlace;
-import fr.putnami.pwt.doc.client.page.soon.CommingSoonPlace;
+import fr.putnami.pwt.doc.client.page.soon.ComingSoonPlace;
 import fr.putnami.pwt.doc.client.page.starting.GettingStartedPlace;
 import fr.putnami.pwt.doc.client.page.table.TablesPlace;
 import fr.putnami.pwt.doc.client.page.welcome.WelcomePlace;
@@ -101,7 +101,7 @@ public class DocumentationApp implements EntryPoint {
 		controller.registerActivity(SamplesPlace.INSTANCE);
 		controller.registerActivity(ContactsTablePlace.INSTANCE);
 		controller.registerActivity(AddressBookPlace.INSTANCE);
-		controller.registerActivity(CommingSoonPlace.INSTANCE);
+		controller.registerActivity(ComingSoonPlace.INSTANCE);
 		controller.registerActivity(DownloadPlace.INSTANCE);
 
 		controller.handleCurrentHistory();

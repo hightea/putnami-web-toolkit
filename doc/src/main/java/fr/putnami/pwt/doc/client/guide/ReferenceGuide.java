@@ -53,7 +53,7 @@ import fr.putnami.pwt.doc.client.page.more.MoreView;
 import fr.putnami.pwt.doc.client.page.navigation.NavigationView;
 import fr.putnami.pwt.doc.client.page.plugins.CodeEditorView;
 import fr.putnami.pwt.doc.client.page.server.ServerCallsView;
-import fr.putnami.pwt.doc.client.page.soon.CommingSoonView;
+import fr.putnami.pwt.doc.client.page.soon.ComingSoonView;
 import fr.putnami.pwt.doc.client.page.starting.GettingStartedView;
 import fr.putnami.pwt.doc.client.page.table.TablesView;
 import fr.putnami.pwt.doc.client.page.welcome.WelcomeView;
@@ -174,7 +174,7 @@ public class ReferenceGuide extends Composite implements EntryPoint {
 		addContent(new ErrorsView(), 1);
 		addHeading("Plugins", 1);
 		addContent(new CodeEditorView(), 1);
-		addContent(new CommingSoonView(), 0);
+		addContent(new ComingSoonView(), 0);
 
 		StringBuffer tableContentBuffer = new StringBuffer();
 		root.draw(tableContentBuffer);

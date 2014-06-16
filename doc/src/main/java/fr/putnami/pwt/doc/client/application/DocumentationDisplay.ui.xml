@@ -57,7 +57,7 @@
 							<w:NavLink label="Contacts table" link="#!ContactsTable"/>
 							<w:NavLink label="Address book" link="#!AddressBook"/>
 						</w:NavDropdown>
-						<w:NavLink label="Comming soon ..." link="#!CommingSoon" />
+						<w:NavLink label="Coming soon ..." link="#!ComingSoon" />
 					</w:Nav>
 				</w:Navbar>
 			</w:Affix>

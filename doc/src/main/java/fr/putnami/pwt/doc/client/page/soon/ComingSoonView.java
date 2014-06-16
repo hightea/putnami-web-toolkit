@@ -17,20 +17,19 @@
 package fr.putnami.pwt.doc.client.page.soon;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.ui.Widget;
 
-import fr.putnami.pwt.core.mvp.client.MvpPlace;
-import fr.putnami.pwt.core.mvp.client.ViewProxy;
+import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
+import fr.putnami.pwt.doc.client.application.Page;
 
-public class CommingSoonPlace extends MvpPlace {
+public class ComingSoonView extends Page<ComingSoonPlace> {
 
-	public static final CommingSoonPlace INSTANCE = new CommingSoonPlace();
-
-	public CommingSoonPlace() {
-		super((ViewProxy) GWT.create(CommingSoonView.class), null);
+	interface Binder extends UiBinderLocalized<Widget, ComingSoonView> {
 	}
 
 	@Override
-	public MvpPlace getPlace(String token) {
-		return CommingSoonPlace.INSTANCE;
+	protected UiBinderLocalized getBinder() {
+		return GWT.create(Binder.class);
 	}
+
 }

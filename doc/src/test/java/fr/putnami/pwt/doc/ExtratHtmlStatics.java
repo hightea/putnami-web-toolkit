@@ -56,7 +56,7 @@ import fr.putnami.pwt.doc.client.page.sample.addressbook.AddressBookPlace;
 import fr.putnami.pwt.doc.client.page.sample.all.SamplesPlace;
 import fr.putnami.pwt.doc.client.page.sample.table.ContactsTablePlace;
 import fr.putnami.pwt.doc.client.page.server.ServerCallsPlace;
-import fr.putnami.pwt.doc.client.page.soon.CommingSoonPlace;
+import fr.putnami.pwt.doc.client.page.soon.ComingSoonPlace;
 import fr.putnami.pwt.doc.client.page.starting.GettingStartedPlace;
 import fr.putnami.pwt.doc.client.page.table.TablesPlace;
 import fr.putnami.pwt.doc.client.page.welcome.WelcomePlace;
@@ -91,7 +91,7 @@ public class ExtratHtmlStatics {
 			extractPage(SamplesPlace.class);
 			extractPage(ContactsTablePlace.class);
 			extractPage(AddressBookPlace.class);
-			extractPage(CommingSoonPlace.class);
+			extractPage(ComingSoonPlace.class);
 			extractPage(DownloadPlace.class);
 
 			Files.copy(new File(outFolder + "Welcome.html"), new File(outFolder + "index.html"));
