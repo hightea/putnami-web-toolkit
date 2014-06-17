@@ -409,7 +409,6 @@ pre.code-editor div.code-editor-line {
 	.teaser{
 		font-weight: 300;
 		font-size: 1.3em;
-		padding: 20px 10px;
 	}
 	
 	.teaser h1{
@@ -426,9 +425,10 @@ pre.code-editor div.code-editor-line {
 	}
 }
 
-@media (min-width: 768px) and (max-width: 991px) {
-  .hidden-sm {
-    display: none !important;
-  }
+@media (min-width: 768px) and  (max-width: 991px) {
+        #pwt-header .nav > li > a{
+                font-size: 0.9em !important;
+                padding: 17px 9px;
+        }
 }
 

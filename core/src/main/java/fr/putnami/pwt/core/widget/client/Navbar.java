@@ -25,6 +25,8 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
+import fr.putnami.pwt.core.mvp.client.MvpController;
+import fr.putnami.pwt.core.mvp.client.event.StartActivityEvent;
 import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
 import fr.putnami.pwt.core.widget.client.base.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
@@ -35,7 +37,7 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class Navbar extends AbstractPanel implements
-		CloneableWidget {
+CloneableWidget {
 
 	private static final CssStyle STYLE_NAVBAR = new SimpleStyle("navbar");
 	private static final CssStyle STYLE_BRAND = new SimpleStyle("navbar-brand");
@@ -87,7 +89,7 @@ public class Navbar extends AbstractPanel implements
 		}
 	}
 
-	private static class NavbarButton extends Widget implements CloneableWidget {
+	private class NavbarButton extends Widget implements CloneableWidget {
 
 		public NavbarButton() {
 			setElement(Document.get().createAnchorElement());
@@ -103,7 +105,7 @@ public class Navbar extends AbstractPanel implements
 		}
 
 		public void setCollapseContainer(Container collapseContainer) {
-			CollapseHelper.apply(this, collapseContainer.getElement(), true);
+			collapseHelper = CollapseHelper.apply(this, collapseContainer.getElement(), true);
 		}
 
 		private Element createIcon() {
@@ -118,6 +120,17 @@ public class Navbar extends AbstractPanel implements
 
 	private Type type = Type.DEFAULT;
 	private Position position = Position.DEFAULT;
+	private CollapseHelper collapseHelper;
+
+	private StartActivityEvent.Handler collapseHandler = new StartActivityEvent.Handler() {
+
+		@Override
+		public void onStartActivity(StartActivityEvent event) {
+			if (collapseHelper != null) {
+				collapseHelper.collapse();
+			}
+		}
+	};
 
 	public Navbar() {
 		super(DivElement.TAG);
@@ -151,6 +164,8 @@ public class Navbar extends AbstractPanel implements
 
 		setType(type);
 		setPosition(position);
+
+		MvpController.get().addStartActivityHandler(collapseHandler);
 	}
 
 	@Override
