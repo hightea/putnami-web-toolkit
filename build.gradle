@@ -25,19 +25,6 @@ ext {
 	guavaVersion = '15.0'
 }
 
-task generateReadMe(type: Copy) {
-	from '.'
-    into '.'
-	include('README.md.build')
-    rename ('README.md.build', 'README.md')
-	filter(ReplaceTokens, tokens: project.ext.getProperties())
-}
-
-publishAll.dependsOn generateReadMe
-publishAllToMavenLocal.dependsOn generateReadMe
-publishAllLibs.dependsOn generateReadMe
-publishAllLibsToMavenLocal.dependsOn generateReadMe
-
 subprojects {
 	apply plugin: 'java'
 	apply plugin: 'maven'

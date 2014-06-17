@@ -8,10 +8,10 @@ The **main goal** of this framework is to improve your productivity by removing 
 # Resources
 Useful links :
 
-* [Documentation](http://pwt.putnami.org/)
-* [Getting started with the framework](http://pwt.putnami.org/#GettingStarted)
+* [Documentation](http://pwt.putnami.org/?utm_source=github-pwt)
+* [Getting started with the framework](http://pwt.putnami.org/?utm_source=github-pwt#!GettingStarted)
 * [Release repository](http://repo.putnami.org/)
-* [Download page](http://pwt.putnami.org/download.html)
+* [Download page](http://pwt.putnami.org/?utm_source=github-pwt#!Download)
 
 # License
 The framework is delivered under LGPL v 3.0.
@@ -20,7 +20,7 @@ This license allows the use of PWT in both open source and commercial projects, 
 
 The use of PWT in your application doesn't and will not affect the license of you application. Using PWT is free of charge and you won't have to pay any fees to use or integrate it.
 
-You can find a [copy](https://github.com/Putnami/putnami-pwt/raw/master/COPYING) of the GPL v3 or you can get the [original](http://www.gnu.org/licenses/gpl-3.0.txt) and a [copy](https://github.com/Putnami/putnami-pwt/raw/master/COPYING.LESSER) of the LGPL v3 or you can get the [orignal](https://www.gnu.org/licenses/lgpl-3.0.txt).
+You can find a [copy](https://github.com/Putnami/putnami-pwt/raw/master/COPYING) of the GPL v3 or you can get the [original](https://www.gnu.org/licenses/gpl-3.0.txt) and a [copy](https://github.com/Putnami/putnami-pwt/raw/master/COPYING.LESSER) of the LGPL v3 or you can get the [orignal](https://www.gnu.org/licenses/lgpl-3.0.txt).
 
 # Usage #
 To use this framework, simply add a dependency to the core jar (*pwt-core.jar*) and eventually to the needed plugin jars (*pwt-code-editor.jar* and/or *pwt-google-analytics.jar*).
