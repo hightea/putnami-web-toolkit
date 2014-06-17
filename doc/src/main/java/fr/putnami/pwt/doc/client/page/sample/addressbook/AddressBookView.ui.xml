@@ -53,25 +53,22 @@
 				<w:Form ui:field="contactDetails" type="HORIZONTAL">
 					<w:Fieldset>
 						<w:Legend>
-							<w:FormGroup >
-								<w:Label text="" />
-								<w:InputGroup style="UNSTYLED">
-									<w:GridRow>
-										<w:GridColumn size="2">
-											<w:InputSelect path="gender"/>
-										</w:GridColumn>
-										<w:GridColumn size="10">
-											<w:InputText path="name"/>
-										</w:GridColumn>
-									</w:GridRow>
-								</w:InputGroup>
-								<w:OutputGroup>
+							<w:GridRow ui:field="editNameRow">
+								<w:GridColumn size="3" offset="3">
+									<w:InputSelect path="gender"/>
+								</w:GridColumn>
+								<w:GridColumn size="6">
+									<w:InputText path="name"/>
+								</w:GridColumn>
+							</w:GridRow>
+							<w:GridRow ui:field="viewNameRow">
+								<w:GridColumn size="9" offset="3">
 									<w:OutputEnum path="gender" tag="span"/> 
 									<strong>
 										<w:OutputText path="name" tag="span"/>
 									</strong>
-								</w:OutputGroup>
-							</w:FormGroup>
+								</w:GridColumn>
+							</w:GridRow>
 						</w:Legend>
 						<w:FormGroup path="birthday" />
 						<w:FormGroup path="emails" >

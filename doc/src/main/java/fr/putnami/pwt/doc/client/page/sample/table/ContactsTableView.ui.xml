@@ -76,7 +76,7 @@
 					</fieldset>
 					<w:Footer>
 						<w:Button ui:field="cancelButton" name="cancel" />
-						<w:Button ui:field="saveButton" name="save" size="LARGE" type="PRIMARY" />
+						<w:FormSubmitButton name="save" size="LARGE" />
 					</w:Footer>
 				</w:Form>
 	 		</w:Modal>

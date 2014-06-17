@@ -32,12 +32,14 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
+import fr.putnami.pwt.core.editor.client.event.DirtyEvent;
 import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
 import fr.putnami.pwt.core.model.client.model.Model;
 import fr.putnami.pwt.core.mvp.client.View;
 import fr.putnami.pwt.core.widget.client.Anchor;
 import fr.putnami.pwt.core.widget.client.Button;
 import fr.putnami.pwt.core.widget.client.Form;
+import fr.putnami.pwt.core.widget.client.GridRow;
 import fr.putnami.pwt.core.widget.client.InputMultiSelect;
 import fr.putnami.pwt.core.widget.client.InputText;
 import fr.putnami.pwt.core.widget.client.OutputList;
@@ -84,6 +86,10 @@ public class AddressBookView extends SampleView<AddressBookPlace> implements Vie
 	Form<Contact> contactItemTemplate;
 	@UiField
 	InputMultiSelect<String> groupSelect;
+	@UiField
+	GridRow editNameRow;
+	@UiField
+	GridRow viewNameRow;
 
 	@UiField
 	Button<Contact> newContactButton;
@@ -209,6 +215,11 @@ public class AddressBookView extends SampleView<AddressBookPlace> implements Vie
 		selectContact(anchor.getValue());
 	}
 
+	@UiHandler("contactDetails")
+	void onSaveContact(DirtyEvent event) {
+		saveContactButton.setDisabled(false);
+	}
+
 	private void displayGroup(Group group) {
 		this.displayedGroup = group;
 		displayList(group.getMembers());
@@ -233,19 +244,25 @@ public class AddressBookView extends SampleView<AddressBookPlace> implements Vie
 		contactDetails.setReadonly(true);
 		contactDetails.edit(collaborator);
 
-		newContactButton.setDisabled(false);
 		editContactButton.setDisabled(false);
-		cancelContactButton.setDisabled(true);
+
 		saveContactButton.setDisabled(true);
+		cancelContactButton.setDisabled(true);
+
+		editNameRow.setVisible(false);
+		viewNameRow.setVisible(true);
 	}
 
 	private void editContact(Contact collaborator) {
 		contactDetails.setReadonly(false);
 		contactDetails.edit(collaborator);
 
-		newContactButton.setDisabled(true);
 		editContactButton.setDisabled(true);
-		cancelContactButton.setDisabled(false);
+
 		saveContactButton.setDisabled(false);
+		cancelContactButton.setDisabled(false);
+
+		editNameRow.setVisible(true);
+		viewNameRow.setVisible(false);
 	}
 }

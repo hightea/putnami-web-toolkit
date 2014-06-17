@@ -25,6 +25,7 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
+import fr.putnami.pwt.core.editor.client.event.FlushSuccessEvent;
 import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
 import fr.putnami.pwt.core.model.client.model.Model;
 import fr.putnami.pwt.core.mvp.client.View;
@@ -123,14 +124,11 @@ public class ContactsTableView extends SampleView<ContactsTablePlace> implements
 		modal.hide();
 	}
 
-	@UiHandler("saveButton")
-	void onSave(ButtonEvent event) {
-		Contact flushed = contactEditor.flush();
-		if (!contactEditor.hasError()) {
-			ContactService.get().savePerson(flushed);
-			modal.hide();
-			present(null);
-		}
+	@UiHandler("contactEditor")
+	void onSave(FlushSuccessEvent event) {
+		ContactService.get().savePerson((Contact) event.getValue());
+		modal.hide();
+		present(null);
 	}
 
 	private List<Integer> generateWeightItems() {

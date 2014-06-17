@@ -5,8 +5,8 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
 import com.google.gwt.user.client.ui.RootPanel;
 
-import fr.putnami.pwt.core.common.client.error.ErrorManager;
-import fr.putnami.pwt.core.error.client.SimpleErrorDisplayer;
+import fr.putnami.pwt.core.error.client.ErrorManager;
+import fr.putnami.pwt.core.error.client.widget.SimpleErrorDisplayer;
 import fr.putnami.pwt.core.mvp.client.MvpController;
 import fr.putnami.pwt.core.theme.client.CssLink;
 import fr.putnami.pwt.core.theme.client.Theme;
@@ -25,9 +25,9 @@ public class SampleWebApp implements EntryPoint {
 		RootPanel.get().add(applicationMenu);
 
 		Theme theme = new Theme();
-		theme.addLink(new CssLink("theme/yeti/style/pwt-sample-web.css", 0));
+		theme.addLink(new CssLink("theme/sample/style/pwt-sample-web.css", 0));
 		ThemeController.get().installTheme(theme);
-		
+
 		MvpController controller = MvpController.get();
 		controller.setDisplay(applicationMenu);
 

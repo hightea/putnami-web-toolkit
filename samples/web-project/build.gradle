@@ -21,7 +21,7 @@ buildscript {
 }
 
 ext {
-	pwtVersion = '1.0.0-RC1'
+	pwtVersion = '1.0.0-SNAPSHOT'
 }
 	
 configurations {

@@ -46,7 +46,7 @@
 		<pre>git clone git@github.com:Putnami/putnami-pwt.git</pre>
 		
 		<w:Heading level="3" navSpy="{navSpy}">Gradle</w:Heading>
-		<p>PWT is built with Gradle. You cat buil</p>
+		<p>PWT is built with Gradle.</p>
 		<p>Once you get the sources you can build PWT with the command:</p>
 		<pre>gradle build</pre>
 		<p>To use it with maven, you can also push the artifact in your lacal maven repository with the command:</p>
