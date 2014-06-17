@@ -101,7 +101,7 @@ public class AddressBookView extends SampleView<AddressBookPlace> implements Vie
 	private final IsWidget sampleWidget;
 
 	public AddressBookView() {
-		super("list/AddressBookView.java", "list/AddressBookView.ui.xml", "list/AddressBookPlace.java",
+		super("addressbook/AddressBookView.java", "addressbook/AddressBookView.ui.xml", "addressbook/AddressBookPlace.java",
 				"service/ContactService.java", "domain/Person.java", "domain/Contact.java", "domain/Address.java",
 				"domain/Gender.java", "domain/Group.java", "constants/SampleConstants.java");
 

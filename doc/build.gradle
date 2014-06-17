@@ -3,7 +3,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 apply plugin: 'gwt'
 apply plugin: 'jetty'
 
-//FIXME sourceSets.main.resources.srcDir 'src/main/java'
+sourceSets.main.resources.srcDir 'src/main/java'
 
 dependencies {
 	compile project(':pwt')
@@ -16,10 +16,11 @@ gwt {
 
 	modules = ['fr.putnami.pwt.doc.Documentation']
 	devModules = ['fr.putnami.pwt.doc.DocumentationDev']
-	// We just invert the order of the sources files to use the processed ressources first in GWT compilation
-	src =  files(sourceSets.main.output.resourcesDir, sourceSets.main.java.srcDirs)
 	
-	 
+	compileGwt {
+		// We just invert the order of the sources files to use the processed ressources first in GWT compilation
+		src =  files(sourceSets.main.output.resourcesDir, sourceSets.main.java.srcDirs)
+	}
 	gwtDev {
 		jvmArgs('-Xdebug',  '-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000')
 	}
@@ -29,7 +30,16 @@ gwt {
 }
 
 processResources {
-	filter(ReplaceTokens, tokens: rootProject.ext.getProperties())
+	// work-around for filter corrupting  resources on the build
+    from(sourceSets.main.resources.srcDirs) {
+        include '**/*.properties'
+        include '**/*.xml'
+		filter(ReplaceTokens, tokens: rootProject.ext.getProperties())
+    }
+    from(sourceSets.main.resources.srcDirs) {
+        exclude '**/*.properties'
+        exclude '**/*.xml'
+    }
 }
 
 war {

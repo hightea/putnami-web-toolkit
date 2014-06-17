@@ -30,9 +30,9 @@
 	<inherits name="fr.putnami.pwt.plugin.ga.GoogleAnalytics"/>
 
 
-	<extend-property name="locale" values="en"/>
+<!-- 	<extend-property name="locale" values="en"/> -->
 <!-- 	<extend-property name="locale" values="fr"/> -->
-	<set-property-fallback name="locale" value="en"/> 
+<!-- 	<set-property-fallback name="locale" value="en"/>  -->
 	
 	<source path="client"/>
 	<source path="shared"/>
