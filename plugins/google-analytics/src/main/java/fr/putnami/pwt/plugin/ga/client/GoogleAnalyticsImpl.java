@@ -53,7 +53,6 @@ public class GoogleAnalyticsImpl extends GoogleAnalytics implements StartActivit
 		initScript();
 		MvpController.get().addStartActivityHandler(this);
 		createTracker(account);
-		trackPage();
 	}
 
 	@Override
