@@ -21,7 +21,9 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
@@ -107,10 +109,6 @@ public class AddressBookView extends SampleView<AddressBookPlace> implements Vie
 	private final IsWidget sampleWidget;
 
 	public AddressBookView() {
-		super("addressbook/AddressBookView.java", "addressbook/AddressBookView.ui.xml", "addressbook/AddressBookPlace.java",
-				"service/ContactService.java", "domain/Person.java", "domain/Contact.java", "domain/Address.java",
-				"domain/Gender.java", "domain/Group.java", "constants/SampleConstants.java");
-
 		sampleWidget = Binder.BINDER.createAndBindUi(this);
 
 		MessageHelper messageHelper = new MessageHelper(constants);
@@ -127,6 +125,19 @@ public class AddressBookView extends SampleView<AddressBookPlace> implements Vie
 		groupsList.initialize(GroupModel.MODEL);
 		groupItemTemplate.setMessageHelper(messageHelper);
 		groupItemTemplate.initialize(GroupModel.MODEL);
+
+		Multimap<String, String> sources = LinkedHashMultimap.create();
+		sources.put(VIEW_PANEL, "addressbook/AddressBookView.ui.xml");
+		sources.put(VIEW_PANEL, "addressbook/AddressBookView.java");
+		sources.put(VIEW_PANEL, "addressbook/AddressBookPlace.java");
+		sources.put(SERVICE_PANEL, "service/ContactService.java");
+		sources.put(DOMAIN_PANEL, "domain/Person.java");
+		sources.put(DOMAIN_PANEL, "domain/Contact.java");
+		sources.put(CONSTANTS_PANEL, "domain/Address.java");
+		sources.put(DOMAIN_PANEL, "domain/Gender.java");
+		sources.put(DOMAIN_PANEL, "domain/Group.java");
+		sources.put(CONSTANTS_PANEL, "constants/SampleConstants.java");
+		addSources(sources);
 	}
 
 	@Override

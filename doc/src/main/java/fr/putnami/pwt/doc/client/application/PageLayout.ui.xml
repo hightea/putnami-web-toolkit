@@ -27,7 +27,7 @@
 		<w:GridRow>
 			<w:GridColumn ui:field="contentContainer" size="8" styleName="text-justify" />
 			<w:GridColumn size="4">
-				<w:Affix layerIndex="2" offsetTop="80" offsetBottom="210" xsVisibility="HIDDEN" smVisibility="HIDDEN" styleName="pwt-spy-affix">
+				<w:Affix layerIndex="2" offsetTop="80" offsetBottom="250" xsVisibility="HIDDEN" smVisibility="HIDDEN" styleName="pwt-spy-affix">
 					<w:NavSpy ui:field="tableOfContent" spyOffset="80"/>
 				</w:Affix>
 			</w:GridColumn>

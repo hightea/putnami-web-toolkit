@@ -16,6 +16,7 @@
  */
 package fr.putnami.pwt.doc.client.page.sample;
 
+import com.google.common.collect.Multimap;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -33,8 +34,12 @@ import com.google.gwt.user.client.ui.Widget;
 
 import fr.putnami.pwt.core.mvp.client.View;
 import fr.putnami.pwt.core.widget.client.Anchor;
+import fr.putnami.pwt.core.widget.client.Header;
 import fr.putnami.pwt.core.widget.client.List;
+import fr.putnami.pwt.core.widget.client.List.Type;
 import fr.putnami.pwt.core.widget.client.ListItem;
+import fr.putnami.pwt.core.widget.client.Panel;
+import fr.putnami.pwt.core.widget.client.PanelAccordion;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 import fr.putnami.pwt.plugin.code.client.StaticCode;
 import fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration;
@@ -50,7 +55,7 @@ public abstract class SampleView<P extends Place> extends Composite implements V
 		@UiField
 		HTMLPanel sampleContent;
 		@UiField
-		List sourceList;
+		PanelAccordion sourceAccordion;
 		@UiField
 		StaticCode sourceCode;
 	}
@@ -77,14 +82,40 @@ public abstract class SampleView<P extends Place> extends Composite implements V
 		}
 	}
 
+	protected static final String VIEW_PANEL = "Views";
+	protected static final String CONSTANTS_PANEL = "Constants";
+	protected static final String DOMAIN_PANEL = "Domain";
+	protected static final String SERVICE_PANEL = "Service";
+
 	private final SampleLayoutView samplePageLayout = new SampleLayoutView();
 
-	public SampleView(String... sourceFiles) {
+	public SampleView() {
 		initWidget(Binder.BINDER.createAndBindUi(samplePageLayout));
 		samplePageLayout.sourceCode.asWidget().setVisible(false);
-		for (String source : sourceFiles) {
-			samplePageLayout.sourceList.addListItem(new SourceItem(source));
+	}
+
+	protected void addSources(Multimap<String, String> sources) {
+		Panel panelToOpen = null;
+		String sourceToOpen = null;
+		for (String panelName : sources.keySet()) {
+
+			List sourceList = new List();
+			sourceList.setType(Type.LIST);
+			for (String source : sources.get(panelName)) {
+				if (sourceToOpen == null) {
+					sourceToOpen = source;
+				}
+				sourceList.add(new SourceItem(source));
+			}
+			Panel sourcePanel = new Panel();
+			if (panelToOpen == null) {
+				panelToOpen = sourcePanel;
+			}
+			sourcePanel.add(new Header(panelName));
+			sourcePanel.add(sourceList);
+			samplePageLayout.sourceAccordion.add(sourcePanel);
 		}
+		requestFile(sourceToOpen);
 	}
 
 	@Override

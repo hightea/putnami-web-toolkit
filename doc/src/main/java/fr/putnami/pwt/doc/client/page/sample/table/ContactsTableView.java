@@ -18,7 +18,9 @@ package fr.putnami.pwt.doc.client.page.sample.table;
 
 import java.util.List;
 
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -71,9 +73,7 @@ public class ContactsTableView extends SampleView<ContactsTablePlace> implements
 	private final IsWidget sampleWidget;
 
 	public ContactsTableView() {
-		super("table/ContactsTableView.java", "table/ContactsTableView.ui.xml", "table/ContactsTablePlace.java",
-				"service/ContactService.java", "domain/Person.java", "domain/Contact.java", "domain/Address.java",
-				"domain/Gender.java", "domain/Group.java", "constants/SampleConstants.java");
+		super();
 
 		sampleWidget = Binder.BINDER.createAndBindUi(this);
 
@@ -83,6 +83,19 @@ public class ContactsTableView extends SampleView<ContactsTablePlace> implements
 		contactTable.initialize(ContactModel.MODEL);
 		contactEditor.setMessageHelper(messageHelper);
 		contactEditor.initialize(ContactModel.MODEL);
+
+		Multimap<String, String> sources = LinkedHashMultimap.create();
+		sources.put(VIEW_PANEL, "table/ContactsTableView.ui.xml");
+		sources.put(VIEW_PANEL, "table/ContactsTableView.java");
+		sources.put(VIEW_PANEL, "table/ContactsTablePlace.java");
+		sources.put(SERVICE_PANEL, "service/ContactService.java");
+		sources.put(DOMAIN_PANEL, "domain/Person.java");
+		sources.put(DOMAIN_PANEL, "domain/Contact.java");
+		sources.put(CONSTANTS_PANEL, "domain/Address.java");
+		sources.put(DOMAIN_PANEL, "domain/Gender.java");
+		sources.put(DOMAIN_PANEL, "domain/Group.java");
+		sources.put(CONSTANTS_PANEL, "constants/SampleConstants.java");
+		addSources(sources);
 	}
 
 	@Override

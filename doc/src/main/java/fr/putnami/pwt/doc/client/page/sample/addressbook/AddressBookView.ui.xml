@@ -117,7 +117,7 @@
 				</w:Form>
 			</w:GridColumn>
 		</w:GridRow>
-		<w:Affix offsetBottom="220" fixBottom="20" layerIndex="900">
+		<w:Affix offsetBottom="260" fixBottom="20" layerIndex="900">
 			<w:GridRow>
 				<w:GridColumn size="5" offset="6" styleName="sample-contact-actions">
 					<w:ButtonGroup>

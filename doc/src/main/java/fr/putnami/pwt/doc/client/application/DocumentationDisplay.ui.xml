@@ -54,8 +54,8 @@
 							<w:NavLink label="Code editor" link="#!CodeEditor"/>
 						</w:NavDropdown>
 						<w:NavDropdown label="Samples" >
-							<w:NavLink label="Contacts table" link="#!ContactsTable"/>
 							<w:NavLink label="Address book" link="#!AddressBook"/>
+							<w:NavLink label="Contacts table" link="#!ContactsTable"/>
 						</w:NavDropdown>
 						<w:NavLink label="Coming soon ..." link="#!ComingSoon" />
 					</w:Nav>
@@ -66,12 +66,13 @@
 			<w:OneWidgetPanel tag="div" ui:field="viewContainer"  styleName="container" />
 		</div>
 		<footer id="pwt-footer">
+			<p>Follow us on <a href="https://twitter.com/PutnamiTeam" class="btn btn-default btn-xs btn-info" target="_BLANK"><i class="icon icon-twitter" />Twitter</a></p>
 			<p>Designed and made with all our love by <a href="https://github.com/hightea" target="_blank">@tcharbonnier</a> and <a href="https://github.com/fdumay" target="_blank">@fdumay</a></p>
 			<p>Licensed under <a href="https://www.gnu.org/licenses/lgpl-3.0.txt" target="_blank">LGPL v 3.0</a></p>
 			<ul class="list-inline">
 			  <li><a href="https://github.com/putnami" target="_blank">Putnami Team</a></li>
 			  <li>current version @releaseVersion@</li>
-			  <li><a href="https://github.com/putnami/putnami-pwt" target="_blank">GitHub</a></li>
+			  <li><a href="https://github.com/putnami/putnami-pwt" target="_blank"><i class="icon icon-github-squared" />GitHub</a></li>
 			  <li><a href="#!Samples">Samples</a></li>
 			  <li><a href="https://github.com/putnami/putnami-pwt/issues" target="_blank">Issues</a></li>
 			  <li><a href="#!Download">Download</a></li>
