@@ -25,7 +25,7 @@
 		<header id="pwt-header">
 			<div class="pwt-top-header">
 				<div id="pwt-title" class="container" title="PWT - Putnami Web Tool Kit">
-					<img src="assets/img/putnami.png" alt="Putnami Logo" /> PWT <small>Putnami Web Toolkit</small>
+					<img src="assets/img/putnami.png" alt="Putnami Logo" /> PWT <small class="hidden-xs">Putnami Web Toolkit</small>
 				</div>
 			</div>
 			<w:Affix ui:field="affixMenu" styleName="pwt-menu-affix">

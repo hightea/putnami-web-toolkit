@@ -17,6 +17,9 @@ gwt {
 	modules = ['fr.putnami.pwt.doc.Documentation']
 	devModules = ['fr.putnami.pwt.doc.DocumentationDev']
 	
+	compiler {
+		localWorkers = 2
+	}
 	compileGwt {
 		// We just invert the order of the sources files to use the processed ressources first in GWT compilation
 		src =  files(sourceSets.main.output.resourcesDir, sourceSets.main.java.srcDirs)

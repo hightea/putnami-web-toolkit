@@ -120,7 +120,7 @@
 					Unlike <a href="http://github.com/ArcBees/GWTP" target="_BLANK">GWTP</a> is realy lightweight but mainly provide a good MVP framework.</li>
 				<li><strong>Server side</strong> such as <a href="http://vaadin.com">Vaadin</a>. Sounds realy great, make GWT on server side is realy great idea.
 					It's realy good! But also it's far from our habits and seems difficult to extend. Above all it's truly magical. Is it still GWT ?</li>
-				<li><strong>Non usage free</strong> solution such as <a href="https://www.sencha.com/products/gxt/">GXT</a> which provides a full featured framework integrating a lot of GWT features bon non free for commercial usage.</li>
+				<li><strong>Non usage free</strong> solution such as <a href="https://www.sencha.com/products/gxt/">GXT</a> which provides a full featured framework integrating a lot of GWT features but non free for commercial usage.</li>
 			</ul>
 			<p>
 				Well, clearly we've seen alot of good things. But all our needs weren't present at once.
