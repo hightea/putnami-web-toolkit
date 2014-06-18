@@ -20,6 +20,8 @@ public final class ApplicationConfig {
 
 	public static final String ANALYTICS_TRACKER_ID = "UA-51591008-1";
 
+	public static final String DOMAIN = "putnami.org";
+
 	private ApplicationConfig() {
 		// Nothing to do
 	}

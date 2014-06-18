@@ -50,9 +50,14 @@ public class GoogleAnalyticsImpl extends GoogleAnalytics implements StartActivit
 
 	@Override
 	protected void initialize(String account) {
+		initialize(account, "auto");
+	}
+
+	@Override
+	protected void initialize(String account, String domain) {
 		initScript();
 		MvpController.get().addStartActivityHandler(this);
-		createTracker(account);
+		createTracker(account, domain);
 	}
 
 	@Override
@@ -74,16 +79,9 @@ public class GoogleAnalyticsImpl extends GoogleAnalytics implements StartActivit
 		$wnd.ga.l = 1 * new Date();
 	}-*/;
 
-	private native void createTracker(String account)
+	private native void createTracker(String account, String domain)
 	/*-{
-		$wnd.ga('create', account, 'auto');
-	}-*/;
-
-	private native void createLocalhostTracker(String account)
-	/*-{
-		$wnd.ga('create', account, {
-		  'cookieDomain': 'none'
-		});
+		$wnd.ga('create', account, domain);
 	}-*/;
 
 	@Override

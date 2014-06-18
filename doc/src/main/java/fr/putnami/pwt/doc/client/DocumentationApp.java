@@ -72,7 +72,7 @@ public class DocumentationApp implements EntryPoint {
 		DocumentationDisplay display = new DocumentationDisplay();
 		RootPanel.get().add(display);
 
-		GoogleAnalytics.get(ApplicationConfig.ANALYTICS_TRACKER_ID).forceSSL(true);
+		GoogleAnalytics.init(ApplicationConfig.ANALYTICS_TRACKER_ID, ApplicationConfig.DOMAIN).forceSSL(true);
 
 		SimpleErrorDisplayer errorDisplayer = new SimpleErrorDisplayer();
 		errorDisplayer.setConstants((ConstantsWithLookup) GWT.create(ErrorConstants.class));

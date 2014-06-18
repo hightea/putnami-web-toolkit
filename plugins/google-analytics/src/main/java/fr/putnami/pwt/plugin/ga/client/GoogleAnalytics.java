@@ -34,7 +34,18 @@ public abstract class GoogleAnalytics {
 		return ga;
 	}
 
+	public static GoogleAnalytics init(String account, String domain) {
+		GoogleAnalytics ga = cache.get(account);
+		if (ga == null) {
+			ga = GWT.create(GoogleAnalytics.class);
+			ga.initialize(account, domain);
+		}
+		return ga;
+	}
+
 	protected abstract void initialize(String account);
+
+	protected abstract void initialize(String account, String domain);
 
 	public abstract void forceSSL(boolean force);
 

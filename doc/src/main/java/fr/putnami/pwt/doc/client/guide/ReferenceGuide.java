@@ -154,7 +154,7 @@ public class ReferenceGuide extends Composite implements EntryPoint {
 		ErrorManager.get().setErrorDisplayer(errorDisplayer);
 		ErrorManager.get().registerErrorHandler(new UmbrellaExceptionHandler());
 
-		GoogleAnalytics.get(ApplicationConfig.ANALYTICS_TRACKER_ID).trackPage();
+		GoogleAnalytics.init(ApplicationConfig.ANALYTICS_TRACKER_ID, ApplicationConfig.DOMAIN).trackPage();
 
 		addHeading("Putnami Web Toolkit", 1);
 		addContent(new WelcomeView(), 0);
