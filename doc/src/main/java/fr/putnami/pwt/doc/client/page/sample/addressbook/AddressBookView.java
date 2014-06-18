@@ -133,7 +133,7 @@ public class AddressBookView extends SampleView<AddressBookPlace> implements Vie
 		sources.put(SERVICE_PANEL, "service/ContactService.java");
 		sources.put(DOMAIN_PANEL, "domain/Person.java");
 		sources.put(DOMAIN_PANEL, "domain/Contact.java");
-		sources.put(CONSTANTS_PANEL, "domain/Address.java");
+		sources.put(DOMAIN_PANEL, "domain/Address.java");
 		sources.put(DOMAIN_PANEL, "domain/Gender.java");
 		sources.put(DOMAIN_PANEL, "domain/Group.java");
 		sources.put(CONSTANTS_PANEL, "constants/SampleConstants.java");

@@ -105,33 +105,34 @@
 				Need a framework? Yes definitly! But what do we exactly require? Nice widgets, a solid architecture, ease of use, fullness, lightweight!
 				<br/>
 				 Woah we're so exigent!
-				<p>
-				Well what were the market possibilities :
-				</p>
-				<ul>
-					<li><strong>JS wrapper</strong> such as <a href="">GXT</a> or <a href="http://www.smartclient.com/product/smartgwt.jsp" target="_BLANK">SMARTGWT</a> are not enough maintainable and evolutive for us.
-						Also it can be sight as a corruption of the GWT's phylosophy.</li>
-					<li><strong>Components oriented</strong> such as <a href="https://github.com/gwtbootstrap3/gwtbootstrap3" target="_BLANK">GWT bootstrap</a> are sexy but doesn't provide any solid framework to build apps.</li>
-					<li><strong>Framework oriented</strong> sush as <a href="http://erraiframework.org/" target="_BLANK">ERRAI</a> or <a href="http://github.com/ArcBees/GWTP" target="_BLANK">GWTP</a> unfortunatly doesn't provide nice components.
-						<br/>
-						And in the details <a href="http://erraiframework.org/" target="_BLANK">ERRAI</a> provides a lot of good things, but it's so heavy! A basic sample give a 80MB War...
-						<br/>
-						Unlike <a href="http://github.com/ArcBees/GWTP" target="_BLANK">GWTP</a> is realy lightweight but mainly provide a good MVP framework.</li>
-					<li><strong>Server side</strong> such as <a href="http://vaadin.com">Vaadin</a>. Sounds realy great, make GWT on server side is realy great idea.
-						It's realy good! But also it's far from our habits and seems difficult to extend. Above all it's truly magical. Is it still GWT ?</li>
-				</ul>
-				<p>
+			</p>
+			<p>
+				Well what were the <strong>market possibilities</strong> :
+			</p>
+			<ul>
+				<li><strong>JS wrapper</strong> such as <a href="http://www.smartclient.com/product/smartgwt.jsp" target="_BLANK">SMARTGWT</a> are not enough maintainable and evolutive for us.
+					Also it can be sight as a corruption of the GWT's phylosophy.</li>
+				<li><strong>Components oriented</strong> such as <a href="https://github.com/gwtbootstrap3/gwtbootstrap3" target="_BLANK">GWT bootstrap</a> are sexy but doesn't provide any solid framework to build apps.</li>
+				<li><strong>Framework oriented</strong> sush as <a href="http://erraiframework.org/" target="_BLANK">ERRAI</a> or <a href="http://github.com/ArcBees/GWTP" target="_BLANK">GWTP</a> unfortunatly doesn't provide nice components.
+					<br/>
+					And in the details <a href="http://erraiframework.org/" target="_BLANK">ERRAI</a> provides a lot of good things, but it's so heavy! A basic sample give a 80MB War...
+					<br/>
+					Unlike <a href="http://github.com/ArcBees/GWTP" target="_BLANK">GWTP</a> is realy lightweight but mainly provide a good MVP framework.</li>
+				<li><strong>Server side</strong> such as <a href="http://vaadin.com">Vaadin</a>. Sounds realy great, make GWT on server side is realy great idea.
+					It's realy good! But also it's far from our habits and seems difficult to extend. Above all it's truly magical. Is it still GWT ?</li>
+				<li><strong>Non usage free</strong> solution such as <a href="https://www.sencha.com/products/gxt/">GXT</a> which provides a full featured framework integrating a lot of GWT features bon non free for commercial usage.</li>
+			</ul>
+			<p>
 				Well, clearly we've seen alot of good things. But all our needs weren't present at once.
 				We would maybe try to put some of those framework togethers, and finally with a bit of luck make it work.
 				But at the end, we would made a lot of compromises, for a not sure result but above all not mastered, so finally alot of wasted time.
-				</p>
-				<p>
-					Ok <strong>Let's start!</strong> Trying to do good stuff, without any compromise, keeping a clear ideas. Here we go...
-				</p>
-				<p>
-					That sure we made it for us.
-					But since we are quietly proud of the result and that we reckon that it may help someone else, we decided to share it by making it open source, Here we are.
-				</p>
+			</p>
+			<p>
+				Ok <strong>Let's start!</strong> Trying to do good stuff, without any compromise, keeping a clear ideas. Here we go...
+			</p>
+			<p>
+				That sure we made it for us.
+				But since we are quietly proud of the result and that we reckon that it may help someone else, we decided to share it by making it open source, Here we are.
 			</p>
 
 			<w:Heading level="2" navSpy="{tableOfContent}" >Just use it ! <small>maybe help us?</small></w:Heading>
@@ -144,7 +145,7 @@
 				So let us the benefit of the doubt.
 			</p>
 			<ul>
-				<li>Visit this showcase.</li>
+				<li>Visit this site fully made with <strong>PWT</strong>.</li>
 				<li>Go arround the <a href="#!AddressBook">Address book</a>.</li>
 				<li>You want to try, read the <a href="#!GettingStarted">Getting Started</a> page and let you go.</li>
 				<li>Have a look on the code, check out it or fork it on <a href="https://github.com/putnami/putnami-pwt">GitHub</a>.</li>
@@ -153,7 +154,8 @@
 				If you like it, and want to help us, Great :). So please, we would be glad that you:
 			</p>
 			<ul>
-				<li>Speak about it and spread it around you and beyond.</li>
+				<li>Follow us on <a href="https://twitter.com/PutnamiTeam" class="btn btn-default btn-xs btn-info" target="_BLANK"><i class="icon icon-twitter" alt="Twitter" />Twitter</a></li>
+				<li>Speak and blog about <strong title="Putnami Web Toolkit">PWT</strong>. Spread it around you and beyond.</li>
 				<li>Try and maybe use it on your next web app.</li>
 				<li><a href="https://github.com/putnami/putnami-pwt/issues">Report bugs</a> to make it better.</li>
 				<li>Submit ideas to get new amazing features.</li>
@@ -166,8 +168,7 @@
 			</p>
 			<p class="pull-right">
 				Best regards.
-			</p>
-			<p class="pull-right">
+				<br/>
 				<a href="https://github.com/putnami"><strong>@Putnami team</strong></a><br/>
 			</p>
 		</w:HTMLPanel>
