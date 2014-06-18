@@ -157,7 +157,7 @@ public class ExtratHtmlStatics {
 			elem.remove();
 		}
 
-		String pageData = page.asXml();
+		String pageData = page.asXml().replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "<!DOCTYPE html>");
 		pageData = pageData.replaceAll(host, "");
 		pageData = pageData.replaceAll("#\\!([a-zA-Z]*)", targetHost + "$1.html");
 
