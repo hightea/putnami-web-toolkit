@@ -25,13 +25,12 @@ import com.google.common.collect.Maps;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
-import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.dom.client.ScrollEvent;
 import com.google.gwt.event.dom.client.ScrollHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -60,7 +59,12 @@ public class NavSpy extends AbstractComposite implements HasDrawable {
 				@Override
 				public void execute() {
 					int top = getElementTop(heading) - spyOffset;
-					getScrollElement().setScrollTop(top);
+					if (isBodyScrollWidget()) {
+						Window.scrollTo(Document.get().getScrollLeft(), top);
+					}
+					else {
+						scrollWidget.getElement().setScrollTop(top);
+					}
 				}
 			});
 
@@ -125,10 +129,18 @@ public class NavSpy extends AbstractComposite implements HasDrawable {
 		if (navs.isEmpty()) {
 			return; // Not displayed NavSpy
 		}
-		Element scrollElement = getScrollElement();
-		int scrollTop = scrollElement.getScrollTop() + spyOffset;
-		int scrollHeight = scrollElement.getScrollHeight();
-		int maxScroll = scrollHeight - scrollElement.getClientHeight();
+		int scrollTop, scrollHeight, maxScroll;
+
+		if (isBodyScrollWidget()) {
+			scrollTop = Document.get().getScrollTop() + spyOffset;
+			scrollHeight = Document.get().getScrollHeight();
+			maxScroll = scrollHeight - Document.get().getClientHeight();
+		}
+		else {
+			scrollTop = scrollWidget.getElement().getScrollTop() + spyOffset;
+			scrollHeight = scrollWidget.getElement().getScrollHeight();
+			maxScroll = scrollHeight - scrollWidget.getElement().getClientHeight();
+		}
 
 		Heading activeHeading = null;
 		if (scrollTop >= maxScroll && headings.size() > 0) {
@@ -198,7 +210,7 @@ public class NavSpy extends AbstractComposite implements HasDrawable {
 		if (scrollRegistration != null) {
 			scrollRegistration.removeHandler();
 		}
-		if (this.scrollWidget == null) {
+		if (isBodyScrollWidget()) {
 			scrollRegistration = Window.addWindowScrollHandler(new Window.ScrollHandler() {
 
 				@Override
@@ -225,20 +237,17 @@ public class NavSpy extends AbstractComposite implements HasDrawable {
 		}
 	}
 
-	private Element getScrollElement() {
-		if (scrollWidget != null) {
-			return scrollWidget.getElement();
-		}
-		return RootPanel.get().getElement();
-	}
-
 	private int getElementTop(Heading heading) {
-		if (scrollWidget == null) {
+		if (isBodyScrollWidget()) {
 			return heading.getElement().getAbsoluteTop();
 		}
 		else {
 			return heading.getElement().getOffsetTop() - scrollWidget.getElement().getOffsetTop();
 		}
+	}
+
+	private boolean isBodyScrollWidget() {
+		return scrollWidget == null;
 	}
 
 	public List<Heading> getHeadings() {
