@@ -155,9 +155,10 @@
 			</p>
 			<ul>
 				<li>Follow us on <a href="https://twitter.com/PutnamiTeam" class="btn btn-default btn-xs btn-info" target="_BLANK"><i class="icon icon-twitter" alt="Twitter" />Twitter</a></li>
-				<li>Speak and blog about <strong title="Putnami Web Toolkit">PWT</strong>. Spread it around you and beyond.</li>
+				<li>Join the community on <a href="https://twitter.com/PutnamiTeam" target="_BLANK"><i class="icon icon-coffee" />Google Group</a></li>
+				<li>Speak, blog and tweet about <strong title="Putnami Web Toolkit">PWT</strong>. Spread it around you and beyond.</li>
 				<li>Try and maybe use it on your next web app.</li>
-				<li><a href="https://github.com/putnami/putnami-pwt/issues">Report bugs</a> to make it better.</li>
+				<li><a href="https://github.com/putnami/putnami-pwt/issues"><i class="icon icon-extinguisher" />Report issues</a> to make it better.</li>
 				<li>Submit ideas to get new amazing features.</li>
 			</ul>
 			<p>

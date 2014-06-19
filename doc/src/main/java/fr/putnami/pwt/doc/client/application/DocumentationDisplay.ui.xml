@@ -70,12 +70,13 @@
 			<p>Designed and made with all our love by <a href="https://github.com/hightea" target="_blank">@tcharbonnier</a> and <a href="https://github.com/fdumay" target="_blank">@fdumay</a></p>
 			<p>Licensed under <a href="https://www.gnu.org/licenses/lgpl-3.0.txt" target="_blank">LGPL v 3.0</a></p>
 			<ul class="list-inline">
-			  <li><a href="https://github.com/putnami" target="_blank">Putnami Team</a></li>
+			  <li><a href="https://github.com/putnami" target="_blank">@PutnamiTeam</a></li>
 			  <li>current version @releaseVersion@</li>
 			  <li><a href="https://github.com/putnami/putnami-pwt" target="_blank"><i class="icon icon-github-squared" />GitHub</a></li>
-			  <li><a href="#!Samples">Samples</a></li>
-			  <li><a href="https://github.com/putnami/putnami-pwt/issues" target="_blank">Issues</a></li>
-			  <li><a href="#!Download">Download</a></li>
+			  <li><a href="https://github.com/putnami/putnami-pwt/issues" target="_blank"><i class="icon icon-extinguisher" />Issues</a></li>
+			  <li><a href="https://groups.google.com/forum/#!forum/putnami-web-toolkit" target="_blank"><i class="icon icon-coffee" />Google Group</a></li>
+			  <li><a href="#!Samples"><i class="icon icon-rocket" />Samples</a></li>
+			  <li><a href="#!Download"><i class="icon icon-download-cloud" />Download</a></li>
 			</ul>
 		</footer>
 	</w:HTMLPanel>
