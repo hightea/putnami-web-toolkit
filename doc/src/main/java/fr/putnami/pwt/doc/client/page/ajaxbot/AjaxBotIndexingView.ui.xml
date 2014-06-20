@@ -29,7 +29,7 @@
 		<w:Header ui:field="header">
 			<w:Heading level="1" navSpy="{tableOfContent}">Ajax bot indexing plugin</w:Heading>
 			<p class="lead">
-				As I did, you probably think that <strong>GWT</strong> web apps are not googlizable, you were wrong. 
+				As we did, you probably think that <strong>GWT</strong> web apps are not googlizable, you were wrong. 
 				<br/>
 				<strong>PWT</strong> provides a plugin making possible to index ajax pages by search engines. 
 			</p>
