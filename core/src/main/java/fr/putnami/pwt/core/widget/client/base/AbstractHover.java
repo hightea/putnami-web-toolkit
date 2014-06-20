@@ -270,13 +270,13 @@ public abstract class AbstractHover implements IsWidget, HasWidgets, HasOneWidge
 		}
 		final Element toDisplayElement = getHoverWidget().getElement();
 		final Element target = getWidget().getElement();
-		final Widget parent = getWidget().getParent();
+		final Element parent = target.getParentElement();
 		if(parent == null){
 			return;
 		}
 		switch (order) {
 		case SHOW:
-			parent.getElement().insertAfter(toDisplayElement, target);
+			parent.insertAfter(toDisplayElement, target);
 			toDisplayElement.getStyle().setDisplay(Display.BLOCK);
 			resetPosition(toDisplayElement, getWidget(), placement);
 			StyleUtils.addStyle(getHoverWidget(), placement);
