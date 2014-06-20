@@ -106,18 +106,17 @@ public class ExtratHtmlStatics {
 			throws FailingHttpStatusCodeException, MalformedURLException, IOException {
 
 		String tokenName = null;
-		HtmlPage page = null;
 		String url = host;
 		if (place != null) {
 			tokenName = place.getSimpleName().replace("Place", "");
 			url += "#!" + tokenName;
 		}
-		page = webClient.getPage(url);
-//		for (DomNode node : page.getHead().getChildren()) {
-//			if ("script".equals(node.getNodeName())) {
-//				node.remove();
-//			}
-//		}
+		HtmlPage page = webClient.getPage(url);
+		//		for (DomNode node : page.getHead().getChildren()) {
+		//			if ("script".equals(node.getNodeName())) {
+		//				node.remove();
+		//			}
+		//		}
 
 		// Elements to remove
 		List<DomNode> elementsToRemove = Lists.newArrayList();

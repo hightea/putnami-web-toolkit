@@ -9,6 +9,7 @@ dependencies {
 	compile project(':pwt')
 	compile project(':pwt-code-editor')
 	compile project(':pwt-google-analytics')
+	compile project(':pwt-ajax-bot-indexing')
 }
 
 gwt {
