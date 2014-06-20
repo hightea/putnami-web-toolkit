@@ -25,9 +25,9 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
 
-	<w:HTMLPanel title="PWT - Plugins - code editor">
+	<w:HTMLPanel title="PWT - code editor plugins">
 		<w:Header ui:field="header">
-			<w:Heading level="1" navSpy="{tableOfContent}">Code editor Plugin</w:Heading>
+			<w:Heading level="1" navSpy="{tableOfContent}">Code editor plugin</w:Heading>
 			<p class="lead">
 			The code editor plugin provides a way to display highlighted String, and an ability to edit the String with completion. 
 			</p>

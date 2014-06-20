@@ -21,7 +21,7 @@
 	</properties>
 
 	<dependencies>
-	<dependency>
+		<dependency>
 			<groupId>fr.putnami.pwt</groupId>
 			<artifactId>pwt</artifactId>
 			<version>${pwt.version}</version>

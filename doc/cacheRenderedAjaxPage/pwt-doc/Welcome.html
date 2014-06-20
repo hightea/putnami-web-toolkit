@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      PWT - Putnami Web Toolkit - Open source GWT Framework
+    </title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="PWT - Putnami Web Toolkit - Is an open source GWT Framework made increase the coder's productivity."/>
+    <link rel="stylesheet" href="http://localhost:8080/pwt-doc/Documentation/theme/default/style/bootstrap.min.css"/>
+    <link rel="stylesheet" href="http://localhost:8080/pwt-doc/Documentation/theme/default/style/fontello.css"/>
+    <link rel="stylesheet" href="http://localhost:8080/pwt-doc/Documentation/theme/default/style/pwt-core.css"/>
+    <link rel="stylesheet" href="http://localhost:8080/pwt-doc/Documentation/theme/default/style/pwt-code-editor.css"/>
+    <link rel="stylesheet" href="http://localhost:8080/pwt-doc/Documentation/theme/doc/style/pwt-doc.css"/>
+  </head>
+  <body>
+    <noscript>
+      Your browser does not support JavaScript!
+    </noscript>
+    <div style="display: none;" aria-hidden="true">
+    </div>
+    <div class="p-h-t-m-l-panel putnami-showcase">
+      <header id="pwt-header">
+        <div class="pwt-top-header">
+          <div class="container" id="pwt-title" title="PWT - Putnami Web Tool Kit">
+            <img alt="Putnami Logo" src="assets/img/putnami.png"/>
+             PWT 
+            <small class="hidden-xs">
+              Putnami Web Toolkit
+            </small>
+          </div>
+        </div>
+        <div class="p-base-simple-panel p-affix affix-top pwt-menu-affix">
+          <div class="p-navbar navbar navbar-default container pwt-menu navbar-static-top">
+            <div class="p-container container-fluid">
+              <div class="p-container navbar-header">
+                <a class="navbar-toggle text-muted" href="javascript:;">
+                </a>
+                <a class="p-anchor navbar-brand" href="#!">
+                  PWT
+                </a>
+              </div>
+              <div class="p-container collapse navbar-collapse">
+                <ul class="p-nav nav nav navbar-nav">
+                  <li class="p-nav-link">
+                    <a class="p-anchor" href="#!GettingStarted">
+                      Getting started
+                    </a>
+                  </li>
+                  <li class="p-nav-dropdown dropdown">
+                    <a class="gwt-Anchor dropdown-toggle" href="javascript:;">
+                      Look and feel
+                      <span class="caret">
+                      </span>
+                    </a>
+                    <ul class="p-simple-dropdown$1 dropdown-menu">
+                      <li class="p-nav-link">
+                        <a class="p-anchor" href="#!Bootstrap">
+                          Bootstrap
+                        </a>
+                      </li>
+                      <li class="p-nav-link">
+                        <a class="p-anchor" href="#!Layouts">
+                          Layouts
+                        </a>
+                      </li>
+                      <li class="p-nav-link">
+                        <a class="p-anchor" href="#!Components">
+                          Components
+                        </a>
+                      </li>
+                      <li class="p-nav-link">
+                        <a class="p-anchor" href="#!Forms">
+                          Forms
+                        </a>
+                      </li>
+                      <li class="p-nav-link">
+                        <a class="p-anchor" href="#!Tables">
+                          Tables
+                        </a>
+                      </li>
+                      <li class="p-nav-link">
+                        <a class="p-anchor" href="#!More">
+                          More
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="p-nav-dropdown dropdown">
+                    <a class="gwt-Anchor dropdown-toggle" href="javascript:;">
+                      Framework
+                      <span class="caret">
+                      </span>
+                    </a>
+                    <ul class="p-simple-dropdown$1 dropdown-menu">
+                      <li class="p-nav-link">
+                        <a class="p-anchor" href="#!Navigation">
+                          Navigation
+                        </a>
+                      </li>
+                      <li class="p-nav-link">
+                        <a class="p-anchor" href="#!DataBinding">
+                          Data Binding
+                        </a>
+                      </li>
+                      <li class="p-nav-link">
+                        <a class="p-anchor" href="#!Internationalization">
+                          Internationalization
+                        </a>
+                      </li>
+                      <li class="p-nav-link">
+                        <a class="p-anchor" href="#!ServerCalls">
+                          Server calls
+                        </a>
+                      </li>
+                      <li class="p-nav-link">
+                        <a class="p-anchor" href="#!Errors">
+                          Errors handling
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="p-nav-dropdown dropdown">
+                    <a class="gwt-Anchor dropdown-toggle" href="javascript:;">
+                      Plugins
+                      <span class="caret">
+                      </span>
+                    </a>
+                    <ul class="p-simple-dropdown$1 dropdown-menu">
+                      <li class="p-nav-link">
+                        <a class="p-anchor" href="#!CodeEditor">
+                          Code editor
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="p-nav-dropdown dropdown">
+                    <a class="gwt-Anchor dropdown-toggle" href="javascript:;">
+                      Samples
+                      <span class="caret">
+                      </span>
+                    </a>
+                    <ul class="p-simple-dropdown$1 dropdown-menu">
+                      <li class="p-nav-link">
+                        <a class="p-anchor" href="#!AddressBook">
+                          Address book
+                        </a>
+                      </li>
+                      <li class="p-nav-link">
+                        <a class="p-anchor" href="#!ContactsTable">
+                          Contacts table
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="p-nav-link">
+                    <a class="p-anchor" href="#!ComingSoon">
+                      Coming soon ...
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="showcase-section">
+        <div class="p-base-simple-panel p-one-widget-panel container">
+          <div class="p-h-t-m-l-panel">
+            <div class="p-grid-row row">
+              <div class="p-grid-column col-md-12">
+                <div class="p-header">
+                  <div class="jumbotron teaser" id="gwt-uid-16">
+                    <div class="forkMeOnGitHub">
+                      <a href="https://github.com/putnami/putnami-pwt" target="_BLANK">
+                        <img src="assets/img/forkMe.png"/>
+                      </a>
+                    </div>
+                    <h1 class="p-heading">
+                      Putnami Web Toolkit
+                    </h1>
+                    <div class="p-grid-row row">
+                      <div class="p-grid-column col-md-6">
+                         Open Source
+                      </div>
+                      <div class="p-grid-column col-md-6">
+                         Raise your productivity
+                      </div>
+                    </div>
+                    <div class="p-grid-row row">
+                      <div class="p-grid-column col-md-6">
+                         GWT is now easy
+                      </div>
+                      <div class="p-grid-column col-md-6">
+                         Reduce your costs
+                      </div>
+                    </div>
+                    <div class="p-grid-row row">
+                      <div class="p-grid-column col-md-6">
+                         Get better application
+                      </div>
+                      <div class="p-grid-column col-md-6">
+                         Do less code
+                      </div>
+                    </div>
+                    <div class="p-grid-row row">
+                      <div class="p-grid-column col-md-6">
+                         Made by coders, for coders
+                      </div>
+                      <div class="p-grid-column col-md-6">
+                         Extensible
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-grid-row row">
+              <div class="p-grid-column text-justify col-md-8">
+                <div class="p-h-t-m-l-panel">
+                  <h2 class="p-heading">
+                    What is PWT?
+                  </h2>
+                  <p>
+                    <strong title="Putnami Web Toolkit">
+                      PWT
+                    </strong>
+                     is a powerfull 
+                    <abbr title="Google Web Toolkit">
+                      GWT
+                    </abbr>
+                     framework. Open source we built 
+                    <strong title="Putnami Web Toolkit">
+                      PWT
+                    </strong>
+                     to be lightweight and efficient. 
+                    <br/>
+                    <strong title="Putnami Web Toolkit">
+                      PWT
+                    </strong>
+                     provides new graphical components based on a solid architecture. 
+                  </p>
+                  <ul>
+                    <li>
+                      Thanks to 
+                      <a href="http://getbootstrap.com/" target="_BLANK">
+                        Twitter 's Bootstrap
+                      </a>
+                      , your applications are responsive and easily themable.
+                    </li>
+                    <li>
+                      The nice 
+                      <strong>
+                        graphical components
+                      </strong>
+                       are easy to extend and to customize.
+                    </li>
+                    <li>
+                      The 
+                      <a href="#!DataBinding">
+                        data binding
+                      </a>
+                       is a pushover, build form and dynamic tables is now so simple.
+                    </li>
+                    <li>
+                      <a href="#!ServerCalls">
+                        Server calls
+                      </a>
+                       are simplified and optimized. Multiplex your queries, and say good bye to the useless Async interfaces.
+                    </li>
+                    <li>
+                      The 
+                      <a href="#!Navigation">
+                        Navigation
+                      </a>
+                       is done to simplified MVP. 
+                      <strong>
+                        Split
+                      </strong>
+                       and 
+                      <strong>
+                        scale
+                      </strong>
+                       your application without even knowing.
+                    </li>
+                    <li>
+                      Neither third librairies nor external JS are required. Neither third librairies nor external JS are required, to Provide 
+                      <strong>
+                        security
+                      </strong>
+                       and serenity for your achievements and our future.
+                    </li>
+                  </ul>
+                  <p>
+                     Focused on the useless code removal, all the graphical design is now fully described with the gwt's UiBinding templates. 
+                  </p>
+                  <p>
+                    <strong>
+                      Easy to start
+                    </strong>
+                    , we think 
+                    <strong>
+                      PWT
+                    </strong>
+                     is a serious alternative for your next web app developments. 
+                  </p>
+                  <h2 class="p-heading">
+                    A new framework, again! 
+                    <small>
+                      but why?
+                    </small>
+                  </h2>
+                  <p>
+                     Before we've started 
+                    <strong title="Putnami Web Toolkit">
+                      PWT
+                    </strong>
+                    , our primary needs were to build rich web applications, lightweight, robust, and maintainable. So we were looking for a nice web framework. 
+                    <br/>
+                     Comming from the java world, disliking the javascript, experemented on GWT, the techno was an evidence. 
+                    <br/>
+                     As many techno, 
+                    <a href="http://http://www.gwtproject.org">
+                      GWT
+                    </a>
+                     alone can be a nightmare, widgets are not so rich, and despite the UiBinding, the interface descriptions are very verbose! Have you even tried to make a data based table? 
+                    <br/>
+                     Need a framework? Yes definitly! But what do we exactly require? Nice widgets, a solid architecture, ease of use, fullness, lightweight! 
+                    <br/>
+                     Woah we're so exigent! 
+                  </p>
+                  <p>
+                     Well what were the 
+                    <strong>
+                      market possibilities
+                    </strong>
+                     : 
+                  </p>
+                  <ul>
+                    <li>
+                      <strong>
+                        JS wrapper
+                      </strong>
+                       such as 
+                      <a href="http://www.smartclient.com/product/smartgwt.jsp" target="_BLANK">
+                        SMARTGWT
+                      </a>
+                       are not enough maintainable and evolutive for us. Also it can be sight as a corruption of the GWT's phylosophy.
+                    </li>
+                    <li>
+                      <strong>
+                        Components oriented
+                      </strong>
+                       such as 
+                      <a href="https://github.com/gwtbootstrap3/gwtbootstrap3" target="_BLANK">
+                        GWT bootstrap
+                      </a>
+                       are sexy but doesn't provide any solid framework to build apps.
+                    </li>
+                    <li>
+                      <strong>
+                        Framework oriented
+                      </strong>
+                       sush as 
+                      <a href="http://erraiframework.org/" target="_BLANK">
+                        ERRAI
+                      </a>
+                       or 
+                      <a href="http://github.com/ArcBees/GWTP" target="_BLANK">
+                        GWTP
+                      </a>
+                       unfortunatly doesn't provide nice components. 
+                      <br/>
+                       And in the details 
+                      <a href="http://erraiframework.org/" target="_BLANK">
+                        ERRAI
+                      </a>
+                       provides a lot of good things, but it's so heavy! A basic sample give a 80MB War... 
+                      <br/>
+                       Unlike 
+                      <a href="http://github.com/ArcBees/GWTP" target="_BLANK">
+                        GWTP
+                      </a>
+                       is realy lightweight but mainly provide a good MVP framework.
+                    </li>
+                    <li>
+                      <strong>
+                        Server side
+                      </strong>
+                       such as 
+                      <a href="http://vaadin.com">
+                        Vaadin
+                      </a>
+                      . Sounds realy great, make GWT on server side is realy great idea. It's realy good! But also it's far from our habits and seems difficult to extend. Above all it's truly magical. Is it still GWT ?
+                    </li>
+                    <li>
+                      <strong>
+                        Non usage free
+                      </strong>
+                       solution such as 
+                      <a href="https://www.sencha.com/products/gxt/">
+                        GXT
+                      </a>
+                       which provides a full featured framework integrating a lot of GWT features but non free for commercial usage.
+                    </li>
+                  </ul>
+                  <p>
+                     Well, clearly we've seen alot of good things. But all our needs weren't present at once. We would maybe try to put some of those framework togethers, and finally with a bit of luck make it work. But at the end, we would made a lot of compromises, for a not sure result but above all not mastered, so finally alot of wasted time. 
+                  </p>
+                  <p>
+                     Ok 
+                    <strong>
+                      Let's start!
+                    </strong>
+                     Trying to do good stuff, without any compromise, keeping a clear ideas. Here we go... 
+                  </p>
+                  <p>
+                     That sure we made it for us. But since we are quietly proud of the result and that we reckon that it may help someone else, we decided to share it by making it open source, Here we are. 
+                  </p>
+                  <h2 class="p-heading">
+                    Just use it ! 
+                    <small>
+                      maybe help us?
+                    </small>
+                  </h2>
+                  <p>
+                     Well you can see 
+                    <strong title="Putnami Web Toolkit">
+                      PWT
+                    </strong>
+                     just as an another offer within all GWT frameworks, and finally wonder why do not use an other one. 
+                  </p>
+                  <p>
+                     Fine we know that 
+                    <strong title="Putnami Web Toolkit">
+                      PWT
+                    </strong>
+                     is young, that we come from nowhere or close to. 
+                    <br/>
+                     So let us the benefit of the doubt. 
+                  </p>
+                  <ul>
+                    <li>
+                      Visit this site fully made with 
+                      <strong>
+                        PWT
+                      </strong>
+                      .
+                    </li>
+                    <li>
+                      Go arround the 
+                      <a href="#!AddressBook">
+                        Address book
+                      </a>
+                      .
+                    </li>
+                    <li>
+                      You want to try, read the 
+                      <a href="#!GettingStarted">
+                        Getting Started
+                      </a>
+                       page and let you go.
+                    </li>
+                    <li>
+                      Have a look on the code, check out it or fork it on 
+                      <a href="https://github.com/putnami/putnami-pwt">
+                        GitHub
+                      </a>
+                      .
+                    </li>
+                  </ul>
+                  <p>
+                     If you like it, and want to help us, Great :). So please, we would be glad that you: 
+                  </p>
+                  <ul>
+                    <li>
+                      Follow us on 
+                      <a class="btn btn-default btn-xs btn-info" href="https://twitter.com/PutnamiTeam" target="_BLANK">
+                        Twitter
+                      </a>
+                    </li>
+                    <li>
+                      Join the community on 
+                      <a href="https://groups.google.com/forum/#!forum/putnami-web-toolkit" target="_BLANK">
+                        Google Group
+                      </a>
+                    </li>
+                    <li>
+                      Speak, blog and tweet about 
+                      <strong title="Putnami Web Toolkit">
+                        PWT
+                      </strong>
+                      . Spread it around you and beyond.
+                    </li>
+                    <li>
+                      Try and maybe use it on your next web app.
+                    </li>
+                    <li>
+                      <a href="https://github.com/putnami/putnami-pwt/issues">
+                        Report issues
+                      </a>
+                       to make it better.
+                    </li>
+                    <li>
+                      Submit ideas to get new amazing features.
+                    </li>
+                  </ul>
+                  <p>
+                     All your feedback are really precious and will be taken into account with the utmost consideration. 
+                  </p>
+                  <p>
+                     Thank you for the visit. We hope to see you again soon. 
+                  </p>
+                  <p class="pull-right">
+                     Best regards. 
+                    <br/>
+                    <a href="https://github.com/putnami">
+                      <strong>
+                        @Putnami team
+                      </strong>
+                    </a>
+                    <br/>
+                  </p>
+                </div>
+              </div>
+              <div class="p-grid-column col-md-4">
+                <div class="p-base-simple-panel p-affix affix-top pwt-spy-affix hidden-sm hidden-xs" style="z-index: 2;">
+                  <div class="p-nav-spy nav-spy">
+                    <ul class="p-nav nav">
+                      <li class="p-nav-spy$-nav-widget">
+                        <a class="p-anchor" href="javascript:;">
+                          What is PWT?
+                        </a>
+                      </li>
+                      <li class="p-nav-spy$-nav-widget">
+                        <a class="p-anchor" href="javascript:;">
+                          A new framework, again! 
+                          <small>
+                            but why?
+                          </small>
+                        </a>
+                      </li>
+                      <li class="p-nav-spy$-nav-widget">
+                        <a class="p-anchor" href="javascript:;">
+                          Just use it ! 
+                          <small>
+                            maybe help us?
+                          </small>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer id="pwt-footer">
+        <p>
+          Follow us on 
+          <a class="btn btn-default btn-xs btn-info" href="https://twitter.com/PutnamiTeam" target="_BLANK">
+            Twitter
+          </a>
+        </p>
+        <p>
+          Designed and made with all our love by 
+          <a href="https://github.com/hightea" target="_blank">
+            @tcharbonnier
+          </a>
+           and 
+          <a href="https://github.com/fdumay" target="_blank">
+            @fdumay
+          </a>
+        </p>
+        <p>
+          Licensed under 
+          <a href="https://www.gnu.org/licenses/lgpl-3.0.txt" target="_blank">
+            LGPL v 3.0
+          </a>
+        </p>
+        <ul class="list-inline">
+          <li>
+            <a href="https://github.com/putnami" target="_blank">
+              @PutnamiTeam
+            </a>
+          </li>
+          <li>
+            current version @releaseVersion@
+          </li>
+          <li>
+            <a href="https://github.com/putnami/putnami-pwt" target="_blank">
+              GitHub
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/putnami/putnami-pwt/issues" target="_blank">
+              Issues
+            </a>
+          </li>
+          <li>
+            <a href="https://groups.google.com/forum/#!forum/putnami-web-toolkit" target="_blank">
+              Google Group
+            </a>
+          </li>
+          <li>
+            <a href="#!Samples">
+              Samples
+            </a>
+          </li>
+          <li>
+            <a href="#!Download">
+              Download
+            </a>
+          </li>
+        </ul>
+      </footer>
+    </div>
+  </body>
+</html>

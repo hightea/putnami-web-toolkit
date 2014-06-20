@@ -14,23 +14,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.doc.client.page.plugins;
+package fr.putnami.pwt.doc.client.page.ajaxbot;
 
 import com.google.gwt.core.client.GWT;
 
 import fr.putnami.pwt.core.mvp.client.MvpPlace;
 import fr.putnami.pwt.core.mvp.client.ViewProxy;
 
-public class CodeEditorPlace extends MvpPlace {
+public class AjaxBotIndexingPlace extends MvpPlace {
 
-	public static final CodeEditorPlace INSTANCE = new CodeEditorPlace();
+	public static final AjaxBotIndexingPlace INSTANCE = new AjaxBotIndexingPlace();
 
-	public CodeEditorPlace() {
-		super((ViewProxy) GWT.create(CodeEditorView.class), null);
+	public AjaxBotIndexingPlace() {
+		super((ViewProxy) GWT.create(AjaxBotIndexingView.class), null);
 	}
 
 	@Override
 	public MvpPlace getPlace(String token) {
-		return CodeEditorPlace.INSTANCE;
+		return AjaxBotIndexingPlace.INSTANCE;
 	}
 }

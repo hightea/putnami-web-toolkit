@@ -14,22 +14,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.doc.client.page.plugins;
+package fr.putnami.pwt.doc.client.page.codeeditor;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.ui.Widget;
 
-import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
-import fr.putnami.pwt.doc.client.application.Page;
+import fr.putnami.pwt.core.mvp.client.MvpPlace;
+import fr.putnami.pwt.core.mvp.client.ViewProxy;
 
-public class CodeEditorView extends Page<CodeEditorPlace> {
+public class CodeEditorPlace extends MvpPlace {
 
-	interface Binder extends UiBinderLocalized<Widget, CodeEditorView> {
+	public static final CodeEditorPlace INSTANCE = new CodeEditorPlace();
+
+	public CodeEditorPlace() {
+		super((ViewProxy) GWT.create(CodeEditorView.class), null);
 	}
 
 	@Override
-	protected UiBinderLocalized getBinder() {
-		return GWT.create(Binder.class);
+	public MvpPlace getPlace(String token) {
+		return CodeEditorPlace.INSTANCE;
 	}
-
 }

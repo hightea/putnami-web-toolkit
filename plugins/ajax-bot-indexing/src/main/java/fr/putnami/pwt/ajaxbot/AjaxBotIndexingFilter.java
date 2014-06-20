@@ -39,10 +39,6 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.io.ByteStreams;
 
-/**
- * 
- *
- */
 public class AjaxBotIndexingFilter implements Filter {
 
 
@@ -102,7 +98,7 @@ public class AjaxBotIndexingFilter implements Filter {
 
 	private InputStream extractHtml(HttpServletRequest request) throws IOException {
 		WebClient webClient = new WebClient(BrowserVersion.CHROME);
-		new InterceptGoogleAnalyticsConnectionFilter(webClient);
+		new GoogleAnalyticsConnectionFilter(webClient);
 
 		String token = request.getParameter(QUERY_PARAM_ESCAPED_FRAGMENT);
 		String escapedTokenQuery = QUERY_PARAM_ESCAPED_FRAGMENT + "=" + token;
@@ -221,8 +217,8 @@ public class AjaxBotIndexingFilter implements Filter {
 		return cacheFileName;
 	}
 
-	class InterceptGoogleAnalyticsConnectionFilter extends FalsifyingWebConnection {
-		public InterceptGoogleAnalyticsConnectionFilter(WebClient webClient) throws IllegalArgumentException {
+	class GoogleAnalyticsConnectionFilter extends FalsifyingWebConnection {
+		public GoogleAnalyticsConnectionFilter(WebClient webClient) throws IllegalArgumentException {
 			super(webClient);
 		}
 
