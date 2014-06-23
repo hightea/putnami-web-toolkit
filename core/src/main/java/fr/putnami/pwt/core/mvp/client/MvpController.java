@@ -44,11 +44,11 @@ import fr.putnami.pwt.core.mvp.client.event.StopActivityEvent.Handler;
 import fr.putnami.pwt.core.mvp.client.event.StopActivityEvent.HasStopActivityHandlers;
 
 public class MvpController extends PlaceController implements
-		PlaceHistoryMapper,
-		ActivityMapper,
-		HasStartActivityHandlers,
-		HasStopActivityHandlers,
-		HasMayStopActivityHandlers
+PlaceHistoryMapper,
+ActivityMapper,
+HasStartActivityHandlers,
+HasStopActivityHandlers,
+HasMayStopActivityHandlers
 {
 
 	private static MvpController instance;
@@ -124,6 +124,10 @@ public class MvpController extends PlaceController implements
 		PlaceTokenizer tokenizer = place;
 		String key = getPlacePrefix(place);
 		this.TOKENIZERS.put(key, tokenizer);
+	}
+
+	public void registerAlias(String alias, MvpPlace place) {
+		this.TOKENIZERS.put("!" + alias, place);
 	}
 
 	@Override
