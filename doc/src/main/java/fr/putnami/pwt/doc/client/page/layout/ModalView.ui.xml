@@ -27,9 +27,8 @@
 
 	<w:HTMLPanel>
 		<w:Heading level="2" navSpy="{navSpy}">Modal</w:Heading>
-		<p class="lead">We provide a full bootstrap's Carousel support, allowing auto-play, pause on hover and display left and right navigation buttons.</p>
+		<p>We provide a full bootstrap's Carousel support, allowing auto-play, pause on hover and display left and right navigation buttons.</p>
 					
-		<w:Heading level="3" >Basic usage</w:Heading>
 		<p>A <code>Modal</code> contains one child widget. if this widget has a <code>Header</code> or a <code>Footer</code>, the <code>Modal</code> use them. Else you can add a <code>Header</code> or a <code>Footer</code>. Footer and header can only be set <em>once</em>.</p>
 		<p>If no <code>Header</code> is set you can use the <code>title</code> property to set the modal title.</p>
 		<p>If the <code>dismissable</code> property is set to <code>true</code>, a close button is added on the top-right corner to close the modal. In other cases, you should take care of closing the modal whith a button or something else.</p>

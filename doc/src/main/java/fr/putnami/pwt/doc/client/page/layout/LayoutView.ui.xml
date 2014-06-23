@@ -28,21 +28,28 @@
 	<w:HTMLPanel title="PWT - UI Layouts components">
 		<w:Header ui:field="header">
 			<w:Heading level="1" navSpy="{tableOfContent}">Layout</w:Heading>
-			<p class="lead"><strong title="Putnami Web Toolkit">PWT</strong> use Twitter's Bootstrap, so every bootstrap css layout can be applied. However we provide some usefull widgets wrapping those CSS components.</p>
+			<p class="lead">
+				<strong title="Putnami Web Toolkit">PWT</strong> use Twitter's Bootstrap, so every bootstrap css layout can be applied. 
+				<br/>
+				However we provide some usefull widgets wrapping those CSS components.
+			</p>
 			<p> You should only use or extend Putnami-provided widgets and panels because they provide a bunch of internal fonctionalities and utilites.</p>
 			<p>All the base widgets have a responsive visibility ability with the <code>xsVisibility</code>, <code>smVisibility</code>, <code>mdVisibility</code>, <code>lgVisibility</code>, <code>printVisibility</code> properties.</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
 			<c:GridView navSpy="{tableOfContent}" />
-			<c:ContainerView navSpy="{tableOfContent}" />
-			<c:OneWidgetView navSpy="{tableOfContent}" />
 			<c:HTMLPanelView navSpy="{tableOfContent}" />
+			<c:OneWidgetView navSpy="{tableOfContent}" />
+			<c:ContainerView navSpy="{tableOfContent}" />
 			<c:HeaderFooterView navSpy="{tableOfContent}" />
+
 			<c:PanelView navSpy="{tableOfContent}" />
 			<c:PanelAccordionView navSpy="{tableOfContent}" />
 			<c:TabPanelView navSpy="{tableOfContent}" />
 			<c:AlertView navSpy="{tableOfContent}" />
 			<c:ListView navSpy="{tableOfContent}" />
+			<c:ModalView navSpy="{tableOfContent}" />
+			<c:AffixView navSpy="{tableOfContent}" />
 		</w:HTMLPanel>
 	</w:HTMLPanel>
 </ui:UiBinder>

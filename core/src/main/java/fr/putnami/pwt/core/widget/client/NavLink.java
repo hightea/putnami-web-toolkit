@@ -107,23 +107,6 @@ public class NavLink extends AbstractPanel implements Nav.IsNavContent, Cloneabl
 		resetInner();
 	}
 
-	private void resetInner() {
-		if (iconType == null) {
-			iconType = IconType.get(name);
-		}
-
-		anchor.clear();
-		if (iconType != null) {
-			Icon icon = new Icon();
-			icon.setType(iconType);
-
-			anchor.append(icon);
-		}
-		if (label != null) {
-			anchor.getElement().setInnerHTML(label);
-		}
-	}
-
 	@Override
 	public void setActive(boolean active) {
 		this.active = active;
@@ -186,6 +169,24 @@ public class NavLink extends AbstractPanel implements Nav.IsNavContent, Cloneabl
 		}
 		else {
 			setActive(false);
+		}
+		resetInner();
+	}
+
+	private void resetInner() {
+		if (iconType == null && IconType.get(name) != null) {
+			iconType = IconType.get(name);
+		}
+
+		anchor.clear();
+		if (iconType != null) {
+			Icon icon = new Icon();
+			icon.setType(iconType);
+
+			anchor.append(icon);
+		}
+		if (label != null) {
+			anchor.getElement().setInnerHTML(label);
 		}
 	}
 

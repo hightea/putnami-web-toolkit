@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.doc.client.page.components;
+package fr.putnami.pwt.doc.client.page.layout;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiConstructor;
@@ -25,9 +25,9 @@ import com.google.gwt.user.client.ui.Widget;
 import fr.putnami.pwt.core.widget.client.NavSpy;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 
-public class AnchorView extends Composite {
+public class AffixView extends Composite {
 
-	interface Binder extends UiBinderLocalized<Widget, AnchorView> {
+	interface Binder extends UiBinderLocalized<Widget, AffixView> {
 
 		Binder BINDER = GWT.create(Binder.class);
 	}
@@ -36,10 +36,9 @@ public class AnchorView extends Composite {
 	final NavSpy navSpy;
 
 	@UiConstructor
-	public AnchorView(NavSpy navSpy) {
+	public AffixView(NavSpy navSpy) {
 		this.navSpy = navSpy;
 		initWidget(Binder.BINDER.createAndBindUi(this));
-
 	}
 
 }

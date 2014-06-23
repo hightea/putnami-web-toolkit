@@ -27,9 +27,8 @@
 
 	<w:HTMLPanel>
 		<w:Heading level="2" navSpy="{navSpy}">Panel accordion</w:Heading>
-		<p class="lead">A <code>PanelAccordion</code> group multiple <code>Panel</code> with automatic Open / Collapse ability</p>
+		<p>A <code>PanelAccordion</code> group multiple <code>Panel</code> with automatic Open / Collapse ability</p>
 					
-		<w:Heading level="3">Basic usage</w:Heading>
 		<p>All the <code>Panel</code> must have a <code>Header</code>.</p>
 		<p>All the sub <code>Panel</code> can be independently customized.</p>
 		<p>All the <code>collapsible</code> properties are automatically define to <code>true</code>. By default, all the panel are collapsed. To initialy expand a panel, define the <code>collapse</code> property to false.</p>

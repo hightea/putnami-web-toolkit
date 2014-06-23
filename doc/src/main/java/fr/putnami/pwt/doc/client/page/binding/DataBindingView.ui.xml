@@ -57,8 +57,8 @@
 						Form and Table components are fully described in those pages:
 						</p>
 						<ul>
-							<li><a href="#!Forms">Forms documentation</a></li>
-							<li><a href="#!Tables">Tables documentation</a></li>
+							<li><a href="#!Components">Forms documentation</a></li>
+							<li><a href="#!Components">Tables documentation</a></li>
 						</ul>
 					</w:Alert>
 				</w:GridColumn>

@@ -27,9 +27,10 @@
 
 	<w:HTMLPanel>
 		<w:Heading level="2" navSpy="{navSpy}">One Widget Panel</w:Heading>
-		<p class="lead">A <code>OneWidgetPanel</code> is a Panel accepting only one child. It extends internal <code>AbstractComposite</code> providing some usefull utilities</p>
+		<p>
+			A <code>OneWidgetPanel</code> is a Panel accepting only one child. It extends internal <code>AbstractComposite</code> providing some usefull utilities.
+		</p>
 					
-		<w:Heading level="3">Basic usage</w:Heading>
 		<p>The default HTML tag used by the container when used in Java code is a <code>&lt;div&gt;</code>. This tag can be specified in the constructor in java code and <strong>must</strong> be specified in *.ui.xml files.</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">

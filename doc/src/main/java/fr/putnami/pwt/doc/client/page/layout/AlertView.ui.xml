@@ -27,9 +27,8 @@
 
 	<w:HTMLPanel>
 		<w:Heading level="2" navSpy="{navSpy}">Alert</w:Heading>
-		<p class="lead"><code>Alert</code> is a HTML Panel containing child widgets</p>
+		<p><code>Alert</code> is a HTML Panel containing child widgets</p>
 					
-		<w:Heading level="3">Basic usage</w:Heading>
 		<p>Use the <code>type</code> property to customize the <code>Alert</code>.</p>
 		<p>Set the <code>dismissable</code> property to <code>true</code> to enable the dismiss ability of the <code>Alert</code>.</p>
 		<div class="showcase-sample-block">

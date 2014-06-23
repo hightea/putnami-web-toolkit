@@ -79,12 +79,12 @@
 				<strong title="Putnami Web Toolkit">PWT</strong> provides new graphical components based on a solid architecture.
 			</p>
 			<ul>
-				<li>Thanks to <a href="http://getbootstrap.com/" target="_BLANK">Twitter 's Bootstrap</a>, your applications are responsive and easily themable.</li>
-				<li>The nice <strong>graphical components</strong> are easy to extend and to customize.</li>
+				<li>Thanks to <a href="http://getbootstrap.com/" target="_BLANK">Twitter 's Bootstrap</a>, your applications are <strong>responsive</strong> and easily <strong>themable</strong>.</li>
+				<li>The nice <a href="#!Components">graphical components</a> are easy to extend and to customize.</li>
 				<li>The <a href="#!DataBinding">data binding</a> is a pushover, build form and dynamic tables is now so simple.</li>
 				<li><a href="#!ServerCalls">Server calls</a> are simplified and optimized. Multiplex your queries, and say good bye to the useless Async interfaces.</li>
 				<li>The <a href="#!Navigation">Navigation</a> is done to simplified MVP. <strong>Split</strong> and <strong>scale</strong> your application without even knowing.</li>
-				<li>Neither third librairies nor  external JS are required. Neither third librairies nor  external JS are required, to Provide <strong>security</strong> and serenity for your achievements and our future.</li>
+				<li>Neither third librairies nor  external JS are required. Providing <strong>security</strong> and serenity for your achievements and our future.</li>
 			</ul>
 			<p>
 				Focused on the useless code removal, all the graphical design is now fully described with the gwt's UiBinding templates.

@@ -47,15 +47,12 @@ import fr.putnami.pwt.doc.client.page.bootstrap.BootstrapView;
 import fr.putnami.pwt.doc.client.page.codeeditor.CodeEditorView;
 import fr.putnami.pwt.doc.client.page.components.ComponentsView;
 import fr.putnami.pwt.doc.client.page.errors.ErrorsView;
-import fr.putnami.pwt.doc.client.page.form.FormView;
 import fr.putnami.pwt.doc.client.page.i18n.InternationalizationView;
 import fr.putnami.pwt.doc.client.page.layout.LayoutView;
-import fr.putnami.pwt.doc.client.page.more.MoreView;
 import fr.putnami.pwt.doc.client.page.navigation.NavigationView;
 import fr.putnami.pwt.doc.client.page.server.ServerCallsView;
 import fr.putnami.pwt.doc.client.page.soon.ComingSoonView;
 import fr.putnami.pwt.doc.client.page.starting.GettingStartedView;
-import fr.putnami.pwt.doc.client.page.table.TablesView;
 import fr.putnami.pwt.doc.client.page.welcome.WelcomeView;
 import fr.putnami.pwt.plugin.ga.client.GoogleAnalytics;
 
@@ -163,9 +160,6 @@ public class ReferenceGuide extends Composite implements EntryPoint {
 		addContent(new BootstrapView(), 1);
 		addContent(new LayoutView(), 1);
 		addContent(new ComponentsView(), 1);
-		addContent(new FormView(), 1);
-		addContent(new TablesView(), 1);
-		addContent(new MoreView(), 1);
 		addHeading("Framework", 1);
 		addContent(new NavigationView(), 1);
 		addContent(new DataBindingView(), 1);

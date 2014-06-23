@@ -26,10 +26,44 @@
 	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
 
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">Heading</w:Heading>
-		<p class="lead">This widget renders HTML headings from <code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code></p>
+		<w:Heading level="2" navSpy="{navSpy}">Typography</w:Heading>
+
+		<w:Heading level="3" navSpy="{navSpy}">Text</w:Heading>
+		<p>This widgets outputs a simple HTML Text node</p>
 					
-		<w:Heading level="3">Basic usage</w:Heading>
+		<p>Use the <code>text</code> property or use the <code>HasText</code> text child usage.</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:Text text="Simple Text" /> <br/>
+				<w:Text>HasText text child</w:Text>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:Text text="Simple Text" />
+<w:Text>HasText text child</w:Text>]]></pre>
+			</c:StaticCode>
+		</div>
+
+		<w:Heading level="3" navSpy="{navSpy}">Anchor</w:Heading>
+		<p>An <code>Anchor</code>  represents a <code>&lt;a&gt;</code> tag.</p>
+					
+		<p>The <code>link</code> property is rendered as <code>href</code> attribute. It can be used to switch place or to link to another weblink</p>
+		<p>Anchor text can be customize with <code>text</code> property or with children widgets (as a Panel)</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:Anchor text="PWT - GettingStarted" link="#!GettingStarted" /><br/>
+				<w:Anchor link="https://github.com/putnami/putnami-pwt"><w:Icon type="GITHUB_CIRCLED"/><w:Text text="PWT's github repo"/></w:Anchor>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:Anchor text="PWT - GettingStarted" link="#!GettingStarted" />
+<w:Anchor link="https://github.com/Putnami/putnami-gwt"><w:Icon type="GITHUB_CIRCLED"/><w:Text text="- PWT's github repo"/></w:Anchor>]]></pre>
+			</c:StaticCode>
+		</div>
+
+		<w:Heading level="3" navSpy="{navSpy}">Heading</w:Heading>
+		<p>This widget renders HTML headings from <code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code></p>
+					
 		<p>Define the level whit the <code>level</code> property.</p>
 		<p>Use the <code>text</code> and <code>subtext</code> properties, or the <code>HasHTML</code> html child usage.</p>
 		<div class="showcase-sample-block">
@@ -45,5 +79,6 @@
 <w:Heading level="3"><strong>HTML</strong> Child <small>with subtext</small></w:Heading>]]></pre>
 			</c:StaticCode>
 		</div>
+
 	</w:HTMLPanel>
 </ui:UiBinder>

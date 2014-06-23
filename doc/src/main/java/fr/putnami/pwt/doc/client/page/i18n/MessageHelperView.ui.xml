@@ -30,8 +30,6 @@
 		<w:Heading level="2" navSpy="{navSpy}">Message Helper</w:Heading>
 		<p class="lead"><strong title="Putnami Web Toolkit">PWT</strong> provides a Helper to use the <code>ConstantsWithLookup</code>.</p>
 					
-		<w:Heading level="3" navSpy="{navSpy}">Basic usage</w:Heading>
-		<p></p>
 		<w:Heading level="3" navSpy="{navSpy}">Example</w:Heading>
 		<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[

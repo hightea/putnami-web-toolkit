@@ -27,8 +27,7 @@
 
 	<w:HTMLPanel>
 		<w:Heading level="2" navSpy="{navSpy}">List</w:Heading>
-					
-		<w:Heading level="3">Basic usage</w:Heading>
+
 		<p>Use the <code>type</code> property to select the list type.</p>
 		<p>The <code>ListItem</code> children are HTML panel (so accepts HTML and Widgets children).</p>
 		<p>The default HTML tag used by the container when used in Java code is a <code>&lt;li&gt;</code>. This tag can be specified in the constructor in java code and <strong>must</strong> be specified in *.ui.xml files.</p>

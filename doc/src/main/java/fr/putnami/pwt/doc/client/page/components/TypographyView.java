@@ -14,23 +14,31 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.doc.client.page.form;
+package fr.putnami.pwt.doc.client.page.components;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.uibinder.client.UiConstructor;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Widget;
 
-import fr.putnami.pwt.core.mvp.client.MvpPlace;
-import fr.putnami.pwt.core.mvp.client.ViewProxy;
+import fr.putnami.pwt.core.widget.client.NavSpy;
+import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 
-public class FormsPlace extends MvpPlace {
+public class TypographyView extends Composite {
 
-	public static final FormsPlace INSTANCE = new FormsPlace();
+	interface Binder extends UiBinderLocalized<Widget, TypographyView> {
 
-	public FormsPlace() {
-		super((ViewProxy) GWT.create(FormView.class), null);
+		Binder BINDER = GWT.create(Binder.class);
 	}
 
-	@Override
-	public MvpPlace getPlace(String token) {
-		return FormsPlace.INSTANCE;
+	@UiField(provided = true)
+	final NavSpy navSpy;
+
+	@UiConstructor
+	public TypographyView(NavSpy navSpy) {
+		this.navSpy = navSpy;
+		initWidget(Binder.BINDER.createAndBindUi(this));
 	}
+
 }

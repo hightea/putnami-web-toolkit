@@ -27,10 +27,10 @@
 	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
 
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">Popover and tooltip</w:Heading>
-		<p class="lead"></p>
-					
-		<w:Heading level="3" navSpy="{navSpy}">Basic usage</w:Heading>
+		<w:Heading level="2" navSpy="{navSpy}">More widgets</w:Heading>
+
+
+		<w:Heading level="3" navSpy="{navSpy}">Popover and tooltip</w:Heading>
 		<p>A <code>Popover</code> or a <code>Tooltip</code> contains only one widget.</p>
 		<p>Use the <code>text</code> property to set the popover / tooltip content, and the <code>title</code> property to set the popover title.</p>
 		<p>Use the <code>placement</code> property to set the popover / tooltip position (default is set to <code>TOP</code>).</p>
@@ -95,7 +95,6 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="3" navSpy="{navSpy}">Popover / tooltip trigger</w:Heading>
 		<p>Default behaviour is to trigger the popover / tooltip on mouse over. Use the <code>trigger</code> property to chose between <code>HOVER</code>, <code>FOCUS</code> or <code>MANUAL</code> trigger.</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample text-center">
@@ -154,6 +153,92 @@ public void onManualPopoverBtnClick(ButtonEvent event) {
 public void onManualTooltipBtnClick(ButtonEvent event) {
 	manualTooltip.toggleVisibility();
 }]]></pre>
+			</c:StaticCode>
+		</div>
+
+
+		<w:Heading level="3" navSpy="{navSpy}">Carousel</w:Heading>
+		<p>We provide a full bootstrap's Carousel support, allowing auto-play, pause on hover and display left and right navigation buttons.</p>
+					
+		<p>Add some <code>CarouselItem</code> to the <code>Carousel</code>. A <code>CarouselItem</code> is a <code>HTMLPanel</code> which can also have a <code>caption</code> child to add some caption to the item. The caption has to be a <code>IsWidget</code>.</p>
+		<p>Use the <code>autoPlay</code> property to enable autoPlay. By default, the <code>pauseOnHover</code> property is set to <code>true</code>. You can customize the delay with the <code>timerDelay</code> property (default set to 5000 ms).</p>
+		<p>Use the <code>displayNavButtons</code> property to show / hide the left and right navs buttons (default set to <code>true</code>).</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<w:Carousel>
+					<w:CarouselItem>
+						<img alt="First slide" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzc3NyIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjQ1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojNTU1O2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjU2cHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+Rmlyc3Qgc2xpZGUgd2l0aG91dCBjYXB0aW9uPC90ZXh0Pjwvc3ZnPg=="/>
+					</w:CarouselItem>
+					<w:CarouselItem>
+						<img alt="Second slide" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzY2NiIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjQ1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojNDQ0O2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjU2cHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+U2Vjb25kIHNsaWRlIHdpdGggY2FwdGlvbjwvdGV4dD48L3N2Zz4="/>
+						<w:caption>
+							<w:Container tag="div">
+								<w:Heading level="2">Item caption Title</w:Heading>						
+								<w:Text>Item caption</w:Text>
+							</w:Container>
+						</w:caption>
+					</w:CarouselItem>
+					<w:CarouselItem>
+						<img alt="Third slide" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzU1NSIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjQ1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojMzMzO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjU2cHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+VGhpcmQgc2xpZGUgd2l0aG91dCBjYXB0aW9uPC90ZXh0Pjwvc3ZnPg=="/>
+					</w:CarouselItem>
+				</w:Carousel>
+				<br/>
+				<br/>
+				<w:Carousel autoPlay="true" timerDelay="2500" displayNavButtons="false">
+					<w:CarouselItem>
+						<img alt="First slide" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzc3NyIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjQ1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojNTU1O2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjU2cHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+Rmlyc3Qgc2xpZGUgd2l0aG91dCBjYXB0aW9uPC90ZXh0Pjwvc3ZnPg=="/>
+					</w:CarouselItem>
+					<w:CarouselItem>
+						<img alt="Second slide" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzY2NiIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjQ1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojNDQ0O2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjU2cHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+U2Vjb25kIHNsaWRlIHdpdGggY2FwdGlvbjwvdGV4dD48L3N2Zz4="/>
+						<w:caption>
+							<w:Container tag="div">
+								<w:Heading level="2">Item caption Title</w:Heading>						
+								<w:Text>Item caption</w:Text>
+							</w:Container>
+						</w:caption>
+					</w:CarouselItem>
+					<w:CarouselItem>
+						<img alt="Third slide" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzU1NSIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjQ1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojMzMzO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjU2cHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+VGhpcmQgc2xpZGUgd2l0aG91dCBjYXB0aW9uPC90ZXh0Pjwvc3ZnPg=="/>
+					</w:CarouselItem>
+				</w:Carousel>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:Carousel>
+	<w:CarouselItem>
+		<img alt="First slide" src="..."/>
+	</w:CarouselItem>
+	<w:CarouselItem>
+		<img alt="Second slide" src="..."/>
+		<w:caption>
+			<w:Container tag="div">
+				<w:Heading level="2">Item caption Title</w:Heading>
+				<w:Text>Item caption</w:Text>
+			</w:Container>
+		</w:caption>
+	</w:CarouselItem>
+	<w:CarouselItem>
+		<img alt="Third slide" src="..."/>
+	</w:CarouselItem>
+</w:Carousel>
+
+<w:Carousel autoPlay="true" timerDelay="2500" displayNavButtons="false">
+	<w:CarouselItem>
+		<img alt="First slide" src="..."/>
+	</w:CarouselItem>
+	<w:CarouselItem>
+		<img alt="Second slide" src="..."/>
+		<w:caption>
+			<w:Container tag="div">
+				<w:Heading level="2">Item caption Title</w:Heading>
+				<w:Text>Item caption</w:Text>
+			</w:Container>
+		</w:caption>
+	</w:CarouselItem>
+	<w:CarouselItem>
+		<img alt="Third slide" src="..."/>
+	</w:CarouselItem>
+</w:Carousel>]]></pre>
 			</c:StaticCode>
 		</div>
 	</w:HTMLPanel>

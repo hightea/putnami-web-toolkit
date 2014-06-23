@@ -39,10 +39,8 @@ import fr.putnami.pwt.doc.client.page.codeeditor.CodeEditorPlace;
 import fr.putnami.pwt.doc.client.page.components.ComponentsPlace;
 import fr.putnami.pwt.doc.client.page.download.DownloadPlace;
 import fr.putnami.pwt.doc.client.page.errors.ErrorsPlace;
-import fr.putnami.pwt.doc.client.page.form.FormsPlace;
 import fr.putnami.pwt.doc.client.page.i18n.InternationalizationPlace;
 import fr.putnami.pwt.doc.client.page.layout.LayoutsPlace;
-import fr.putnami.pwt.doc.client.page.more.MorePlace;
 import fr.putnami.pwt.doc.client.page.navigation.NavigationPlace;
 import fr.putnami.pwt.doc.client.page.sample.addressbook.AddressBookPlace;
 import fr.putnami.pwt.doc.client.page.sample.all.SamplesPlace;
@@ -50,7 +48,6 @@ import fr.putnami.pwt.doc.client.page.sample.table.ContactsTablePlace;
 import fr.putnami.pwt.doc.client.page.server.ServerCallsPlace;
 import fr.putnami.pwt.doc.client.page.soon.ComingSoonPlace;
 import fr.putnami.pwt.doc.client.page.starting.GettingStartedPlace;
-import fr.putnami.pwt.doc.client.page.table.TablesPlace;
 import fr.putnami.pwt.doc.client.page.welcome.WelcomePlace;
 import fr.putnami.pwt.plugin.ga.client.GoogleAnalytics;
 
@@ -90,9 +87,6 @@ public class DocumentationApp implements EntryPoint {
 		controller.registerActivity(BootstrapPlace.INSTANCE);
 		controller.registerActivity(LayoutsPlace.INSTANCE);
 		controller.registerActivity(ComponentsPlace.INSTANCE);
-		controller.registerActivity(FormsPlace.INSTANCE);
-		controller.registerActivity(TablesPlace.INSTANCE);
-		controller.registerActivity(MorePlace.INSTANCE);
 		controller.registerActivity(DataBindingPlace.INSTANCE);
 		controller.registerActivity(InternationalizationPlace.INSTANCE);
 		controller.registerActivity(NavigationPlace.INSTANCE);
@@ -106,6 +100,10 @@ public class DocumentationApp implements EntryPoint {
 		controller.registerActivity(AddressBookPlace.INSTANCE);
 		controller.registerActivity(ComingSoonPlace.INSTANCE);
 		controller.registerActivity(DownloadPlace.INSTANCE);
+
+		controller.registerAlias("Tables", ComponentsPlace.INSTANCE);
+		controller.registerAlias("Forms", ComponentsPlace.INSTANCE);
+		controller.registerAlias("More", LayoutsPlace.INSTANCE);
 
 		controller.handleCurrentHistory();
 	}

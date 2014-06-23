@@ -27,9 +27,9 @@
 
 	<w:HTMLPanel>
 		<w:Heading level="2" navSpy="{navSpy}">Icon</w:Heading>
-		<p class="lead"><strong title="Putnami Web Toolkit">PWT</strong> privides a bunch of icons based on fontello's (<a href="http://fontello.com/" target="_blank">http://fontello.com</a>). Those icons are webfonts so easily resizeable.</p>
-					
-		<w:Heading level="3">Basic usage</w:Heading>
+		<p>
+			<strong title="Putnami Web Toolkit">PWT</strong> privides a bunch of icons based on fontello's (<a href="http://fontello.com/" target="_blank">http://fontello.com</a>). Those icons are webfonts so easily resizeable.
+		</p>
 		<p>Set the icon with the <code>type</code> attribute referencing the <code>IconType</code> enumeration.</p>
 		<p>The icon color can be customize with the <code>color</code> attribute. As the icon are webfonts, the color use the <code>text-*</code> CSS classe.s</p>
 		<div class="showcase-sample-block">

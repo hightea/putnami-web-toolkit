@@ -25,21 +25,17 @@
 	
 	<w:HTMLPanel stylePrimaryName="container" title="PWT - UI Components">
 		<w:Header ui:field="header">
-			<w:Heading level="1" navSpy="{tableOfContent}">User interface Components</w:Heading>
+			<w:Heading level="1" navSpy="{tableOfContent}">UI Components</w:Heading>
 			<p class="lead"><strong title="Putnami Web Toolkit">PWT</strong> provides Bootstrap based UI widget</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
-			<c:TextView navSpy="{tableOfContent}" />
-			<c:AnchorView navSpy="{tableOfContent}" />
-			<c:HeadingView navSpy="{tableOfContent}" />
+			<c:TypographyView navSpy="{tableOfContent}" />
 			<c:IconView navSpy="{tableOfContent}" />
 			<c:ButtonsView navSpy="{tableOfContent}" />
-			<c:DropdownView navSpy="{tableOfContent}" />
-			<c:ButtonGroupView navSpy="{tableOfContent}" />
-			<c:NavView navSpy="{tableOfContent}" />
-			<c:NavbarView navSpy="{tableOfContent}" />
-			<c:BreadcrumbView navSpy="{tableOfContent}" />
-			<c:PaginationView navSpy="{tableOfContent}" />
+			<c:FormsView navSpy="{tableOfContent}" />
+			<c:TablesView navSpy="{tableOfContent}" />
+			<c:NavigationView navSpy="{tableOfContent}" />
+			<c:MoreView navSpy="{tableOfContent}" />
 		</w:HTMLPanel>
 	</w:HTMLPanel>
 </ui:UiBinder>

@@ -27,9 +27,11 @@
 
 	<w:HTMLPanel>
 		<w:Heading level="2" navSpy="{navSpy}">Grid system</w:Heading>
-		<p class="lead">A <code>GridRow</code> represents a <code>&lt;div class="row"&gt;</code> and a column is represented by a <code>GridColumn</code> whith <code>size</code> and <code>offset</code> attributes.</p>
+		<p>
+			A <code>GridRow</code> represents a <code>&lt;div class="row"&gt;</code> and a column is represented 
+			by a <code>GridColumn</code> whith <code>size</code> and <code>offset</code> attributes.
+		</p>
 					
-		<w:Heading level="3" navSpy="{navSpy}">Example</w:Heading>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample grid-sample">
 				<w:GridRow>

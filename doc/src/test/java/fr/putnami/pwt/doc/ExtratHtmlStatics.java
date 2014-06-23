@@ -47,10 +47,8 @@ import fr.putnami.pwt.doc.client.page.codeeditor.CodeEditorPlace;
 import fr.putnami.pwt.doc.client.page.components.ComponentsPlace;
 import fr.putnami.pwt.doc.client.page.download.DownloadPlace;
 import fr.putnami.pwt.doc.client.page.errors.ErrorsPlace;
-import fr.putnami.pwt.doc.client.page.form.FormsPlace;
 import fr.putnami.pwt.doc.client.page.i18n.InternationalizationPlace;
 import fr.putnami.pwt.doc.client.page.layout.LayoutsPlace;
-import fr.putnami.pwt.doc.client.page.more.MorePlace;
 import fr.putnami.pwt.doc.client.page.navigation.NavigationPlace;
 import fr.putnami.pwt.doc.client.page.sample.addressbook.AddressBookPlace;
 import fr.putnami.pwt.doc.client.page.sample.all.SamplesPlace;
@@ -58,7 +56,6 @@ import fr.putnami.pwt.doc.client.page.sample.table.ContactsTablePlace;
 import fr.putnami.pwt.doc.client.page.server.ServerCallsPlace;
 import fr.putnami.pwt.doc.client.page.soon.ComingSoonPlace;
 import fr.putnami.pwt.doc.client.page.starting.GettingStartedPlace;
-import fr.putnami.pwt.doc.client.page.table.TablesPlace;
 import fr.putnami.pwt.doc.client.page.welcome.WelcomePlace;
 
 public class ExtratHtmlStatics {
@@ -71,6 +68,7 @@ public class ExtratHtmlStatics {
 
 	public static void main(String[] args) {
 		webClient = new WebClient(BrowserVersion.CHROME);
+
 		siteMap.delete();
 		new File(outFolder).mkdirs();
 		try {
@@ -79,9 +77,6 @@ public class ExtratHtmlStatics {
 			extractPage(BootstrapPlace.class);
 			extractPage(LayoutsPlace.class);
 			extractPage(ComponentsPlace.class);
-			extractPage(FormsPlace.class);
-			extractPage(TablesPlace.class);
-			extractPage(MorePlace.class);
 			extractPage(DataBindingPlace.class);
 			extractPage(InternationalizationPlace.class);
 			extractPage(NavigationPlace.class);
@@ -175,4 +170,5 @@ public class ExtratHtmlStatics {
 
 		webClient.closeAllWindows();
 	}
+
 }

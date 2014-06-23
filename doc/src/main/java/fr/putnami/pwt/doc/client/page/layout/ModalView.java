@@ -14,20 +14,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.doc.client.page.components;
+package fr.putnami.pwt.doc.client.page.layout;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
+import fr.putnami.pwt.core.widget.client.Modal;
 import fr.putnami.pwt.core.widget.client.NavSpy;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
+import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 
-public class HeadingView extends Composite {
+public class ModalView extends Composite {
 
-	interface Binder extends UiBinderLocalized<Widget, HeadingView> {
+	interface Binder extends UiBinderLocalized<Widget, ModalView> {
 
 		Binder BINDER = GWT.create(Binder.class);
 	}
@@ -35,10 +38,51 @@ public class HeadingView extends Composite {
 	@UiField(provided = true)
 	final NavSpy navSpy;
 
+	@UiField
+	Modal modalForm;
+
+	@UiField
+	Modal modalTitle;
+
+	@UiField
+	Modal modalWidgetDismissable;
+
+	@UiField
+	Modal modalWidget;
+
 	@UiConstructor
-	public HeadingView(NavSpy navSpy) {
+	public ModalView(NavSpy navSpy) {
 		this.navSpy = navSpy;
 		initWidget(Binder.BINDER.createAndBindUi(this));
 	}
 
+	@UiHandler("openModalFormBtn")
+	public void onOpenModalForm(ButtonEvent event) {
+		modalForm.show();
+	}
+
+	@UiHandler("openModalTitleBtn")
+	public void onOpenModalTitle(ButtonEvent event) {
+		modalTitle.show();
+	}
+
+	@UiHandler("closeModalTitleBtn")
+	public void onCloseModalTitle(ButtonEvent event) {
+		modalTitle.hide();
+	}
+
+	@UiHandler("openModalWidgetDismissableBtn")
+	public void onOpenModalWidgetDismissable(ButtonEvent event) {
+		modalWidgetDismissable.show();
+	}
+
+	@UiHandler("openModalWidgetBtn")
+	public void onOpenModalWidget(ButtonEvent event) {
+		modalWidget.show();
+	}
+
+	@UiHandler("closeModalWidgetBtn")
+	public void onCloseModalWidget(ButtonEvent event) {
+		modalWidget.hide();
+	}
 }

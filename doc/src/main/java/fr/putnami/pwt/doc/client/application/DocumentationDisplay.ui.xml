@@ -39,9 +39,6 @@
 							<w:NavLink label="Bootstrap" link="#!Bootstrap"/>
 							<w:NavLink label="Layouts" link="#!Layouts"/>
 							<w:NavLink label="Components" link="#!Components"/>
-							<w:NavLink label="Forms" link="#!Forms"/>
-							<w:NavLink label="Tables" link="#!Tables" />
-							<w:NavLink label="More" link="#!More" />
 						</w:NavDropdown>
 						<w:NavDropdown label="Framework" >
 							<w:NavLink label="Navigation" link="#!Navigation"/>

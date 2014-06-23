@@ -26,10 +26,9 @@
 	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
 
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">TabPanel</w:Heading>
-		<p class="lead">A <code>TabPanel</code> contains multiple <code>TabPanelConten</code>, each is a pane with a <code>NavLink</code> to add in the nav component.</p>
+		<w:Heading level="2" navSpy="{navSpy}">Tab Panel</w:Heading>
+		<p>A <code>TabPanel</code> contains multiple <code>TabPanelConten</code>, each is a pane with a <code>NavLink</code> to add in the nav component.</p>
 					
-		<w:Heading level="3" navSpy="{navSpy}">BasicUsage</w:Heading>
 		<p>The <code>NavLink</code>s can also be customized with icons.</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">

@@ -14,23 +14,25 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.doc.client.page.table;
+package fr.putnami.pwt.doc.client.page.components;
 
 import java.util.List;
 
 import com.google.common.collect.Lists;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
+import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
 import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
 import fr.putnami.pwt.core.model.client.model.Model;
+import fr.putnami.pwt.core.widget.client.NavSpy;
 import fr.putnami.pwt.core.widget.client.TableEditor;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
-import fr.putnami.pwt.doc.client.application.Page;
 
-public class TablesView extends Page<TablesPlace> {
+public class TablesView extends Composite {
 
 	public static enum Gender {
 		MALE,
@@ -73,6 +75,7 @@ public class TablesView extends Page<TablesPlace> {
 	}
 
 	interface Binder extends UiBinderLocalized<Widget, TablesView> {
+		Binder BINDER = GWT.create(Binder.class);
 	}
 
 	interface Constants extends ConstantsWithLookup {
@@ -99,6 +102,9 @@ public class TablesView extends Page<TablesPlace> {
 		String name();
 	}
 
+	@UiField(provided = true)
+	final NavSpy tableOfContent;
+
 	@UiField
 	TableEditor<Bean> firstTable;
 	@UiField
@@ -106,19 +112,20 @@ public class TablesView extends Page<TablesPlace> {
 
 	Constants constants = GWT.create(Constants.class);
 
-	public TablesView() {
+	@UiConstructor
+	public TablesView(NavSpy navSpy) {
 		super();
+
+		this.tableOfContent = navSpy;
+
+		initWidget(Binder.BINDER.createAndBindUi(this));
+
 		firstTable.initialize(BeanModel.MODEL);
 		firstTable.edit(getBeans());
 
 		secondTable.setMessageHelper(new MessageHelper(constants));
 		secondTable.initialize(BeanModel.MODEL);
 		secondTable.edit(getBeans());
-	}
-
-	@Override
-	protected UiBinderLocalized getBinder() {
-		return GWT.create(Binder.class);
 	}
 
 	private List<Bean> getBeans() {

@@ -29,7 +29,6 @@
 		<w:Heading level="2" navSpy="{navSpy}">Localized templates</w:Heading>
 		<p class="lead">Use one Ui template per locale!</p>
 					
-		<w:Heading level="3" navSpy="{navSpy}">Basic usage</w:Heading>
 		<p>Instead of using <code>Constants</code> to translate your application, you can use one template per locale. It allows you to change the Ui between locales. It makes also easier to maintain some translations.</p>
 		<p>However you can still use the GWT <code>Constants</code> in your locale based templates.</p>
 		<p>To use the localised templates, suffix the template name with the locale. If no one is found for the locale, the default one is used (without suffix) : It follow the same rules as the constants i18n functionnality.</p>
