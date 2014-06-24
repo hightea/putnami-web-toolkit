@@ -25,19 +25,14 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 
 	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-	<ui:with field="stateSuggestions" type="java.util.List" />
-	<ui:with field="ageList" type="java.util.List" />
-	<ui:with field="groups" type="java.util.List" />
 
 	<w:HTMLPanel>
 		<w:Heading level="2" navSpy="{tableOfContent}">Forms</w:Heading>
 		<p>
-			<strong title="Putnami Web Toolkit">PWT</strong> provide a full components set in order to build nice and efficient forms.<br />
+			<strong title="Putnami Web Toolkit">PWT</strong> provides a full components set in order to build nice and efficient forms.<br />
 			This framework allow to easily bind data with views, then flush data from views. <br />
 			The <code>Data Binding</code> is fully descrided in this <a href="#!DataBinding">dedecated page.</a><br/>
 		</p>
-
-		<w:Heading level="3" navSpy="{tableOfContent}">Forms</w:Heading>
 		<p>
 			<code>Forms</code> are composed with sub-<code>Form</code>, <code>Fieldset</code>, <code>FormGroup</code> or <code>EditorInput</code> and <code>EditorOutput</code>.
 			The form can drive how the <code>FormGroup</code> is rendered. 
@@ -45,8 +40,8 @@
 			Each sub components manages his own layout if setted.<br/>
 			The <code>AbstractHTMLPanel</code> inheritance provide a good design flexibility.
 		</p>
-		
-		<w:Heading level="4" navSpy="{tableOfContent}">Basic form</w:Heading>
+
+		<w:Heading level="3" navSpy="{tableOfContent}">Basic form</w:Heading>
 		<p>
 			With the <code>BASIC</code> layout, all components are set to <code>width: 100%;</code>.
 		</p>
@@ -80,7 +75,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="4" navSpy="{tableOfContent}">Inline form</w:Heading>
+		<w:Heading level="3" navSpy="{tableOfContent}">Inline form</w:Heading>
 		<p>The <code>INLINE</code> layout render controls with a left aligned and inline-block. 
 		the label are hidden and only visible for screen readers. Some controls like <code>TextArea</code> still displayed on 100% width. 
 		</p>
@@ -117,7 +112,7 @@
 		</div>
 
 
-		<w:Heading level="4" navSpy="{tableOfContent}">Horizontal form</w:Heading>
+		<w:Heading level="3" navSpy="{tableOfContent}">Horizontal form</w:Heading>
 		<p>
 			The <code>HORIZONTAL</code> layout use the Bootstrap grid system to render the label in the left column and the right column contains the control, the help message and the errors.   
 		</p>
@@ -148,7 +143,7 @@
 			</c:StaticCode>
 		</div>
 
-		<w:Heading level="4" navSpy="{tableOfContent}">Readonly form</w:Heading>
+		<w:Heading level="3" navSpy="{tableOfContent}">Readonly form</w:Heading>
 		<p><code>Form</code> can be set to readonly, in this case the <code>FormGroup</code> use <code>EditorOutput</code>. 
 			If <code>EditorInput</code> is not within the a <code>FormGroup</code> the <code>EditorInput</code> is set to disabled.</p>
 		<div class="showcase-sample-block">
@@ -181,7 +176,7 @@
 			</c:StaticCode>
 		</div>
 
-		<w:Heading level="4" navSpy="{tableOfContent}">Header and Footer</w:Heading>
+		<w:Heading level="3" navSpy="{tableOfContent}">Header and Footer</w:Heading>
 		<p><code>Form</code> accept <code>Header</code> and <code>Footer</code> which are automaticaly positionned. 
 		Those components can be wrapped by the parent container such as <code>Modal</code> or <code>Panel</code>.
 		</p>
@@ -220,7 +215,7 @@
 
 
 
-		<w:Heading level="4" navSpy="{tableOfContent}">Fieldset</w:Heading>
+		<w:Heading level="3" navSpy="{tableOfContent}">Fieldset</w:Heading>
 		<p>Acting like <code>Form</code>, <code>Fieldset</code> allow to structure the <code>Form</code> by managing it's own layout, 
 			and it's own readonly state. Also accept one <code>Legend</code> as child.<br/>
 			As <code>Fieldset</code> extends an <code>AbstractHTMLPanel</code> you have all the needed flexibility.
@@ -419,410 +414,6 @@ formMagic.setMessageHelper(messageHelper);
 </w:FormGroup>]]></pre>
 			</c:StaticCode>
 		</div>
-
-
-		<w:Form ui:field="formInputEditor">
-			<w:Heading level="3" navSpy="{tableOfContent}">Input controls</w:Heading>
-			
-			<!-- InputText -->
-			<div>
-				<w:Heading level="4" navSpy="{tableOfContent}">InputText</w:Heading>
-				<p><code>InputText</code> is a simple text box.</p>
-				<div class="showcase-sample-block">
-					<div class="showcase-sample">
-						<w:InputText path="name" placeholder="Enter your name..." />
-					</div>
-					<c:StaticCode configuration="{XML_CONFIGURATION}">
-						<pre><![CDATA[<w:InputText placeholder="Enter your name..." />]]></pre>
-					</c:StaticCode>
-				</div>
-			</div>
-			
-			<!-- InputPassword -->
-			<div>
-				<w:Heading level="4" navSpy="{tableOfContent}">InputPassword</w:Heading>
-				<p><code>InputPassword</code> is a simple password box.</p>
-				<div class="showcase-sample-block">
-					<div class="showcase-sample">
-						<w:InputPassword path="password" placeholder="Enter a strong password..." />
-					</div>
-					<c:StaticCode configuration="{XML_CONFIGURATION}">
-						<pre><![CDATA[<w:InputPassword placeholder="Enter a strong password..." />]]></pre>
-					</c:StaticCode>
-				</div>
-			</div>
-			
-			<!-- InputTextArea -->
-			<div>
-				<w:Heading level="4" navSpy="{tableOfContent}">InputTextArea</w:Heading>
-				<p><code>InputTextArea</code> is a simple text area </p>
-				<div class="showcase-sample-block">
-					<div class="showcase-sample">
-						<w:InputTextArea path="remarks" rows="4" placeholder="Any remarks" />
-					</div>
-					<c:StaticCode configuration="{XML_CONFIGURATION}">
-						<pre><![CDATA[<w:InputTextArea path="remarks" rows="4" placeholder="Any remarks" />]]></pre>
-					</c:StaticCode>
-				</div>
-			</div>
-			
-			<!-- InputTextArea -->
-			<div>
-				<w:Heading level="4" navSpy="{tableOfContent}">InputBoolean</w:Heading>
-				<p><code>InputBoolean</code> is a simple control for boolean value. You can easily decorate it with a <code>Label</code>.</p>
-				<div class="showcase-sample-block">
-					<div class="showcase-sample">
-						<w:InputBoolean path="major">You declare to be older than 18.</w:InputBoolean>
-					</div>
-					<c:StaticCode configuration="{XML_CONFIGURATION}">
-						<pre><![CDATA[<w:InputBoolean>You declare to be older than 18.</w:InputBoolean>]]></pre>
-					</c:StaticCode>
-				</div>
-			</div>
-			
-			<!-- InputEmail -->
-			<div>
-				<w:Heading level="4" navSpy="{tableOfContent}">InputEmail</w:Heading>
-				<p><code>InputEmail</code> is an advenced text box with  restricted characters on typing and parsing validation on flushing.</p>
-				<div class="showcase-sample-block">
-					<div class="showcase-sample">
-						<w:InputEmail path="email" placeholder="Enter your email..." />
-					</div>
-					<c:StaticCode configuration="{XML_CONFIGURATION}">
-						<pre><![CDATA[<w:InputEmail  placeholder="Enter your email..." />]]></pre>
-					</c:StaticCode>
-				</div>
-			</div>
-			
-			<!-- InputNumber -->
-			<div>
-				<w:Heading level="4" navSpy="{tableOfContent}">InputNumber</w:Heading>
-				<p><code>InputNumber</code> is an Input box with an advanced mask according to the declared type, 
-					it can be controled with arrow keys and the pressed keys are restricted.<br/>
-					The number type supported are <code>FLOAT</code>, <code>DOUBLE</code>, <code>BIG_DECIMAL</code>, 
-					<code>INTEGER</code>, <code>LONG</code>, <code>BIG_INTEGER</code>.</p>
-				<div class="showcase-sample-block">
-					<div class="showcase-sample">
-						<w:InputNumber path="age" type="INTEGER" signed="false" placeholder="How old are you..." /><br/>
-						<w:InputNumber path="height" type="DOUBLE" placeholder="How tall are you..." />
-					</div>
-					<c:StaticCode configuration="{XML_CONFIGURATION}">
-						<pre><![CDATA[<w:InputNumber type="INTEGER" signed="false" placeholder="How old are you..." />
-<w:InputNumber type="DOUBLE" placeholder="How tall are you..." />]]></pre>
-					</c:StaticCode>
-				</div>
-			</div>
-			
-			<!-- InputDateBox -->
-			<div>
-				<w:Heading level="4" navSpy="{tableOfContent}">InputDateBox</w:Heading>
-				<p><code>InputDateBox</code> is an input box with advanced mask according to the date format. <br />
-					By default the mask is generated with the localized date format.  <br/>
-					<code>InputDateBox</code> can be controled with arrow keys.
-				</p>
-				<div class="showcase-sample-block">
-					<div class="showcase-sample">
-						<w:InputDateBox path="birthdate" /><br/>
-						<w:InputDateBox path="birthdate" format="E dd MMMM yyyy" />
-					</div>
-					<c:StaticCode configuration="{XML_CONFIGURATION}">
-						<pre><![CDATA[<w:InputDateBox />
-<w:InputDateBox format="E dd MMMM yyyy" />]]></pre>
-					</c:StaticCode>
-				</div>
-			</div>
-			
-			<!-- InputDatePicker -->
-			<div>
-				<w:Heading level="4" navSpy="{tableOfContent}">InputDatePicker</w:Heading>
-				<p><code>InputDatePicker</code> can be use as Date editor or embeded as popup in <Code>InputDate</Code></p>
-				<div class="showcase-sample-block">
-					<div class="showcase-sample">
-						<w:InputDatePicker  path="birthdate"/>
-					</div>
-					<c:StaticCode configuration="{XML_CONFIGURATION}">
-						<pre><![CDATA[<w:InputDatePicker />]]></pre>
-					</c:StaticCode>
-				</div>
-			</div>
-			
-			<!-- InputDate -->
-			<div>
-				<w:Heading level="4" navSpy="{tableOfContent}">InputDate</w:Heading>
-				<p><code>InputDate</code> is an <code>InputGroup</code> mixing <code>InputDateBox</code> and <code>InputDatePicker</code></p>
-				<div class="showcase-sample-block">
-					<div class="showcase-sample">
-						<w:InputDate path="birthdate" /><br/>
-						<w:InputDate path="birthdate" format="E dd MMMM yyyy" />
-					</div>
-					<c:StaticCode configuration="{XML_CONFIGURATION}">
-						<pre><![CDATA[<w:InputDate />
-<w:InputDate format="E dd MMMM yyyy" />]]></pre>
-					</c:StaticCode>
-				</div>
-			</div>
-			
-			<!-- InputSelect -->
-			<div>
-				<w:Heading level="4" navSpy="{tableOfContent}">InputSelect</w:Heading>
-				<p><code>InputSelect</code> is an select box made on bootstrap <code>DropDown</code> component.
-					Options are set with a simple list or a map.
-					Can accept any type of value if you initialize appropriate renderer.</p>
-					<div class="showcase-sample-block">
-						<div class="showcase-sample">
-					<w:Label htmlFor="test">test</w:Label>
-					<w:InputSelect htmlId="test" path="mainGroup" nullValueAllowed="true" nullRender="Choose a group" items="{groups}"/>
-				</div>
-				<c:StaticCode configuration="{XML_CONFIGURATION}">
-					<pre><![CDATA[<w:InputSelect nullValueAllowed="true" nullRender="Choose a group" items="{groups}"/>]]></pre>
-				</c:StaticCode>
-				</div>
-			</div>
-			
-			<!-- InputSelect on enumeration -->
-			<div>
-				<w:Heading level="4" navSpy="{tableOfContent}">InputSelect on enumeration</w:Heading>
-				<p>For Enumerations the options are automaticaly resolved from the enum items, 
-					then rendered with message helper passed to the driver </p>
-				<div class="showcase-sample-block">
-					<div class="showcase-sample">
-						<w:InputSelect path="gender" />
-					</div>
-					<c:StaticCode configuration="{XML_CONFIGURATION}">
-						<pre><![CDATA[<w:InputSelect />]]></pre>
-					</c:StaticCode>
-				</div>
-			</div>
-			
-			<!-- InputSlider -->
-			<div>
-				<w:Heading level="4" navSpy="{tableOfContent}">InputSlider</w:Heading>
-				<p></p>
-				<div class="showcase-sample-block">
-					<div class="showcase-sample">
-						<w:InputSlider path="age" items="{ageList}" />
-					</div>
-					<c:StaticCode configuration="{XML_CONFIGURATION}">
-						<pre><![CDATA[<w:InputSlider items="{ageList}" />]]></pre>
-					</c:StaticCode>
-				</div>
-			</div>
-			
-			<!-- InputMultiSelect -->
-			<div>
-				<w:Heading level="4" navSpy="{tableOfContent}">InputMultiSelect</w:Heading>
-				<p><code>InputMultiSelect</code> is a select box made on bootstrap <code>DropDown</code> component hwich allow the multiselection
-					Such as <code>InputSelect</code>, options are set with a simple list or a map.
-					Can accept any type of value if you initialize appropriate renderer.</p>
-				<div class="showcase-sample-block">
-					<div class="showcase-sample">
-						<w:InputMultiSelect path="groups" items="{groups}" nullValueAllowed="true" nullRender="Choose your groups"/>
-					</div>
-					<c:StaticCode configuration="{XML_CONFIGURATION}">
-						<pre><![CDATA[<w:InputMultiSelect items="{groups}" nullValueAllowed="true" nullRender="Choose your groups"/>]]></pre>
-					</c:StaticCode>
-				</div>
-			</div>
-			
-			<!-- InputGroup -->
-			<div>
-				<w:Heading level="4" navSpy="{tableOfContent}">InputGroup</w:Heading>
-				<p><code>InputGroup</code> extends form controls by adding addon or button before or after the control.</p>
-				<div class="showcase-sample-block">
-					<div class="showcase-sample">
-						<w:InputGroup>
-							<w:addon>
-								<w:OutputStaticText>@</w:OutputStaticText>
-							</w:addon>
-							<w:InputText path="name" />
-						</w:InputGroup><br/>
-						<w:InputGroup>
-							<w:input>
-								<w:InputNumber type="INTEGER" path="age" />
-							</w:input>
-							<w:addon>
-								<w:OutputStaticText>.00</w:OutputStaticText>
-							</w:addon>
-						</w:InputGroup><br/>
-						<w:InputGroup style="UNSTYLED">
-							<w:GridRow>
-								<w:GridColumn size="2">
-									<w:InputText path="name" />
-								</w:GridColumn>
-								<w:GridColumn size="10">
-									<w:InputNumber type="INTEGER" path="age" />
-								</w:GridColumn>
-							</w:GridRow>
-						</w:InputGroup>
-					</div>
-					<c:StaticCode configuration="{XML_CONFIGURATION}">
-						<pre><![CDATA[<w:InputGroup>
-	<w:addon>
-		<w:OutputStaticText>@</w:OutputStaticText>
-	</w:addon>
-	<w:InputText path="name" />
-</w:InputGroup>
-<w:InputGroup>
-	<w:input>
-		<w:InputNumber type="INTEGER" path="age" />
-	</w:input>
-	<w:addon>
-		<w:OutputStaticText>.00</w:OutputStaticText>
-	</w:addon>
-</w:InputGroup>
-<w:InputGroup style="UNSTYLED">
-	<w:GridRow>
-		<w:GridColumn size="2">
-			<w:InputText path="name" />
-		</w:GridColumn>
-		<w:GridColumn size="10">
-			<w:InputNumber type="INTEGER" path="age" />
-		</w:GridColumn>
-	</w:GridRow>
-</w:InputGroup>]]></pre>
-					</c:StaticCode>
-				</div>
-			</div>
-		</w:Form>
-
-
-		<w:Form ui:field="editorOutputControls">
-			<w:Heading level="3" navSpy="{tableOfContent}">Static controls</w:Heading>
-			<p>Static controls are implementations of EditorOutput. Those components allow to bind data with an readonly state.
-			</p>
-				
-			<!-- OutputText -->
-			<div>
-				<w:Heading level="4" navSpy="{tableOfContent}">OutputText</w:Heading>
-				<p>The <code>OutputText</code> is a simple text render. If tag attribute is not set, the text is wrapped in <code>&lt;p&gt;</code> tag. 
-				It also accept style attribute such as <code>BADGE</code> or <code>LABEL</code>.</p>
-				
-				<div class="showcase-sample-block">
-					<div class="showcase-sample">
-						<w:OutputText path="name" />
-						<w:OutputText path="name" style="BADGE" />
-						<w:OutputText path="name" tag="span" style="LABEL" />
-						<w:OutputText path="name" tag="div" style="LABEL_PRIMARY" />
-						<w:OutputText path="name" style="LABEL_SUCCESS" />
-						<w:OutputText path="name" style="LABEL_INFO" />
-						<w:OutputText path="name" style="LABEL_WARNING" />
-						<w:OutputText path="name" tag="footer" style="LABEL_DANGER" />
-					</div>
-					<c:StaticCode configuration="{XML_CONFIGURATION}">
-						<pre><![CDATA[<w:OutputText />
-<w:OutputText style="BADGE" />
-<w:OutputText tag="span" style="LABEL" />
-<w:OutputText tag="div" style="LABEL_PRIMARY" />
-<w:OutputText style="LABEL_SUCCESS" />
-<w:OutputText style="LABEL_INFO" />
-<w:OutputText style="LABEL_WARNING" />
-<w:OutputText tag="footer" style="LABEL_DANGER" />]]></pre>
-					</c:StaticCode>
-				</div>
-			</div>
-			
-			<!-- OutputNumber -->
-			<div>
-				<w:Heading level="4" navSpy="{tableOfContent}">OutputNumber</w:Heading>
-				<p>The <code>OutputNumber</code> is an <code>OutputText</code> accepting custom number format.</p>
-				<div class="showcase-sample-block">
-					<div class="showcase-sample">
-						<w:OutputNumber path="height"  />
-						<w:OutputNumber path="height" format="#,##.0"  />
-					</div>
-					<c:StaticCode configuration="{XML_CONFIGURATION}">
-						<pre><![CDATA[<w:OutputNumber />
-<w:OutputNumber format="#,##.0" />]]></pre>
-					</c:StaticCode>
-				</div>
-			</div>
-			
-			<!-- OutputDate -->
-			<div>
-				<w:Heading level="4" navSpy="{tableOfContent}">OutputDate</w:Heading>
-				<p>The <code>OutputDate</code> is an <code>OutputText</code> accepting custom date format.
-				</p>
-				<div class="showcase-sample-block">
-					<div class="showcase-sample">
-						<w:OutputDate path="birthdate" />
-						<w:OutputDate path="birthdate" format="E dd MMMM yyyy" />
-					</div>
-					<c:StaticCode configuration="{XML_CONFIGURATION}">
-						<pre><![CDATA[<w:OutputDate />
-<w:OutputDate format="E dd MMMM yyyy"/>	]]></pre>
-					</c:StaticCode>
-				</div>
-			</div>
-			
-			<!-- OutputEnum -->
-			<div>
-				<w:Heading level="4" navSpy="{tableOfContent}">OutputEnum</w:Heading>
-				<p>The <code>OutputEnum</code> is an <code>OutputText</code> with an <code>EnumRenderer</code> generated with the <code>MessageHelper</code></p>
-				<div class="showcase-sample-block">
-					<div class="showcase-sample">
-						<w:OutputEnum path="gender" />
-					</div>
-					<c:StaticCode configuration="{XML_CONFIGURATION}">
-						<pre><![CDATA[<w:OutputEnum />]]></pre>
-					</c:StaticCode>
-				</div>
-			</div>
-			
-			<!-- OutputBoolean -->
-			<div>
-				<w:Heading level="4" navSpy="{tableOfContent}">OutputBoolean</w:Heading>
-				<p>The <code>OutputBoolean</code> can customize the rendered value when true or false.</p>
-				<div class="showcase-sample-block">
-					<div class="showcase-sample">
-						<w:OutputBoolean path="major" trueLabel="I am major" falseLabel="I am minor"/>
-						<w:OutputBoolean path="notMajor" trueLabel="I am major" falseLabel="I am minor"/>
-					</div>
-					<c:StaticCode configuration="{XML_CONFIGURATION}">
-						<pre><![CDATA[<w:OutputBoolean path="major" trueLabel="I am major" falseLabel="I am minor"/>
-<w:OutputBoolean path="notMajor"  trueLabel="I am major" falseLabel="I am minor" />]]></pre>
-					</c:StaticCode>
-				</div>
-			</div>
-			
-			<!-- OutputEmail -->
-			<div>
-				<w:Heading level="4" navSpy="{tableOfContent}">OutputEmail</w:Heading>
-				<p>The <code>OuputEmail</code> wrapper the text mailto anchor.</p>
-				<div class="showcase-sample-block">
-					<div class="showcase-sample">
-						<w:OutputEmail path="email" />
-					</div>
-					<c:StaticCode configuration="{XML_CONFIGURATION}">
-						<pre><![CDATA[<w:OutputEmail />]]></pre>
-					</c:StaticCode>
-				</div>
-			</div>
-			
-			<!-- OutputList -->
-			<div>
-				<w:Heading level="4" navSpy="{tableOfContent}">OutputList</w:Heading>
-				<p>The <code>OutputList</code> render Collection in list. For each value it will generate a new EditorOutput. 
-					If the EditorOutput is not specified, the <code>OuputList</code> guess the output editor with the property type.</p>
-				<div class="showcase-sample-block">
-					<div class="showcase-sample">
-						<w:OutputList path="groups" type="INLINE" />
-						<w:OutputList path="groups" type="LIST" />
-						<w:OutputList path="groups" type="LIST_GROUP"/>
-						<w:OutputList path="emails">
-							<w:OutputEmail />
-						</w:OutputList>
-					</div>
-					<c:StaticCode configuration="{XML_CONFIGURATION}">
-						<pre><![CDATA[<w:OutputList path="groups" type="INLINE" />
-<w:OutputList path="groups" type="LIST" />
-<w:OutputList path="groups" type="LIST_GROUP"/>
-<w:OutputList path="emails">
-	<w:OutputEmail />
-</w:OutputList>]]></pre>
-					</c:StaticCode>
-				</div>
-			</div>
-		</w:Form>
 
 	</w:HTMLPanel>
 

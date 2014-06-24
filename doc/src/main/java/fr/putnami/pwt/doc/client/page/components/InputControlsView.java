@@ -24,7 +24,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
 import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
@@ -32,14 +31,12 @@ import com.google.gwt.user.client.ui.Widget;
 import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
 import fr.putnami.pwt.core.editor.shared.constant.ValidationConstants;
 import fr.putnami.pwt.core.model.client.model.Model;
-import fr.putnami.pwt.core.widget.client.Fieldset;
 import fr.putnami.pwt.core.widget.client.Form;
 import fr.putnami.pwt.core.widget.client.NavSpy;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
-import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.core.widget.client.helper.DateParser;
 
-public class FormsView extends Composite {
+public class InputControlsView extends Composite {
 
 	public enum Gender {
 		MALE,
@@ -71,7 +68,7 @@ public class FormsView extends Composite {
 		Model<Bean> MODEL = GWT.create(BeanModel.class);
 	}
 
-	interface Binder extends UiBinderLocalized<Widget, FormsView> {
+	interface Binder extends UiBinderLocalized<Widget, InputControlsView> {
 		Binder BINDER = GWT.create(Binder.class);
 	}
 
@@ -95,31 +92,23 @@ public class FormsView extends Composite {
 	@UiField(provided = true)
 	final NavSpy tableOfContent;
 
-	@UiField
-	Form<Bean> formBasic;
-	@UiField
-	Form<Bean> formInline;
-	@UiField
-	Form<Bean> formHorizontal;
-	@UiField
-	Form<Bean> formReadonly;
-	@UiField
-	Form<Bean> formHeaderFooter;
+	@UiField(provided = true)
+	final List<String> stateSuggestions = Lists.newArrayList("Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut",
+			"Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland",
+			"Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey",
+			"New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina",
+			"South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming");
+
+	@UiField(provided = true)
+	final List<Integer> ageList = Lists.newArrayList();
+	@UiField(provided = true)
+	final List<String> groups = Lists.newArrayList("Familly", "Friends", "Colleague", "Other");
 
 	@UiField
-	Form<Bean> formFieldset;
-	@UiField
-	Fieldset<Bean> fieldsetIds;
-
-	@UiField
-	Form<Bean> formGroupEditable;
-	@UiField
-	Form<Bean> formGroupReadonly;
-	@UiField
-	Form<Bean> formGroupMagic;
+	Form<Bean> formInputEditor;
 
 	@UiConstructor
-	public FormsView(NavSpy navSpy) {
+	public InputControlsView(NavSpy navSpy) {
 		super();
 
 		this.tableOfContent = navSpy;
@@ -129,53 +118,11 @@ public class FormsView extends Composite {
 
 		MessageHelper messageHelper = new MessageHelper((ConstantsWithLookup) GWT.create(Constants.class));
 
-		formBasic.setMessageHelper(messageHelper);
-		formBasic.initialize(BeanModel.MODEL);
-		formBasic.getDriver().setAutoFlush(true);
-		formBasic.edit(new Bean());
+		formInputEditor.setMessageHelper(messageHelper);
+		formInputEditor.initialize(BeanModel.MODEL);
+		formInputEditor.edit(new Bean());
+		formInputEditor.getDriver().setAutoFlush(true);
 
-		formInline.setMessageHelper(messageHelper);
-		formInline.initialize(BeanModel.MODEL);
-		formInline.getDriver().setAutoFlush(true);
-		formInline.edit(new Bean());
-
-		formHorizontal.setMessageHelper(messageHelper);
-		formHorizontal.initialize(BeanModel.MODEL);
-		formHorizontal.getDriver().setAutoFlush(true);
-		formHorizontal.edit(new Bean());
-
-		formReadonly.setMessageHelper(messageHelper);
-		formReadonly.initialize(BeanModel.MODEL);
-		formReadonly.getDriver().setAutoFlush(true);
-		formReadonly.edit(new Bean());
-
-		formHeaderFooter.setMessageHelper(messageHelper);
-		formHeaderFooter.initialize(BeanModel.MODEL);
-		formHeaderFooter.getDriver().setAutoFlush(true);
-		formHeaderFooter.edit(new Bean());
-
-		formFieldset.setMessageHelper(messageHelper);
-		formFieldset.initialize(BeanModel.MODEL);
-		formFieldset.getDriver().setAutoFlush(true);
-		formFieldset.edit(new Bean());
-
-		formGroupEditable.setMessageHelper(messageHelper);
-		formGroupEditable.initialize(BeanModel.MODEL);
-		formGroupEditable.getDriver().setAutoFlush(true);
-		formGroupEditable.edit(new Bean());
-
-		formGroupReadonly.initialize(BeanModel.MODEL);
-		formGroupReadonly.edit(new Bean());
-
-		formGroupMagic.setMessageHelper(messageHelper);
-		formGroupMagic.initialize(BeanModel.MODEL);
-		formGroupMagic.edit(new Bean());
-
-	}
-
-	@UiHandler("fieldsetToogleReadOnly")
-	public void onFieldsetToogleReadOnlyClick(ButtonEvent event) {
-		fieldsetIds.setReadonly(Boolean.FALSE.equals(fieldsetIds.getReadonly()));
 	}
 
 }

@@ -33,6 +33,8 @@
 			<c:IconView navSpy="{tableOfContent}" />
 			<c:ButtonsView navSpy="{tableOfContent}" />
 			<c:FormsView navSpy="{tableOfContent}" />
+			<c:InputControlsView navSpy="{tableOfContent}" />
+			<c:OutputControlsView navSpy="{tableOfContent}" />
 			<c:TablesView navSpy="{tableOfContent}" />
 			<c:NavigationView navSpy="{tableOfContent}" />
 			<c:MoreView navSpy="{tableOfContent}" />

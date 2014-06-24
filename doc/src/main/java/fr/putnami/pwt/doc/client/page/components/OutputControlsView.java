@@ -24,7 +24,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
 import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
@@ -32,14 +31,12 @@ import com.google.gwt.user.client.ui.Widget;
 import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
 import fr.putnami.pwt.core.editor.shared.constant.ValidationConstants;
 import fr.putnami.pwt.core.model.client.model.Model;
-import fr.putnami.pwt.core.widget.client.Fieldset;
 import fr.putnami.pwt.core.widget.client.Form;
 import fr.putnami.pwt.core.widget.client.NavSpy;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
-import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.core.widget.client.helper.DateParser;
 
-public class FormsView extends Composite {
+public class OutputControlsView extends Composite {
 
 	public enum Gender {
 		MALE,
@@ -71,7 +68,7 @@ public class FormsView extends Composite {
 		Model<Bean> MODEL = GWT.create(BeanModel.class);
 	}
 
-	interface Binder extends UiBinderLocalized<Widget, FormsView> {
+	interface Binder extends UiBinderLocalized<Widget, OutputControlsView> {
 		Binder BINDER = GWT.create(Binder.class);
 	}
 
@@ -96,30 +93,10 @@ public class FormsView extends Composite {
 	final NavSpy tableOfContent;
 
 	@UiField
-	Form<Bean> formBasic;
-	@UiField
-	Form<Bean> formInline;
-	@UiField
-	Form<Bean> formHorizontal;
-	@UiField
-	Form<Bean> formReadonly;
-	@UiField
-	Form<Bean> formHeaderFooter;
-
-	@UiField
-	Form<Bean> formFieldset;
-	@UiField
-	Fieldset<Bean> fieldsetIds;
-
-	@UiField
-	Form<Bean> formGroupEditable;
-	@UiField
-	Form<Bean> formGroupReadonly;
-	@UiField
-	Form<Bean> formGroupMagic;
+	Form<Bean> editorOutputControls;
 
 	@UiConstructor
-	public FormsView(NavSpy navSpy) {
+	public OutputControlsView(NavSpy navSpy) {
 		super();
 
 		this.tableOfContent = navSpy;
@@ -129,53 +106,12 @@ public class FormsView extends Composite {
 
 		MessageHelper messageHelper = new MessageHelper((ConstantsWithLookup) GWT.create(Constants.class));
 
-		formBasic.setMessageHelper(messageHelper);
-		formBasic.initialize(BeanModel.MODEL);
-		formBasic.getDriver().setAutoFlush(true);
-		formBasic.edit(new Bean());
 
-		formInline.setMessageHelper(messageHelper);
-		formInline.initialize(BeanModel.MODEL);
-		formInline.getDriver().setAutoFlush(true);
-		formInline.edit(new Bean());
+		editorOutputControls.setMessageHelper(messageHelper);
+		editorOutputControls.initialize(BeanModel.MODEL);
+		editorOutputControls.edit(new Bean());
+		editorOutputControls.getDriver().setAutoFlush(true);
 
-		formHorizontal.setMessageHelper(messageHelper);
-		formHorizontal.initialize(BeanModel.MODEL);
-		formHorizontal.getDriver().setAutoFlush(true);
-		formHorizontal.edit(new Bean());
-
-		formReadonly.setMessageHelper(messageHelper);
-		formReadonly.initialize(BeanModel.MODEL);
-		formReadonly.getDriver().setAutoFlush(true);
-		formReadonly.edit(new Bean());
-
-		formHeaderFooter.setMessageHelper(messageHelper);
-		formHeaderFooter.initialize(BeanModel.MODEL);
-		formHeaderFooter.getDriver().setAutoFlush(true);
-		formHeaderFooter.edit(new Bean());
-
-		formFieldset.setMessageHelper(messageHelper);
-		formFieldset.initialize(BeanModel.MODEL);
-		formFieldset.getDriver().setAutoFlush(true);
-		formFieldset.edit(new Bean());
-
-		formGroupEditable.setMessageHelper(messageHelper);
-		formGroupEditable.initialize(BeanModel.MODEL);
-		formGroupEditable.getDriver().setAutoFlush(true);
-		formGroupEditable.edit(new Bean());
-
-		formGroupReadonly.initialize(BeanModel.MODEL);
-		formGroupReadonly.edit(new Bean());
-
-		formGroupMagic.setMessageHelper(messageHelper);
-		formGroupMagic.initialize(BeanModel.MODEL);
-		formGroupMagic.edit(new Bean());
-
-	}
-
-	@UiHandler("fieldsetToogleReadOnly")
-	public void onFieldsetToogleReadOnlyClick(ButtonEvent event) {
-		fieldsetIds.setReadonly(Boolean.FALSE.equals(fieldsetIds.getReadonly()));
 	}
 
 }

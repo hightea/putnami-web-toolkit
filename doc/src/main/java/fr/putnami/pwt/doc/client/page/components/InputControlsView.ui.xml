@@ -1,0 +1,307 @@
+<!--
+
+    This file is part of pwt-doc.
+
+    pwt-doc is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt-doc is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+
+	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+	<ui:with field="stateSuggestions" type="java.util.List" />
+	<ui:with field="ageList" type="java.util.List" />
+	<ui:with field="groups" type="java.util.List" />
+
+	<w:HTMLPanel>
+		<w:Heading level="2" navSpy="{tableOfContent}">Input controls</w:Heading>
+		<p>
+			<strong title="Putnami Web Toolkit">PWT</strong> provides a full bunch of <code>InputControls</code>.
+			 Those controls are fully supproted by the <a href="#!DataBinding">DataBinding</a> framework.
+			 Allowing to enter basic types (String, Integer, Boolean), some of them also allow to enter collections.
+			 Some controls are advanced making possible to use input masks and specified formating (Date, Number).
+		</p>
+
+
+		<w:Form ui:field="formInputEditor">
+			
+			<!-- InputText -->
+			<div>
+				<w:Heading level="3" navSpy="{tableOfContent}">InputText</w:Heading>
+				<p><code>InputText</code> is a simple text box.</p>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:InputText path="name" placeholder="Enter your name..." />
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:InputText placeholder="Enter your name..." />]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+			
+			<!-- InputPassword -->
+			<div>
+				<w:Heading level="3" navSpy="{tableOfContent}">InputPassword</w:Heading>
+				<p><code>InputPassword</code> is a simple password box.</p>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:InputPassword path="password" placeholder="Enter a strong password..." />
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:InputPassword placeholder="Enter a strong password..." />]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+			
+			<!-- InputTextArea -->
+			<div>
+				<w:Heading level="3" navSpy="{tableOfContent}">InputTextArea</w:Heading>
+				<p><code>InputTextArea</code> is a simple text area </p>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:InputTextArea path="remarks" rows="4" placeholder="Any remarks" />
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:InputTextArea path="remarks" rows="4" placeholder="Any remarks" />]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+			
+			<!-- InputTextArea -->
+			<div>
+				<w:Heading level="3" navSpy="{tableOfContent}">InputBoolean</w:Heading>
+				<p><code>InputBoolean</code> is a simple control for boolean value. You can easily decorate it with a <code>Label</code>.</p>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:InputBoolean path="major">You declare to be older than 18.</w:InputBoolean>
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:InputBoolean>You declare to be older than 18.</w:InputBoolean>]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+			
+			<!-- InputEmail -->
+			<div>
+				<w:Heading level="3" navSpy="{tableOfContent}">InputEmail</w:Heading>
+				<p><code>InputEmail</code> is an advenced text box with  restricted characters on typing and parsing validation on flushing.</p>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:InputEmail path="email" placeholder="Enter your email..." />
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:InputEmail  placeholder="Enter your email..." />]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+			
+			<!-- InputNumber -->
+			<div>
+				<w:Heading level="3" navSpy="{tableOfContent}">InputNumber</w:Heading>
+				<p><code>InputNumber</code> is an Input box with an advanced mask according to the declared type, 
+					it can be controled with arrow keys and the pressed keys are restricted.<br/>
+					The number type supported are <code>FLOAT</code>, <code>DOUBLE</code>, <code>BIG_DECIMAL</code>, 
+					<code>INTEGER</code>, <code>LONG</code>, <code>BIG_INTEGER</code>.</p>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:InputNumber path="age" type="INTEGER" signed="false" placeholder="How old are you..." /><br/>
+						<w:InputNumber path="height" type="DOUBLE" placeholder="How tall are you..." />
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:InputNumber type="INTEGER" signed="false" placeholder="How old are you..." />
+<w:InputNumber type="DOUBLE" placeholder="How tall are you..." />]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+			
+			<!-- InputDateBox -->
+			<div>
+				<w:Heading level="3" navSpy="{tableOfContent}">InputDateBox</w:Heading>
+				<p><code>InputDateBox</code> is an input box with advanced mask according to the date format. <br />
+					By default the mask is generated with the localized date format.  <br/>
+					<code>InputDateBox</code> can be controled with arrow keys.
+				</p>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:InputDateBox path="birthdate" /><br/>
+						<w:InputDateBox path="birthdate" format="E dd MMMM yyyy" />
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:InputDateBox />
+<w:InputDateBox format="E dd MMMM yyyy" />]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+			
+			<!-- InputDatePicker -->
+			<div>
+				<w:Heading level="3" navSpy="{tableOfContent}">InputDatePicker</w:Heading>
+				<p><code>InputDatePicker</code> can be use as Date editor or embeded as popup in <Code>InputDate</Code></p>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:InputDatePicker  path="birthdate"/>
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:InputDatePicker />]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+			
+			<!-- InputDate -->
+			<div>
+				<w:Heading level="3" navSpy="{tableOfContent}">InputDate</w:Heading>
+				<p><code>InputDate</code> is an <code>InputGroup</code> mixing <code>InputDateBox</code> and <code>InputDatePicker</code></p>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:InputDate path="birthdate" /><br/>
+						<w:InputDate path="birthdate" format="E dd MMMM yyyy" />
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:InputDate />
+<w:InputDate format="E dd MMMM yyyy" />]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+			
+			<!-- InputSelect -->
+			<div>
+				<w:Heading level="3" navSpy="{tableOfContent}">InputSelect</w:Heading>
+				<p><code>InputSelect</code> is an select box made on bootstrap <code>DropDown</code> component.
+					Options are set with a simple list or a map.
+					Can accept any type of value if you initialize appropriate renderer.</p>
+					<div class="showcase-sample-block">
+						<div class="showcase-sample">
+					<w:Label htmlFor="test">test</w:Label>
+					<w:InputSelect htmlId="test" path="mainGroup" nullValueAllowed="true" nullRender="Choose a group" items="{groups}"/>
+				</div>
+				<c:StaticCode configuration="{XML_CONFIGURATION}">
+					<pre><![CDATA[<w:InputSelect nullValueAllowed="true" nullRender="Choose a group" items="{groups}"/>]]></pre>
+				</c:StaticCode>
+				</div>
+			</div>
+			
+			<!-- InputSelect on enumeration -->
+			<div>
+				<w:Heading level="3" navSpy="{tableOfContent}">InputSelect on enumeration</w:Heading>
+				<p>For Enumerations the options are automaticaly resolved from the enum items, 
+					then rendered with message helper passed to the driver </p>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:InputSelect path="gender" />
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:InputSelect />]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+			
+			<!-- InputSlider -->
+			<div>
+				<w:Heading level="3" navSpy="{tableOfContent}">InputSlider</w:Heading>
+				<p></p>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:InputSlider path="age" items="{ageList}" />
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:InputSlider items="{ageList}" />]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+			
+			<!-- InputMultiSelect -->
+			<div>
+				<w:Heading level="3" navSpy="{tableOfContent}">InputMultiSelect</w:Heading>
+				<p><code>InputMultiSelect</code> is a select box made on bootstrap <code>DropDown</code> component hwich allow the multiselection
+					Such as <code>InputSelect</code>, options are set with a simple list or a map.
+					Can accept any type of value if you initialize appropriate renderer.</p>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:InputMultiSelect path="groups" items="{groups}" nullValueAllowed="true" nullRender="Choose your groups"/>
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:InputMultiSelect items="{groups}" nullValueAllowed="true" nullRender="Choose your groups"/>]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+			
+			<!-- InputGroup -->
+			<div>
+				<w:Heading level="3" navSpy="{tableOfContent}">InputGroup</w:Heading>
+				<p><code>InputGroup</code> extends form controls by adding addon or button before or after the control.</p>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:InputGroup>
+							<w:addon>
+								<w:OutputStaticText>@</w:OutputStaticText>
+							</w:addon>
+							<w:InputText path="name" />
+						</w:InputGroup><br/>
+						<w:InputGroup>
+							<w:input>
+								<w:InputNumber type="INTEGER" path="age" />
+							</w:input>
+							<w:addon>
+								<w:OutputStaticText>.00</w:OutputStaticText>
+							</w:addon>
+						</w:InputGroup><br/>
+						<w:InputGroup style="UNSTYLED">
+							<w:GridRow>
+								<w:GridColumn size="2">
+									<w:InputText path="name" />
+								</w:GridColumn>
+								<w:GridColumn size="10">
+									<w:InputNumber type="INTEGER" path="age" />
+								</w:GridColumn>
+							</w:GridRow>
+						</w:InputGroup>
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:InputGroup>
+	<w:addon>
+		<w:OutputStaticText>@</w:OutputStaticText>
+	</w:addon>
+	<w:InputText path="name" />
+</w:InputGroup>
+<w:InputGroup>
+	<w:input>
+		<w:InputNumber type="INTEGER" path="age" />
+	</w:input>
+	<w:addon>
+		<w:OutputStaticText>.00</w:OutputStaticText>
+	</w:addon>
+</w:InputGroup>
+<w:InputGroup style="UNSTYLED">
+	<w:GridRow>
+		<w:GridColumn size="2">
+			<w:InputText path="name" />
+		</w:GridColumn>
+		<w:GridColumn size="10">
+			<w:InputNumber type="INTEGER" path="age" />
+		</w:GridColumn>
+	</w:GridRow>
+</w:InputGroup>]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+		</w:Form>
+
+	</w:HTMLPanel>
+
+</ui:UiBinder>
