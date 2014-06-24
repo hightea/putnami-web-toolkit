@@ -20,6 +20,9 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.ScriptElement;
 
+import fr.putnami.pwt.core.error.client.AbstractErrorHandler;
+import fr.putnami.pwt.core.error.client.ErrorHandler;
+import fr.putnami.pwt.core.error.client.ErrorManager;
 import fr.putnami.pwt.core.mvp.client.MvpController;
 import fr.putnami.pwt.core.mvp.client.event.StartActivityEvent;
 
@@ -28,6 +31,7 @@ public class GoogleAnalyticsImpl extends GoogleAnalytics implements StartActivit
 	private static final String SCRIPT_URL = "//www.google-analytics.com/analytics.js";
 
 	private static boolean isInit = false;
+	private ErrorHandler errorHandler;
 
 	private void loadAnalyticsScript() {
 		ScriptElement script = Document.get().createScriptElement();
@@ -66,6 +70,25 @@ public class GoogleAnalyticsImpl extends GoogleAnalytics implements StartActivit
 		trackPage("/#" + placeToken);
 	}
 
+	@Override
+	public void handleUncaughtException(boolean enable) {
+		if (enable) {
+			if (errorHandler == null) {
+				errorHandler = new AbstractErrorHandler() {
+					@Override
+					public boolean handle(Throwable error) {
+						trackException(error.getMessage(), false);
+						return false;
+					}
+				};
+			}
+			ErrorManager.get().registerErrorHandler(errorHandler);
+		}
+		else {
+			ErrorManager.get().removeErrorHandler(errorHandler);
+		}
+	}
+
 	private native void createGaObject()
 	/*-{
 	  	// store the name of the Analytics object
@@ -88,6 +111,12 @@ public class GoogleAnalyticsImpl extends GoogleAnalytics implements StartActivit
 	public native void forceSSL(boolean force)
 	/*-{
 	    $wnd.ga('set', 'forceSSL', force);
+	}-*/;
+
+	@Override
+	public native void displayfeatures()
+	/*-{
+	    $wnd.ga('require', 'displayfeatures');
 	}-*/;
 
 	@Override
@@ -119,4 +148,23 @@ public class GoogleAnalyticsImpl extends GoogleAnalytics implements StartActivit
 	/*-{
 	   $wnd.ga('send', 'event', category, action, label, value);
 	}-*/;
+
+
+	@Override
+	public native void trackException(String description, boolean fatal)
+	/*-{
+   	$wnd.ga('send', 'exception', {
+   		'exDescription': description,
+  			'exFatal': fatal
+   	});
+	}-*/;
+
+	@Override
+	public native void trackSocial(String socialNetwork, String socialAction, String socialtarget)
+	/*-{
+		$wnd.ga('send', 'social', socialNetwork, socialAction, socialtarget, {
+			'page': page
+		});
+	}-*/;
+
 }

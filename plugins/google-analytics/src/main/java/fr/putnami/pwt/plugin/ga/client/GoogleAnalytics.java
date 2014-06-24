@@ -47,7 +47,11 @@ public abstract class GoogleAnalytics {
 
 	protected abstract void initialize(String account, String domain);
 
+	public abstract void handleUncaughtException(boolean enable);
+
 	public abstract void forceSSL(boolean force);
+
+	public abstract void displayfeatures();
 
 	public abstract void trackPage();
 
@@ -59,4 +63,7 @@ public abstract class GoogleAnalytics {
 
 	public abstract void trackEvent(String category, String action, String label, int value);
 
+	public abstract void trackException(String description, boolean fatal);
+
+	public abstract void trackSocial(String socialNetwork, String socialAction, String socialtarget);
 }
