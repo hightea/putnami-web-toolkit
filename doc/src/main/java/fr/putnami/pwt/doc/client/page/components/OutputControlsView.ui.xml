@@ -142,6 +142,41 @@
 				</div>
 			</div>
 			
+			<!-- OutputProgress -->
+			<div>
+				<w:Heading level="3" navSpy="{tableOfContent}">OutputProgressBar</w:Heading>
+				<p>The <code>OutputProgressBar</code> render a number value on a graphical progress bar.</p>
+				<p><strong>Pameters :</strong></p>
+				<ul>
+					<li><strong>color</strong> : color of the progress bar (DEFAULT, SUCCESS, INFO, WARNING, DANGER)</li>
+					<li><strong>striped</strong> : Strip decoration (default false)</li>
+					<li><strong>animated</strong> : Strip decoration animation, auto set striped attribute to true (default false)</li>
+					<li><strong>min</strong> : min value is used to compute the percentage.</li>
+					<li><strong>max</strong> : max value is used to compute the percentage.</li>
+					<li><strong>format</strong> : is used to display value ({0} the value, {1} the percentage, {2} min value, {4} max value).</li>
+					<li><strong>displayValue</strong> : displayValue if false the value is displayed for the screan readers in a hidden span.</li>
+				</ul>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:OutputProgressBar path="age" />
+						<w:OutputProgressBar path="age" color="SUCCESS"/>
+						<w:OutputProgressBar path="age" striped="true" max="200" color="INFO"/>
+						<w:OutputProgressBar path="age" animated="true" color="WARNING" />
+						<w:OutputProgressBar path="age" min="-10" max="150" color="DANGER" />
+						<w:OutputProgressBar path="age"  max="75" displayValue="true" format="the value is {0} on {3} so the progress is {1} percent" />
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:OutputProgressBar />
+<w:OutputProgressBar color="SUCCESS"/>
+<w:OutputProgressBar striped="true" max="200" color="INFO"/>
+<w:OutputProgressBar animated="true" color="WARNING" />
+<w:OutputProgressBar min="-10" max="150" color="DANGER" />
+]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+			
 			<!-- OutputList -->
 			<div>
 				<w:Heading level="3" navSpy="{tableOfContent}">OutputList</w:Heading>

@@ -53,7 +53,7 @@ public class OutputControlsView extends Composite {
 		public boolean rememberMe = false;
 		public boolean major = true;
 		public boolean notMajor = false;
-		public int age = Random.nextInt(100);
+		public int age = 65;
 		public double height = Random.nextInt(1000000) / 100D;
 		public Date birthdate = new DateParser("dd/MM/yyyy").parseOrNull("02/03/1985");
 		public String remarks = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lobortis elementum vestibulum. Aliquam luctus semper congue. Fusce placerat tempus lectus, et pulvinar elit aliquam eget. Suspendisse placerat vitae risus vitae sagittis. Suspendisse dignissim orci urna, in aliquam lectus pharetra eu. Donec velit elit, tincidunt semper mollis et, adipiscing vel dui. Morbi rhoncus dui sit amet libero gravida sagittis. Duis tincidunt luctus elit, ac cursus nisi tempus in. Fusce quis quam quam. Suspendisse hendrerit lobortis metus, non fermentum nibh tincidunt gravida.";
