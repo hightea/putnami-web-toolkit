@@ -31,6 +31,7 @@
 		<w:HTMLPanel ui:field="content">
 			<c:TypographyView navSpy="{tableOfContent}" />
 			<c:IconView navSpy="{tableOfContent}" />
+			<c:ImageView navSpy="{tableOfContent}" />
 			<c:ButtonsView navSpy="{tableOfContent}" />
 			<c:FormsView navSpy="{tableOfContent}" />
 			<c:InputControlsView navSpy="{tableOfContent}" />
