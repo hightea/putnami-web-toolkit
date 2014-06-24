@@ -49,7 +49,7 @@
 						</w:NavDropdown>
 						<w:NavDropdown label="Plugins" >
 							<w:NavLink label="Code editor" link="#!CodeEditor"/>
-<!-- 							<w:NavLink label="Google analytics" link="#!GoogleAnalytics"/> -->
+							<w:NavLink label="Google analytics" link="#!GoogleAnalytics"/>
 							<w:NavLink label="Ajax bot indexing" link="#!AjaxBotIndexing"/>
 						</w:NavDropdown>
 						<w:NavDropdown label="Samples" >

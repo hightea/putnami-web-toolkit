@@ -16,9 +16,15 @@
  */
 package fr.putnami.pwt.doc.client;
 
+import static fr.putnami.pwt.doc.client.application.ApplicationConfig.ANALYTICS_TRACKER_ID;
+import static fr.putnami.pwt.doc.client.application.ApplicationConfig.COOKIE_COUNT_VISIT;
+import static fr.putnami.pwt.doc.client.application.ApplicationConfig.DOMAIN;
+
+import com.google.common.base.Strings;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
 
@@ -28,11 +34,11 @@ import fr.putnami.pwt.core.mvp.client.MvpController;
 import fr.putnami.pwt.core.theme.client.CssLink;
 import fr.putnami.pwt.core.theme.client.Theme;
 import fr.putnami.pwt.core.theme.client.ThemeController;
-import fr.putnami.pwt.doc.client.application.ApplicationConfig;
 import fr.putnami.pwt.doc.client.application.DocumentationDisplay;
 import fr.putnami.pwt.doc.client.application.error.ErrorConstants;
 import fr.putnami.pwt.doc.client.application.error.UmbrellaExceptionHandler;
 import fr.putnami.pwt.doc.client.page.ajaxbot.AjaxBotIndexingPlace;
+import fr.putnami.pwt.doc.client.page.analytics.GoogleAnalyticsPlace;
 import fr.putnami.pwt.doc.client.page.binding.DataBindingPlace;
 import fr.putnami.pwt.doc.client.page.bootstrap.BootstrapPlace;
 import fr.putnami.pwt.doc.client.page.codeeditor.CodeEditorPlace;
@@ -63,14 +69,33 @@ public class DocumentationApp implements EntryPoint {
 			staticContent.getElement().removeFromParent();
 		}
 
+
 		Theme theme = new Theme();
 		theme.addLink(new CssLink("theme/doc/style/pwt-doc.css", 0));
 		ThemeController.get().installTheme(theme);
 
+		if (Cookies.isCookieEnabled()) {
+			int cnt = 0;
+			try {
+				String cntString = Cookies.getCookie(COOKIE_COUNT_VISIT);
+				if (!Strings.isNullOrEmpty(cntString)) {
+					cnt = Integer.parseInt(cntString);
+				}
+			}
+			catch (NumberFormatException e) {
+				cnt = 0;
+			}
+			cnt++;
+			Cookies.setCookie(COOKIE_COUNT_VISIT, "" + cnt);
+		}
+
+		GoogleAnalytics analytics = GoogleAnalytics.init(ANALYTICS_TRACKER_ID, DOMAIN);
+		analytics.forceSSL(true);
+		analytics.displayfeatures();
+		analytics.handleUncaughtException(true);
+
 		DocumentationDisplay display = new DocumentationDisplay();
 		RootPanel.get().add(display);
-
-		GoogleAnalytics.init(ApplicationConfig.ANALYTICS_TRACKER_ID, ApplicationConfig.DOMAIN).forceSSL(true);
 
 		SimpleErrorDisplayer errorDisplayer = new SimpleErrorDisplayer();
 		errorDisplayer.setConstants((ConstantsWithLookup) GWT.create(ErrorConstants.class));
@@ -94,7 +119,7 @@ public class DocumentationApp implements EntryPoint {
 		controller.registerActivity(ErrorsPlace.INSTANCE);
 		controller.registerActivity(CodeEditorPlace.INSTANCE);
 		controller.registerActivity(AjaxBotIndexingPlace.INSTANCE);
-		//		controller.registerActivity(GoogleAnalyticsPlace.INSTANCE);
+		controller.registerActivity(GoogleAnalyticsPlace.INSTANCE);
 		controller.registerActivity(SamplesPlace.INSTANCE);
 		controller.registerActivity(ContactsTablePlace.INSTANCE);
 		controller.registerActivity(AddressBookPlace.INSTANCE);

@@ -44,7 +44,6 @@
 						<w:Form ui:field="contactItemTemplate">
 							<strong><w:Anchor ui:field="openContactAnchor"><w:OutputText ui:field="contactName" path="name" tag="span"/></w:Anchor></strong>
 							 - <w:OutputText path="address.city" tag="span" />
-							<hr />
 						</w:Form>
 					</w:OutputList>
 				</w:ScrollPanel>

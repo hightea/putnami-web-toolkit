@@ -41,6 +41,8 @@ import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 
 import fr.putnami.pwt.core.mvp.client.MvpPlace;
+import fr.putnami.pwt.doc.client.page.ajaxbot.AjaxBotIndexingPlace;
+import fr.putnami.pwt.doc.client.page.analytics.GoogleAnalyticsPlace;
 import fr.putnami.pwt.doc.client.page.binding.DataBindingPlace;
 import fr.putnami.pwt.doc.client.page.bootstrap.BootstrapPlace;
 import fr.putnami.pwt.doc.client.page.codeeditor.CodeEditorPlace;
@@ -83,6 +85,8 @@ public class ExtratHtmlStatics {
 			extractPage(ServerCallsPlace.class);
 			extractPage(ErrorsPlace.class);
 			extractPage(CodeEditorPlace.class);
+			extractPage(AjaxBotIndexingPlace.class);
+			extractPage(GoogleAnalyticsPlace.class);
 			extractPage(SamplesPlace.class);
 			extractPage(ContactsTablePlace.class);
 			extractPage(AddressBookPlace.class);
