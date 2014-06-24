@@ -69,6 +69,7 @@ public class DefaultErrorManager extends ErrorManager {
 		GWT.setUncaughtExceptionHandler(this);
 	}
 
+	@Override
 	public void registerErrorHandlers(ErrorHandler... handlers) {
 		if (handlers != null) {
 			for (ErrorHandler handler : handlers) {
@@ -77,6 +78,7 @@ public class DefaultErrorManager extends ErrorManager {
 		}
 	}
 
+	@Override
 	public void registerErrorHandler(ErrorHandler handler) {
 		if (handler != null) {
 			errorHandlers.add(handler);
@@ -84,11 +86,20 @@ public class DefaultErrorManager extends ErrorManager {
 		}
 	}
 
+	@Override
+	public void removeErrorHandler(ErrorHandler handler) {
+		if (handler != null) {
+			errorHandlers.remove(handler);
+		}
+	}
+
+	@Override
 	public void setDefaultErrorHandler(ErrorHandler handler) {
 		assert handler != null : "The default Error Handler should not be null";
 		this.defaultHandler = handler;
 	}
 
+	@Override
 	public List<ErrorHandler> getErrorHandlers() {
 		return errorHandlers;
 	}
@@ -103,14 +114,17 @@ public class DefaultErrorManager extends ErrorManager {
 		defaultHandler.handle(throwable);
 	}
 
+	@Override
 	public boolean hasErrorDisplayer() {
 		return errorDisplayer != null;
 	}
 
+	@Override
 	public ErrorDisplayer getErrorDisplayer() {
 		return errorDisplayer;
 	}
 
+	@Override
 	public void setErrorDisplayer(ErrorDisplayer errorDisplayer) {
 		this.errorDisplayer = errorDisplayer;
 	}

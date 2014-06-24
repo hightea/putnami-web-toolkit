@@ -46,4 +46,6 @@ public abstract class ErrorManager implements UncaughtExceptionHandler {
 
 	public abstract void setErrorDisplayer(ErrorDisplayer errorDisplayer);
 
+	public abstract void removeErrorHandler(ErrorHandler errorHandler);
+
 }
