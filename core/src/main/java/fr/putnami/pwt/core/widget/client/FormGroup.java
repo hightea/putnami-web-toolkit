@@ -35,26 +35,26 @@ import fr.putnami.pwt.core.model.client.base.HasLabelEditor;
 import fr.putnami.pwt.core.model.client.base.HasOutputEditorFactory;
 import fr.putnami.pwt.core.model.client.base.HasReadonly;
 import fr.putnami.pwt.core.model.client.base.HasWidgetFactory;
+import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractForm.Type;
 import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
-import fr.putnami.pwt.core.widget.client.base.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.HasFormType;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class FormGroup<T> extends AbstractPanel implements
-		HasFormType,
-		CloneableWidget,
-		EditorValue<T>,
-		HasLabelEditor,
-		HasEditorProvider,
-		HasWidgetFactory,
-		HasOutputEditorFactory<T>,
-		HasInputEditorFactory<T>,
-		HasReadonly,
-		EditorLabel,
-		EditorError
+HasFormType,
+CloneableWidget,
+EditorValue<T>,
+HasLabelEditor,
+HasEditorProvider,
+HasWidgetFactory,
+HasOutputEditorFactory<T>,
+HasInputEditorFactory<T>,
+HasReadonly,
+EditorLabel,
+EditorError
 {
 
 	private static final CssStyle STYLE_FORM_GROUP = new SimpleStyle("form-group");

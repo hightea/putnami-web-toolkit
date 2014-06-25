@@ -58,21 +58,21 @@ import fr.putnami.pwt.core.model.client.base.HasOutputEditorFactory;
 import fr.putnami.pwt.core.model.client.model.Model;
 import fr.putnami.pwt.core.model.client.model.ModelCollection;
 import fr.putnami.pwt.core.model.client.visitor.ReadonlyVisitor;
-import fr.putnami.pwt.core.widget.client.base.CssStyle;
+import fr.putnami.pwt.core.theme.client.CssStyle;
+import fr.putnami.pwt.core.theme.client.IconFont;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
-import fr.putnami.pwt.core.widget.client.constant.IconType;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent.Handler;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class InputList<T> extends List implements
-		EditorCollection<T>,
-		EditorInput<Collection<T>>,
-		EditorModel<T>,
-		HasDrawable,
-		HasEditorProvider,
-		HasInputEditorFactory<T>,
-		HasOutputEditorFactory<T>
+EditorCollection<T>,
+EditorInput<Collection<T>>,
+EditorModel<T>,
+HasDrawable,
+HasEditorProvider,
+HasInputEditorFactory<T>,
+HasOutputEditorFactory<T>
 {
 
 	private static final CssStyle STYLE_ITEM_CONTAINER = new SimpleStyle("list-element-container");
@@ -89,7 +89,7 @@ public class InputList<T> extends List implements
 			addButton = new Button<T>();
 			addButton.setType(Button.Type.LINK);
 			addButton.setSize(Button.Size.SMALL);
-			addButton.setIconType(IconType.ADD);
+			addButton.setIconType(IconFont.ICON_ADD);
 			add(addButton);
 			setTabIndex(0);
 			addButton.addButtonHandler(this);

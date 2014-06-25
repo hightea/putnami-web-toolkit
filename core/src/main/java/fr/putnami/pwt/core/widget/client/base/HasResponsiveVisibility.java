@@ -16,6 +16,8 @@
  */
 package fr.putnami.pwt.core.widget.client.base;
 
+import fr.putnami.pwt.core.theme.client.CssStyle;
+
 public interface HasResponsiveVisibility {
 
 	enum XsVisibility implements CssStyle {

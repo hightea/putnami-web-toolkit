@@ -48,23 +48,24 @@ import fr.putnami.pwt.core.model.client.base.HasDriver;
 import fr.putnami.pwt.core.model.client.base.HasReadonly;
 import fr.putnami.pwt.core.model.client.model.Model;
 import fr.putnami.pwt.core.model.client.visitor.ReadonlyVisitor;
+import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public abstract class AbstractForm<T> extends AbstractHTMLPanel implements
-		EditorLeaf,
-		EditorModel<T>,
-		EditorOutput<T>,
-		EditorInput<T>,
-		HasReadonly,
-		HasDrawable,
-		HasDriver<T, ModelDriver<T>>,
-		HasFormType,
-		HasDirtyHandlers,
-		HasFlushSuccessHandlers,
-		HasFlushErrorHandlers,
-		HasResetDisplayHandlers,
-		HasDataValidationHandlers
+EditorLeaf,
+EditorModel<T>,
+EditorOutput<T>,
+EditorInput<T>,
+HasReadonly,
+HasDrawable,
+HasDriver<T, ModelDriver<T>>,
+HasFormType,
+HasDirtyHandlers,
+HasFlushSuccessHandlers,
+HasFlushErrorHandlers,
+HasResetDisplayHandlers,
+HasDataValidationHandlers
 {
 
 	public enum Type implements CssStyle {

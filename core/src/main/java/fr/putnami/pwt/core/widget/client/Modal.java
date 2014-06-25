@@ -31,8 +31,8 @@ import com.google.gwt.user.client.ui.Widget;
 
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.model.client.base.HasDrawable;
+import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
-import fr.putnami.pwt.core.widget.client.base.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.HasFooter;
 import fr.putnami.pwt.core.widget.client.base.HasHeader;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
@@ -40,9 +40,9 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class Modal extends AbstractPanel implements
-		HasOneWidget,
-		CloneableWidget,
-		HasDrawable {
+HasOneWidget,
+CloneableWidget,
+HasDrawable {
 
 	private static final CssStyle STYLE_MODAL = new SimpleStyle("modal");
 	private static final CssStyle STYLE_DIALOG = new SimpleStyle("modal-dialog");
@@ -158,7 +158,7 @@ public class Modal extends AbstractPanel implements
 		if (header == null) {
 			return;
 		}
-		assert (this.header == null) : "header may only be set once";
+		assert this.header == null : "header may only be set once";
 		this.header = header;
 	}
 
@@ -166,7 +166,7 @@ public class Modal extends AbstractPanel implements
 		if (footer == null) {
 			return;
 		}
-		assert (this.footer == null) : "footer may only be set once";
+		assert this.footer == null : "footer may only be set once";
 		this.footer = footer;
 		StyleUtils.addStyle(footer, STYLE_FOOTER);
 	}

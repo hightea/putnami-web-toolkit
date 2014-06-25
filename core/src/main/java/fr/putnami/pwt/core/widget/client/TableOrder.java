@@ -38,17 +38,16 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import fr.putnami.pwt.core.event.client.HandlerRegistrationCollection;
+import fr.putnami.pwt.core.theme.client.CssStyle;
+import fr.putnami.pwt.core.theme.client.IconFont;
 import fr.putnami.pwt.core.widget.client.base.AbstractTableCell;
 import fr.putnami.pwt.core.widget.client.base.AbstractTableColumn;
-import fr.putnami.pwt.core.widget.client.base.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
-import fr.putnami.pwt.core.widget.client.constant.IconType;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class TableOrder<T> extends AbstractTableColumn<T> {
 
 	private static final CssStyle STYLE_ROW_DRAGING = new SimpleStyle("success");
-
 	private static final CssStyle STYLE_NO_SELECTION = new SimpleStyle("no-selection");
 
 	private class TDHandle extends AbstractTableCell<T> {
@@ -58,7 +57,7 @@ public class TableOrder<T> extends AbstractTableColumn<T> {
 		public TDHandle() {
 			super(TableCellElement.TAG_TD);
 			dragIcon = new Icon();
-			dragIcon.setType(IconType.DRAG);
+			dragIcon.setType(IconFont.ICON_DRAG);
 			dragIcon.addDomHandler(mouseHandler, MouseDownEvent.getType());
 			dragIcon.addDomHandler(mouseHandler, ClickEvent.getType());
 			append(dragIcon);
@@ -171,14 +170,14 @@ public class TableOrder<T> extends AbstractTableColumn<T> {
 	}
 
 	private native static void disableTextSelectInternal(Element e, boolean disable)
-	/*-{ 
-	    if (disable) { 
-	      e.ondrag = function () { return false; }; 
-	      e.onselectstart = function () { return false; }; 
-	    } else { 
-	      e.ondrag = null; 
-	      e.onselectstart = null; 
-	    } 
+	/*-{
+	    if (disable) {
+	      e.ondrag = function () { return false; };
+	      e.onselectstart = function () { return false; };
+	    } else {
+	      e.ondrag = null;
+	      e.onselectstart = null;
+	    }
 	  }-*/;
 
 }

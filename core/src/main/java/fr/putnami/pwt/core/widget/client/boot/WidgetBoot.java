@@ -19,15 +19,18 @@ package fr.putnami.pwt.core.widget.client.boot;
 import com.google.gwt.core.client.EntryPoint;
 
 import fr.putnami.pwt.core.theme.client.CssLink;
+import fr.putnami.pwt.core.theme.client.Theme;
 import fr.putnami.pwt.core.theme.client.ThemeController;
 
 public class WidgetBoot implements EntryPoint {
 
 	@Override
 	public void onModuleLoad() {
-		ThemeController.get().addDefaultStyle(new CssLink("theme/default/style/bootstrap.min.css", -2));
-		ThemeController.get().addDefaultStyle(new CssLink("theme/default/style/fontello.css", -1));
-		ThemeController.get().addDefaultStyle(new CssLink("theme/default/style/pwt-core.css", 0));
+		Theme defaultTheme = ThemeController.get().getDefaultTheme();
+		defaultTheme.addLink(new CssLink("theme/default/style/bootstrap.min.css", -2));
+		defaultTheme.addLink(new CssLink("theme/default/style/pwt-core.css", 0));
+
+		defaultTheme.setIconFont(new FontAwesomeIcons());
 	}
 
 }

@@ -18,9 +18,9 @@ package fr.putnami.pwt.core.widget.client;
 
 import com.google.gwt.dom.client.DivElement;
 
+import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.Button.Size;
 import fr.putnami.pwt.core.widget.client.Button.Type;
-import fr.putnami.pwt.core.widget.client.base.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.SimpleDropdown;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;

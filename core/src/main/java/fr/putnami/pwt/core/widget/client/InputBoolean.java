@@ -33,13 +33,13 @@ import com.google.web.bindery.event.shared.HandlerRegistration;
 import fr.putnami.pwt.core.editor.client.EditorLabel;
 import fr.putnami.pwt.core.editor.client.event.DirtyEvent;
 import fr.putnami.pwt.core.editor.client.event.DirtyEvent.Handler;
+import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractInput;
-import fr.putnami.pwt.core.widget.client.base.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class InputBoolean extends AbstractInput<Boolean> implements
-		HasText, EditorLabel {
+HasText, EditorLabel {
 
 	private static final CssStyle STYLE_CHECKBOX = new SimpleStyle("checkbox");
 

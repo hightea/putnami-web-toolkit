@@ -31,12 +31,13 @@ import fr.putnami.pwt.core.model.client.ModelDriver;
 import fr.putnami.pwt.core.model.client.base.HasDrawable;
 import fr.putnami.pwt.core.model.client.model.Model;
 import fr.putnami.pwt.core.model.client.util.ModelUtils;
+import fr.putnami.pwt.core.theme.client.IconFont;
 import fr.putnami.pwt.core.widget.client.Button.Type;
 import fr.putnami.pwt.core.widget.client.base.AbstractTableColumnAspect;
-import fr.putnami.pwt.core.widget.client.constant.IconType;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 
 public class TableSort<T> extends AbstractTableColumnAspect<T> implements HasDrawable {
+
 
 	private final Button<T> button = new Button<T>();
 
@@ -53,7 +54,7 @@ public class TableSort<T> extends AbstractTableColumnAspect<T> implements HasDra
 	}
 
 	private void endConstruct() {
-		button.setIconType(IconType.SORT);
+		button.setIconType(IconFont.ICON_SORT);
 		button.setType(Type.ICON);
 		button.setSize(Button.Size.SMALL);
 	}
@@ -80,13 +81,13 @@ public class TableSort<T> extends AbstractTableColumnAspect<T> implements HasDra
 	@Override
 	public void redraw() {
 		if (Boolean.TRUE.equals(asc)) {
-			button.setIconType(IconType.SORT_DOWN);
+			button.setIconType(IconFont.ICON_SORT_DOWN);
 		}
 		else if (Boolean.FALSE.equals(asc)) {
-			button.setIconType(IconType.SORT_UP);
+			button.setIconType(IconFont.ICON_SORT_UP);
 		}
 		else {
-			button.setIconType(IconType.SORT);
+			button.setIconType(IconFont.ICON_SORT);
 		}
 		button.setActive(asc != null);
 	}

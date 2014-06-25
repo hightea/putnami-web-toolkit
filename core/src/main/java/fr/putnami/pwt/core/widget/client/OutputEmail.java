@@ -20,8 +20,8 @@ import com.google.gwt.dom.client.AnchorElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.user.client.ui.IsWidget;
 
+import fr.putnami.pwt.core.theme.client.IconFont;
 import fr.putnami.pwt.core.widget.client.base.AbstractOutput;
-import fr.putnami.pwt.core.widget.client.constant.IconType;
 import fr.putnami.pwt.core.widget.client.helper.StringRenderer;
 
 public class OutputEmail extends AbstractOutput<String> {
@@ -45,7 +45,7 @@ public class OutputEmail extends AbstractOutput<String> {
 		if (value != null) {
 			AnchorElement anchor = Document.get().createAnchorElement();
 			Icon icon = new Icon();
-			icon.setType(IconType.MAIL);
+			icon.setType(IconFont.ICON_MAIL);
 			anchor.setHref("mailto:" + value);
 			anchor.appendChild(icon.getElement());
 			anchor.appendChild(new Text(value).getElement());

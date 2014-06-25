@@ -25,16 +25,26 @@ import com.google.common.collect.Lists;
 public class Theme {
 
 	private final List<CssLink> links = Lists.newArrayList();
+	private IconFont iconFontCss;
 
 	public void addLink(CssLink link) {
 		if (!links.contains(link)) {
 			links.add(link);
 		}
+		Collections.sort(links);
 	}
 
 	public Iterable<CssLink> getLinks() {
-		Collections.sort(links);
 		return Iterables.unmodifiableIterable(links);
 	}
+
+	public IconFont getIconFont() {
+		return iconFontCss;
+	}
+
+	public void setIconFont(IconFont iconFontCss) {
+		this.iconFontCss = iconFontCss;
+	}
+
 
 }

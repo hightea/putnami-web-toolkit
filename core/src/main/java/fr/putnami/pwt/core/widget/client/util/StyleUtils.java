@@ -20,7 +20,7 @@ import com.google.common.base.CaseFormat;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Widget;
 
-import fr.putnami.pwt.core.widget.client.base.CssStyle;
+import fr.putnami.pwt.core.theme.client.CssStyle;
 
 public final class StyleUtils {
 

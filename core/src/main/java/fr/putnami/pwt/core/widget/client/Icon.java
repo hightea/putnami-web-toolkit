@@ -19,9 +19,9 @@ package fr.putnami.pwt.core.widget.client;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.user.client.ui.Widget;
 
-import fr.putnami.pwt.core.widget.client.base.CssStyle;
+import fr.putnami.pwt.core.theme.client.CssStyle;
+import fr.putnami.pwt.core.theme.client.ThemeController;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
-import fr.putnami.pwt.core.widget.client.constant.IconType;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class Icon extends Widget {
@@ -51,7 +51,7 @@ public class Icon extends Widget {
 
 	private static final String ICON_TAG_NAME = "i";
 
-	private IconType type;
+	private String type;
 	private Color color;
 
 	private boolean light;
@@ -60,12 +60,12 @@ public class Icon extends Widget {
 		this.setElement(Document.get().createElement(Icon.ICON_TAG_NAME));
 	}
 
-	public void setType(IconType type) {
-		StyleUtils.addStyle(this, type);
+	public void setType(String type) {
+		StyleUtils.addStyle(this, ThemeController.get().getIconStyle(type));
 		this.type = type;
 	}
 
-	public IconType getType() {
+	public String getType() {
 		return type;
 	}
 

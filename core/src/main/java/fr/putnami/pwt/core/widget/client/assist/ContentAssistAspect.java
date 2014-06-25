@@ -42,9 +42,9 @@ import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 
+import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.Nav.LinkStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
-import fr.putnami.pwt.core.widget.client.base.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.util.AnchorUtils;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
@@ -194,7 +194,7 @@ public class ContentAssistAspect {
 
 		@Override
 		public void showSuggestions(final IsWidget textInput, Collection<? extends Suggestion> suggestions, final SuggestionCallback callback) {
-			boolean anySuggestions = (suggestions != null && suggestions.size() > 0);
+			boolean anySuggestions = suggestions != null && suggestions.size() > 0;
 			if (!anySuggestions && hideWhenEmpty) {
 				hideSuggestions();
 				return;

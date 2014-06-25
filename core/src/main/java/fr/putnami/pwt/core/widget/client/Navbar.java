@@ -27,10 +27,10 @@ import com.google.gwt.user.client.ui.Widget;
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.mvp.client.MvpController;
 import fr.putnami.pwt.core.mvp.client.event.StartActivityEvent;
+import fr.putnami.pwt.core.theme.client.CssStyle;
+import fr.putnami.pwt.core.theme.client.IconFont;
 import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
-import fr.putnami.pwt.core.widget.client.base.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
-import fr.putnami.pwt.core.widget.client.constant.IconType;
 import fr.putnami.pwt.core.widget.client.helper.CollapseHelper;
 import fr.putnami.pwt.core.widget.client.util.AnchorUtils;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
@@ -110,7 +110,7 @@ CloneableWidget {
 
 		private Element createIcon() {
 			Icon icon = new Icon();
-			icon.setType(IconType.MENU);
+			icon.setType(IconFont.ICON_MENU);
 			return icon.getElement();
 		}
 	}

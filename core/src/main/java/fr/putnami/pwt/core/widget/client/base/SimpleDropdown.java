@@ -41,10 +41,10 @@ import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.IsWidget;
 
+import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.DropdownHeader;
 import fr.putnami.pwt.core.widget.client.Icon;
 import fr.putnami.pwt.core.widget.client.Nav;
-import fr.putnami.pwt.core.widget.client.constant.IconType;
 import fr.putnami.pwt.core.widget.client.helper.CompositeFocusHelper;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
@@ -72,7 +72,7 @@ public class SimpleDropdown extends AbstractPanel implements ClickHandler, KeyPr
 
 	private boolean open = false;
 
-	private IconType iconType;
+	private String iconType;
 	private String name;
 	private String label;
 
@@ -117,11 +117,11 @@ public class SimpleDropdown extends AbstractPanel implements ClickHandler, KeyPr
 		this.name = name;
 	}
 
-	public IconType getIconType() {
+	public String getIconType() {
 		return iconType;
 	}
 
-	public void setIconType(IconType iconType) {
+	public void setIconType(String iconType) {
 		this.iconType = iconType;
 		resetInner();
 	}
@@ -161,10 +161,6 @@ public class SimpleDropdown extends AbstractPanel implements ClickHandler, KeyPr
 	}
 
 	private void resetInner() {
-		if (iconType == null) {
-			iconType = IconType.get(name);
-		}
-
 		anchor.getElement().removeAllChildren();
 		if (iconType != null) {
 			Icon icon = new Icon();

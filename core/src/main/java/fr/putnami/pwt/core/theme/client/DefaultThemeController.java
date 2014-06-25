@@ -16,48 +16,65 @@
  */
 package fr.putnami.pwt.core.theme.client;
 
-import java.util.Collections;
-import java.util.List;
-
-import com.google.common.collect.Lists;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.HeadElement;
 import com.google.gwt.dom.client.LinkElement;
 import com.google.gwt.dom.client.NodeList;
 
+import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
+
 public class DefaultThemeController extends ThemeController {
 
 	private HeadElement head;
 
-	private final List<CssLink> defaultLinks = Lists.newArrayList();
+	private final Theme defaultTheme = new Theme();
 	private Theme currentTheme;
+	private IconFont icons;
 
 	private boolean isInit = false;
 
 	@Override
-	public void addDefaultStyle(CssLink link) {
-		if (!defaultLinks.contains(link)) {
-			defaultLinks.add(link);
-		}
+	public Theme getDefaultTheme() {
+		return defaultTheme;
 	}
 
 	@Override
 	public void installTheme(Theme theme) {
-		initThemeController();
+		removeCssLinks();
 		if (currentTheme != null) {
 			for (CssLink link : currentTheme.getLinks()) {
 				link.getLink().removeFromParent();
 			}
 		}
-		resetDefault();
 		this.currentTheme = theme;
-		for (CssLink link : theme.getLinks()) {
-			getHead().appendChild(link.getLink());
+		resetTheme();
+	}
+
+	@Override
+	public void resetTheme() {
+		insertLinks(this.defaultTheme);
+		insertLinks(this.currentTheme);
+		if (currentTheme != null && currentTheme.getIconFont() != null) {
+			icons = currentTheme.getIconFont();
+		}
+		else if (defaultTheme.getIconFont() != null) {
+			icons = defaultTheme.getIconFont();
+		}
+		if (icons != null) {
+			getHead().appendChild(icons.getLink());
 		}
 	}
 
-	private void initThemeController() {
+	private void insertLinks(Theme theme) {
+		if (theme != null) {
+			for (CssLink link : theme.getLinks()) {
+				getHead().appendChild(link.getLink());
+			}
+		}
+	}
+
+	private void removeCssLinks() {
 		if (isInit) {
 			return;
 		}
@@ -70,13 +87,6 @@ public class DefaultThemeController extends ThemeController {
 		}
 	}
 
-	private void resetDefault() {
-		Collections.sort(defaultLinks);
-		for (CssLink link : defaultLinks) {
-			getHead().appendChild(link.getLink());
-		}
-	}
-
 	private HeadElement getHead() {
 		if (head == null) {
 			Element elt = Document.get().getElementsByTagName("head").getItem(0);
@@ -85,6 +95,14 @@ public class DefaultThemeController extends ThemeController {
 			head = HeadElement.as(elt);
 		}
 		return head;
+	}
+
+	@Override
+	public CssStyle getIconStyle(String iconName) {
+		if (icons == null) {
+			return SimpleStyle.EMPTY_STYLE;
+		}
+		return icons.getStyle(iconName);
 	}
 
 }

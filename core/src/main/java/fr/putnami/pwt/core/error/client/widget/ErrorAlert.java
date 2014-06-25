@@ -25,11 +25,11 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Label;
 
 import fr.putnami.pwt.core.error.client.ErrorDisplayer.Severity;
+import fr.putnami.pwt.core.theme.client.IconFont;
 import fr.putnami.pwt.core.widget.client.Alert;
 import fr.putnami.pwt.core.widget.client.Alert.Type;
 import fr.putnami.pwt.core.widget.client.Button;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
-import fr.putnami.pwt.core.widget.client.constant.IconType;
 import fr.putnami.pwt.core.widget.client.event.CollapseEvent;
 import fr.putnami.pwt.core.widget.client.helper.CollapseHelper;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
@@ -85,10 +85,10 @@ public class ErrorAlert implements CollapseEvent.Handler {
 	@Override
 	public void onCollapse(CollapseEvent event) {
 		if (event.isCollapsed()) {
-			detailButton.setIconType(IconType.ANGLE_DOUBLE_RIGHT);
+			detailButton.setIconType(IconFont.ICON_ANGLE_DOUBLE_RIGHT);
 		}
 		else {
-			detailButton.setIconType(IconType.ANGLE_DOUBLE_DOWN);
+			detailButton.setIconType(IconFont.ICON_ANGLE_DOUBLE_DOWN);
 		}
 	}
 

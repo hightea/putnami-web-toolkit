@@ -34,9 +34,9 @@ import com.google.web.bindery.event.shared.HandlerRegistration;
 import fr.putnami.pwt.core.editor.client.EditorValue;
 import fr.putnami.pwt.core.event.client.EventBus;
 import fr.putnami.pwt.core.model.client.base.HasDrawable;
+import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractTableCell;
 import fr.putnami.pwt.core.widget.client.base.AbstractTableColumn;
-import fr.putnami.pwt.core.widget.client.base.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.event.SelectionEvent;
 import fr.putnami.pwt.core.widget.client.event.SelectionEvent.HasSelectionHandlers;
@@ -51,9 +51,9 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 	}
 
 	private class TDSelecter extends AbstractTableCell<T> implements
-			ClickHandler,
-			EditorValue<T>,
-			HasDrawable {
+	ClickHandler,
+	EditorValue<T>,
+	HasDrawable {
 
 		private final InputElement inputElem;
 

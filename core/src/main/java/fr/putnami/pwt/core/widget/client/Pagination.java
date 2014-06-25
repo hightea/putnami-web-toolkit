@@ -27,8 +27,8 @@ import com.google.web.bindery.event.shared.HandlerRegistration;
 
 import fr.putnami.pwt.core.event.client.EventBus;
 import fr.putnami.pwt.core.model.client.base.HasDrawable;
+import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractComposite;
-import fr.putnami.pwt.core.widget.client.base.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.event.PageChangeEvent;
 import fr.putnami.pwt.core.widget.client.event.PageChangeEvent.Handler;
@@ -231,7 +231,7 @@ public class Pagination extends AbstractComposite implements HasPageChangeHandle
 	@Override
 	public void redraw() {
 		int nbPageToDraw = Math.min(nbPageMax, nbPage);
-		currentStartPage = currentPage - (nbPageToDraw / 2);
+		currentStartPage = currentPage - nbPageToDraw / 2;
 		redrawFromCurrentStart();
 	}
 

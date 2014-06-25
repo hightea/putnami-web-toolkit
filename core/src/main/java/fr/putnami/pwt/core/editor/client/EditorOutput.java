@@ -19,7 +19,7 @@ package fr.putnami.pwt.core.editor.client;
 import com.google.gwt.user.client.ui.IsWidget;
 
 import fr.putnami.pwt.core.editor.client.factory.OutputFactory;
-import fr.putnami.pwt.core.widget.client.base.CssStyle;
+import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 
 public interface EditorOutput<T> extends EditorValue<T>, OutputFactory, IsWidget {

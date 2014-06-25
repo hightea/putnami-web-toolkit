@@ -33,7 +33,12 @@ public abstract class ThemeController {
 
 	}
 
-	public abstract void addDefaultStyle(CssLink link);
+	public abstract Theme getDefaultTheme();
 
 	public abstract void installTheme(Theme theme);
+
+	public abstract void resetTheme();
+
+	public abstract CssStyle getIconStyle(String iconName);
+
 }

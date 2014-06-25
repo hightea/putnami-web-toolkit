@@ -64,7 +64,7 @@ import fr.putnami.pwt.core.editor.client.validator.Validator;
 import fr.putnami.pwt.core.event.client.EventBus;
 import fr.putnami.pwt.core.model.client.base.HasDrawable;
 import fr.putnami.pwt.core.model.client.base.HasHtmlId;
-import fr.putnami.pwt.core.widget.client.base.CssStyle;
+import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.constant.WidgetParams;
 import fr.putnami.pwt.core.widget.client.event.AskFocusEvent;

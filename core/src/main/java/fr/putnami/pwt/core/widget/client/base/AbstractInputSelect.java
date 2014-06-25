@@ -42,6 +42,7 @@ import fr.putnami.pwt.core.event.client.EventBus;
 import fr.putnami.pwt.core.model.client.base.HasDrawable;
 import fr.putnami.pwt.core.model.client.base.HasMessageHelper;
 import fr.putnami.pwt.core.model.client.base.HasPlaceholder;
+import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.ButtonDropdown;
 import fr.putnami.pwt.core.widget.client.DropdownHeader;
 import fr.putnami.pwt.core.widget.client.NavLink;
@@ -51,11 +52,11 @@ import fr.putnami.pwt.core.widget.client.helper.CompositeFocusHelper;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public abstract class AbstractInputSelect<T, U> extends AbstractInput<U> implements
-		HasValueChangeHandlers<U>,
-		ValueChangeHandler<U>,
-		HasPlaceholder,
-		HasMessageHelper,
-		HasDrawable {
+HasValueChangeHandlers<U>,
+ValueChangeHandler<U>,
+HasPlaceholder,
+HasMessageHelper,
+HasDrawable {
 
 	private static final CssStyle STYLE_INPUT_SELECT = new SimpleStyle("input-select");
 

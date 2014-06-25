@@ -36,10 +36,9 @@ import com.google.web.bindery.event.shared.HandlerRegistration;
 import fr.putnami.pwt.core.editor.client.EditorLabel;
 import fr.putnami.pwt.core.editor.client.EditorValue;
 import fr.putnami.pwt.core.event.client.HandlerRegistrationCollection;
+import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractWidget;
-import fr.putnami.pwt.core.widget.client.base.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
-import fr.putnami.pwt.core.widget.client.constant.IconType;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent.Handler;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent.HasButtonHandlers;
@@ -47,12 +46,12 @@ import fr.putnami.pwt.core.widget.client.util.AnchorUtils;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class Button<T> extends AbstractWidget implements
-		HasHTML,
-		EditorValue<T>,
-		EditorLabel,
-		HasButtonHandlers,
-		HasAllFocusHandlers,
-		Focusable {
+HasHTML,
+EditorValue<T>,
+EditorLabel,
+HasButtonHandlers,
+HasAllFocusHandlers,
+Focusable {
 
 	private static final CssStyle STYLE_BUTTON = new SimpleStyle("btn");
 	private static final CssStyle STYLE_BLOCK = new SimpleStyle("btn-block");
@@ -122,7 +121,7 @@ public class Button<T> extends AbstractWidget implements
 	private boolean disabled = false;
 	private boolean active = false;
 
-	private IconType iconType;
+	private String iconType;
 
 	private String name;
 	private String text;
@@ -214,11 +213,11 @@ public class Button<T> extends AbstractWidget implements
 		}
 	}
 
-	public IconType getIconType() {
+	public String getIconType() {
 		return iconType;
 	}
 
-	public void setIconType(IconType iconType) {
+	public void setIconType(String iconType) {
 		this.iconType = iconType;
 		resetInner();
 	}
@@ -280,10 +279,6 @@ public class Button<T> extends AbstractWidget implements
 	}
 
 	private void resetInner() {
-		if (iconType == null) {
-			iconType = IconType.get(name);
-		}
-
 		element.removeAllChildren();
 		if (iconType != null) {
 			Icon icon = new Icon();

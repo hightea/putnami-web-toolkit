@@ -30,7 +30,6 @@ import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.model.client.base.HasDrawable;
 import fr.putnami.pwt.core.widget.client.Nav.LinkStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
-import fr.putnami.pwt.core.widget.client.constant.IconType;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class NavLink extends AbstractPanel implements Nav.IsNavContent, CloneableWidget, ClickHandler, ValueChangeHandler<String>, HasDrawable {
@@ -43,7 +42,7 @@ public class NavLink extends AbstractPanel implements Nav.IsNavContent, Cloneabl
 	private ScheduledCommand command;
 	private String link;
 
-	private IconType iconType;
+	private String iconType;
 	private String name;
 	private String label;
 
@@ -98,11 +97,11 @@ public class NavLink extends AbstractPanel implements Nav.IsNavContent, Cloneabl
 		this.name = name;
 	}
 
-	public IconType getIconType() {
+	public String getIconType() {
 		return iconType;
 	}
 
-	public void setIconType(IconType iconType) {
+	public void setIconType(String iconType) {
 		this.iconType = iconType;
 		resetInner();
 	}
@@ -174,10 +173,6 @@ public class NavLink extends AbstractPanel implements Nav.IsNavContent, Cloneabl
 	}
 
 	private void resetInner() {
-		if (iconType == null && IconType.get(name) != null) {
-			iconType = IconType.get(name);
-		}
-
 		anchor.clear();
 		if (iconType != null) {
 			Icon icon = new Icon();

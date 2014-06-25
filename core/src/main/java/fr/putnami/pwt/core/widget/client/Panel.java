@@ -25,8 +25,8 @@ import com.google.web.bindery.event.shared.HandlerRegistration;
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.event.client.EventBus;
 import fr.putnami.pwt.core.model.client.base.HasDrawable;
+import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
-import fr.putnami.pwt.core.widget.client.base.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.HasFooter;
 import fr.putnami.pwt.core.widget.client.base.HasHeader;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
@@ -38,10 +38,10 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class Panel extends AbstractPanel implements
-		CloneableWidget,
-		HasOneWidget,
-		HasDrawable,
-		HasCollapseHandlers {
+CloneableWidget,
+HasOneWidget,
+HasDrawable,
+HasCollapseHandlers {
 
 	private static final CssStyle STYLE_PANEL = new SimpleStyle("panel");
 	private static final CssStyle STYLE_BODY = new SimpleStyle("panel-body");
@@ -161,7 +161,7 @@ public class Panel extends AbstractPanel implements
 		if (header == null) {
 			return;
 		}
-		assert (this.header == null) : "heading may only be set once";
+		assert this.header == null : "heading may only be set once";
 		this.header = header;
 		StyleUtils.addStyle(header, STYLE_HEADING);
 		redraw();
@@ -175,7 +175,7 @@ public class Panel extends AbstractPanel implements
 		if (footer == null) {
 			return;
 		}
-		assert (this.footer == null) : "footer may only be set once";
+		assert this.footer == null : "footer may only be set once";
 		this.footer = footer;
 		StyleUtils.addStyle(footer, STYLE_FOOTER);
 		redraw();

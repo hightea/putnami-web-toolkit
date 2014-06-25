@@ -23,8 +23,8 @@ import com.google.common.collect.Lists;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.user.client.ui.IsWidget;
 
+import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractHTMLPanel;
-import fr.putnami.pwt.core.widget.client.base.CssStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class GridColumn extends AbstractHTMLPanel {
@@ -34,7 +34,7 @@ public class GridColumn extends AbstractHTMLPanel {
 
 		public SizeStyle(String preffix, int size) {
 			super();
-			assert (size >= 0 && size <= 12) : "Invalid column size";
+			assert size >= 0 && size <= 12 : "Invalid column size";
 
 			this.preffix = preffix;
 			this.size = size;
@@ -66,7 +66,7 @@ public class GridColumn extends AbstractHTMLPanel {
 
 		public OffsetStyle(String preffix, int size) {
 			super();
-			assert (size >= 0 && size < 12) : "Invalid column size";
+			assert size >= 0 && size < 12 : "Invalid column size";
 
 			this.preffix = preffix;
 			this.size = size;

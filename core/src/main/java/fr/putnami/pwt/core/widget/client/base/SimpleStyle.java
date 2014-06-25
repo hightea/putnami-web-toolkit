@@ -16,7 +16,10 @@
  */
 package fr.putnami.pwt.core.widget.client.base;
 
+import fr.putnami.pwt.core.theme.client.CssStyle;
+
 public final class SimpleStyle implements CssStyle {
+	public static final CssStyle EMPTY_STYLE = new SimpleStyle(null);
 
 	private final String style;
 

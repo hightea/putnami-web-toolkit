@@ -32,16 +32,17 @@ import fr.putnami.pwt.core.editor.client.event.DirtyEvent;
 import fr.putnami.pwt.core.editor.client.event.DirtyEvent.Handler;
 import fr.putnami.pwt.core.editor.client.validator.Validator;
 import fr.putnami.pwt.core.model.client.base.HasPlaceholder;
+import fr.putnami.pwt.core.theme.client.IconFont;
 import fr.putnami.pwt.core.widget.client.Button.Type;
-import fr.putnami.pwt.core.widget.client.constant.IconType;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.core.widget.client.helper.CompositeFocusHelper;
 
 public class InputDate extends InputGroup<Date> implements
-		DirtyEvent.HasDirtyHandlers,
-		HasAllFocusHandlers,
-		Focusable,
-		HasPlaceholder {
+DirtyEvent.HasDirtyHandlers,
+HasAllFocusHandlers,
+Focusable,
+HasPlaceholder {
+
 
 	private final InputDateBox dateBox = new InputDateBox();
 	private final Button<Date> calendarButton = new Button<Date>();
@@ -70,7 +71,7 @@ public class InputDate extends InputGroup<Date> implements
 
 	protected void endConstruct() {
 		calendarButton.setType(Type.ICON);
-		calendarButton.setIconType(IconType.CALENDAR);
+		calendarButton.setIconType(IconFont.ICON_CALENDAR);
 		calendarButton.addButtonHandler(buttonHandler);
 		append(dateBox);
 		addAddon(calendarButton);

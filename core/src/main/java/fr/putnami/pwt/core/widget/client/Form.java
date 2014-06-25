@@ -21,16 +21,16 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
 import fr.putnami.pwt.core.editor.client.validator.Validator;
+import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractForm;
-import fr.putnami.pwt.core.widget.client.base.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.HasFooter;
 import fr.putnami.pwt.core.widget.client.base.HasHeader;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class Form<T> extends AbstractForm<T> implements
-		HasHeader,
-		HasFooter
+HasHeader,
+HasFooter
 {
 
 	private static final CssStyle STYLE_FORM = new SimpleStyle("form");

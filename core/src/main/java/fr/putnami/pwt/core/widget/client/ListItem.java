@@ -85,16 +85,16 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.impl.FocusImpl;
 
 import fr.putnami.pwt.core.model.client.base.HasDrawable;
+import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractHTMLPanel;
-import fr.putnami.pwt.core.widget.client.base.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class ListItem extends AbstractHTMLPanel implements HasDrawable,
-		Focusable,
-		HasAllDragAndDropHandlers, HasAllMouseHandlers, HasClickHandlers,
-		HasDoubleClickHandlers, HasAllKeyHandlers, HasAllFocusHandlers,
-		HasAllGestureHandlers, HasAllTouchHandlers
+Focusable,
+HasAllDragAndDropHandlers, HasAllMouseHandlers, HasClickHandlers,
+HasDoubleClickHandlers, HasAllKeyHandlers, HasAllFocusHandlers,
+HasAllGestureHandlers, HasAllTouchHandlers
 {
 
 	private static final FocusImpl focusImpl = FocusImpl.getFocusImplForPanel();

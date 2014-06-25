@@ -34,6 +34,7 @@ import fr.putnami.pwt.core.editor.client.Path;
 import fr.putnami.pwt.core.editor.client.util.PathUtils;
 import fr.putnami.pwt.core.model.client.model.Model;
 import fr.putnami.pwt.core.model.client.util.ModelUtils;
+import fr.putnami.pwt.core.theme.client.IconFont;
 import fr.putnami.pwt.core.widget.client.Button;
 import fr.putnami.pwt.core.widget.client.Button.Type;
 import fr.putnami.pwt.core.widget.client.Container;
@@ -41,7 +42,6 @@ import fr.putnami.pwt.core.widget.client.InputText;
 import fr.putnami.pwt.core.widget.client.TableTH;
 import fr.putnami.pwt.core.widget.client.base.AbstractTableColumnAspect;
 import fr.putnami.pwt.core.widget.client.base.HasHeaderCell;
-import fr.putnami.pwt.core.widget.client.constant.IconType;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 
 public class TableFilter<T> extends AbstractTableColumnAspect<T> implements HasHeaderCell {
@@ -66,7 +66,7 @@ public class TableFilter<T> extends AbstractTableColumnAspect<T> implements HasH
 	}
 
 	private void endConstruct() {
-		button.setIconType(IconType.FILTER);
+		button.setIconType(IconFont.ICON_FILTER);
 		button.setType(Type.ICON);
 		button.setSize(Button.Size.SMALL);
 
@@ -100,7 +100,7 @@ public class TableFilter<T> extends AbstractTableColumnAspect<T> implements HasH
 	}
 
 	public void redraw() {
-		button.setIconType(IconType.FILTER);
+		button.setIconType(IconFont.ICON_FILTER);
 		button.setActive(activate);
 
 		Container row = (Container) ((Widget) headerCell).getParent();

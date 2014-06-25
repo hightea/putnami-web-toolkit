@@ -28,13 +28,13 @@ import com.google.gwt.user.client.ui.Widget;
 import fr.putnami.pwt.core.editor.client.Editor;
 import fr.putnami.pwt.core.editor.client.EditorLabel;
 import fr.putnami.pwt.core.editor.client.Path;
+import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractTableColumnAspect;
-import fr.putnami.pwt.core.widget.client.base.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class TableEditorTH<T> extends TableTH<T> implements
-		EditorLabel {
+EditorLabel {
 
 	private static final CssStyle STYLE_FLOAT_RIGHT = new SimpleStyle("pull-right");
 	private Collection<AbstractTableColumnAspect<T>> aspects;

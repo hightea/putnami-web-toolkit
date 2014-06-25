@@ -26,8 +26,8 @@ import com.google.web.bindery.event.shared.HandlerRegistration;
 
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.model.client.base.HasReadonly;
+import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
-import fr.putnami.pwt.core.widget.client.base.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.event.RowClickEvent;
 import fr.putnami.pwt.core.widget.client.event.RowClickEvent.Handler;
@@ -35,9 +35,9 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class Table<T> extends AbstractPanel implements
-		HasReadonly,
-		CloneableWidget,
-		RowClickEvent.HasRowClickHandlers {
+HasReadonly,
+CloneableWidget,
+RowClickEvent.HasRowClickHandlers {
 
 	private static final CssStyle STYLE_TABLE = new SimpleStyle("table");
 	private static final CssStyle STYLE_RESPONSIVE = new SimpleStyle("table-responsive");

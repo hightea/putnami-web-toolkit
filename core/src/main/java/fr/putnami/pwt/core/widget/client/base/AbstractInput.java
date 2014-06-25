@@ -98,23 +98,24 @@ import fr.putnami.pwt.core.editor.client.util.ValidationUtils;
 import fr.putnami.pwt.core.editor.client.validator.Validator;
 import fr.putnami.pwt.core.event.client.EventBus;
 import fr.putnami.pwt.core.model.client.base.HasHtmlId;
+import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public abstract class AbstractInput<I> extends AbstractComposite implements
-		DirtyEvent.HasDirtyHandlers,
-		EditorInput<I>,
-		EditorLeaf,
-		HasHtmlId,
-		Focusable,
-		HasValueChangeHandlers<I>,
-		HasAllFocusHandlers,
-		HasClickHandlers,
-		HasDoubleClickHandlers,
-		HasAllDragAndDropHandlers,
-		HasAllGestureHandlers,
-		HasAllKeyHandlers,
-		HasAllMouseHandlers,
-		HasAllTouchHandlers
+DirtyEvent.HasDirtyHandlers,
+EditorInput<I>,
+EditorLeaf,
+HasHtmlId,
+Focusable,
+HasValueChangeHandlers<I>,
+HasAllFocusHandlers,
+HasClickHandlers,
+HasDoubleClickHandlers,
+HasAllDragAndDropHandlers,
+HasAllGestureHandlers,
+HasAllKeyHandlers,
+HasAllMouseHandlers,
+HasAllTouchHandlers
 {
 
 	public static CssStyle STYLE_CONTROL = new SimpleStyle("form-control");
