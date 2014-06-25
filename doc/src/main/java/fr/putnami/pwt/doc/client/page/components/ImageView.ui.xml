@@ -35,8 +35,8 @@
 			<li><strong>type</strong> : type of the image (DEFAULT, ROUNDED, CIRCLE, THUMBNAIL)</li>
 			<li><strong>src</strong> : URL of the image. If the URL starts with a <code>/</code> the GWT module name will be added at the begining in order to lookup in the public module resources.</li>
 			<li><strong>alt</strong> : Alternatif text</li>
-			<li><strong>width</strong> : with of the image. must be grater than 0.</li>
-			<li><strong>height</strong> : height of the image. must be grater than 0.</li>
+			<li><strong>widthPx</strong> : with of the image. must be grater than 0.</li>
+			<li><strong>heightPx</strong> : height of the image. must be grater than 0.</li>
 			<li><strong>keepPropertions</strong> : if true use max-with and max-height rather than with and height HTML attribute.</li>
 		</ul>
 		<div class="showcase-sample-block">
@@ -44,8 +44,8 @@
 				<w:Image src="assets/img/Phidippus_putnami_male.png" alt="Phidippus putnami male"/>
 				<w:Image src="assets/img/Phidippus_putnami_male.png" alt="Phidippus putnami male" type="ROUNDED"/>
 				<br/>
-				<w:Image src="assets/img/Phidippus_putnami_male.png" alt="Phidippus putnami male" type="CIRCLE"/>
-				<w:Image src="assets/img/Phidippus_putnami_male.png" alt="Phidippus putnami male" type="THUMBNAIL"/>
+				<w:Image src="assets/img/Phidippus_putnami_male.png" alt="Phidippus putnami male" type="THUMBNAIL" keepPropertions="true" heightPx="200" widthPx="200"/>
+				<w:Image src="assets/img/Phidippus_putnami_male.png" alt="Phidippus putnami male" type="CIRCLE" keepPropertions="false" heightPx="200" widthPx="200"/>
 			</div>
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
 <pre><![CDATA[
@@ -54,9 +54,9 @@
 <w:Image src="assets/img/Phidippus_putnami_male.png" 
 		alt="Phidippus putnami male" type="ROUNDED"/>
 <w:Image src="assets/img/Phidippus_putnami_male.png" 
-		alt="Phidippus putnami male" type="CIRCLE"/>
+		alt="Phidippus putnami male" type="THUMBNAIL" keepPropertions="true" heightPx="200" widthPx="200"/>
 <w:Image src="assets/img/Phidippus_putnami_male.png" 
-		alt="Phidippus putnami male" type="THUMBNAIL"/>
+		alt="Phidippus putnami male" type="CIRCLE" keepPropertions="false" heightPx="200" widthPx="200" />
 ]]></pre>
 			</c:StaticCode>
 		</div>

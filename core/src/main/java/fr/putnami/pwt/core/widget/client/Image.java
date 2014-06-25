@@ -28,8 +28,8 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class Image extends AbstractWidget implements EditorOutput<String> {
 
-	private static final String PROP_MAX_WIDTH = "max-width";
-	private static final String PROP_MAX_HEIGHT = "max-height";
+	private static final String PROP_MAX_WIDTH = "maxWidth";
+	private static final String PROP_MAX_HEIGHT = "maxHeight";
 	private static final String PROP_WIDTH = "width";
 	private static final String PROP_HEIGHT = "height";
 
@@ -60,8 +60,8 @@ public class Image extends AbstractWidget implements EditorOutput<String> {
 	private String src;
 	private String alt;
 
-	private int width = -1;
-	private int height = -1;
+	private int widthPx = -1;
+	private int heightPx = -1;
 
 	public Image() {
 		super(ImageElement.TAG);
@@ -74,8 +74,8 @@ public class Image extends AbstractWidget implements EditorOutput<String> {
 
 		setSrc(source.src);
 		setAlt(source.alt);
-		this.width = source.width;
-		this.height =source.height;
+		this.widthPx = source.widthPx;
+		this.widthPx = source.widthPx;
 		this.keepPropertions = source.keepPropertions;
 
 		resetSize();
@@ -136,21 +136,21 @@ public class Image extends AbstractWidget implements EditorOutput<String> {
 		resetSize();
 	}
 
-	public Integer getWidth() {
-		return width;
+	public Integer getWidthPx() {
+		return widthPx;
 	}
 
-	public void setWidth(Integer width) {
-		this.width = width;
+	public void setWidthPx(Integer widthPx) {
+		this.widthPx = widthPx;
 		resetSize();
 	}
 
-	public Integer getHeight() {
-		return height;
+	public Integer getHeightPx() {
+		return heightPx;
 	}
 
-	public void setHeight(Integer height) {
-		this.height = height;
+	public void setHeightPx(Integer heightPx) {
+		this.heightPx = heightPx;
 		resetSize();
 	}
 
@@ -161,21 +161,11 @@ public class Image extends AbstractWidget implements EditorOutput<String> {
 		imgStyle.clearProperty(PROP_MAX_WIDTH);
 		imgStyle.clearProperty(PROP_MAX_HEIGHT);
 
-		if(keepPropertions){
-			if (width > 0) {
-				imgStyle.setPropertyPx(PROP_MAX_WIDTH, width);
-			}
-			if (height > 0) {
-				imgStyle.setPropertyPx(PROP_MAX_HEIGHT, height);
-			}
+		if (widthPx > 0) {
+			imgStyle.setPropertyPx(keepPropertions ? PROP_MAX_WIDTH : PROP_WIDTH, widthPx);
 		}
-		else{
-			if (width > 0) {
-				imgStyle.setPropertyPx(PROP_WIDTH, width);
-			}
-			if (height > 0) {
-				imgStyle.setPropertyPx(PROP_HEIGHT, height);
-			}
+		if (heightPx > 0) {
+			imgStyle.setPropertyPx(keepPropertions ? PROP_MAX_HEIGHT : PROP_HEIGHT, heightPx);
 		}
 	}
 
