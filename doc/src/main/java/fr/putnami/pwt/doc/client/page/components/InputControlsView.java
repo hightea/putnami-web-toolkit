@@ -100,7 +100,7 @@ public class InputControlsView extends Composite {
 			"South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming");
 
 	@UiField(provided = true)
-	final List<Integer> ageList = Lists.newArrayList();
+	final List<Integer> ageList = generateAgeList();
 	@UiField(provided = true)
 	final List<String> groups = Lists.newArrayList("Familly", "Friends", "Colleague", "Other");
 
@@ -115,7 +115,6 @@ public class InputControlsView extends Composite {
 
 		initWidget(Binder.BINDER.createAndBindUi(this));
 
-
 		MessageHelper messageHelper = new MessageHelper((ConstantsWithLookup) GWT.create(Constants.class));
 
 		formInputEditor.setMessageHelper(messageHelper);
@@ -123,6 +122,14 @@ public class InputControlsView extends Composite {
 		formInputEditor.edit(new Bean());
 		formInputEditor.getDriver().setAutoFlush(true);
 
+	}
+
+	private List<Integer> generateAgeList() {
+		List<Integer> result = Lists.newArrayList();
+		for (int i = 0; i <= 100; i++) {
+			result.add(Integer.valueOf(i));
+		}
+		return result;
 	}
 
 }

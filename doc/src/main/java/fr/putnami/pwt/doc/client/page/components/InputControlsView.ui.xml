@@ -211,20 +211,6 @@
 				</div>
 			</div>
 			
-			<!-- InputSlider -->
-			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">InputSlider</w:Heading>
-				<p></p>
-				<div class="showcase-sample-block">
-					<div class="showcase-sample">
-						<w:InputSlider path="age" items="{ageList}" />
-					</div>
-					<c:StaticCode configuration="{XML_CONFIGURATION}">
-						<pre><![CDATA[<w:InputSlider items="{ageList}" />]]></pre>
-					</c:StaticCode>
-				</div>
-			</div>
-			
 			<!-- InputMultiSelect -->
 			<div>
 				<w:Heading level="3" navSpy="{tableOfContent}">InputMultiSelect</w:Heading>
@@ -237,6 +223,37 @@
 					</div>
 					<c:StaticCode configuration="{XML_CONFIGURATION}">
 						<pre><![CDATA[<w:InputMultiSelect items="{groups}" nullValueAllowed="true" nullRender="Choose your groups"/>]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+			
+			<!-- InputSlider -->
+			<div>
+				<w:Heading level="3" navSpy="{tableOfContent}">InputSlider</w:Heading>
+				<p><code>InputSlider</code> allows you to slide between values. It uses a provided <code>List</code> of values (not necessary <code>Number</code>).</p>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:InputSlider path="age" items="{ageList}" />
+						<br/>
+						<w:InputSlider path="mainGroup" items="{groups}" />
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:InputSlider items="{ageList}" />
+<w:InputSlider items="{groups}" />]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+			
+			<!-- InputSuggest -->
+			<div>
+				<w:Heading level="3" navSpy="{tableOfContent}">InputSuggest</w:Heading>
+				<p><code>InputSuggest</code> allows you to provide some suggestions to the input.</p>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:InputSuggest path="state" suggestions="{stateSuggestions}"/>
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:InputSuggest suggestions="{stateSuggestions}"/>]]></pre>
 					</c:StaticCode>
 				</div>
 			</div>
