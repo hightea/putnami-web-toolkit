@@ -20,6 +20,8 @@ import com.google.common.base.Objects;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -50,6 +52,7 @@ public class InputCode extends AbstractInput<String> implements
 		CodeEditor,
 		HasPlaceholder,
 		FocusHandler,
+		ClickHandler,
 		BlurHandler,
 		HasHTML {
 
@@ -62,6 +65,8 @@ public class InputCode extends AbstractInput<String> implements
 	private HandlerRegistration valueChangeRegistration;
 
 	private CompositeFocusHelper compositeFocus;
+
+	private boolean displayInput = false;
 
 	public InputCode() {
 		super(new FlowPanel());
@@ -80,13 +85,14 @@ public class InputCode extends AbstractInput<String> implements
 
 	@Override
 	protected void endConstruct() {
-		content.add(codeInput);
 		content.add(codeOutput);
 		// Hook to replace Input by output on blur
 		setTabIndex(0);
-		codeInput.asWidget().setVisible(false);
 		compositeFocus = CompositeFocusHelper.createFocusHelper(codeInput, codeInput);
+
 		addFocusHandler(this);
+		// in IE, the focus is not set on click on the codeOutput
+		codeOutput.asWidget().addDomHandler(this, ClickEvent.getType());
 		compositeFocus.addBlurHandler(this);
 
 		StyleUtils.removeStyle(this, STYLE_CONTROL);
@@ -161,18 +167,36 @@ public class InputCode extends AbstractInput<String> implements
 	}
 
 	@Override
+	public void onClick(ClickEvent event) {
+		showInput();
+	}
+
+	@Override
 	public void onFocus(FocusEvent event) {
-		codeInput.asWidget().getElement().getStyle().setHeight(codeOutput.asWidget().getElement().getOffsetHeight(), Unit.PX);
-		codeInput.asWidget().setVisible(true);
-		codeOutput.asWidget().setVisible(false);
-		codeInput.setFocus(true);
+		showInput();
 	}
 
 	@Override
 	public void onBlur(BlurEvent event) {
-		codeInput.asWidget().setVisible(false);
-		codeOutput.asWidget().setVisible(true);
+		hideInput();
+	}
 
+	private void showInput() {
+		if (!displayInput) {
+			displayInput = true;
+			codeInput.asWidget().getElement().getStyle().setHeight(codeOutput.asWidget().getElement().getOffsetHeight(), Unit.PX);
+			codeOutput.asWidget().removeFromParent();
+			content.add(codeInput);
+			codeInput.setFocus(true);
+		}
+	}
+
+	private void hideInput() {
+		if (displayInput) {
+			displayInput = false;
+			codeInput.asWidget().removeFromParent();
+			content.add(codeOutput);
+		}
 	}
 
 	@Override
