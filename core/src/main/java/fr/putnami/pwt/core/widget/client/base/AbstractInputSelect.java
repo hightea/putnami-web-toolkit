@@ -22,6 +22,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Predicate;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
@@ -52,11 +56,11 @@ import fr.putnami.pwt.core.widget.client.helper.CompositeFocusHelper;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public abstract class AbstractInputSelect<T, U> extends AbstractInput<U> implements
-HasValueChangeHandlers<U>,
-ValueChangeHandler<U>,
-HasPlaceholder,
-HasMessageHelper,
-HasDrawable {
+		HasValueChangeHandlers<U>,
+		ValueChangeHandler<U>,
+		HasPlaceholder,
+		HasMessageHelper,
+		HasDrawable {
 
 	private static final CssStyle STYLE_INPUT_SELECT = new SimpleStyle("input-select");
 
@@ -85,6 +89,8 @@ HasDrawable {
 		void onUpKeyDown();
 
 		void onDownKeyDown();
+
+		void onItemSearch(T searchResult);
 
 		void setSelection(U selection, boolean fireEvents);
 
@@ -194,7 +200,36 @@ HasDrawable {
 		}
 	}
 
+	private class KeyPressHandler implements Predicate<NavLink> {
+
+		private static final long KEY_INTERVAL = 1200L;
+
+		private String currentString = "";
+		private long lastSearchTime = 0L;
+
+		public void handleKeyPress(int charCode) {
+			long currentTime = System.currentTimeMillis();
+			if (currentTime - lastSearchTime > KEY_INTERVAL) {
+				currentString = String.valueOf((char) charCode).toLowerCase();
+			}
+			else {
+				currentString += String.valueOf((char) charCode).toLowerCase();
+			}
+			lastSearchTime = currentTime;
+			NavLink matchingLink = Iterables.find(itemsLinks.values(), this, null);
+			if (matchingLink != null) {
+				selectionHandler.onItemSearch(itemsLinks.inverse().get(matchingLink));
+			}
+		}
+
+		@Override
+		public boolean apply(NavLink input) {
+			return input.getLabel() != null && input.getLabel().toLowerCase().startsWith(currentString);
+		}
+	}
+
 	private final SelectRenderer<T, U> selectRenderer = new SelectRendererImpl();
+	private final KeyPressHandler keyPressHandler = new KeyPressHandler();
 
 	private HandlerRegistration valueChangeRegistration;
 
@@ -203,7 +238,7 @@ HasDrawable {
 	private MessageHelper messageHelper;
 
 	private final Map<String, Collection<T>> itemsMap;
-	private Map<T, NavLink> itemsLinks = Maps.newHashMap();
+	private BiMap<T, NavLink> itemsLinks = HashBiMap.create();
 	private List<T> orderedItems = Lists.newArrayList();
 
 	private ItemSelectionHandler<T, U> selectionHandler;
@@ -251,7 +286,7 @@ HasDrawable {
 		dropdown.addAnchorStyle(STYLE_CONTROL);
 
 		addValueChangeHandler(this);
-		sinkEvents(Event.ONKEYDOWN);
+		sinkEvents(Event.ONKEYDOWN | Event.ONKEYPRESS);
 
 		super.endConstruct();
 	}
@@ -491,7 +526,11 @@ HasDrawable {
 				break;
 			}
 			break;
+		case Event.ONKEYPRESS:
+			keyPressHandler.handleKeyPress(event.getCharCode());
+			break;
 		}
+
 		if (mustKillEvent) {
 			event.preventDefault();
 			event.stopPropagation();

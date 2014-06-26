@@ -55,6 +55,11 @@ public class InputSelect<T> extends AbstractInputSelect<T, T> {
 			selectByIndex(InputSelect.this.getOrderedItems().indexOf(selectedItem) + 1);
 		}
 
+		@Override
+		public void onItemSearch(T searchResult) {
+			setSelection(searchResult, true);
+		}
+
 		private void selectByIndex(int index) {
 			int newIndex = Math.min(InputSelect.this.getOrderedItems().size() - 1, Math.max(0, index));
 			setSelection(InputSelect.this.getOrderedItems().get(newIndex), true);

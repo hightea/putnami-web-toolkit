@@ -135,6 +135,11 @@ public class InputMultiSelect<T> extends AbstractInputSelect<T, List<T>> {
 		}
 
 		@Override
+		public void onItemSearch(T searchResult) {
+			highlightByIndex(InputMultiSelect.this.getOrderedItems().indexOf(searchResult));
+		}
+
+		@Override
 		public void setSelection(List<T> selection, boolean fireEvents) {
 			List<T> oldSelection = selectedItems;
 			if (oldSelection != null) {
