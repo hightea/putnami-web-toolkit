@@ -174,15 +174,16 @@ public class NavLink extends AbstractPanel implements Nav.IsNavContent, Cloneabl
 
 	private void resetInner() {
 		anchor.clear();
+		if (label != null) {
+			anchor.getElement().setInnerHTML(label);
+		}
 		if (iconType != null) {
 			Icon icon = new Icon();
 			icon.setType(iconType);
 
-			anchor.append(icon);
+			anchor.getElement().insertFirst(icon.getElement());
 		}
-		if (label != null) {
-			anchor.getElement().setInnerHTML(label);
-		}
+
 	}
 
 }
