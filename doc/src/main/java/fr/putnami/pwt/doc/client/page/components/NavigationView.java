@@ -22,6 +22,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
+import fr.putnami.pwt.core.widget.client.HTMLPanel;
 import fr.putnami.pwt.core.widget.client.NavSpy;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 
@@ -38,12 +39,16 @@ public class NavigationView extends Composite {
 	@UiField
 	NavSpy sampleNavSpy;
 
+	@UiField
+	HTMLPanel scrollTarget;
+
 	@UiConstructor
 	public NavigationView(NavSpy navSpy) {
 		this.navSpy = navSpy;
 		initWidget(Binder.BINDER.createAndBindUi(this));
 
 		sampleNavSpy.redraw();
+		sampleNavSpy.setScrollWidget(scrollTarget);
 
 	}
 
