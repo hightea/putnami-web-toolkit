@@ -176,6 +176,10 @@ HasDrawable {
 		redraw();
 		visible = true;
 		Modal.MODAL_BACKDROP.show();
+		if (getParent() != null) {
+			removeFromParent();
+		}
+		RootPanel.get().add(this);
 		getElement().getStyle().setDisplay(Display.BLOCK);
 		Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
 
@@ -197,6 +201,9 @@ HasDrawable {
 			@Override
 			public boolean execute() {
 				getElement().getStyle().clearDisplay();
+				if (getParent() != null) {
+					removeFromParent();
+				}
 				return false;
 			}
 		}, 150);
