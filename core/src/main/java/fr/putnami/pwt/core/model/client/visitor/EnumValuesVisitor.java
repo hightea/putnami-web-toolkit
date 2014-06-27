@@ -28,6 +28,7 @@ import fr.putnami.pwt.core.model.client.ModelDriver;
 import fr.putnami.pwt.core.model.client.model.Model;
 import fr.putnami.pwt.core.model.client.model.ModelCollection;
 import fr.putnami.pwt.core.model.client.util.ModelUtils;
+import fr.putnami.pwt.core.widget.client.base.AbstractInputChoice;
 import fr.putnami.pwt.core.widget.client.base.AbstractInputSelect;
 import fr.putnami.pwt.core.widget.client.helper.EnumRenderer;
 
@@ -36,7 +37,7 @@ public class EnumValuesVisitor extends AbstractVisitor {
 	@Override
 	public <A, B extends Editor> boolean visit(Context<B> context) {
 		Editor editor = context.getEditor();
-		if (editor instanceof AbstractInputSelect) {
+		if (editor instanceof AbstractInputChoice) {
 			ModelDriver<?> driver = context.getDriver();
 			MessageHelper messageHelper = driver.getMessageHelper();
 			Class<A> propertyType = null;
@@ -50,11 +51,14 @@ public class EnumValuesVisitor extends AbstractVisitor {
 			}
 
 			if (ModelUtils.isEnumType(propertyType)) {
-				AbstractInputSelect inputSelect = (AbstractInputSelect) editor;
+				AbstractInputChoice inputChoice = (AbstractInputChoice) editor;
 				Renderer<?> renderer = new EnumRenderer(messageHelper);
-				inputSelect.setItemRenderer(renderer);
-				inputSelect.setSelectionRenderer(renderer);
-				inputSelect.setItems(Lists.newArrayList(propertyType.getEnumConstants()));
+				inputChoice.setItemRenderer(renderer);
+				inputChoice.setItems(Lists.newArrayList(propertyType.getEnumConstants()));
+				if (inputChoice instanceof AbstractInputSelect) {
+					((AbstractInputSelect) inputChoice).setSelectionRenderer(renderer);
+
+				}
 			}
 		}
 		return true;

@@ -58,7 +58,7 @@ public class InputMultiSelect<T> extends AbstractInputSelect<T, List<T>> {
 				result = Joiner.on(", ").join(Iterables.transform(values, new Function<T, String>() {
 					@Override
 					public String apply(T input) {
-						return InputMultiSelect.this.getSelectRenderer().renderItem(input);
+						return InputMultiSelect.this.getChoiceRenderer().renderItem(input);
 					}
 				}));
 			}
@@ -66,7 +66,7 @@ public class InputMultiSelect<T> extends AbstractInputSelect<T, List<T>> {
 		};
 	}
 
-	private class MultiSelectionHandler implements ItemSelectionHandler<T, List<T>> {
+	private class MultiSelectionHandler implements SelectItemSelectionHandler<T, List<T>> {
 		private int currentHighlightedIndex = -1;
 		private List<T> selectedItems;
 
@@ -187,12 +187,12 @@ public class InputMultiSelect<T> extends AbstractInputSelect<T, List<T>> {
 
 	public InputMultiSelect() {
 		super();
-		setSelectionHandler(new MultiSelectionHandler());
 		setMultiple(true);
+		setSelectionHandler(new MultiSelectionHandler());
 		setSelectionRenderer(new MultiSelectionRenderer());
 	}
 
-	protected InputMultiSelect(InputMultiSelect source) {
+	protected InputMultiSelect(InputMultiSelect<T> source) {
 		super(source);
 		setSelectionHandler(new MultiSelectionHandler());
 		setSelectionRenderer(new MultiSelectionRenderer());

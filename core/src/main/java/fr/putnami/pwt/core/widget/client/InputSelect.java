@@ -26,7 +26,7 @@ import fr.putnami.pwt.core.widget.client.base.AbstractInputSelect;
 
 public class InputSelect<T> extends AbstractInputSelect<T, T> {
 
-	private class SelectionHandler implements ItemSelectionHandler<T, T> {
+	private class SelectionHandler implements SelectItemSelectionHandler<T, T> {
 		private T selectedItem;
 
 		@Override

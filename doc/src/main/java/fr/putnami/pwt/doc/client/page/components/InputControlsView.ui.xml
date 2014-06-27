@@ -227,6 +227,38 @@
 				</div>
 			</div>
 			
+			<!-- InputRadio -->
+			<div>
+				<w:Heading level="3" navSpy="{tableOfContent}">InputRadio</w:Heading>
+				<p><code>InputRadio</code> allows you to use Radio Buttons to presents simple selection values.</p>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:InputRadio path="mainGroup" items="{groups}" />
+						<w:InputRadio path="mainGroup" items="{groups}" type="INLINE" />
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:InputRadio items="{groups}" />
+<w:InputRadio items="{groups}" type="INLINE" />]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+			
+			<!-- InputCheckBox -->
+			<div>
+				<w:Heading level="3" navSpy="{tableOfContent}">InputCheckBox</w:Heading>
+				<p><code>InputCheckBox</code> allows you to use Checkboxes to presents multiselection values.</p>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:InputCheckBox path="groups" items="{groups}" />
+						<w:InputCheckBox path="groups" items="{groups}" type="INLINE" />
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:InputCheckBox items="{groups}" />
+<w:InputCheckBox items="{groups}" type="INLINE" />]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+			
 			<!-- InputSlider -->
 			<div>
 				<w:Heading level="3" navSpy="{tableOfContent}">InputSlider</w:Heading>

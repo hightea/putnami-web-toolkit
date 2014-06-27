@@ -17,50 +17,33 @@
 package fr.putnami.pwt.core.widget.client.base;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.text.shared.Renderer;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
-import com.google.web.bindery.event.shared.HandlerRegistration;
 
-import fr.putnami.pwt.core.editor.client.event.DirtyEvent.Handler;
-import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
-import fr.putnami.pwt.core.event.client.EventBus;
-import fr.putnami.pwt.core.model.client.base.HasDrawable;
-import fr.putnami.pwt.core.model.client.base.HasMessageHelper;
 import fr.putnami.pwt.core.model.client.base.HasPlaceholder;
 import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.ButtonDropdown;
 import fr.putnami.pwt.core.widget.client.DropdownHeader;
 import fr.putnami.pwt.core.widget.client.NavLink;
-import fr.putnami.pwt.core.widget.client.event.AskFocusEvent;
-import fr.putnami.pwt.core.widget.client.event.ChangeEvent;
 import fr.putnami.pwt.core.widget.client.helper.CompositeFocusHelper;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public abstract class AbstractInputSelect<T, U> extends AbstractInput<U> implements
-		HasValueChangeHandlers<U>,
-		ValueChangeHandler<U>,
-		HasPlaceholder,
-		HasMessageHelper,
-		HasDrawable {
+public abstract class AbstractInputSelect<T, U> extends AbstractInputChoice<T, U> implements
+		HasPlaceholder {
 
 	private static final CssStyle STYLE_INPUT_SELECT = new SimpleStyle("input-select");
 
@@ -78,9 +61,7 @@ public abstract class AbstractInputSelect<T, U> extends AbstractInput<U> impleme
 		}
 	}
 
-	public interface ItemSelectionHandler<T, U> {
-
-		void onItemClick(T item);
+	public interface SelectItemSelectionHandler<T, U> extends ChoiceSelectionHandler<T, U> {
 
 		void onHomeKeyDown();
 
@@ -92,22 +73,13 @@ public abstract class AbstractInputSelect<T, U> extends AbstractInput<U> impleme
 
 		void onItemSearch(T searchResult);
 
-		void setSelection(U selection, boolean fireEvents);
-
-		U getSelection();
 	}
 
-	public interface SelectRenderer<T, U> {
-
-		Renderer<T> getItemRenderer();
-
-		void setItemRenderer(Renderer<T> renderer);
+	public interface SelectRenderer<T, U> extends ChoiceRenderer<T> {
 
 		Renderer<U> getSelectionRenderer();
 
 		void setSelectionRenderer(Renderer<U> renderer);
-
-		String renderItem(T item);
 
 		String renderSelection(U selection);
 
@@ -115,30 +87,12 @@ public abstract class AbstractInputSelect<T, U> extends AbstractInput<U> impleme
 
 		void setPlaceholder(String placeholder);
 
-		String getNullRender();
-
-		void setNullRender(String nullRender);
-
 	}
 
-	private class SelectRendererImpl implements SelectRenderer<T, U> {
+	private class SelectRendererImpl extends ChoiceRendererImpl implements SelectRenderer<T, U> {
 
-		private static final String DEFAULT_NULL_RENDER = "";
-
-		private Renderer<T> itemRenderer;
 		private Renderer<U> selectionRenderer;
-		private String nullRender;
 		private String placeholder;
-
-		@Override
-		public Renderer<T> getItemRenderer() {
-			return itemRenderer;
-		}
-
-		@Override
-		public void setItemRenderer(Renderer<T> renderer) {
-			this.itemRenderer = renderer;
-		}
 
 		@Override
 		public Renderer<U> getSelectionRenderer() {
@@ -148,11 +102,6 @@ public abstract class AbstractInputSelect<T, U> extends AbstractInput<U> impleme
 		@Override
 		public void setSelectionRenderer(Renderer<U> renderer) {
 			this.selectionRenderer = renderer;
-		}
-
-		@Override
-		public String renderItem(T item) {
-			return render(item, itemRenderer);
 		}
 
 		@Override
@@ -170,32 +119,12 @@ public abstract class AbstractInputSelect<T, U> extends AbstractInput<U> impleme
 			this.placeholder = placeholder;
 		}
 
-		@Override
-		public String getNullRender() {
-			return nullRender;
-		}
-
-		@Override
-		public void setNullRender(String nullRender) {
-			this.nullRender = nullRender;
-		}
-
-		private <V> String render(V value, Renderer<V> renderer) {
-			if (value == null) {
-				return renderNull();
-			}
-			if (renderer != null) {
-				return renderer.render(value);
-			}
-			return value.toString();
-		}
-
-		private String renderNull() {
-			if (AbstractInputSelect.this.nullValueAllowed) {
-				return this.nullRender != null ? this.nullRender : DEFAULT_NULL_RENDER;
+		protected String renderNull() {
+			if (!AbstractInputSelect.this.isNullValueAllowed()) {
+				return this.placeholder != null ? this.placeholder : DEFAULT_NULL_RENDER;
 			}
 			else {
-				return this.placeholder != null ? this.placeholder : DEFAULT_NULL_RENDER;
+				return super.renderNull();
 			}
 		}
 	}
@@ -228,29 +157,16 @@ public abstract class AbstractInputSelect<T, U> extends AbstractInput<U> impleme
 		}
 	}
 
-	private final SelectRenderer<T, U> selectRenderer = new SelectRendererImpl();
+	private SelectRenderer<T, U> selectRenderer = new SelectRendererImpl();
+	private SelectItemSelectionHandler<T, U> selectionHandler;
+
 	private final KeyPressHandler keyPressHandler = new KeyPressHandler();
-
-	private HandlerRegistration valueChangeRegistration;
-
 	private CompositeFocusHelper compositeFocusHelper;
-
-	private MessageHelper messageHelper;
 
 	private final Map<String, Collection<T>> itemsMap;
 	private BiMap<T, NavLink> itemsLinks = HashBiMap.create();
-	private List<T> orderedItems = Lists.newArrayList();
-
-	private ItemSelectionHandler<T, U> selectionHandler;
-
-	private boolean nullValueAllowed = false;
-	private boolean multiple = false;
 
 	private final SimpleDropdown dropdown;
-
-	private HandlerRegistration askFocusRegistration;
-
-	private String htmlId;
 
 	public AbstractInputSelect() {
 		super(new ButtonDropdown());
@@ -262,35 +178,24 @@ public abstract class AbstractInputSelect<T, U> extends AbstractInput<U> impleme
 	protected AbstractInputSelect(AbstractInputSelect<T, U> source) {
 		super(new ButtonDropdown(), source);
 		dropdown = (SimpleDropdown) getWidget();
-		endConstruct();
-		messageHelper = source.messageHelper;
-		multiple = source.multiple;
-		nullValueAllowed = source.nullValueAllowed;
-		selectionHandler = source.selectionHandler;
-
 		itemsMap = source.itemsMap;
-
-		setNullRender(source.selectRenderer.getNullRender());
-		setItemRenderer(source.selectRenderer.getItemRenderer());
-		setSelectionRenderer(source.selectRenderer.getSelectionRenderer());
-		redraw();
+		endConstruct();
 	}
 
 	@Override
 	protected void endConstruct() {
-		StyleUtils.removeStyle(this, STYLE_CONTROL);
 		StyleUtils.removeStyle(this, ButtonDropdown.STYLE_BUTTON_GROUP);
 		StyleUtils.addStyle(this, STYLE_INPUT_SELECT);
 
 		compositeFocusHelper = CompositeFocusHelper.createFocusHelper(this, dropdown);
 		dropdown.addAnchorStyle(STYLE_CONTROL);
 
-		addValueChangeHandler(this);
 		sinkEvents(Event.ONKEYDOWN | Event.ONKEYPRESS);
 
 		super.endConstruct();
 	}
 
+	@Override
 	public void setItems(Collection<T> items) {
 		Map<String, Collection<T>> itemsMap = Maps.newHashMapWithExpectedSize(1);
 		itemsMap.put(null, items);
@@ -304,13 +209,13 @@ public abstract class AbstractInputSelect<T, U> extends AbstractInput<U> impleme
 		edit(currentValue);
 	}
 
-	private void redrowDropdown() {
-
+	@Override
+	protected void redrawInternal() {
 		this.dropdown.clear();
 		this.itemsLinks.clear();
-		this.orderedItems.clear();
+		getOrderedItems().clear();
 
-		if (nullValueAllowed && !multiple) {
+		if (isNullValueAllowed() && !isMultiple()) {
 			addItem(null);
 		}
 
@@ -319,46 +224,24 @@ public abstract class AbstractInputSelect<T, U> extends AbstractInput<U> impleme
 				if (entry.getKey() != null) {
 					dropdown.addMenuContent(new DropdownHeader(entry.getKey()));
 				}
-				addItemCollection(entry.getValue());
-			}
-		}
-
-	}
-
-	private void addItemCollection(Collection<T> items) {
-		if (items != null) {
-			for (T item : items) {
-				addItem(item);
+				for (T item : entry.getValue()) {
+					addItem(item);
+				}
 			}
 		}
 	}
 
 	public void addItem(T item) {
-		NavLink link = new NavLink(selectRenderer.renderItem(item), new ItemClickCommand(item));
+		NavLink link = new NavLink(getChoiceRenderer().renderItem(item), new ItemClickCommand(item));
 		dropdown.addMenuContent(link);
 		this.itemsLinks.put(item, link);
-		this.orderedItems.add(item);
+		getOrderedItems().add(item);
 	}
 
+	@Override
 	public void setNullRender(String nullRender) {
-		selectRenderer.setNullRender(nullRender);
+		super.setNullRender(nullRender);
 		renderLabel();
-	}
-
-	public void setNullValueAllowed(boolean nullValueAllowed) {
-		this.nullValueAllowed = nullValueAllowed;
-	}
-
-	public boolean isNullValueAllowed() {
-		return nullValueAllowed;
-	}
-
-	public void setMultiple(boolean multiple) {
-		this.multiple = multiple;
-	}
-
-	public void setItemRenderer(Renderer<T> renderer) {
-		selectRenderer.setItemRenderer(renderer);
 	}
 
 	public void setSelectionRenderer(Renderer<U> renderer) {
@@ -367,38 +250,8 @@ public abstract class AbstractInputSelect<T, U> extends AbstractInput<U> impleme
 
 	@Override
 	public void setHtmlId(String htmlId) {
-		this.htmlId = htmlId;
+		super.setHtmlId(htmlId);
 		dropdown.getAnchor().getElement().setId(htmlId);
-		if (askFocusRegistration != null) {
-			askFocusRegistration.removeHandler();
-		}
-		if (htmlId != null) {
-			AskFocusEvent.Handler handler = new AskFocusEvent.Handler() {
-
-				@Override
-				public void onAskFocus(AskFocusEvent event) {
-					if (Objects.equal(event.getHtmlId(), AbstractInputSelect.this.htmlId)) {
-						setFocus(true);
-					}
-				}
-			};
-			askFocusRegistration = EventBus.get().addHandler(AskFocusEvent.TYPE, handler);
-		}
-	}
-
-	@Override
-	public String getHtmlId() {
-		return dropdown.getAnchor().getElement().getId();
-	}
-
-	@Override
-	public MessageHelper getMessageHelper() {
-		return messageHelper;
-	}
-
-	@Override
-	public void setMessageHelper(MessageHelper messageHelper) {
-		this.messageHelper = messageHelper;
 	}
 
 	@Override
@@ -413,43 +266,8 @@ public abstract class AbstractInputSelect<T, U> extends AbstractInput<U> impleme
 	}
 
 	@Override
-	public boolean isDirty() {
-		return !Objects.equal(this.getValue(), this.getSelectedValue());
-	}
-
-	@Override
-	public HandlerRegistration addDirtyHandler(Handler handler) {
-		if (valueChangeRegistration == null) {
-			valueChangeRegistration = addValueChangeHandler(new ChangeEvent<U>(AbstractInputSelect.this));
-		}
-		return super.addDirtyHandler(handler);
-	}
-
-	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addValueChangeHandler(ValueChangeHandler<U> handler) {
-		return addHandler(handler, ValueChangeEvent.getType());
-	}
-
-	public U getSelectedValue() {
-		return getSelectionHandler().getSelection();
-	}
-
-	@Override
-	public U flush() {
-		clearErrors();
-		U value = getSelectedValue();
-		validate(value);
-		if (!hasErrors()) {
-			setValue(value);
-		}
-		return getValue();
-	}
-
-	@Override
 	public void edit(U value) {
-		redrowDropdown();
-		setValue(value);
-		getSelectionHandler().setSelection(getValue(), false);
+		super.edit(value);
 		renderLabel();
 	}
 
@@ -461,13 +279,6 @@ public abstract class AbstractInputSelect<T, U> extends AbstractInput<U> impleme
 	public void onValueChange(ValueChangeEvent<U> event) {
 		if (event != null && event.getSource() == this) {
 			dropdown.setLabel(selectRenderer.renderSelection(event.getValue()));
-		}
-	}
-
-	@Override
-	public void redraw() {
-		if (!itemsMap.isEmpty()) {
-			setItemsMap(Maps.newLinkedHashMap(itemsMap));
 		}
 	}
 
@@ -509,19 +320,19 @@ public abstract class AbstractInputSelect<T, U> extends AbstractInput<U> impleme
 		case Event.ONKEYDOWN:
 			switch (event.getKeyCode()) {
 			case KeyCodes.KEY_HOME:
-				getSelectionHandler().onHomeKeyDown();
+				selectionHandler.onHomeKeyDown();
 				mustKillEvent = true;
 				break;
 			case KeyCodes.KEY_END:
-				getSelectionHandler().onEndKeyDown();
+				selectionHandler.onEndKeyDown();
 				mustKillEvent = true;
 				break;
 			case KeyCodes.KEY_UP:
-				getSelectionHandler().onUpKeyDown();
+				selectionHandler.onUpKeyDown();
 				mustKillEvent = true;
 				break;
 			case KeyCodes.KEY_DOWN:
-				getSelectionHandler().onDownKeyDown();
+				selectionHandler.onDownKeyDown();
 				mustKillEvent = true;
 				break;
 			}
@@ -537,25 +348,33 @@ public abstract class AbstractInputSelect<T, U> extends AbstractInput<U> impleme
 		}
 	}
 
-	protected SelectRenderer<T, U> getSelectRenderer() {
+	@Override
+	protected void setChoiceRenderer(ChoiceRenderer<T> choiceRenderer) {
+		if (choiceRenderer instanceof SelectRenderer) {
+			this.selectRenderer = (SelectRenderer<T, U>) choiceRenderer;
+		}
+	}
+
+	@Override
+	protected ChoiceRenderer<T> getChoiceRenderer() {
 		return selectRenderer;
 	}
 
-	protected ItemSelectionHandler<T, U> getSelectionHandler() {
+	@Override
+	protected ChoiceSelectionHandler<T, U> getSelectionHandler() {
 		assert selectionHandler != null : "SelectionHandler is not set !";
 		return selectionHandler;
 	}
 
-	protected void setSelectionHandler(ItemSelectionHandler<T, U> selectionHandler) {
-		this.selectionHandler = selectionHandler;
+	@Override
+	protected void setSelectionHandler(ChoiceSelectionHandler<T, U> selectionHandler) {
+		if (selectionHandler instanceof SelectItemSelectionHandler) {
+			this.selectionHandler = (SelectItemSelectionHandler<T, U>) selectionHandler;
+		}
 	}
 
 	protected Map<T, NavLink> getItemsLinks() {
 		return itemsLinks;
-	}
-
-	protected List<T> getOrderedItems() {
-		return orderedItems;
 	}
 
 	protected SimpleDropdown getDropdown() {
