@@ -19,6 +19,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:a="urn:import:fr.putnami.pwt.doc.client.application"
 	>
 
 	<w:HTMLPanel styleName="putnami-showcase">
@@ -26,7 +27,9 @@
 			<div class="pwt-top-header">
 				<div id="pwt-title" class="container" title="PWT - Putnami Web Tool Kit">
 					<img src="assets/img/putnami.png" alt="Putnami Logo" /> PWT <small class="hidden-xs">Putnami Web Toolkit</small>
+					<a:NewsPopup />
 				</div>
+					
 			</div>
 			<w:Affix ui:field="affixMenu" styleName="pwt-menu-affix">
 				<w:Navbar position="STATIC_TOP" styleName="container pwt-menu">

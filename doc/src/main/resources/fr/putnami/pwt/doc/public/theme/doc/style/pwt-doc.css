@@ -181,6 +181,35 @@ pre{
 	cursor: default;
 }
 
+#pwt-header .pwt-top-header .container{
+	position: relative;
+}
+#pwt-header .notifications{
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	border-radius: 5px;	
+	font-size: 0.5em;
+	padding: 8px;
+	cursor: pointer;
+}
+#pwt-header .notifications .notification-count{
+	position: absolute;
+	bottom: -10px;
+	right: 2px;
+	background: #ec7600;
+	color: #000;
+	font-size: 0.8em;
+	border-radius: 10px;
+	padding: 2px 5px;
+}
+.notificationPopup h4{
+	margin-top: 0;
+}
+.notificationPopup .alert{
+	background-color: #F6F6F6;
+}
+
 /**
 * Footer
 */

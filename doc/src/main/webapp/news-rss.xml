@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+    <channel>
+   
+        <title>PWT - Putnami Web Toolkit - News</title>
+        <link>http://pwt.putnami.org</link>
+        <description>Putnami Web Toolkit News</description>
+       
+        <item>
+            <title>Welcome on board</title>
+            <description>
+            	Today the Putnami Web Toolkit is out! First public announcement has been done on the GWT google group. We really hope that we're gonna enjoy :)  
+            </description>
+            <link>https://groups.google.com/forum/#!topic/google-web-toolkit/EcWmPHx9Ew8</link>
+            <guid>http://pwt.putnami.org/#news:welcome</guid>
+            <pubDate>Tue, 17 jun 2014</pubDate>
+            <author>Fabien</author>
+        </item>
+        <item>
+            <title>Release 1.0.0-RC2 planned.</title>
+            <description>
+            	We're close to get all expected features planned for the 1.0.0 . we decided to fix the RC2 to the Friday 4th of july.
+            </description>
+            <link>#!ComingSoon</link>
+            <guid>http://pwt.putnami.org/#news:rc2-planned</guid>
+            <pubDate>Fri, 27 jun 2014</pubDate>
+            <author>Fabien</author>
+        </item>
+    </channel>
+</rss>
