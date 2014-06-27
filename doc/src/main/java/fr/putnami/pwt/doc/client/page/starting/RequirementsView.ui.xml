@@ -34,7 +34,7 @@
 		<ul>
 			<li>Latest version of <abbr title="Google Web Toolkit">GWT</abbr> (currently @gwtVersion@)</li>
 			<li>Guava and Guava-gwt version @guavaVersion@</li>
-			<li>Latest version of Twitter's Bootstrap Css file (currently 3.1.1) (Note : We do not use the Javascript files, all is natively developped in <abbr title="Google Web Toolkit">GWT</abbr>)</li>
+			<li>Latest version of Twitter's Bootstrap Css file (currently 3.2.0) (Note : We do not use the Javascript files, all is natively developped in <abbr title="Google Web Toolkit">GWT</abbr>)</li>
 		</ul>
 		
 		<w:Heading level="3" navSpy="{navSpy}">Java</w:Heading>
