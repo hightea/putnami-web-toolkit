@@ -83,7 +83,10 @@ public class DefaultThemeController extends ThemeController {
 		NodeList<Element> links = getHead().getElementsByTagName(LinkElement.TAG);
 		int size = links.getLength();
 		for (int i = 0; i < size; i++) {
-			links.getItem(0).removeFromParent();
+			LinkElement elem = LinkElement.as(links.getItem(0));
+			if ("stylesheet".equals(elem.getRel())) {
+				elem.removeFromParent();
+			}
 		}
 	}
 
