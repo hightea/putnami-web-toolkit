@@ -37,9 +37,9 @@ public class AlertDismissEvent extends GwtEvent<AlertDismissEvent.Handler> {
 
 	public static final Type<Handler> TYPE = new Type<Handler>();
 
-	private final Alert source;
+	private final Alert<?> source;
 
-	public AlertDismissEvent(Alert source) {
+	public AlertDismissEvent(Alert<?> source) {
 		super();
 		this.source = source;
 	}
@@ -55,7 +55,7 @@ public class AlertDismissEvent extends GwtEvent<AlertDismissEvent.Handler> {
 	}
 
 	@Override
-	public Alert getSource() {
+	public Alert<?> getSource() {
 		return source;
 	}
 }

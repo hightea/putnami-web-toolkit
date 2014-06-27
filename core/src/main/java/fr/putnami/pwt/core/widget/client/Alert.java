@@ -24,7 +24,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
-import fr.putnami.pwt.core.event.client.EventBus;
 import fr.putnami.pwt.core.model.client.base.HasDrawable;
 import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractForm;
@@ -95,7 +94,7 @@ public class Alert<T> extends AbstractForm<T> implements HasDrawable, HasAlertDi
 			@Override
 			public boolean execute() {
 				Alert.this.removeFromParent();
-				EventBus.get().fireEventFromSource(new AlertDismissEvent(Alert.this), Alert.this);
+				fireEvent(new AlertDismissEvent(Alert.this));
 				return false;
 			}
 		}, 150);
@@ -149,7 +148,7 @@ public class Alert<T> extends AbstractForm<T> implements HasDrawable, HasAlertDi
 
 	@Override
 	public HandlerRegistration addAlertDismissHandler(AlertDismissEvent.Handler handler) {
-		return EventBus.get().addHandlerToSource(AlertDismissEvent.TYPE, this, handler);
+		return addHandler(handler, AlertDismissEvent.TYPE);
 	}
 
 }
