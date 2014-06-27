@@ -21,6 +21,7 @@
 	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
 	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
 
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
 	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
@@ -28,10 +29,23 @@
 	<w:HTMLPanel>
 		<w:Heading level="2" navSpy="{navSpy}">Icon</w:Heading>
 		<p>
-			<strong title="Putnami Web Toolkit">PWT</strong> privides a bunch of icons based on fontello's (<a href="http://fontello.com/" target="_blank">http://fontello.com</a>). Those icons are webfonts so easily resizeable.
+			Icons are based on a webfont mechanism provided by <a href="http://fontello.com/" target="_blank">fontello</a>. 
+			Uni-color the webfont icons inherit the size and the color from the css. Really lightweight this mecanism reduce the server consumption.
 		</p>
-		<p>Set the icon with the <code>type</code> attribute referencing the <code>IconType</code> enumeration.</p>
-		<p>The icon color can be customize with the <code>color</code> attribute. As the icon are webfonts, the color use the <code>text-*</code> CSS classe.s</p>
+		<p>
+			You can find the full default icon set on <a href="Documentation/theme/default/icons.html">icons.html</a>
+		</p>
+		<p><strong>Properties :</strong></p>
+		<ul>
+			<li><code>type</code> : define the icon. It will be use to resolve the css Icon class name. 
+				<ul>
+					<li>All the <code>_</code> are automatically replaced with <code>-</code></li>
+					<li>The type is not case sensitive.</li>
+					<li>If css class does'nt exists the icon isn't visible no warning or error occures</li>
+				</ul>
+			</li>
+			<li><code>color</code> : Bootstrap text color are relevent for <code>Icon</code> (SUCCESS, DANGER, INFO, WARNING, MUTED)</li>
+		</ul>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
 				<w:Icon type="OK" color="SUCCESS"/>
@@ -39,16 +53,7 @@
 				<w:Icon type="PLUS" color="INFO"/>
 				<w:Icon type="MINUS" color="WARNING"/>
 				<w:Icon type="LEFT_OPEN" color="MUTED"/>
-				<w:Icon type="RIGHT_OPEN"  color="DEFAULT"/>
-				<w:Icon type="UP_OPEN" />
-				<w:Icon type="DOWN_OPEN" />
-				<w:Icon type="ANDROID" />
-				<w:Icon type="BITBUCKET" />
-				<w:Icon type="GITHUB" />
-				<w:Icon type="CALENDAR" />
-				<w:Icon type="FEMALE" />
-				<w:Icon type="MALE" />
-				<w:Icon type="INFO" />
+				<w:Icon type="RIGHT_OPEN" />
 			</div>
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
 <pre><![CDATA[
@@ -57,17 +62,25 @@
 <w:Icon type="PLUS" color="INFO"/>
 <w:Icon type="MINUS" color="WARNING"/>
 <w:Icon type="LEFT_OPEN" color="MUTED"/>
-<w:Icon type="RIGHT_OPEN"  color="DEFAULT"/>
-<w:Icon type="UP_OPEN" />
-<w:Icon type="DOWN_OPEN" />
-<w:Icon type="ANDROID" />
-<w:Icon type="BITBUCKET" />
-<w:Icon type="GITHUB" />
-<w:Icon type="CALENDAR" />
-<w:Icon type="FEMALE" />
-<w:Icon type="MALE" />
-<w:Icon type="INFO" />]]></pre>
+<w:Icon type="RIGHT_OPEN"/>
+]]></pre>
 			</c:StaticCode>
 		</div>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Customization</w:Heading>
+		<p>You can customise your Icon set by making your own on <a href="http://fontello.com/" target="_blank">fontello</a> and install the <code>IconFont</code> in your theme following the bellow code. </p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+IconFont font = new IconFont("theme/default/style/fontello.css", "icon-");
+font.addAlias("add", "plus");
+font.addAlias("save", "floppy");
+font.addAlias("view", "search");
+font.addAlias("drag", "menu");
+
+Theme theme = new Theme();
+theme.setIconFont(font);
+ThemeController.get().installTheme(theme);
+]]></pre>
+			</c:StaticCode>
 	</w:HTMLPanel>
 </ui:UiBinder>

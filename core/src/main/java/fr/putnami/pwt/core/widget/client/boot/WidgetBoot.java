@@ -19,6 +19,7 @@ package fr.putnami.pwt.core.widget.client.boot;
 import com.google.gwt.core.client.EntryPoint;
 
 import fr.putnami.pwt.core.theme.client.CssLink;
+import fr.putnami.pwt.core.theme.client.IconFont;
 import fr.putnami.pwt.core.theme.client.Theme;
 import fr.putnami.pwt.core.theme.client.ThemeController;
 
@@ -30,7 +31,13 @@ public class WidgetBoot implements EntryPoint {
 		defaultTheme.addLink(new CssLink("theme/default/style/bootstrap.min.css", -2));
 		defaultTheme.addLink(new CssLink("theme/default/style/pwt-core.css", 0));
 
-		defaultTheme.setIconFont(new FontAwesomeIcons());
+		IconFont font = new IconFont("theme/default/style/fontello.css", "icon-");
+		font.addAlias("add", "plus");
+		font.addAlias("save", "floppy");
+		font.addAlias("view", "search");
+		font.addAlias("drag", "menu");
+
+		defaultTheme.setIconFont(font);
 	}
 
 }

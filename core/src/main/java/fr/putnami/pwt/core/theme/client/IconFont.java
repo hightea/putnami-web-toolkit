@@ -7,7 +7,7 @@ import com.google.common.collect.Maps;
 
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 
-public abstract class IconFont extends CssLink {
+public class IconFont extends CssLink {
 
 	public static final String ICON_CALENDAR = "calendar";
 	public static final String ICON_ADD = "plus";
@@ -29,7 +29,7 @@ public abstract class IconFont extends CssLink {
 		this.preffix = preffix == null ? "" : preffix;
 	}
 
-	protected void addAlias(String alias, String target) {
+	public void addAlias(String alias, String target) {
 		aliases.put(alias, target);
 	}
 
@@ -44,8 +44,8 @@ public abstract class IconFont extends CssLink {
 		return new SimpleStyle(this.preffix + className);
 	}
 
-	protected String transformClassName(String className) {
-		return className;
+	protected String transformClassName(String iStr) {
+		return iStr.toLowerCase().replaceAll("_", "-");
 	}
 
 }

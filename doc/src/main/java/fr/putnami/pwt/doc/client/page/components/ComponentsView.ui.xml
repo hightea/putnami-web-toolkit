@@ -26,7 +26,9 @@
 	<w:HTMLPanel stylePrimaryName="container" title="PWT - UI Components">
 		<w:Header ui:field="header">
 			<w:Heading level="1" navSpy="{tableOfContent}">UI Components</w:Heading>
-			<p class="lead"><strong title="Putnami Web Toolkit">PWT</strong> provides Bootstrap based UI widget</p>
+			<p class="lead"><strong>Responsive</strong> and <strong>Themable</strong> <strong title="Putnami Web Toolkit">PWT</strong> provides an expensive components set.</p>
+			<p class="lead">Designed with the bootstrap's html model you can easily make themes.</p>
+			<p class="lead">All the components are perfectly integrated with the <a href="#!DataBinding">DataBinding</a> framework.</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
 			<c:TypographyView navSpy="{tableOfContent}" />
