@@ -115,7 +115,8 @@ public class NewsPopup implements IsWidget, HasDrawable {
 	void onNotificationClose(AlertDismissEvent event) {
 		Alert<RssItem> closed = (Alert<RssItem>) event.getSource();
 		rssReader.read(closed.getValue());
-		reload();
+		notifications.remove(closed.getValue());
+		redraw();
 	}
 
 	@UiHandler("seeMoreBtn")

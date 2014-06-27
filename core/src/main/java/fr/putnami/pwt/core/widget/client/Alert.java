@@ -100,6 +100,12 @@ public class Alert<T> extends AbstractForm<T> implements HasDrawable, HasAlertDi
 		}, 150);
 	}
 
+	@Override
+	public void edit(T object) {
+		super.edit(object);
+		StyleUtils.addStyle(this, STYLE_VISIBLE);
+	}
+
 	public Type getType() {
 		return type;
 	}
