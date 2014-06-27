@@ -19,7 +19,7 @@ package fr.putnami.pwt.core.widget.client.base;
 
 public interface HasFormType {
 
-	AbstractForm.Type getType();
+	AbstractForm.Layout getLayout();
 
-	void setType(AbstractForm.Type type);
+	void setLayout(AbstractForm.Layout type);
 }

@@ -36,7 +36,7 @@ import fr.putnami.pwt.core.model.client.base.HasOutputEditorFactory;
 import fr.putnami.pwt.core.model.client.base.HasReadonly;
 import fr.putnami.pwt.core.model.client.base.HasWidgetFactory;
 import fr.putnami.pwt.core.theme.client.CssStyle;
-import fr.putnami.pwt.core.widget.client.base.AbstractForm.Type;
+import fr.putnami.pwt.core.widget.client.base.AbstractForm.Layout;
 import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
 import fr.putnami.pwt.core.widget.client.base.HasFormType;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
@@ -63,7 +63,7 @@ EditorError
 	private static final CssStyle STYLE_WARNING = new SimpleStyle("help-warning");
 	private static final CssStyle STYLE_SUCCESS = new SimpleStyle("help-succes");
 
-	private Type type;
+	private Layout type;
 
 	private InputFactory inputFactory;
 	private OutputFactory outputFactory;
@@ -141,12 +141,12 @@ EditorError
 	}
 
 	@Override
-	public Type getType() {
+	public Layout getLayout() {
 		return type;
 	}
 
 	@Override
-	public void setType(Type type) {
+	public void setLayout(Layout type) {
 		this.type = type;
 	}
 
@@ -231,7 +231,7 @@ EditorError
 	public void redraw() {
 		clear();
 
-		StyleUtils.toggleStyle(asWidgetOrNull(label), STYLE_SCREAN_READER, type == Type.INLINE);
+		StyleUtils.toggleStyle(asWidgetOrNull(label), STYLE_SCREAN_READER, type == Layout.INLINE);
 		addIfNotNull(label, 3, 0, false);
 		Editor editor = editorProvider.getEditor(readonly);
 		if (!Boolean.FALSE.equals(readonly)) {
@@ -247,7 +247,7 @@ EditorError
 	private void addIfNotNull(Editor e, int size, int offset, boolean wrap) {
 		if (e instanceof IsWidget) {
 			boolean wrapInCol = wrap;
-			wrapInCol &= type == Type.HORIZONTAL;
+			wrapInCol &= type == Layout.HORIZONTAL;
 
 			Widget toAdd = asWidgetOrNull((IsWidget) e);
 			if (wrapInCol) {
@@ -257,7 +257,7 @@ EditorError
 				column.setOffset(offset);
 				toAdd = column;
 			}
-			if (type == Type.HORIZONTAL) {
+			if (type == Layout.HORIZONTAL) {
 				if (size > 0) {
 					StyleUtils.addStyle(toAdd, new GridColumn.SizeStyle(GridColumn.PREFIX_SIZE_MD, size));
 				}

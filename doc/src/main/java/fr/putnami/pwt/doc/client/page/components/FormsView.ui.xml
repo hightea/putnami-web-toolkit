@@ -47,7 +47,7 @@
 		</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
-				<w:Form ui:field="formBasic" type="BASIC">
+				<w:Form ui:field="formBasic" layout="BASIC">
 					<w:FormGroup path="email">
 						<w:Label>Email address</w:Label>
 						<w:InputEmail placeholder="Enter email" />
@@ -64,7 +64,7 @@
 			</div>
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
 				<pre><![CDATA[
-<w:Form type="BASIC"> 
+<w:Form layout="BASIC"> 
 	<w:FormGroup path="email">
 		<w:Label>Email address</w:Label>
 		<w:InputEmail placeholder="Enter email" />
@@ -81,7 +81,7 @@
 		</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
-				<w:Form ui:field="formInline" type="INLINE">
+				<w:Form ui:field="formInline" layout="INLINE">
 					<w:FormGroup path="email">
 						<w:Label>Email address</w:Label>
 						<w:InputEmail placeholder="Enter email" />
@@ -96,7 +96,7 @@
 			</div>
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
 <pre><![CDATA[
-<w:Form type="INLINE"> 
+<w:Form layout="INLINE"> 
 	<w:FormGroup path="email">
 		<w:Label>Email address</w:Label>
 		<w:InputEmail placeholder="Enter email" />
@@ -118,7 +118,7 @@
 		</p>
 		<div class="showcase-sample-block">
 				<div class="showcase-sample">
-				<w:Form ui:field="formHorizontal" type="HORIZONTAL">
+				<w:Form ui:field="formHorizontal" layout="HORIZONTAL">
 					<w:FormGroup path="email">
 						<w:Label>Email address</w:Label>
 						<w:InputEmail placeholder="Enter email" />
@@ -132,7 +132,7 @@
 			</div>
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
 				<pre><![CDATA[
-<w:Form type="HORIZONTAL"> 
+<w:Form layout="HORIZONTAL"> 
 	<w:FormGroup path="email">
 		<w:Label>Email address</w:Label>
 		<w:InputEmail placeholder="Enter email" />
@@ -148,7 +148,7 @@
 			If <code>EditorInput</code> is not within the a <code>FormGroup</code> the <code>EditorInput</code> is set to disabled.</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
-				<w:Form ui:field="formReadonly" type="BASIC" readonly="true">
+				<w:Form ui:field="formReadonly" layout="BASIC" readonly="true">
 					<w:FormGroup path="email">
 						<w:Label>Email address</w:Label>
 						<w:OutputEmail />
@@ -164,7 +164,7 @@
 			</div>
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
 				<pre><![CDATA[
-<w:Form type="BASIC" readonly="true"> 
+<w:Form layout="BASIC" readonly="true"> 
 	<w:FormGroup path="email">
 		<w:Label>Email address</w:Label>
 		<w:OutputEmail placeholder="Enter email" />
@@ -183,7 +183,7 @@
 		<div class="showcase-sample-block">
 				<div class="showcase-sample">
 				<w:Panel collapsible="true" color="PRIMARY">
-					<w:Form ui:field="formHeaderFooter" type="HORIZONTAL">
+					<w:Form ui:field="formHeaderFooter" layout="HORIZONTAL">
 						<w:Header><h4><w:OutputText path="name" /></h4></w:Header>
 						<w:FormGroup path="email">
 							<w:Label>Email address</w:Label>
@@ -204,7 +204,7 @@
 			</div>
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
 				<pre><![CDATA[<w:Panel collapsible="true" color="PRIMARY">
-	<w:Form type="HORIZONTAL">
+	<w:Form layout="HORIZONTAL">
 		<w:Header><w:Heading level="4"><w:OutputText path="Name" /></w:Heading></w:Header>
 ...
 		<w:Footer><w:Button>Sign in</w:Button></w:Footer>
@@ -223,8 +223,8 @@
 		</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
-				<w:Form ui:field="formFieldset" type="BASIC">
-					<w:Fieldset ui:field="fieldsetIds" type="HORIZONTAL">
+				<w:Form ui:field="formFieldset" layout="BASIC">
+					<w:Fieldset ui:field="fieldsetIds" layout="HORIZONTAL">
 						<w:Legend>Sign in</w:Legend>
 						<w:FormGroup path="email">
 							<w:Label>Email</w:Label>
@@ -251,8 +251,8 @@
 				<span class="clearfix" />
 			</div>
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
-				<pre><![CDATA[<w:Form ui:field="formFieldset" type="BASIC">
-	<w:Fieldset ui:field="fieldsetIds" type="HORIZONTAL">
+				<pre><![CDATA[<w:Form ui:field="formFieldset" layout="BASIC">
+	<w:Fieldset ui:field="fieldsetIds" layout="HORIZONTAL">
 		<w:Legend>Sign in</w:Legend>
 		<w:FormGroup path="email">
 			<w:Label>Email</w:Label>
@@ -285,7 +285,7 @@
 			If setted as readonly,  the input field is automaticaly switch to an output field.  <br/>
 			You can declare every sub components in the template, but the <code>FormGroup</code> can also guess a lot of thing by itself. 
 				<code>Label</code>, <code>Help</code>, and <code>Tooltip</code> can be resolved by convention thanks to a <code>MessageHelper</code>.
-				The <code>EditorInput</code> and the <code>EditorOutput</code> are guessed with the property type.
+				The <code>EditorInput</code> and the <code>EditorOutput</code> are guessed with the property layout.
 		</p>
 		
 		<w:Heading level="4" navSpy="{tableOfContent}">Editable Control</w:Heading>
@@ -302,7 +302,7 @@
 		</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
-				<w:Form ui:field="formGroupEditable" type="BASIC" >
+				<w:Form ui:field="formGroupEditable" layout="BASIC" >
 					<w:FormGroup path="email">
 						<w:Label htmlFor="emailInput">Email</w:Label>
 						<w:Tooltip text="Please enter your address email" placement="TOP" >
@@ -314,7 +314,8 @@
 				</w:Form>
 			</div>
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
-				<pre><![CDATA[<w:Form type="BASIC">
+				<pre><![CDATA[
+<w:Form layout="BASIC">
 	<w:FormGroup path="email">
 		<w:Label htmlFor="emailInput">Email</w:Label>
 		<w:Tooltip text="Please enter your address email" placement="TOP" >
@@ -323,7 +324,8 @@
 		<w:OutputEmail />
 		<w:Help text="An friendly help message" />
 	</w:FormGroup>
-</w:Form>]]></pre>
+</w:Form>
+]]></pre>
 			</c:StaticCode>
 		</div>
 		
@@ -333,7 +335,7 @@
 		</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
-				<w:Form ui:field="formGroupReadonly" type="BASIC">
+				<w:Form ui:field="formGroupReadonly" layout="BASIC">
 					<w:FormGroup path="email" readonly="true">
 						<w:Label htmlFor="emailInput">Email</w:Label>
 						<w:OutputEmail />
@@ -341,7 +343,7 @@
 				</w:Form>
 			</div>
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
-				<pre><![CDATA[<w:Form type="BASIC">
+				<pre><![CDATA[<w:Form layout="BASIC">
 	<w:FormGroup path="email" readonly="true">
 		...
 		<w:OutputEmail />
@@ -355,18 +357,18 @@
 			Are the FormGroup magic?  no... <br/>
 			In this example all <code>Label</code>, <code>Tooltip</code>, and <code>Help</code> are resolved with a <code>MessageHelper</code> initialized with contants.
 			This feature is really usefull for code reuse.<br/>
-			Further more, the <code>EditorInput</code> and the <code>EditorOutput</code> are generated thanks the property type, in this case <code>String</code> are mapped with an <code>InputText</code> and an <code>OutputText</code>.
-			If the default editor for the the type doesn't exists or is not appropriate you can declare it manually.
+			Further more, the <code>EditorInput</code> and the <code>EditorOutput</code> are generated thanks the property layout, in this case <code>String</code> are mapped with an <code>InputText</code> and an <code>OutputText</code>.
+			If the default editor for the the layout doesn't exists or is not appropriate you can declare it manually.
 		</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
-				<w:Form ui:field="formGroupMagic" type="BASIC">
+				<w:Form ui:field="formGroupMagic" layout="BASIC">
 					<w:FormGroup path="name" />
 				</w:Form>
 			</div>
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
 				<pre><![CDATA[<!-- In the template ui.xml -->
-<w:Form type="BASIC">
+<w:Form layout="BASIC">
 	<w:FormGroup path="name" />
 </w:Form>]]></pre>
 			</c:StaticCode>

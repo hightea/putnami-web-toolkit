@@ -54,7 +54,7 @@
 			</w:TableEditor>
 			
 			<w:Modal ui:field="modal" title="{constants.newPersonTitle}" dismissable="true">
-				<w:Form ui:field="contactEditor" type="HORIZONTAL">
+				<w:Form ui:field="contactEditor" layout="HORIZONTAL">
 					<fieldset>
 						<legend>Person</legend>
 						<w:FormGroup path="name" />

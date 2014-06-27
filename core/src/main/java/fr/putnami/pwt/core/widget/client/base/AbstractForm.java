@@ -68,7 +68,7 @@ HasResetDisplayHandlers,
 HasDataValidationHandlers
 {
 
-	public enum Type implements CssStyle {
+	public enum Layout implements CssStyle {
 
 		BASIC("form"),
 		INLINE("form-inline"),
@@ -76,7 +76,7 @@ HasDataValidationHandlers
 
 		private final String style;
 
-		private Type(String style) {
+		private Layout(String style) {
 			this.style = style;
 		}
 
@@ -93,7 +93,7 @@ HasDataValidationHandlers
 
 	private Boolean readonly;
 
-	private Type type;
+	private Layout layout;
 
 	public AbstractForm(String tag, String html) {
 		super(tag, html);
@@ -103,7 +103,7 @@ HasDataValidationHandlers
 		super(source);
 		this.messageHelper = source.messageHelper;
 		this.readonly = source.readonly;
-		this.type = source.type;
+		this.layout = source.layout;
 	}
 
 	@Override
@@ -176,14 +176,14 @@ HasDataValidationHandlers
 	}
 
 	@Override
-	public Type getType() {
-		return type;
+	public Layout getLayout() {
+		return layout;
 	}
 
 	@Override
-	public void setType(Type type) {
-		this.type = type;
-		StyleUtils.addStyle(this, type);
+	public void setLayout(Layout layout) {
+		this.layout = layout;
+		StyleUtils.addStyle(this, layout);
 		Set<Widget> children = WidgetUtils.listChildren(this);
 		for (Widget w : children) {
 			refreshType(w);
@@ -209,8 +209,8 @@ HasDataValidationHandlers
 	}
 
 	private void refreshType(Widget w) {
-		if (type != null && w instanceof HasFormType && ((HasFormType) w).getType() == null) {
-			((HasFormType) w).setType(type);
+		if (layout != null && w instanceof HasFormType && ((HasFormType) w).getLayout() == null) {
+			((HasFormType) w).setLayout(layout);
 		}
 	}
 

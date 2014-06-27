@@ -179,7 +179,7 @@ private final Model<Person> personModel = GWT.create(PersonModel.class);
 				We use a dotted path like <code>address.city</code> to access a field on a sub-bean.</p>
 			<div class="showcase-sample-block">
 				<div class="showcase-sample">
-					<w:Form ui:field="beanForm" type="INLINE">
+					<w:Form ui:field="beanForm" layout="INLINE">
 						<w:FormGroup path="name"/>
 						<w:FormGroup path="email" >
 							<w:InputEmail placeholder="Entrer your email... " />
@@ -190,7 +190,7 @@ private final Model<Person> personModel = GWT.create(PersonModel.class);
 				</div>
 				<c:StaticCode configuration="{XML_CONFIGURATION}">
 <pre><![CDATA[
-<w:Form ui:field="beanForm" type="INLINE">
+<w:Form ui:field="beanForm" layout="INLINE">
 	<w:InputText path="name" placeholder="Entrer your name..." />
 	<w:InputEmail path="email" placeholder="Entrer your email... " />
 	<w:OutputText path="address.city" />
@@ -304,7 +304,7 @@ tableEditor.edit(people);
 					<w:GridRow>
 						<w:GridColumn size="6">
 							<w:OutputList ui:field="outputListEditor" type="LIST">
-								<w:Form  ui:field="outputListItemTemplate" type="INLINE">
+								<w:Form  ui:field="outputListItemTemplate" layout="INLINE">
 									<w:OutputText path="name" tag="span" />
 									<w:OutputEmail path="email" tag="span" />
 								</w:Form>
@@ -313,13 +313,13 @@ tableEditor.edit(people);
 						<w:GridColumn size="6">
 							<w:InputList ui:field="inputListEditor">
 								<w:output>
-									<w:Form  ui:field="inputListInItemTemplate" type="INLINE" readonly="true">
+									<w:Form  ui:field="inputListInItemTemplate" layout="INLINE" readonly="true">
 										<w:FormGroup path="name" />
 										<w:FormGroup path="email" />
 									</w:Form>
 								</w:output>
 								<w:input>
-									<w:Form  ui:field="inputListOutItemTemplate" type="INLINE">
+									<w:Form  ui:field="inputListOutItemTemplate" layout="INLINE">
 										<w:FormGroup path="name" />
 										<w:FormGroup path="email" />
 									</w:Form>
@@ -333,7 +333,7 @@ tableEditor.edit(people);
 <w:GridRow>
 	<w:GridColumn size="6">
 		<w:OutputList ui:field="outputListEditor" type="LIST">
-			<w:Form  ui:field="outputListItemTemplate" type="INLINE">
+			<w:Form  ui:field="outputListItemTemplate" layout="INLINE">
 				<w:OutputText path="name" tag="span" />
 				<w:OutputEmail path="email" tag="span" />
 			</w:Form>
@@ -342,13 +342,13 @@ tableEditor.edit(people);
 	<w:GridColumn size="6">
 		<w:InputList ui:field="inputListEditor">
 			<w:output>
-				<w:Form  ui:field="inputListInItemTemplate" type="INLINE" readonly="true">
+				<w:Form  ui:field="inputListInItemTemplate" layout="INLINE" readonly="true">
 					<w:FormGroup path="name" />
 					<w:FormGroup path="email" />
 				</w:Form>
 			</w:output>
 			<w:input>
-				<w:Form  ui:field="inputListOutItemTemplate" type="INLINE">
+				<w:Form  ui:field="inputListOutItemTemplate" layout="INLINE">
 					<w:FormGroup path="name" />
 					<w:FormGroup path="email" />
 				</w:Form>

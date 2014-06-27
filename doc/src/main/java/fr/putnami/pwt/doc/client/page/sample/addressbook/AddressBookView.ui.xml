@@ -49,7 +49,7 @@
 				</w:ScrollPanel>
 			</w:GridColumn>
 			<w:GridColumn size="6">
-				<w:Form ui:field="contactDetails" type="HORIZONTAL">
+				<w:Form ui:field="contactDetails" layout="HORIZONTAL">
 					<w:Fieldset>
 						<w:Legend>
 							<w:GridRow ui:field="editNameRow">
