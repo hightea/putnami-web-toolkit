@@ -53,8 +53,6 @@ public class DefaultThemeController extends ThemeController {
 
 	@Override
 	public void resetTheme() {
-		insertLinks(this.defaultTheme);
-		insertLinks(this.currentTheme);
 		if (currentTheme != null && currentTheme.getIconFont() != null) {
 			icons = currentTheme.getIconFont();
 		}
@@ -64,6 +62,8 @@ public class DefaultThemeController extends ThemeController {
 		if (icons != null) {
 			getHead().appendChild(icons.getLink());
 		}
+		insertLinks(this.defaultTheme);
+		insertLinks(this.currentTheme);
 	}
 
 	private void insertLinks(Theme theme) {
