@@ -84,7 +84,7 @@ public class Alert<T> extends AbstractForm<T> implements HasDrawable, HasAlertDi
 
 	@Override
 	public IsWidget cloneWidget() {
-		return new Alert(this);
+		return new Alert<T>(this);
 	}
 
 	public void hide() {
@@ -121,14 +121,16 @@ public class Alert<T> extends AbstractForm<T> implements HasDrawable, HasAlertDi
 
 	public void setDismissable(boolean dismissable) {
 		this.dismissable = dismissable;
-		StyleUtils.toggleStyle(this, STYLE_ALERT_DISMISSABLE, dismissable);
 		redraw();
 	}
 
 	@Override
 	public void redraw() {
-		if (dismissable && dismissButton == null) {
-			insert(ensureDismissButton(), 0, true);
+		StyleUtils.toggleStyle(this, STYLE_ALERT_DISMISSABLE, dismissable);
+		if (dismissable) {
+			if (dismissButton == null) {
+				insert(ensureDismissButton(), 0, true);
+			}
 		}
 		else if (dismissButton != null) {
 			dismissButton.removeFromParent();
