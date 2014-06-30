@@ -16,102 +16,91 @@
  */
 package fr.putnami.pwt.core.widget.client.base;
 
+import java.util.Iterator;
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
 import fr.putnami.pwt.core.theme.client.CssStyle;
 
 public interface HasResponsiveVisibility {
 
-	enum XsVisibility implements CssStyle {
-		DEFAULT(null),
-		VISIBLE("visible-xs"),
-		HIDDEN("hidden-xs");
+	enum TargetSize {
+		XS("xs"),
+		SM("sm"),
+		MD("md"),
+		LG("lg"),
+		PRINT("print");
 
-		private final String style;
+		private final String value;
 
-		private XsVisibility(String style) {
-			this.style = style;
+		private TargetSize(String value) {
+			this.value = value;
+		}
+
+		public String value() {
+			return value;
+		}
+	}
+
+	enum Visibility {
+		DEFAULT(null, null),
+		HIDDEN("hidden-", null),
+		VISIBLE_BLOCK("visible-", "-block"),
+		VISIBLE_INLINE("visible-", "-inline"),
+		VISIBLE_INLINE_BLOCK("visible-", "-inline-block");
+
+		private final String prefix;
+		private final String suffix;
+
+		private Visibility(String prefix, String suffix) {
+			this.prefix = prefix;
+			this.suffix = suffix;
+		}
+
+		public String get(TargetSize size) {
+			if (this == DEFAULT) {
+				return null;
+			}
+			String result = prefix + size.value();
+			if (suffix != null) {
+				result += suffix;
+			}
+			return result;
+		}
+	}
+
+	public static class VisibilityStyle implements CssStyle, Iterable<VisibilityStyle> {
+		private final TargetSize size;
+		private final Visibility visibility;
+
+		public VisibilityStyle(TargetSize size, Visibility visibility) {
+			this.size = size;
+			this.visibility = visibility;
 		}
 
 		@Override
 		public String get() {
-			return style;
-		}
-	}
-
-	enum SmVisibility implements CssStyle {
-		DEFAULT(null),
-		VISIBLE("visible-sm"),
-		HIDDEN("hidden-sm");
-
-		private final String style;
-
-		private SmVisibility(String style) {
-			this.style = style;
+			return visibility.get(size);
 		}
 
 		@Override
-		public String get() {
-			return style;
+		public Iterator<VisibilityStyle> iterator() {
+			List<VisibilityStyle> toRemove = Lists.newArrayList();
+			for (Visibility availableVisibility : Visibility.values()) {
+				toRemove.add(new VisibilityStyle(size, availableVisibility));
+			}
+			return toRemove.iterator();
 		}
 	}
 
-	enum MdVisibility implements CssStyle {
-		DEFAULT(null),
-		VISIBLE("visible-md"),
-		HIDDEN("hidden-md");
+	void setXsVisibility(Visibility xsVisibility);
 
-		private final String style;
+	void setSmVisibility(Visibility smVisibility);
 
-		private MdVisibility(String style) {
-			this.style = style;
-		}
+	void setMdVisibility(Visibility mdVisibility);
 
-		@Override
-		public String get() {
-			return style;
-		}
-	}
+	void setLgVisibility(Visibility lgVisibility);
 
-	enum LgVisibility implements CssStyle {
-		DEFAULT(null),
-		VISIBLE("visible-lg"),
-		HIDDEN("hidden-lg");
-
-		private final String style;
-
-		private LgVisibility(String style) {
-			this.style = style;
-		}
-
-		@Override
-		public String get() {
-			return style;
-		}
-	}
-
-	enum PrintVisibility implements CssStyle {
-		DEFAULT(null),
-		VISIBLE("visible-print"),
-		HIDDEN("hidden-print");
-
-		private final String style;
-
-		private PrintVisibility(String style) {
-			this.style = style;
-		}
-
-		@Override
-		public String get() {
-			return style;
-		}
-	}
-
-	void setXsVisibility(XsVisibility xsVisibility);
-
-	void setSmVisibility(SmVisibility smVisibility);
-
-	void setMdVisibility(MdVisibility mdVisibility);
-
-	void setLgVisibility(LgVisibility lgVisibility);
-
-	void setPrintVisibility(PrintVisibility printVisibility);
+	void setPrintVisibility(Visibility printVisibility);
 }

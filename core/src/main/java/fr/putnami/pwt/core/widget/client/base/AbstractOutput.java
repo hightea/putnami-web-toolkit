@@ -31,11 +31,11 @@ import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public abstract class AbstractOutput<T> extends Widget implements
-CloneableWidget,
-EditorLeaf,
-EditorOutput<T>,
-HasText,
-HasResponsiveVisibility {
+		CloneableWidget,
+		EditorLeaf,
+		EditorOutput<T>,
+		HasText,
+		HasResponsiveVisibility {
 
 	public enum Style implements CssStyle {
 		DEFAULT(null),
@@ -183,28 +183,28 @@ HasResponsiveVisibility {
 	}
 
 	@Override
-	public void setXsVisibility(XsVisibility xsVisibility) {
-		StyleUtils.addStyle(this, xsVisibility);
+	public void setXsVisibility(Visibility xsVisibility) {
+		StyleUtils.addStyle(this, new VisibilityStyle(TargetSize.XS, xsVisibility));
 	}
 
 	@Override
-	public void setSmVisibility(SmVisibility smVisibility) {
-		StyleUtils.addStyle(this, smVisibility);
+	public void setSmVisibility(Visibility smVisibility) {
+		StyleUtils.addStyle(this, new VisibilityStyle(TargetSize.SM, smVisibility));
 	}
 
 	@Override
-	public void setMdVisibility(MdVisibility mdVisibility) {
-		StyleUtils.addStyle(this, mdVisibility);
+	public void setMdVisibility(Visibility mdVisibility) {
+		StyleUtils.addStyle(this, new VisibilityStyle(TargetSize.MD, mdVisibility));
 	}
 
 	@Override
-	public void setLgVisibility(LgVisibility lgVisibility) {
-		StyleUtils.addStyle(this, lgVisibility);
+	public void setLgVisibility(Visibility lgVisibility) {
+		StyleUtils.addStyle(this, new VisibilityStyle(TargetSize.LG, lgVisibility));
 	}
 
 	@Override
-	public void setPrintVisibility(PrintVisibility printVisibility) {
-		StyleUtils.addStyle(this, printVisibility);
+	public void setPrintVisibility(Visibility printVisibility) {
+		StyleUtils.addStyle(this, new VisibilityStyle(TargetSize.PRINT, printVisibility));
 	}
 
 }
