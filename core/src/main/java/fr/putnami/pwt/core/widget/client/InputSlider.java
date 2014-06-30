@@ -52,8 +52,8 @@ import fr.putnami.pwt.core.widget.client.event.ChangeEvent;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class InputSlider<T> extends AbstractInput<T> implements
-HasValueChangeHandlers<T>,
-ValueChangeHandler<T> {
+		HasValueChangeHandlers<T>,
+		ValueChangeHandler<T> {
 
 	private static final CssStyle STYLE_BACKGROUNG = new SimpleStyle("input-slider-background");
 	private static final CssStyle STYLE_HANDLE = new SimpleStyle("input-slider-handle");
@@ -66,7 +66,6 @@ ValueChangeHandler<T> {
 			if (this.dragging) {
 				this.dragging = false;
 				Event.releaseCapture(InputSlider.this.getElement());
-				handleWidget.moveHandleToPosition(getRelativeX(event));
 			}
 		}
 
