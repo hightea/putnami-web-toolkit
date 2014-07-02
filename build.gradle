@@ -22,7 +22,7 @@ ext {
 	releaseVersion = '1.0.0-RC1'
 	snapshotVersion = '1.0.0-SNAPSHOT'
 	gwtVersion = '2.6.1'
-	guavaVersion = '15.0'
+	guavaVersion = '17.0'
 }
 
 subprojects {
