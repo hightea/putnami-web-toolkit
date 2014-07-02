@@ -28,6 +28,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 import javax.servlet.Filter;
@@ -48,6 +50,7 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlItalic;
+import com.gargoylesoftware.htmlunit.html.HtmlMeta;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.util.FalsifyingWebConnection;
@@ -57,9 +60,10 @@ import com.google.gwt.thirdparty.guava.common.io.ByteStreams;
 
 public class AjaxBotIndexingFilter implements Filter {
 
-
 	private static final String FILTER_PARAM_CACHE_RESET_ON_STARTUP = "cacheResetOnStartup";
 	private static final String FILTER_PARAM_CACHE_FOLDER = "cacheFolder";
+
+	private static final String META_NAME_FRAGMENT = "fragment";
 
 	private static final String QUERY_PARAM_ESCAPED_FRAGMENT = "_escaped_fragment_";
 	private static final String QUERY_PARAM_RESET_FILTER = "_ajaxbotfilter_cache_reset_";
@@ -81,15 +85,43 @@ public class AjaxBotIndexingFilter implements Filter {
 	public void destroy() {
 	}
 
+	private static String rewriteQueryString(String queryString) throws UnsupportedEncodingException {
+		StringBuilder queryStringSb = new StringBuilder(queryString);
+		int i = queryStringSb.indexOf("&" + QUERY_PARAM_ESCAPED_FRAGMENT);
+		if (i != -1) {
+			StringBuilder tmpSb = new StringBuilder(queryStringSb.substring(0, i));
+			tmpSb.append("#!");
+			tmpSb.append(URLDecoder.decode(queryStringSb.substring(i + 20, queryStringSb.length()), "UTF-8"));
+			queryStringSb = tmpSb;
+		}
+
+		i = queryStringSb.indexOf(QUERY_PARAM_ESCAPED_FRAGMENT);
+		if (i != -1) {
+			StringBuilder tmpSb = new StringBuilder(queryStringSb.substring(0, i));
+			tmpSb.append("#!");
+			tmpSb.append(URLDecoder.decode(queryStringSb.substring(i + 19, queryStringSb.length()), "UTF-8"));
+			queryStringSb = tmpSb;
+		}
+		if (queryStringSb.indexOf("#!") != 0) {
+			queryStringSb.insert(0, '?');
+		}
+		queryString = queryStringSb.toString();
+
+		return queryString;
+	}
+
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
-		String token = request.getParameter(QUERY_PARAM_ESCAPED_FRAGMENT);
+		String queryString = request.getQueryString();
+		if (queryString == null) {
+			queryString = "";
+		}
 		if ("GET".equals(request.getMethod())
-				&& request.getParameter(QUERY_PARAM_RESET_FILTER) != null) {
+				&& queryString.contains(QUERY_PARAM_RESET_FILTER)) {
 			resetCache();
 		}
-		if ("GET".equals(request.getMethod()) && token != null) {
+		if ("GET".equals(request.getMethod()) && queryString.contains(QUERY_PARAM_ESCAPED_FRAGMENT)) {
 			ByteStreams.copy(getHtmlStream(request), resp.getOutputStream());
 		}
 		else {
@@ -113,51 +145,29 @@ public class AjaxBotIndexingFilter implements Filter {
 	}
 
 	private InputStream extractHtml(HttpServletRequest request) throws IOException {
-		WebClient webClient = new WebClient(BrowserVersion.CHROME);
+		WebClient webClient = new WebClient(BrowserVersion.FIREFOX_24);
 		new GoogleAnalyticsConnectionFilter(webClient);
-
-		String token = request.getParameter(QUERY_PARAM_ESCAPED_FRAGMENT);
-		String escapedTokenQuery = QUERY_PARAM_ESCAPED_FRAGMENT + "=" + token;
-
-		String uri = request.getRequestURI();
-		String host = request.getServerName();
-		int port = request.getServerPort();
-		String query = request.getQueryString();
-
-		if (token.contains("\\&" + escapedTokenQuery)) {
-			query = query.replace("&" + escapedTokenQuery, "");
-		}
-		else if (token.contains(escapedTokenQuery + "&")) {
-			query = query.replace("&" + escapedTokenQuery, "");
-		}
-		else {
-		}
-		query = query.replace(escapedTokenQuery, "");
-		if (query.contains("&&")) {
-			query = query.replace("&&", "");
-		}
-		else if (query.endsWith("&")) {
-			query = query.substring(0, query.length() - 1);
-		}
 
 		StringBuffer prettyUrl = new StringBuffer();
 		prettyUrl.append(request.isSecure() ? "https://" : "http://")
-		.append(host)
-		.append(":")
-		.append(port)
-		.append(uri);
-
-		if (query.length() > 1) {
-			prettyUrl.append("?")
-			.append(query);
+				.append(request.getServerName());
+		if (request.getServerPort() != 0) {
+			prettyUrl.append(":")
+					.append(request.getServerPort());
 		}
-
-		prettyUrl.append("#!")
-		.append(token);
+		prettyUrl.append(request.getRequestURI());
+		prettyUrl.append(rewriteQueryString(request.getQueryString()));
 
 		HtmlPage page = webClient.getPage(prettyUrl.toString());
 		List<DomNode> elementsToRemove = Lists.newArrayList();
 
+		// Remove the meta tag containing the fragment
+		for (DomElement elem : page.getHead().getElementsByTagName(HtmlMeta.TAG_NAME)) {
+			HtmlMeta meta = (HtmlMeta) elem;
+			if (META_NAME_FRAGMENT.equals(meta.getNameAttribute())) {
+				elementsToRemove.add(meta);
+			}
+		}
 		// GWT iframe are useless
 		for (DomNode node : page.getBody().getChildren()) {
 			if (HtmlInlineFrame.TAG_NAME.equals(node.getNodeName())) {
@@ -220,6 +230,7 @@ public class AjaxBotIndexingFilter implements Filter {
 		}
 		folder.delete();
 	}
+
 	private String getCacheFileName(HttpServletRequest request) {
 		if (cacheFolder == null) {
 			return null;
