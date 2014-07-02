@@ -1,0 +1,10 @@
+RewriteEngine On
+
+
+RewriteCond %{REQUEST_URI} ^/seo/(.*)$
+RewriteCond %{REQUEST_URI} !^/seo/data/sitemap.txt$
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteRule ^ - [R=404,L]
+
+RewriteCond %{QUERY_STRING} ^(.*)_escaped_fragment_=(.*)$
+RewriteRule ^$ seo/extractor.php?place=%2 [QSD,L]

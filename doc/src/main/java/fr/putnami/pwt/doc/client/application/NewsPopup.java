@@ -42,7 +42,8 @@ public class NewsPopup implements IsWidget, HasDrawable {
 		Binder BINDER = GWT.create(Binder.class);
 	}
 
-	public interface NotificationModel extends Model<RssItem> {	}
+	public interface NotificationModel extends Model<RssItem> {
+	}
 
 	private final Model<RssItem> notificationModel = GWT.create(NotificationModel.class);
 
@@ -125,7 +126,7 @@ public class NewsPopup implements IsWidget, HasDrawable {
 		getGA().trackEvent("read", "news" + item.getGuid());
 		String link = item.getLink();
 		if (link.startsWith("#!")) {
-			History.newItem(link);
+			History.newItem(link.substring(1));
 		}
 		else {
 			Window.open(link, "_blank", "");
