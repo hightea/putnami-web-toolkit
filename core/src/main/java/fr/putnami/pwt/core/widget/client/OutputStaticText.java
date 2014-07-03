@@ -25,6 +25,10 @@ public class OutputStaticText extends AbstractOutput<Object> {
 	public OutputStaticText() {
 	}
 
+	public OutputStaticText(String text) {
+		setText(text);
+	}
+
 	protected OutputStaticText(OutputStaticText source) {
 		super(source);
 	}
