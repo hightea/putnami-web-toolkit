@@ -70,6 +70,7 @@ HasCollapseHandlers {
 
 	private final Container collapsePanel = new Container();
 	private OneWidgetPanel bodyPanel;
+	private Table table;
 
 	private Header header;
 	private Footer footer;
@@ -145,12 +146,18 @@ HasCollapseHandlers {
 
 	@Override
 	public void setWidget(IsWidget w) {
-		if (bodyPanel == null) {
-			bodyPanel = new OneWidgetPanel();
-			StyleUtils.addStyle(bodyPanel, STYLE_BODY);
+		if (w instanceof Table) {
+			table = (Table) w;
 			redraw();
 		}
-		bodyPanel.setWidget(w);
+		else {
+			if (bodyPanel == null) {
+				bodyPanel = new OneWidgetPanel();
+				StyleUtils.addStyle(bodyPanel, STYLE_BODY);
+				redraw();
+			}
+			bodyPanel.setWidget(w);
+		}
 	}
 
 	public Header getHeader() {
@@ -233,6 +240,7 @@ HasCollapseHandlers {
 
 		collapsePanel.clear();
 		collapsePanel.append(bodyPanel);
+		collapsePanel.append(table);
 		collapsePanel.append(footer);
 
 		ensureCollapseHelper();
