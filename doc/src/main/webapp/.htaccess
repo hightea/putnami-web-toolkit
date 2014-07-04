@@ -8,3 +8,33 @@ RewriteRule ^ - [R=404,L]
 
 RewriteCond %{QUERY_STRING} ^(.*)_escaped_fragment_=(.*)$
 RewriteRule ^$ seo/extractor.php?place=%2 [QSD,L]
+
+
+redirect 301 http://pwt.putnami.org/Welcome.html				http://pwt.putnami.org#!Welcome
+
+redirect 301 http://pwt.putnami.org/GettingStarted.html			http://pwt.putnami.org#!GettingStarted
+
+redirect 301 http://pwt.putnami.org/Bootstrap.html				http://pwt.putnami.org#!Bootstrap
+redirect 301 http://pwt.putnami.org/Layouts.html				http://pwt.putnami.org#!Layouts
+redirect 301 http://pwt.putnami.org/Components.html				http://pwt.putnami.org#!Components
+redirect 301 http://pwt.putnami.org/Forms.html					http://pwt.putnami.org#!Components
+redirect 301 http://pwt.putnami.org/More.html					http://pwt.putnami.org#!Components
+redirect 301 http://pwt.putnami.org/Table.html					http://pwt.putnami.org#!Components
+
+redirect 301 http://pwt.putnami.org/DataBinding.html			http://pwt.putnami.org#!DataBinding
+redirect 301 http://pwt.putnami.org/Internationalization.html	http://pwt.putnami.org#!Internationalization
+redirect 301 http://pwt.putnami.org/Navigation.html				http://pwt.putnami.org#!Navigation
+redirect 301 http://pwt.putnami.org/ServerCalls.html			http://pwt.putnami.org#!ServerCalls
+redirect 301 http://pwt.putnami.org/Errors.html					http://pwt.putnami.org#!Errors
+
+redirect 301 http://pwt.putnami.org/CodeEditor.html				http://pwt.putnami.org#!CodeEditor
+redirect 301 http://pwt.putnami.org/AjaxBotIndexing.html		http://pwt.putnami.org#!AjaxBotIndexing
+redirect 301 http://pwt.putnami.org/GoogleAnalytics.html		http://pwt.putnami.org#!GoogleAnalytics
+
+redirect 301 http://pwt.putnami.org/Samples.html				http://pwt.putnami.org#!Samples
+redirect 301 http://pwt.putnami.org/ContactsTable.html			http://pwt.putnami.org#!ContactsTable
+redirect 301 http://pwt.putnami.org/AddressBook.html			http://pwt.putnami.org#!AddressBook
+
+redirect 301 http://pwt.putnami.org/ComingSoon.html				http://pwt.putnami.org#!ComingSoon
+
+redirect 301 http://pwt.putnami.org/Download.html				http://pwt.putnami.org#!Download
