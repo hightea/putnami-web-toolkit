@@ -55,6 +55,10 @@ public class TableHead extends AbstractPanel implements CloneableWidget {
 		if (w instanceof AbstractTableColumn) {
 			this.addColumn((AbstractTableColumn) w);
 		}
+		if (w instanceof TableTH
+				|| w instanceof TableTD) {
+			headerRow.append(w);
+		}
 	}
 
 	private <A> void addColumn(AbstractTableColumn<A> column) {
