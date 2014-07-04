@@ -154,7 +154,7 @@ public final class DefaultCommandController extends CommandController {
 	private Stack<Request> stack = new Stack<Request>();
 
 	private DefaultCommandController() {
-		this.moduleBaseURL = GWT.getModuleBaseURL();
+		this.moduleBaseURL = GWT.getHostPageBaseURL();
 		this.remoteServiceURL = this.moduleBaseURL + "commandService";
 		ErrorManager.get().registerErrorHandlers(new ClientErrorHandler(), new ServerErrorHandler(), new DefaultCommandExceptionErrorHandler());
 	}
