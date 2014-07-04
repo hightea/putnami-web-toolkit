@@ -2,6 +2,7 @@ apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'gwt-base'
+apply plugin: 'eclipse'
 
 
 group = 'fr.putnami.pwt'
@@ -56,6 +57,16 @@ jar {
 
 gwt {
 	gwtVersion='2.6.1'
+	
+	eclipse{
+		addGwtContainer=false
+	}
+}
+
+eclipse {
+	classpath {
+		downloadSources=true
+	}
 }
 
 publishing {

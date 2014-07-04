@@ -3,10 +3,11 @@ apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'gwt'
 apply plugin: 'jetty'
+apply plugin: 'eclipse'
 
 
 group = 'fr.putnami.pwt'
-version = '1.0.0-RC1'
+version = '1.0.0-RC2'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
@@ -62,6 +63,9 @@ gwt {
 	superDev {
 		noPrecompile=true
 	}
+	eclipse{
+		addGwtContainer=false
+	}
 }
 
 publishing {
@@ -70,6 +74,12 @@ publishing {
             from components.web
         }
     }
+}
+
+eclipse {
+	classpath {
+		downloadSources=true
+	}
 }
 
 /**

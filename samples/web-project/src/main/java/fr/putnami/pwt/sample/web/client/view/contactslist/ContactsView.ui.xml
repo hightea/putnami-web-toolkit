@@ -39,7 +39,7 @@
 		</a:GridRow>
 		
 		<a:Modal ui:field="modal" title="{constants.newPersonTitle}" dismissable="true">
-			<a:Form ui:field="contactEditor" type="HORIZONTAL">
+			<a:Form ui:field="contactEditor" layout="HORIZONTAL">
 				<fieldset>
 					<legend>Person</legend>
 					<a:FormGroup path="name" />
