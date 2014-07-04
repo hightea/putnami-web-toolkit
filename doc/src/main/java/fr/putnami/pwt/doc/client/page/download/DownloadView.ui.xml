@@ -23,37 +23,125 @@
 	
 	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
 
-	<w:HTMLPanel>
+	<w:HTMLPanel title="PWT - Downloads center">
 		<w:Header ui:field="header">
 			<w:Heading level="1" navSpy="{tableOfContent}">Download center</w:Heading>
+			<p class="lead">
+			All release are available on our maven repository on <a href="http://repo.putnami.org">http://repo.putnami.org</a>.
+			<br/>
+			You can also checkout the releases on <a href="https://github.com/Putnami/putnami-pwt/releases">GitHub release page</a>.
+			</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
-			<w:Heading level="2" navSpy="{tableOfContent}">Releases</w:Heading>
-			<w:GridRow styleName="text-left">
-				<w:GridColumn sizeSm="6" size="6">
-					<w:Heading level="3">PWT Core library</w:Heading>
-					<p>Core framework library.</p>
-					<w:Anchor ui:field="coreBtn" link="http://repo.putnami.org/fr/putnami/pwt/pwt/@releaseVersion@/pwt-@releaseVersion@.jar" styleName="btn btn-default" text="Download" />
-				</w:GridColumn>
-				<w:GridColumn sizeSm="6" size="6">
-					<w:Heading level="3">PWT Code Editor plugin</w:Heading>
-					<p>Plugin providing a code editor component.</p>
-					<w:Anchor ui:field="codeBtn" link="http://repo.putnami.org/fr/putnami/pwt/pwt-code-editor/@releaseVersion@/pwt-code-editor-@releaseVersion@.jar" styleName="btn btn-default" text="Download" />
-				</w:GridColumn>
-<!-- 				<w:GridColumn sizeSm="4" size="4"> -->
-<!-- 					<w:Heading level="3">PWT Google Analytics library</w:Heading> -->
-<!-- 					<p>Plugin providing Google Analytics support.</p> -->
-<!-- 					<w:Anchor ui:field="gaBtn" link="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/@releaseVersion@/pwt-google-analytics-@releaseVersion@.jar" styleName="btn btn-default" text="Download" /> -->
-<!-- 				</w:GridColumn> -->
-			</w:GridRow>
-			<p>Current version <span class="label label-info">@releaseVersion@</span></p>
+			<w:Heading level="2" navSpy="{tableOfContent}">Current stable <small>@releaseVersion@</small></w:Heading>
 			
-			<w:Heading level="2" navSpy="{tableOfContent}">Usage</w:Heading>
-			<w:Alert type="INFO">
-				<w:Heading level="4">Releases</w:Heading>
-				<p>If you want more details with the maven or gradle usage of PWT, go to the <w:Anchor link="#!GettingStarted" text="Getting started guide" /></p>
-				<p><em>Note :</em> You can use the snapshot <span class="label label-info">@snapshotVersion@</span></p>
+			<w:Table>
+				<w:TableHead>
+						<w:TableTH><w:Label>Package</w:Label></w:TableTH>
+						<w:TableTH><w:Label>Name</w:Label></w:TableTH>
+						<w:TableTH><w:Label>Version</w:Label></w:TableTH>
+						<w:TableTH></w:TableTH>
+						<w:TableTH></w:TableTH>
+				</w:TableHead>
+				<w:TableBody bodyId="main">
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.0.0-RC2</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt/1.0.0-RC2/pwt-1.0.0-RC2.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt/1.0.0-RC2/pwt-1.0.0-RC2.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt-code-editor</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.0.0-RC2</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-code-editor/1.0.0-RC2/pwt-code-editor-1.0.0-RC2.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-code-editor/1.0.0-RC2/pwt-code-editor-1.0.0-RC2.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt-google-analytics</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.0.0-RC2</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/1.0.0-RC2/pwt-google-analytics-1.0.0-RC2.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/1.0.0-RC2/pwt-google-analytics-1.0.0-RC2.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt-ajax-bot-indexing</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.0.0-RC2</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-ajax-bot-indexing/1.0.0-RC2/pwt-ajax-bot-indexing-1.0.0-RC2.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-ajax-bot-indexing/1.0.0-RC2/pwt-ajax-bot-indexing-1.0.0-RC2.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+				</w:TableBody>
+			</w:Table>			
+			<w:Panel color="SUCCESS" collapsible="true" collapse="true">
+				<w:Header>Release notes</w:Header>
+				<w:HTMLPanel>
+					<strong>New enhancements :</strong>
+					<ul>
+						<li>Migrate to Bootstrap 3.2</li>
+						<li>UI - AbstractForm rename type to layoutType</li>
+						<li>UI - Alert should extends AbstractForm</li>
+						<li>UI - InputCheckBox</li>
+						<li>UI - Icon customisation</li>
+						<li>UI - Progress Bar</li>
+						<li>UI - InputRadioBox</li>
+						<li>UI - Image</li>
+					</ul>
+					<strong>Fixed issues :</strong>
+					<ul>
+						<li>UI - AlertDismissEvent propagation on Alert clone</li>
+						<li>UI - Modal should be attach to the RootPanel</li>
+						<li>CodeEditor - IE issue</li>
+						<li>InputDatePicker header sunday repeat twice</li>
+						<li>eclipse gwt classpath</li>
+						<li>Google Analitics - divers fixes</li>
+					</ul>
+					
+				</w:HTMLPanel>
+			</w:Panel>
+			<w:Alert type="SUCCESS">
+				<strong>Curent Snapshots <span class="label label-info">@snapshotVersion@</span></strong>
 			</w:Alert>
+			<w:Alert type="INFO">
+				<strong>Gradle and Maven usage</strong>
+				<p>Find more details on the maven and gradle usage with <w:Anchor link="#!GettingStarted" text="Getting started guide" /></p>
+			</w:Alert>
+			
+			<w:Header><w:Heading level="2" navSpy="{tableOfContent}">Version <strong>1.0.0-RC1</strong></w:Heading></w:Header>
+			<w:Table>
+				<w:TableHead>
+						<w:TableTH><w:Label>Package</w:Label></w:TableTH>
+						<w:TableTH><w:Label>Name</w:Label></w:TableTH>
+						<w:TableTH><w:Label>Version</w:Label></w:TableTH>
+						<w:TableTH></w:TableTH>
+						<w:TableTH></w:TableTH>
+				</w:TableHead>
+				<w:TableBody bodyId="main">
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.0.0-RC1</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt/1.0.0-RC1/pwt-1.0.0-RC1.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt/1.0.0-RC1/pwt-1.0.0-RC1.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt-code-editor</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.0.0-RC1</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-code-editor/1.0.0-RC1/pwt-code-editor-1.0.0-RC1.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-code-editor/1.0.0-RC1/pwt-code-editor-1.0.0-RC1.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt-google-analytics</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.0.0-RC1</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/1.0.0-RC1/pwt-google-analytics-1.0.0-RC1.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/1.0.0-RC1/pwt-google-analytics-1.0.0-RC1.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+				</w:TableBody>
+			</w:Table>
+
 		</w:HTMLPanel>
 	</w:HTMLPanel>
 

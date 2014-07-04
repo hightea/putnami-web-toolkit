@@ -9,21 +9,33 @@
         <item>
             <title>Welcome on board</title>
             <description>
-            	Today the Putnami Web Toolkit is out! First public announcement has been done on the GWT google group. We really hope that we're gonna enjoy :)  
+            	Today the Putnami Web Toolkit alias PWT is out of the box! First public announcement has been done on the GWT google group. We really hope that we're gonna enjoy :)  
             </description>
             <link>https://groups.google.com/forum/#!topic/google-web-toolkit/EcWmPHx9Ew8</link>
-            <guid>http://pwt.putnami.org/#news:welcome</guid>
+            <guid>http://pwt.putnami.org/#news:out-of-the-box</guid>
             <pubDate>Tue, 17 jun 2014</pubDate>
             <author>Fabien</author>
         </item>
         <item>
-            <title>Release 1.0.0-RC2 planned.</title>
+            <title>What's up! 2 weeks from our first and only public post.</title>
             <description>
-            	We're close to get all expected features planned for the 1.0.0 . we decided to fix the RC2 to the Friday 4th of july.
+            	Lots of people come and come back. we talked about our toolkit and close to 50 countries came to see it. Internet is truly magical.
+				All the feedback are hopeful. Now we know that we've got something with great future. 
             </description>
-            <link>#!ComingSoon</link>
-            <guid>http://pwt.putnami.org/#news:rc2-planned</guid>
-            <pubDate>Fri, 27 jun 2014</pubDate>
+            <link>https://groups.google.com/d/msg/putnami-web-toolkit/y1IBVFojb8s/4_sm61JpPwkJ</link>
+            <guid>http://pwt.putnami.org/#news:2-weeks</guid>
+            <pubDate>Tue, 1 jul 2014</pubDate>
+            <author>Fabien</author>
+        </item>
+        <item>
+            <title>1.0.0-RC2 has been released.</title>
+            <description>
+            	Waoh! every things is going right. 8 new enhancements, 6 fixed issues, The sun is shining for PWT.
+            	The 1.0  final is planed for the end of august.
+            </description>
+            <link>#!Download</link>
+            <guid>http://pwt.putnami.org/#news:1.0.0-RC2</guid>
+            <pubDate>Fri, 4 jul 2014</pubDate>
             <author>Fabien</author>
         </item>
     </channel>

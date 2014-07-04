@@ -17,6 +17,7 @@
 package fr.putnami.pwt.doc.client.page.sample.all;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -35,6 +36,7 @@ public class SamplesView extends Composite implements View<SamplesPlace> {
 
 	@Override
 	public void present(SamplesPlace place) {
+		Document.get().setTitle("PWT - Samples");
 		// Nothing to do
 	}
 }

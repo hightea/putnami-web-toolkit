@@ -22,6 +22,7 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -106,6 +107,7 @@ public class ContactsTableView extends SampleView<ContactsTablePlace> implements
 	@Override
 	public void present(ContactsTablePlace place) {
 		super.present(place);
+		Document.get().setTitle("PWT - Sample - Contact table");
 		contactTable.edit(Lists.<Contact> newArrayList(ContactService.get().getPeople()));
 	}
 

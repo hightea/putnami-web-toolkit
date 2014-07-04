@@ -17,14 +17,10 @@
 package fr.putnami.pwt.doc.client.page.download;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Widget;
 
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
-import fr.putnami.pwt.doc.client.application.ApplicationConfig;
 import fr.putnami.pwt.doc.client.application.Page;
-import fr.putnami.pwt.plugin.ga.client.GoogleAnalytics;
 
 public class DownloadView extends Page<DownloadPlace> {
 
@@ -38,18 +34,8 @@ public class DownloadView extends Page<DownloadPlace> {
 		return GWT.create(Binder.class);
 	}
 
-	@UiHandler("coreBtn")
-	public void onCoreLinknClick(ClickEvent evt) {
-		GoogleAnalytics.get(ApplicationConfig.ANALYTICS_TRACKER_ID).trackEvent("download", "pwt-core-jar");
-	}
-
-	@UiHandler("codeBtn")
-	public void onCodeLinkClick(ClickEvent evt) {
-		GoogleAnalytics.get(ApplicationConfig.ANALYTICS_TRACKER_ID).trackEvent("download", "code-editor-jar");
-	}
-//
-//	@UiHandler("gaBtn")
-//	public void onGaLinkClick(ClickEvent evt) {
-//		GoogleAnalytics.get(ApplicationConfig.ANALYTICS_TRACKER_ID).trackEvent("download", "google-analytics-jar");
-//	}
+//	@UiHandler("content")
+	//	public void onClick(ClickEvent evt) {
+	//		GoogleAnalytics.get(ApplicationConfig.ANALYTICS_TRACKER_ID).trackEvent("download", "pwt-core-jar");
+	//	}
 }

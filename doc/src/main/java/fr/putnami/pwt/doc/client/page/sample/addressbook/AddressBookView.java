@@ -27,6 +27,7 @@ import com.google.common.collect.Multimap;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.uibinder.client.UiField;
@@ -148,6 +149,9 @@ public class AddressBookView extends SampleView<AddressBookPlace> implements Vie
 	@Override
 	public void present(AddressBookPlace place) {
 		super.present(place);
+
+		Document.get().setTitle("PWT - Sample - Address book");
+
 		List<Group> groups = ContactService.get().getGroups();
 		Collection<String> groupsItems = Lists.newArrayList();
 		for (int i = 1; i < groups.size(); i++) {
