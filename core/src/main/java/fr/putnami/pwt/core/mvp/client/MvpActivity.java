@@ -59,7 +59,10 @@ public final class MvpActivity implements Activity, ViewProxy.Callback {
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		this.panel = panel;
-		this.place.getViewProxy().getView(this);
+		ViewProxy proxy = this.place.getViewProxy();
+		if (proxy != null) {
+			proxy.getView(this);
+		}
 	}
 
 	@Override
