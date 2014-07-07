@@ -16,16 +16,11 @@
  */
 package fr.putnami.pwt.doc.client;
 
-import static fr.putnami.pwt.doc.client.application.ApplicationConfig.ANALYTICS_TRACKER_ID;
-import static fr.putnami.pwt.doc.client.application.ApplicationConfig.COOKIE_COUNT_VISIT;
-import static fr.putnami.pwt.doc.client.application.ApplicationConfig.DOMAIN;
-
 import com.google.common.base.Strings;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
 import com.google.gwt.user.client.Cookies;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import fr.putnami.pwt.core.error.client.ErrorManager;
@@ -56,15 +51,14 @@ import fr.putnami.pwt.doc.client.page.soon.ComingSoonPlace;
 import fr.putnami.pwt.doc.client.page.starting.GettingStartedPlace;
 import fr.putnami.pwt.doc.client.page.welcome.WelcomePlace;
 import fr.putnami.pwt.plugin.ga.client.GoogleAnalytics;
+import static fr.putnami.pwt.doc.client.application.ApplicationConfig.ANALYTICS_TRACKER_ID;
+import static fr.putnami.pwt.doc.client.application.ApplicationConfig.COOKIE_COUNT_VISIT;
+import static fr.putnami.pwt.doc.client.application.ApplicationConfig.DOMAIN;
 
 public class DocumentationApp implements EntryPoint {
 
 	@Override
 	public void onModuleLoad() {
-		if (redirectIfNotIndexPage()) {
-			return;
-		}
-
 		Theme theme = new Theme();
 		theme.addLink(new CssLink("theme/doc/style/pwt-doc.css", 0));
 		ThemeController.get().installTheme(theme);
@@ -126,20 +120,5 @@ public class DocumentationApp implements EntryPoint {
 		controller.registerAlias("More", LayoutsPlace.INSTANCE);
 
 		controller.handleCurrentHistory();
-	}
-
-	private boolean redirectIfNotIndexPage() {
-		String params = "";
-		String pageUrl = Window.Location.getHref();
-		if (pageUrl.contains("?")) {
-			params = Window.Location.getQueryString();
-			pageUrl = pageUrl.replace(params, "");
-		}
-		if (pageUrl.endsWith(".html")) {
-			String newUrl = GWT.getHostPageBaseURL().substring(0, GWT.getHostPageBaseURL().lastIndexOf("/"));
-			Window.Location.replace(newUrl + params);
-			return true;
-		}
-		return false;
 	}
 }
