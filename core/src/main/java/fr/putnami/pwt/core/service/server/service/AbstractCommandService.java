@@ -107,7 +107,7 @@ public abstract class AbstractCommandService extends AbstractRemoteServiceServle
 			boolean gzipEncode = RPCServletUtils.acceptsGzipEncoding(request)
 					&& RPCServletUtils.exceedsUncompressedContentLengthLimit(responsePayload);
 
-			RPCServletUtils.writeResponse(null, response, responsePayload, gzipEncode);
+			RPCServletUtils.writeResponse(request.getServletContext(), response, responsePayload, gzipEncode);
 		}
 		catch (Exception e) {
 			logger.error("Request processing failed", e);
