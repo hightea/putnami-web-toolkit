@@ -135,6 +135,20 @@ public class Affix extends OneWidgetPanel {
 		getElement().getStyle().setZIndex(layerIndex);
 	}
 
+	public int getPinnedOffset() {
+		return pinnedOffset;
+	}
+
+	@Override
+	public int getOffsetWidth() {
+		return offsetWidth;
+	}
+
+	@Override
+	public int getOffsetHeight() {
+		return offsetHeight;
+	}
+
 	public int getOffsetTop() {
 		return offsetTop;
 	}

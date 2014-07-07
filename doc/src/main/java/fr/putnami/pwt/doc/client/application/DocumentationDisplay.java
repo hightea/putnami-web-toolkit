@@ -16,6 +16,7 @@
  */
 package fr.putnami.pwt.doc.client.application;
 
+import com.google.common.base.Strings;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
@@ -70,21 +71,9 @@ public class DocumentationDisplay extends Composite implements AcceptsOneWidget 
 		if (w == null) {
 			return;
 		}
-		final int scrollLeft = Window.getScrollLeft();
-		final int scrollTop = Window.getScrollTop();
 
 		viewContainer.setWidget(w);
-
-		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-
-			@Override
-			public void execute() {
-				redraw();
-				if (scrollTop > 0 || scrollLeft > 0) {
-					Window.scrollTo(scrollLeft, scrollTop);
-				}
-			}
-		});
+		redraw();
 	}
 
 	private void redraw() {
@@ -95,8 +84,12 @@ public class DocumentationDisplay extends Composite implements AcceptsOneWidget 
 			viewContainer.getElement().getStyle().setHeight(Window.getClientHeight() - height, Unit.PX);
 		}
 		String historyToken = History.getToken();
-		if (historyToken != null && historyToken.length() > 0 && Window.getScrollTop() == 0) {
-			Window.scrollTo(Window.getScrollLeft(), affixMenu.getElement().getAbsoluteTop());
+		if (!Strings.isNullOrEmpty(historyToken)) {
+			int top = affixMenu.getPinnedOffset();
+			Window.scrollTo(Window.getScrollLeft(), top);
+		}
+		else {
+			Window.scrollTo(Window.getScrollLeft(), 0);
 		}
 	}
 
