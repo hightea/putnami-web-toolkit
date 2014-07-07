@@ -31,21 +31,21 @@
 		<w:Header ui:field="header">
 			<w:Heading level="1" navSpy="{tableOfContent}">Server calls</w:Heading>
 			<p class="lead">
-				GWT RPC framework make easy to invoke service procedure on server. But no easy enough for <strong title="Putnami Web Toolkit">PWT</strong>. <br/>
-				It's why we improved this mechanism in various ways.
+				GWT RPC framework makes it easy to invoke service procedure on server. But not easy enough for <strong title="Putnami Web Toolkit">PWT</strong>. <br/>
+				That's why we improved this mechanism in various ways.
 			</p>
 			<ul class="lead">
-				<li>Whrite the full Async interface is no more required.</li>
+				<li>Writing the full Async interface is no longer required.</li>
 				<li>Use the <code>@AsyncHandler</code> instead to extend <code>AsynCallback</code>.</li>
-				<li>Multiplex your request on a single HttpResquest.</li>
+				<li>Multiplex your request on a single HttpRequest.</li>
 				<li>Handle <code>CommandEvent</code> to monitor the RPC activity.</li>
 				<li>Delay your request with the <code>@LazyCommand</code> annotation.</li>
 			</ul>
 			<p class="lead">
 				Without any Async interfaces and inner <code>AsyncCallback</code> declaration, 
-				this feature help you to decrease the number of lignes and keep your code readable and simple. 
+				this feature helps you decrease the number of lines and keep your code readable and simple. 
 				<br/>
-				In optimizing the number of HTTP request, your application is more efficient and reactive.
+				By optimizing the number of HTTP requests, your application is more efficient and reactive.
 			</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
@@ -57,7 +57,7 @@
 			To make it work you need to:
 			</p>
 			<ul>
-				<li>On the client side you just have to genarate a <code>ServiceProxy</code> from the service interface.</li>
+				<li>On the client side you just have to generate a <code>ServiceProxy</code> from the service interface.</li>
 				<li>On the server side you just have to instantiate a single servlet implementing the <code>CommandService</code></li>
 			</ul>
 			<p>
@@ -66,18 +66,18 @@
 			<ol>
 				<li>The <code>ServiceProxy</code> builds one <code>CommandRequest</code></li>
 				<li>The <code>CommandRequest</code> is submited to the <code>CommandController</code>.</li>
-				<li>The <code>CommandController</code> send a <code>CommandRequestEvent</code> to notify handlers.</li>
+				<li>The <code>CommandController</code> sends a <code>CommandRequestEvent</code> to notify handlers.</li>
 				<li>Then <code>CommandController</code> encodes the <code>CommandRequest</code> in a RPC payload.</li>
 				<li>The <code>CommandController</code> sends the payload over one <code>HttpTequest.</code></li>
 				<li>On the server side, the <code>CommandService</code> handles the <code>CommandRequest</code></li>
 				<li>The <code>CommandRequest</code> is dispatched it to the responsive <code>CommandExecutor</code>.</li>
 				<li>The <code>CommandExecutor</code> invokes the service</li>
-				<li>The <code>CommandExecutor</code> builds a  with the result or the exception.</li>
-				<li>The <code>CommandExecutor</code> return the <code>CommandResponse</code></li>
+				<li>The <code>CommandExecutor</code> builds a <code>CommandResponse</code> with the result or the exception.</li>
+				<li>The <code>CommandExecutor</code> returns the <code>CommandResponse</code></li>
 				<li>Then <code>CommandService</code> writes <code>CommandResponse</code> on the <code>HttpResponse</code>.</li>
 				<li>Back on the client side, the <code>CommandController</code> handles the <code>CommandResponse</code>.</li>
 				<li>The <code>CommandResponse</code> result or exception is dispatched the to differents binded callbacks.</li>
-				<li>Finally the <code>CommandController</code> send a <code>CommandResponseEvent</code> to notify handlers.</li>
+				<li>Finally the <code>CommandController</code> sends a <code>CommandResponseEvent</code> to notify handlers.</li>
 			</ol>
 			<w:Alert type="INFO">
 				<h4>Note :</h4>
@@ -90,14 +90,14 @@
 
 			<w:Heading level="2" navSpy="{tableOfContent}">On server side</w:Heading>
 			<p>
-			On the server side all requests pass throw the <code>CommandService</code>. 
+			On the server side all requests pass through the <code>CommandService</code>. 
 			<br/>
-			The <code>CommandService</code> is incharge to dispach the <code>CommandRequest</code> to a <code>CommandExecutor</code>.
+			The <code>CommandService</code> is in charge to dispatch the <code>CommandRequest</code> to a <code>CommandExecutor</code>.
 			<br/>
-			Then <code>CommandExecutor</code> handle <code>CommandRequest</code>, invoke the targeted service then return a <code>CommandResponse</code>.
+			Then <code>CommandExecutor</code> handles <code>CommandRequest</code>, invokes the targeted service then returns a <code>CommandResponse</code>.
 			</p>
 			<w:Alert type="INFO">
-				<h4>Comming soon :</h4>
+				<h4>Coming soon :</h4>
 				<ul>
 					<li>J2EE CommandService resolving services in the JNDI</li>
 					<li>Spring CommandService resolving services in the ApplicationContext</li>
@@ -107,7 +107,7 @@
 			<div class="showcase-sample-block">
 				<div class="showcase-sample">
 					<p>
-					The <code>BasicCommandService</code> is a basic implementation allowing to instanciate services.
+					The <code>BasicCommandService</code> is a basic implementation allowing to instantiate services.
 					</p>
 				</div>
 				<c:StaticCode configuration="{XML_CONFIGURATION}">
@@ -134,7 +134,7 @@
 			<div class="showcase-sample-block">
 				<div class="showcase-sample">
 					<p>
-						On the client side you need first to generate a proxy with the following steps:
+						On the client side you first need to generate a proxy with the following steps:
 					</p>
 					<ol>
 						<li>Declare an interface which extends <code>ServiceProxy&lt;HANDLER, SERVICE&gt;</code>. 
@@ -145,11 +145,11 @@
 						</li>
 						<li>Generate the proxy with <code>GWT.create(...)</code>. 
 							<br/>
-							The rebind mechanism will genarate the code to make commands and callbacks.
+							The rebind mechanism will generate the code to make commands and callbacks.
 						</li>
 						<li>Then finally then bind the proxy with the handler <code>proxy.bindService(hadler)</code>.
 							<br/>
-							Attach the proxy to the handler, in order to properly dispatch the async callbaks.
+							Attach the proxy to the handler, in order to properly dispatch the async callbacks.
 						</li>
 					</ol>
 				</div>
@@ -261,7 +261,7 @@ void customSavePersonThrown(Throwable thrown) {
 				<w:Alert type="INFO">
 					<h4>Note : </h4>
 					<p>
-					All proxy method return null. the result is be passed to the <code>AsyncHandler</code>
+					All proxy methods return null. the result is be passed to the <code>AsyncHandler</code>
 					</p>
 				</w:Alert>
 				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
@@ -277,7 +277,7 @@ void onSaveClick(ClickEvent event){
 				<w:Heading level="3"  navSpy="{tableOfContent}">Multiplex requests</w:Heading>
 				<div class="showcase-sample">
 					<p>
-						The <code>CommandController</code> help you to suspend requests. When it flushed the pending requests are collected and sent in a single HTTP Request to the server. On response, each <code>@AsyncHandler</code> are properly called.
+						The <code>CommandController</code> helps you suspend requests. When it is flushed the pending requests are collected and sent in a single HTTP Request to the server. On response, each <code>@AsyncHandler</code> is properly called.
 					</p>
 				</div>
 				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
@@ -298,7 +298,7 @@ void load100Persons(){
 				<w:Heading level="3"  navSpy="{tableOfContent}">Lazy commands</w:Heading>
 				<div class="showcase-sample">
 					<p>
-						Use the <code>LazyCommand</code> annotation to stack the request untill a next "no lazy" request is done or <code>CommandController</code> is flushed. 
+						Use the <code>LazyCommand</code> annotation to stack the request untill the next "no lazy" request is done or <code>CommandController</code> is flushed. 
 					</p>
 				</div>
 				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
@@ -328,7 +328,7 @@ interface PersonRemoteService extends ServiceProxy<PersonView, PersonService>, P
 					<w:Alert>
 						<h4>Note :</h4>
 						<p>
-						 If the method is annoted as <code>@QuietCommand</code> events are not fired.
+						 If the method is annotated as <code>@QuietCommand</code> events are not fired.
 						</p>
 					</w:Alert>
 				</div>
