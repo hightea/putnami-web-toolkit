@@ -35,14 +35,35 @@ import fr.putnami.pwt.core.editor.client.util.ValidationUtils;
 import fr.putnami.pwt.core.editor.client.validator.SizeValidator;
 import fr.putnami.pwt.core.editor.client.validator.Validator;
 import fr.putnami.pwt.core.model.client.base.HasPlaceholder;
+import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.event.ChangeEvent;
 import fr.putnami.pwt.core.widget.client.helper.ToStringRenderer;
+import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public abstract class AbstractInputBox<T extends TextBoxBase, I> extends AbstractInput<I> implements
-		HasPlaceholder,
-		HasEnabled,
-		HasChangeHandlers
+HasPlaceholder,
+HasEnabled,
+HasChangeHandlers
 {
+
+	public enum Size implements CssStyle {
+
+		DEFAULT(null),
+		LARGE("input-lg"),
+		SMALL("input-sm");
+
+		private final String style;
+
+		private Size(String style) {
+			this.style = style;
+		}
+
+		@Override
+		public String get() {
+			return style;
+		}
+
+	}
 
 	private static final String ERROR_PARSING = "inputParsing";
 
@@ -56,6 +77,8 @@ public abstract class AbstractInputBox<T extends TextBoxBase, I> extends Abstrac
 	private Renderer<I> renderer = (Renderer<I>) ToStringRenderer.get();
 	private String placeholder;
 
+	private Size size;
+
 	public AbstractInputBox(T input) {
 		super(input);
 		this.input = input;
@@ -67,6 +90,8 @@ public abstract class AbstractInputBox<T extends TextBoxBase, I> extends Abstrac
 		setPlaceholder(source.placeholder);
 		this.parser = source.parser;
 		this.renderer = source.renderer;
+
+		setSize(source.size);
 		endConstruct();
 	}
 
@@ -84,6 +109,15 @@ public abstract class AbstractInputBox<T extends TextBoxBase, I> extends Abstrac
 
 	public void setRenderer(Renderer<I> renderer) {
 		this.renderer = renderer;
+	}
+
+	public Size getSize() {
+		return size;
+	}
+
+	public void setSize(Size size) {
+		this.size = size;
+		StyleUtils.addStyle(this, size);
 	}
 
 	public T getInput() {
