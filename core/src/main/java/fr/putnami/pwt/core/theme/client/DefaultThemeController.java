@@ -52,6 +52,11 @@ public class DefaultThemeController extends ThemeController {
 	}
 
 	@Override
+	public void installDefaultTheme() {
+		installTheme(null);
+	}
+
+	@Override
 	public void resetTheme() {
 		if (currentTheme != null && currentTheme.getIconFont() != null) {
 			icons = currentTheme.getIconFont();

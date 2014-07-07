@@ -37,6 +37,8 @@ public abstract class ThemeController {
 
 	public abstract void installTheme(Theme theme);
 
+	public abstract void installDefaultTheme();
+
 	public abstract void resetTheme();
 
 	public abstract CssStyle getIconStyle(String iconName);
