@@ -19,8 +19,8 @@ task licenseAll
 task licenseFormatAll
 
 ext {
-	releaseVersion = '1.0.0-RC2'
-	snapshotVersion = '1.0.0-SNAPSHOT'
+	releaseVersion = '1.1.0'
+	snapshotVersion = '1.1.0-SNAPSHOT'
 	gwtVersion = '2.6.1'
 	guavaVersion = '17.0'
 }
