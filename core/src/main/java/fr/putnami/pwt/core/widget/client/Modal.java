@@ -40,11 +40,12 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class Modal extends AbstractPanel implements
-HasOneWidget,
-CloneableWidget,
-HasDrawable {
+		HasOneWidget,
+		CloneableWidget,
+		HasDrawable {
 
 	private static final CssStyle STYLE_MODAL = new SimpleStyle("modal");
+	private static final CssStyle STYLE_MODAL_OPEN = new SimpleStyle("modal-open");
 	private static final CssStyle STYLE_DIALOG = new SimpleStyle("modal-dialog");
 	private static final CssStyle STYLE_CONTENT = new SimpleStyle("modal-content");
 	private static final CssStyle STYLE_HEADER = new SimpleStyle("modal-header");
@@ -181,6 +182,7 @@ HasDrawable {
 		}
 		RootPanel.get().add(this);
 		getElement().getStyle().setDisplay(Display.BLOCK);
+		StyleUtils.addStyle(RootPanel.get(), STYLE_MODAL_OPEN);
 		Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
 
 			@Override
@@ -196,6 +198,7 @@ HasDrawable {
 		visible = false;
 		StyleUtils.removeStyle(Modal.this, STYLE_VISIBLE);
 		Modal.MODAL_BACKDROP.hide();
+		StyleUtils.removeStyle(RootPanel.get(), STYLE_MODAL_OPEN);
 		Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
 
 			@Override
