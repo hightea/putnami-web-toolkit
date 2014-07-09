@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.core.Ordered;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ import fr.putnami.pwt.core.service.server.service.AbstractCommandService;
 import fr.putnami.pwt.plugin.spring.rpc.server.util.RequestThreadLocalUtils;
 
 @Controller
-public class CommandServiceController extends AbstractCommandService implements BeanPostProcessor {
+public class CommandServiceController extends AbstractCommandService implements BeanPostProcessor, Ordered {
 
 
 	private static final long serialVersionUID = 4383424486613678203L;
@@ -50,5 +51,10 @@ public class CommandServiceController extends AbstractCommandService implements 
 			}
 		}
 		return bean;
+	}
+
+	@Override
+	public int getOrder() {
+		return Ordered.HIGHEST_PRECEDENCE;
 	}
 }

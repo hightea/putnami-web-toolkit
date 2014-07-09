@@ -22,6 +22,7 @@ import java.util.Map;
 import com.google.common.collect.Maps;
 
 import fr.putnami.pwt.core.service.shared.domain.CommandDefinition;
+import fr.putnami.pwt.core.service.shared.exception.CommandException;
 
 public class CommandExecutorRegistryImpl implements CommandExecutorRegistry {
 
@@ -32,7 +33,11 @@ public class CommandExecutorRegistryImpl implements CommandExecutorRegistry {
 
 	@Override
 	public CommandExecutor resolveCommandExecutor(CommandDefinition commandDef) {
-		return this.executors.get(commandDef);
+		CommandExecutor executor = this.executors.get(commandDef);
+		if (executor == null) {
+			throw new CommandException("no executor foud for " + commandDef);
+		}
+		return executor;
 	}
 
 	@Override
