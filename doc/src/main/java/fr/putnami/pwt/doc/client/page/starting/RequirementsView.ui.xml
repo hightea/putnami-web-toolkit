@@ -49,12 +49,12 @@
 		<p>PWT is built with Gradle.</p>
 		<p>Once you get the sources you can build PWT with the command:</p>
 		<pre>gradle build</pre>
-		<p>To use it with maven, you can also push the artifact in your lacal maven repository with the command:</p>
+		<p>To use it with maven, you can also push the artifact in your local maven repository with the command:</p>
 		<pre>gradle build publishToMavenLocal</pre>
 		
 		<w:Heading level="3" navSpy="{navSpy}">PWT's artifacts</w:Heading>
-		<p>To use this framework, simply add a dependency to the core jar (<em>pwt-core.jar</em>) and eventually to the needed plugin jars (<em>pwt-code-editor.jar</em>).</p>
-		<p>We release those jar on our maven repository hosted on github reachable via the following URL : <a href="http://repo.putnami.org">http://repo.putnami.org</a></p>
+		<p>To use this framework, simply add a dependency to the core jar (<em>pwt.jar</em>) and eventually to the needed plugin jars (<em>pwt-code-editor.jar</em>, ...).</p>
+		<p>We release those jar on our maven repository reachable via the following URL : <a href="http://repo.putnami.org">http://repo.putnami.org</a></p>
 		<p>You can also download those artifacts on the <a href="#!Download">download page</a></p>
 
 	</w:HTMLPanel>
