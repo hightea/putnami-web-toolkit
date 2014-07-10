@@ -128,5 +128,50 @@
 </w:Modal>]]></pre>
 			</c:StaticCode>
 		</div>
+		
+		<w:Heading level="3" navSpy="{navSpy}">Size</w:Heading>
+		<p>Use the <code>size</code> property to set the modal size(<code>DEFAULT</code>, <code>SMALL</code> or <code>LARGE</code>).</p>
+		<div class="showcase-sample-block">
+			<div class="showcase-sample">
+				<div class="text-center">
+					<w:Button ui:field="openSmallModalBtn">Open a small Modal</w:Button>
+				</div>
+				<br/>
+				<w:Modal ui:field="smallModal" size="SMALL" dismissable="true">
+					<w:Form>
+						<w:Header>Form header</w:Header>
+						<w:HTMLPanel>
+							<p>Form Content</p>
+						</w:HTMLPanel>
+						<w:Footer>Form Footer</w:Footer>
+					</w:Form>
+	 			</w:Modal>
+	 			
+	 			<div class="text-center">
+					<w:Button ui:field="openLargeModalBtn">Open a large Modal</w:Button>
+				</div>
+				<br/>
+				<w:Modal ui:field="largeModal" size="LARGE" dismissable="true">
+					<w:Form>
+						<w:Header>Form header</w:Header>
+						<w:HTMLPanel>
+							<p>Form Content</p>
+						</w:HTMLPanel>
+						<w:Footer>Form Footer</w:Footer>
+					</w:Form>
+	 			</w:Modal>
+			</div>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:Modal size="SMALL" dismissable="true">
+	...
+</w:Modal>
+
+<w:Modal size="LARGE" dismissable="true">
+	...
+</w:Modal>]]></pre>
+			</c:StaticCode>
+		</div>
+		
 	</w:HTMLPanel>
 </ui:UiBinder>

@@ -88,6 +88,23 @@ public class Modal extends AbstractPanel implements
 		}
 	}
 
+	public enum Size implements CssStyle {
+		SMALL("modal-sm"),
+		DEFAULT(null),
+		LARGE("modal-lg");
+
+		private final String style;
+
+		private Size(String style) {
+			this.style = style;
+		}
+
+		@Override
+		public String get() {
+			return this.style;
+		}
+	}
+
 	private static final ModalBackdrop MODAL_BACKDROP = new ModalBackdrop();
 
 	private final Container headerContainer = new Container(DivElement.TAG);
@@ -103,6 +120,8 @@ public class Modal extends AbstractPanel implements
 	private boolean visible = false;
 	private boolean dismissable;
 	private String title;
+
+	private Size size = Size.DEFAULT;
 
 	public Modal() {
 		super(DivElement.TAG);
@@ -250,6 +269,15 @@ public class Modal extends AbstractPanel implements
 
 	public void setDismissable(boolean dismissable) {
 		this.dismissable = dismissable;
+	}
+
+	public Size getSize() {
+		return size;
+	}
+
+	public void setSize(Size size) {
+		this.size = size;
+		StyleUtils.addStyle(contentContainer, this.size);
 	}
 
 	@Override
