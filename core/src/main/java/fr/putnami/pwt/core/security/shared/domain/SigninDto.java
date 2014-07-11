@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
 
-public class SignInRequest implements Serializable {
+public class SigninDto implements Serializable {
 	@NotNull
 	private String username;
 	@NotNull

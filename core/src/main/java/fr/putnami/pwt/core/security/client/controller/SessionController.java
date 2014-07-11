@@ -14,7 +14,7 @@ import fr.putnami.pwt.core.security.client.event.SignOutEvent;
 import fr.putnami.pwt.core.security.client.event.SignOutEvent.HasSignOutHandlers;
 import fr.putnami.pwt.core.security.shared.constant.SecurityConstants;
 import fr.putnami.pwt.core.security.shared.domain.SessionDto;
-import fr.putnami.pwt.core.security.shared.domain.SignInRequest;
+import fr.putnami.pwt.core.security.shared.domain.SigninDto;
 
 public abstract class SessionController implements HasSignInHandlers, HasSignOutHandlers, HasSignFailledHandlers {
 
@@ -97,8 +97,10 @@ public abstract class SessionController implements HasSignInHandlers, HasSignOut
 		EventBus.get().fireEventFromSource(event, this);
 	}
 
-	public abstract void signIn(SignInRequest sessionRequest);
+	public abstract void signIn(SigninDto sessionRequest);
 
 	public abstract void signOut();
+
+	public abstract void loadSession();
 
 }

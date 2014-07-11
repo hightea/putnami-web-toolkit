@@ -15,15 +15,22 @@ import fr.putnami.pwt.core.editor.client.Path;
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.security.client.controller.SessionController;
 import fr.putnami.pwt.core.security.client.event.SignInEvent;
-import fr.putnami.pwt.core.security.client.event.SignInEvent.Handler;
+import fr.putnami.pwt.core.security.client.event.SignOutEvent;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class Secure implements IsWidget, HasWidgets, HasOneWidget, CloneableWidget, EditorComposite {
 
-	private final Handler sessionHandler = new Handler() {
+	private final SignInEvent.Handler signinHandler = new SignInEvent.Handler() {
 
 		@Override
 		public void onSignInEvent(SignInEvent event) {
+			eval();
+		}
+	};
+	private final SignOutEvent.Handler signoutHandler = new SignOutEvent.Handler() {
+
+		@Override
+		public void onSignOutEvent(SignOutEvent event) {
 			eval();
 		}
 	};
@@ -35,7 +42,8 @@ public class Secure implements IsWidget, HasWidgets, HasOneWidget, CloneableWidg
 	private String hasRole;
 
 	public Secure() {
-		SessionController.get().addSignInHandler(sessionHandler);
+		SessionController.get().addSignInHandler(signinHandler);
+		SessionController.get().addSignOutHandler(signoutHandler);
 	}
 
 	public Secure(Secure source) {

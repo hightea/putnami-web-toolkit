@@ -1,11 +1,14 @@
 package fr.putnami.pwt.plugin.spring.rpc.server.controller;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.context.ApplicationContext;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Controller;
@@ -22,10 +25,19 @@ public class CommandServiceController extends AbstractCommandService implements 
 
 	private static final long serialVersionUID = 4383424486613678203L;
 
+	@Autowired
+	private ApplicationContext applicationContext;
+
+	@PostConstruct
+	public void afterPropertySet() {
+		for (String beanName : applicationContext.getBeanDefinitionNames()) {
+			scanBean(applicationContext.getBean(beanName), beanName);
+		}
+	}
+
 	@RequestMapping(value = "/commandService", method = RequestMethod.POST)
 	public void processPostRpc(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		try {
-			RequestThreadLocalUtils.initContext(request, response);
 			processPost(request, response);
 		}
 		finally {
@@ -40,6 +52,11 @@ public class CommandServiceController extends AbstractCommandService implements 
 
 	@Override
 	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+		scanBean(bean, beanName);
+		return bean;
+	}
+
+	private void scanBean(Object bean, String name) {
 		Class<?> implClass = bean.getClass();
 		if (AopUtils.isAopProxy(bean)) {
 			implClass = AopUtils.getTargetClass(bean);
@@ -50,7 +67,6 @@ public class CommandServiceController extends AbstractCommandService implements 
 				injectService(inter, bean);
 			}
 		}
-		return bean;
 	}
 
 	@Override
