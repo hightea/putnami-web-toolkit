@@ -19,11 +19,19 @@
 -->
 <module>
 	<inherits name="com.google.gwt.user.User" />
+	<inherits name="com.google.gwt.user.UserAgent"/>
 	
 	<inherits name="fr.putnami.pwt.core.event.Event"/>
 
+	<!-- Fall back to this rule if the browser isn't IE 8-->
 	<replace-with class="fr.putnami.pwt.core.theme.client.DefaultThemeController">
 		<when-type-is class="fr.putnami.pwt.core.theme.client.ThemeController"/>
+	</replace-with>
+	
+	 <!-- Implementation for IE 8 -->
+	<replace-with class="fr.putnami.pwt.core.theme.client.DefaultIE8ThemeController">
+    	<when-type-is class="fr.putnami.pwt.core.theme.client.ThemeController"/>
+    	<when-property-is name="user.agent" value="ie8"/>
 	</replace-with>
 	
 </module>
