@@ -37,22 +37,22 @@
 						<w:tabLink>
 							<w:NavLink iconType="HOME" label="Home" />
 						</w:tabLink>
-						<w:OutputText styleName="showcase-tab-content">First Panel Content : Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium facilisis nisi ut tempor. Morbi vestibulum turpis et elit faucibus interdum. Etiam sodales diam ut suscipit egestas. Nulla lacinia posuere viverra. Nam et pulvinar turpis. Nam purus massa, porttitor vitae mauris nec, tempus varius quam. Sed ac scelerisque elit. In velit nibh, aliquam ut felis eu, pulvinar suscipit leo. Proin eget sagittis lectus. Maecenas facilisis sem arcu, non consectetur nulla placerat quis.
-						</w:OutputText>
+						<w:Text styleName="showcase-tab-content">First Panel Content : Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium facilisis nisi ut tempor. Morbi vestibulum turpis et elit faucibus interdum. Etiam sodales diam ut suscipit egestas. Nulla lacinia posuere viverra. Nam et pulvinar turpis. Nam purus massa, porttitor vitae mauris nec, tempus varius quam. Sed ac scelerisque elit. In velit nibh, aliquam ut felis eu, pulvinar suscipit leo. Proin eget sagittis lectus. Maecenas facilisis sem arcu, non consectetur nulla placerat quis.
+						</w:Text>
 					</w:TabPanelContent>
 					<w:TabPanelContent>
 						<w:tabLink>
 							<w:NavLink active="true" iconType="USER" label="Profile"/>
 						</w:tabLink>
-						<w:OutputText styleName="showcase-tab-content">Second Panel Content : Nam odio neque, consectetur sit amet semper a, interdum eget nisi. Praesent a justo ut nisl ultricies suscipit. In condimentum porta aliquet. Etiam ornare libero justo, sit amet dictum dui rutrum sit amet. Cras egestas laoreet lorem, sit amet tempus dolor ornare eget. Proin libero quam, accumsan et consectetur quis, vulputate quis augue. Aenean venenatis magna eu vehicula lobortis. Suspendisse lorem purus, porttitor at tortor sit amet, ultrices mattis magna. Nullam condimentum a diam non tempus. Mauris id rhoncus eros, eu venenatis purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque eleifend rutrum nunc, vulputate vehicula justo tempus non. Proin consectetur dui at nisl viverra convallis. Proin metus elit, pretium eu mauris quis, tincidunt venenatis sapien.
-						</w:OutputText>
+						<w:Text styleName="showcase-tab-content">Second Panel Content : Nam odio neque, consectetur sit amet semper a, interdum eget nisi. Praesent a justo ut nisl ultricies suscipit. In condimentum porta aliquet. Etiam ornare libero justo, sit amet dictum dui rutrum sit amet. Cras egestas laoreet lorem, sit amet tempus dolor ornare eget. Proin libero quam, accumsan et consectetur quis, vulputate quis augue. Aenean venenatis magna eu vehicula lobortis. Suspendisse lorem purus, porttitor at tortor sit amet, ultrices mattis magna. Nullam condimentum a diam non tempus. Mauris id rhoncus eros, eu venenatis purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque eleifend rutrum nunc, vulputate vehicula justo tempus non. Proin consectetur dui at nisl viverra convallis. Proin metus elit, pretium eu mauris quis, tincidunt venenatis sapien.
+						</w:Text>
 					</w:TabPanelContent>
 					<w:TabPanelContent>
 						<w:tabLink>
 							<w:NavLink iconType="MAIL" label="Message"/>
 						</w:tabLink>
-						<w:OutputText styleName="showcase-tab-content">Third Panel Content : Nam eu purus ante. Proin dignissim purus nec dolor volutpat porttitor. Aenean quis ante at velit rhoncus tincidunt. Phasellus id justo nec neque vestibulum auctor nec egestas urna. Vivamus sed rhoncus dolor. Donec dapibus semper aliquam. Fusce ac congue libero, non dictum leo. Aliquam porttitor et massa non cursus. Donec pretium ligula sit amet congue molestie. Aenean sit amet est sed magna pretium suscipit. Vivamus rhoncus eros eget justo ultrices, eu euismod odio malesuada. Vivamus aliquet nunc massa, quis pretium justo faucibus at. Proin eget tortor quam. Duis a mauris dictum, bibendum velit sit amet, dictum libero.
-						</w:OutputText>
+						<w:Text styleName="showcase-tab-content">Third Panel Content : Nam eu purus ante. Proin dignissim purus nec dolor volutpat porttitor. Aenean quis ante at velit rhoncus tincidunt. Phasellus id justo nec neque vestibulum auctor nec egestas urna. Vivamus sed rhoncus dolor. Donec dapibus semper aliquam. Fusce ac congue libero, non dictum leo. Aliquam porttitor et massa non cursus. Donec pretium ligula sit amet congue molestie. Aenean sit amet est sed magna pretium suscipit. Vivamus rhoncus eros eget justo ultrices, eu euismod odio malesuada. Vivamus aliquet nunc massa, quis pretium justo faucibus at. Proin eget tortor quam. Duis a mauris dictum, bibendum velit sit amet, dictum libero.
+						</w:Text>
 					</w:TabPanelContent>
 				</w:TabPanel>
 			</div>
@@ -63,19 +63,19 @@
 		<w:tabLink>
 			<w:NavLink iconType="HOME" label="Home" />
 		</w:tabLink>
-		<w:OutputText>First Panel Content</w:OutputText>
+		<w:Text>First Panel Content</w:Text>
 	</w:TabPanelContent>
 	<w:TabPanelContent>
 		<w:tabLink>
 			<w:NavLink iconType="USER" label="Profile"/>
 		</w:tabLink>
-		<w:OutputTex>Second Panel Content</w:OutputText>
+		<w:Text>Second Panel Content</w:Text>
 	</w:TabPanelContent>
 	<w:TabPanelContent>
 		<w:tabLink>
 			<w:NavLink iconType="MAIL" label="Message"/>
 		</w:tabLink>
-		<w:OutputText>Third Panel Content</w:OutputText>
+		<w:Text>Third Panel Content</w:Text>
 	</w:TabPanelContent>
 </w:TabPanel>]]></pre>
 			</c:StaticCode>
@@ -91,22 +91,22 @@
 						<w:tabLink>
 							<w:NavLink iconType="HOME" label="Home" />
 						</w:tabLink>
-						<w:OutputText styleName="showcase-tab-content">First Panel Content : Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium facilisis nisi ut tempor. Morbi vestibulum turpis et elit faucibus interdum. Etiam sodales diam ut suscipit egestas. Nulla lacinia posuere viverra. Nam et pulvinar turpis. Nam purus massa, porttitor vitae mauris nec, tempus varius quam. Sed ac scelerisque elit. In velit nibh, aliquam ut felis eu, pulvinar suscipit leo. Proin eget sagittis lectus. Maecenas facilisis sem arcu, non consectetur nulla placerat quis.
-						</w:OutputText>
+						<w:Text styleName="showcase-tab-content">First Panel Content : Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium facilisis nisi ut tempor. Morbi vestibulum turpis et elit faucibus interdum. Etiam sodales diam ut suscipit egestas. Nulla lacinia posuere viverra. Nam et pulvinar turpis. Nam purus massa, porttitor vitae mauris nec, tempus varius quam. Sed ac scelerisque elit. In velit nibh, aliquam ut felis eu, pulvinar suscipit leo. Proin eget sagittis lectus. Maecenas facilisis sem arcu, non consectetur nulla placerat quis.
+						</w:Text>
 					</w:TabPanelContent>
 					<w:TabPanelContent>
 						<w:tabLink>
 							<w:NavLink iconType="USER" label="Profile"/>
 						</w:tabLink>
-						<w:OutputText styleName="showcase-tab-content">Second Panel Content : Nam odio neque, consectetur sit amet semper a, interdum eget nisi. Praesent a justo ut nisl ultricies suscipit. In condimentum porta aliquet. Etiam ornare libero justo, sit amet dictum dui rutrum sit amet. Cras egestas laoreet lorem, sit amet tempus dolor ornare eget. Proin libero quam, accumsan et consectetur quis, vulputate quis augue. Aenean venenatis magna eu vehicula lobortis. Suspendisse lorem purus, porttitor at tortor sit amet, ultrices mattis magna. Nullam condimentum a diam non tempus. Mauris id rhoncus eros, eu venenatis purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque eleifend rutrum nunc, vulputate vehicula justo tempus non. Proin consectetur dui at nisl viverra convallis. Proin metus elit, pretium eu mauris quis, tincidunt venenatis sapien.
-						</w:OutputText>
+						<w:Text styleName="showcase-tab-content">Second Panel Content : Nam odio neque, consectetur sit amet semper a, interdum eget nisi. Praesent a justo ut nisl ultricies suscipit. In condimentum porta aliquet. Etiam ornare libero justo, sit amet dictum dui rutrum sit amet. Cras egestas laoreet lorem, sit amet tempus dolor ornare eget. Proin libero quam, accumsan et consectetur quis, vulputate quis augue. Aenean venenatis magna eu vehicula lobortis. Suspendisse lorem purus, porttitor at tortor sit amet, ultrices mattis magna. Nullam condimentum a diam non tempus. Mauris id rhoncus eros, eu venenatis purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque eleifend rutrum nunc, vulputate vehicula justo tempus non. Proin consectetur dui at nisl viverra convallis. Proin metus elit, pretium eu mauris quis, tincidunt venenatis sapien.
+						</w:Text>
 					</w:TabPanelContent>
 					<w:TabPanelContent>
 						<w:tabLink>
 							<w:NavLink iconType="MAIL" label="Message"/>
 						</w:tabLink>
-						<w:OutputText styleName="showcase-tab-content">Third Panel Content : Nam eu purus ante. Proin dignissim purus nec dolor volutpat porttitor. Aenean quis ante at velit rhoncus tincidunt. Phasellus id justo nec neque vestibulum auctor nec egestas urna. Vivamus sed rhoncus dolor. Donec dapibus semper aliquam. Fusce ac congue libero, non dictum leo. Aliquam porttitor et massa non cursus. Donec pretium ligula sit amet congue molestie. Aenean sit amet est sed magna pretium suscipit. Vivamus rhoncus eros eget justo ultrices, eu euismod odio malesuada. Vivamus aliquet nunc massa, quis pretium justo faucibus at. Proin eget tortor quam. Duis a mauris dictum, bibendum velit sit amet, dictum libero.
-						</w:OutputText>
+						<w:Text styleName="showcase-tab-content">Third Panel Content : Nam eu purus ante. Proin dignissim purus nec dolor volutpat porttitor. Aenean quis ante at velit rhoncus tincidunt. Phasellus id justo nec neque vestibulum auctor nec egestas urna. Vivamus sed rhoncus dolor. Donec dapibus semper aliquam. Fusce ac congue libero, non dictum leo. Aliquam porttitor et massa non cursus. Donec pretium ligula sit amet congue molestie. Aenean sit amet est sed magna pretium suscipit. Vivamus rhoncus eros eget justo ultrices, eu euismod odio malesuada. Vivamus aliquet nunc massa, quis pretium justo faucibus at. Proin eget tortor quam. Duis a mauris dictum, bibendum velit sit amet, dictum libero.
+						</w:Text>
 					</w:TabPanelContent>
 				</w:TabPanel>
 			</div>
@@ -117,19 +117,19 @@
 		<w:tabLink>
 			<w:NavLink iconType="HOME" label="Home" />
 		</w:tabLink>
-		<w:OutputText>First Panel Content</w:OutputText>
+		<w:Text>First Panel Content</w:Text>
 	</w:TabPanelContent>
 	<w:TabPanelContent>
 		<w:tabLink>
 			<w:NavLink iconType="USER" label="Profile"/>
 		</w:tabLink>
-		<w:OutputText>Second Panel Content</w:OutputText>
+		<w:Text>Second Panel Content</w:Text>
 	</w:TabPanelContent>
 	<w:TabPanelContent>
 		<w:tabLink>
 			<w:NavLink iconType="MAIL" label="Message"/>
 		</w:tabLink>
-		<w:OutputText>Third Panel Content</w:OutputText>
+		<w:Text>Third Panel Content</w:Text>
 	</w:TabPanelContent>
 </w:TabPanel>]]></pre>
 			</c:StaticCode>
