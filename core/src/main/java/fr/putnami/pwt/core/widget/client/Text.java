@@ -16,16 +16,15 @@
  */
 package fr.putnami.pwt.core.widget.client;
 
-import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Widget;
 
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
+import fr.putnami.pwt.core.widget.client.base.AbstractWidget;
 import fr.putnami.pwt.core.widget.client.util.HTMLUtils;
 
-public class Text extends Widget implements
+public class Text extends AbstractWidget implements
 		HasText,
 		CloneableWidget {
 
@@ -33,8 +32,8 @@ public class Text extends Widget implements
 	private String text;
 
 	public Text() {
-		this.span = Document.get().createSpanElement();
-		setElement(span);
+		super(SpanElement.TAG);
+		this.span = SpanElement.as(getElement());
 	}
 
 	public Text(String text) {
@@ -43,7 +42,8 @@ public class Text extends Widget implements
 	}
 
 	public Text(Text source) {
-		this();
+		super(source);
+		span = SpanElement.as(getElement());
 		span.setInnerText(source.text);
 	}
 
