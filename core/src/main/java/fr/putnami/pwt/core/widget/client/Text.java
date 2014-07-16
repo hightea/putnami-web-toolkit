@@ -16,25 +16,24 @@
  */
 package fr.putnami.pwt.core.widget.client;
 
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Widget;
 
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
+import fr.putnami.pwt.core.widget.client.base.AbstractWidget;
 import fr.putnami.pwt.core.widget.client.util.HTMLUtils;
 
-public class Text extends Widget implements
+public class Text extends AbstractWidget implements
 		HasText,
 		CloneableWidget {
 
-	private final com.google.gwt.dom.client.Text textElement;
+	private final SpanElement span;
 	private String text;
 
 	public Text() {
-		this.textElement = Document.get().createTextNode("");
-		setElement(textElement.<Element> cast());
+		super(SpanElement.TAG);
+		this.span = SpanElement.as(getElement());
 	}
 
 	public Text(String text) {
@@ -43,8 +42,9 @@ public class Text extends Widget implements
 	}
 
 	public Text(Text source) {
-		this();
-		textElement.setData(source.text);
+		super(source);
+		span = SpanElement.as(getElement());
+		span.setInnerText(source.text);
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class Text extends Widget implements
 	@Override
 	public void setText(String text) {
 		this.text = HTMLUtils.unescapeHTML(text);
-		textElement.setData(this.text == null ? "" : this.text);
+		span.setInnerText(this.text == null ? "" : this.text);
 	}
 
 }

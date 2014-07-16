@@ -32,7 +32,7 @@
 					
 			</div>
 			<w:Affix ui:field="affixMenu" styleName="pwt-menu-affix">
-				<w:Navbar position="STATIC_TOP" styleName="container pwt-menu">
+				<w:Navbar position="STATIC_TOP" containerType="RESPONSIVE" styleName="pwt-menu">
 					<w:Brand>
 						<w:Anchor text="PWT" link="#!" />
 					</w:Brand>

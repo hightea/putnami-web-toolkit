@@ -17,6 +17,7 @@
 package fr.putnami.pwt.core.widget.client;
 
 import com.google.gwt.dom.client.AnchorElement;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -87,6 +88,7 @@ import fr.putnami.pwt.core.editor.client.EditorValue;
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
 import fr.putnami.pwt.core.widget.client.util.AnchorUtils;
+import fr.putnami.pwt.core.widget.client.util.HTMLUtils;
 
 public class Anchor<T> extends AbstractPanel implements
 		EditorValue<T>, CloneableWidget,
@@ -106,8 +108,7 @@ public class Anchor<T> extends AbstractPanel implements
 
 	public Anchor(String text) {
 		this();
-		append(new Text(text));
-		endConstruct();
+		setText(text);
 	}
 
 	public Anchor(Anchor<T> source) {
@@ -126,7 +127,7 @@ public class Anchor<T> extends AbstractPanel implements
 	}
 
 	public void setText(String text) {
-		append(new Text(text));
+		getElement().appendChild(Document.get().createTextNode(HTMLUtils.unescapeHTML(text)));
 	}
 
 	public String getLink() {

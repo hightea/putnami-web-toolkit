@@ -31,7 +31,7 @@
 		<p>From our point of view, Gradle is the best build automation ever made. We realy advice you to use it for your next accomplishments.  </p>
 		
 		<w:Heading level="3" navSpy="{navSpy}">gwt-gradle-plugin</w:Heading>
-		<p>Gradle does not support any official GWT plugin yet. However, there is a very nice plugin one hosted on Github : <a href="https://github.com/steffenschaefer/gwt-gradle-plugin" target="_BLANK">Steffen Schäffer's gwt-gradle-plugin</a>.
+		<p>Gradle does not support any official GWT plugin yet. However, there is a very nice one hosted on Github : <a href="https://github.com/steffenschaefer/gwt-gradle-plugin" target="_BLANK">Steffen Schäffer's gwt-gradle-plugin</a>.
 		Unfortunately, today there is a little typo in the source code making impossible to define different modules between production tasks (like compile) and dev tasks (like GWT's SuperDevMode).</p>
 		
 		<p>To work, the GWT's SuperDevMode needs some specific configuration in the module gwt.xml file (like a specific linker, etc...). So it is necessary to have the ability to define different modules between dev and production.</p>

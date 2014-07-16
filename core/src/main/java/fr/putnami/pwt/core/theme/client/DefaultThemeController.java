@@ -52,6 +52,11 @@ public class DefaultThemeController extends ThemeController {
 	}
 
 	@Override
+	public void installDefaultTheme() {
+		installTheme(null);
+	}
+
+	@Override
 	public void resetTheme() {
 		if (currentTheme != null && currentTheme.getIconFont() != null) {
 			icons = currentTheme.getIconFont();
@@ -90,7 +95,7 @@ public class DefaultThemeController extends ThemeController {
 		}
 	}
 
-	private HeadElement getHead() {
+	protected HeadElement getHead() {
 		if (head == null) {
 			Element elt = Document.get().getElementsByTagName("head").getItem(0);
 			assert elt != null : "The host HTML page does not have a <head> element"

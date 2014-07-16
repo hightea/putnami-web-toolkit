@@ -19,23 +19,15 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
-	xmlns:c="urn:import:fr.putnami.pwt.doc.client.page.starting">
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
 
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-	
-	<w:HTMLPanel title="PWT - Quick start Getting Started">
-		<w:Header ui:field="header">
-			<w:Heading level="1" navSpy="{tableOfContent}">Getting started</w:Heading>
-			<p class="lead">
-			</p>
-		</w:Header>
-		<w:HTMLPanel ui:field="content">
-			<c:ThankYouView navSpy="{tableOfContent}" />
-			<c:RequirementsView navSpy="{tableOfContent}" />
-			<c:StartTutorialView navSpy="{tableOfContent}" />
-			<c:StartSamplesView navSpy="{tableOfContent}" />
-			<c:StartGradleView navSpy="{tableOfContent}" />
-			<c:StartMavenView navSpy="{tableOfContent}" />
-		</w:HTMLPanel>
+	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel>
+		<w:Heading level="2" navSpy="{navSpy}">Start from tutorial</w:Heading>
+
+		<p>We've created a step-by-step tutorial in order to create a PWT based application, guiding you between the powerful features of PWT.</p>
+		<p>You'll find it on its <a href="https://github.com/Putnami/putnami-pwt-tutorial/wiki" target="_blank">Github repo's wiki</a></p>
+		<p>For each major step, you'll find the corresponding commit in order to see the current result.</p>
 	</w:HTMLPanel>
 </ui:UiBinder>

@@ -17,30 +17,29 @@
 package fr.putnami.pwt.core.theme.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.ScriptElement;
 
-public abstract class ThemeController {
+public class DefaultIE8ThemeController extends DefaultThemeController {
 
-	private static ThemeController instance;
+	private static String RESPOND_JS_LOCATION = "theme/default/script/respond.min.js";
 
-	public static ThemeController get() {
-		if (instance == null) {
-			instance = GWT.create(ThemeController.class);
+	private ScriptElement respondJsScript;
+
+	@Override
+	public void resetTheme() {
+		ensureRespondJsScriptElement();
+		respondJsScript.removeFromParent();
+		super.resetTheme();
+		getHead().appendChild(respondJsScript);
+	}
+
+	private void ensureRespondJsScriptElement() {
+		if (respondJsScript == null) {
+			respondJsScript = Document.get().createScriptElement();
+			respondJsScript.setSrc(GWT.getModuleBaseForStaticFiles() + RESPOND_JS_LOCATION);
+			respondJsScript.setType("text/javascript");
 		}
-		return instance;
 	}
-
-	protected ThemeController() {
-
-	}
-
-	public abstract Theme getDefaultTheme();
-
-	public abstract void installTheme(Theme theme);
-
-	public abstract void installDefaultTheme();
-
-	public abstract void resetTheme();
-
-	public abstract CssStyle getIconStyle(String iconName);
 
 }

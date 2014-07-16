@@ -38,6 +38,7 @@ public class WidgetBoot implements EntryPoint {
 		font.addAlias("drag", "menu");
 
 		defaultTheme.setIconFont(font);
+		ThemeController.get().installDefaultTheme();
 	}
 
 }

@@ -37,7 +37,7 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class Navbar extends AbstractPanel implements
-CloneableWidget {
+		CloneableWidget {
 
 	private static final CssStyle STYLE_NAVBAR = new SimpleStyle("navbar");
 	private static final CssStyle STYLE_BRAND = new SimpleStyle("navbar-brand");
@@ -51,7 +51,22 @@ CloneableWidget {
 	private static final CssStyle STYLE_NAVBAR_LINK = new SimpleStyle("navbar-link");
 	private static final CssStyle STYLE_COLLAPSE = new SimpleStyle("navbar-collapse");
 	private static final CssStyle STYLE_TEXT_MUTED = new SimpleStyle("text-muted");
-	private static final CssStyle STYLE_FLUID = new SimpleStyle("container-fluid");
+
+	public enum ContainerType implements CssStyle {
+		RESPONSIVE("container"),
+		FLUID("container-fluid");
+
+		private final String style;
+
+		private ContainerType(String style) {
+			this.style = style;
+		}
+
+		@Override
+		public String get() {
+			return this.style;
+		}
+	}
 
 	public enum Type implements CssStyle {
 
@@ -117,7 +132,9 @@ CloneableWidget {
 
 	private final Container headerContainer = new Container();
 	private final Container collapseContainer = new Container();
+	private final Container contentContainer = new Container();
 
+	private ContainerType containerType = ContainerType.FLUID;
 	private Type type = Type.DEFAULT;
 	private Position position = Position.DEFAULT;
 	private CollapseHelper collapseHelper;
@@ -141,6 +158,7 @@ CloneableWidget {
 		super(source);
 		this.type = source.type;
 		this.position = source.position;
+		this.containerType = source.containerType;
 		for (Widget collapseWidget : source.collapseContainer) {
 			collapseContainer.append(WidgetUtils.cloneWidget(collapseWidget));
 		}
@@ -148,7 +166,6 @@ CloneableWidget {
 	}
 
 	private void endConstruct() {
-		Container contentContainer = new Container();
 		append(contentContainer);
 		contentContainer.append(headerContainer);
 		contentContainer.append(collapseContainer);
@@ -158,10 +175,10 @@ CloneableWidget {
 		headerContainer.append(button);
 
 		StyleUtils.addStyle(this, STYLE_NAVBAR);
-		StyleUtils.addStyle(contentContainer, STYLE_FLUID);
 		StyleUtils.addStyle(headerContainer, STYLE_HEADER);
 		StyleUtils.addStyle(collapseContainer, STYLE_COLLAPSE);
 
+		setContainerType(containerType);
 		setType(type);
 		setPosition(position);
 
@@ -210,6 +227,11 @@ CloneableWidget {
 	public void setPosition(Position position) {
 		this.position = position;
 		StyleUtils.addStyle(getElement(), this.position);
+	}
+
+	public void setContainerType(ContainerType containerType) {
+		this.containerType = containerType;
+		StyleUtils.addStyle(contentContainer, containerType);
 	}
 
 	private void updateNavStyle(Nav nav) {

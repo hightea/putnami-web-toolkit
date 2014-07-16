@@ -48,7 +48,7 @@ public class OutputEmail extends AbstractOutput<String> {
 			icon.setType(IconFont.ICON_MAIL);
 			anchor.setHref("mailto:" + value);
 			anchor.appendChild(icon.getElement());
-			anchor.appendChild(new Text(value).getElement());
+			anchor.appendChild(Document.get().createTextNode(value));
 
 			getElement().appendChild(anchor);
 

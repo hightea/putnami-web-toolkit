@@ -432,7 +432,7 @@
 			</div>
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
 <pre><![CDATA[
-<w:Navbar>
+<w:Navbar type="INVERSE">
 	<w:Brand>
 		<w:Anchor text="PWT"/>
 	</w:Brand>
@@ -441,6 +441,19 @@
 		<w:NavLink label="Profile"/>
 		<w:NavLink label="Message"/>
 	</w:Nav>
+</w:Navbar>]]></pre>
+			</c:StaticCode>
+		</div>
+		
+		<w:Heading level="4" navSpy="{navSpy}">ContainerType</w:Heading>
+		<p>Use <code>RESPONSIVE</code> or <code>FLUID</code> (default to <code>FLUID</code>) to set the navbar inner container type.
+		This allows you to have a <code>NavBar</code> with responsive fixed inner width (as in this application navbar) or with a full width inner content.</p>
+		<div class="showcase-sample-block">
+			
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:Navbar containerType="RESPONSIVE"> 
+	...
 </w:Navbar>]]></pre>
 			</c:StaticCode>
 		</div>

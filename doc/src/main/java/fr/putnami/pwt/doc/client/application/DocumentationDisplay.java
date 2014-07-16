@@ -53,7 +53,7 @@ public class DocumentationDisplay extends Composite implements AcceptsOneWidget 
 
 			@Override
 			public void onResize(ResizeEvent event) {
-				redraw();
+				redraw(false);
 			}
 		});
 
@@ -61,7 +61,7 @@ public class DocumentationDisplay extends Composite implements AcceptsOneWidget 
 
 			@Override
 			public void execute() {
-				redraw();
+				redraw(true);
 			}
 		});
 	}
@@ -73,23 +73,25 @@ public class DocumentationDisplay extends Composite implements AcceptsOneWidget 
 		}
 
 		viewContainer.setWidget(w);
-		redraw();
+		redraw(true);
 	}
 
-	private void redraw() {
+	private void redraw(boolean autoScroll) {
 		viewContainer.getElement().getStyle().clearHeight();
 		int height = getWidget().getElement().getClientHeight();
 
 		if (height < Window.getClientHeight()) {
 			viewContainer.getElement().getStyle().setHeight(Window.getClientHeight() - height, Unit.PX);
 		}
-		String historyToken = History.getToken();
-		if (!Strings.isNullOrEmpty(historyToken)) {
-			int top = affixMenu.getPinnedOffset();
-			Window.scrollTo(Window.getScrollLeft(), top);
-		}
-		else {
-			Window.scrollTo(Window.getScrollLeft(), 0);
+		if (autoScroll) {
+			String historyToken = History.getToken();
+			if (!Strings.isNullOrEmpty(historyToken)) {
+				int top = affixMenu.getPinnedOffset();
+				Window.scrollTo(Window.getScrollLeft(), top);
+			}
+			else {
+				Window.scrollTo(Window.getScrollLeft(), 0);
+			}
 		}
 	}
 

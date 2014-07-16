@@ -7,34 +7,34 @@ RewriteCond %{ENV:REDIRECT_STATUS} ^$
 RewriteRule ^ - [R=404,L]
 
 RewriteCond %{QUERY_STRING} ^(.*)_escaped_fragment_=(.*)$
-RewriteRule ^$ seo/extractor.php?place=%2 [QSD,L]
+RewriteRule ^$ seo/extractor.php?place=%2 [L]
 
 
-redirect 301 http://pwt.putnami.org/Welcome.html				http://pwt.putnami.org#!Welcome
+Redirect permanent /Welcome.html				http://pwt.putnami.org#!Welcome
 
-redirect 301 http://pwt.putnami.org/GettingStarted.html			http://pwt.putnami.org#!GettingStarted
+Redirect permanent /GettingStarted.html			http://pwt.putnami.org#!GettingStarted
 
-redirect 301 http://pwt.putnami.org/Bootstrap.html				http://pwt.putnami.org#!Bootstrap
-redirect 301 http://pwt.putnami.org/Layouts.html				http://pwt.putnami.org#!Layouts
-redirect 301 http://pwt.putnami.org/Components.html				http://pwt.putnami.org#!Components
-redirect 301 http://pwt.putnami.org/Forms.html					http://pwt.putnami.org#!Components
-redirect 301 http://pwt.putnami.org/More.html					http://pwt.putnami.org#!Components
-redirect 301 http://pwt.putnami.org/Table.html					http://pwt.putnami.org#!Components
+Redirect permanent /Bootstrap.html				http://pwt.putnami.org#!Bootstrap
+Redirect permanent /Layouts.html				http://pwt.putnami.org#!Layouts
+Redirect permanent /Components.html				http://pwt.putnami.org#!Components
+Redirect permanent /Forms.html					http://pwt.putnami.org#!Components
+Redirect permanent /More.html					http://pwt.putnami.org#!Components
+Redirect permanent /Table.html					http://pwt.putnami.org#!Components
 
-redirect 301 http://pwt.putnami.org/DataBinding.html			http://pwt.putnami.org#!DataBinding
-redirect 301 http://pwt.putnami.org/Internationalization.html	http://pwt.putnami.org#!Internationalization
-redirect 301 http://pwt.putnami.org/Navigation.html				http://pwt.putnami.org#!Navigation
-redirect 301 http://pwt.putnami.org/ServerCalls.html			http://pwt.putnami.org#!ServerCalls
-redirect 301 http://pwt.putnami.org/Errors.html					http://pwt.putnami.org#!Errors
+Redirect permanent /DataBinding.html			http://pwt.putnami.org#!DataBinding
+Redirect permanent /Internationalization.html	http://pwt.putnami.org#!Internationalization
+Redirect permanent /Navigation.html				http://pwt.putnami.org#!Navigation
+Redirect permanent /ServerCalls.html			http://pwt.putnami.org#!ServerCalls
+Redirect permanent /Errors.html					http://pwt.putnami.org#!Errors
 
-redirect 301 http://pwt.putnami.org/CodeEditor.html				http://pwt.putnami.org#!CodeEditor
-redirect 301 http://pwt.putnami.org/AjaxBotIndexing.html		http://pwt.putnami.org#!AjaxBotIndexing
-redirect 301 http://pwt.putnami.org/GoogleAnalytics.html		http://pwt.putnami.org#!GoogleAnalytics
+Redirect permanent /CodeEditor.html				http://pwt.putnami.org#!CodeEditor
+Redirect permanent /AjaxBotIndexing.html		http://pwt.putnami.org#!AjaxBotIndexing
+Redirect permanent /GoogleAnalytics.html		http://pwt.putnami.org#!GoogleAnalytics
 
-redirect 301 http://pwt.putnami.org/Samples.html				http://pwt.putnami.org#!Samples
-redirect 301 http://pwt.putnami.org/ContactsTable.html			http://pwt.putnami.org#!ContactsTable
-redirect 301 http://pwt.putnami.org/AddressBook.html			http://pwt.putnami.org#!AddressBook
+Redirect permanent /Samples.html				http://pwt.putnami.org#!Samples
+Redirect permanent /ContactsTable.html			http://pwt.putnami.org#!ContactsTable
+Redirect permanent /AddressBook.html			http://pwt.putnami.org#!AddressBook
 
-redirect 301 http://pwt.putnami.org/ComingSoon.html				http://pwt.putnami.org#!ComingSoon
+Redirect permanent /ComingSoon.html				http://pwt.putnami.org#!ComingSoon
 
-redirect 301 http://pwt.putnami.org/Download.html				http://pwt.putnami.org#!Download
+Redirect permanent /Download.html				http://pwt.putnami.org#!Download

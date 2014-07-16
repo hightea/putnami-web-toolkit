@@ -50,6 +50,12 @@ public class ModalView extends Composite {
 	@UiField
 	Modal modalWidget;
 
+	@UiField
+	Modal smallModal;
+
+	@UiField
+	Modal largeModal;
+
 	@UiConstructor
 	public ModalView(NavSpy navSpy) {
 		this.navSpy = navSpy;
@@ -84,5 +90,15 @@ public class ModalView extends Composite {
 	@UiHandler("closeModalWidgetBtn")
 	public void onCloseModalWidget(ButtonEvent event) {
 		modalWidget.hide();
+	}
+
+	@UiHandler("openSmallModalBtn")
+	public void onOpenSmallModal(ButtonEvent event) {
+		smallModal.show();
+	}
+
+	@UiHandler("openLargeModalBtn")
+	public void onOpenLargeModal(ButtonEvent event) {
+		largeModal.show();
 	}
 }

@@ -63,7 +63,7 @@
 	<dependency>
 		<groupId>fr.putnami.pwt</groupId>
 		<artifactId>pwt-code-editor</artifactId>
-		<version>@releaseVersion@0</version>
+		<version>@releaseVersion@</version>
 	</dependency>
 	
 	<!-- GWT dependencies-->
@@ -214,7 +214,7 @@
 		...
 		<plugin>
 			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-compiler-plugin</artifactId>
+			<artifactId>maven-war-plugin</artifactId>
 		</plugin>
 		<plugin>
 			<groupId>org.codehaus.mojo</groupId>
