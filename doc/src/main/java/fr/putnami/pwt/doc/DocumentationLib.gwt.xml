@@ -29,6 +29,7 @@
 	<inherits name="fr.putnami.pwt.core.error.DefaultErrorDisplayer"/>
 	<inherits name="fr.putnami.pwt.plugin.code.CodeEditor"/>
 	<inherits name="fr.putnami.pwt.plugin.ga.GoogleAnalytics"/>
+	<inherits name="fr.putnami.pwt.core.inject.Inject"/>
 
 
 <!-- 	<extend-property name="locale" values="en"/> -->

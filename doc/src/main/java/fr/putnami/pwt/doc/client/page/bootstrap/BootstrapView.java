@@ -27,7 +27,7 @@ import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.doc.client.application.Page;
 
-public class BootstrapView extends Page<BootstrapPlace> {
+public class BootstrapView extends Page {
 
 	interface Binder extends UiBinderLocalized<Widget, BootstrapView> {
 

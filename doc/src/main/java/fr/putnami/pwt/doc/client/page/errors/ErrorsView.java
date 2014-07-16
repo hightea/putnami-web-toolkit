@@ -25,7 +25,7 @@ import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.doc.client.application.Page;
 import fr.putnami.pwt.doc.client.application.error.CustomRuntimeException;
 
-public class ErrorsView extends Page<ErrorsPlace> {
+public class ErrorsView extends Page {
 
 	interface Binder extends UiBinderLocalized<Widget, ErrorsView> {
 

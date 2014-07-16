@@ -14,36 +14,35 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.core.mvp.rebind;
+package fr.putnami.pwt.core.inject.rebind;
 
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
-import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 
-public class ProxyViewGenerator extends Generator {
+public class InjectorProxyGenerator extends Generator {
 
 	@Override
-	public String generate(TreeLogger logger, GeneratorContext context, String viewClassName) throws UnableToCompleteException {
+	public String generate(TreeLogger logger, GeneratorContext context, String typeName) throws UnableToCompleteException {
 		TypeOracle typeOracle = context.getTypeOracle();
-		assert (typeOracle != null);
+		assert typeOracle != null;
 
-		JClassType viewType = typeOracle.findType(viewClassName);
+		JClassType viewType = typeOracle.findType(typeName);
 		if (viewType == null) {
-			logger.log(TreeLogger.ERROR, "Unable to find metadata for type '" + viewClassName + "'", null);
+			logger.log(TreeLogger.ERROR, "Unable to find metadata for type '" + typeName + "'", null);
 			throw new UnableToCompleteException();
 		}
 
-		ProxyViewCreator serviceBinderCreator = new ProxyViewCreator(viewType);
-		try {
-			return serviceBinderCreator.create(logger, context);
-		}
-		catch (NotFoundException e) {
-			throw new UnableToCompleteException();
-		}
+		InjectorPorxyCreator injectorCreator = new InjectorPorxyCreator(viewType);
+		String targetClassName = injectorCreator.create(logger, context);
+
+		ProxyViewCreator proxyCreator = new ProxyViewCreator(viewType, targetClassName);
+
+		return proxyCreator.create(logger, context);
 	}
+
 
 }

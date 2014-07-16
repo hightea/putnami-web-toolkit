@@ -28,9 +28,4 @@
 	<inherits name="fr.putnami.pwt.core.service.Service" />
 
 	<source path="client"/>
-	
-	<generate-with class="fr.putnami.pwt.core.mvp.rebind.ProxyViewGenerator">
-		<when-type-assignable class="fr.putnami.pwt.core.mvp.client.View" />
-	</generate-with>
-
 </module>

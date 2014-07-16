@@ -2,14 +2,13 @@ package fr.putnami.pwt.core.security.shared.exception;
 
 import fr.putnami.pwt.core.service.shared.exception.CommandException;
 
-public class SignFailledException extends CommandException {
+public class UnauthorizedException extends CommandException {
 
-	public SignFailledException() {
+	public UnauthorizedException() {
 	}
 
-	public SignFailledException(String message) {
+	public UnauthorizedException(String message) {
 		super(message);
 	}
-
 
 }

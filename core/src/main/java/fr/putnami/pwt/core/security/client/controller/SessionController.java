@@ -15,6 +15,7 @@ import fr.putnami.pwt.core.security.client.event.SignOutEvent.HasSignOutHandlers
 import fr.putnami.pwt.core.security.shared.constant.SecurityConstants;
 import fr.putnami.pwt.core.security.shared.domain.SessionDto;
 import fr.putnami.pwt.core.security.shared.domain.SigninDto;
+import fr.putnami.pwt.core.security.shared.exception.UnauthorizedException;
 
 public abstract class SessionController implements HasSignInHandlers, HasSignOutHandlers, HasSignFailledHandlers {
 
@@ -56,6 +57,13 @@ public abstract class SessionController implements HasSignInHandlers, HasSignOut
 			}
 		}
 		return false;
+	}
+
+	public void checkAuthorized(String role) {
+		boolean hasRole = hasRole(role);
+		if (!hasRole) {
+			throw new UnauthorizedException();
+		}
 	}
 
 	protected void setSession(SessionDto session) {

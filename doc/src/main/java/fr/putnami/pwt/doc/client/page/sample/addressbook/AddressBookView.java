@@ -30,6 +30,7 @@ import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.KeyPressEvent;
+import com.google.gwt.i18n.client.ConstantsWithLookup;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -37,8 +38,8 @@ import com.google.gwt.user.client.ui.Widget;
 
 import fr.putnami.pwt.core.editor.client.event.DirtyEvent;
 import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
+import fr.putnami.pwt.core.inject.client.annotation.PresentHandler;
 import fr.putnami.pwt.core.model.client.model.Model;
-import fr.putnami.pwt.core.mvp.client.View;
 import fr.putnami.pwt.core.widget.client.Anchor;
 import fr.putnami.pwt.core.widget.client.Button;
 import fr.putnami.pwt.core.widget.client.Form;
@@ -54,7 +55,7 @@ import fr.putnami.pwt.doc.client.page.sample.domain.Contact;
 import fr.putnami.pwt.doc.client.page.sample.domain.Group;
 import fr.putnami.pwt.doc.client.page.sample.service.ContactService;
 
-public class AddressBookView extends SampleView<AddressBookPlace> implements View<AddressBookPlace> {
+public class AddressBookView extends SampleView {
 
 	interface Binder extends UiBinderLocalized<Widget, AddressBookView> {
 
@@ -112,7 +113,7 @@ public class AddressBookView extends SampleView<AddressBookPlace> implements Vie
 	public AddressBookView() {
 		sampleWidget = Binder.BINDER.createAndBindUi(this);
 
-		MessageHelper messageHelper = new MessageHelper(constants);
+		MessageHelper messageHelper = new MessageHelper((ConstantsWithLookup) GWT.create(SampleConstants.class));
 
 		contactDetails.setMessageHelper(messageHelper);
 		contactDetails.initialize(ContactModel.MODEL);
@@ -146,10 +147,8 @@ public class AddressBookView extends SampleView<AddressBookPlace> implements Vie
 		return sampleWidget;
 	}
 
-	@Override
-	public void present(AddressBookPlace place) {
-		super.present(place);
-
+	@PresentHandler
+	public void presentAddressBook(AddressBookPlace place) {
 		Document.get().setTitle("PWT - Sample - Address book");
 
 		List<Group> groups = ContactService.get().getGroups();
@@ -177,7 +176,7 @@ public class AddressBookView extends SampleView<AddressBookPlace> implements Vie
 		Contact contactToSave = contactDetails.flush();
 		if (!contactDetails.hasError()) {
 			ContactService.get().savePerson(contactToSave);
-			present(null);
+			presentAddressBook(null);
 		}
 	}
 

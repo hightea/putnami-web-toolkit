@@ -22,7 +22,7 @@ import com.google.gwt.user.client.ui.Widget;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 import fr.putnami.pwt.doc.client.application.Page;
 
-public class DownloadView extends Page<DownloadPlace> {
+public class DownloadView extends Page {
 
 	interface Binder extends UiBinderLocalized<Widget, DownloadView> {
 
@@ -34,7 +34,7 @@ public class DownloadView extends Page<DownloadPlace> {
 		return GWT.create(Binder.class);
 	}
 
-//	@UiHandler("content")
+	//	@UiHandler("content")
 	//	public void onClick(ClickEvent evt) {
 	//		GoogleAnalytics.get(ApplicationConfig.ANALYTICS_TRACKER_ID).trackEvent("download", "pwt-core-jar");
 	//	}

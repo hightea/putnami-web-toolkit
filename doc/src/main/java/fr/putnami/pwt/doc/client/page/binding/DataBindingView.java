@@ -28,6 +28,8 @@ import com.google.gwt.user.client.ui.Widget;
 
 import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
 import fr.putnami.pwt.core.editor.shared.constant.ValidationConstants;
+import fr.putnami.pwt.core.inject.client.annotation.InjectModel;
+import fr.putnami.pwt.core.inject.client.annotation.PostConstruct;
 import fr.putnami.pwt.core.model.client.model.Model;
 import fr.putnami.pwt.core.widget.client.Form;
 import fr.putnami.pwt.core.widget.client.InputList;
@@ -36,7 +38,7 @@ import fr.putnami.pwt.core.widget.client.TableEditor;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 import fr.putnami.pwt.doc.client.application.Page;
 
-public class DataBindingView extends Page<DataBindingPlace> {
+public class DataBindingView extends Page {
 
 	interface Binder extends UiBinderLocalized<Widget, DataBindingView> {
 	}
@@ -82,10 +84,8 @@ public class DataBindingView extends Page<DataBindingPlace> {
 		String emailPlaceholder();
 	}
 
-	public interface PersonModel extends Model<Person> {
-	}
-
-	private final Model<Person> personModel = GWT.create(PersonModel.class);
+	@InjectModel
+	Model<Person> personModel;
 
 	@UiField
 	Form<Person> beanForm;
@@ -106,7 +106,10 @@ public class DataBindingView extends Page<DataBindingPlace> {
 	@UiField
 	Form<Person> inputListOutItemTemplate;
 
-	public DataBindingView() {
+	@Override
+	@PostConstruct
+	public void postConstruct() {
+		super.postConstruct();
 		List<Person> people = Lists.newArrayList();
 		people.add(new Person());
 		people.add(new Person("Jane Doe", "jane@doe.com"));

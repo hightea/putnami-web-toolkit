@@ -16,11 +16,8 @@
  */
 package fr.putnami.pwt.core.mvp.client;
 
-import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.IsWidget;
 
-public interface View<P extends Place> extends IsWidget {
-
-	void present(P place);
+public interface View extends IsWidget {
 
 }

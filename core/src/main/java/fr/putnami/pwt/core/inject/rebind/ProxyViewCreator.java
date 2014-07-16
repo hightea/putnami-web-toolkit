@@ -14,10 +14,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.core.mvp.rebind;
+package fr.putnami.pwt.core.inject.rebind;
 
 import java.io.PrintWriter;
-import java.util.logging.Logger;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.RunAsyncCallback;
@@ -25,7 +24,6 @@ import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
-import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
@@ -37,17 +35,23 @@ public class ProxyViewCreator {
 
 	private final JClassType viewType;
 
-	private String viewProxyQualifiedName;
-	private String viewProxySimpleName;
+	private final String viewProxyQualifiedName;
+	private final String viewProxySimpleName;
+	private final String packageName;
+	private final String targetClassName;
 
-	public ProxyViewCreator(JClassType viewType) {
+	public ProxyViewCreator(JClassType viewType, String targetClassName) {
 		this.viewType = viewType;
+		this.packageName = this.viewType.getPackage().getName();
 		this.viewProxyQualifiedName = this.viewType.getQualifiedSourceName() + ProxyViewCreator.PROXY_SUFFIX;
 		this.viewProxySimpleName = this.viewType.getSimpleSourceName() + ProxyViewCreator.PROXY_SUFFIX;
+		this.targetClassName = targetClassName;
 	}
 
-	public String create(TreeLogger logger, GeneratorContext context) throws UnableToCompleteException, NotFoundException {
-		PrintWriter printWriter = this.getPrintWriter(logger, context, this.viewProxyQualifiedName);
+	public String create(TreeLogger logger, GeneratorContext context) throws UnableToCompleteException {
+		String packageName = this.viewType.getPackage().getName();
+		String className = this.viewProxySimpleName;
+		PrintWriter printWriter = context.tryCreate(logger, packageName, className);
 		if (printWriter == null) {
 			return this.viewProxyQualifiedName;
 		}
@@ -66,12 +70,12 @@ public class ProxyViewCreator {
 
 	private void generateProxy(TreeLogger logger, SourceWriter srcWriter) {
 		srcWriter.println();
-		srcWriter.println("private static %s view;", this.viewType.getSimpleSourceName());
+		srcWriter.println("private static %s view;", targetClassName);
 		srcWriter.println();
 
 		srcWriter.println("public void getView(final ViewProxy.Callback callback) {");
 		srcWriter.indent();
-		srcWriter.println("GWT.runAsync(%s.class, new RunAsyncCallback() {", this.viewType.getSimpleSourceName());
+		srcWriter.println("GWT.runAsync(%s.class, new RunAsyncCallback() {", targetClassName);
 		srcWriter.indent();
 		srcWriter.println("public void onFailure(Throwable reason) {");
 		srcWriter.indent();
@@ -82,7 +86,7 @@ public class ProxyViewCreator {
 		srcWriter.indent();
 		srcWriter.println("if(view == null){");
 		srcWriter.indent();
-		srcWriter.println("view = new %s();", this.viewType.getSimpleSourceName());
+		srcWriter.println("view = new %s();", targetClassName);
 		srcWriter.outdent();
 		srcWriter.println("}");
 		srcWriter.println("callback.showView(view);");
@@ -96,28 +100,15 @@ public class ProxyViewCreator {
 
 	private SourceWriter getSourceWriter(PrintWriter printWriter, GeneratorContext ctx) {
 
-		String packageName = this.viewType.getPackage().getName();
-		String className = this.viewProxySimpleName;
 
-		ClassSourceFileComposerFactory composerFactory = new ClassSourceFileComposerFactory(packageName, className);
+		ClassSourceFileComposerFactory composerFactory = new ClassSourceFileComposerFactory(packageName, viewProxySimpleName);
 
 		composerFactory.addImport(GWT.class.getName());
 		composerFactory.addImport(RunAsyncCallback.class.getName());
-
 		composerFactory.addImport(ViewProxy.class.getName());
-		composerFactory.addImport(Logger.class.getName());
-
-		composerFactory.addImport(this.viewType.getQualifiedSourceName());
 
 		composerFactory.addImplementedInterface(ViewProxy.class.getSimpleName());
 
 		return composerFactory.createSourceWriter(ctx, printWriter);
 	}
-
-	private PrintWriter getPrintWriter(TreeLogger logger, GeneratorContext ctx, String targetQualifiedName) {
-		String packageName = this.viewType.getPackage().getName();
-		String className = this.viewProxySimpleName;
-		return ctx.tryCreate(logger, packageName, className);
-	}
-
 }

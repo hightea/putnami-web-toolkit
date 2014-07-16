@@ -22,9 +22,10 @@ import com.google.gwt.user.client.ui.Widget;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 import fr.putnami.pwt.doc.client.application.Page;
 
-public class WelcomeView extends Page<WelcomePlace> {
+public class WelcomeView extends Page {
 
 	interface Binder extends UiBinderLocalized<Widget, WelcomeView> {
+
 		Binder BINDER = GWT.create(Binder.class);
 	}
 

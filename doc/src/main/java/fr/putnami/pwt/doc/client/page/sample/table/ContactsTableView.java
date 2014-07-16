@@ -30,8 +30,8 @@ import com.google.gwt.user.client.ui.Widget;
 
 import fr.putnami.pwt.core.editor.client.event.FlushSuccessEvent;
 import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
+import fr.putnami.pwt.core.inject.client.annotation.PresentHandler;
 import fr.putnami.pwt.core.model.client.model.Model;
-import fr.putnami.pwt.core.mvp.client.View;
 import fr.putnami.pwt.core.widget.client.Form;
 import fr.putnami.pwt.core.widget.client.Modal;
 import fr.putnami.pwt.core.widget.client.TableEditor;
@@ -45,7 +45,7 @@ import fr.putnami.pwt.doc.client.page.sample.domain.Contact;
 import fr.putnami.pwt.doc.client.page.sample.domain.Person;
 import fr.putnami.pwt.doc.client.page.sample.service.ContactService;
 
-public class ContactsTableView extends SampleView<ContactsTablePlace> implements View<ContactsTablePlace> {
+public class ContactsTableView extends SampleView {
 
 	interface Binder extends UiBinderLocalized<Widget, ContactsTableView> {
 		UiBinderLocalized<Widget, ContactsTableView> BINDER = GWT.create(Binder.class);
@@ -104,9 +104,8 @@ public class ContactsTableView extends SampleView<ContactsTablePlace> implements
 		return sampleWidget;
 	}
 
-	@Override
-	public void present(ContactsTablePlace place) {
-		super.present(place);
+	@PresentHandler
+	public void presentContactsTable(ContactsTablePlace place) {
 		Document.get().setTitle("PWT - Sample - Contact table");
 		contactTable.edit(Lists.<Contact> newArrayList(ContactService.get().getPeople()));
 	}
@@ -143,7 +142,7 @@ public class ContactsTableView extends SampleView<ContactsTablePlace> implements
 	void onSave(FlushSuccessEvent event) {
 		ContactService.get().savePerson((Contact) event.getValue());
 		modal.hide();
-		present(null);
+		presentContactsTable(null);
 	}
 
 	private List<Integer> generateWeightItems() {

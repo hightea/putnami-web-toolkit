@@ -25,13 +25,13 @@ import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
-import com.google.gwt.place.shared.Place;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
+import fr.putnami.pwt.core.inject.client.annotation.PresentHandler;
 import fr.putnami.pwt.core.mvp.client.View;
 import fr.putnami.pwt.core.widget.client.Anchor;
 import fr.putnami.pwt.core.widget.client.Header;
@@ -45,7 +45,7 @@ import fr.putnami.pwt.plugin.code.client.StaticCode;
 import fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration;
 import fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration;
 
-public abstract class SampleView<P extends Place> extends Composite implements View<P> {
+public abstract class SampleView extends Composite implements View {
 
 	interface Binder extends UiBinderLocalized<Widget, SampleLayoutView> {
 		UiBinderLocalized<Widget, SampleLayoutView> BINDER = GWT.create(Binder.class);
@@ -85,7 +85,7 @@ public abstract class SampleView<P extends Place> extends Composite implements V
 	protected static final String VIEW_PANEL = "Views";
 	protected static final String CONSTANTS_PANEL = "Constants";
 	protected static final String DOMAIN_PANEL = "Domain";
-	protected static final String SERVICE_PANEL = "Service";
+	protected static final String SERVICE_PANEL = "InjectService";
 
 	private final SampleLayoutView samplePageLayout = new SampleLayoutView();
 
@@ -118,8 +118,8 @@ public abstract class SampleView<P extends Place> extends Composite implements V
 		requestFile(sourceToOpen);
 	}
 
-	@Override
-	public void present(P place) {
+	@PresentHandler
+	public void present() {
 		samplePageLayout.sampleContent.add(getSampleWidget());
 	}
 

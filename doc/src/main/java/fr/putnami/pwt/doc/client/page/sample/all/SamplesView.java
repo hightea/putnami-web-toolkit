@@ -21,10 +21,11 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
+import fr.putnami.pwt.core.inject.client.annotation.PresentHandler;
 import fr.putnami.pwt.core.mvp.client.View;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 
-public class SamplesView extends Composite implements View<SamplesPlace> {
+public class SamplesView extends Composite implements View {
 
 	interface Binder extends UiBinderLocalized<Widget, SamplesView> {
 		Binder BINDER = GWT.create(Binder.class);
@@ -34,9 +35,8 @@ public class SamplesView extends Composite implements View<SamplesPlace> {
 		initWidget(Binder.BINDER.createAndBindUi(this));
 	}
 
-	@Override
-	public void present(SamplesPlace place) {
+	@PresentHandler
+	public void present() {
 		Document.get().setTitle("PWT - Samples");
-		// Nothing to do
 	}
 }

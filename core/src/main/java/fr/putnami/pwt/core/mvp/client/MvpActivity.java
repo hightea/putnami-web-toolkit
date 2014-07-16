@@ -16,8 +16,6 @@
  */
 package fr.putnami.pwt.core.mvp.client;
 
-import java.util.List;
-
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
@@ -26,9 +24,6 @@ import com.google.gwt.user.client.ui.IsWidget;
 import fr.putnami.pwt.core.mvp.client.event.MayStopActivityEvent;
 import fr.putnami.pwt.core.mvp.client.event.StartActivityEvent;
 import fr.putnami.pwt.core.mvp.client.event.StopActivityEvent;
-import fr.putnami.pwt.core.service.client.CallbackAdapter;
-import fr.putnami.pwt.core.service.client.CommandController;
-import fr.putnami.pwt.core.service.shared.domain.CommandResponse;
 
 public final class MvpActivity implements Activity, ViewProxy.Callback {
 
@@ -71,21 +66,11 @@ public final class MvpActivity implements Activity, ViewProxy.Callback {
 	}
 
 	protected void startView(final AcceptsOneWidget container, final IsWidget widget) {
-		CommandController commandController = CommandController.get();
-		boolean isSuspended = commandController.isSuspended();
-		commandController.setSuspended(true);
 		StartActivityEvent.fire(this, this.place, container, widget);
-		if (widget instanceof View) {
-			((View) widget).present(this.place);
+		if (widget instanceof Presenter) {
+			Presenter presenter = (Presenter) widget;
+			presenter.present(this.place, container);
 		}
-		commandController.flush(new CallbackAdapter<List<CommandResponse>>() {
-
-			@Override
-			public void onSuccess(List<CommandResponse> result) {
-				container.setWidget(widget);
-			};
-		});
-		commandController.setSuspended(isSuspended);
 	}
 
 }
