@@ -32,6 +32,8 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
 import fr.putnami.pwt.core.widget.client.Affix;
+import fr.putnami.pwt.core.widget.client.Container;
+import fr.putnami.pwt.core.widget.client.HTMLPanel;
 import fr.putnami.pwt.core.widget.client.OneWidgetPanel;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 
@@ -44,7 +46,20 @@ public class DocumentationDisplay extends Composite implements AcceptsOneWidget 
 	@UiField
 	Affix affixMenu;
 	@UiField
-	OneWidgetPanel viewContainer;
+	HTMLPanel viewContainer;
+	@UiField
+	Affix tableOfContentAffix;
+
+	@UiField
+	OneWidgetPanel noPageContainer;
+	@UiField
+	Container pageContainer;
+	@UiField
+	OneWidgetPanel tableOfContentContainer;
+	@UiField
+	OneWidgetPanel headerContainer;
+	@UiField
+	OneWidgetPanel contentContainer;
 
 	public DocumentationDisplay() {
 		initWidget(Binder.BINDER.createAndBindUi(this));
@@ -68,11 +83,25 @@ public class DocumentationDisplay extends Composite implements AcceptsOneWidget 
 
 	@Override
 	public void setWidget(IsWidget w) {
-		if (w == null) {
-			return;
-		}
+		noPageContainer.clear();
+		if (w instanceof Page) {
+			Page page = (Page) w;
+			noPageContainer.setVisible(false);
+			pageContainer.setVisible(true);
 
-		viewContainer.setWidget(w);
+			headerContainer.setWidget(page.header);
+			contentContainer.setWidget(page.content);
+			tableOfContentContainer.setWidget(page.tableOfContent);
+		}
+		else {
+			noPageContainer.setVisible(true);
+			pageContainer.setVisible(false);
+
+			headerContainer.setWidget(null);
+			contentContainer.setWidget(null);
+			tableOfContentContainer.setWidget(null);
+			noPageContainer.add(w);
+		}
 		redraw(true);
 	}
 
@@ -93,6 +122,7 @@ public class DocumentationDisplay extends Composite implements AcceptsOneWidget 
 				Window.scrollTo(Window.getScrollLeft(), 0);
 			}
 		}
+		tableOfContentAffix.reset();
 	}
 
 }

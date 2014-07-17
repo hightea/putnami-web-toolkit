@@ -64,9 +64,28 @@
 				</w:Navbar>
 			</w:Affix>
 		</header>
-		<div class="showcase-section">
-			<w:OneWidgetPanel tag="div" ui:field="viewContainer"  styleName="container" />
-		</div>
+		<w:HTMLPanel ui:field="viewContainer" styleName="showcase-section">
+			<div class="container">
+				<w:OneWidgetPanel tag="div" ui:field="noPageContainer" />
+				<w:Container tag="div" ui:field="pageContainer">
+					<w:GridRow>
+						<w:GridColumn>
+							<w:OneWidgetPanel tag="div" ui:field="headerContainer" />
+						</w:GridColumn>
+					</w:GridRow>
+					<w:GridRow>
+						<w:GridColumn size="8" styleName="text-justify" >
+							<w:OneWidgetPanel tag="div" ui:field="contentContainer" />
+						</w:GridColumn>
+						<w:GridColumn size="4">
+							<w:Affix ui:field="tableOfContentAffix" layerIndex="2" offsetTop="80" offsetBottom="250" xsVisibility="HIDDEN" smVisibility="HIDDEN" styleName="pwt-spy-affix">
+								<w:OneWidgetPanel tag="div" ui:field="tableOfContentContainer" />
+							</w:Affix>
+						</w:GridColumn>
+					</w:GridRow>
+				</w:Container>
+			</div>
+		</w:HTMLPanel>
 		<footer id="pwt-footer">
 			<p>Follow us on <a href="https://twitter.com/PutnamiTeam" class="btn btn-default btn-xs btn-info" target="_BLANK"><i class="icon icon-twitter" />Twitter</a></p>
 			<p>Designed and made with all our love by <a href="https://github.com/hightea" target="_blank">@tcharbonnier</a> and <a href="https://github.com/fdumay" target="_blank">@fdumay</a></p>

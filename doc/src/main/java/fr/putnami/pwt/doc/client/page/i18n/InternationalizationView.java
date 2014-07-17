@@ -19,16 +19,10 @@ package fr.putnami.pwt.doc.client.page.i18n;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Widget;
 
+import fr.putnami.pwt.core.inject.client.annotation.Templated;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 import fr.putnami.pwt.doc.client.application.Page;
 
+@Templated
 public class InternationalizationView extends Page {
-
-	interface Binder extends UiBinderLocalized<Widget, InternationalizationView> {
-	}
-
-	@Override
-	protected UiBinderLocalized getBinder() {
-		return GWT.create(Binder.class);
-	}
 }

@@ -59,10 +59,6 @@ public class InitializeFormCreator extends InjectorCreatorDelegate {
 		composerFactory.addImport(MessageHelper.class.getName());
 		composerFactory.addImport(ConstantsWithLookup.class.getName());
 		composerFactory.addImport(beanType.getQualifiedSourceName());
-		if (constantClassName != null) {
-			composerFactory.addImport(constantClassName.getName());
-		}
-
 	}
 
 	@Override
@@ -70,7 +66,7 @@ public class InitializeFormCreator extends InjectorCreatorDelegate {
 		String fieldName = modelField.getName();
 		if (constantClassName != null) {
 			srcWriter.println("MessageHelper %sMessageHelper = new MessageHelper((ConstantsWithLookup) GWT.create(%s.class));"
-					, fieldName, constantClassName.getName());
+					, fieldName, constantClassName.getCanonicalName());
 			srcWriter.println("%s.setMessageHelper(%sMessageHelper);"
 					, fieldName, fieldName);
 		}

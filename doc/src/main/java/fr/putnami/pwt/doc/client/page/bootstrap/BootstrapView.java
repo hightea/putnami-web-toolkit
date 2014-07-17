@@ -16,39 +16,31 @@
  */
 package fr.putnami.pwt.doc.client.page.bootstrap;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.Widget;
 
+import fr.putnami.pwt.core.inject.client.annotation.PostConstruct;
+import fr.putnami.pwt.core.inject.client.annotation.Templated;
 import fr.putnami.pwt.core.theme.client.CssLink;
 import fr.putnami.pwt.core.theme.client.Theme;
 import fr.putnami.pwt.core.theme.client.ThemeController;
-import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.doc.client.application.Page;
 
+@Templated
 public class BootstrapView extends Page {
-
-	interface Binder extends UiBinderLocalized<Widget, BootstrapView> {
-
-		Binder BINDER = GWT.create(Binder.class);
-	}
 
 	private final Theme defaultTheme = new Theme();
 	private final Theme yeti = new Theme();
 	private final Theme amelia = new Theme();
 	private final Theme doc = new Theme();
 
-	public BootstrapView() {
+	@PostConstruct
+	public void postConstructBootstrapView() {
 		yeti.addLink(new CssLink("theme/yeti/style/bootstrap-yeti.min.css", 0));
 		amelia.addLink(new CssLink("theme/amelia/style/bootstrap-amelia.min.css", 0));
 		doc.addLink(new CssLink("theme/doc/style/pwt-doc.css", 0));
 	}
 
-	@Override
-	protected UiBinderLocalized getBinder() {
-		return GWT.create(Binder.class);
-	}
 
 	@UiHandler("yetiBtn")
 	public void onYetiClick(ButtonEvent event) {

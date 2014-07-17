@@ -16,26 +16,15 @@
  */
 package fr.putnami.pwt.doc.client.page.errors;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.Widget;
 
-import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
+import fr.putnami.pwt.core.inject.client.annotation.Templated;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.doc.client.application.Page;
 import fr.putnami.pwt.doc.client.application.error.CustomRuntimeException;
 
+@Templated
 public class ErrorsView extends Page {
-
-	interface Binder extends UiBinderLocalized<Widget, ErrorsView> {
-
-		Binder BINDER = GWT.create(Binder.class);
-	}
-
-	@Override
-	protected UiBinderLocalized getBinder() {
-		return GWT.create(Binder.class);
-	}
 
 	@UiHandler("errorBtn")
 	public void onErrorButtonClick(ButtonEvent evt) {

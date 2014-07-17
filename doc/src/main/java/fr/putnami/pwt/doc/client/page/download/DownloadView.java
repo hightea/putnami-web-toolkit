@@ -19,21 +19,12 @@ package fr.putnami.pwt.doc.client.page.download;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Widget;
 
+import fr.putnami.pwt.core.inject.client.annotation.Templated;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 import fr.putnami.pwt.doc.client.application.Page;
 
+@Templated
 public class DownloadView extends Page {
-
-	interface Binder extends UiBinderLocalized<Widget, DownloadView> {
-
-		Binder BINDER = GWT.create(Binder.class);
-	}
-
-	@Override
-	protected UiBinderLocalized getBinder() {
-		return GWT.create(Binder.class);
-	}
-
 	//	@UiHandler("content")
 	//	public void onClick(ClickEvent evt) {
 	//		GoogleAnalytics.get(ApplicationConfig.ANALYTICS_TRACKER_ID).trackEvent("download", "pwt-core-jar");

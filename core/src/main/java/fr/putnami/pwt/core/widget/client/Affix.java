@@ -233,7 +233,7 @@ public class Affix extends OneWidgetPanel {
 		}
 	}
 
-	protected void reset() {
+	public void reset() {
 		Element e = getElement();
 
 		StyleUtils.addStyle(e, Affixed.TOP);

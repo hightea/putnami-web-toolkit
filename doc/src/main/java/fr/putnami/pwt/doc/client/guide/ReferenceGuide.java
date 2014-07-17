@@ -38,7 +38,6 @@ import fr.putnami.pwt.core.widget.client.Heading;
 import fr.putnami.pwt.core.widget.client.NavSpy;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 import fr.putnami.pwt.doc.client.application.ApplicationConfig;
-import fr.putnami.pwt.doc.client.application.HasTableOfContent;
 import fr.putnami.pwt.doc.client.application.Page;
 import fr.putnami.pwt.doc.client.application.error.ErrorConstants;
 import fr.putnami.pwt.doc.client.application.error.UmbrellaExceptionHandler;
@@ -185,8 +184,8 @@ public class ReferenceGuide extends Composite implements EntryPoint {
 	private void addContent(Widget content, int offset) {
 
 		NavSpy subNav = null;
-		if (content instanceof HasTableOfContent) {
-			subNav = ((HasTableOfContent) content).getTableOfContent();
+		if (content instanceof Page) {
+			subNav = ((Page) content).tableOfContent;
 		}
 		if (subNav != null) {
 			for (Heading heading : subNav.getHeadings()) {
