@@ -21,21 +21,19 @@
 	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
 	xmlns:c="urn:import:fr.putnami.pwt.doc.client.page.starting">
 
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-	
 	<w:HTMLPanel title="PWT - Quick start Getting Started">
 		<w:Header ui:field="header">
-			<w:Heading level="1" navSpy="{tableOfContent}">Getting started</w:Heading>
+			<w:Heading level="1" summary="docSummary">Getting started</w:Heading>
 			<p class="lead">
 			</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
-			<c:ThankYouView navSpy="{tableOfContent}" />
-			<c:RequirementsView navSpy="{tableOfContent}" />
-			<c:StartTutorialView navSpy="{tableOfContent}" />
-			<c:StartSamplesView navSpy="{tableOfContent}" />
-			<c:StartGradleView navSpy="{tableOfContent}" />
-			<c:StartMavenView navSpy="{tableOfContent}" />
+			<c:ThankYouView/>
+			<c:RequirementsView/>
+			<c:StartTutorialView/>
+			<c:StartSamplesView/>
+			<c:StartGradleView/>
+			<c:StartMavenView/>
 		</w:HTMLPanel>
 	</w:HTMLPanel>
 </ui:UiBinder>

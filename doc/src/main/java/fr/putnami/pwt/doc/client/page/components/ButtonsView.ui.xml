@@ -23,15 +23,13 @@
 
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">Buttons</w:Heading>
+		<w:Heading level="2" summary="docSummary">Buttons</w:Heading>
 
-		<w:Heading level="3" navSpy="{navSpy}">Simple Button</w:Heading>
+		<w:Heading level="3" summary="docSummary">Simple Button</w:Heading>
 		<p>A button is a <code>Button</code> widget which can be styled with properties like <code>type</code> or <code>size</code>.</p>
 		
-		<w:Heading level="4" navSpy="{navSpy}">Types and size</w:Heading>
+		<w:Heading level="4" summary="docSummary">Types and size</w:Heading>
 		<p>Use the <code>type</code> attribute to stylize a button.</p>
 		<p>Use the <code>size</code> attribute to change the size.</p>
 		<div class="showcase-sample-block">
@@ -64,7 +62,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="4" navSpy="{navSpy}">Icon customization</w:Heading>
+		<w:Heading level="4" summary="docSummary">Icon customization</w:Heading>
 		<p>Set the <code>iconType</code> property to customize the button with an icon.</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
@@ -98,7 +96,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="4" navSpy="{navSpy}">Button states</w:Heading>
+		<w:Heading level="4" summary="docSummary">Button states</w:Heading>
 		<p>Set the <code>active</code> property to <code>true</code> for the button appears pressed.</p>
 		<p>Set the <code>disabled</code> property to <code>true</code> to disable the button.</p>
 		<div class="showcase-sample-block">
@@ -126,7 +124,7 @@
 		</div>
 		
 		
-		<w:Heading level="3" navSpy="{navSpy}">Dropdown Button</w:Heading>
+		<w:Heading level="3" summary="docSummary">Dropdown Button</w:Heading>
 		<p>the <code>ButtonDropdown</code> is a button with a context menu.</p>
 		
 		<p>The context menu can be composed of : </p>
@@ -159,7 +157,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="4" navSpy="{navSpy}">Icon customization</w:Heading>
+		<w:Heading level="4" summary="docSummary">Icon customization</w:Heading>
 		<p>With the <code>iconType</code> property, add an icon to the dropdown. The <code>label</code> is not mandatory.</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
@@ -201,7 +199,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="3" navSpy="{navSpy}">Button group</w:Heading>
+		<w:Heading level="3" summary="docSummary">Button group</w:Heading>
 		<p>Group a serie of buttons together on a single line.</p>
 		
 		<p>Add <code>Button</code> to the <code>ButtonGroup</code>.</p>
@@ -223,7 +221,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="4" navSpy="{navSpy}">Size</w:Heading>
+		<w:Heading level="4" summary="docSummary">Size</w:Heading>
 		<p>Use any of these <code>ButtonGroup.Size</code> to change the size.</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
@@ -273,7 +271,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="4" navSpy="{navSpy}">Button customization</w:Heading>
+		<w:Heading level="4" summary="docSummary">Button customization</w:Heading>
 		<p>Each <code>Button</code> can be customize independently (<code>type</code>, <code>iconType</code> or <code>active</code> and <code>disabled</code> properties).</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
@@ -293,7 +291,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="4" navSpy="{navSpy}">Dropdown use</w:Heading>
+		<w:Heading level="4" summary="docSummary">Dropdown use</w:Heading>
 		<p>A <code>ButtonGroup</code> can contains <code>Button</code> and <code>DropdownButton</code>.</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
@@ -341,7 +339,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="4" navSpy="{navSpy}">Button toolbar</w:Heading>
+		<w:Heading level="4" summary="docSummary">Button toolbar</w:Heading>
 		<p>Combine a set of <code>ButtonGroup</code>.</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
@@ -383,7 +381,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="4" navSpy="{navSpy}">Vertical variation</w:Heading>
+		<w:Heading level="4" summary="docSummary">Vertical variation</w:Heading>
 		<p>Use the <code>ButtonGroup.Type.VERTICAL</code>to make the set of <code>Button</code> appears verticaly.</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
@@ -405,7 +403,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="4" navSpy="{navSpy}">Justified variation</w:Heading>
+		<w:Heading level="4" summary="docSummary">Justified variation</w:Heading>
 		<p>Set the <code>justified</code> property to  <code>true</code> to make the group stretch at his parents width.</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">

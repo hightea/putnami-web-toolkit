@@ -20,26 +20,24 @@ import java.util.Date;
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
-import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Widget;
 
-import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
 import fr.putnami.pwt.core.editor.shared.constant.ValidationConstants;
-import fr.putnami.pwt.core.model.client.model.Model;
+import fr.putnami.pwt.core.inject.client.annotation.Initialize;
+import fr.putnami.pwt.core.inject.client.annotation.PostConstruct;
+import fr.putnami.pwt.core.inject.client.annotation.Templated;
+import fr.putnami.pwt.core.mvp.client.View;
 import fr.putnami.pwt.core.widget.client.Fieldset;
 import fr.putnami.pwt.core.widget.client.Form;
-import fr.putnami.pwt.core.widget.client.NavSpy;
-import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.core.widget.client.helper.DateParser;
 
-public class FormsView extends Composite {
+@Templated
+public class FormsView extends Composite implements View {
 
 	public enum Gender {
 		MALE,
@@ -66,15 +64,6 @@ public class FormsView extends Composite {
 		public List<String> emails = Lists.newArrayList("john.doe@gmail.com", "john.doe@aol.com");
 	}
 
-	public interface BeanModel extends Model<Bean> {
-
-		Model<Bean> MODEL = GWT.create(BeanModel.class);
-	}
-
-	interface Binder extends UiBinderLocalized<Widget, FormsView> {
-		Binder BINDER = GWT.create(Binder.class);
-	}
-
 	interface Constants extends ConstantsWithLookup, ValidationConstants {
 		@DefaultStringValue("Name")
 		String nameLabel();
@@ -92,83 +81,55 @@ public class FormsView extends Composite {
 		String genderFemaleEnum();
 	}
 
-	@UiField(provided = true)
-	final NavSpy tableOfContent;
-
 	@UiField
+	@Initialize(constantsClass = Constants.class)
 	Form<Bean> formBasic;
 	@UiField
+	@Initialize(constantsClass = Constants.class)
 	Form<Bean> formInline;
 	@UiField
+	@Initialize(constantsClass = Constants.class)
 	Form<Bean> formHorizontal;
 	@UiField
+	@Initialize(constantsClass = Constants.class)
 	Form<Bean> formReadonly;
 	@UiField
+	@Initialize(constantsClass = Constants.class)
 	Form<Bean> formHeaderFooter;
 
 	@UiField
+	@Initialize(constantsClass = Constants.class)
 	Form<Bean> formFieldset;
 	@UiField
 	Fieldset<Bean> fieldsetIds;
 
 	@UiField
+	@Initialize(constantsClass = Constants.class)
 	Form<Bean> formGroupEditable;
 	@UiField
+	@Initialize(constantsClass = Constants.class)
 	Form<Bean> formGroupReadonly;
 	@UiField
+	@Initialize(constantsClass = Constants.class)
 	Form<Bean> formGroupMagic;
 
-	@UiConstructor
-	public FormsView(NavSpy navSpy) {
-		super();
-
-		this.tableOfContent = navSpy;
-
-		initWidget(Binder.BINDER.createAndBindUi(this));
-
-
-		MessageHelper messageHelper = new MessageHelper((ConstantsWithLookup) GWT.create(Constants.class));
-
-		formBasic.setMessageHelper(messageHelper);
-		formBasic.initialize(BeanModel.MODEL);
+	@PostConstruct
+	public void postConstruct() {
 		formBasic.getDriver().setAutoFlush(true);
 		formBasic.edit(new Bean());
-
-		formInline.setMessageHelper(messageHelper);
-		formInline.initialize(BeanModel.MODEL);
 		formInline.getDriver().setAutoFlush(true);
 		formInline.edit(new Bean());
-
-		formHorizontal.setMessageHelper(messageHelper);
-		formHorizontal.initialize(BeanModel.MODEL);
 		formHorizontal.getDriver().setAutoFlush(true);
 		formHorizontal.edit(new Bean());
-
-		formReadonly.setMessageHelper(messageHelper);
-		formReadonly.initialize(BeanModel.MODEL);
 		formReadonly.getDriver().setAutoFlush(true);
 		formReadonly.edit(new Bean());
-
-		formHeaderFooter.setMessageHelper(messageHelper);
-		formHeaderFooter.initialize(BeanModel.MODEL);
 		formHeaderFooter.getDriver().setAutoFlush(true);
 		formHeaderFooter.edit(new Bean());
-
-		formFieldset.setMessageHelper(messageHelper);
-		formFieldset.initialize(BeanModel.MODEL);
 		formFieldset.getDriver().setAutoFlush(true);
 		formFieldset.edit(new Bean());
-
-		formGroupEditable.setMessageHelper(messageHelper);
-		formGroupEditable.initialize(BeanModel.MODEL);
 		formGroupEditable.getDriver().setAutoFlush(true);
 		formGroupEditable.edit(new Bean());
-
-		formGroupReadonly.initialize(BeanModel.MODEL);
 		formGroupReadonly.edit(new Bean());
-
-		formGroupMagic.setMessageHelper(messageHelper);
-		formGroupMagic.initialize(BeanModel.MODEL);
 		formGroupMagic.edit(new Bean());
 
 	}

@@ -24,18 +24,16 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel title="PWT - Theming and bootstrap">
 		<w:Header ui:field="header">
-			<w:Heading level="1" navSpy="{tableOfContent}">Bootstrap</w:Heading>
+			<w:Heading level="1" summary="docSummary">Bootstrap</w:Heading>
 			<p class="lead">
 				<strong title="Putnami Web Toolkit">PWT</strong> is fully based on Twitter bootstrap Css framework. 
 				So it is fully responsive and fully themable.
 			</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
-			<w:Heading level="2" navSpy="{tableOfContent}">Bootstrap Theming</w:Heading>
+			<w:Heading level="2" summary="docSummary">Bootstrap Theming</w:Heading>
 			<p>Use the following button to change the documentation theme. You can note that those themes are free bootstrap theme downloaded from <a href="http://bootswatch.com/">http://bootswatch.com/</a></p>
 			<div class="text-center">
 				<w:Button ui:field="yetiBtn" text="Theme Yeti" />
@@ -46,7 +44,7 @@
 				<w:Button ui:field="clearBtn" text="PWT documentation Theme" />
 			</div>
 			
-			<w:Heading level="2" navSpy="{tableOfContent}">Create a theme</w:Heading>
+			<w:Heading level="2" summary="docSummary">Create a theme</w:Heading>
 			<p>To use your own theme or use an existing one. 
 				You just have to create a new <code>Theme</code> and add the <code>CssLink</code>, then you can apply it with the <code>ThemeController</code>.
 			</p>
@@ -71,7 +69,7 @@
 				<p>You can find all customizations in the <code>pwt-core.css</code> file.</p>
 				<p>Plugins can also provide their own CSS file (<code>pwt-code-editor.css</code> ).</p>
 			</w:Alert>
-			<w:Heading level="2" navSpy="{tableOfContent}">Global component theming</w:Heading>
+			<w:Heading level="2" summary="docSummary">Global component theming</w:Heading>
 			<p>You may want to theme a particular component specifically. Therefore we set on each component a specific CSS class which is the component simple class name prefixed by "p-" (to avoid collision with existing CSS class).</p>
 			<p>For instance the <code>Container</code> component has a <code>p-container</code> CSS class and the <code>HTMLPanel</code> component has a <code>p-h-t-m-l-panel</code> CSS class (the class name is in lower-hyphen case)</p>
 			<w:Alert type="INFO">

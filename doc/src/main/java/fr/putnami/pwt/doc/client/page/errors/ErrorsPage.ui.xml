@@ -24,17 +24,15 @@
 	
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel title="PWT - Errors management">
 		<w:Header ui:field="header">
-			<w:Heading level="1" navSpy="{tableOfContent}">Errors Handling</w:Heading>
+			<w:Heading level="1" summary="docSummary">Errors Handling</w:Heading>
 			<p class="lead">
 				<strong title="Putnami Web Toolkit">PWT</strong> provides an easy way to handle errors in the application.
 			</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
-			<w:Heading level="2" navSpy="{tableOfContent}">Error Manager</w:Heading>
+			<w:Heading level="2" summary="docSummary">Error Manager</w:Heading>
 			<p><strong title="Putnami Web Toolkit">PWT</strong> use an <code>ErrorManager</code> in wich we register some <code>ErrorHandler</code>s and eventualy a <code>defaultErrorHandler</code> which handle errors after the lower priority handler.</p>
 			<p>It also accepts an <code>ErrorDisplayer</code> to eventually display a message to the end user</p>
 			<p>Default registered <code>ErrorHandler</code>s are</p>
@@ -49,7 +47,7 @@
 			</ul>
 			<p>Those provided handlers simply display the error if a <code>ErrorDisplayer</code> is registered.</p>
 			
-			<w:Heading level="2" navSpy="{tableOfContent}">Error Handlers</w:Heading>
+			<w:Heading level="2" summary="docSummary">Error Handlers</w:Heading>
 			<p>You can register several error<code>ErrorHandler</code>s. They are processed by priority (higher first).</p>
 			<p>To define an <code>ErrorHandler</code> you'll have to define a priority and implement the <code>handle</code> method. If you want to prevent lower priority handlers processing, return <code>true</code>.</p>
 			<p>We provide several base abstract classes to handle Exception, such as</p>
@@ -82,7 +80,7 @@ public class MyExceptionErrorHandler extends AbstractErrorHandler {
 ErrorManager.get().registerHandler(new MyExceptionErrorHandler());]]></pre>
 			</c:StaticCode>
 			
-			<w:Heading level="2" navSpy="{tableOfContent}">Error Displayer</w:Heading>
+			<w:Heading level="2" summary="docSummary">Error Displayer</w:Heading>
 			<p>In most cases, the errors need to be displayed to the end user. We provide a simple <code>ErrorDisplayer</code> : <code>SimpleErrorDisplayer</code> which display errors with their stacktrace.</p>
 			<p>You can set a <code>ConstantsWithLookup</code> to the <code>SimpleErrorDisplayer</code> to eventually set the error title and message from the error class</p>
 			<ul>
@@ -91,7 +89,7 @@ ErrorManager.get().registerHandler(new MyExceptionErrorHandler());]]></pre>
 			</ul>
 			<br/>
 			<p>In order to use this displayer you'll have to set it in the <code>ErrorManager</code></p>
-			<w:Heading level="3" navSpy="{tableOfContent}">Example</w:Heading>
+			<w:Heading level="3" summary="docSummary">Example</w:Heading>
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
 /*
@@ -113,7 +111,7 @@ public interface ErrorConstants extends ConstantsWithLookup {
 	String runtimeExceptionMessage();
 }]]></pre>
 	</c:StaticCode>
-			<w:Heading level="3" navSpy="{tableOfContent}">Try it !</w:Heading>
+			<w:Heading level="3" summary="docSummary">Try it !</w:Heading>
 			<w:Button ui:field="errorBtn" text="Runtime Exception" />
 			<w:Button ui:field="customErrorBtn" text="Custom Runtime Exception" />
 			<w:Button ui:field="otherErrorBtn" text="Other Exception" />

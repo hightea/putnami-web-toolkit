@@ -25,8 +25,6 @@
     <ui:with field="constants" type="fr.putnami.pwt.doc.shared.page.sample.constants.SampleConstants" />
     <ui:with field="weightItems" type="java.util.List" />
 
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel title="PWT - Contact table sample">
 		<w:Header ui:field="header">
 			<w:Heading level="1">Contacts <small>manage your friends</small></w:Heading>

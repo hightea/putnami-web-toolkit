@@ -21,11 +21,9 @@
 	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
 	>
 	
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel title="PWT - Downloads center">
 		<w:Header ui:field="header">
-			<w:Heading level="1" navSpy="{tableOfContent}">Download center</w:Heading>
+			<w:Heading level="1" summary="docSummary">Download center</w:Heading>
 			<p class="lead">
 			All release are available on our maven repository on <a href="http://repo.putnami.org">http://repo.putnami.org</a>.
 			<br/>
@@ -33,7 +31,7 @@
 			</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
-			<w:Heading level="2" navSpy="{tableOfContent}">Current stable <small>@releaseVersion@</small></w:Heading>
+			<w:Heading level="2" summary="docSummary">Current stable <small>@releaseVersion@</small></w:Heading>
 			
 			<w:Table>
 				<w:TableHead>
@@ -108,7 +106,7 @@
 				<p>Find more details on the maven and gradle usage with <w:Anchor link="#!GettingStarted" text="Getting started guide" /></p>
 			</w:Alert>
 			
-			<w:Header><w:Heading level="2" navSpy="{tableOfContent}">Version <strong>1.0.0-RC1</strong></w:Heading></w:Header>
+			<w:Header><w:Heading level="2" summary="docSummary">Version <strong>1.0.0-RC1</strong></w:Heading></w:Header>
 			<w:Table>
 				<w:TableHead>
 						<w:TableTH><w:Label>Package</w:Label></w:TableTH>

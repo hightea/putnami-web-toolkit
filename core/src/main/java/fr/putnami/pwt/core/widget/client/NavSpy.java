@@ -16,7 +16,6 @@
  */
 package fr.putnami.pwt.core.widget.client;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -26,11 +25,14 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Node;
 import com.google.gwt.event.dom.client.ScrollEvent;
 import com.google.gwt.event.dom.client.ScrollHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -54,8 +56,8 @@ public class NavSpy extends AbstractComposite implements HasDrawable {
 			this.level = level;
 		}
 
-		public NavWidget(NavWidget parentNav, final Heading heading) {
-			super(heading.getText(), new ScheduledCommand() {
+		public NavWidget(NavWidget parentNav, final Element heading) {
+			super(heading.getInnerHTML(), new ScheduledCommand() {
 				@Override
 				public void execute() {
 					int top = getElementTop(heading) - spyOffset;
@@ -69,7 +71,7 @@ public class NavSpy extends AbstractComposite implements HasDrawable {
 			});
 
 			this.parentNav = parentNav;
-			this.level = heading.getLevel();
+			this.level = getLevel(heading);
 		}
 
 		private NavWidget addToSubNav(NavWidget subNav) {
@@ -92,14 +94,17 @@ public class NavSpy extends AbstractComposite implements HasDrawable {
 
 	private final SimplePanel content = new SimplePanel();
 
-	private final List<Heading> headings = Lists.newArrayList();
-	private final Map<Heading, NavWidget> navs = Maps.newHashMap();
+	private final List<Element> headings = Lists.newArrayList();
+	private final Map<Element, NavWidget> navs = Maps.newHashMap();
 
 	private boolean refreshing = false;
 	private HandlerRegistration scrollRegistration;
 	private Widget scrollWidget;
 
 	private int spyOffset;
+
+	private Widget target;
+	private String spyName;
 
 	private final RepeatingCommand refreshCommand = new RepeatingCommand() {
 
@@ -125,57 +130,34 @@ public class NavSpy extends AbstractComposite implements HasDrawable {
 		return new NavSpy(this);
 	}
 
-	private void refreshActive() {
-		if (navs.isEmpty()) {
-			return; // Not displayed NavSpy
-		}
-		int scrollTop, scrollHeight, maxScroll;
-
-		if (isBodyScrollWidget()) {
-			scrollTop = Document.get().getScrollTop() + spyOffset;
-			scrollHeight = Document.get().getScrollHeight();
-			maxScroll = scrollHeight - Document.get().getClientHeight();
-		}
-		else {
-			scrollTop = scrollWidget.getElement().getScrollTop() + spyOffset;
-			scrollHeight = scrollWidget.getElement().getScrollHeight();
-			maxScroll = scrollHeight - scrollWidget.getElement().getClientHeight();
-		}
-
-		Heading activeHeading = null;
-		if (scrollTop >= maxScroll && headings.size() > 0) {
-			activeHeading = headings.get(headings.size() - 1);
-		}
-		else {
-			for (Heading heading : headings) {
-				int top = getElementTop(heading) - scrollTop;
-				if (activeHeading == null || top <= 0) {
-					activeHeading = heading;
-				}
-				if (top > 0) {
-					break;
-				}
-			}
-		}
-
-		for (NavWidget nav : navs.values()) {
-			nav.setActive(false);
-		}
-		if (activeHeading != null) {
-			NavWidget navActive = navs.get(activeHeading);
-			navActive.setActive(true);
-			while (navActive.parentNav != null) {
-				navActive = navActive.parentNav;
-				navActive.setActive(true);
-			}
-		}
-		refreshing = false;
+	@Override
+	protected void onLoad() {
+		super.onLoad();
+		registerScrollHandler();
 	}
 
-	public void addHeading(Heading heading) {
-		if (heading != null) {
-			headings.add(heading);
+	@Override
+	protected void onUnload() {
+		super.onUnload();
+		if (scrollRegistration != null) {
+			scrollRegistration.removeHandler();
 		}
+	}
+
+	public Widget getTarget() {
+		return target;
+	}
+
+	public void setTarget(Widget target) {
+		this.target = target;
+	}
+
+	public String getSpyName() {
+		return spyName;
+	}
+
+	public void setSpyName(String spyName) {
+		this.spyName = spyName;
 	}
 
 	public void setScrollWidget(IsWidget scrollWidget) {
@@ -193,16 +175,40 @@ public class NavSpy extends AbstractComposite implements HasDrawable {
 	}
 
 	@Override
-	protected void onLoad() {
-		super.onLoad();
-		registerScrollHandler();
-	}
+	public void redraw() {
+		if (target == null) {
+			target = RootPanel.get();
+		}
+		headings.clear();
+		collectHeadings(target.getElement(), headings);
 
-	@Override
-	protected void onUnload() {
-		super.onUnload();
-		if (scrollRegistration != null) {
-			scrollRegistration.removeHandler();
+		int lowestNavLevel = 6;
+		navs.clear();
+		content.clear();
+		for (Element heading : headings) {
+			int level = getLevel(heading);
+			if (level < lowestNavLevel) {
+				lowestNavLevel = level;
+			}
+		}
+
+		NavWidget currentNav = new NavWidget(null, lowestNavLevel - 1);
+		content.add(currentNav.getSubNavContainer());
+		for (Element heading : headings) {
+			int level = getLevel(heading);
+			while (currentNav.level >= level && currentNav.parentNav != null) {
+				currentNav = currentNav.parentNav;
+			}
+			if (currentNav.level < level - 1) {
+				for (int i = currentNav.level; i < level; i++) {
+					NavWidget newNav = new NavWidget(currentNav, i);
+					currentNav.append(newNav);
+					currentNav = newNav;
+				}
+			}
+
+			currentNav = currentNav.addToSubNav(new NavWidget(currentNav, heading));
+			navs.put(heading, currentNav);
 		}
 	}
 
@@ -237,12 +243,12 @@ public class NavSpy extends AbstractComposite implements HasDrawable {
 		}
 	}
 
-	private int getElementTop(Heading heading) {
+	private int getElementTop(Element heading) {
 		if (isBodyScrollWidget()) {
-			return heading.getElement().getAbsoluteTop();
+			return heading.getAbsoluteTop();
 		}
 		else {
-			return heading.getElement().getOffsetTop() - scrollWidget.getElement().getOffsetTop();
+			return heading.getOffsetTop() - scrollWidget.getElement().getOffsetTop();
 		}
 	}
 
@@ -250,37 +256,74 @@ public class NavSpy extends AbstractComposite implements HasDrawable {
 		return scrollWidget == null;
 	}
 
-	public List<Heading> getHeadings() {
-		return Collections.unmodifiableList(headings);
-	}
+	private void refreshActive() {
+		if (navs.isEmpty()) {
+			return; // Not displayed NavSpy
+		}
+		int scrollTop, scrollHeight, maxScroll;
 
-	@Override
-	public void redraw() {
-		int lowestNavLevel = 6;
-		navs.clear();
-		content.clear();
-		for (Heading heading : headings) {
-			if (heading.getLevel() < lowestNavLevel) {
-				lowestNavLevel = heading.getLevel();
-			}
+		if (isBodyScrollWidget()) {
+			scrollTop = Document.get().getScrollTop() + spyOffset;
+			scrollHeight = Document.get().getScrollHeight();
+			maxScroll = scrollHeight - Document.get().getClientHeight();
+		}
+		else {
+			scrollTop = scrollWidget.getElement().getScrollTop() + spyOffset;
+			scrollHeight = scrollWidget.getElement().getScrollHeight();
+			maxScroll = scrollHeight - scrollWidget.getElement().getClientHeight();
 		}
 
-		NavWidget currentNav = new NavWidget(null, lowestNavLevel - 1);
-		content.add(currentNav.getSubNavContainer());
-		for (Heading heading : headings) {
-			while (currentNav.level >= heading.getLevel() && currentNav.parentNav != null) {
-				currentNav = currentNav.parentNav;
-			}
-			if (currentNav.level < heading.getLevel() - 1) {
-				for (int i = currentNav.level; i < heading.getLevel(); i++) {
-					NavWidget newNav = new NavWidget(currentNav, i);
-					currentNav.append(newNav);
-					currentNav = newNav;
+		Element activeHeading = null;
+		if (scrollTop >= maxScroll && headings.size() > 0) {
+			activeHeading = headings.get(headings.size() - 1);
+		}
+		else {
+			for (Element heading : headings) {
+				int top = getElementTop(heading) - scrollTop;
+				if (activeHeading == null || top <= 0) {
+					activeHeading = heading;
+				}
+				if (top > 0) {
+					break;
 				}
 			}
-
-			currentNav = currentNav.addToSubNav(new NavWidget(currentNav, heading));
-			navs.put(heading, currentNav);
 		}
+
+		for (NavWidget nav : navs.values()) {
+			nav.setActive(false);
+		}
+		if (activeHeading != null) {
+			NavWidget navActive = navs.get(activeHeading);
+			navActive.setActive(true);
+			while (navActive.parentNav != null) {
+				navActive = navActive.parentNav;
+				navActive.setActive(true);
+			}
+		}
+		refreshing = false;
 	}
+
+	private int getLevel(Element element) {
+		return Heading.HEADING_TAGS.indexOf(element.getTagName().toLowerCase()) + 1;
+	}
+
+	private void collectHeadings(Element element, List<Element> headings) {
+		for (int i = 0; i < element.getChildCount(); i++) {
+			Node node = element.getChild(i);
+			if (node instanceof Element) {
+				Element child = (Element) node;
+				String tagName = child.getTagName();
+				if (tagName != null && Heading.HEADING_TAGS.contains(tagName.toLowerCase())) {
+					if (spyName != null && spyName.equals(child.getAttribute(Heading.ATTRIBUTE_DATA_SUMMARY))) {
+						headings.add(child);
+					}
+				}
+				else {
+					collectHeadings(child, headings);
+				}
+			}
+		}
+
+	}
+
 }

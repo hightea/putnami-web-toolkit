@@ -20,23 +20,21 @@ import java.util.Date;
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
-import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Widget;
 
-import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
 import fr.putnami.pwt.core.editor.shared.constant.ValidationConstants;
-import fr.putnami.pwt.core.model.client.model.Model;
+import fr.putnami.pwt.core.inject.client.annotation.Initialize;
+import fr.putnami.pwt.core.inject.client.annotation.PostConstruct;
+import fr.putnami.pwt.core.inject.client.annotation.Templated;
+import fr.putnami.pwt.core.mvp.client.View;
 import fr.putnami.pwt.core.widget.client.Form;
-import fr.putnami.pwt.core.widget.client.NavSpy;
-import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 import fr.putnami.pwt.core.widget.client.helper.DateParser;
 
-public class InputControlsView extends Composite {
+@Templated
+public class InputControlsView extends Composite implements View {
 
 	public enum Gender {
 		MALE,
@@ -63,15 +61,6 @@ public class InputControlsView extends Composite {
 		public List<String> emails = Lists.newArrayList("john.doe@gmail.com", "john.doe@aol.com");
 	}
 
-	public interface BeanModel extends Model<Bean> {
-
-		Model<Bean> MODEL = GWT.create(BeanModel.class);
-	}
-
-	interface Binder extends UiBinderLocalized<Widget, InputControlsView> {
-		Binder BINDER = GWT.create(Binder.class);
-	}
-
 	interface Constants extends ConstantsWithLookup, ValidationConstants {
 		@DefaultStringValue("Name")
 		String nameLabel();
@@ -90,9 +79,6 @@ public class InputControlsView extends Composite {
 	}
 
 	@UiField(provided = true)
-	final NavSpy tableOfContent;
-
-	@UiField(provided = true)
 	final List<String> stateSuggestions = Lists.newArrayList("Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut",
 			"Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland",
 			"Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey",
@@ -105,23 +91,13 @@ public class InputControlsView extends Composite {
 	final List<String> groups = Lists.newArrayList("Familly", "Friends", "Colleague", "Other");
 
 	@UiField
+	@Initialize(constantsClass = Constants.class)
 	Form<Bean> formInputEditor;
 
-	@UiConstructor
-	public InputControlsView(NavSpy navSpy) {
-		super();
-
-		this.tableOfContent = navSpy;
-
-		initWidget(Binder.BINDER.createAndBindUi(this));
-
-		MessageHelper messageHelper = new MessageHelper((ConstantsWithLookup) GWT.create(Constants.class));
-
-		formInputEditor.setMessageHelper(messageHelper);
-		formInputEditor.initialize(BeanModel.MODEL);
+	@PostConstruct
+	public void postConstruct() {
 		formInputEditor.edit(new Bean());
 		formInputEditor.getDriver().setAutoFlush(true);
-
 	}
 
 	private List<Integer> generateAgeList() {

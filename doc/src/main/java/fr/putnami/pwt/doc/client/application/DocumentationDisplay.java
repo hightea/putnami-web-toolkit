@@ -34,6 +34,7 @@ import com.google.gwt.user.client.ui.Widget;
 import fr.putnami.pwt.core.widget.client.Affix;
 import fr.putnami.pwt.core.widget.client.Container;
 import fr.putnami.pwt.core.widget.client.HTMLPanel;
+import fr.putnami.pwt.core.widget.client.NavSpy;
 import fr.putnami.pwt.core.widget.client.OneWidgetPanel;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 
@@ -55,7 +56,7 @@ public class DocumentationDisplay extends Composite implements AcceptsOneWidget 
 	@UiField
 	Container pageContainer;
 	@UiField
-	OneWidgetPanel tableOfContentContainer;
+	NavSpy tableOfContent;
 	@UiField
 	OneWidgetPanel headerContainer;
 	@UiField
@@ -91,7 +92,6 @@ public class DocumentationDisplay extends Composite implements AcceptsOneWidget 
 
 			headerContainer.setWidget(page.header);
 			contentContainer.setWidget(page.content);
-			tableOfContentContainer.setWidget(page.tableOfContent);
 		}
 		else {
 			noPageContainer.setVisible(true);
@@ -99,9 +99,10 @@ public class DocumentationDisplay extends Composite implements AcceptsOneWidget 
 
 			headerContainer.setWidget(null);
 			contentContainer.setWidget(null);
-			tableOfContentContainer.setWidget(null);
 			noPageContainer.add(w);
 		}
+
+		tableOfContent.redraw();
 		redraw(true);
 	}
 

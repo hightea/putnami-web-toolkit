@@ -23,11 +23,9 @@
 
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-	
 	<w:HTMLPanel title="PWT - UI Layouts components">
 		<w:Header ui:field="header">
-			<w:Heading level="1" navSpy="{tableOfContent}">Layout</w:Heading>
+			<w:Heading level="1" summary="docSummary">Layout</w:Heading>
 			<p class="lead">
 				<strong title="Putnami Web Toolkit">PWT</strong> use Twitter's Bootstrap, so every bootstrap css layout can be applied. 
 				<br/>
@@ -38,19 +36,19 @@
 			<p>Available Visibility values are (as of Bootstrap 3.2.0) : <code>DEFAULT</code>, <code>HIDDEN</code>, <code>VISIBLE_BLOCK</code>, <code>VISIBLE_INLINE</code> and <code>VISIBLE_INLINE_BLOCK</code>.</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
-			<c:GridView navSpy="{tableOfContent}" />
-			<c:HTMLPanelView navSpy="{tableOfContent}" />
-			<c:OneWidgetView navSpy="{tableOfContent}" />
-			<c:ContainerView navSpy="{tableOfContent}" />
-			<c:HeaderFooterView navSpy="{tableOfContent}" />
+			<c:GridView />
+			<c:HTMLPanelView />
+			<c:OneWidgetView />
+			<c:ContainerView />
+			<c:HeaderFooterView />
 
-			<c:PanelView navSpy="{tableOfContent}" />
-			<c:PanelAccordionView navSpy="{tableOfContent}" />
-			<c:TabPanelView navSpy="{tableOfContent}" />
-			<c:AlertView navSpy="{tableOfContent}" />
-			<c:ListView navSpy="{tableOfContent}" />
-			<c:ModalView navSpy="{tableOfContent}" />
-			<c:AffixView navSpy="{tableOfContent}" />
+			<c:PanelView />
+			<c:PanelAccordionView />
+			<c:TabPanelView />
+			<c:AlertView />
+			<c:ListView />
+			<c:ModalView />
+			<c:AffixView />
 		</w:HTMLPanel>
 	</w:HTMLPanel>
 </ui:UiBinder>

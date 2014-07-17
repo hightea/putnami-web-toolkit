@@ -25,11 +25,9 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel title="PWT - Server Calls RPC Framework">
 		<w:Header ui:field="header">
-			<w:Heading level="1" navSpy="{tableOfContent}">Server calls</w:Heading>
+			<w:Heading level="1" summary="docSummary">Server calls</w:Heading>
 			<p class="lead">
 				GWT RPC framework makes it easy to invoke service procedure on server. But not easy enough for <strong title="Putnami Web Toolkit">PWT</strong>. <br/>
 				That's why we improved this mechanism in various ways.
@@ -49,7 +47,7 @@
 			</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
-			<w:Heading level="2" navSpy="{tableOfContent}">How does it work?</w:Heading>
+			<w:Heading level="2" summary="docSummary">How does it work?</w:Heading>
 			<p>
 			This framework is based on a invisible command pattern. This pattern allow to pipe all requests on unique servlet.
 			</p>
@@ -88,7 +86,7 @@
 				</ul> 
 			</w:Alert>
 
-			<w:Heading level="2" navSpy="{tableOfContent}">On server side</w:Heading>
+			<w:Heading level="2" summary="docSummary">On server side</w:Heading>
 			<p>
 			On the server side all requests pass through the <code>CommandService</code>. 
 			<br/>
@@ -103,7 +101,7 @@
 					<li>Spring CommandService resolving services in the ApplicationContext</li>
 				</ul>
 			</w:Alert>
-			<w:Heading level="3" navSpy="{tableOfContent}">BasicCommandService</w:Heading>
+			<w:Heading level="3" summary="docSummary">BasicCommandService</w:Heading>
 			<div class="showcase-sample-block">
 				<div class="showcase-sample">
 					<p>
@@ -129,8 +127,8 @@
 				</c:StaticCode>
 			</div>
 			
-			<w:Heading level="2" navSpy="{tableOfContent}">Service proxy</w:Heading>
-			<w:Heading level="3" navSpy="{tableOfContent}">Basic proxy</w:Heading>
+			<w:Heading level="2" summary="docSummary">Service proxy</w:Heading>
+			<w:Heading level="3" summary="docSummary">Basic proxy</w:Heading>
 			<div class="showcase-sample-block">
 				<div class="showcase-sample">
 					<p>
@@ -168,7 +166,7 @@ public PersonView(){
 				</c:StaticCode>
 			</div>
 			
-			<w:Heading level="3" navSpy="{tableOfContent}">Standard async method</w:Heading>
+			<w:Heading level="3" summary="docSummary">Standard async method</w:Heading>
 			<div class="showcase-sample-block">
 				<div class="showcase-sample">
 					<p>
@@ -189,14 +187,14 @@ interface PersonRemoteService extends ServiceProxy<PersonView, PersonService>, P
 				</c:StaticCode>
 			</div>
 			
-			<w:Heading level="2" navSpy="{tableOfContent}">Callbacks</w:Heading>
+			<w:Heading level="2" summary="docSummary">Callbacks</w:Heading>
 			<p>
 				Thanks to the <code>@AsyncHandler</code> you don't need to declare the verbose <code>AsyncCallback</code>. 
 				<br/>
 				The annoted methods of the handler are scanned and used to generate the callbacks.
 			</p>
 			<div class="showcase-sample-block">
-				<w:Heading level="3"  navSpy="{tableOfContent}">Success callback</w:Heading>
+				<w:Heading level="3"  summary="docSummary">Success callback</w:Heading>
 				<div class="showcase-sample">
 					<p>
 						The service method name is resolved by convention or with the attribute <code>@AsyncHandler(method="savePerson")</code>.
@@ -224,7 +222,7 @@ void customSavePersonCallback(Person result) {
 }
 ]]></pre>
 				</c:StaticCode>
-				<w:Heading level="3"  navSpy="{tableOfContent}">Faillure callback</w:Heading>
+				<w:Heading level="3"  summary="docSummary">Faillure callback</w:Heading>
 				<div class="showcase-sample">
 					<p>
 						The service method name is resolved by convention or with the attribute <code>@AsyncHandler(method="savePerson")</code>.
@@ -250,9 +248,9 @@ void customSavePersonThrown(Throwable thrown) {
 				</c:StaticCode>
 			</div>
 
-			<w:Heading level="2" navSpy="{tableOfContent}">Invoke a service</w:Heading>
+			<w:Heading level="2" summary="docSummary">Invoke a service</w:Heading>
 			<div class="showcase-sample-block">
-				<w:Heading level="3"  navSpy="{tableOfContent}">Single request</w:Heading>
+				<w:Heading level="3"  summary="docSummary">Single request</w:Heading>
 				<div class="showcase-sample">
 					<p>
 						Server method invokation is a pushover, you just have to invoke the methods on the <code>ServiceProxy</code> then all concerned <code>AsyncHandler</code> are called .
@@ -274,7 +272,7 @@ void onSaveClick(ClickEvent event){
 }
 ]]></pre>
 				</c:StaticCode>
-				<w:Heading level="3"  navSpy="{tableOfContent}">Multiplex requests</w:Heading>
+				<w:Heading level="3"  summary="docSummary">Multiplex requests</w:Heading>
 				<div class="showcase-sample">
 					<p>
 						The <code>CommandController</code> helps you suspend requests. When it is flushed the pending requests are collected and sent in a single HTTP Request to the server. On response, each <code>@AsyncHandler</code> is properly called.
@@ -295,7 +293,7 @@ void load100Persons(){
 }
 ]]></pre>
 				</c:StaticCode>
-				<w:Heading level="3"  navSpy="{tableOfContent}">Lazy commands</w:Heading>
+				<w:Heading level="3"  summary="docSummary">Lazy commands</w:Heading>
 				<div class="showcase-sample">
 					<p>
 						Use the <code>LazyCommand</code> annotation to stack the request untill the next "no lazy" request is done or <code>CommandController</code> is flushed. 
@@ -311,7 +309,7 @@ interface PersonRemoteService extends ServiceProxy<PersonView, PersonService>, P
 				</c:StaticCode>
 			</div>
 
-			<w:Heading level="2" navSpy="{tableOfContent}">Events</w:Heading>
+			<w:Heading level="2" summary="docSummary">Events</w:Heading>
 			<div class="showcase-sample-block">
 				<div class="showcase-sample">
 					<p>

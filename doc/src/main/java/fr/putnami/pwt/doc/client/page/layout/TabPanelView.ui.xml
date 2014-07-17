@@ -23,10 +23,8 @@
 
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">Tab Panel</w:Heading>
+		<w:Heading level="2" summary="docSummary">Tab Panel</w:Heading>
 		<p>A <code>TabPanel</code> contains multiple <code>TabPanelConten</code>, each is a pane with a <code>NavLink</code> to add in the nav component.</p>
 					
 		<p>The <code>NavLink</code>s can also be customized with icons.</p>
@@ -81,7 +79,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="3" navSpy="{navSpy}">Tab Style</w:Heading>
+		<w:Heading level="3" summary="docSummary">Tab Style</w:Heading>
 		<p>The <code>Nav</code> Style can be customized. More informations on the <w:Anchor link="#!Components" text="Components Page"/>.</p>
 		<p>Default <code>style</code> property value is <code>Nav.Style.TABS</code>.</p>
 		<div class="showcase-sample-block">

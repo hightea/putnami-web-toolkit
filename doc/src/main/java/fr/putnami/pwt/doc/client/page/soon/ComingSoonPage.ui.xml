@@ -25,11 +25,9 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel title="PWT - Roadmap - Coming soon on PWT">
 		<w:Header ui:field="header">
-			<w:Heading level="1" navSpy="{tableOfContent}">Coming soon...</w:Heading>
+			<w:Heading level="1" summary="docSummary">Coming soon...</w:Heading>
 			<p class="lead">
 			<strong>PWT</strong> is not over. A lot of good stuff are in the pipe. 
 			</p>
@@ -50,23 +48,23 @@
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
 		
-			<w:Heading level="2" navSpy="{tableOfContent}">Documentation</w:Heading>
+			<w:Heading level="2" summary="docSummary">Documentation</w:Heading>
 			<p>We're continuing our efforts to complete and correct the documentation. 
 			As you may have noticed we are not native english speakers, so any help in correcting typos is welcome. </p>
 			<p>Due to the non quality of the actual javadoc, we voluntarily withdrew it from the sources. 
 				We will provide the necessary efforts to deliver a good Javadoc in next releases.</p>
 				
 				
-			<w:Heading level="2" navSpy="{tableOfContent}">Injection</w:Heading>
+			<w:Heading level="2" summary="docSummary">Injection</w:Heading>
 			<p>The next step for reduce code is the code generation with rebinding and injection.</p>
 
-	 		<w:Heading level="3" navSpy="{tableOfContent}">@PostConstruct</w:Heading>
+	 		<w:Heading level="3" summary="docSummary">@PostConstruct</w:Heading>
 			<p>
 			Because of the injection, the annotation <code>@PostConstruct</code> is required.
 			The  <code>@PostConstruct</code> annoted method will be called after the injection process.
 			</p>
 			
-	 		<w:Heading level="3" navSpy="{tableOfContent}">@Model</w:Heading>
+	 		<w:Heading level="3" summary="docSummary">@Model</w:Heading>
 			<p>The <code>@Model</code> annotation will replace non productive code to declare Model.</p>
 			<div class="showcase-sample-block">
 				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
@@ -85,7 +83,7 @@ Model<Group> MODEL;
 ]]></pre>
 				</c:StaticCode>
 			</div>
-			<w:Heading level="3" navSpy="{tableOfContent}">@Service</w:Heading>
+			<w:Heading level="3" summary="docSummary">@Service</w:Heading>
 			<p>The <code>@Service</code> annotation will help to construct and bind an rpc service.</p>
 			<div class="showcase-sample-block">
 				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
@@ -115,7 +113,7 @@ public class MyView {
 			</div>
 			
 			
-			<w:Heading level="3" navSpy="{tableOfContent}">@Templated</w:Heading>
+			<w:Heading level="3" summary="docSummary">@Templated</w:Heading>
 			<p>
 				The <code>@Templated</code> annoted view will be auto binded whith the template.
 			</p>
@@ -142,7 +140,7 @@ public class MyView { }
 ]]></pre>
 				</c:StaticCode>
 			</div>
-			<w:Heading level="3" navSpy="{tableOfContent}">@ErrorHandler</w:Heading>
+			<w:Heading level="3" summary="docSummary">@ErrorHandler</w:Heading>
 			<p>
 				<code>@ErrorHandler</code> annotation will help to bind uncaught exceptions directly on the view when loaded.
 			</p>
@@ -157,16 +155,16 @@ void onUncaughtException(Throwable e) {
 				</c:StaticCode>
 			</div>
 				
-			<w:Heading level="2" navSpy="{tableOfContent}">Components</w:Heading>
+			<w:Heading level="2" summary="docSummary">Components</w:Heading>
 			<p>We will keep on our efforts to provide rich components. 
 				We know that some important components are missing, such as the followings and for sure many others are required. 
 				Any other suggestions are welcome and will be discussed.
 			</p>
 				
-			<w:Heading level="3" navSpy="{tableOfContent}">Drag and Drop support</w:Heading>
+			<w:Heading level="3" summary="docSummary">Drag and Drop support</w:Heading>
 			<p>We're going to provide  an easy  drag and drop support. We don't know how yet, but we will find a solution.</p>
 			
-			<w:Heading level="3" navSpy="{tableOfContent}">File upload</w:Heading>
+			<w:Heading level="3" summary="docSummary">File upload</w:Heading>
 			<p>We're going to provide a sexy File upload widget. This control will get the following features : </p>
 			<ul>
 				<li>Live upload progress bar.</li>
@@ -174,7 +172,7 @@ void onUncaughtException(Throwable e) {
 				<li>Drag and Drop system files / folder.</li>
 			</ul>
 			
-			<w:Heading level="3" navSpy="{tableOfContent}">Template logic</w:Heading>
+			<w:Heading level="3" summary="docSummary">Template logic</w:Heading>
 			<p>Based on data binding, the template logic will help to make easily dynamic forms.
 				All needs hasn't been fixed, but we're  thinking about it.
 			</p>
@@ -192,7 +190,7 @@ void onUncaughtException(Throwable e) {
 				</c:StaticCode>
 			</div>
 	
-			<w:Heading level="2" navSpy="{tableOfContent}">Server Integration</w:Heading>
+			<w:Heading level="2" summary="docSummary">Server Integration</w:Heading>
 			<p>We're going to implement new <code>CommandServices</code> allowing an easy integration on servers. 
 			</p>
 			<ul>
@@ -202,7 +200,7 @@ void onUncaughtException(Throwable e) {
 			</ul>
 			
 	
-			<w:Heading level="2" navSpy="{tableOfContent}">Security</w:Heading>
+			<w:Heading level="2" summary="docSummary">Security</w:Heading>
 			<p>Because the security is an important thing, we're going to provide the possibility to manage it on View, Services and Components.</p>
 			<div class="showcase-sample-block">
 				<div class="showcase-sample">
@@ -226,14 +224,14 @@ public class MyView{}
 				</c:StaticCode>
 			</div>
 	
-			<w:Heading level="2" navSpy="{tableOfContent}">New plugins</w:Heading>
+			<w:Heading level="2" summary="docSummary">New plugins</w:Heading>
 			<p>Those plugin's are ideas of what we'll maybe need a close day.</p>
 			<ul>
 				<li><strong>Social plugins :</strong> Make easy the integration with the most common social networks.</li>
 				<li><strong>MarkDown / RichText editor :</strong> Make easy to write and read markdown text.</li>
 			</ul>
 	
-			<w:Heading level="2" navSpy="{tableOfContent}">Conclusions</w:Heading>
+			<w:Heading level="2" summary="docSummary">Conclusions</w:Heading>
 			<p>Yes there are still months of works. Implementing new features, fixing bugs.
 				But we're pretty sure that PWT will help you tomorrow to build great web apps, it already helps us every days.
 			</p>

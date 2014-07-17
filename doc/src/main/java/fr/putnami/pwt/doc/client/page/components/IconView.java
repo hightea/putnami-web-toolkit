@@ -16,29 +16,11 @@
  */
 package fr.putnami.pwt.doc.client.page.components;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.uibinder.client.UiConstructor;
-import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Widget;
 
-import fr.putnami.pwt.core.widget.client.NavSpy;
-import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
+import fr.putnami.pwt.core.inject.client.annotation.Templated;
+import fr.putnami.pwt.core.mvp.client.View;
 
-public class IconView extends Composite {
-
-	interface Binder extends UiBinderLocalized<Widget, IconView> {
-
-		Binder BINDER = GWT.create(Binder.class);
-	}
-
-	@UiField(provided = true)
-	final NavSpy navSpy;
-
-	@UiConstructor
-	public IconView(NavSpy navSpy) {
-		this.navSpy = navSpy;
-		initWidget(Binder.BINDER.createAndBindUi(this));
-	}
-
+@Templated
+public class IconView extends Composite implements View {
 }

@@ -23,10 +23,8 @@
 
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">Panel</w:Heading>
+		<w:Heading level="2" summary="docSummary">Panel</w:Heading>
 		<p>
 			A <code>Panel</code> is a widget with a header, a body and a footer. It uses the Header and Footer from his children.
 		</p>
@@ -121,7 +119,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="3" navSpy="{navSpy}">Customization</w:Heading>
+		<w:Heading level="3" summary="docSummary">Customization</w:Heading>
 		<p>Use the <code>color</code> property to customize the panel.</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
@@ -201,7 +199,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="3" navSpy="{navSpy}">Panel collapse</w:Heading>
+		<w:Heading level="3" summary="docSummary">Panel collapse</w:Heading>
 		<p>Use the <code>collapsible</code> property to allow the panel to be collapsed, and set the <code>collapse</code> property to initialy collapse the panel.</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">

@@ -25,10 +25,9 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
 	<w:HTMLPanel title="PWT - Navigation MVP Framework">
 		<w:Header ui:field="header">
-				<w:Heading level="1" navSpy="{tableOfContent}">Navigation</w:Heading>
+				<w:Heading level="1" summary="docSummary">Navigation</w:Heading>
 				<p class="lead">
 				<strong title="Putnami Web Toolkit">PWT</strong> offer a simple navigation framework. 
 				<br/>
@@ -40,7 +39,7 @@
 				</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
-			<w:Heading level="2" navSpy="{tableOfContent}">What's MVP</w:Heading>
+			<w:Heading level="2" summary="docSummary">What's MVP</w:Heading>
 			<p>
 			The <abbr title="Model View Presenter">MVP</abbr> is a derived of the well-known <abbr title="Model View Controller">MVC</abbr> pattern. 
 			It keeps the same goals, but evicts the views's interactions, for reduce coupling of  the application.
@@ -51,7 +50,7 @@
 			<br/>
 			</p>
 			
-			<w:Heading level="2" navSpy="{tableOfContent}">PWT's MVP framework</w:Heading>
+			<w:Heading level="2" summary="docSummary">PWT's MVP framework</w:Heading>
 			<p>
 			In the main lines, the <strong title="Punami Web Toolkit">PWT</strong>'s <abbr title="Model View Presenter">MVP</abbr> framework ideas are :
 			</p>
@@ -63,11 +62,11 @@
 				<li><code>MvpActivity</code> is in charge of presenting the view and place it in a displayer.</li>
 			</ul>
 				
-			<w:Heading level="2" navSpy="{tableOfContent}">By the practice</w:Heading>
+			<w:Heading level="2" summary="docSummary">By the practice</w:Heading>
 			<p>
 				In the following sample, you can see a simple implementation of blog place / view mechanism.
 			</p>
-			<w:Heading level="3" navSpy="{tableOfContent}">Init the Framework</w:Heading>
+			<w:Heading level="3" summary="docSummary">Init the Framework</w:Heading>
 			<div class="showcase-sample-block">
 				<div class="showcase-sample">
 					To Initialize the framework. you have to : 
@@ -97,7 +96,7 @@ public class MyApp implements EntryPoint {
 				</c:StaticCode>
 			</div>
 			
-			<w:Heading level="3" navSpy="{tableOfContent}">Create a Place</w:Heading>
+			<w:Heading level="3" summary="docSummary">Create a Place</w:Heading>
 			<div class="showcase-sample-block">
 				<div class="showcase-sample">
 					The place's roles are
@@ -122,7 +121,7 @@ public class BlogPlace extends MvpPlace {
 				</c:StaticCode>
 			</div>
 			
-			<w:Heading level="3" navSpy="{tableOfContent}">Build a View</w:Heading>
+			<w:Heading level="3" summary="docSummary">Build a View</w:Heading>
 			<div class="showcase-sample-block">
 				<div class="showcase-sample">
 					Build a view which implements <code>View&lt;PLACE&gt;</code> in order to present your place.
@@ -149,7 +148,7 @@ public class BlogView extends Composite extends View<BlogPlace> {
 				</c:StaticCode>
 			</div>
 			
-			<w:Heading level="3" navSpy="{tableOfContent}">Go to a Place</w:Heading>
+			<w:Heading level="3" summary="docSummary">Go to a Place</w:Heading>
 			<div class="showcase-sample-block">
 				<div class="showcase-sample">
 					Then, you can go to any place by invoking the <code>MvController.goTo(...)</code> method.
@@ -162,7 +161,7 @@ MvpController.get().goTo(new BlogPlace("myPost"));
 			</div>
 
 
-			<w:Heading level="2" navSpy="{tableOfContent}">Scaling the web app</w:Heading>
+			<w:Heading level="2" summary="docSummary">Scaling the web app</w:Heading>
 			<p>Thanks to the <strong title="Punami Web Toolkit">PWT</strong>'s <abbr title="Model View Presenter">MVP</abbr> Framework, 
 				you don't have to care about scaling your web app. 
 				<br/> 

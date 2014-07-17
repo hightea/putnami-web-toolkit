@@ -16,23 +16,12 @@
  */
 package fr.putnami.pwt.doc.client.page.i18n;
 
-import com.google.gwt.uibinder.client.UiConstructor;
-import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 
 import fr.putnami.pwt.core.inject.client.annotation.Templated;
 import fr.putnami.pwt.core.mvp.client.View;
-import fr.putnami.pwt.core.widget.client.NavSpy;
 
 @Templated
 public class MessageHelperView extends Composite implements View {
-
-	@UiField(provided = true)
-	final NavSpy navSpy;
-
-	@UiConstructor
-	public MessageHelperView(NavSpy navSpy) {
-		this.navSpy = navSpy;
-	}
 
 }

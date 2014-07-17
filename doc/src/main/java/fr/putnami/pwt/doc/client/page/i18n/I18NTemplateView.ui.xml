@@ -23,17 +23,15 @@
 
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 
-	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">Localized templates</w:Heading>
+		<w:Heading level="2" summary="docSummary">Localized templates</w:Heading>
 		<p class="lead">Use one Ui template per locale!</p>
 					
 		<p>Instead of using <code>Constants</code> to translate your application, you can use one template per locale. It allows you to change the Ui between locales. It makes also easier to maintain some translations.</p>
 		<p>However you can still use the GWT <code>Constants</code> in your locale based templates.</p>
 		<p>To use the localised templates, suffix the template name with the locale. If no one is found for the locale, the default one is used (without suffix) : It follow the same rules as the constants i18n functionnality.</p>
 		
-		<w:Heading level="3" navSpy="{navSpy}">Example</w:Heading>
+		<w:Heading level="3" summary="docSummary">Example</w:Heading>
 		<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
 interface Binder extends UiBinderLocalized<Widget, TemplateView> {

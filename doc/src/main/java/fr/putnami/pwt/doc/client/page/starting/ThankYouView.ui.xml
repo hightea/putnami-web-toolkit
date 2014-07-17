@@ -20,11 +20,8 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client">
 
-
-	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">Thank you</w:Heading>
+		<w:Heading level="2" summary="docSummary">Thank you</w:Heading>
 		<p class="lead">First of all, we want to thank you to use and, why not help us to improve, <strong title="Putnami Web Toolkit">PWT</strong>.</p>
 		<p>We've built this framework because we needed it. But we think that you or other may need it too. That's why we open-sourced it.</p>
 		<p>As we've made it for us foremost, we may have forgotten some fetaures, so don't hesitate to help us and submit your ideas.</p>

@@ -23,11 +23,10 @@
 	
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
 
 	<w:HTMLPanel title="PWT - Ajax Bot Indexing Plugin">
 		<w:Header ui:field="header">
-			<w:Heading level="1" navSpy="{tableOfContent}">Ajax bot indexing plugin</w:Heading>
+			<w:Heading level="1" summary="docSummary">Ajax bot indexing plugin</w:Heading>
 			<p class="lead">
 				As we did, you probably think that <strong>GWT</strong> web apps are not googlizable, you were wrong. 
 				<br/>
@@ -35,7 +34,7 @@
 			</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
-			<w:Heading level="2" navSpy="{tableOfContent}">How does it work?</w:Heading>
+			<w:Heading level="2" summary="docSummary">How does it work?</w:Heading>
 			<p>
 			All main search bots such as google use a protocole for follow all hash links <strong>#!{fragment}</strong>. 
 			<br/>
@@ -67,8 +66,8 @@
 				</p>
 			</w:Alert>
 			
-			<w:Heading level="2" navSpy="{tableOfContent}">Making it work</w:Heading>
-			<w:Heading level="3" navSpy="{tableOfContent}">Add dependency</w:Heading>
+			<w:Heading level="2" summary="docSummary">Making it work</w:Heading>
+			<w:Heading level="3" summary="docSummary">Add dependency</w:Heading>
 			<p>
 			First you need to add a dependency on the ajax bot indexing plugin.
 			</p>
@@ -96,7 +95,7 @@ dependencies {
 ]]></pre>
 		  		</c:StaticCode>
 			</div>
-			<w:Heading level="3" navSpy="{tableOfContent}">Web.xml</w:Heading>
+			<w:Heading level="3" summary="docSummary">Web.xml</w:Heading>
 			<p>
 				Then you initialize the filter in the web.xml.
 			</p>
@@ -131,7 +130,7 @@ dependencies {
 ]]></pre>
 		  	</c:StaticCode>
 
-			<w:Heading level="3" navSpy="{tableOfContent}">Initialize the gwt host page</w:Heading>
+			<w:Heading level="3" summary="docSummary">Initialize the gwt host page</w:Heading>
 			<p>
 			The last step is to add a meta <code>fragment</code> on the html which host the gwt module. 
 			This meta tag allow search engine crawler to index the first page as an ajax one.
@@ -148,7 +147,7 @@ dependencies {
 ]]></pre>
 		  	</c:StaticCode>
 
-			<w:Heading level="3" navSpy="{tableOfContent}">Clean html cache</w:Heading>
+			<w:Heading level="3" summary="docSummary">Clean html cache</w:Heading>
 			<p>
 			You can easily clean all the html genarated cache by invoking the server on any page with the parameter <code>_ajaxbotfilter_cache_reset_</code>.
 			<br/>

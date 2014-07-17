@@ -16,27 +16,17 @@
  */
 package fr.putnami.pwt.doc.client.page.layout;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Widget;
 
+import fr.putnami.pwt.core.inject.client.annotation.Templated;
+import fr.putnami.pwt.core.mvp.client.View;
 import fr.putnami.pwt.core.widget.client.Modal;
-import fr.putnami.pwt.core.widget.client.NavSpy;
-import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 
-public class ModalView extends Composite {
-
-	interface Binder extends UiBinderLocalized<Widget, ModalView> {
-
-		Binder BINDER = GWT.create(Binder.class);
-	}
-
-	@UiField(provided = true)
-	final NavSpy navSpy;
+@Templated
+public class ModalView extends Composite implements View {
 
 	@UiField
 	Modal modalForm;
@@ -56,11 +46,6 @@ public class ModalView extends Composite {
 	@UiField
 	Modal largeModal;
 
-	@UiConstructor
-	public ModalView(NavSpy navSpy) {
-		this.navSpy = navSpy;
-		initWidget(Binder.BINDER.createAndBindUi(this));
-	}
 
 	@UiHandler("openModalFormBtn")
 	public void onOpenModalForm(ButtonEvent event) {

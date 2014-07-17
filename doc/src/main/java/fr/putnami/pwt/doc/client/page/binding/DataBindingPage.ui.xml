@@ -25,11 +25,9 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel title="PWT - Data binding Framework">
 		<w:Header ui:field="header">
-			<w:Heading level="1" navSpy="{tableOfContent}">
+			<w:Heading level="1" summary="docSummary">
 				Data binding
 			</w:Heading>
 			<p class="lead">
@@ -65,7 +63,7 @@
 			</w:GridRow>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
-			<w:Heading level="2" navSpy="{tableOfContent}">How does it work?</w:Heading>
+			<w:Heading level="2" summary="docSummary">How does it work?</w:Heading>
 			<p>The three main components of <strong>PWT</strong>'s binding framework are:</p>
 			<ul>
 				<li>The <strong>Model</strong> is the helper to deal with the data.</li>
@@ -98,7 +96,7 @@
 				</ul>
 			</w:Alert>
 
-			<w:Heading level="2" navSpy="{tableOfContent}">Driver</w:Heading>
+			<w:Heading level="2" summary="docSummary">Driver</w:Heading>
 			<p>The <code>Driver</code> is the brain of the <code>Editor</code>. It orchesters the form controls binding and flushing. 
 				<br/>
 				The <code>Driver</code> is totally transparent for the coder. All the common methods (initialize, edit and flush) are delegated to the <code>Editor</code>.
@@ -106,7 +104,7 @@
 			</p>
 			
 
-			<w:Heading level="2" navSpy="{tableOfContent}">Model</w:Heading>
+			<w:Heading level="2" summary="docSummary">Model</w:Heading>
 			<p>The <code>Model&lt;T&gt;</code> is the main tool which makes all this binding features possible. 
 				<br/>
 				All the binding framework consist to get fields from bean to display them in views, and to flush the inputs to populate the bean.
@@ -123,7 +121,7 @@
 				<li>Validate bean fields.</li>
 			</ul>
 			
-			<w:Heading level="3" navSpy="{tableOfContent}">Generate a bean model</w:Heading>
+			<w:Heading level="3" summary="docSummary">Generate a bean model</w:Heading>
 			<p><strong>PWT</strong> provides a <code>ModelGenerator</code> which generates the model for you. 
 				<br/>
 				To generate the model, you only have to implement an interface <code>Model&lt;BEAN_CLASS&gt;</code> and allow it to be rebinded with <code>GWT.create(...)</code>.
@@ -135,7 +133,7 @@ private final Model<Person> personModel = GWT.create(PersonModel.class);
 ]]></pre>
 			</c:StaticCode>
 
-			<w:Heading level="2" navSpy="{tableOfContent}">Editors</w:Heading>
+			<w:Heading level="2" summary="docSummary">Editors</w:Heading>
 			<p>
 			In <strong>PWT</strong> allmost all graphicals widgets implements an <code>Editor</code> interface. This allow the binding framework to collect all sub-editors within a root editor.
 			</p>
@@ -169,10 +167,10 @@ private final Model<Person> personModel = GWT.create(PersonModel.class);
 			</ul>
 
 			
-			<w:Heading level="3" navSpy="{tableOfContent}">Bean editors descriptions</w:Heading>
+			<w:Heading level="3" summary="docSummary">Bean editors descriptions</w:Heading>
 			<p></p>
 			
-			<w:Heading level="4" navSpy="{tableOfContent}">Form</w:Heading>
+			<w:Heading level="4" summary="docSummary">Form</w:Heading>
 			<p>In the below basic form example, all components are editors. The <code>&lt;w:Form&gt;</code> represents the root editor and <code>&lt;w:Input...&gt;</code> the sub-editors.
 				<br/>
 				The <code>path</code> attribute is used on the sub-editors to specify the field or accessor method on the bean. 
@@ -209,7 +207,7 @@ beanForm.initialize(personModel);
 				</c:StaticCode>
 			</div>
 			
-			<w:Heading level="4" navSpy="{tableOfContent}">Embedded sub-forms</w:Heading>
+			<w:Heading level="4" summary="docSummary">Embedded sub-forms</w:Heading>
 			<p>
 				<code>EditorComposite</code> can embed some sub-<code>EditorComposite</code>. In this case the sub-editor is considerated as an <code>EditorLeaf</code>.
 			
@@ -243,10 +241,10 @@ beanForm.initialize(personModel);
 				</c:StaticCode>
 			</div>
 
-			<w:Heading level="3" navSpy="{tableOfContent}">Collection editors</w:Heading>
+			<w:Heading level="3" summary="docSummary">Collection editors</w:Heading>
 			<p></p>
 			
-			<w:Heading level="4" navSpy="{tableOfContent}">TableEditor</w:Heading>
+			<w:Heading level="4" summary="docSummary">TableEditor</w:Heading>
 			<p></p>
 			<div class="showcase-sample-block">
 				<div class="showcase-sample">
@@ -296,7 +294,7 @@ tableEditor.edit(people);
 				</c:StaticCode>
 			</div>
 			
-			<w:Heading level="4" navSpy="{tableOfContent}">ListEditor</w:Heading>
+			<w:Heading level="4" summary="docSummary">ListEditor</w:Heading>
 			<p>
 			</p>
 			<div class="showcase-sample-block">

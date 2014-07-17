@@ -184,14 +184,14 @@ public class ReferenceGuide extends Composite implements EntryPoint {
 	private void addContent(Widget content, int offset) {
 
 		NavSpy subNav = null;
-		if (content instanceof Page) {
-			subNav = ((Page) content).tableOfContent;
-		}
-		if (subNav != null) {
-			for (Heading heading : subNav.getHeadings()) {
-				addChapter(heading, offset);
-			}
-		}
+		//		if (content instanceof Page) {
+		//			subNav = ((Page) content).tableOfContent;
+		//		}
+		//		if (subNav != null) {
+		//			for (Heading heading : subNav.getHeadings()) {
+		//				addChapter(heading, offset);
+		//			}
+		//		}
 		if (content instanceof Page) {
 			contentContainer.add(((Page) content).header);
 			contentContainer.add(((Page) content).content);

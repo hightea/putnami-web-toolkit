@@ -23,18 +23,17 @@
 	
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
 
 	<w:HTMLPanel title="PWT - Google Analytics Plugin">
 		<w:Header ui:field="header">
-			<w:Heading level="1" navSpy="{tableOfContent}">Google analytics plugin</w:Heading>
+			<w:Heading level="1" summary="docSummary">Google analytics plugin</w:Heading>
 			<p class="lead">
 			This plugin tracks your visitor actions. Each visited places are reported in your google analytics account. 
 			You can also track user events, social network events, and exception events. The Ecommerce tracking is not supported yet. 
 			</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
-			<w:Heading level="2" navSpy="{tableOfContent}">Setup</w:Heading>
+			<w:Heading level="2" summary="docSummary">Setup</w:Heading>
 			<p>
 			To setup the plugin you have to call init method on <code>GoogleAnalytics</code> class. 
 			</p>
@@ -60,7 +59,7 @@ analytics.forceSSL(true);
 				<p>Please visit google analytics website first : <a href="https://www.google.com/analytics" target="_blank">https://www.google.com/analytics</a></p>
 			</w:Alert>
 			
-			<w:Heading level="2" navSpy="{tableOfContent}">Events tracking</w:Heading>
+			<w:Heading level="2" summary="docSummary">Events tracking</w:Heading>
 			<p>
 				You can track custom actions by invoking the <code>trackEvent</code> method.
 			</p>
@@ -82,7 +81,7 @@ public void onMyButtonClick(ClickEvent evt) {
 ]]></pre>
 	  		</c:StaticCode>
 
-			<w:Heading level="2" navSpy="{tableOfContent}">Social tracking</w:Heading>
+			<w:Heading level="2" summary="docSummary">Social tracking</w:Heading>
 			<p>
 				You can track social network actions with the <code>trackSocial</code> method.
 			</p>
@@ -103,7 +102,7 @@ public void onMySocialButtonClick(ClickEvent evt) {
 ]]></pre>
 			</c:StaticCode>
 
-			<w:Heading level="2" navSpy="{tableOfContent}">Exception tracking</w:Heading>
+			<w:Heading level="2" summary="docSummary">Exception tracking</w:Heading>
 			<p>
 				You can automatically track uncaught exception by invoking the <code>handleUncaughtException</code> method.
 			</p>
@@ -135,7 +134,7 @@ void onSavePersonThrown(Throwable thrown) {
 ]]></pre>
 	  		</c:StaticCode>
 
-			<w:Heading level="2" navSpy="{tableOfContent}">Display Features</w:Heading>
+			<w:Heading level="2" summary="docSummary">Display Features</w:Heading>
 			<p>
 				You can enable the display feature of google analytics with the <code>displayfeatures</code> method.
 				This Feature is quite usefull to report the user demographics profil (Age, Gender, and Interest). You can better understand who your users are.

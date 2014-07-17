@@ -23,17 +23,16 @@
 	
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
 
 	<w:HTMLPanel title="PWT - code editor plugins">
 		<w:Header ui:field="header">
-			<w:Heading level="1" navSpy="{tableOfContent}">Code editor plugin</w:Heading>
+			<w:Heading level="1" summary="docSummary">Code editor plugin</w:Heading>
 			<p class="lead">
 			The code editor plugin provides a way to display highlighted String, and an ability to edit the String with completion. 
 			</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
-			<w:Heading level="2" navSpy="{tableOfContent}">Getting started</w:Heading>
+			<w:Heading level="2" summary="docSummary">Getting started</w:Heading>
 			<p> The code editor plugin provides 3 components :</p>
 			<dl class="dl-horizontal">
 				<dt>A code input</dt>
@@ -82,7 +81,7 @@ public static void main (String[] args) {
 			
 			<br/>
 			<br/>
-			<w:Heading level="2" navSpy="{tableOfContent}">Configuration</w:Heading>
+			<w:Heading level="2" summary="docSummary">Configuration</w:Heading>
 			<p>All the 3 components need a <code>CodeEditorConfiguration</code> to highlight the string and eventually assist the typping.</p>
 			<p>A configuration contains a list of aspects to apply to the CodeInput or CodeOutput. It provides the ability to easily extends the fonctionalities in the future.</p>
 			<p>Today, we provide two aspects :</p>
@@ -94,7 +93,7 @@ public static void main (String[] args) {
 		  	</dl>
 		  	
 			<br/>
-		  	<w:Heading level="3" navSpy="{tableOfContent}">Text render</w:Heading>
+		  	<w:Heading level="3" summary="docSummary">Text render</w:Heading>
 		  	<p>Text highlighting uses String tokenization.</p>
 		  	<p>To define a syntax highlighting configuration, we just need to define the tokenizers and associate the CSS class to render the tokens.</p>
 		  	<p>There are two text render aspects : One simple (<code>TextRenderAspect</code>) which associate a token with a css class and one a little bit more complicated (<code>PartitionnedTextRenderAspect</code>) which at split the text in partitions and then tokenize independenly every partition.
@@ -102,7 +101,7 @@ public static void main (String[] args) {
 		  	
 		  	<br/>
 		  	<p>The tokenizer are visited in their declaration order. Only one Token can be extracted from a set of chars (Token other than UNDEFINED).</p>
-		  	<w:Heading level="4" navSpy="{tableOfContent}">Provided tokenizer</w:Heading>
+		  	<w:Heading level="4" summary="docSummary">Provided tokenizer</w:Heading>
 		  	<p>A tokenizer is a <code>TokenEvaluator</code>. It goes through the String char by char via a char scanner (which retains the current scanner position) and return a Token corresponding to the input. This token is Undefined if the tokenizer didn't find anything.</p>
 		  	<p>We provide a bunch of TokenEvaluator, but you can easily create your own if needed.</p>
 		  	<p>Provided <code>TokenEvaluator</code> are : </p>
@@ -117,7 +116,7 @@ public static void main (String[] args) {
 				<dt>Balanced Pattern evaluator</dt>
 				<dd>Particular Pattern evaluator used to detect token like parenthesis or curly brace eclosed expressions : starting with a pattern (not a regexp) and ending with another pattern but each start pattern must have a corresponding endPattern..</dd>
 		  	</dl>
-		  	<w:Heading level="4" navSpy="{tableOfContent}">Example</w:Heading>
+		  	<w:Heading level="4" summary="docSummary">Example</w:Heading>
 		  	<w:Heading level="5">Java text render</w:Heading>
 		  	<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
@@ -173,7 +172,7 @@ renderAspect.registerPartitionScanners(XmlPartitionTokenContent.INNER_TAG, strin
 		  	</c:StaticCode>
 		  	
 		  	<br/>
-		  	<w:Heading level="3" navSpy="{tableOfContent}">Content assist</w:Heading>
+		  	<w:Heading level="3" summary="docSummary">Content assist</w:Heading>
 		  	<p>To activate content assist on the input, you must add a <code>ContentAssistAspect</code> on the configuration</p>
 		  	<p>The content assist aspect need a <code>ContentAssistHandler</code> in charge of maintaining the oracle, extracting the query to provide to the oracle, keeping the oracle suggestion size limit and handling the oracle suggestion applyance.</p>
 		  	<p>We provide some assist handler (like <code>JavaKeywordAssistHandler</code> which provide code assist to insert java keyword, but no matter where you are in the java class you're writing) but you'll need to write your own to obtain what you want.</p>
@@ -216,7 +215,7 @@ public void handleSuggestionSelected(IsWidget textInput, Suggestion suggestion) 
 		  	</w:Alert>
 		  	
 		  	
-		  	<w:Heading level="2" navSpy="{tableOfContent}">Code editor usage</w:Heading>
+		  	<w:Heading level="2" summary="docSummary">Code editor usage</w:Heading>
 		  	<w:Heading level="3">Code editor configuration</w:Heading>
 		  	<p>In order to use the code editor you just need to provide him a <code>CodeEditorConfiguration</code>. Either you write your own, either you use one of the provided ones.</p>
 		  	<p>Today we provide two configurations :</p>

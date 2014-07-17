@@ -24,11 +24,9 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">Maven's users</w:Heading>
-		<w:Heading level="3" navSpy="{navSpy}">Init the pom.xml</w:Heading>
+		<w:Heading level="2" summary="docSummary">Maven's users</w:Heading>
+		<w:Heading level="3" summary="docSummary">Init the pom.xml</w:Heading>
 		<ol>
 			<li>Add the putnami repository</li>
 			<li>Set compiler properties to Java 1.7</li>
@@ -124,7 +122,7 @@
 		</c:StaticCode>
 		
 		
-		<w:Heading level="3" navSpy="{navSpy}">Make a GWT library</w:Heading>
+		<w:Heading level="3" summary="docSummary">Make a GWT library</w:Heading>
 		<p>View a full working <a href="https://github.com/Putnami/putnami-pwt/blob/master/samples/lib-project/pom.xml" target="_BLANK" >pom.xml</a></p>
 		<c:StaticCode configuration="{XML_CONFIGURATION}">
 <pre><![CDATA[
@@ -153,7 +151,7 @@
 ...]]></pre>
 		</c:StaticCode>
 		
-		<w:Heading level="3" navSpy="{navSpy}">Make a web app</w:Heading>
+		<w:Heading level="3" summary="docSummary">Make a web app</w:Heading>
 		<p>View a full working <a href="https://github.com/Putnami/putnami-pwt/blob/master/samples/web-project/pom.xml"  target="_BLANK">pom.xml</a></p>
 		<c:StaticCode configuration="{XML_CONFIGURATION}">
 <pre><![CDATA[
@@ -225,12 +223,12 @@
 </build>]]></pre>
 		</c:StaticCode>
 		
-		<w:Heading level="3" navSpy="{navSpy}">Running in standard DevMode</w:Heading>
+		<w:Heading level="3" summary="docSummary">Running in standard DevMode</w:Heading>
 		<w:Alert ><h4>Note :</h4><p>The standard DevMode is no more supported on Chrome for Linux or on Firefox</p></w:Alert>
 		
 		<p>Use <kbd>mvn gwt:run</kbd></p>
 		
-		<w:Heading level="3" navSpy="{navSpy}">Running in SuperDevMode</w:Heading>
+		<w:Heading level="3" summary="docSummary">Running in SuperDevMode</w:Heading>
 		<p>To run the SuperDevMode you'll need the maven jetty plugin.</p>
 		
 		<p></p>

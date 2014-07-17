@@ -21,16 +21,14 @@
 	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
 	xmlns:c="urn:import:fr.putnami.pwt.doc.client.page.i18n">
 
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-	
 	<w:HTMLPanel title="PWT - Internationalization Framework">
 		<w:Header ui:field="header">
-			<w:Heading level="1" navSpy="{tableOfContent}">Internationalization (I18N)</w:Heading>
+			<w:Heading level="1" summary="docSummary">Internationalization (I18N)</w:Heading>
 			<p class="lead"><strong title="Putnami Web Toolkit">PWT</strong> extends the native GWT I18N capabilities to make it more easy to use.</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
-			<c:I18NTemplateView navSpy="{tableOfContent}" />
-<!-- 			<c:MessageHelperView navSpy="{tableOfContent}" /> -->
+			<c:I18NTemplateView />
+<!-- 			<c:MessageHelperView /> -->
 		</w:HTMLPanel>
 	</w:HTMLPanel>
 </ui:UiBinder>

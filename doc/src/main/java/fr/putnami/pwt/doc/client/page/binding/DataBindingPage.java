@@ -105,10 +105,8 @@ public class DataBindingPage extends Page {
 	@Initialize(constantsClass = Constants.class)
 	Form<Person> inputListOutItemTemplate;
 
-	@Override
 	@PostConstruct
 	public void postConstruct() {
-		super.postConstruct();
 
 		List<Person> people = Lists.newArrayList();
 		people.add(new Person());

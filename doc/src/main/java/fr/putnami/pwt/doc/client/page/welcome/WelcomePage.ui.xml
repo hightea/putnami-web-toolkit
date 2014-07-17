@@ -20,7 +20,6 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client">
 
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
 	<w:HTMLPanel title="PWT - Putnami Web Toolkit - Open source GWT Framework">
 		<w:Header ui:field="header">
 			<div ui:field="jumbotronDiv" class="jumbotron teaser">
@@ -71,7 +70,7 @@
 			</div>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
-			<w:Heading level="2" navSpy="{tableOfContent}" >What is PWT?</w:Heading>
+			<w:Heading level="2" summary="docSummary" >What is PWT?</w:Heading>
 			<p>
 				<strong title="Putnami Web Toolkit">PWT</strong> is a powerfull <abbr title="Google Web Toolkit">GWT</abbr> framework.
 				Open source we built <strong title="Putnami Web Toolkit">PWT</strong> to be lightweight and efficient.
@@ -93,7 +92,7 @@
 				<strong>Easy to start</strong>, we think <strong>PWT</strong> is a serious alternative for your next web app developments.
 			</p>
 
-			<w:Heading level="2" navSpy="{tableOfContent}" >A new framework, again! <small>but why?</small></w:Heading>
+			<w:Heading level="2" summary="docSummary" >A new framework, again! <small>but why?</small></w:Heading>
 			<p>
 				Before we've started <strong title="Putnami Web Toolkit">PWT</strong>, our primary needs were to build rich web applications, lightweight, robust, and maintainable.
 				So we were looking for a nice web framework.
@@ -135,7 +134,7 @@
 				But since we are quietly proud of the result and that we reckon that it may help someone else, we decided to share it by making it open source, Here we are.
 			</p>
 
-			<w:Heading level="2" navSpy="{tableOfContent}" >Just use it ! <small>maybe help us?</small></w:Heading>
+			<w:Heading level="2" summary="docSummary" >Just use it ! <small>maybe help us?</small></w:Heading>
 			<p>
 				Well you can see <strong title="Putnami Web Toolkit">PWT</strong> just as an another offer within all GWT frameworks, and finally wonder why do not use an other one.
 			</p>
