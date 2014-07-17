@@ -26,7 +26,7 @@ public class ErrorsPlace extends MvpPlace {
 	public static final ErrorsPlace INSTANCE = new ErrorsPlace();
 
 	public ErrorsPlace() {
-		super((ViewProxy) GWT.create(ErrorsView.class), null);
+		super((ViewProxy) GWT.create(ErrorsPage.class), null);
 	}
 
 	@Override

@@ -26,7 +26,7 @@ public class ComponentsPlace extends MvpPlace {
 	public static final ComponentsPlace INSTANCE = new ComponentsPlace();
 
 	public ComponentsPlace() {
-		super((ViewProxy) GWT.create(ComponentsView.class), null);
+		super((ViewProxy) GWT.create(ComponentsPage.class), null);
 	}
 
 	@Override

@@ -26,7 +26,7 @@ public class DataBindingPlace extends MvpPlace {
 	public static final DataBindingPlace INSTANCE = new DataBindingPlace();
 
 	public DataBindingPlace() {
-		super((ViewProxy) GWT.create(DataBindingView.class), null);
+		super((ViewProxy) GWT.create(DataBindingPage.class), null);
 	}
 
 	@Override

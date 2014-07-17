@@ -14,19 +14,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.doc.client.page.download;
-
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.ui.Widget;
+package fr.putnami.pwt.doc.client.page.codeeditor;
 
 import fr.putnami.pwt.core.inject.client.annotation.Templated;
-import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 import fr.putnami.pwt.doc.client.application.Page;
 
 @Templated
-public class DownloadView extends Page {
-	//	@UiHandler("content")
-	//	public void onClick(ClickEvent evt) {
-	//		GoogleAnalytics.get(ApplicationConfig.ANALYTICS_TRACKER_ID).trackEvent("download", "pwt-core-jar");
-	//	}
+public class CodeEditorPage extends Page {
+
 }

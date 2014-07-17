@@ -26,7 +26,7 @@ public class CodeEditorPlace extends MvpPlace {
 	public static final CodeEditorPlace INSTANCE = new CodeEditorPlace();
 
 	public CodeEditorPlace() {
-		super((ViewProxy) GWT.create(CodeEditorView.class), null);
+		super((ViewProxy) GWT.create(CodeEditorPage.class), null);
 	}
 
 	@Override

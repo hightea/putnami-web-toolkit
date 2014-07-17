@@ -26,7 +26,7 @@ public class DownloadPlace extends MvpPlace {
 	public static final DownloadPlace INSTANCE = new DownloadPlace();
 
 	public DownloadPlace() {
-		super((ViewProxy) GWT.create(DownloadView.class), null);
+		super((ViewProxy) GWT.create(DownloadPage.class), null);
 	}
 
 	@Override

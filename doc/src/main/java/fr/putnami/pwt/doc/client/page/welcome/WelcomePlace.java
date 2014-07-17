@@ -26,7 +26,7 @@ public class WelcomePlace extends MvpPlace {
 	public static final WelcomePlace INSTANCE = new WelcomePlace();
 
 	public WelcomePlace() {
-		super((ViewProxy) GWT.create(WelcomeView.class), null);
+		super((ViewProxy) GWT.create(WelcomePage.class), null);
 	}
 
 	@Override

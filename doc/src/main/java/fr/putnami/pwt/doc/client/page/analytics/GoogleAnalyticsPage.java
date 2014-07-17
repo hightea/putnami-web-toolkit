@@ -14,12 +14,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.doc.client.page.soon;
+package fr.putnami.pwt.doc.client.page.analytics;
 
 import fr.putnami.pwt.core.inject.client.annotation.Templated;
 import fr.putnami.pwt.doc.client.application.Page;
 
 @Templated
-public class ComingSoonView extends Page {
+public class GoogleAnalyticsPage extends Page {
 
 }

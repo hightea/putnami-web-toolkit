@@ -26,7 +26,7 @@ public class ServerCallsPlace extends MvpPlace {
 	public static final ServerCallsPlace INSTANCE = new ServerCallsPlace();
 
 	public ServerCallsPlace() {
-		super((ViewProxy) GWT.create(ServerCallsView.class), null);
+		super((ViewProxy) GWT.create(ServerCallsPage.class), null);
 	}
 
 	@Override

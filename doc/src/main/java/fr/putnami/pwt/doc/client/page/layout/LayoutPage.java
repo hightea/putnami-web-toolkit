@@ -14,16 +14,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.doc.client.page.starting;
-
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.ui.Widget;
+package fr.putnami.pwt.doc.client.page.layout;
 
 import fr.putnami.pwt.core.inject.client.annotation.Templated;
-import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 import fr.putnami.pwt.doc.client.application.Page;
 
 @Templated
-public class GettingStartedView extends Page {
+public class LayoutPage extends Page {
 
 }

@@ -20,6 +20,6 @@ import fr.putnami.pwt.core.inject.client.annotation.Templated;
 import fr.putnami.pwt.doc.client.application.Page;
 
 @Templated
-public class NavigationView extends Page {
+public class NavigationPage extends Page {
 
 }

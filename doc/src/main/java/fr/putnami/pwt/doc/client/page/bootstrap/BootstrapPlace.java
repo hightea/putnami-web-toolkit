@@ -26,7 +26,7 @@ public class BootstrapPlace extends MvpPlace {
 	public static final BootstrapPlace INSTANCE = new BootstrapPlace();
 
 	public BootstrapPlace() {
-		super((ViewProxy) GWT.create(BootstrapView.class), null);
+		super((ViewProxy) GWT.create(BootstrapPage.class), null);
 	}
 
 	@Override

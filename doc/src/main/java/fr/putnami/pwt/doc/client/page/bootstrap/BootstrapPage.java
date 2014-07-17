@@ -27,7 +27,7 @@ import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.doc.client.application.Page;
 
 @Templated
-public class BootstrapView extends Page {
+public class BootstrapPage extends Page {
 
 	private final Theme defaultTheme = new Theme();
 	private final Theme yeti = new Theme();

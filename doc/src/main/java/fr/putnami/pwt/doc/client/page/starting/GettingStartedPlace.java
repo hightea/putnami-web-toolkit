@@ -26,7 +26,7 @@ public class GettingStartedPlace extends MvpPlace {
 	public static final GettingStartedPlace INSTANCE = new GettingStartedPlace();
 
 	public GettingStartedPlace() {
-		super((ViewProxy) GWT.create(GettingStartedView.class), null);
+		super((ViewProxy) GWT.create(GettingStartedPage.class), null);
 	}
 
 	@Override

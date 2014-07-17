@@ -26,7 +26,7 @@ public class AjaxBotIndexingPlace extends MvpPlace {
 	public static final AjaxBotIndexingPlace INSTANCE = new AjaxBotIndexingPlace();
 
 	public AjaxBotIndexingPlace() {
-		super((ViewProxy) GWT.create(AjaxBotIndexingView.class), null);
+		super((ViewProxy) GWT.create(AjaxBotIndexingPage.class), null);
 	}
 
 	@Override

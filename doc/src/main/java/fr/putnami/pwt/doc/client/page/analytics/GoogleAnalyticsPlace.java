@@ -26,7 +26,7 @@ public class GoogleAnalyticsPlace extends MvpPlace {
 	public static final GoogleAnalyticsPlace INSTANCE = new GoogleAnalyticsPlace();
 
 	public GoogleAnalyticsPlace() {
-		super((ViewProxy) GWT.create(GoogleAnalyticsView.class), null);
+		super((ViewProxy) GWT.create(GoogleAnalyticsPage.class), null);
 	}
 
 	@Override

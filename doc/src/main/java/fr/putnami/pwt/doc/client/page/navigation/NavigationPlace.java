@@ -25,7 +25,7 @@ public class NavigationPlace extends fr.putnami.pwt.core.mvp.client.MvpPlace {
 	public static final NavigationPlace INSTANCE = new NavigationPlace();
 
 	public NavigationPlace() {
-		super((ViewProxy) GWT.create(NavigationView.class), null);
+		super((ViewProxy) GWT.create(NavigationPage.class), null);
 	}
 
 	@Override

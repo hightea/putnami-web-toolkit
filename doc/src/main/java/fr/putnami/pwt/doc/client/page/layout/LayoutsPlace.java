@@ -26,7 +26,7 @@ public class LayoutsPlace extends MvpPlace {
 	public static final LayoutsPlace INSTANCE = new LayoutsPlace();
 
 	public LayoutsPlace() {
-		super((ViewProxy) GWT.create(LayoutView.class), null);
+		super((ViewProxy) GWT.create(LayoutPage.class), null);
 	}
 
 	@Override

@@ -26,7 +26,7 @@ public class InternationalizationPlace extends MvpPlace {
 	public static final InternationalizationPlace INSTANCE = new InternationalizationPlace();
 
 	public InternationalizationPlace() {
-		super((ViewProxy) GWT.create(InternationalizationView.class), null);
+		super((ViewProxy) GWT.create(InternationalizationPage.class), null);
 	}
 
 	@Override

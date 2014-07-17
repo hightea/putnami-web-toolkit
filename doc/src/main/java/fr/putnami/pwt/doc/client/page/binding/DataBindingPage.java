@@ -35,7 +35,7 @@ import fr.putnami.pwt.core.widget.client.TableEditor;
 import fr.putnami.pwt.doc.client.application.Page;
 
 @Templated
-public class DataBindingView extends Page {
+public class DataBindingPage extends Page {
 
 	public static class Address {
 		@NotNull

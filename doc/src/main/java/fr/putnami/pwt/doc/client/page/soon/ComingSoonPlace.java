@@ -26,7 +26,7 @@ public class ComingSoonPlace extends MvpPlace {
 	public static final ComingSoonPlace INSTANCE = new ComingSoonPlace();
 
 	public ComingSoonPlace() {
-		super((ViewProxy) GWT.create(ComingSoonView.class), null);
+		super((ViewProxy) GWT.create(ComingSoonPage.class), null);
 	}
 
 	@Override
