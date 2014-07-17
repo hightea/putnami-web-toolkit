@@ -16,21 +16,9 @@
  */
 package fr.putnami.pwt.doc.client.page.layout;
 
-import com.google.gwt.core.client.GWT;
-
 import fr.putnami.pwt.core.mvp.client.MvpPlace;
-import fr.putnami.pwt.core.mvp.client.ViewProxy;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
 
+@ActivityDescrition(view = LayoutPage.class, aliases = "More")
 public class LayoutsPlace extends MvpPlace {
-
-	public static final LayoutsPlace INSTANCE = new LayoutsPlace();
-
-	public LayoutsPlace() {
-		super((ViewProxy) GWT.create(LayoutPage.class), null);
-	}
-
-	@Override
-	public MvpPlace getPlace(String token) {
-		return LayoutsPlace.INSTANCE;
-	}
 }

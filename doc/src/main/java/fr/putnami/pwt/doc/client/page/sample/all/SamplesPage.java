@@ -25,13 +25,13 @@ import fr.putnami.pwt.core.inject.client.annotation.PresentHandler;
 import fr.putnami.pwt.core.mvp.client.View;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 
-public class SamplesView extends Composite implements View {
+public class SamplesPage extends Composite implements View {
 
-	interface Binder extends UiBinderLocalized<Widget, SamplesView> {
+	interface Binder extends UiBinderLocalized<Widget, SamplesPage> {
 		Binder BINDER = GWT.create(Binder.class);
 	}
 
-	public SamplesView() {
+	public SamplesPage() {
 		initWidget(Binder.BINDER.createAndBindUi(this));
 	}
 

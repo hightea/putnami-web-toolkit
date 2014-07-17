@@ -16,21 +16,9 @@
  */
 package fr.putnami.pwt.doc.client.page.starting;
 
-import com.google.gwt.core.client.GWT;
-
 import fr.putnami.pwt.core.mvp.client.MvpPlace;
-import fr.putnami.pwt.core.mvp.client.ViewProxy;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
 
+@ActivityDescrition(view = GettingStartedPage.class)
 public class GettingStartedPlace extends MvpPlace {
-
-	public static final GettingStartedPlace INSTANCE = new GettingStartedPlace();
-
-	public GettingStartedPlace() {
-		super((ViewProxy) GWT.create(GettingStartedPage.class), null);
-	}
-
-	@Override
-	public MvpPlace getPlace(String token) {
-		return GettingStartedPlace.INSTANCE;
-	}
 }

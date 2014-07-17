@@ -16,21 +16,11 @@
  */
 package fr.putnami.pwt.doc.client.page.components;
 
-import com.google.gwt.core.client.GWT;
-
 import fr.putnami.pwt.core.mvp.client.MvpPlace;
-import fr.putnami.pwt.core.mvp.client.ViewProxy;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
 
+@ActivityDescrition(view = ComponentsPage.class, aliases = {
+	"Tables", "Forms"
+})
 public class ComponentsPlace extends MvpPlace {
-
-	public static final ComponentsPlace INSTANCE = new ComponentsPlace();
-
-	public ComponentsPlace() {
-		super((ViewProxy) GWT.create(ComponentsPage.class), null);
-	}
-
-	@Override
-	public MvpPlace getPlace(String token) {
-		return ComponentsPlace.INSTANCE;
-	}
 }

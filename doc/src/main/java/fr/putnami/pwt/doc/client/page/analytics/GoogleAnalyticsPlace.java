@@ -16,21 +16,9 @@
  */
 package fr.putnami.pwt.doc.client.page.analytics;
 
-import com.google.gwt.core.client.GWT;
-
 import fr.putnami.pwt.core.mvp.client.MvpPlace;
-import fr.putnami.pwt.core.mvp.client.ViewProxy;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
 
+@ActivityDescrition(view = GoogleAnalyticsPage.class)
 public class GoogleAnalyticsPlace extends MvpPlace {
-
-	public static final GoogleAnalyticsPlace INSTANCE = new GoogleAnalyticsPlace();
-
-	public GoogleAnalyticsPlace() {
-		super((ViewProxy) GWT.create(GoogleAnalyticsPage.class), null);
-	}
-
-	@Override
-	public MvpPlace getPlace(String token) {
-		return GoogleAnalyticsPlace.INSTANCE;
-	}
 }

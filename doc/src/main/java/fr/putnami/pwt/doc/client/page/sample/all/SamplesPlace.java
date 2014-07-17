@@ -16,22 +16,9 @@
  */
 package fr.putnami.pwt.doc.client.page.sample.all;
 
-import com.google.gwt.core.client.GWT;
-
 import fr.putnami.pwt.core.mvp.client.MvpPlace;
-import fr.putnami.pwt.core.mvp.client.ViewProxy;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
 
+@ActivityDescrition(view = SamplesPage.class)
 public class SamplesPlace extends MvpPlace {
-
-	public static final SamplesPlace INSTANCE = new SamplesPlace();
-
-	public SamplesPlace() {
-		super((ViewProxy) GWT.create(SamplesView.class), null);
-	}
-
-	@Override
-	public MvpPlace getPlace(String token) {
-		return SamplesPlace.INSTANCE;
-	}
-
 }

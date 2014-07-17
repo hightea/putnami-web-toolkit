@@ -16,22 +16,10 @@
  */
 package fr.putnami.pwt.doc.client.page.sample.table;
 
-import com.google.gwt.core.client.GWT;
-
 import fr.putnami.pwt.core.mvp.client.MvpPlace;
-import fr.putnami.pwt.core.mvp.client.ViewProxy;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
 
+@ActivityDescrition(view = ContactsTablePage.class)
 public class ContactsTablePlace extends MvpPlace {
-
-	public static final ContactsTablePlace INSTANCE = new ContactsTablePlace();
-
-	public ContactsTablePlace() {
-		super((ViewProxy) GWT.create(ContactsTableView.class), null);
-	}
-
-	@Override
-	public MvpPlace getPlace(String token) {
-		return ContactsTablePlace.INSTANCE;
-	}
 
 }

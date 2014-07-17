@@ -14,38 +14,33 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.core.mvp.client;
+package fr.putnami.pwt.core.mvp.client.annotation;
 
-import com.google.gwt.place.shared.Place;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-public abstract class MvpPlace extends Place {
+import com.google.gwt.place.shared.PlaceTokenizer;
 
-	private final MvpPlace parent;
-	private final String token;
+import fr.putnami.pwt.core.mvp.client.View;
 
-	public MvpPlace() {
-		this(null, null);
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface ActivityDescrition {
+
+	Class<? extends View> view();
+
+	Class<? extends PlaceTokenizer> placeTokenizer() default PlaceTokenizer.class;
+
+	boolean asyncView() default true;
+
+	String[] aliases() default {};
+
+	Scope scope() default Scope.SINGLETON;
+
+	enum Scope {
+		SINGLETON,
+		PROTOTYPE
 	}
-
-	public MvpPlace(String token) {
-		this(null, token);
-	}
-
-	public MvpPlace(MvpPlace parent) {
-		this(parent, null);
-	}
-
-	public MvpPlace(MvpPlace parent, String token) {
-		this.parent = parent;
-		this.token = token;
-	}
-
-	public MvpPlace getParent() {
-		return this.parent;
-	}
-
-	public String getToken() {
-		return this.token;
-	}
-
 }

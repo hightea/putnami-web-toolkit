@@ -16,21 +16,9 @@
  */
 package fr.putnami.pwt.doc.client.page.soon;
 
-import com.google.gwt.core.client.GWT;
-
 import fr.putnami.pwt.core.mvp.client.MvpPlace;
-import fr.putnami.pwt.core.mvp.client.ViewProxy;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
 
+@ActivityDescrition(view = ComingSoonPage.class)
 public class ComingSoonPlace extends MvpPlace {
-
-	public static final ComingSoonPlace INSTANCE = new ComingSoonPlace();
-
-	public ComingSoonPlace() {
-		super((ViewProxy) GWT.create(ComingSoonPage.class), null);
-	}
-
-	@Override
-	public MvpPlace getPlace(String token) {
-		return ComingSoonPlace.INSTANCE;
-	}
 }

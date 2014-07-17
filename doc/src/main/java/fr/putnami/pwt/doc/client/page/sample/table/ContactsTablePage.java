@@ -39,16 +39,16 @@ import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.core.widget.client.event.RowClickEvent;
 import fr.putnami.pwt.core.widget.client.event.SelectionEvent;
-import fr.putnami.pwt.doc.client.page.sample.SampleView;
-import fr.putnami.pwt.doc.client.page.sample.constants.SampleConstants;
-import fr.putnami.pwt.doc.client.page.sample.domain.Contact;
-import fr.putnami.pwt.doc.client.page.sample.domain.Person;
-import fr.putnami.pwt.doc.client.page.sample.service.ContactService;
+import fr.putnami.pwt.doc.client.page.sample.SamplePage;
+import fr.putnami.pwt.doc.shared.page.sample.constants.SampleConstants;
+import fr.putnami.pwt.doc.shared.page.sample.domain.Contact;
+import fr.putnami.pwt.doc.shared.page.sample.domain.Person;
+import fr.putnami.pwt.doc.shared.page.sample.service.ContactService;
 
-public class ContactsTableView extends SampleView {
+public class ContactsTablePage extends SamplePage {
 
-	interface Binder extends UiBinderLocalized<Widget, ContactsTableView> {
-		UiBinderLocalized<Widget, ContactsTableView> BINDER = GWT.create(Binder.class);
+	interface Binder extends UiBinderLocalized<Widget, ContactsTablePage> {
+		UiBinderLocalized<Widget, ContactsTablePage> BINDER = GWT.create(Binder.class);
 	}
 
 	public interface ContactModel extends Model<Contact> {
@@ -73,7 +73,7 @@ public class ContactsTableView extends SampleView {
 
 	private final IsWidget sampleWidget;
 
-	public ContactsTableView() {
+	public ContactsTablePage() {
 		super();
 
 		sampleWidget = Binder.BINDER.createAndBindUi(this);
@@ -86,8 +86,8 @@ public class ContactsTableView extends SampleView {
 		contactEditor.initialize(ContactModel.MODEL);
 
 		Multimap<String, String> sources = LinkedHashMultimap.create();
-		sources.put(VIEW_PANEL, "table/ContactsTableView.ui.xml");
-		sources.put(VIEW_PANEL, "table/ContactsTableView.java");
+		sources.put(VIEW_PANEL, "table/ContactsTablePage.ui.xml");
+		sources.put(VIEW_PANEL, "table/ContactsTablePage.java");
 		sources.put(VIEW_PANEL, "table/ContactsTablePlace.java");
 		sources.put(SERVICE_PANEL, "service/ContactService.java");
 		sources.put(DOMAIN_PANEL, "domain/Person.java");

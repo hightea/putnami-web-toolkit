@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.core.inject.rebind;
+package fr.putnami.pwt.core.mvp.rebind;
 
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
@@ -23,21 +23,22 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 
-public class InjectorProxyGenerator extends Generator {
+public class ProxyViewGenerator extends Generator {
 
 	@Override
 	public String generate(TreeLogger logger, GeneratorContext context, String typeName) throws UnableToCompleteException {
 		TypeOracle typeOracle = context.getTypeOracle();
 		assert typeOracle != null;
 
-		JClassType viewType = typeOracle.findType(typeName);
-		if (viewType == null) {
+		JClassType placeType = typeOracle.findType(typeName);
+		if (placeType == null) {
 			logger.log(TreeLogger.ERROR, "Unable to find metadata for type '" + typeName + "'", null);
 			throw new UnableToCompleteException();
 		}
 
-		InjectorPorxyCreator injectorCreator = new InjectorPorxyCreator(viewType);
-		return injectorCreator.create(logger, context);
+		ProxyViewCreator proxyCreator = new ProxyViewCreator(placeType);
+
+		return proxyCreator.create(logger, context);
 	}
 
 

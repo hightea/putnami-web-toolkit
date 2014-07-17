@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.doc.client.page.sample.domain;
+package fr.putnami.pwt.doc.shared.page.sample.domain;
 
 import java.io.Serializable;
 import java.util.List;

@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.doc.client.page.sample.constants;
+package fr.putnami.pwt.doc.shared.page.sample.constants;
 
 import com.google.gwt.i18n.client.ConstantsWithLookup;
 

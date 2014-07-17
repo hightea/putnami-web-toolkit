@@ -26,14 +26,12 @@ import fr.putnami.pwt.core.widget.client.NavSpy;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 
 public class I18NTemplateView extends Composite {
-
 	interface Binder extends UiBinderLocalized<Widget, I18NTemplateView> {
-
 		Binder BINDER = GWT.create(Binder.class);
 	}
 
 	@UiField(provided = true)
-	final NavSpy navSpy;
+	NavSpy navSpy;
 
 	@UiConstructor
 	public I18NTemplateView(NavSpy navSpy) {

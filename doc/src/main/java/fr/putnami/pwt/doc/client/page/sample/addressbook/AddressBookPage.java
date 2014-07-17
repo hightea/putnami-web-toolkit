@@ -49,17 +49,17 @@ import fr.putnami.pwt.core.widget.client.InputText;
 import fr.putnami.pwt.core.widget.client.OutputList;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
-import fr.putnami.pwt.doc.client.page.sample.SampleView;
-import fr.putnami.pwt.doc.client.page.sample.constants.SampleConstants;
-import fr.putnami.pwt.doc.client.page.sample.domain.Contact;
-import fr.putnami.pwt.doc.client.page.sample.domain.Group;
-import fr.putnami.pwt.doc.client.page.sample.service.ContactService;
+import fr.putnami.pwt.doc.client.page.sample.SamplePage;
+import fr.putnami.pwt.doc.shared.page.sample.constants.SampleConstants;
+import fr.putnami.pwt.doc.shared.page.sample.domain.Contact;
+import fr.putnami.pwt.doc.shared.page.sample.domain.Group;
+import fr.putnami.pwt.doc.shared.page.sample.service.ContactService;
 
-public class AddressBookView extends SampleView {
+public class AddressBookPage extends SamplePage {
 
-	interface Binder extends UiBinderLocalized<Widget, AddressBookView> {
+	interface Binder extends UiBinderLocalized<Widget, AddressBookPage> {
 
-		UiBinderLocalized<Widget, AddressBookView> BINDER = GWT.create(Binder.class);
+		UiBinderLocalized<Widget, AddressBookPage> BINDER = GWT.create(Binder.class);
 	}
 
 	public interface GroupModel extends Model<Group> {
@@ -110,7 +110,7 @@ public class AddressBookView extends SampleView {
 
 	private final IsWidget sampleWidget;
 
-	public AddressBookView() {
+	public AddressBookPage() {
 		sampleWidget = Binder.BINDER.createAndBindUi(this);
 
 		MessageHelper messageHelper = new MessageHelper((ConstantsWithLookup) GWT.create(SampleConstants.class));
@@ -129,8 +129,8 @@ public class AddressBookView extends SampleView {
 		groupItemTemplate.initialize(GroupModel.MODEL);
 
 		Multimap<String, String> sources = LinkedHashMultimap.create();
-		sources.put(VIEW_PANEL, "addressbook/AddressBookView.ui.xml");
-		sources.put(VIEW_PANEL, "addressbook/AddressBookView.java");
+		sources.put(VIEW_PANEL, "addressbook/AddressBookPage.ui.xml");
+		sources.put(VIEW_PANEL, "addressbook/AddressBookPage.java");
 		sources.put(VIEW_PANEL, "addressbook/AddressBookPlace.java");
 		sources.put(SERVICE_PANEL, "service/ContactService.java");
 		sources.put(DOMAIN_PANEL, "domain/Person.java");

@@ -45,7 +45,7 @@ import fr.putnami.pwt.plugin.code.client.StaticCode;
 import fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration;
 import fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration;
 
-public abstract class SampleView extends Composite implements View {
+public abstract class SamplePage extends Composite implements View {
 
 	interface Binder extends UiBinderLocalized<Widget, SampleLayoutView> {
 		UiBinderLocalized<Widget, SampleLayoutView> BINDER = GWT.create(Binder.class);
@@ -89,7 +89,7 @@ public abstract class SampleView extends Composite implements View {
 
 	private final SampleLayoutView samplePageLayout = new SampleLayoutView();
 
-	public SampleView() {
+	public SamplePage() {
 		initWidget(Binder.BINDER.createAndBindUi(samplePageLayout));
 		samplePageLayout.sourceCode.asWidget().setVisible(false);
 	}

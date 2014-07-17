@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with pwt-doc.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.doc.client.page.sample.service;
+package fr.putnami.pwt.doc.shared.page.sample.service;
 
 import java.util.Collections;
 import java.util.Date;
@@ -25,11 +25,11 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import fr.putnami.pwt.doc.client.page.sample.domain.Address;
-import fr.putnami.pwt.doc.client.page.sample.domain.Contact;
-import fr.putnami.pwt.doc.client.page.sample.domain.Gender;
-import fr.putnami.pwt.doc.client.page.sample.domain.Group;
-import fr.putnami.pwt.doc.client.page.sample.domain.Person;
+import fr.putnami.pwt.doc.shared.page.sample.domain.Address;
+import fr.putnami.pwt.doc.shared.page.sample.domain.Contact;
+import fr.putnami.pwt.doc.shared.page.sample.domain.Gender;
+import fr.putnami.pwt.doc.shared.page.sample.domain.Group;
+import fr.putnami.pwt.doc.shared.page.sample.domain.Person;
 
 public class ContactService {
 

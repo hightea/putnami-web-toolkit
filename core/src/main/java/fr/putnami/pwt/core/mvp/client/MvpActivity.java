@@ -18,6 +18,7 @@ package fr.putnami.pwt.core.mvp.client;
 
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.IsWidget;
 
@@ -27,12 +28,14 @@ import fr.putnami.pwt.core.mvp.client.event.StopActivityEvent;
 
 public final class MvpActivity implements Activity, ViewProxy.Callback {
 
-	private final MvpPlace place;
+	private final Place place;
+	private final ViewProxy viewMapper;
 	private AcceptsOneWidget panel;
 	private IsWidget view;
 
-	public MvpActivity(MvpPlace place) {
+	public MvpActivity(ViewProxy viewMapper, Place place) {
 		super();
+		this.viewMapper = viewMapper;
 		this.place = place;
 	}
 
@@ -54,10 +57,7 @@ public final class MvpActivity implements Activity, ViewProxy.Callback {
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		this.panel = panel;
-		ViewProxy proxy = this.place.getViewProxy();
-		if (proxy != null) {
-			proxy.getView(this);
-		}
+		this.viewMapper.getView(this);
 	}
 
 	@Override

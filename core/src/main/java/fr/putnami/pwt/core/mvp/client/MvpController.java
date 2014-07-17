@@ -60,7 +60,7 @@ HasMayStopActivityHandlers
 		return MvpController.instance;
 	}
 
-	private final Map<String, PlaceTokenizer<?>> TOKENIZERS = Maps.newHashMap();
+	private final Map<String, ViewProxy> VIEW_MAPPERS = Maps.newHashMap();
 
 	private final ActivityManager activityManager;
 	private final PlaceHistoryHandler historyHandler;
@@ -120,20 +120,21 @@ HasMayStopActivityHandlers
 		this.historyHandler.handleCurrentHistory();
 	}
 
-	public void registerActivity(MvpPlace place) {
-		PlaceTokenizer tokenizer = place;
-		String key = getPlacePrefix(place);
-		this.TOKENIZERS.put(key, tokenizer);
-	}
-
-	public void registerAlias(String alias, MvpPlace place) {
-		this.TOKENIZERS.put("!" + alias, place);
+	public void registerActivity(ViewProxy placeViewMapper) {
+		for (String preffix : placeViewMapper.getTokenPrefixes()) {
+			if (!preffix.startsWith("!")) {
+				preffix = "!" + preffix;
+			}
+			this.VIEW_MAPPERS.put(preffix, placeViewMapper);
+		}
 	}
 
 	@Override
 	public Activity getActivity(Place place) {
-		if (place instanceof MvpPlace) {
-			return new MvpActivity((MvpPlace) place);
+		String key = getPlacePrefix(place);
+		ViewProxy placeViewMapper = VIEW_MAPPERS.get(key);
+		if (placeViewMapper != null) {
+			return new MvpActivity(placeViewMapper, place);
 		}
 		return null;
 	}
@@ -147,7 +148,7 @@ HasMayStopActivityHandlers
 			prefix = token.substring(0, colonAt);
 			rest = token.substring(colonAt + 1);
 		}
-		PlaceTokenizer<?> tokenizer = this.TOKENIZERS.get(prefix);
+		ViewProxy tokenizer = this.VIEW_MAPPERS.get(prefix);
 		if (tokenizer != null) {
 			return tokenizer.getPlace(rest);
 		}
@@ -161,7 +162,7 @@ HasMayStopActivityHandlers
 		}
 		String prefix = getPlacePrefix(place);
 		String token = null;
-		PlaceTokenizer tokenizer = this.TOKENIZERS.get(prefix);
+		PlaceTokenizer tokenizer = this.VIEW_MAPPERS.get(prefix);
 		if (tokenizer != null) {
 			token = tokenizer.getToken(place);
 		}

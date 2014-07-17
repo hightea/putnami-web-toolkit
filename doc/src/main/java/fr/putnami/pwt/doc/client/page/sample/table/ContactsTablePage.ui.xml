@@ -22,7 +22,7 @@
 				xmlns:i="urn:import:fr.putnami.pwt.core.widget.incubating"
         >
 
-    <ui:with field="constants" type="fr.putnami.pwt.doc.client.page.sample.constants.SampleConstants" />
+    <ui:with field="constants" type="fr.putnami.pwt.doc.shared.page.sample.constants.SampleConstants" />
     <ui:with field="weightItems" type="java.util.List" />
 
 	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />

@@ -16,20 +16,8 @@
  */
 package fr.putnami.pwt.doc.client.page.navigation;
 
-import com.google.gwt.core.client.GWT;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
 
-import fr.putnami.pwt.core.mvp.client.ViewProxy;
-
+@ActivityDescrition(view = NavigationPage.class)
 public class NavigationPlace extends fr.putnami.pwt.core.mvp.client.MvpPlace {
-
-	public static final NavigationPlace INSTANCE = new NavigationPlace();
-
-	public NavigationPlace() {
-		super((ViewProxy) GWT.create(NavigationPage.class), null);
-	}
-
-	@Override
-	public fr.putnami.pwt.core.mvp.client.MvpPlace getPlace(String token) {
-		return NavigationPlace.INSTANCE;
-	}
 }

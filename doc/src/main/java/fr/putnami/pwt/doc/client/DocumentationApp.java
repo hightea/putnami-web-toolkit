@@ -26,6 +26,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import fr.putnami.pwt.core.error.client.ErrorManager;
 import fr.putnami.pwt.core.error.client.widget.SimpleErrorDisplayer;
 import fr.putnami.pwt.core.mvp.client.MvpController;
+import fr.putnami.pwt.core.mvp.client.ViewProxy;
 import fr.putnami.pwt.core.theme.client.CssLink;
 import fr.putnami.pwt.core.theme.client.Theme;
 import fr.putnami.pwt.core.theme.client.ThemeController;
@@ -94,30 +95,26 @@ public class DocumentationApp implements EntryPoint {
 		MvpController controller = MvpController.get();
 		controller.setDisplay(display);
 
-		controller.setDefaultPlace(WelcomePlace.INSTANCE);
+		controller.setDefaultPlace(new WelcomePlace());
 
-		controller.registerActivity(WelcomePlace.INSTANCE);
-		controller.registerActivity(GettingStartedPlace.INSTANCE);
-		controller.registerActivity(BootstrapPlace.INSTANCE);
-		controller.registerActivity(LayoutsPlace.INSTANCE);
-		controller.registerActivity(ComponentsPlace.INSTANCE);
-		controller.registerActivity(DataBindingPlace.INSTANCE);
-		controller.registerActivity(InternationalizationPlace.INSTANCE);
-		controller.registerActivity(NavigationPlace.INSTANCE);
-		controller.registerActivity(ServerCallsPlace.INSTANCE);
-		controller.registerActivity(ErrorsPlace.INSTANCE);
-		controller.registerActivity(CodeEditorPlace.INSTANCE);
-		controller.registerActivity(AjaxBotIndexingPlace.INSTANCE);
-		controller.registerActivity(GoogleAnalyticsPlace.INSTANCE);
-		controller.registerActivity(SamplesPlace.INSTANCE);
-		controller.registerActivity(ContactsTablePlace.INSTANCE);
-		controller.registerActivity(AddressBookPlace.INSTANCE);
-		controller.registerActivity(ComingSoonPlace.INSTANCE);
-		controller.registerActivity(DownloadPlace.INSTANCE);
-
-		controller.registerAlias("Tables", ComponentsPlace.INSTANCE);
-		controller.registerAlias("Forms", ComponentsPlace.INSTANCE);
-		controller.registerAlias("More", LayoutsPlace.INSTANCE);
+		controller.registerActivity((ViewProxy) GWT.create(WelcomePlace.class));
+		controller.registerActivity((ViewProxy) GWT.create(GettingStartedPlace.class));
+		controller.registerActivity((ViewProxy) GWT.create(BootstrapPlace.class));
+		controller.registerActivity((ViewProxy) GWT.create(LayoutsPlace.class));
+		controller.registerActivity((ViewProxy) GWT.create(ComponentsPlace.class));
+		controller.registerActivity((ViewProxy) GWT.create(DataBindingPlace.class));
+		controller.registerActivity((ViewProxy) GWT.create(InternationalizationPlace.class));
+		controller.registerActivity((ViewProxy) GWT.create(NavigationPlace.class));
+		controller.registerActivity((ViewProxy) GWT.create(ServerCallsPlace.class));
+		controller.registerActivity((ViewProxy) GWT.create(ErrorsPlace.class));
+		controller.registerActivity((ViewProxy) GWT.create(CodeEditorPlace.class));
+		controller.registerActivity((ViewProxy) GWT.create(AjaxBotIndexingPlace.class));
+		controller.registerActivity((ViewProxy) GWT.create(GoogleAnalyticsPlace.class));
+		controller.registerActivity((ViewProxy) GWT.create(SamplesPlace.class));
+		controller.registerActivity((ViewProxy) GWT.create(ContactsTablePlace.class));
+		controller.registerActivity((ViewProxy) GWT.create(AddressBookPlace.class));
+		controller.registerActivity((ViewProxy) GWT.create(ComingSoonPlace.class));
+		controller.registerActivity((ViewProxy) GWT.create(DownloadPlace.class));
 
 		controller.handleCurrentHistory();
 	}
