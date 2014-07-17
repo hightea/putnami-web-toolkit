@@ -102,7 +102,6 @@ if (rootProject.tasks.findByPath(':publishAllToMavenLocal') != null) {
 }
 if (applyLicense) {
 	project.tasks.publish.dependsOn project.tasks.licenseFormat
-	project.tasks.publishToMavenLocal.dependsOn project.tasks.licenseFormat
 	if (rootProject.tasks.findByPath(':licenseAll') != null ) {
 		rootProject.tasks.licenseAll.dependsOn project.tasks.license
 	}
