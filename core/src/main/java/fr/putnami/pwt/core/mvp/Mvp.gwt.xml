@@ -25,7 +25,6 @@
 	<inherits name="com.google.common.collect.Collect" />
 	
 	<inherits name="fr.putnami.pwt.core.event.Event" />
-	<inherits name="fr.putnami.pwt.core.service.Service" />
 
 	<source path="client"/>
 	
