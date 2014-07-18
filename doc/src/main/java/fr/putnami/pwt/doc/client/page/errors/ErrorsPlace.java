@@ -16,9 +16,9 @@
  */
 package fr.putnami.pwt.doc.client.page.errors;
 
-import fr.putnami.pwt.core.mvp.client.MvpPlace;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
 import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
 
 @ActivityDescrition(view = ErrorsPage.class)
-public class ErrorsPlace extends MvpPlace {
+public class ErrorsPlace extends ViewPlace {
 }

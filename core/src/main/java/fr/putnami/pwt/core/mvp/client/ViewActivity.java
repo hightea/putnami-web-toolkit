@@ -26,14 +26,14 @@ import fr.putnami.pwt.core.mvp.client.event.MayStopActivityEvent;
 import fr.putnami.pwt.core.mvp.client.event.StartActivityEvent;
 import fr.putnami.pwt.core.mvp.client.event.StopActivityEvent;
 
-public final class MvpActivity implements Activity, ViewProxy.Callback {
+public final class ViewActivity implements Activity, ViewProxy.Callback {
 
 	private final Place place;
 	private final ViewProxy viewMapper;
 	private AcceptsOneWidget panel;
 	private IsWidget view;
 
-	public MvpActivity(ViewProxy viewMapper, Place place) {
+	public ViewActivity(ViewProxy viewMapper, Place place) {
 		super();
 		this.viewMapper = viewMapper;
 		this.place = place;

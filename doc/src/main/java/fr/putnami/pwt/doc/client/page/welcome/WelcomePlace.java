@@ -18,11 +18,11 @@ package fr.putnami.pwt.doc.client.page.welcome;
 
 import com.google.gwt.place.shared.PlaceTokenizer;
 
-import fr.putnami.pwt.core.mvp.client.MvpPlace;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
 import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
 
 @ActivityDescrition(view = WelcomePage.class)
-public class WelcomePlace extends MvpPlace implements PlaceTokenizer<WelcomePlace> {
+public class WelcomePlace extends ViewPlace implements PlaceTokenizer<WelcomePlace> {
 
 	@Override
 	public WelcomePlace getPlace(String token) {

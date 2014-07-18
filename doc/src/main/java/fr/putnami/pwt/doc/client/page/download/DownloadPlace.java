@@ -16,10 +16,10 @@
  */
 package fr.putnami.pwt.doc.client.page.download;
 
-import fr.putnami.pwt.core.mvp.client.MvpPlace;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
 import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
 
 @ActivityDescrition(view = DownloadPage.class)
-public class DownloadPlace extends MvpPlace {
+public class DownloadPlace extends ViewPlace {
 
 }

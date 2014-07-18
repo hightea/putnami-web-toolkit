@@ -108,12 +108,12 @@ public class MyApp implements EntryPoint {
 				</div>
 				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-public class BlogPlace extends MvpPlace {
+public class BlogPlace extends ViewPlace {
 	public BlogPlace(String postId) {
 		super((ViewProxy) GWT.create(BlogView.class), postId);
 	}
 	@Override
-	public MvpPlace getPlace(String token) {
+	public ViewPlace getPlace(String token) {
 		return new  BlogPlace(String token);
 	}
 }

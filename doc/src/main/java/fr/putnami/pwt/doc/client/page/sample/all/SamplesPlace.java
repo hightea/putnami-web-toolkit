@@ -16,9 +16,9 @@
  */
 package fr.putnami.pwt.doc.client.page.sample.all;
 
-import fr.putnami.pwt.core.mvp.client.MvpPlace;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
 import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
 
 @ActivityDescrition(view = SamplesPage.class)
-public class SamplesPlace extends MvpPlace {
+public class SamplesPlace extends ViewPlace {
 }

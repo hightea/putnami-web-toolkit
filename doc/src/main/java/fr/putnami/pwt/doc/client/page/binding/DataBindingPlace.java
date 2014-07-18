@@ -16,9 +16,9 @@
  */
 package fr.putnami.pwt.doc.client.page.binding;
 
-import fr.putnami.pwt.core.mvp.client.MvpPlace;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
 import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
 
 @ActivityDescrition(view = DataBindingPage.class)
-public class DataBindingPlace extends MvpPlace {
+public class DataBindingPlace extends ViewPlace {
 }

@@ -42,6 +42,7 @@ import fr.putnami.pwt.core.mvp.client.event.StartActivityEvent.HasStartActivityH
 import fr.putnami.pwt.core.mvp.client.event.StopActivityEvent;
 import fr.putnami.pwt.core.mvp.client.event.StopActivityEvent.Handler;
 import fr.putnami.pwt.core.mvp.client.event.StopActivityEvent.HasStopActivityHandlers;
+import fr.putnami.pwt.core.mvp.client.util.MvpUtils;
 
 public class MvpController extends PlaceController implements
 PlaceHistoryMapper,
@@ -60,7 +61,7 @@ HasMayStopActivityHandlers
 		return MvpController.instance;
 	}
 
-	private final Map<String, ViewProxy> VIEW_MAPPERS = Maps.newHashMap();
+	private final Map<String, ActivityFactory> ACTIVITY_FACTORIES = Maps.newHashMap();
 
 	private final ActivityManager activityManager;
 	private final PlaceHistoryHandler historyHandler;
@@ -120,21 +121,21 @@ HasMayStopActivityHandlers
 		this.historyHandler.handleCurrentHistory();
 	}
 
-	public void registerActivity(ViewProxy placeViewMapper) {
-		for (String preffix : placeViewMapper.getTokenPrefixes()) {
+	public void registerActivity(ActivityFactory placeViewMapper) {
+		for (String preffix : placeViewMapper.getPlacePrefixes()) {
 			if (!preffix.startsWith("!")) {
 				preffix = "!" + preffix;
 			}
-			this.VIEW_MAPPERS.put(preffix, placeViewMapper);
+			this.ACTIVITY_FACTORIES.put(preffix, placeViewMapper);
 		}
 	}
 
 	@Override
 	public Activity getActivity(Place place) {
-		String key = getPlacePrefix(place);
-		ViewProxy placeViewMapper = VIEW_MAPPERS.get(key);
-		if (placeViewMapper != null) {
-			return new MvpActivity(placeViewMapper, place);
+		String key = MvpUtils.getPlacePrefix(place);
+		ActivityFactory activityFactory = ACTIVITY_FACTORIES.get(key);
+		if (activityFactory != null) {
+			return activityFactory.createActivity(place);
 		}
 		return null;
 	}
@@ -148,9 +149,9 @@ HasMayStopActivityHandlers
 			prefix = token.substring(0, colonAt);
 			rest = token.substring(colonAt + 1);
 		}
-		ViewProxy tokenizer = this.VIEW_MAPPERS.get(prefix);
-		if (tokenizer != null) {
-			return tokenizer.getPlace(rest);
+		ActivityFactory activityFactory = this.ACTIVITY_FACTORIES.get(prefix);
+		if (activityFactory instanceof PlaceTokenizer) {
+			return ((PlaceTokenizer) activityFactory).getPlace(rest);
 		}
 		return null;
 	}
@@ -160,11 +161,11 @@ HasMayStopActivityHandlers
 		if (place == null) {
 			return null;
 		}
-		String prefix = getPlacePrefix(place);
+		String prefix = MvpUtils.getPlacePrefix(place);
 		String token = null;
-		PlaceTokenizer tokenizer = this.VIEW_MAPPERS.get(prefix);
-		if (tokenizer != null) {
-			token = tokenizer.getToken(place);
+		ActivityFactory activityFactory = this.ACTIVITY_FACTORIES.get(prefix);
+		if (activityFactory instanceof PlaceTokenizer) {
+			token = ((PlaceTokenizer) activityFactory).getToken(place);
 		}
 
 		if (token != null) {
@@ -217,10 +218,6 @@ HasMayStopActivityHandlers
 	@Override
 	public HandlerRegistration addMayStopActivityHandler(fr.putnami.pwt.core.mvp.client.event.MayStopActivityEvent.Handler handler) {
 		return EventBus.get().addHandler(MayStopActivityEvent.TYPE, handler);
-	}
-
-	private String getPlacePrefix(Place place) {
-		return "!" + place.getClass().getSimpleName().replace("Place", "");
 	}
 
 }

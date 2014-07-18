@@ -18,29 +18,29 @@ package fr.putnami.pwt.core.mvp.client;
 
 import com.google.gwt.place.shared.Place;
 
-public abstract class MvpPlace extends Place {
+public abstract class ViewPlace extends Place {
 
-	private final MvpPlace parent;
+	private final ViewPlace parent;
 	private final String token;
 
-	public MvpPlace() {
+	public ViewPlace() {
 		this(null, null);
 	}
 
-	public MvpPlace(String token) {
+	public ViewPlace(String token) {
 		this(null, token);
 	}
 
-	public MvpPlace(MvpPlace parent) {
+	public ViewPlace(ViewPlace parent) {
 		this(parent, null);
 	}
 
-	public MvpPlace(MvpPlace parent, String token) {
+	public ViewPlace(ViewPlace parent, String token) {
 		this.parent = parent;
 		this.token = token;
 	}
 
-	public MvpPlace getParent() {
+	public ViewPlace getParent() {
 		return this.parent;
 	}
 

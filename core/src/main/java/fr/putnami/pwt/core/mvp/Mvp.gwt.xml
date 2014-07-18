@@ -29,6 +29,6 @@
 	<source path="client"/>
 	
 	<generate-with class="fr.putnami.pwt.core.mvp.rebind.ProxyViewGenerator">
-		<when-type-assignable class="fr.putnami.pwt.core.mvp.client.MvpPlace" />
+		<when-type-assignable class="fr.putnami.pwt.core.mvp.client.ViewPlace" />
 	</generate-with>
 </module>

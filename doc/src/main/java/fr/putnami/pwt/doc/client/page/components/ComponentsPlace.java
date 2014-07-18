@@ -16,11 +16,11 @@
  */
 package fr.putnami.pwt.doc.client.page.components;
 
-import fr.putnami.pwt.core.mvp.client.MvpPlace;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
 import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
 
 @ActivityDescrition(view = ComponentsPage.class, aliases = {
 	"Tables", "Forms"
 })
-public class ComponentsPlace extends MvpPlace {
+public class ComponentsPlace extends ViewPlace {
 }

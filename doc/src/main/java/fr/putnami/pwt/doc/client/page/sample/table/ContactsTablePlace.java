@@ -16,10 +16,10 @@
  */
 package fr.putnami.pwt.doc.client.page.sample.table;
 
-import fr.putnami.pwt.core.mvp.client.MvpPlace;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
 import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
 
 @ActivityDescrition(view = ContactsTablePage.class)
-public class ContactsTablePlace extends MvpPlace {
+public class ContactsTablePlace extends ViewPlace {
 
 }

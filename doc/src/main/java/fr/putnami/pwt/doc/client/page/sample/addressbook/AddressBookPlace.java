@@ -16,10 +16,10 @@
  */
 package fr.putnami.pwt.doc.client.page.sample.addressbook;
 
-import fr.putnami.pwt.core.mvp.client.MvpPlace;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
 import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
 
 @ActivityDescrition(view = AddressBookPage.class)
-public class AddressBookPlace extends MvpPlace {
+public class AddressBookPlace extends ViewPlace {
 
 }

@@ -16,9 +16,9 @@
  */
 package fr.putnami.pwt.doc.client.page.analytics;
 
-import fr.putnami.pwt.core.mvp.client.MvpPlace;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
 import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
 
 @ActivityDescrition(view = GoogleAnalyticsPage.class)
-public class GoogleAnalyticsPlace extends MvpPlace {
+public class GoogleAnalyticsPlace extends ViewPlace {
 }
