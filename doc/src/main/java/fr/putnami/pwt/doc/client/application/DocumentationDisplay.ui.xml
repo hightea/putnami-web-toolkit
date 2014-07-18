@@ -79,7 +79,7 @@
 						</w:GridColumn>
 						<w:GridColumn size="4">
 							<w:Affix ui:field="tableOfContentAffix" layerIndex="2" offsetTop="80" offsetBottom="250" xsVisibility="HIDDEN" smVisibility="HIDDEN" styleName="pwt-spy-affix">
-								<w:NavSpy ui:field="tableOfContent" target="{viewContainer}" spyName="docSummary" />
+								<w:NavSpy ui:field="tableOfContent" target="{viewContainer}" spyName="docSummary" spyOffset="50" />
 							</w:Affix>
 						</w:GridColumn>
 					</w:GridRow>
