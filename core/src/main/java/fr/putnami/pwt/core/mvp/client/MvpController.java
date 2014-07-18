@@ -219,7 +219,7 @@ HasMayStopActivityHandlers
 	}
 
 	private String getPlacePrefix(Place place) {
-		return "!" + place.getClass().getSimpleName().replace("Place", "");
+		return "!" + place.getClass().getSimpleName().replaceAll("Place$", "");
 	}
 
 }
