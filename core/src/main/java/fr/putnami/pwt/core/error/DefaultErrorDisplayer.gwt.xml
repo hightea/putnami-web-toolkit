@@ -17,6 +17,7 @@
     along with pwt.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
+
 <module>
 	<inherits name="fr.putnami.pwt.core.error.Error" />
 	<inherits name="fr.putnami.pwt.core.widget.Widget" />
