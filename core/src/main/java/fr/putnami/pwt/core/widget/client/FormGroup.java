@@ -44,17 +44,17 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class FormGroup<T> extends AbstractPanel implements
-		HasFormType,
-		CloneableWidget,
-		EditorValue<T>,
-		HasLabelEditor,
-		HasEditorProvider,
-		HasWidgetFactory,
-		HasOutputEditorFactory<T>,
-		HasInputEditorFactory<T>,
-		HasReadonly,
-		EditorLabel,
-		EditorError
+HasFormType,
+CloneableWidget,
+EditorValue<T>,
+HasLabelEditor,
+HasEditorProvider,
+HasWidgetFactory,
+HasOutputEditorFactory<T>,
+HasInputEditorFactory<T>,
+HasReadonly,
+EditorLabel,
+EditorError
 {
 
 	private static final CssStyle STYLE_FORM_GROUP = new SimpleStyle("form-group");
@@ -225,6 +225,7 @@ public class FormGroup<T> extends AbstractPanel implements
 			error = new ErrorGroup();
 		}
 		error.displayErrors(errors);
+		error.redraw();
 		StyleUtils.toggleStyle(this, STYLE_ERROR, !Boolean.TRUE.equals(readonly) && error != null && error.hasError());
 	}
 
