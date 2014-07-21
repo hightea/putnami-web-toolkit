@@ -270,7 +270,7 @@ public static void main (String[] args) {
 		  	</c:StaticCode>
 		  	<br/>
 		  	<w:Heading level="3">Code editor customization</w:Heading>
-		  	<p>The provided highlightings  can be customize overriding the <code>pwt-code-editor.css</code> file content.</p>
+		  	<p>The provided highlightings  can be customize overriding the <code>pwt.css</code> file content.</p>
 		</w:HTMLPanel>
 	</w:HTMLPanel>
 </ui:UiBinder>

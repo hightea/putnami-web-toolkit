@@ -71,7 +71,7 @@ repositories {
 dependencies {
 	compile "fr.putnami.pwt:pwt:@releaseVersion@"
 	/* You may want to use these plugins */
-	compile "fr.putnami.pwt:pwt-code-editor:@releaseVersion@"
+	compile "fr.putnami.pwt:pwt:@releaseVersion@"
 }]]></pre>
 		</c:StaticCode>
 		

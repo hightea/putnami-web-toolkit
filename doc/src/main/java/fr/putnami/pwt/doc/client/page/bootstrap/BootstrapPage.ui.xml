@@ -67,7 +67,7 @@
 					If you apply a particular Bootstrap theme, you need to customize the css for those componenents such as <code>NavSpy</code>, <code>InputSlider</code>.
 				</p>
 				<p>You can find all customizations in the <code>pwt-core.css</code> file.</p>
-				<p>Plugins can also provide their own CSS file (<code>pwt-code-editor.css</code> ).</p>
+				<p>Plugins can also provide their own CSS file (<code>pwt.css</code> ).</p>
 			</w:Alert>
 			<w:Heading level="2" summary="docSummary">Global component theming</w:Heading>
 			<p>You may want to theme a particular component specifically. Therefore we set on each component a specific CSS class which is the component simple class name prefixed by "p-" (to avoid collision with existing CSS class).</p>

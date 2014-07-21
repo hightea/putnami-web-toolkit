@@ -60,7 +60,7 @@
 	<!-- You may want to use these plugins -->
 	<dependency>
 		<groupId>fr.putnami.pwt</groupId>
-		<artifactId>pwt-code-editor</artifactId>
+		<artifactId>pwt</artifactId>
 		<version>@releaseVersion@</version>
 	</dependency>
 	

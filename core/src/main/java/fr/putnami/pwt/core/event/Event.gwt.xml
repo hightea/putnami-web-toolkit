@@ -17,6 +17,7 @@
     along with pwt.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
+
 <module>
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name="com.google.common.base.Base" />

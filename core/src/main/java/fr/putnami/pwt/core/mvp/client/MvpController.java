@@ -219,5 +219,4 @@ HasMayStopActivityHandlers
 	public HandlerRegistration addMayStopActivityHandler(fr.putnami.pwt.core.mvp.client.event.MayStopActivityEvent.Handler handler) {
 		return EventBus.get().addHandler(MayStopActivityEvent.TYPE, handler);
 	}
-
 }
