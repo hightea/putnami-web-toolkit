@@ -184,7 +184,7 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 	}
 
 	@Override
-	public TableTH<T> createHeaderCell() {
+	public TableTH<T> doCreateHeaderCell() {
 		TableTH<T> headerCell = new TableTH<T>();
 		if (selectionMode == SelectionMode.ROW_CLICK) {
 			headerCell.setVisible(false);
@@ -193,7 +193,7 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 	}
 
 	@Override
-	public AbstractTableCell<T> createBodyCell() {
+	public AbstractTableCell<T> doCreateBodyCell() {
 		TDSelecter cell = new TDSelecter();
 		cells.add(cell);
 		return cell;

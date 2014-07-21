@@ -82,7 +82,7 @@ public class TableColumn<T> extends AbstractTableColumn<T> implements
 	}
 
 	@Override
-	public TableTH<T> createHeaderCell() {
+	public TableTH<T> doCreateHeaderCell() {
 		TableEditorTH<T> headerCell = new TableEditorTH<T>();
 		headerCell.setPath(path);
 		headerCell.setColspan(getColspan());
@@ -97,7 +97,7 @@ public class TableColumn<T> extends AbstractTableColumn<T> implements
 	}
 
 	@Override
-	public AbstractTableCell<T> createBodyCell() {
+	public AbstractTableCell<T> doCreateBodyCell() {
 		TableEditorTD<T> bodyCell = new TableEditorTD<T>();
 		String subPath = path;
 		bodyCell.setInputFactory(inputFactory);
