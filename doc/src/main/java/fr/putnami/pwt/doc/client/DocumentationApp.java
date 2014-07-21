@@ -60,7 +60,7 @@ public class DocumentationApp implements EntryPoint {
 	@Override
 	public void onModuleLoad() {
 		Theme theme = new Theme();
-		theme.addLink(new CssLink("theme/doc/style/pwt.css", 0));
+		theme.addLink(new CssLink("theme/doc/style/pwt-doc.css", 0));
 		ThemeController.get().installTheme(theme);
 
 		if (Cookies.isCookieEnabled()) {
