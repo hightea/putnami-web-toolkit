@@ -1,20 +1,4 @@
 /**
- * This file is part of pwt-ajax-bot-indexing.
- *
- * pwt-ajax-bot-indexing is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * pwt-ajax-bot-indexing is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt-ajax-bot-indexing.  If not, see <http://www.gnu.org/licenses/>.
- */
-/**
  * This file is part of pwt. pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License
  * as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. pwt is distributed in the
  * hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -150,10 +134,10 @@ public class AjaxBotIndexingFilter implements Filter {
 
 		StringBuffer prettyUrl = new StringBuffer();
 		prettyUrl.append(request.isSecure() ? "https://" : "http://")
-				.append(request.getServerName());
+		.append(request.getServerName());
 		if (request.getServerPort() != 0) {
 			prettyUrl.append(":")
-					.append(request.getServerPort());
+			.append(request.getServerPort());
 		}
 		prettyUrl.append(request.getRequestURI());
 		prettyUrl.append(rewriteQueryString(request.getQueryString()));
