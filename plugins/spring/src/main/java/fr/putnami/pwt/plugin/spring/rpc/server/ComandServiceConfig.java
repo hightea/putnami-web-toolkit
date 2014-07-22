@@ -18,12 +18,15 @@ package fr.putnami.pwt.plugin.spring.rpc.server;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 
 import fr.putnami.pwt.plugin.spring.rpc.server.controller.CommandServiceController;
 
 @Configuration
 public class ComandServiceConfig {
 	@Bean
+	@Order(Ordered.LOWEST_PRECEDENCE)
 	public CommandServiceController commandServiceController() {
 		return new CommandServiceController();
 	}

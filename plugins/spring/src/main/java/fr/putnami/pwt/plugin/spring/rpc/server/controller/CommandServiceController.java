@@ -25,7 +25,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
-import org.springframework.core.Ordered;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -36,7 +35,7 @@ import fr.putnami.pwt.core.service.server.service.AbstractCommandService;
 import fr.putnami.pwt.plugin.spring.rpc.server.util.RequestThreadLocalUtils;
 
 @Controller
-public class CommandServiceController extends AbstractCommandService implements BeanPostProcessor, Ordered {
+public class CommandServiceController extends AbstractCommandService implements BeanPostProcessor {
 
 
 	private static final long serialVersionUID = 4383424486613678203L;
@@ -85,8 +84,4 @@ public class CommandServiceController extends AbstractCommandService implements 
 		}
 	}
 
-	@Override
-	public int getOrder() {
-		return Ordered.HIGHEST_PRECEDENCE;
-	}
 }
