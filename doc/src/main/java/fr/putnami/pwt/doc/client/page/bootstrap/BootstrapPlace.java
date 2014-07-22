@@ -17,8 +17,8 @@
 package fr.putnami.pwt.doc.client.page.bootstrap;
 
 import fr.putnami.pwt.core.mvp.client.ViewPlace;
-import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
-@ActivityDescrition(view = BootstrapPage.class)
+@ActivityDescription(view = BootstrapPage.class)
 public class BootstrapPlace extends ViewPlace {
 }

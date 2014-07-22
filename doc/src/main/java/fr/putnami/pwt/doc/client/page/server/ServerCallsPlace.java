@@ -17,8 +17,8 @@
 package fr.putnami.pwt.doc.client.page.server;
 
 import fr.putnami.pwt.core.mvp.client.ViewPlace;
-import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
-@ActivityDescrition(view = ServerCallsPage.class)
+@ActivityDescription(view = ServerCallsPage.class)
 public class ServerCallsPlace extends ViewPlace {
 }

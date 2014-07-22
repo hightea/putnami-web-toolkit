@@ -17,8 +17,8 @@
 package fr.putnami.pwt.doc.client.page.layout;
 
 import fr.putnami.pwt.core.mvp.client.ViewPlace;
-import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
-@ActivityDescrition(view = LayoutPage.class, aliases = "More")
+@ActivityDescription(view = LayoutPage.class, aliases = "More")
 public class LayoutsPlace extends ViewPlace {
 }

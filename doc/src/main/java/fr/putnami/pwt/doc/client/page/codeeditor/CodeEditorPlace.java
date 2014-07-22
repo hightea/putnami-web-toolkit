@@ -17,8 +17,8 @@
 package fr.putnami.pwt.doc.client.page.codeeditor;
 
 import fr.putnami.pwt.core.mvp.client.ViewPlace;
-import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
-@ActivityDescrition(view = CodeEditorPage.class)
+@ActivityDescription(view = CodeEditorPage.class)
 public class CodeEditorPlace extends ViewPlace {
 }

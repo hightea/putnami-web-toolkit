@@ -17,8 +17,8 @@
 package fr.putnami.pwt.doc.client.page.i18n;
 
 import fr.putnami.pwt.core.mvp.client.ViewPlace;
-import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
-@ActivityDescrition(view = InternationalizationPage.class)
+@ActivityDescription(view = InternationalizationPage.class)
 public class InternationalizationPlace extends ViewPlace {
 }

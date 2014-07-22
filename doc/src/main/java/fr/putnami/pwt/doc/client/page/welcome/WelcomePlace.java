@@ -19,9 +19,9 @@ package fr.putnami.pwt.doc.client.page.welcome;
 import com.google.gwt.place.shared.PlaceTokenizer;
 
 import fr.putnami.pwt.core.mvp.client.ViewPlace;
-import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
-@ActivityDescrition(view = WelcomePage.class)
+@ActivityDescription(view = WelcomePage.class)
 public class WelcomePlace extends ViewPlace implements PlaceTokenizer<WelcomePlace> {
 
 	@Override

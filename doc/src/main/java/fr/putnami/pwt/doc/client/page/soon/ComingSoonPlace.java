@@ -17,8 +17,8 @@
 package fr.putnami.pwt.doc.client.page.soon;
 
 import fr.putnami.pwt.core.mvp.client.ViewPlace;
-import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
-@ActivityDescrition(view = ComingSoonPage.class)
+@ActivityDescription(view = ComingSoonPage.class)
 public class ComingSoonPlace extends ViewPlace {
 }

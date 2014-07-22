@@ -35,10 +35,11 @@ import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
 import fr.putnami.pwt.core.mvp.client.ViewActivity;
+import fr.putnami.pwt.core.mvp.client.ViewDecorator;
 import fr.putnami.pwt.core.mvp.client.ViewPlace;
 import fr.putnami.pwt.core.mvp.client.ViewProxy;
-import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
-import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition.Scope;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription.Scope;
 
 public class ProxyViewCreator {
 
@@ -49,15 +50,16 @@ public class ProxyViewCreator {
 	private final String viewProxyQualifiedName;
 	private final String viewProxySimpleName;
 	private final String packageName;
-	private final ActivityDescrition activityDescrition;
+	private final ActivityDescription activityDescrition;
 	private Class<? extends PlaceTokenizer> placeTokenizerClass;
+	private Class<? extends ViewDecorator> viewDecoratorClass;
 
 	public ProxyViewCreator(JClassType placeType) {
 		this.placeType = placeType;
 		this.packageName = this.placeType.getPackage().getName();
 		this.viewProxyQualifiedName = this.placeType.getQualifiedSourceName() + ProxyViewCreator.PROXY_SUFFIX;
 		this.viewProxySimpleName = this.placeType.getSimpleSourceName() + ProxyViewCreator.PROXY_SUFFIX;
-		this.activityDescrition = placeType.getAnnotation(ActivityDescrition.class);
+		this.activityDescrition = placeType.getAnnotation(ActivityDescription.class);
 		this.placeTokenizerClass = activityDescrition.placeTokenizer();
 		if (PlaceTokenizer.class.equals(placeTokenizerClass)) {
 			placeTokenizerClass = null;
@@ -72,6 +74,10 @@ public class ProxyViewCreator {
 			catch (ClassNotFoundException e) {
 				// Nothing to do
 			}
+		}
+		this.viewDecoratorClass = activityDescrition.viewDecorator();
+		if (ViewDecorator.class.equals(viewDecoratorClass)) {
+			viewDecoratorClass = null;
 		}
 	}
 
@@ -198,7 +204,8 @@ public class ProxyViewCreator {
 			srcWriter.println("view = GWT.create(%s.class);", viewName);
 			srcWriter.outdent();
 			srcWriter.println("}");
-			srcWriter.println("callback.showView(view);");
+			generateProxyResult(logger, srcWriter);
+			// srcWriter.println("callback.showView(view);");
 			srcWriter.outdent();
 			srcWriter.println("}");
 			srcWriter.outdent();
@@ -210,11 +217,24 @@ public class ProxyViewCreator {
 			srcWriter.println("view = GWT.create(%s.class);", viewName);
 			srcWriter.outdent();
 			srcWriter.println("}");
-			srcWriter.println("callback.showView(view);");
+			generateProxyResult(logger, srcWriter);
+			// srcWriter.println("callback.showView(view);");
 
 		}
 		srcWriter.outdent();
 		srcWriter.println("}");
+	}
+
+	private void generateProxyResult(TreeLogger logger, SourceWriter srcWriter) {
+		if (viewDecoratorClass == null) {
+			srcWriter.println("callback.showView(view);");
+		}
+		else {
+			String decoratorName = viewDecoratorClass.getSimpleName();
+			srcWriter.println("%s decorator = %s.get();", decoratorName, decoratorName);
+			srcWriter.println("decorator.setWidget(view);");
+			srcWriter.println("callback.showView(decorator);");
+		}
 	}
 
 	private SourceWriter getSourceWriter(PrintWriter printWriter, GeneratorContext ctx) {
@@ -233,6 +253,9 @@ public class ProxyViewCreator {
 		composerFactory.addImport(activityDescrition.view().getCanonicalName());
 		if (placeTokenizerClass != null) {
 			composerFactory.addImport(placeTokenizerClass.getCanonicalName());
+		}
+		if (viewDecoratorClass != null) {
+			composerFactory.addImport(viewDecoratorClass.getCanonicalName());
 		}
 
 		composerFactory.addImplementedInterface(ViewProxy.class.getSimpleName() + "<" + placeType.getSimpleSourceName() + ">");

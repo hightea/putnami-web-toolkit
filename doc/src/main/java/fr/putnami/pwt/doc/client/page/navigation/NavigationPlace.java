@@ -16,8 +16,8 @@
  */
 package fr.putnami.pwt.doc.client.page.navigation;
 
-import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
-@ActivityDescrition(view = NavigationPage.class)
+@ActivityDescription(view = NavigationPage.class)
 public class NavigationPlace extends fr.putnami.pwt.core.mvp.client.ViewPlace {
 }

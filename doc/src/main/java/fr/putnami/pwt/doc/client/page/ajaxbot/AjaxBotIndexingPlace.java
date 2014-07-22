@@ -17,8 +17,8 @@
 package fr.putnami.pwt.doc.client.page.ajaxbot;
 
 import fr.putnami.pwt.core.mvp.client.ViewPlace;
-import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
-@ActivityDescrition(view = AjaxBotIndexingPage.class)
+@ActivityDescription(view = AjaxBotIndexingPage.class)
 public class AjaxBotIndexingPlace extends ViewPlace {
 }

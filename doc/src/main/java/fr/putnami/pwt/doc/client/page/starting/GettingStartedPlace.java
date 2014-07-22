@@ -17,8 +17,8 @@
 package fr.putnami.pwt.doc.client.page.starting;
 
 import fr.putnami.pwt.core.mvp.client.ViewPlace;
-import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescrition;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
-@ActivityDescrition(view = GettingStartedPage.class)
+@ActivityDescription(view = GettingStartedPage.class)
 public class GettingStartedPlace extends ViewPlace {
 }

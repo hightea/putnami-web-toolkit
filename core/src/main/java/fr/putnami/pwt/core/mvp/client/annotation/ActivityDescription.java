@@ -24,12 +24,15 @@ import java.lang.annotation.Target;
 import com.google.gwt.place.shared.PlaceTokenizer;
 
 import fr.putnami.pwt.core.mvp.client.View;
+import fr.putnami.pwt.core.mvp.client.ViewDecorator;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface ActivityDescrition {
+public @interface ActivityDescription {
 
 	Class<? extends View> view();
+
+	Class<? extends ViewDecorator> viewDecorator() default ViewDecorator.class;;
 
 	Class<? extends PlaceTokenizer> placeTokenizer() default PlaceTokenizer.class;
 
