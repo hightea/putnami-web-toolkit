@@ -41,7 +41,7 @@ import fr.putnami.pwt.core.inject.rebind.factory.SecurityCreatorFactory;
 import fr.putnami.pwt.core.inject.rebind.factory.ServiceCreatorFactory;
 import fr.putnami.pwt.core.inject.rebind.factory.TemplatedCreatorFactory;
 
-public class InjectorPorxyCreator {
+public class InjectorProxyCreator {
 	private static final String PROXY_SUFFIX = "_Injector";
 
 	private static final Collection<InjectorDelegateFactorty> delegateFactories = Lists.newArrayList();
@@ -63,7 +63,7 @@ public class InjectorPorxyCreator {
 
 	private final List<InjectorCreatorDelegate> delegates = Lists.newArrayList();
 
-	public InjectorPorxyCreator(JClassType injectableType) {
+	public InjectorProxyCreator(JClassType injectableType) {
 		this.injectableType = injectableType;
 		this.packageName = injectableType.getPackage().getName();
 		this.proxyName = injectableType.getSimpleSourceName() + PROXY_SUFFIX;

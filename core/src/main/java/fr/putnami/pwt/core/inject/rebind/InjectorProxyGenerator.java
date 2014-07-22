@@ -36,7 +36,7 @@ public class InjectorProxyGenerator extends Generator {
 			throw new UnableToCompleteException();
 		}
 
-		InjectorPorxyCreator injectorCreator = new InjectorPorxyCreator(viewType);
+		InjectorProxyCreator injectorCreator = new InjectorProxyCreator(viewType);
 		return injectorCreator.create(logger, context);
 	}
 
