@@ -28,6 +28,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.model.client.base.HasDrawable;
+import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.Nav.LinkStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
@@ -104,6 +105,10 @@ public class NavLink extends AbstractPanel implements Nav.IsNavContent, Cloneabl
 	public void setIconType(String iconType) {
 		this.iconType = iconType;
 		resetInner();
+	}
+
+	public void addAnchorStyle(CssStyle style) {
+		StyleUtils.addStyle(anchor, style);
 	}
 
 	@Override
