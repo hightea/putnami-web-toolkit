@@ -27,12 +27,22 @@ import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.model.client.base.HasReadonly;
 import fr.putnami.pwt.core.widget.client.TableTH;
 
-public abstract class AbstractTableColumn<T> implements HasReadonly, IsWidget, CloneableWidget {
+public abstract class AbstractTableColumn<T> implements
+		HasReadonly,
+		IsWidget,
+		HasResponsiveVisibility,
+		CloneableWidget {
 
 	private Collection<AbstractTableColumnAspect<T>> aspects;
 
 	private Boolean readonly;
 	private Integer colspan;
+
+	private Visibility xsVisibility = Visibility.DEFAULT;
+	private Visibility smVisibility = Visibility.DEFAULT;
+	private Visibility mdVisibility = Visibility.DEFAULT;
+	private Visibility lgVisibility = Visibility.DEFAULT;
+	private Visibility printVisibility = Visibility.DEFAULT;
 
 	public AbstractTableColumn() {
 
@@ -88,7 +98,52 @@ public abstract class AbstractTableColumn<T> implements HasReadonly, IsWidget, C
 		throw new UnsupportedOperationException("An AbstractTableColumn cannot be use as a widget. It exists for use in UiBinder Only");
 	}
 
-	public abstract AbstractTableCell<T> createBodyCell();
+	@Override
+	public void setXsVisibility(Visibility xsVisibility) {
+		this.xsVisibility = xsVisibility;
+	}
 
-	public abstract TableTH<T> createHeaderCell();
+	@Override
+	public void setSmVisibility(Visibility smVisibility) {
+		this.xsVisibility = smVisibility;
+	}
+
+	@Override
+	public void setMdVisibility(Visibility mdVisibility) {
+		this.xsVisibility = mdVisibility;
+	}
+
+	@Override
+	public void setLgVisibility(Visibility lgVisibility) {
+		this.xsVisibility = lgVisibility;
+	}
+
+	@Override
+	public void setPrintVisibility(Visibility printVisibility) {
+		this.xsVisibility = printVisibility;
+	}
+
+	public final AbstractTableCell<T> createBodyCell() {
+		AbstractTableCell<T> cell = doCreateBodyCell();
+		setResponsiveVisibility(cell);
+		return cell;
+	}
+
+	public final TableTH<T> createHeaderCell() {
+		TableTH<T> cell = doCreateHeaderCell();
+		setResponsiveVisibility(cell);
+		return cell;
+	}
+
+	private void setResponsiveVisibility(HasResponsiveVisibility target) {
+		target.setXsVisibility(xsVisibility);
+		target.setSmVisibility(smVisibility);
+		target.setMdVisibility(mdVisibility);
+		target.setLgVisibility(lgVisibility);
+		target.setPrintVisibility(printVisibility);
+	}
+
+	protected abstract AbstractTableCell<T> doCreateBodyCell();
+
+	protected abstract TableTH<T> doCreateHeaderCell();
 }

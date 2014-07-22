@@ -151,13 +151,13 @@ public class TableOrder<T> extends AbstractTableColumn<T> {
 	}
 
 	@Override
-	public TableTH<T> createHeaderCell() {
+	public TableTH<T> doCreateHeaderCell() {
 		TableTH<T> headerCell = new TableTH<T>();
 		return headerCell;
 	}
 
 	@Override
-	public AbstractTableCell<T> createBodyCell() {
+	public AbstractTableCell<T> doCreateBodyCell() {
 		TDHandle cell = new TDHandle();
 		cells.add(cell);
 		return cell;

@@ -199,15 +199,16 @@
 		<p>Use the <code>TableEditor</code>, <code>TableEditorBody</code> children with <code>TableColumn</code> to define the Table display.</p>
 		<p>If no <code>TableEditorBody</code> is provided, a default one is created.</p>
 		<p>In each <code>TableColumn</code> you can define the <code>OutputFactory</code> or the <code>InputFactory</code> which should be used to render the propery.</p>
+		<p><code>TableColumn</code> a responsive visibility ability with the <code>xsVisibility</code>, <code>smVisibility</code>, <code>mdVisibility</code>, <code>lgVisibility</code>, <code>printVisibility</code> properties.</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
 				<w:TableEditor ui:field="firstTable">
-					<w:TableColumn path="gender"/>
+					<w:TableColumn path="gender" xsVisibility="HIDDEN" smVisibility="HIDDEN"/>
 					<w:TableColumn path="name"/>
-					<w:TableColumn path="email">
+					<w:TableColumn path="email" xsVisibility="HIDDEN">
 						<w:OutputEmail />
 					</w:TableColumn>
-					<w:TableColumn path="address.city"/>
+					<w:TableColumn path="address.city" xsVisibility="HIDDEN" smVisibility="HIDDEN"/>
 					<w:TableColumn >
 						<w:Button type="ICON" iconType="VIEW" />
 					</w:TableColumn>
@@ -216,12 +217,12 @@
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
 <pre><![CDATA[
 <w:TableEditor ui:field="firstTable">
-	<w:TableColumn path="gender"/>
+	<w:TableColumn path="gender" xsVisibility="HIDDEN" smVisibility="HIDDEN"/>
 	<w:TableColumn path="name"/>
-	<w:TableColumn path="email">
+	<w:TableColumn path="email" xsVisibility="HIDDEN">
 		<w:OutputEmail />
 	</w:TableColumn>
-	<w:TableColumn path="address.city"/>
+	<w:TableColumn path="address.city" xsVisibility="HIDDEN" smVisibility="HIDDEN"/>
 	<w:TableColumn >
 		<w:Button type="ICON" iconType="VIEW" />
 	</w:TableColumn>
