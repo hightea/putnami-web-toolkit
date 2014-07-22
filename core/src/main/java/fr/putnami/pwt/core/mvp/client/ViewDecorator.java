@@ -20,4 +20,8 @@ public abstract class ViewDecorator implements AcceptsOneWidget, IsWidget {
 		return decoratorWidget.asWidget();
 	}
 
+	public void presentPlace(ViewPlace place) {
+
+	}
+
 }

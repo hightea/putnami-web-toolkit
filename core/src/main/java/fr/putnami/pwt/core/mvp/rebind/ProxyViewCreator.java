@@ -233,6 +233,7 @@ public class ProxyViewCreator {
 			String decoratorName = viewDecoratorClass.getSimpleName();
 			srcWriter.println("%s decorator = %s.get();", decoratorName, decoratorName);
 			srcWriter.println("decorator.setWidget(view);");
+			srcWriter.println("decorator.presentPlace(%s.this);", viewProxySimpleName);
 			srcWriter.println("callback.showView(decorator);");
 		}
 	}
