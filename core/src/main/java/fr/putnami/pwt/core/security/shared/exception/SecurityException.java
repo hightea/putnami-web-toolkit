@@ -16,16 +16,42 @@
  */
 package fr.putnami.pwt.core.security.shared.exception;
 
-import fr.putnami.pwt.core.service.shared.exception.CommandException;
+import com.google.gwt.place.shared.Place;
 
-public class BadAuthenticationException extends CommandException {
+public class SecurityException extends RuntimeException {
 
-	public BadAuthenticationException() {
+	private Place fallback;
+	private String message;
+
+	public SecurityException() {
+		this(null, null);
 	}
 
-	public BadAuthenticationException(String message) {
+	public SecurityException(String message) {
+		this(message, null);
+	}
+
+	public SecurityException(String message, Place fallback) {
 		super(message);
+		this.message = message;
+		this.fallback = fallback;
 	}
 
+	public Place getFallback() {
+		return fallback;
+	}
+
+	@Override
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public void setFallback(Place fallback) {
+		this.fallback = fallback;
+	}
 
 }

@@ -76,6 +76,12 @@ public class Alert<T> extends AbstractForm<T> implements HasDrawable, HasAlertDi
 		setType(Type.INFO);
 	}
 
+	public Alert(Type type, String message) {
+		this("");
+		setType(type);
+		getElement().setInnerHTML(message);
+	}
+
 	protected Alert(Alert<T> source) {
 		super(source);
 		this.dismissable = source.dismissable;

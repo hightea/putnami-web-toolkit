@@ -16,10 +16,9 @@
  */
 package fr.putnami.pwt.core.security.client.controller;
 
-import com.google.gwt.core.shared.GWT;
+import com.google.gwt.core.client.GWT;
 
 import fr.putnami.pwt.core.security.shared.domain.SessionDto;
-import fr.putnami.pwt.core.security.shared.domain.SigninDto;
 import fr.putnami.pwt.core.security.shared.service.SessionService;
 import fr.putnami.pwt.core.service.client.ServiceProxy;
 import fr.putnami.pwt.core.service.client.annotation.AsyncHandler;
@@ -41,11 +40,6 @@ public class DefaultSessionController extends SessionController {
 	}
 
 	@Override
-	public void signIn(SigninDto request) {
-		service.signIn(request);
-	}
-
-	@Override
 	public void signOut() {
 		service.signOut();
 	}
@@ -53,19 +47,6 @@ public class DefaultSessionController extends SessionController {
 	@AsyncHandler
 	void onGetCurrentSession(SessionDto session) {
 		setSession(session);
-		fireSignIn();
-	}
-
-
-	@AsyncHandler
-	void onSignIn(SessionDto session) {
-		setSession(session);
-		fireSignIn();
-	}
-
-	@AsyncHandler(method = "signIn")
-	void onSignIn(Throwable e) {
-		fireSignFailled();
 	}
 
 	@AsyncHandler

@@ -41,7 +41,7 @@ public class InjectSecuritedCreator extends InjectorCreatorDelegate {
 	public void writeBeforePresent(SourceWriter srcWriter) {
 		if (securedAnnotation.value() != null) {
 			for (String value : securedAnnotation.value()) {
-				srcWriter.println("SessionController.get().checkAuthorized(\"%s\");", value);
+				srcWriter.println("SessionController.get().checkAuthorized(\"%s\", place);", value);
 			}
 		}
 

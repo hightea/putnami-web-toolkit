@@ -18,6 +18,7 @@ package fr.putnami.pwt.core.security.client.controller;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.place.shared.Place;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
 import fr.putnami.pwt.core.event.client.EventBus;
@@ -30,8 +31,7 @@ import fr.putnami.pwt.core.security.client.event.SignOutEvent;
 import fr.putnami.pwt.core.security.client.event.SignOutEvent.HasSignOutHandlers;
 import fr.putnami.pwt.core.security.shared.constant.SecurityConstants;
 import fr.putnami.pwt.core.security.shared.domain.SessionDto;
-import fr.putnami.pwt.core.security.shared.domain.SigninDto;
-import fr.putnami.pwt.core.security.shared.exception.UnauthorizedException;
+import fr.putnami.pwt.core.security.shared.exception.SecurityException;
 
 public abstract class SessionController implements HasSignInHandlers, HasSignOutHandlers, HasSignFailledHandlers {
 
@@ -48,6 +48,10 @@ public abstract class SessionController implements HasSignInHandlers, HasSignOut
 
 	protected SessionController() {
 
+	}
+
+	public SessionDto getCurrentSession() {
+		return session;
 	}
 
 	public boolean isAuthenticated() {
@@ -75,16 +79,17 @@ public abstract class SessionController implements HasSignInHandlers, HasSignOut
 		return false;
 	}
 
-	public void checkAuthorized(String role) {
+	public void checkAuthorized(String role, Place fallback) {
 		boolean hasRole = hasRole(role);
 		if (!hasRole) {
-			throw new UnauthorizedException();
+			throw new SecurityException("Unauthorized", fallback);
 		}
 	}
 
-	protected void setSession(SessionDto session) {
+	public void setSession(SessionDto session) {
 		if (this.session == null || !this.session.equals(session)) {
 			this.session = session;
+			fireSignIn();
 		}
 	}
 
@@ -120,8 +125,6 @@ public abstract class SessionController implements HasSignInHandlers, HasSignOut
 	public void fireEvent(GwtEvent<?> event) {
 		EventBus.get().fireEventFromSource(event, this);
 	}
-
-	public abstract void signIn(SigninDto sessionRequest);
 
 	public abstract void signOut();
 
