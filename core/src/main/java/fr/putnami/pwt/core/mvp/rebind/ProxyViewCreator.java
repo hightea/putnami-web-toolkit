@@ -205,7 +205,6 @@ public class ProxyViewCreator {
 			srcWriter.outdent();
 			srcWriter.println("}");
 			generateProxyResult(logger, srcWriter);
-			// srcWriter.println("callback.showView(view);");
 			srcWriter.outdent();
 			srcWriter.println("}");
 			srcWriter.outdent();
@@ -218,7 +217,6 @@ public class ProxyViewCreator {
 			srcWriter.outdent();
 			srcWriter.println("}");
 			generateProxyResult(logger, srcWriter);
-			// srcWriter.println("callback.showView(view);");
 
 		}
 		srcWriter.outdent();
@@ -232,8 +230,7 @@ public class ProxyViewCreator {
 		else {
 			String decoratorName = viewDecoratorClass.getSimpleName();
 			srcWriter.println("%s decorator = %s.get();", decoratorName, decoratorName);
-			srcWriter.println("decorator.setWidget(view);");
-			srcWriter.println("decorator.presentPlace(%s.this);", viewProxySimpleName);
+			srcWriter.println("decorator.setView(view);");
 			srcWriter.println("callback.showView(decorator);");
 		}
 	}
