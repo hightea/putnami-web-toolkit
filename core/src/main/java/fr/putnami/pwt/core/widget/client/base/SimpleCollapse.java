@@ -53,9 +53,9 @@ public class SimpleCollapse extends AbstractDropdown {
 	public void addMenuContent(IsWidget w) {
 		if (w instanceof NavLink) {
 			((NavLink) w).addAnchorStyle(STYLE_MENU_ITEM_HEADING);
-			StyleUtils.addStyle(w.asWidget(), STYLE_MENU_ITEM);
-			super.addMenuContent(w);
 		}
+		StyleUtils.addStyle(w.asWidget(), STYLE_MENU_ITEM);
+		super.addMenuContent(w);
 	}
 
 	@Override

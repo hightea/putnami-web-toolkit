@@ -25,6 +25,7 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.web.bindery.event.shared.HandlerRegistration;
 
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.model.client.base.HasDrawable;
@@ -46,6 +47,8 @@ public class NavLink extends AbstractPanel implements Nav.IsNavContent, Cloneabl
 	private String iconType;
 	private String name;
 	private String label;
+
+	private HandlerRegistration historyChangeHandlerRegistration;
 
 	public NavLink() {
 		super(LIElement.TAG);
@@ -145,8 +148,14 @@ public class NavLink extends AbstractPanel implements Nav.IsNavContent, Cloneabl
 	public void setLink(String link) {
 		this.link = link;
 		anchor.setLink(link);
-		History.addValueChangeHandler(this);
+		ensureHistoryChangeHandler();
 		redraw();
+	}
+
+	private void ensureHistoryChangeHandler() {
+		if (historyChangeHandlerRegistration == null) {
+			historyChangeHandlerRegistration = History.addValueChangeHandler(this);
+		}
 	}
 
 	@Override
