@@ -45,11 +45,11 @@ import fr.putnami.pwt.core.mvp.client.event.StopActivityEvent.HasStopActivityHan
 import fr.putnami.pwt.core.mvp.client.util.MvpUtils;
 
 public class MvpController extends PlaceController implements
-PlaceHistoryMapper,
-ActivityMapper,
-HasStartActivityHandlers,
-HasStopActivityHandlers,
-HasMayStopActivityHandlers
+		PlaceHistoryMapper,
+		ActivityMapper,
+		HasStartActivityHandlers,
+		HasStopActivityHandlers,
+		HasMayStopActivityHandlers
 {
 
 	private static MvpController instance;

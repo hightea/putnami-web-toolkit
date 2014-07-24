@@ -20,7 +20,7 @@ import com.google.gwt.place.shared.Place;
 
 public abstract class ViewPlace extends Place {
 
-	private final ViewPlace parent;
+	private ViewPlace parent;
 	private final String token;
 
 	public ViewPlace() {
@@ -38,6 +38,10 @@ public abstract class ViewPlace extends Place {
 	public ViewPlace(ViewPlace parent, String token) {
 		this.parent = parent;
 		this.token = token;
+	}
+
+	public void setParent(ViewPlace parent) {
+		this.parent = parent;
 	}
 
 	public ViewPlace getParent() {

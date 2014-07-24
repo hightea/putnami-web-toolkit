@@ -32,6 +32,7 @@ import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
 import fr.putnami.pwt.core.inject.rebind.delegate.SuspendServiceOnPresentCreator;
+import fr.putnami.pwt.core.inject.rebind.factory.DecoratorPresenterCreatorFactory;
 import fr.putnami.pwt.core.inject.rebind.factory.InitializeFormCreatorFactory;
 import fr.putnami.pwt.core.inject.rebind.factory.ModelCreatorFactory;
 import fr.putnami.pwt.core.inject.rebind.factory.PostconstructCreatorFactory;
@@ -50,6 +51,7 @@ public class InjectorProxyCreator {
 		delegateFactories.add(new ResourceCreatorFactory());
 		delegateFactories.add(new ServiceCreatorFactory());
 		delegateFactories.add(new PresenterCreatorFactory());
+		delegateFactories.add(new DecoratorPresenterCreatorFactory());
 		delegateFactories.add(new ModelCreatorFactory());
 		delegateFactories.add(new TemplatedCreatorFactory());
 		delegateFactories.add(new PostconstructCreatorFactory());
@@ -115,7 +117,7 @@ public class InjectorProxyCreator {
 		srcWriter.outdent();
 		srcWriter.println("}");
 		// presenter
-		srcWriter.println("public <P extends Place> void present(P place, final AcceptsOneWidget displayer){");
+		srcWriter.println("public <P extends Place> void present(P place, final AcceptsOneWidget displayer, boolean flush){");
 		srcWriter.indent();
 		for (InjectorCreatorDelegate delegate : delegates) {
 			delegate.writeBeforePresent(srcWriter);

@@ -1,16 +1,13 @@
 package fr.putnami.pwt.core.mvp.client;
 
-import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
-import fr.putnami.pwt.core.inject.client.annotation.PresentHandler;
-
-public abstract class ViewDecorator implements AcceptsOneWidget, IsWidget {
+public abstract class ViewDecorator implements AcceptsOneWidget, View {
 
 	private IsWidget decoratorWidget;
-	private IsWidget view;
+	protected IsWidget view;
 
 	protected void initWidget(IsWidget decoratorWidget) {
 		this.decoratorWidget = decoratorWidget;
@@ -27,13 +24,4 @@ public abstract class ViewDecorator implements AcceptsOneWidget, IsWidget {
 		}
 		return decoratorWidget.asWidget();
 	}
-
-	@PresentHandler
-	public void present(Place place) {
-		if (view instanceof Presenter) {
-			Presenter presenter = (Presenter) view;
-			presenter.present(place, this);
-		}
-	}
-
 }

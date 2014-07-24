@@ -53,12 +53,24 @@ public class SuspendServiceOnPresentCreator extends InjectorCreatorDelegate {
 
 	@Override
 	public void writeAfterPresent(SourceWriter srcWriter) {
+		srcWriter.println("if (flush) {");
+		srcWriter.indent();
 		srcWriter.println("commandController.flush(new CallbackAdapter<List<CommandResponse>>() {");
+		srcWriter.indent();
 		srcWriter.println("@Override");
 		srcWriter.println("public void onSuccess(List<CommandResponse> result) {");
+		srcWriter.indent();
 		srcWriter.println("displayer.setWidget(%s.this);", injectorName);
+		srcWriter.outdent();
 		srcWriter.println("};");
+		srcWriter.outdent();
 		srcWriter.println("});");
+		srcWriter.outdent();
+		srcWriter.println("} else {");
+		srcWriter.indent();
+		srcWriter.println("displayer.setWidget(%s.this);", injectorName);
+		srcWriter.outdent();
+		srcWriter.println("}");
 		srcWriter.println("commandController.setSuspended(isSuspended);");
 	}
 }

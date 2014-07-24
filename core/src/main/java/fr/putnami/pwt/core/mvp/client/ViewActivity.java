@@ -69,7 +69,7 @@ public final class ViewActivity implements Activity, ViewProxy.Callback {
 		StartActivityEvent.fire(this, this.place, container, widget);
 		if (widget instanceof Presenter) {
 			Presenter presenter = (Presenter) widget;
-			presenter.present(this.place, container);
+			presenter.present(this.place, container, true);
 		}
 	}
 
