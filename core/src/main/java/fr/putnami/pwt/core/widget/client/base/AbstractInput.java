@@ -136,6 +136,9 @@ HasAllTouchHandlers
 	private Character accessKey;
 	private Integer tabIndex;
 
+	protected AbstractInput() {
+	}
+
 	public AbstractInput(Widget widget) {
 		initWidget(widget);
 	}

@@ -12,4 +12,7 @@ dependencies {
 
 	compile "org.springframework.security:spring-security-config:$springSecurityVersion"
 	compile "org.springframework.security:spring-security-web:$springSecurityVersion"
+
+	compile "commons-fileupload:commons-fileupload:+"
+	compile "org.codehaus.jackson:jackson-mapper-asl:1.9.5"
 }
