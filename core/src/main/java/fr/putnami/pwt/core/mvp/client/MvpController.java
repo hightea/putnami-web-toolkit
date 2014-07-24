@@ -61,6 +61,9 @@ public class MvpController extends PlaceController implements
 		return MvpController.instance;
 	}
 
+	private static final String PLACE_SEPARATOR = ">";
+	private static final char PLACE_TOKEN_SEPARATOR = ':';
+
 	private final Map<String, ActivityFactory> ACTIVITY_FACTORIES = Maps.newHashMap();
 
 	private final ActivityManager activityManager;
@@ -142,8 +145,24 @@ public class MvpController extends PlaceController implements
 
 	@Override
 	public Place getPlace(String token) {
-		int colonAt = token.indexOf(':');
+		String[] placesToken = token.split(PLACE_SEPARATOR);
+		Place result = null;
+		for (String placeToken : placesToken) {
+			Place localPlace = getSimplePlace(placeToken);
+			if (localPlace != null && localPlace instanceof ViewPlace && result instanceof ViewPlace) {
+				((ViewPlace) localPlace).setParent((ViewPlace) result);
+			}
+			result = localPlace;
+		}
+		return result;
+	}
+
+	private Place getSimplePlace(String token) {
+		int colonAt = token.indexOf(PLACE_TOKEN_SEPARATOR);
 		String prefix = token;
+		if (!prefix.startsWith("!")) {
+			prefix = "!" + prefix;
+		}
 		String rest = null;
 		if (colonAt > 0) {
 			prefix = token.substring(0, colonAt);
@@ -161,6 +180,10 @@ public class MvpController extends PlaceController implements
 		if (place == null) {
 			return null;
 		}
+		String parentToken = null;
+		if (place instanceof ViewPlace && ((ViewPlace) place).getParent() != null) {
+			parentToken = getToken(((ViewPlace) place).getParent());
+		}
 		String prefix = MvpUtils.getPlacePrefix(place);
 		String token = null;
 		ActivityFactory activityFactory = this.ACTIVITY_FACTORIES.get(prefix);
@@ -168,12 +191,20 @@ public class MvpController extends PlaceController implements
 			token = ((PlaceTokenizer) activityFactory).getToken(place);
 		}
 
+		String result = "";
+		if (parentToken != null) {
+			result = parentToken + PLACE_SEPARATOR;
+			if (prefix.startsWith("!")) {
+				prefix = prefix.substring(1);
+			}
+		}
 		if (token != null) {
-			return prefix.length() == 0 ? token : prefix + ":" + token;
+			result += prefix.length() == 0 ? token : prefix + PLACE_TOKEN_SEPARATOR + token;
 		}
 		else {
-			return prefix;
+			result += prefix;
 		}
+		return result;
 	}
 
 	public void setDisplay(AcceptsOneWidget display) {
