@@ -26,6 +26,9 @@ import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 public class IconFont extends CssLink {
 
 	public static final String ICON_CALENDAR = "calendar";
+	public static final String ICON_UPLOAD = "upload";
+	public static final String ICON_DOWNLOAD = "download";
+	public static final String ICON_CANCEL = "cancel";
 	public static final String ICON_ADD = "plus";
 	public static final String ICON_MENU = "menu";
 	public static final String ICON_MAIL = "mail";

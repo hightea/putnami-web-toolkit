@@ -91,10 +91,10 @@ import fr.putnami.pwt.core.widget.client.util.AnchorUtils;
 import fr.putnami.pwt.core.widget.client.util.HTMLUtils;
 
 public class Anchor<T> extends AbstractPanel implements
-		EditorValue<T>, CloneableWidget,
-		HasAllDragAndDropHandlers, HasAllMouseHandlers, HasClickHandlers,
-		HasDoubleClickHandlers, HasAllKeyHandlers, HasAllFocusHandlers,
-		HasAllGestureHandlers, HasAllTouchHandlers
+EditorValue<T>, CloneableWidget,
+HasAllDragAndDropHandlers, HasAllMouseHandlers, HasClickHandlers,
+HasDoubleClickHandlers, HasAllKeyHandlers, HasAllFocusHandlers,
+HasAllGestureHandlers, HasAllTouchHandlers
 {
 	private static final FocusImpl impl = FocusImpl.getFocusImplForPanel();
 
@@ -127,6 +127,7 @@ public class Anchor<T> extends AbstractPanel implements
 	}
 
 	public void setText(String text) {
+		getElement().removeAllChildren();
 		getElement().appendChild(Document.get().createTextNode(HTMLUtils.unescapeHTML(text)));
 	}
 
