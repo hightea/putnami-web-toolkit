@@ -35,9 +35,9 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class Table<T> extends AbstractPanel implements
-HasReadonly,
-CloneableWidget,
-RowClickEvent.HasRowClickHandlers {
+		HasReadonly,
+		CloneableWidget,
+		RowClickEvent.HasRowClickHandlers {
 
 	private static final CssStyle STYLE_TABLE = new SimpleStyle("table");
 	private static final CssStyle STYLE_RESPONSIVE = new SimpleStyle("table-responsive");
@@ -62,10 +62,7 @@ RowClickEvent.HasRowClickHandlers {
 	public Table() {
 		super(DivElement.TAG);
 
-		append(tableContainer);
-
-		StyleUtils.addStyle(this, STYLE_RESPONSIVE);
-		StyleUtils.addStyle(tableContainer, STYLE_TABLE);
+		endConstruct();
 
 		setStriped(striped);
 		setHover(hover);
@@ -74,6 +71,8 @@ RowClickEvent.HasRowClickHandlers {
 
 	protected Table(Table<T> source) {
 		super(source);
+
+		endConstruct();
 
 		setStriped(source.striped);
 		setHover(source.hover);
@@ -91,6 +90,13 @@ RowClickEvent.HasRowClickHandlers {
 	@Override
 	public IsWidget cloneWidget() {
 		return new Table<T>(this);
+	}
+
+	private void endConstruct() {
+		append(tableContainer);
+
+		StyleUtils.addStyle(this, STYLE_RESPONSIVE);
+		StyleUtils.addStyle(tableContainer, STYLE_TABLE);
 	}
 
 	public boolean isStriped() {
