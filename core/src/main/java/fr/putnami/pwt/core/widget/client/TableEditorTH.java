@@ -17,7 +17,6 @@
 package fr.putnami.pwt.core.widget.client;
 
 import java.util.Collection;
-import java.util.Collections;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -34,10 +33,10 @@ import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class TableEditorTH<T> extends TableTH<T> implements
-EditorLabel {
+		EditorLabel {
 
 	private static final CssStyle STYLE_FLOAT_RIGHT = new SimpleStyle("pull-right");
-	private Collection<AbstractTableColumnAspect<T>> aspects;
+	private Collection<AbstractTableColumnAspect<T>> aspects = Lists.newArrayList();
 	private String text;
 
 	private String path;
@@ -61,9 +60,6 @@ EditorLabel {
 	}
 
 	public void addAspect(AbstractTableColumnAspect<T> aspect) {
-		if (aspects == null) {
-			aspects = Lists.newArrayList();
-		}
 		aspects.add(aspect);
 	}
 
@@ -98,7 +94,7 @@ EditorLabel {
 	public void redraw() {
 		super.redraw();
 		clear();
-		if (aspects != null && aspects.size() > 0) {
+		if (aspects.size() > 0) {
 			FlowPanel flowPanel = new FlowPanel();
 			int countAspectWidget = 0;
 			for (AbstractTableColumnAspect aspect : aspects) {
@@ -132,7 +128,7 @@ EditorLabel {
 
 	@Override
 	public Iterable<Editor> getEditors() {
-		return aspects == null ? Collections.emptySet() : Iterables.unmodifiableIterable((Collection) aspects);
+		return Iterables.unmodifiableIterable((Collection) aspects);
 	}
 
 	@Override
