@@ -143,7 +143,7 @@ public final class ModelUtils {
 					list.add(value);
 				}
 				else {
-					list.add(firstElementIndex, value);
+					list.set(firstElementIndex, value);
 				}
 			}
 		}
