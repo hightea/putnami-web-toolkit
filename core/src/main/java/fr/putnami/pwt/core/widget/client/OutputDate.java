@@ -20,10 +20,10 @@ import java.util.Date;
 
 import com.google.gwt.user.client.ui.IsWidget;
 
-import fr.putnami.pwt.core.widget.client.base.AbstractOutput;
+import fr.putnami.pwt.core.widget.client.base.AbstractTextOutput;
 import fr.putnami.pwt.core.widget.client.helper.DateRenderer;
 
-public class OutputDate extends AbstractOutput<Date> {
+public class OutputDate extends AbstractTextOutput<Date> {
 
 	private String format;
 

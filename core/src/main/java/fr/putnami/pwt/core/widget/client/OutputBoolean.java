@@ -16,24 +16,44 @@
  */
 package fr.putnami.pwt.core.widget.client;
 
-import java.io.IOException;
-
-import com.google.gwt.text.shared.Renderer;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Text;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.IsWidget;
 
 import fr.putnami.pwt.core.widget.client.base.AbstractOutput;
 
-public class OutputBoolean extends AbstractOutput<Boolean> implements Renderer<Boolean> {
+public class OutputBoolean extends AbstractOutput<Boolean> {
+
+	public enum RenderType {
+		ICON_AND_TEXT,
+		ICON,
+		TEXT;
+	}
 
 	private String trueLabel = Boolean.TRUE.toString();
 	private String falseLabel = Boolean.TRUE.toString();
 
+	private Icon trueIcon;
+	private Icon falseIcon;
+
+	private RenderType outputType = RenderType.ICON_AND_TEXT;
+
 	public OutputBoolean() {
-		setRenderer(this);
 	}
 
 	protected OutputBoolean(OutputBoolean source) {
 		super(source);
+		this.trueLabel = source.trueLabel;
+		this.falseLabel = source.falseLabel;
+		this.outputType = source.outputType;
+		if (source.trueIcon != null) {
+			setTrueIcon((Icon) source.trueIcon.cloneWidget());
+		}
+		if (source.falseIcon != null) {
+			setFalseIcon((Icon) source.falseIcon.cloneWidget());
+		}
+
 	}
 
 	@Override
@@ -42,13 +62,31 @@ public class OutputBoolean extends AbstractOutput<Boolean> implements Renderer<B
 	}
 
 	@Override
-	public String render(Boolean object) {
-		return Boolean.TRUE.equals(object) ? trueLabel : falseLabel;
+	protected void ensureElement(Element element) {
+		resetInner();
 	}
 
 	@Override
-	public void render(Boolean object, Appendable appendable) throws IOException {
-		appendable.append(render(object));
+	protected void renderValue(Boolean value) {
+		resetInner();
+	}
+
+	private void resetInner() {
+		if (elementExists()) {
+			Element element = getElement();
+			element.removeAllChildren();
+			boolean rendervalue = Boolean.TRUE.equals(getValue());
+			if (outputType != RenderType.TEXT) {
+				Icon icon = rendervalue ? trueIcon : falseIcon;
+				if (icon != null) {
+					element.appendChild(icon.getElement());
+				}
+			}
+			if (outputType != RenderType.ICON) {
+				Text textElem = Document.get().createTextNode(rendervalue ? trueLabel : falseLabel);
+				element.appendChild(textElem);
+			}
+		}
 	}
 
 	public String getTrueLabel() {
@@ -57,6 +95,7 @@ public class OutputBoolean extends AbstractOutput<Boolean> implements Renderer<B
 
 	public void setTrueLabel(String trueLabel) {
 		this.trueLabel = trueLabel;
+		resetInner();
 	}
 
 	public String getFalseLabel() {
@@ -65,6 +104,34 @@ public class OutputBoolean extends AbstractOutput<Boolean> implements Renderer<B
 
 	public void setFalseLabel(String falseLabel) {
 		this.falseLabel = falseLabel;
+		resetInner();
+	}
+
+	public void setTrueIcon(Icon icon) {
+		trueIcon = icon;
+		resetInner();
+	}
+
+	public void setTrueIconType(String iconType) {
+		trueIcon = new Icon();
+		trueIcon.setType(iconType);
+		resetInner();
+	}
+
+	public void setFalseIcon(Icon icon) {
+		falseIcon = icon;
+		resetInner();
+	}
+
+	public void setFalseIconType(String iconType) {
+		falseIcon = new Icon();
+		falseIcon.setType(iconType);
+		resetInner();
+	}
+
+	public void setOutputType(RenderType outputType) {
+		this.outputType = outputType;
+		resetInner();
 	}
 
 }

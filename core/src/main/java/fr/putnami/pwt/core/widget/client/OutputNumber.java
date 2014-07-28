@@ -18,10 +18,10 @@ package fr.putnami.pwt.core.widget.client;
 
 import com.google.gwt.user.client.ui.IsWidget;
 
-import fr.putnami.pwt.core.widget.client.base.AbstractOutput;
+import fr.putnami.pwt.core.widget.client.base.AbstractTextOutput;
 import fr.putnami.pwt.core.widget.client.helper.NumberRenderer;
 
-public class OutputNumber extends AbstractOutput<Number> {
+public class OutputNumber extends AbstractTextOutput<Number> {
 
 	private String format;
 

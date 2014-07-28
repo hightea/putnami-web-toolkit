@@ -113,15 +113,23 @@
 			<!-- OutputBoolean -->
 			<div>
 				<w:Heading level="3" summary="docSummary">OutputBoolean</w:Heading>
-				<p>The <code>OutputBoolean</code> can customize the rendered value when true or false.</p>
+				<p>The <code>OutputBoolean</code> can customize the rendered value when true or false and can use icons too.</p>
 				<div class="showcase-sample-block">
 					<div class="showcase-sample">
 						<w:OutputBoolean path="major" trueLabel="I am major" falseLabel="I am minor"/>
 						<w:OutputBoolean path="notMajor" trueLabel="I am major" falseLabel="I am minor"/>
+						<w:OutputBoolean path="major" trueLabel="I am major" trueIconType="ok" falseLabel="I am minor" falseIconType="cancel"/>
+						<w:OutputBoolean path="notmajor" trueLabel="I am major" trueIconType="ok" falseLabel="I am minor" falseIconType="cancel"/>
+						<w:OutputBoolean path="major" trueIconType="ok" falseIconType="cancel" outputType="ICON"/>
+						<w:OutputBoolean path="notmajor" trueIconType="ok" falseIconType="cancel" outputType="ICON"/>
 					</div>
 					<c:StaticCode configuration="{XML_CONFIGURATION}">
 						<pre><![CDATA[<w:OutputBoolean path="major" trueLabel="I am major" falseLabel="I am minor"/>
-<w:OutputBoolean path="notMajor"  trueLabel="I am major" falseLabel="I am minor" />]]></pre>
+<w:OutputBoolean path="notMajor"  trueLabel="I am major" falseLabel="I am minor" />
+<w:OutputBoolean path="major" trueLabel="I am major" trueIconType="ok" falseLabel="I am minor" falseIconType="cancel"/>
+<w:OutputBoolean path="notmajor" trueLabel="I am major" trueIconType="ok" falseLabel="I am minor" falseIconType="cancel"/>
+<w:OutputBoolean path="major" trueIconType="ok" falseIconType="cancel" outputType="ICON"/>
+<w:OutputBoolean path="notmajor" trueIconType="ok" falseIconType="cancel" outputType="ICON"/>]]></pre>
 					</c:StaticCode>
 				</div>
 			</div>
