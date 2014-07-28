@@ -38,6 +38,8 @@ public class TableColumn<T> extends AbstractTableColumn<T> implements
 
 	private String path;
 
+	private String headerText;
+
 	public TableColumn() {
 
 	}
@@ -86,6 +88,7 @@ public class TableColumn<T> extends AbstractTableColumn<T> implements
 		TableEditorTH<T> headerCell = new TableEditorTH<T>();
 		headerCell.setPath(path);
 		headerCell.setColspan(getColspan());
+		headerCell.setText(headerText);
 		for (AbstractTableColumnAspect aspect : getAspects()) {
 			if (aspect.getColumnPath() == null) {
 				aspect.setColumnPath(path);
@@ -113,6 +116,10 @@ public class TableColumn<T> extends AbstractTableColumn<T> implements
 	@Override
 	public void add(Widget child) {
 		add((IsWidget) child);
+	}
+
+	public void setHeaderText(String headerText) {
+		this.headerText = headerText;
 	}
 
 	@Override
