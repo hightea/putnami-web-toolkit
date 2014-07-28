@@ -16,15 +16,15 @@
  */
 package fr.putnami.pwt.core.widget.client;
 
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.IsWidget;
 
 import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.theme.client.ThemeController;
+import fr.putnami.pwt.core.widget.client.base.AbstractWidget;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public class Icon extends Widget {
+public class Icon extends AbstractWidget {
 
 	private static final CssStyle STYLE_LIGHT = new SimpleStyle("light");
 
@@ -57,7 +57,19 @@ public class Icon extends Widget {
 	private boolean light;
 
 	public Icon() {
-		this.setElement(Document.get().createElement(Icon.ICON_TAG_NAME));
+		super(Icon.ICON_TAG_NAME);
+	}
+
+	protected Icon(Icon source) {
+		super(source);
+		setType(source.type);
+		setColor(source.color);
+		setLight(source.light);
+	}
+
+	@Override
+	public IsWidget cloneWidget() {
+		return new Icon(this);
 	}
 
 	public void setType(String type) {
