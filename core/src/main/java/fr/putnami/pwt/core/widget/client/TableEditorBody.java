@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -85,7 +86,7 @@ public class TableEditorBody<T> extends TableBody<T> implements
 	public void initialize(Model<T> model, Visitor... visitors) {
 		assert this.model == null : "model can not be set twice.";
 		this.model = model;
-		this.driver = new ModelDriver<Collection<T>>((ModelCollection<T>) model);
+		this.driver = new ModelDriver<Collection<T>>(new ModelCollection<T>(List.class, model));
 		this.driver.setMessageHelper(messageHelper);
 		this.driver.initialize(this, visitors);
 		this.driver.accept(new ReadonlyVisitor(this, getReadonly(), true));
@@ -148,7 +149,7 @@ public class TableEditorBody<T> extends TableBody<T> implements
 			}
 			row.setReadonly(getReadonly());
 			row.setMessageHelper(messageHelper);
-			row.initialize((Model<T>) this.driver.getModel().getLeafModel());
+			row.setPath(Strings.nullToEmpty(getPath()) + "[" + index + "]");
 
 			addRow(row);
 		}

@@ -35,9 +35,10 @@ public class ModelInitializerVisitor extends AbstractVisitor {
 			ModelDriver<?> driver = context.getDriver();
 
 			Model<?> model = ModelUtils.resolveModel(driver.getModel(), context.getPath());
+			Model<?> toInitialize = model.getLeafModel() != null ? model.getLeafModel() : model;
 
 			editorModel.setMessageHelper(driver.getMessageHelper());
-			editorModel.initialize(model, driver.getVisitors().toArray(new Visitor[] {}));
+			editorModel.initialize(toInitialize, driver.getVisitors().toArray(new Visitor[driver.getVisitors().size()]));
 		}
 		return true;
 	}

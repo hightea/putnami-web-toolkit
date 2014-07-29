@@ -16,19 +16,14 @@
  */
 package fr.putnami.pwt.core.model.client.visitor;
 
-import java.util.Collection;
-import java.util.List;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Multimap;
 
 import fr.putnami.pwt.core.editor.client.Context;
 import fr.putnami.pwt.core.editor.client.Editor;
-import fr.putnami.pwt.core.editor.client.EditorCollection;
 import fr.putnami.pwt.core.editor.client.EditorError;
 import fr.putnami.pwt.core.editor.client.EditorInput;
-import fr.putnami.pwt.core.editor.client.EditorValue;
 import fr.putnami.pwt.core.editor.client.Error;
 import fr.putnami.pwt.core.editor.client.Path;
 import fr.putnami.pwt.core.editor.client.impl.SimpleError;
@@ -67,24 +62,6 @@ public class FlusherVisitor<T> extends AbstractVisitor {
 			if (editor instanceof HasDriver && !context.isRootContext()) {
 				HasDriver hasDriverEditor = (HasDriver) editor;
 				hasDriverEditor.getDriver().accept(this);
-			}
-
-			if (context.isRootContext() && editor instanceof EditorCollection) {
-				EditorCollection editorList = (EditorCollection) editor;
-				Collection collectionBinded = (Collection) ModelUtils.resolveValue(targetValue, this.model, path);
-
-				value = (A) collectionBinded;
-				if (collectionBinded instanceof List) {
-					for (int i = 0; i < collectionBinded.size(); i++) {
-						EditorValue traversalEditor = editorList.getEditorForTraversal(i);
-						if (traversalEditor instanceof EditorInput) {
-							((List) collectionBinded).set(i, ((EditorInput) traversalEditor).flush());
-						}
-						else {
-							((List) collectionBinded).set(i, traversalEditor.getValue());
-						}
-					}
-				}
 			}
 
 			EditorInput<A> inputEditor = (EditorInput<A>) editor;

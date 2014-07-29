@@ -42,7 +42,7 @@ public class ReadonlyAspectVisitor extends AbstractVisitor {
 	@Override
 	public <A, B extends Editor> boolean visit(Context<B> context) {
 		Editor editor = context.getEditor();
-		if (editor instanceof HasReadonly) {
+		if (editor instanceof HasReadonly && !context.hasAspect(ReadonlyAspect.class)) {
 			HasReadonly hasReadonly = (HasReadonly) editor;
 			context.addAspect(new ReadonlyAspect(hasReadonly.getReadonly()));
 		}

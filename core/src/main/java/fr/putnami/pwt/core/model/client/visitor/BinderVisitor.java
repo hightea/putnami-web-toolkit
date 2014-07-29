@@ -30,12 +30,18 @@ import fr.putnami.pwt.core.editor.client.aspect.ContextAspect;
 import fr.putnami.pwt.core.editor.client.visitor.AbstractVisitor;
 import fr.putnami.pwt.core.model.client.ModelDriver;
 import fr.putnami.pwt.core.model.client.base.HasDrawable;
+import fr.putnami.pwt.core.model.client.base.HasReadonly;
+import fr.putnami.pwt.core.model.client.factory.ContextFactory;
 import fr.putnami.pwt.core.model.client.util.ModelUtils;
 
 public class BinderVisitor extends AbstractVisitor {
 
 	public class TraversalEditorsAspect implements ContextAspect {
-		private final List<Context<EditorValue<?>>> contexts = Lists.newArrayList();
+		private final List<Context<EditorValue>> contexts = Lists.newArrayList();
+
+		public List<Context<EditorValue>> getContexts() {
+			return contexts;
+		}
 	}
 
 	private final ModelDriver<?> driver;
@@ -72,19 +78,22 @@ public class BinderVisitor extends AbstractVisitor {
 			EditorCollection editorList = (EditorCollection) editor;
 			Collection collectionToBind = (Collection) value;
 
-//			// TODO implement traversal editor recycling
-//			for (Context contextToRemove : aspect.contexts) {
-//				driver.removeContext(contextToRemove);
-//			}
-//			aspect.contexts.clear();
+			for (Context contextToRemove : aspect.contexts) {
+				driver.removeContext(contextToRemove);
+			}
+			aspect.contexts.clear();
 
 			int i = 0;
 			for (Object o : collectionToBind) {
 				EditorValue traversalEditor = editorList.getEditorForTraversal(i);
-				Context<EditorValue<?>> contextCreated = (Context<EditorValue<?>>) driver.getContext(traversalEditor);
-//				aspect.contexts.add(contextCreated);
-				traversalEditor.edit(o);
-				driver.removeContext(contextCreated);
+				Context<EditorValue> contextCreated = (Context<EditorValue>) driver.getContext(traversalEditor);
+				if (contextCreated == null) {
+					contextCreated = ContextFactory.Util.get().createContext(driver, null, traversalEditor);
+					if (editor instanceof HasReadonly) {
+						driver.accept(new ReadonlyVisitor(editor, ((HasReadonly) editor).getReadonly(), true), contextCreated);
+					}
+				}
+				aspect.contexts.add(contextCreated);
 				i++;
 			}
 		}
