@@ -29,6 +29,7 @@ import fr.putnami.pwt.core.editor.client.visitor.AbstractVisitor;
 import fr.putnami.pwt.core.model.client.ModelDriver;
 import fr.putnami.pwt.core.model.client.factory.EditorFactoryManager;
 import fr.putnami.pwt.core.model.client.model.Model;
+import fr.putnami.pwt.core.model.client.model.ModelCollection;
 import fr.putnami.pwt.core.model.client.util.ModelUtils;
 
 public class TooltipRendererVisitor extends AbstractVisitor {
@@ -39,14 +40,18 @@ public class TooltipRendererVisitor extends AbstractVisitor {
 		ModelDriver<?> driver = context.getDriver();
 		MessageHelper messageHelper = driver.getMessageHelper();
 		if (messageHelper != null && editor instanceof EditorLeaf) {
+			Class<?> parentPropertyType = null;
 			Path path = context.getPath();
-			Model<?> model = driver.getModel();
-			Class<?> propertyType = model.getLeafType();
-			Model<?> propertyModel = ModelUtils.resolveModel(model, context.getPath());
-			if (propertyModel != null) {
-				propertyType = propertyModel.getLeafType();
+			Path parentPath = path.subPath(0, path.size() - 1);
+			Model<?> model = ModelUtils.resolveModel(driver.getModel(), parentPath);
+			if (model instanceof ModelCollection) {
+				parentPropertyType = model.getLeafType();
 			}
-			String label = messageHelper.getMessage(propertyType, path, EditorLabel.TOOLTIP_SUFFIX);
+			else {
+				parentPropertyType = ModelUtils.resolveType(driver.getModel(), parentPath);
+			}
+
+			String label = messageHelper.getMessage(parentPropertyType, path, EditorLabel.TOOLTIP_SUFFIX);
 
 			if (label != null && editor instanceof EditorInput) {
 				EditorFactoryManager.get().createTooltip((IsWidget) editor, label);

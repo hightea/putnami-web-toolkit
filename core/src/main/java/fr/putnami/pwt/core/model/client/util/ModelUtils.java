@@ -68,6 +68,9 @@ public final class ModelUtils {
 	}
 
 	public static <A, B> Class<A> resolveType(Model<B> model, Path path) {
+		if (path.size() == 0) {
+			return (Class<A>) model.getLeafType();
+		}
 		PropertyDescription propertyDescription = resolveProperty(model, path);
 		if (propertyDescription != null) {
 			return (Class<A>) propertyDescription.getClazz();

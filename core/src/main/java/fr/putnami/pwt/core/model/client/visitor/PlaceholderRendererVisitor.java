@@ -24,6 +24,7 @@ import fr.putnami.pwt.core.editor.client.visitor.AbstractVisitor;
 import fr.putnami.pwt.core.model.client.ModelDriver;
 import fr.putnami.pwt.core.model.client.base.HasPlaceholder;
 import fr.putnami.pwt.core.model.client.model.Model;
+import fr.putnami.pwt.core.model.client.model.ModelCollection;
 import fr.putnami.pwt.core.model.client.util.ModelUtils;
 
 public class PlaceholderRendererVisitor extends AbstractVisitor {
@@ -34,13 +35,21 @@ public class PlaceholderRendererVisitor extends AbstractVisitor {
 		if (editor instanceof HasPlaceholder) {
 			ModelDriver<?> driver = context.getDriver();
 			MessageHelper messageHelper = driver.getMessageHelper();
-			Model<?> model = driver.getModel();
-			Class<?> propertyType = ModelUtils.resolveType(model, context.getPath());
+			Class<?> parentPropertyType = null;
+			Path path = context.getPath();
+			Path parentPath = path.subPath(0, path.size() - 1);
+			Model<?> model = ModelUtils.resolveModel(driver.getModel(), parentPath);
+			if (model instanceof ModelCollection) {
+				parentPropertyType = model.getLeafType();
+			}
+			else {
+				parentPropertyType = ModelUtils.resolveType(driver.getModel(), parentPath);
+			}
+
 			HasPlaceholder hasPlaceholder = (HasPlaceholder) editor;
 			String defaulText = hasPlaceholder.getPlaceholder();
-			Path path = context.getPath();
 			if (messageHelper != null && defaulText == null && path != null) {
-				String label = messageHelper.getMessage(propertyType, path, HasPlaceholder.PLACEHOLDER_SUFFIX);
+				String label = messageHelper.getMessage(parentPropertyType, path, HasPlaceholder.PLACEHOLDER_SUFFIX);
 				if (label != null) {
 					hasPlaceholder.setPlaceholder(label);
 				}
