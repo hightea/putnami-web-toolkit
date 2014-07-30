@@ -94,7 +94,6 @@ public class TableRow<T> extends AbstractPanel implements
 		this.driver = new ModelDriver<T>(model);
 		this.driver.setMessageHelper(messageHelper);
 		this.driver.initialize(this, visitors);
-		this.driver.accept(new ReadonlyVisitor(this, readonly, true));
 	}
 
 	@Override

@@ -24,6 +24,7 @@ import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
 import fr.putnami.pwt.core.editor.client.visitor.AbstractVisitor;
 import fr.putnami.pwt.core.model.client.ModelDriver;
 import fr.putnami.pwt.core.model.client.model.Model;
+import fr.putnami.pwt.core.model.client.model.ModelCollection;
 import fr.putnami.pwt.core.model.client.util.ModelUtils;
 
 public class LabelRendererVisitor extends AbstractVisitor {
@@ -35,17 +36,20 @@ public class LabelRendererVisitor extends AbstractVisitor {
 		MessageHelper messageHelper = driver.getMessageHelper();
 		if (messageHelper != null && editor instanceof EditorLabel) {
 			EditorLabel editorLabel = (EditorLabel) editor;
-			Model<?> model = driver.getModel();
 
-			Class<?> propertyType = model.getLeafType();
-			Model<?> propertyModel = ModelUtils.resolveModel(model, context.getPath());
-			if (propertyModel != null) {
-				propertyType = propertyModel.getLeafType();
+			Class<?> parentPropertyType = null;
+			Path path = context.getPath();
+			Path parentPath = path.subPath(0, path.size() - 1);
+			Model<?> model = ModelUtils.resolveModel(driver.getModel(), parentPath);
+			if (model instanceof ModelCollection) {
+				parentPropertyType = model.getLeafType();
+			}
+			else {
+				parentPropertyType = ModelUtils.resolveType(driver.getModel(), parentPath);
 			}
 
 			String defaulText = editorLabel.getText();
 			String label = defaulText;
-			Path path = context.getPath();
 			String labelKey = editorLabel.getLabelKey();
 			String firstKey = null;
 			if (label == null) {
@@ -53,11 +57,11 @@ public class LabelRendererVisitor extends AbstractVisitor {
 					String key = null;
 					if (labelKey == null) {
 						key = messageHelper.getMessageKey(path, suffix);
-						label = messageHelper.getMessage(propertyType, path, suffix);
+						label = messageHelper.getMessage(parentPropertyType, path, suffix);
 					}
 					else {
 						key = labelKey + suffix;
-						label = messageHelper.findMessage(propertyType, key);
+						label = messageHelper.findMessage(parentPropertyType, key);
 					}
 					if (firstKey == null) {
 						firstKey = key;

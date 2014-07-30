@@ -40,8 +40,7 @@ public final class ModelUtils {
 		if (path.size() == 1) {
 			return model.getProperty(firstElementName);
 		}
-		else if (Path.ROOT_PATH.equals(firstElementName)
-				&& path.get(0).getIndexKey() != null) {
+		else if (Path.ROOT_PATH.equals(firstElementName)) {
 			return ModelUtils.resolveProperty(model, path.subPath(1));
 		}
 		else {
@@ -69,6 +68,9 @@ public final class ModelUtils {
 	}
 
 	public static <A, B> Class<A> resolveType(Model<B> model, Path path) {
+		if (path.size() == 0) {
+			return (Class<A>) model.getLeafType();
+		}
 		PropertyDescription propertyDescription = resolveProperty(model, path);
 		if (propertyDescription != null) {
 			return (Class<A>) propertyDescription.getClazz();
@@ -84,6 +86,7 @@ public final class ModelUtils {
 		PathElement firstElement = path.get(0);
 		String firstElementName = firstElement.getElementName();
 		firstElementName = firstElementName == null ? Path.ROOT_PATH : firstElementName;
+		Integer firstElementIndex = firstElement.getIndexKey();
 
 		Object value = bean;
 		Model<?> leafModel = model;
@@ -95,10 +98,10 @@ public final class ModelUtils {
 			value = leafModel.get(bean, firstElementName);
 		}
 
-		if (firstElement.getIndexKey() != null && value instanceof Collection) {
+		if (firstElementIndex != null && value instanceof Collection) {
 			Collection collection = (Collection) value;
 			if (collection.size() > firstElement.getIndexKey()) {
-				value = Iterables.get(collection, firstElement.getIndexKey());
+				value = Iterables.get(collection, firstElementIndex);
 			}
 			else {
 				value = null;
@@ -113,7 +116,6 @@ public final class ModelUtils {
 				leafModel = leafModel.getProperty(firstElementName).getModel();
 			}
 			return ModelUtils.resolveValue(value, leafModel, path.subPath(1));
-
 		}
 	}
 
@@ -125,63 +127,72 @@ public final class ModelUtils {
 		PathElement firstElement = path.get(0);
 		String firstElementName = firstElement.getElementName();
 		Integer firstElementIndex = firstElement.getIndexKey();
-		if (path.size() == 1 && firstElementIndex == null) {
-			model.set(bean, firstElementName, value);
-		}
-		else if (path.size() == 1 && firstElementIndex != null) {
-			Object o = model.get(bean, firstElementName);
-			if (o == null) {
-				o = model.newInstance();
-				model.set(bean, firstElementName, o);
+
+		if (path.size() == 1) {
+			if (firstElementIndex == null) {
+				model.set(bean, firstElementName, value);
 			}
-			if (o instanceof List) {
-				List list = (List) o;
-				while (list.size() < firstElementIndex.intValue()) {
-					list.add(null);
-				}
-				if (firstElementIndex.equals(list.size())) {
-					list.add(value);
+			else {
+				Object o;
+				if (Path.ROOT_PATH.equals(firstElementName)) {
+					o = bean;
 				}
 				else {
+					o = model.get(bean, firstElementName);
+					if (o == null) {
+						o = model.newInstance();
+						model.set(bean, firstElementName, o);
+					}
+				}
+				if (o instanceof List) {
+					List list = (List) o;
+					while (list.size() <= firstElementIndex.intValue()) {
+						list.add(null);
+					}
 					list.set(firstElementIndex, value);
 				}
 			}
 		}
-		else if (Path.ROOT_PATH.equals(firstElementName)
-				&& path.size() == 2) {
-			model.set(bean, path.get(1).getElementName(), value);
-		}
-		else if (firstElementIndex != null) {
-			Object o = model.get(bean, firstElementName);
-			if (o == null) {
-				o = model.newInstance();
-				model.set(bean, firstElementName, o);
+		else {
+			if (Path.ROOT_PATH.equals(firstElementName) && firstElementIndex == null) {
+				ModelUtils.bindValue(bean, model, path.subPath(1), value);
 			}
-			if (o instanceof List) {
-				List list = (List) o;
-				int size = list.size();
-				while (list.size() < firstElementIndex.intValue()) {
-					list.add(null);
+			else if (firstElementIndex != null) {
+				Object o;
+				if (Path.ROOT_PATH.equals(firstElementName)) {
+					o = bean;
 				}
-				Object subBean = list.get(firstElementIndex);
+				else {
+					o = model.get(bean, firstElementName);
+					if (o == null) {
+						o = model.newInstance();
+						model.set(bean, firstElementName, o);
+					}
+				}
+				if (o instanceof List) {
+					List list = (List) o;
+					while (list.size() <= firstElementIndex.intValue()) {
+						list.add(null);
+					}
+					Object subBean = list.get(firstElementIndex);
 
-				Model<Object> subModel = model.getLeafModel();
+					Model<Object> subModel = model.getLeafModel();
+					if (subBean == null) {
+						subBean = subModel.newInstance();
+						list.set(firstElementIndex, subBean);
+					}
+					ModelUtils.bindValue(subBean, subModel, path.subPath(1), value);
+				}
+			}
+			else {
+				Model<Object> subModel = (Model<Object>) model.getProperty(firstElementName).getModel();
+				Object subBean = model.get(bean, firstElementName);
 				if (subBean == null) {
 					subBean = subModel.newInstance();
-					list.add(firstElementIndex, subBean);
+					model.set(bean, firstElementName, subBean);
 				}
 				ModelUtils.bindValue(subBean, subModel, path.subPath(1), value);
 			}
-
-		}
-		else {
-			Model<Object> subModel = (Model<Object>) model.getProperty(firstElementName).getModel();
-			Object subBean = model.get(bean, firstElementName);
-			if (subBean == null) {
-				subBean = subModel.newInstance();
-				model.set(bean, firstElementName, subBean);
-			}
-			ModelUtils.bindValue(subBean, subModel, path.subPath(1), value);
 		}
 		return;
 	}

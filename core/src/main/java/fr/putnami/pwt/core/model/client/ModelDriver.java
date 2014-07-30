@@ -18,6 +18,7 @@ package fr.putnami.pwt.core.model.client;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -224,8 +225,20 @@ public class ModelDriver<T> implements Driver<T> {
 
 	}
 
-	public boolean removeContext(Context<?> context) {
-		return contexts.remove(context);
+	public boolean removeContext(final Context<?> context) {
+		if (contexts.remove(context)) {
+			Iterable<Context<?>> children = Iterables.filter(contexts, new Predicate<Context<?>>() {
+				@Override
+				public boolean apply(Context<?> input) {
+					return context.equals(input.getParentContext());
+				}
+			});
+			for (Context<?> childContext : children) {
+				removeContext(childContext);
+			}
+			return true;
+		}
+		return false;
 	}
 
 	public boolean addContext(Context<?> context) {
@@ -331,8 +344,9 @@ public class ModelDriver<T> implements Driver<T> {
 		if (!visitor.beforeVisit()) {
 			return false;
 		}
-		for (int i = 0; i < contexts.size(); i++) {
-			Context<?> context = contexts.get(i);
+		for (Iterator<Context<?>> contextsIterator = contexts.iterator(); contextsIterator.hasNext();) {
+//		for (int i = 0; i < contexts.size(); i++) {
+			Context<?> context = contextsIterator.next();
 			if (context != null && !visitor.visit(context)) {
 				break;
 			}

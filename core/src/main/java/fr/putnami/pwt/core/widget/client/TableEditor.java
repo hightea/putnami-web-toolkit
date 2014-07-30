@@ -30,6 +30,7 @@ import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
 import fr.putnami.pwt.core.editor.client.validator.Validator;
 import fr.putnami.pwt.core.model.client.ModelDriver;
 import fr.putnami.pwt.core.model.client.base.EditorModel;
+import fr.putnami.pwt.core.model.client.base.HasDriver;
 import fr.putnami.pwt.core.model.client.model.Model;
 import fr.putnami.pwt.core.model.client.model.ModelCollection;
 import fr.putnami.pwt.core.model.client.visitor.ReadonlyVisitor;
@@ -38,6 +39,7 @@ import fr.putnami.pwt.core.widget.client.helper.PaginationHelper;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class TableEditor<T> extends Table<T> implements
+		HasDriver<Collection<T>, ModelDriver<Collection<T>>>,
 		EditorLeaf,
 		EditorOutput<Collection<T>>,
 		EditorInput<Collection<T>>,
@@ -110,6 +112,16 @@ public class TableEditor<T> extends Table<T> implements
 		if (pagination != null) {
 			driver.registerVisitor(pagination);
 		}
+	}
+
+	@Override
+	public ModelDriver<Collection<T>> getDriver() {
+		return driver;
+	}
+
+	@Override
+	public void setDriver(ModelDriver<Collection<T>> driver) {
+		// Nothing to do, initialised method must be call in order to collect contexts
 	}
 
 	@Override
