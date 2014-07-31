@@ -78,10 +78,9 @@ public class BinderVisitor extends AbstractVisitor {
 			EditorCollection editorList = (EditorCollection) editor;
 			Collection collectionToBind = (Collection) value;
 
-			for (Context contextToRemove : aspect.contexts) {
-				driver.removeContext(contextToRemove);
+			while (collectionToBind.size() < aspect.contexts.size()) {
+				driver.removeContext(aspect.contexts.remove(collectionToBind.size()));
 			}
-			aspect.contexts.clear();
 
 			int i = 0;
 			for (Object o : collectionToBind) {
@@ -92,8 +91,8 @@ public class BinderVisitor extends AbstractVisitor {
 					if (editor instanceof HasReadonly) {
 						driver.accept(new ReadonlyVisitor(editor, ((HasReadonly) editor).getReadonly(), true), contextCreated);
 					}
+					aspect.contexts.add(contextCreated);
 				}
-				aspect.contexts.add(contextCreated);
 				i++;
 			}
 		}
