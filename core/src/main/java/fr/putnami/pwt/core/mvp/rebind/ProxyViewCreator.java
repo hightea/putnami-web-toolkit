@@ -40,6 +40,7 @@ import fr.putnami.pwt.core.mvp.client.ViewPlace;
 import fr.putnami.pwt.core.mvp.client.ViewProxy;
 import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription.Scope;
+import fr.putnami.pwt.core.mvp.client.exception.ApplicationUnreachableException;
 
 public class ProxyViewCreator {
 
@@ -194,7 +195,12 @@ public class ProxyViewCreator {
 			srcWriter.indent();
 			srcWriter.println("public void onFailure(Throwable reason) {");
 			srcWriter.indent();
-			srcWriter.println("throw new RuntimeException(reason);");
+			srcWriter.println("if (ApplicationUnreachableException.HTTP_DOWNLOAD_FAILURE_EXCEPTION.equals(reason.getClass().getSimpleName())) {");
+			srcWriter.indent();
+			srcWriter.println("reason = new ApplicationUnreachableException(reason);");
+			srcWriter.outdent();
+			srcWriter.println("}");
+			srcWriter.println("GWT.reportUncaughtException(reason);");
 			srcWriter.outdent();
 			srcWriter.println("}");
 			srcWriter.println("public void onSuccess() {");
@@ -247,6 +253,7 @@ public class ProxyViewCreator {
 		composerFactory.addImport(ViewPlace.class.getName());
 		composerFactory.addImport(Activity.class.getName());
 		composerFactory.addImport(ViewActivity.class.getName());
+		composerFactory.addImport(ApplicationUnreachableException.class.getName());
 		composerFactory.addImport(placeType.getQualifiedSourceName());
 		composerFactory.addImport(activityDescrition.view().getCanonicalName());
 		if (placeTokenizerClass != null) {

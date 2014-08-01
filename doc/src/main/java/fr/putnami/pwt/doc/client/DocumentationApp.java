@@ -16,6 +16,10 @@
  */
 package fr.putnami.pwt.doc.client;
 
+import static fr.putnami.pwt.doc.client.application.ApplicationConfig.ANALYTICS_TRACKER_ID;
+import static fr.putnami.pwt.doc.client.application.ApplicationConfig.COOKIE_COUNT_VISIT;
+import static fr.putnami.pwt.doc.client.application.ApplicationConfig.DOMAIN;
+
 import com.google.common.base.Strings;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -31,6 +35,7 @@ import fr.putnami.pwt.core.theme.client.CssLink;
 import fr.putnami.pwt.core.theme.client.Theme;
 import fr.putnami.pwt.core.theme.client.ThemeController;
 import fr.putnami.pwt.doc.client.application.DocumentationDisplay;
+import fr.putnami.pwt.doc.client.application.error.ApplicationUnreachableExceptionHandler;
 import fr.putnami.pwt.doc.client.application.error.ErrorConstants;
 import fr.putnami.pwt.doc.client.application.error.UmbrellaExceptionHandler;
 import fr.putnami.pwt.doc.client.page.ajaxbot.AjaxBotIndexingPlace;
@@ -52,9 +57,6 @@ import fr.putnami.pwt.doc.client.page.soon.ComingSoonPlace;
 import fr.putnami.pwt.doc.client.page.starting.GettingStartedPlace;
 import fr.putnami.pwt.doc.client.page.welcome.WelcomePlace;
 import fr.putnami.pwt.plugin.ga.client.GoogleAnalytics;
-import static fr.putnami.pwt.doc.client.application.ApplicationConfig.ANALYTICS_TRACKER_ID;
-import static fr.putnami.pwt.doc.client.application.ApplicationConfig.COOKIE_COUNT_VISIT;
-import static fr.putnami.pwt.doc.client.application.ApplicationConfig.DOMAIN;
 
 public class DocumentationApp implements EntryPoint {
 
@@ -91,6 +93,7 @@ public class DocumentationApp implements EntryPoint {
 		errorDisplayer.setConstants((ConstantsWithLookup) GWT.create(ErrorConstants.class));
 		ErrorManager.get().setErrorDisplayer(errorDisplayer);
 		ErrorManager.get().registerErrorHandler(new UmbrellaExceptionHandler());
+		ErrorManager.get().registerErrorHandler(new ApplicationUnreachableExceptionHandler());
 
 		final MvpController controller = MvpController.get();
 		controller.setDisplay(display);

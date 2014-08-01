@@ -32,7 +32,7 @@ public class DefaultCommandExceptionErrorHandler extends AbstractCommandExceptio
 
 	@Override
 	public int getPriority() {
-		return LOW_PRIORITY;
+		return LOWER_PRIORITY;
 	}
 
 }
