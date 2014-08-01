@@ -19,7 +19,10 @@ package fr.putnami.pwt.core.error.client;
 public interface ErrorHandler {
 
 	int DEFAULT_PRIORITY = 0;
-	int LOW_PRIORITY = Integer.MIN_VALUE;
+	int LOWER_PRIORITY = Integer.MIN_VALUE;
+	int LOW_PRIORITY = Integer.valueOf(-1000);
+	int HIGH_PRIORITY = Integer.valueOf(1000);
+	int HIGHER_PRIORITY = Integer.MAX_VALUE;
 
 	boolean handle(Throwable error);
 

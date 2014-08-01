@@ -30,6 +30,7 @@ import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
 import fr.putnami.pwt.core.mvp.client.ViewProxy;
+import fr.putnami.pwt.core.mvp.client.exception.ApplicationUnreachableException;
 
 public class ProxyViewCreator {
 
@@ -75,7 +76,12 @@ public class ProxyViewCreator {
 		srcWriter.indent();
 		srcWriter.println("public void onFailure(Throwable reason) {");
 		srcWriter.indent();
-		srcWriter.println("throw new RuntimeException(reason);");
+		srcWriter.println("if (ApplicationUnreachableException.HTTP_DOWNLOAD_FAILURE_EXCEPTION.equals(reason.getClass().getSimpleName())) {");
+		srcWriter.indent();
+		srcWriter.println("reason = new ApplicationUnreachableException(reason);");
+		srcWriter.outdent();
+		srcWriter.println("}");
+		srcWriter.println("GWT.reportUncaughtException(reason);");
 		srcWriter.outdent();
 		srcWriter.println("}");
 		srcWriter.println("public void onSuccess() {");
@@ -106,6 +112,7 @@ public class ProxyViewCreator {
 
 		composerFactory.addImport(ViewProxy.class.getName());
 		composerFactory.addImport(Logger.class.getName());
+		composerFactory.addImport(ApplicationUnreachableException.class.getName());
 
 		composerFactory.addImport(this.viewType.getQualifiedSourceName());
 
