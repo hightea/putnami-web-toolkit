@@ -1,18 +1,15 @@
 package fr.putnami.pwt.plugin.spring.file.server.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,38 +20,38 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.google.common.collect.Maps;
-import com.google.common.io.Files;
 
 import fr.putnami.pwt.core.widget.shared.domain.FileDto;
 import fr.putnami.pwt.core.widget.shared.domain.UploadStatus;
+import fr.putnami.pwt.plugin.spring.file.server.support.FileTransfertStore;
 
 @Service
 @Controller
 public class FileTransfertController {
 
-	@Value("${filetransfertcontroller.tempdir}")
-	private File tempdir;
+	@Autowired
+	private FileTransfertStore store;
 
-	private Map<String, FileDto> files = Maps.newHashMap();
 	private Map<String, FileTransfertProgressListener> progresses = Maps.newConcurrentMap();
 
 	@RequestMapping(value = "/file/upload/{uploadId}", method = RequestMethod.POST)
 	@ResponseBody
 	public FileDto upload(
 			@PathVariable String uploadId,
-			@RequestParam("data") CommonsMultipartFile file,
+			@RequestParam("data") CommonsMultipartFile multipart,
 			HttpServletRequest request, HttpServletResponse response) {
-		InputStream stream = null;
+		InputStream in = null;
+		OutputStream out = null;
 		try {
-			stream = file.getInputStream();
-			File target = new File(tempdir, uploadId);
-			Files.createParentDirs(target);
-			IOUtils.copy(stream, new FileOutputStream(target));
-			return getFileBean(uploadId, file.getOriginalFilename(), file.getContentType());
+			in = multipart.getInputStream();
+			out = store.write(uploadId, multipart.getOriginalFilename(), multipart.getContentType());
+			IOUtils.copy(in, out);
+			return store.getFileBean(uploadId);
 		} catch (IOException e) {
 			throw new RuntimeException(e.getMessage(), e);
 		} finally {
-			IOUtils.closeQuietly(stream);
+			IOUtils.closeQuietly(in);
+			IOUtils.closeQuietly(out);
 		}
 	}
 
@@ -74,15 +71,11 @@ public class FileTransfertController {
 			HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
-			FileDto fileBean = files.get(fileId);
+			FileDto fileBean = store.getFileBean(fileId);
 			if (fileBean == null) {
 				throw new RuntimeException("Aucun fichier trouver " + fileId);
 			}
-			File file = new File(tempdir, fileId);
-			if (!file.isFile()) {
-				throw new RuntimeException("Aucun fichier trouver " + fileId);
-			}
-			InputStream is = new FileInputStream(file);
+			InputStream is = store.read(fileId);
 			response.setContentType(fileBean.getMime());
 			response.setHeader("Content-Disposition", "attachment; filename=\"" + fileBean.getName() + "\"");
 			response.setContentLength((int) fileBean.getContentLength());
@@ -94,21 +87,6 @@ public class FileTransfertController {
 
 	}
 
-	public FileDto getFileBean(String token, String fileName, String contentType) {
-
-		File file = new File(tempdir, token);
-
-		FileDto fileDto = new FileDto();
-		fileDto.setToken(token);
-		fileDto.setName(fileName);
-		fileDto.setMime(contentType);
-		fileDto.setContentLength(file.length());
-		fileDto.setExtension(FilenameUtils.getExtension(fileName));
-
-		files.put(token, fileDto);
-
-		return fileDto;
-	}
 
 	public void startUpload(String uploadId, FileTransfertProgressListener progress) {
 		progresses.put(uploadId, progress);

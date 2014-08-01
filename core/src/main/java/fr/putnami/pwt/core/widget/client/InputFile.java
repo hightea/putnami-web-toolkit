@@ -18,6 +18,8 @@ package fr.putnami.pwt.core.widget.client;
 
 import com.google.common.base.Strings;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.dom.client.DataTransfer;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
@@ -56,6 +58,7 @@ import fr.putnami.pwt.core.theme.client.IconFont;
 import fr.putnami.pwt.core.widget.client.Button.Type;
 import fr.putnami.pwt.core.widget.client.base.AbstractInput;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
+import fr.putnami.pwt.core.widget.client.constant.WidgetParams;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.UUID;
@@ -63,9 +66,9 @@ import fr.putnami.pwt.core.widget.shared.domain.FileDto;
 import fr.putnami.pwt.core.widget.shared.domain.UploadStatus;
 
 public class InputFile extends InputGroup<FileDto>
-implements DropHandler, DragLeaveHandler, DragOverHandler, HasDrawable, EditorInput<FileDto> {
+implements HasDrawable, EditorInput<FileDto> {
 
-	private static final String MULTIPART_BOUNDARY = "xxxxxxx";
+	private static final String MULTIPART_BOUNDARY = "x-x-x-x-x";
 	private static final String EOL = "\r\n";
 
 	private static final String URL_UPLOAD = GWT.getHostPageBaseURL() + "file/upload/";
@@ -116,8 +119,8 @@ implements DropHandler, DragLeaveHandler, DragOverHandler, HasDrawable, EditorIn
 					fileId = UUID.uuid();
 					uploadForm.setAction(URL_UPLOAD + fileId);
 					uploadForm.submit();
-					nativeInitTimer(fileUpload.getElement(), InputFile.this);
-					redraw();
+					int fileSize = getFileSize(fileUpload.getElement());
+					initProgressBar(fileSize);
 				}
 			}));
 		}
@@ -132,13 +135,14 @@ implements DropHandler, DragLeaveHandler, DragOverHandler, HasDrawable, EditorIn
 
 		public void openFilePicker() {
 			RootPanel.get().add(uploadForm);
-			nativeClickOnInputFile(fileUpload.getElement());
+			nativeClick(fileUpload.getElement());
 		}
 	}
 
+	private final WidgetParams params = WidgetParams.Util.get();
+
 	private final OutputProgressBar<Integer> progressBar = new OutputProgressBar<Integer>();
 	private final OneWidgetPanel progressBarWrapper = new OneWidgetPanel();
-
 	private final Anchor<?> fileNameAnchor = new Anchor();
 	private final Text placeholderText = new Text();
 
@@ -194,7 +198,35 @@ implements DropHandler, DragLeaveHandler, DragOverHandler, HasDrawable, EditorIn
 			}
 		});
 
+		this.addDomHandler(new DragLeaveHandler() {
+			@Override
+			public void onDragLeave(DragLeaveEvent event) {
+				StyleUtils.removeStyle(InputFile.this, STYLE_DRAGOVER);
+			}
+		}, DragLeaveEvent.getType());
+		this.addDomHandler(new DragOverHandler() {
+			@Override
+			public void onDragOver(DragOverEvent event) {
+				StyleUtils.addStyle(InputFile.this, STYLE_DRAGOVER);
+			}
+		}, DragOverEvent.getType());
+		this.addDomHandler(new DropHandler() {
+			@Override
+			public void onDrop(DropEvent event) {
+				event.preventDefault();
+				event.stopPropagation();
+
+				DataTransfer data = event.getNativeEvent().getDataTransfer();
+				nativeUploadData(data, InputFile.this);
+			}
+		}, DropEvent.getType());
+
 		redraw();
+	}
+
+	@Override
+	public IsWidget cloneWidget() {
+		return new InputFile(this);
 	}
 
 	@Override
@@ -205,14 +237,28 @@ implements DropHandler, DragLeaveHandler, DragOverHandler, HasDrawable, EditorIn
 		placeholderText.removeFromParent();
 		progressBarWrapper.removeFromParent();
 		if (fileId != null) {
-			addAddon(cancelBtn);
 			append(progressBarWrapper);
+			addAddon(cancelBtn);
 		}
 		else {
 			FileDto value = getValue();
 			if (value != null) {
+				NumberFormat nf = NumberFormat.getFormat("#.##");
+
+				long size = value.getContentLength();
+				String displaySize = "";
+				if (size > 1024 * 1024) {
+					displaySize = nf.format(size / (1024 * 1024D)) + " MB";
+				}
+				else if (size > 1024) {
+					displaySize = nf.format(size / 1024D) + " KB";
+				}
+				else {
+					displaySize = nf.format(size) + " B";
+				}
+
 				fileNameAnchor.setLink(URL_DOWNLOAD + value.getToken());
-				fileNameAnchor.setText(value.getName() + " - (" + getDisplaySize(value.getContentLength()) + ")");
+				fileNameAnchor.setText(value.getName() + " - (" + displaySize + ")");
 				placeholderText.setText(null);
 				append(fileNameAnchor);
 				addAddon(cancelBtn);
@@ -225,11 +271,6 @@ implements DropHandler, DragLeaveHandler, DragOverHandler, HasDrawable, EditorIn
 			}
 			addAddon(uploadBtn);
 		}
-	}
-
-	@Override
-	public IsWidget cloneWidget() {
-		return new InputFile(this);
 	}
 
 	public String getPlaceholder() {
@@ -246,37 +287,25 @@ implements DropHandler, DragLeaveHandler, DragOverHandler, HasDrawable, EditorIn
 		FileDto oldValue = this.getValue();
 		super.edit(value);
 		timer.cancel();
-
 		redraw();
 	}
 
-	@Override
-	public void onDragLeave(DragLeaveEvent event) {
-		StyleUtils.removeStyle(this, STYLE_DRAGOVER);
-	}
-
-	@Override
-	public void onDragOver(DragOverEvent event) {
-		StyleUtils.addStyle(this, STYLE_DRAGOVER);
-	}
-
-	@Override
-	public void onDrop(DropEvent event) {
-		event.preventDefault();
-		event.stopPropagation();
-
-		DataTransfer data = event.getNativeEvent().getDataTransfer();
-		nativeUploadData(data, this);
-	}
-
-	private void initTimer(String size) {
-		progressBar.setMax(Integer.valueOf(size));
+	private void initProgressBar(int size) {
 		progressBar.edit(0);
-		progressBar.setVisible(true);
-		timer.schedule(10);
+		redraw();
+		if (params.inputFileProgressEnable()) {
+			progressBar.setMax(size);
+			progressBar.edit(0);
+			timer.schedule(10);
+		}
+		else {
+			progressBar.setDisplayValue(false);
+			progressBar.setMax(100);
+			progressBar.edit(40);
+		}
 	}
 
-	protected void statusSendRequest() {
+	private void statusSendRequest() {
 		if (fileId == null) {
 			return;
 		}
@@ -303,7 +332,7 @@ implements DropHandler, DragLeaveHandler, DragOverHandler, HasDrawable, EditorIn
 		}
 	}
 
-	protected void uploadSendRequest(String base64data, String fileName, String type, String size) {
+	private void uploadSendRequest(String base64data, String fileName, String type, int size) {
 		RequestCallback callback = new RequestCallback() {
 			@Override
 			public void onResponseReceived(Request request, Response response) {
@@ -321,7 +350,8 @@ implements DropHandler, DragLeaveHandler, DragOverHandler, HasDrawable, EditorIn
 
 		};
 
-		fileId = URL_UPLOAD + UUID.uuid();
+		fileId = UUID.uuid();
+		initProgressBar(size);
 
 		StringBuffer requestBody = new StringBuffer();
 		requestBody.append("--").append(MULTIPART_BOUNDARY).append(EOL)
@@ -331,12 +361,11 @@ implements DropHandler, DragLeaveHandler, DragOverHandler, HasDrawable, EditorIn
 		.append("--").append(MULTIPART_BOUNDARY).append("--");
 
 		try {
-			RequestBuilder requestBuilder = new RequestBuilder(RequestBuilder.POST, fileId);
+			RequestBuilder requestBuilder = new RequestBuilder(RequestBuilder.POST, URL_UPLOAD + fileId);
 			requestBuilder.setHeader("content-type", "multipart/form-data; boundary=" + MULTIPART_BOUNDARY);
 			requestBuilder.setHeader("Cache-Control", "max-age=0");
 			this.sendRequest = requestBuilder.sendRequest(requestBody.toString(), callback);
 
-			initTimer(size);
 		}
 		catch (RequestException e) {
 			throw new RuntimeException("Couldn't send request", e);
@@ -359,7 +388,7 @@ implements DropHandler, DragLeaveHandler, DragOverHandler, HasDrawable, EditorIn
 		else {
 			progressBar.setValue(progressBar.getMax());
 		}
-		if (uploadForm != null) {
+		if (fileId != null) {
 			timer.schedule(100);
 		}
 
@@ -368,7 +397,7 @@ implements DropHandler, DragLeaveHandler, DragOverHandler, HasDrawable, EditorIn
 	private void handleCompleteJson(String reponseData) {
 		JSONObject jsObject = JSONParser.parseLenient(reponseData).isObject();
 
-		FileDto file = new FileDto();
+		final FileDto file = new FileDto();
 		file.setName(jsObject.get("name").isString().stringValue());
 		file.setExtension(jsObject.get("extension").isString().stringValue());
 		file.setMime(jsObject.get("mime").isString().stringValue());
@@ -381,53 +410,49 @@ implements DropHandler, DragLeaveHandler, DragOverHandler, HasDrawable, EditorIn
 		sendRequest = null;
 		fileId = null;
 
-		edit(file);
+		progressBar.edit(progressBar.getMax());
+
+		Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
+
+			@Override
+			public boolean execute() {
+				edit(file);
+				return false;
+			}
+		}, params.inputFileProgressHideDelay());
 	}
 
 	private void displayError(String string) {
 
 	}
 
-	private String getDisplaySize(long size) {
-		NumberFormat nf = NumberFormat.getFormat("#.##");
-
-		if (size > 1024 * 1024) {
-			return nf.format(size / (1024 * 1024D)) + " MB";
-		}
-		else if (size > 1024) {
-			return nf.format(size / 1024D) + " KB";
-		}
-		return nf.format(size) + " B";
-	}
-
-	private native void nativeUploadData(DataTransfer dataTransfer, InputFile inputFile)
+	private static native void nativeUploadData(DataTransfer dataTransfer, InputFile inputFile)
 	/*-{
 		var files = dataTransfer.files;
 		for (var i = 0; i < files.length; i++ ) {
 			var file = files[i];
-			inputFile.@fr.putnami.pwt.core.widget.client.InputFile::initTimer(Ljava/lang/String;)("" + file.size);
 			var b64reader = new FileReader();
 			b64reader.onloadend = (function(file) {
-			return function(base64) {
-				file.base64data = base64.target.result;
-				var size = "" + file.size;
-				inputFile.@fr.putnami.pwt.core.widget.client.InputFile::uploadSendRequest(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)(file.base64data, file.name, file.type, size);
-			}; })(file);
+					return function(base64) {
+						file.base64data = base64.target.result;
+						inputFile.@fr.putnami.pwt.core.widget.client.InputFile::uploadSendRequest(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;I)
+							(file.base64data, file.name, file.type, file.size);
+					};
+				})(file);
 			b64reader.readAsBinaryString(file);
 	   }
 	}-*/;
 
-	private native void nativeInitTimer(Element fileElement, InputFile inputFile)
+	private static native int getFileSize(Element fileElement)
 	/*-{
 		var files = fileElement.files;
-		fileElement.files = files;
 		for (var i = 0; i < files.length; i++ ) {
-			var file = files[i];
-			inputFile.@fr.putnami.pwt.core.widget.client.InputFile::initTimer(Ljava/lang/String;)("" + file.size);
+			return files[i].size;
 		}
+		return 0;
 	}-*/;
 
-	private static native void nativeClickOnInputFile(Element elem)
+	private static native void nativeClick(Element elem)
 	/*-{
 		elem.click();
 	}-*/;

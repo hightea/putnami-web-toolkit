@@ -38,7 +38,7 @@ public final class DateRenderer extends AbstractRenderer<Date> {
 
 	public DateRenderer(String format) {
 		if (format == null) {
-			formater = DateTimeFormat.getFormat(WidgetParams.Util.get().dateFormatSimple());
+			formater = DateTimeFormat.getFormat(WidgetParams.Util.get().inputDateSimpleFormat());
 		}
 		else {
 			formater = DateTimeFormat.getFormat(format);

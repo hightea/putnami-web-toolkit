@@ -21,6 +21,8 @@ import org.springframework.context.annotation.Configuration;
 
 import fr.putnami.pwt.plugin.spring.file.server.controller.FileTransfertController;
 import fr.putnami.pwt.plugin.spring.file.server.controller.FileTransfertMultipartResolver;
+import fr.putnami.pwt.plugin.spring.file.server.support.DefaultFileTransfertStore;
+import fr.putnami.pwt.plugin.spring.file.server.support.FileTransfertStore;
 
 @Configuration
 public class FileTransfertConfig {
@@ -33,5 +35,10 @@ public class FileTransfertConfig {
 	@Bean
 	public FileTransfertMultipartResolver multipartResolver() {
 		return new FileTransfertMultipartResolver();
+	}
+
+	@Bean
+	public FileTransfertStore fileTransfertStore() {
+		return new DefaultFileTransfertStore();
 	}
 }

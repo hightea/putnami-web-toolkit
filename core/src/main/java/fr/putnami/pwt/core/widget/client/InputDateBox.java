@@ -111,6 +111,8 @@ public class InputDateBox extends AbstractInputBox<TextBox, Date> {
 
 	}
 
+	private final WidgetParams params = WidgetParams.Util.get();
+
 	private final MaskValueBoxHelper maskHelper;
 
 	private String format;
@@ -120,7 +122,7 @@ public class InputDateBox extends AbstractInputBox<TextBox, Date> {
 		StyleUtils.addStyle(this, STYLE_CONTROL);
 
 		this.maskHelper = new MaskValueBoxHelper(getInput());
-		setFormat(WidgetParams.Util.get().dateFormatSimple());
+		setFormat(params.inputDateSimpleFormat());
 	}
 
 	protected InputDateBox(InputDateBox source) {
