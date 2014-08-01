@@ -18,13 +18,17 @@ package fr.putnami.pwt.core.widget.client;
 
 import com.google.common.base.Objects;
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.EventTarget;
 import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.dom.client.LabelElement;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.DomEvent;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -33,13 +37,16 @@ import com.google.web.bindery.event.shared.HandlerRegistration;
 import fr.putnami.pwt.core.editor.client.EditorLabel;
 import fr.putnami.pwt.core.editor.client.event.DirtyEvent;
 import fr.putnami.pwt.core.editor.client.event.DirtyEvent.Handler;
+import fr.putnami.pwt.core.model.client.base.HasHtmlFor;
 import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractInput;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class InputBoolean extends AbstractInput<Boolean> implements
-HasText, EditorLabel {
+		HasText,
+		HasHtmlFor,
+		EditorLabel {
 
 	private static final CssStyle STYLE_CHECKBOX = new SimpleStyle("checkbox");
 
@@ -90,8 +97,27 @@ HasText, EditorLabel {
 	}
 
 	@Override
+	public void setHtmlFor(String htmlFor) {
+		setHtmlId(htmlFor);
+	}
+
+	@Override
+	public String getHtmlFor() {
+		return getHtmlId();
+	}
+
+	@Override
 	public boolean isDirty() {
-		return !Objects.equal("" + this.getValue(), this.checkbocElement.getValue());
+		return !Objects.equal(getValue(), getInputValue());
+	}
+
+	private boolean eventTargetsLabelOrChild(DomEvent<?> event) {
+		Event nativeEvent = Event.as(event.getNativeEvent());
+		EventTarget target = nativeEvent.getEventTarget();
+		if (Element.is(target)) {
+			return labelElement.isOrHasChild(Element.as(target));
+		}
+		return false;
 	}
 
 	@Override
@@ -100,26 +126,40 @@ HasText, EditorLabel {
 			clickHandlerRegistration = addDomHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
-					setValue(getValue() == null || !getValue());
+					if (!eventTargetsLabelOrChild(event)) {
+						setInputValue(!getInputValue());
+					}
 					DirtyEvent.fire(InputBoolean.this);
-					ValueChangeEvent.fire(InputBoolean.this, getValue());
+					ValueChangeEvent.fire(InputBoolean.this, getInputValue());
 				}
 			}, ClickEvent.getType());
 		}
 		return super.addDirtyHandler(handler);
 	}
 
+	private Boolean getInputValue() {
+		return this.checkbocElement.isChecked();
+	}
+
+	private void setInputValue(boolean value) {
+		checkbocElement.setChecked(value);
+	}
+
 	@Override
 	public Boolean flush() {
-		Boolean value = getValue();
+		Boolean value = getInputValue();
 		validate(value);
-		return value;
+		if (!hasErrors()) {
+			setValue(value);
+		}
+		return getValue();
 	}
 
 	@Override
 	public void edit(Boolean value) {
-		setValue(Boolean.TRUE.equals(value));
-		this.checkbocElement.setChecked(getValue());
+		boolean boolValue = Boolean.TRUE.equals(value);
+		setValue(boolValue);
+		setInputValue(boolValue);
 	}
 
 	@Override
