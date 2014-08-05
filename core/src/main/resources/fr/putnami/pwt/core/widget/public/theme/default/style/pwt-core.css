@@ -310,3 +310,16 @@
 	font-weight: 500;
 	padding-left: 28px
 }
+
+/** 
+* Panel
+*/
+.panel-heading{
+	position: relative;
+}
+
+.panel-commands{
+	position: absolute;
+	top: 5px;
+	right: 15px;	
+}
