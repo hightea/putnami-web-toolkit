@@ -61,6 +61,10 @@ public class TableHead extends AbstractPanel implements CloneableWidget {
 		}
 	}
 
+	public void removeColumn(AbstractTableColumn column) {
+		column.createHeaderCell().removeFromParent();
+	}
+
 	private <A> void addColumn(AbstractTableColumn<A> column) {
 		TableTH<A> cell = column.createHeaderCell();
 

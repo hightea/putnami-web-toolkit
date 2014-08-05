@@ -43,11 +43,11 @@ import fr.putnami.pwt.core.widget.client.base.AbstractTableColumn;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class TableEditorBody<T> extends TableBody<T> implements
-		HasDriver<Collection<T>, ModelDriver<Collection<T>>>,
-		EditorOutput<Collection<T>>,
-		EditorInput<Collection<T>>,
-		EditorCollection<T>,
-		EditorModel<T> {
+HasDriver<Collection<T>, ModelDriver<Collection<T>>>,
+EditorOutput<Collection<T>>,
+EditorInput<Collection<T>>,
+EditorCollection<T>,
+EditorModel<T> {
 
 	private final List<AbstractTableColumn<?>> columns = Lists.newArrayList();
 
@@ -120,6 +120,10 @@ public class TableEditorBody<T> extends TableBody<T> implements
 
 	private <A> void addColumn(AbstractTableColumn<A> column) {
 		this.columns.add(column);
+	}
+
+	public <A> void removeColumn(AbstractTableColumn<A> column) {
+		this.columns.remove(column);
 	}
 
 	@Override

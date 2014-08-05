@@ -17,11 +17,13 @@
 package fr.putnami.pwt.core.widget.client.base;
 
 import fr.putnami.pwt.core.model.client.base.HasReadonly;
+import fr.putnami.pwt.core.widget.client.base.AbstractTableColumn.ReadonlyVisibility;
 
 public abstract class AbstractTableCell<T> extends AbstractPanel implements
-		HasReadonly {
+HasReadonly {
 
 	private Boolean readonly;
+	private ReadonlyVisibility readonlyVisibility = ReadonlyVisibility.VISIBLE;
 
 	public AbstractTableCell(String tagName) {
 		super(tagName);
@@ -40,6 +42,29 @@ public abstract class AbstractTableCell<T> extends AbstractPanel implements
 	@Override
 	public void setReadonly(Boolean readonly) {
 		this.readonly = readonly;
+		renderVisible();
 	}
 
+	public ReadonlyVisibility getReadonlyVisibility() {
+		return readonlyVisibility;
+	}
+
+	public void setReadonlyVisibility(ReadonlyVisibility readonlyVisibility) {
+		this.readonlyVisibility = readonlyVisibility;
+		renderVisible();
+	}
+
+	private void renderVisible() {
+		switch (readonlyVisibility) {
+		case VISIBLE:
+			setVisible(true);
+			break;
+		case HIDE_READONLY:
+			setVisible(!Boolean.TRUE.equals(readonly));
+			break;
+		case VISIBLE_READONLY:
+			setVisible(Boolean.TRUE.equals(readonly));
+			break;
+		}
+	}
 }

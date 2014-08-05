@@ -28,10 +28,16 @@ import fr.putnami.pwt.core.model.client.base.HasReadonly;
 import fr.putnami.pwt.core.widget.client.TableTH;
 
 public abstract class AbstractTableColumn<T> implements
-		HasReadonly,
-		IsWidget,
-		HasResponsiveVisibility,
-		CloneableWidget {
+HasReadonly,
+IsWidget,
+HasResponsiveVisibility,
+CloneableWidget {
+
+	public static enum ReadonlyVisibility {
+		VISIBLE,
+		HIDE_READONLY,
+		VISIBLE_READONLY;
+	}
 
 	private Collection<AbstractTableColumnAspect<T>> aspects;
 
@@ -44,6 +50,8 @@ public abstract class AbstractTableColumn<T> implements
 	private Visibility lgVisibility = Visibility.DEFAULT;
 	private Visibility printVisibility = Visibility.DEFAULT;
 
+	private ReadonlyVisibility readonlyVisibility = ReadonlyVisibility.VISIBLE;
+
 	public AbstractTableColumn() {
 
 	}
@@ -51,6 +59,7 @@ public abstract class AbstractTableColumn<T> implements
 	protected AbstractTableColumn(AbstractTableColumn<T> source) {
 		this.readonly = source.readonly;
 		this.colspan = source.colspan;
+		this.readonlyVisibility = source.readonlyVisibility;
 	}
 
 	@Override
@@ -69,6 +78,14 @@ public abstract class AbstractTableColumn<T> implements
 
 	public Integer getColspan() {
 		return colspan;
+	}
+
+	public ReadonlyVisibility getReadonlyVisibility() {
+		return readonlyVisibility;
+	}
+
+	public void setReadonlyVisibility(ReadonlyVisibility readonlyVisibility) {
+		this.readonlyVisibility = readonlyVisibility;
 	}
 
 	public Collection<AbstractTableColumnAspect<T>> getAspects() {
@@ -126,12 +143,14 @@ public abstract class AbstractTableColumn<T> implements
 	public final AbstractTableCell<T> createBodyCell() {
 		AbstractTableCell<T> cell = doCreateBodyCell();
 		setResponsiveVisibility(cell);
+		cell.setReadonlyVisibility(readonlyVisibility);
 		return cell;
 	}
 
 	public final TableTH<T> createHeaderCell() {
 		TableTH<T> cell = doCreateHeaderCell();
 		setResponsiveVisibility(cell);
+		cell.setReadonlyVisibility(readonlyVisibility);
 		return cell;
 	}
 
