@@ -37,7 +37,7 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class Navbar extends AbstractPanel implements
-		CloneableWidget {
+CloneableWidget {
 
 	private static final CssStyle STYLE_NAVBAR = new SimpleStyle("navbar");
 	private static final CssStyle STYLE_BRAND = new SimpleStyle("navbar-brand");
@@ -191,7 +191,7 @@ public class Navbar extends AbstractPanel implements
 	}
 
 	@UiChild(tagname = "Brand")
-	public void addBrand(Anchor w) {
+	public void addBrand(Widget w) {
 		StyleUtils.addStyle(asWidgetOrNull(w), STYLE_BRAND);
 		headerContainer.add(w);
 	}
