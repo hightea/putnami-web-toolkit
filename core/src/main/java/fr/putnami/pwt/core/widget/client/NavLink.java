@@ -61,6 +61,12 @@ public class NavLink extends AbstractPanel implements Nav.IsNavContent, Cloneabl
 		setLabel(label);
 	}
 
+	public NavLink(String label, String link) {
+		this();
+		setLabel(label);
+		setLink(link);
+	}
+
 	protected NavLink(NavLink source) {
 		super(source);
 		endConstruct();
@@ -188,6 +194,7 @@ public class NavLink extends AbstractPanel implements Nav.IsNavContent, Cloneabl
 
 	private void resetInner() {
 		anchor.clear();
+		anchor.getElement().removeAllChildren();
 		if (label != null) {
 			anchor.getElement().setInnerHTML(label);
 		}
