@@ -16,6 +16,7 @@
  */
 package fr.putnami.pwt.core.mvp.client;
 
+import com.google.common.base.Objects;
 import com.google.gwt.place.shared.Place;
 
 public abstract class ViewPlace extends Place {
@@ -50,6 +51,23 @@ public abstract class ViewPlace extends Place {
 
 	public String getToken() {
 		return this.token;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(token, parent, getClass().getSimpleName());
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof ViewPlace) {
+			ViewPlace other = (ViewPlace) obj;
+			return Objects.equal(token, other.token)
+					&& Objects.equal(parent, other.parent)
+					&& Objects.equal(getClass().getSimpleName(), other.getClass().getSimpleName());
+
+		}
+		return false;
 	}
 
 }

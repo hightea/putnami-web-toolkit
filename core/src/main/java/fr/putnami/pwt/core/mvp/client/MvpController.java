@@ -45,11 +45,11 @@ import fr.putnami.pwt.core.mvp.client.event.StopActivityEvent.HasStopActivityHan
 import fr.putnami.pwt.core.mvp.client.util.MvpUtils;
 
 public class MvpController extends PlaceController implements
-		PlaceHistoryMapper,
-		ActivityMapper,
-		HasStartActivityHandlers,
-		HasStopActivityHandlers,
-		HasMayStopActivityHandlers
+PlaceHistoryMapper,
+ActivityMapper,
+HasStartActivityHandlers,
+HasStopActivityHandlers,
+HasMayStopActivityHandlers
 {
 
 	private static MvpController instance;
@@ -61,8 +61,9 @@ public class MvpController extends PlaceController implements
 		return MvpController.instance;
 	}
 
-	private static final String PLACE_SEPARATOR = ">";
-	private static final char PLACE_TOKEN_SEPARATOR = ':';
+	private static final String PLACE_CROWLER_DELIMITER = "!";
+	private static final String PLACE_SEPARATOR = "/";
+	private static final char PLACE_TOKEN_SEPARATOR = '=';
 
 	private final Map<String, ActivityFactory> ACTIVITY_FACTORIES = Maps.newHashMap();
 
@@ -160,13 +161,13 @@ public class MvpController extends PlaceController implements
 	private Place getSimplePlace(String token) {
 		int colonAt = token.indexOf(PLACE_TOKEN_SEPARATOR);
 		String prefix = token;
-		if (!prefix.startsWith("!")) {
-			prefix = "!" + prefix;
-		}
 		String rest = null;
 		if (colonAt > 0) {
 			prefix = token.substring(0, colonAt);
 			rest = token.substring(colonAt + 1);
+		}
+		if (!prefix.startsWith(PLACE_CROWLER_DELIMITER)) {
+			prefix = PLACE_CROWLER_DELIMITER + prefix;
 		}
 		ActivityFactory activityFactory = this.ACTIVITY_FACTORIES.get(prefix);
 		if (activityFactory instanceof PlaceTokenizer) {
