@@ -43,10 +43,12 @@ import fr.putnami.pwt.core.theme.client.IconFont;
 import fr.putnami.pwt.core.widget.client.base.AbstractTableCell;
 import fr.putnami.pwt.core.widget.client.base.AbstractTableColumn;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
+import fr.putnami.pwt.core.widget.client.util.SelectionUtils;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class TableOrder<T> extends AbstractTableColumn<T> {
 
+	private static final CssStyle STYLE_TABLE_ORDER = new SimpleStyle("table-order");
 	private static final CssStyle STYLE_ROW_DRAGING = new SimpleStyle("success");
 	private static final CssStyle STYLE_NO_SELECTION = new SimpleStyle("no-selection");
 
@@ -118,6 +120,7 @@ public class TableOrder<T> extends AbstractTableColumn<T> {
 			hoverRow = null;
 			selectedRow = null;
 			disableTextSelection(false);
+
 			RootPanel.get().getElement().getStyle().clearCursor();
 			if (event != null) {
 				event.stopPropagation();
@@ -153,12 +156,14 @@ public class TableOrder<T> extends AbstractTableColumn<T> {
 	@Override
 	public TableTH<T> doCreateHeaderCell() {
 		TableTH<T> headerCell = new TableTH<T>();
+		StyleUtils.addStyle(headerCell, STYLE_TABLE_ORDER);
 		return headerCell;
 	}
 
 	@Override
 	public AbstractTableCell<T> doCreateBodyCell() {
 		TDHandle cell = new TDHandle();
+		StyleUtils.addStyle(cell, STYLE_TABLE_ORDER);
 		cells.add(cell);
 		return cell;
 	}
@@ -166,18 +171,7 @@ public class TableOrder<T> extends AbstractTableColumn<T> {
 	public void disableTextSelection(boolean disable) {
 		Element rootPanelElement = RootPanel.get().getElement();
 		StyleUtils.toggleStyle(rootPanelElement, STYLE_NO_SELECTION, disable);
-		disableTextSelectInternal(rootPanelElement, disable);
+		SelectionUtils.disableTextSelectInternal(rootPanelElement, disable);
 	}
-
-	private native static void disableTextSelectInternal(Element e, boolean disable)
-	/*-{
-	    if (disable) {
-	      e.ondrag = function () { return false; };
-	      e.onselectstart = function () { return false; };
-	    } else {
-	      e.ondrag = null;
-	      e.onselectstart = null;
-	    }
-	  }-*/;
 
 }

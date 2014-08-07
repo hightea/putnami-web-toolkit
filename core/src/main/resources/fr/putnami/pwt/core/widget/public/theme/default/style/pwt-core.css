@@ -323,3 +323,38 @@
 	top: 5px;
 	right: 15px;	
 }
+.panel-primary>.panel-heading i{
+	color: #fff;
+	background-color: #428bca;
+}
+.panel-success>.panel-heading i{
+  color: #3c763d;
+  background-color: #dff0d8;
+}
+.panel-info>.panel-heading i{
+  color: #31708f;
+  background-color: #d9edf7;
+}
+.panel-warning>.panel-heading i{
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+}
+.panel-danger>.panel-heading i{
+  color: #a94442;
+  background-color: #f2dede;
+}
+
+/**
+* TableOrder
+*/
+table.table td.table-order{
+	width:1em;
+	cursor: ns-resize;
+}
+
+/**
+* TableOrder
+*/
+table.table td.table-selecter{
+	width:1em;
+}

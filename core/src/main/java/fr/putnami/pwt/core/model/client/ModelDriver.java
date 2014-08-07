@@ -328,6 +328,7 @@ public class ModelDriver<T> implements Driver<T> {
 			result = this.value;
 		}
 		else {
+			this.value = result;
 			FlushSuccessEvent.fire(rootEditor, result);
 		}
 

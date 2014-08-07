@@ -44,6 +44,7 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelectionHandlers {
 
+	private static final CssStyle STYLE_TABLE_SELECTER = new SimpleStyle("table-selecter");
 	private static final CssStyle STYLE_ROW_SELECTED = new SimpleStyle("info");
 
 	public enum SelectionMode {
@@ -186,6 +187,7 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 	@Override
 	public TableTH<T> doCreateHeaderCell() {
 		TableTH<T> headerCell = new TableTH<T>();
+		StyleUtils.addStyle(headerCell, STYLE_TABLE_SELECTER);
 		if (selectionMode == SelectionMode.ROW_CLICK) {
 			headerCell.setVisible(false);
 		}
@@ -195,6 +197,7 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 	@Override
 	public AbstractTableCell<T> doCreateBodyCell() {
 		TDSelecter cell = new TDSelecter();
+		StyleUtils.addStyle(cell, STYLE_TABLE_SELECTER);
 		cells.add(cell);
 		return cell;
 	}

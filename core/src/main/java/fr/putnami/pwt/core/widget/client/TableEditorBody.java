@@ -43,7 +43,8 @@ import fr.putnami.pwt.core.widget.client.base.AbstractTableColumn;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class TableEditorBody<T> extends TableBody<T> implements
-HasDriver<Collection<T>, ModelDriver<Collection<T>>>,
+HasDriver<Collection<T>,
+ModelDriver<Collection<T>>>,
 EditorOutput<Collection<T>>,
 EditorInput<Collection<T>>,
 EditorCollection<T>,
@@ -89,7 +90,6 @@ EditorModel<T> {
 		this.driver = new ModelDriver<Collection<T>>(new ModelCollection<T>(List.class, model));
 		this.driver.setMessageHelper(messageHelper);
 		this.driver.initialize(this, visitors);
-		this.driver.accept(new ReadonlyVisitor(this, getReadonly(), true));
 	}
 
 	@Override
@@ -128,7 +128,14 @@ EditorModel<T> {
 
 	@Override
 	public Collection<T> flush() {
-		return this.driver.flush();
+		// FIXME flush is not called from the drivers, but from TableEditor
+		List<T> values = (List<T>) driver.getValue();
+		values.clear();
+		for (TableRow<T> row : getRowList()) {
+			values.add(row.getValue());
+		}
+		return values;
+		//		return this.driver.flush();
 	}
 
 	@Override
@@ -162,9 +169,16 @@ EditorModel<T> {
 	}
 
 	public void switchRows(TableRow<T> first, TableRow<T> second) {
+		List<T> values = null;
+		if (getValue() instanceof List) {
+			values = (List<T>) getValue();
+		}
 		List<TableRow<T>> rows = getRowList();
 		int firstIndex = rows.indexOf(first);
 		int secondIndex = rows.indexOf(second);
+		T firstVal = first.getValue();
+		T secondVal = second.getValue();
+
 		if (firstIndex == secondIndex) {
 			return;
 		}
@@ -173,6 +187,17 @@ EditorModel<T> {
 			rows.add(firstIndex, second);
 			rows.remove(secondIndex);
 			rows.add(secondIndex, first);
+
+			first.setIndex(secondIndex);
+			second.setIndex(firstIndex);
+
+			if (values != null) {
+				values.remove(firstIndex);
+				values.add(firstIndex, secondVal);
+				values.remove(secondIndex);
+				values.add(secondIndex, firstVal);
+			}
+
 			insert(second, firstIndex, true);
 		}
 		else {
@@ -180,6 +205,17 @@ EditorModel<T> {
 			rows.add(secondIndex, first);
 			rows.remove(firstIndex);
 			rows.add(firstIndex, second);
+
+			first.setIndex(secondIndex);
+			second.setIndex(firstIndex);
+
+			if (values != null) {
+				values.remove(secondIndex);
+				values.add(secondIndex, firstVal);
+				values.remove(firstIndex);
+				values.add(firstIndex, secondVal);
+			}
+
 			insert(first, secondIndex, true);
 		}
 	}

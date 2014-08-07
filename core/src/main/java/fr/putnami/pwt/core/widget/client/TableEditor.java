@@ -126,7 +126,12 @@ EditorModel<T> {
 
 	@Override
 	public Collection<T> flush() {
-		return this.driver.flush();
+		this.driver.flush();
+		// FIXME TableOrder doesn't sort result, so we ask to sort result via TableEditor
+		if (!this.driver.hasErrors()) {
+			return ((TableEditorBody) getDefaultBody()).flush();
+		}
+		return this.driver.getValue();
 	}
 
 	@Override
