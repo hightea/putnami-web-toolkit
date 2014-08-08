@@ -262,7 +262,7 @@ HasCollapseHandlers {
 		collapsePanel.append(table);
 		collapsePanel.append(footer);
 
-		if (commands.size() > 0) {
+		if (header != null && commands.size() > 0) {
 			if (commandsContainer == null) {
 				commandsContainer = new Container();
 				StyleUtils
