@@ -123,11 +123,7 @@ public class NavLink extends AbstractPanel implements Nav.IsNavContent, Cloneabl
 	@Override
 	public void setActive(boolean active) {
 		this.active = active;
-		StyleUtils.toggleStyle(this, LinkStyle.ACTIVE, active);
-		if (active && getParent() != null && getParent().getParent() instanceof Nav.IsNavContent) {
-			// if link is in dropdown => parent is container and parent.parent is dropdown
-			((Nav.IsNavContent) getParent().getParent()).setActive(true);
-		}
+		redraw();
 	}
 
 	@Override
@@ -145,6 +141,7 @@ public class NavLink extends AbstractPanel implements Nav.IsNavContent, Cloneabl
 
 	public void setPreventClickWhenActive(boolean preventClickWhenActive) {
 		this.preventClickWhenActive = preventClickWhenActive;
+		redraw();
 	}
 
 	public String getLink() {
@@ -181,15 +178,30 @@ public class NavLink extends AbstractPanel implements Nav.IsNavContent, Cloneabl
 
 	@Override
 	public void redraw() {
-		String link = this.link;
-		link = link == null ? null : link.replace("#", "");
-		if (link != null && link.equals(History.getToken())) {
-			setActive(true);
+		if (this.link != null) {
+			String tokenLink = this.link.replaceAll("^#", "");
+			if (tokenLink.equals(History.getToken())) {
+				this.active = true;
+			}
+			else {
+				this.active = false;
+			}
+			if (active && getParent() != null && getParent().getParent() instanceof Nav.IsNavContent) {
+				// if link is in dropdown => parent is container and parent.parent is dropdown
+				((Nav.IsNavContent) getParent().getParent()).setActive(true);
+			}
+		}
+		StyleUtils.toggleStyle(this, LinkStyle.ACTIVE, active);
+		resetInner();
+		if (active && preventClickWhenActive) {
+			anchor.setLink(null);
+		}
+		else if (this.link != null) {
+			anchor.setLink(this.link);
 		}
 		else {
-			setActive(false);
+			anchor.setLinkAsDummy();
 		}
-		resetInner();
 	}
 
 	private void resetInner() {

@@ -118,7 +118,7 @@ HasAllGestureHandlers, HasAllTouchHandlers
 	}
 
 	private void endConstruct() {
-		AnchorElement.as(getElement()).setHref(AnchorUtils.DUMMY_HREF);
+		setLinkAsDummy();
 	}
 
 	@Override
@@ -137,7 +137,16 @@ HasAllGestureHandlers, HasAllTouchHandlers
 
 	public void setLink(String link) {
 		this.link = link;
-		AnchorElement.as(getElement()).setHref(link);
+		if (link == null) {
+			getElement().removeAttribute("href");
+		}
+		else {
+			AnchorElement.as(getElement()).setHref(link);
+		}
+	}
+
+	public void setLinkAsDummy() {
+		AnchorElement.as(getElement()).setHref(AnchorUtils.DUMMY_HREF);
 	}
 
 	@Override
