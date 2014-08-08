@@ -22,7 +22,7 @@ import com.google.gwt.place.shared.Place;
 public abstract class ViewPlace extends Place {
 
 	private ViewPlace parent;
-	private final String token;
+	private String token;
 
 	public ViewPlace() {
 		this(null, null);
@@ -53,6 +53,14 @@ public abstract class ViewPlace extends Place {
 		return this.token;
 	}
 
+	/**
+	 * @deprecated public only for factory, sould be final field
+	 * @param token
+	 */
+	@Deprecated
+	public void setToken(String token) {
+		this.token = token;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hashCode(token, parent, getClass().getSimpleName());

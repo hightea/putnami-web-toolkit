@@ -134,7 +134,9 @@ public class ProxyViewCreator {
 			srcWriter.println("return new %s(token);", placeType.getSimpleSourceName());
 		}
 		else {
-			srcWriter.println("return new %s();", placeType.getSimpleSourceName());
+			srcWriter.println("%s place = new %s();", placeType.getSimpleSourceName(), placeType.getSimpleSourceName());
+			srcWriter.println("place.setToken(token);");
+			srcWriter.println("return place;");
 		}
 		srcWriter.outdent();
 		srcWriter.println("}");
