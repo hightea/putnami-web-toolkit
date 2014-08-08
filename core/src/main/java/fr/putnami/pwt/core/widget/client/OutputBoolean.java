@@ -18,6 +18,7 @@ package fr.putnami.pwt.core.widget.client;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Text;
+import com.google.gwt.uibinder.client.UiChild;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.IsWidget;
 
@@ -107,6 +108,7 @@ public class OutputBoolean extends AbstractOutput<Boolean> {
 		resetInner();
 	}
 
+	@UiChild(tagname = "iconTrue", limit = 1)
 	public void setTrueIcon(Icon icon) {
 		trueIcon = icon;
 		resetInner();
@@ -118,6 +120,7 @@ public class OutputBoolean extends AbstractOutput<Boolean> {
 		resetInner();
 	}
 
+	@UiChild(tagname = "iconFalse", limit = 1)
 	public void setFalseIcon(Icon icon) {
 		falseIcon = icon;
 		resetInner();
