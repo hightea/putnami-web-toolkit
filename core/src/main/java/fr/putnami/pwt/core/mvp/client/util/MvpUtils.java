@@ -19,8 +19,40 @@ package fr.putnami.pwt.core.mvp.client.util;
 import com.google.gwt.place.shared.Place;
 
 import fr.putnami.pwt.core.mvp.client.ActivityFactory;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
 
 public final class MvpUtils {
+
+	public static boolean isParent(Place parent, Place place) {
+		if(place instanceof ViewPlace){
+			ViewPlace viewPlace = (ViewPlace)place;
+			return viewPlace.getParent() != null && viewPlace.getParent().equals(parent);
+		}
+		return false;
+	}
+
+	public static boolean isAncestor(Place parent, Place place) {
+		Place cursor = place;
+		while (cursor != null) {
+			if (cursor instanceof ViewPlace) {
+				ViewPlace viewPlace = (ViewPlace) cursor;
+				if (cursor.equals(parent)) {
+					return true;
+				}
+				if (viewPlace.getParent() == null) {
+					return false;
+				}
+				if (viewPlace.getParent().equals(parent)) {
+					return true;
+				}
+				cursor = viewPlace.getParent();
+			}
+			else {
+				cursor = null;
+			}
+		}
+		return false;
+	}
 
 	public static String getPlacePrefix(Place place) {
 		if (place instanceof ActivityFactory) {
