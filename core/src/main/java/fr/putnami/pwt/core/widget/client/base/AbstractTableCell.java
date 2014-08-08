@@ -17,13 +17,16 @@
 package fr.putnami.pwt.core.widget.client.base;
 
 import fr.putnami.pwt.core.model.client.base.HasReadonly;
-import fr.putnami.pwt.core.widget.client.base.AbstractTableColumn.ReadonlyVisibility;
+import fr.putnami.pwt.core.widget.client.base.AbstractTableColumn.ColumnVisibility;
+import fr.putnami.pwt.core.widget.client.base.AbstractTableColumn.Type;
+import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public abstract class AbstractTableCell<T> extends AbstractPanel implements
 HasReadonly {
 
+	private Type type = Type.DEFAULT;
 	private Boolean readonly;
-	private ReadonlyVisibility readonlyVisibility = ReadonlyVisibility.VISIBLE;
+	private ColumnVisibility readonlyVisibility = ColumnVisibility.VISIBLE;
 
 	public AbstractTableCell(String tagName) {
 		super(tagName);
@@ -45,19 +48,31 @@ HasReadonly {
 		renderVisible();
 	}
 
-	public ReadonlyVisibility getReadonlyVisibility() {
+	public ColumnVisibility getReadonlyVisibility() {
 		return readonlyVisibility;
 	}
 
-	public void setReadonlyVisibility(ReadonlyVisibility readonlyVisibility) {
+	public void setReadonlyVisibility(ColumnVisibility readonlyVisibility) {
 		this.readonlyVisibility = readonlyVisibility;
 		renderVisible();
+	}
+
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+		StyleUtils.addStyle(this, type);
 	}
 
 	private void renderVisible() {
 		switch (readonlyVisibility) {
 		case VISIBLE:
 			setVisible(true);
+			break;
+		case HIDE:
+			setVisible(false);
 			break;
 		case HIDE_READONLY:
 			setVisible(!Boolean.TRUE.equals(readonly));

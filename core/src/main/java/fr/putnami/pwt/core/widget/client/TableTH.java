@@ -24,7 +24,8 @@ import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.model.client.base.HasDrawable;
 import fr.putnami.pwt.core.model.client.base.HasReadonly;
 import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
-import fr.putnami.pwt.core.widget.client.base.AbstractTableColumn.ReadonlyVisibility;
+import fr.putnami.pwt.core.widget.client.base.AbstractTableColumn.ColumnVisibility;
+import fr.putnami.pwt.core.widget.client.base.AbstractTableColumn.Type;
 
 public class TableTH<T> extends AbstractPanel implements
 CloneableWidget,
@@ -34,7 +35,8 @@ Editor {
 
 	private Integer colspan;
 	private Boolean readonly;
-	private ReadonlyVisibility readonlyVisibility;
+	private ColumnVisibility readonlyVisibility;
+	private Type type = Type.DEFAULT;
 
 	public TableTH() {
 		super(TableCellElement.TAG_TH);
@@ -83,19 +85,30 @@ Editor {
 		renderVisible();
 	}
 
-	public ReadonlyVisibility getReadonlyVisibility() {
+	public ColumnVisibility getReadonlyVisibility() {
 		return readonlyVisibility;
 	}
 
-	public void setReadonlyVisibility(ReadonlyVisibility readonlyVisibility) {
+	public void setReadonlyVisibility(ColumnVisibility readonlyVisibility) {
 		this.readonlyVisibility = readonlyVisibility;
 		renderVisible();
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
+	public Type getType() {
+		return type;
 	}
 
 	private void renderVisible() {
 		switch (readonlyVisibility) {
 		case VISIBLE:
 			setVisible(true);
+			break;
+		case HIDE:
+			setVisible(false);
 			break;
 		case HIDE_READONLY:
 			setVisible(!Boolean.TRUE.equals(readonly));

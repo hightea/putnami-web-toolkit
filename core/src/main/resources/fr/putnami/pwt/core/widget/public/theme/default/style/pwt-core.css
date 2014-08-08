@@ -345,16 +345,16 @@
 }
 
 /**
-* TableOrder
+* Table
 */
-table.table td.table-order{
+table.table .table-action-column{
 	width:1em;
+}
+table.table td.table-order:hover{
 	cursor: ns-resize;
 }
 
-/**
-* TableOrder
-*/
-table.table td.table-selecter{
-	width:1em;
+table.table tr.clickable:hover {
+	cursor: pointer;
+	text-decoration: underline;
 }

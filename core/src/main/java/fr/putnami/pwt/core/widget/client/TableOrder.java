@@ -141,7 +141,8 @@ public class TableOrder<T> extends AbstractTableColumn<T> {
 	private final List<TDHandle> cells = Lists.newArrayList();
 
 	public TableOrder() {
-		setReadonlyVisibility(ReadonlyVisibility.HIDE_READONLY);
+		setColumnVisibility(ColumnVisibility.HIDE_READONLY);
+		setType(Type.ACTION);
 	}
 
 	protected TableOrder(TableOrder<T> source) {

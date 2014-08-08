@@ -25,6 +25,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.model.client.base.HasReadonly;
+import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.TableTH;
 
 public abstract class AbstractTableColumn<T> implements
@@ -33,8 +34,25 @@ IsWidget,
 HasResponsiveVisibility,
 CloneableWidget {
 
-	public static enum ReadonlyVisibility {
+	public enum Type implements CssStyle {
+		DEFAULT(null),
+		ACTION("table-action-column");
+
+		private final String style;
+
+		private Type(String style) {
+			this.style = style;
+		}
+
+		@Override
+		public String get() {
+			return style;
+		}
+	}
+
+	public static enum ColumnVisibility {
 		VISIBLE,
+		HIDE,
 		HIDE_READONLY,
 		VISIBLE_READONLY;
 	}
@@ -50,7 +68,9 @@ CloneableWidget {
 	private Visibility lgVisibility = Visibility.DEFAULT;
 	private Visibility printVisibility = Visibility.DEFAULT;
 
-	private ReadonlyVisibility readonlyVisibility = ReadonlyVisibility.VISIBLE;
+	private Type type = Type.DEFAULT;
+
+	private ColumnVisibility columnVisibility = ColumnVisibility.VISIBLE;
 
 	public AbstractTableColumn() {
 
@@ -59,7 +79,8 @@ CloneableWidget {
 	protected AbstractTableColumn(AbstractTableColumn<T> source) {
 		this.readonly = source.readonly;
 		this.colspan = source.colspan;
-		this.readonlyVisibility = source.readonlyVisibility;
+		this.columnVisibility = source.columnVisibility;
+		this.type = source.type;
 	}
 
 	@Override
@@ -80,12 +101,12 @@ CloneableWidget {
 		return colspan;
 	}
 
-	public ReadonlyVisibility getReadonlyVisibility() {
-		return readonlyVisibility;
+	public ColumnVisibility getColumnVisibility() {
+		return columnVisibility;
 	}
 
-	public void setReadonlyVisibility(ReadonlyVisibility readonlyVisibility) {
-		this.readonlyVisibility = readonlyVisibility;
+	public void setColumnVisibility(ColumnVisibility ColumnVisibility) {
+		this.columnVisibility = ColumnVisibility;
 	}
 
 	public Collection<AbstractTableColumnAspect<T>> getAspects() {
@@ -140,17 +161,27 @@ CloneableWidget {
 		this.xsVisibility = printVisibility;
 	}
 
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
 	public final AbstractTableCell<T> createBodyCell() {
 		AbstractTableCell<T> cell = doCreateBodyCell();
 		setResponsiveVisibility(cell);
-		cell.setReadonlyVisibility(readonlyVisibility);
+		cell.setReadonlyVisibility(columnVisibility);
+		cell.setType(type);
 		return cell;
 	}
 
 	public final TableTH<T> createHeaderCell() {
 		TableTH<T> cell = doCreateHeaderCell();
 		setResponsiveVisibility(cell);
-		cell.setReadonlyVisibility(readonlyVisibility);
+		cell.setType(type);
+		cell.setReadonlyVisibility(columnVisibility);
 		return cell;
 	}
 

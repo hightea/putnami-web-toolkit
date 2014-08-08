@@ -41,12 +41,12 @@ import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
 import fr.putnami.pwt.core.widget.client.base.AbstractTableCell;
 
 public class TableRow<T> extends AbstractPanel implements
-		EditorOutput<T>,
-		EditorInput<T>,
-		EditorLeaf,
-		EditorModel<T>,
-		HasReadonly,
-		HasClickHandlers {
+EditorOutput<T>,
+EditorInput<T>,
+EditorLeaf,
+EditorModel<T>,
+HasReadonly,
+HasClickHandlers {
 
 	private MessageHelper messageHelper;
 	private Model<T> model;
