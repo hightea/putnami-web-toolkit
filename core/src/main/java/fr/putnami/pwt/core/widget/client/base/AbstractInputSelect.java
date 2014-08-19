@@ -158,7 +158,7 @@ HasPlaceholder {
 		}
 	}
 
-	private final SelectRenderer<T, U> selectRenderer;
+	private SelectRenderer<T, U> selectRenderer = new SelectRendererImpl();;
 	private SelectItemSelectionHandler<T, U> selectionHandler;
 
 	private final KeyPressHandler keyPressHandler = new KeyPressHandler();
@@ -173,8 +173,6 @@ HasPlaceholder {
 		super(new ButtonDropdown());
 		itemsMap = Maps.newLinkedHashMap();
 		dropdown = (SimpleDropdown) getWidget();
-
-		selectRenderer = new SelectRendererImpl();
 
 		endConstruct();
 	}
@@ -352,10 +350,14 @@ HasPlaceholder {
 			event.preventDefault();
 			event.stopPropagation();
 		}
+
 	}
 
 	@Override
 	protected void setChoiceRenderer(ChoiceRenderer<T> choiceRenderer) {
+		if (choiceRenderer instanceof SelectRenderer) {
+			this.selectRenderer = (SelectRenderer<T, U>) choiceRenderer;
+		}
 	}
 
 	@Override
