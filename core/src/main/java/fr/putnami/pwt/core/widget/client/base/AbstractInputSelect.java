@@ -43,7 +43,7 @@ import fr.putnami.pwt.core.widget.client.helper.CompositeFocusHelper;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public abstract class AbstractInputSelect<T, U> extends AbstractInputChoice<T, U> implements
-		HasPlaceholder {
+HasPlaceholder {
 
 	private static final CssStyle STYLE_INPUT_SELECT = new SimpleStyle("input-select");
 
@@ -119,6 +119,7 @@ public abstract class AbstractInputSelect<T, U> extends AbstractInputChoice<T, U
 			this.placeholder = placeholder;
 		}
 
+		@Override
 		protected String renderNull() {
 			if (!AbstractInputSelect.this.isNullValueAllowed()) {
 				return this.placeholder != null ? this.placeholder : DEFAULT_NULL_RENDER;
@@ -157,7 +158,7 @@ public abstract class AbstractInputSelect<T, U> extends AbstractInputChoice<T, U
 		}
 	}
 
-	private SelectRenderer<T, U> selectRenderer = new SelectRendererImpl();
+	private final SelectRenderer<T, U> selectRenderer;
 	private SelectItemSelectionHandler<T, U> selectionHandler;
 
 	private final KeyPressHandler keyPressHandler = new KeyPressHandler();
@@ -172,6 +173,9 @@ public abstract class AbstractInputSelect<T, U> extends AbstractInputChoice<T, U
 		super(new ButtonDropdown());
 		itemsMap = Maps.newLinkedHashMap();
 		dropdown = (SimpleDropdown) getWidget();
+
+		selectRenderer = new SelectRendererImpl();
+
 		endConstruct();
 	}
 
@@ -179,6 +183,8 @@ public abstract class AbstractInputSelect<T, U> extends AbstractInputChoice<T, U
 		super(new ButtonDropdown(), source);
 		dropdown = (SimpleDropdown) getWidget();
 		itemsMap = source.itemsMap;
+		selectRenderer = source.selectRenderer;
+
 		endConstruct();
 	}
 
@@ -350,9 +356,6 @@ public abstract class AbstractInputSelect<T, U> extends AbstractInputChoice<T, U
 
 	@Override
 	protected void setChoiceRenderer(ChoiceRenderer<T> choiceRenderer) {
-		if (choiceRenderer instanceof SelectRenderer) {
-			this.selectRenderer = (SelectRenderer<T, U>) choiceRenderer;
-		}
 	}
 
 	@Override
