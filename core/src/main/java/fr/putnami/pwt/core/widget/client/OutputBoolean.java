@@ -33,7 +33,7 @@ public class OutputBoolean extends AbstractOutput<Boolean> {
 	}
 
 	private String trueLabel = Boolean.TRUE.toString();
-	private String falseLabel = Boolean.TRUE.toString();
+	private String falseLabel = Boolean.FALSE.toString();
 
 	private Icon trueIcon;
 	private Icon falseIcon;
