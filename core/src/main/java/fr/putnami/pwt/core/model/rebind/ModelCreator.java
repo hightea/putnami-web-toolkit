@@ -397,7 +397,7 @@ public class ModelCreator {
 
 	private void listGetters(JMethod[] methods) {
 		for (JMethod method : methods) {
-			if (method.getName().startsWith("get")
+			if (method.getName().startsWith("get") || method.getName().startsWith("is")
 					&& method.getParameters().length == 0
 					&& !method.getReturnType().equals(JPrimitiveType.VOID)
 					&& method.isPublic()) {
@@ -421,7 +421,12 @@ public class ModelCreator {
 
 	private String extractPropertyNameFromMethod(JMethod method) {
 		String propertyName = method.getName();
-		propertyName = propertyName.substring(3, propertyName.length());
+		if(method.getName().startsWith("is")){
+			propertyName = propertyName.substring(2, propertyName.length());
+		}
+		else{
+			propertyName = propertyName.substring(3, propertyName.length());
+		}
 		String firstChar = propertyName.substring(0, 1);
 		propertyName = propertyName.replaceFirst(firstChar, firstChar.toLowerCase());
 
