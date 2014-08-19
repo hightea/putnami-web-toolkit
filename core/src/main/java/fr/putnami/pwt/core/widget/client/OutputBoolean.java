@@ -26,7 +26,7 @@ import fr.putnami.pwt.core.widget.client.base.AbstractOutput;
 public class OutputBoolean extends AbstractOutput<Boolean> implements Renderer<Boolean> {
 
 	private String trueLabel = Boolean.TRUE.toString();
-	private String falseLabel = Boolean.TRUE.toString();
+	private String falseLabel = Boolean.FALSE.toString();
 
 	public OutputBoolean() {
 		setRenderer(this);
