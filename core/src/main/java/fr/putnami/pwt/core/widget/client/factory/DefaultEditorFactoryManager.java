@@ -16,6 +16,7 @@
  */
 package fr.putnami.pwt.core.widget.client.factory;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -47,6 +48,7 @@ public class DefaultEditorFactoryManager extends EditorFactoryManager {
 		{
 			registerInputFactory(String.class, new InputText());
 
+			registerInputFactory(BigDecimal.class, new InputNumber<Double>(NumberType.DOUBLE));
 			registerInputFactory(Double.class, new InputNumber<Double>(NumberType.DOUBLE));
 			registerInputFactory(double.class, new InputNumber<Double>(NumberType.DOUBLE));
 			registerInputFactory(Float.class, new InputNumber<Float>(NumberType.FLOAT));
@@ -70,6 +72,7 @@ public class DefaultEditorFactoryManager extends EditorFactoryManager {
 		{
 			registerOutputFactory(String.class, new OutputText());
 
+			registerOutputFactory(BigDecimal.class, new OutputNumber());
 			registerOutputFactory(Double.class, new OutputNumber());
 			registerOutputFactory(double.class, new OutputNumber());
 			registerOutputFactory(Float.class, new OutputNumber());
