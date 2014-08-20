@@ -313,6 +313,7 @@ public class ModelDriver<T> implements Driver<T> {
 
 		T result = this.model.cloneBean(this.value);
 		FlusherVisitor<T> flusher = new FlusherVisitor<T>(model, result);
+		result = flusher.getTargetValue();
 		this.accept(flusher);
 		result = flusher.getTargetValue();
 		if (flusher.hasErrors()) {
