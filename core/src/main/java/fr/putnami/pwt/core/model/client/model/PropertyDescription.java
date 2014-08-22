@@ -50,8 +50,8 @@ public final class PropertyDescription {
 		this.clazz = clazz;
 	}
 
-	public Model<?> getModel() {
-		return this.model;
+	public <M> Model<M> getModel() {
+		return (Model<M>) this.model;
 	}
 
 	public void setModel(Model<?> model) {
