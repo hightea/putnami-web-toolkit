@@ -10,7 +10,7 @@
 
 	<properties>
 		<gwt.version>2.6.1</gwt.version>
-		<pwt.version>1.0.0-SNAPSHOT</pwt.version>
+		<pwt.version>1.0.0</pwt.version>
 		<project.compiler.source>1.7</project.compiler.source>
 		<project.compiler.target>1.7</project.compiler.target>
 		<project.sourceEncoding>UTF-8</project.sourceEncoding>
@@ -18,11 +18,6 @@
 
 	<dependencies>
 	<dependency>
-			<groupId>fr.putnami.pwt</groupId>
-			<artifactId>pwt</artifactId>
-			<version>${pwt.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>fr.putnami.pwt</groupId>
 			<artifactId>pwt</artifactId>
 			<version>${pwt.version}</version>

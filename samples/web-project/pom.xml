@@ -11,8 +11,7 @@
 
 	<properties>
 		<gwt.version>2.6.1</gwt.version>
-		<pwt.version>1.0.0-SNAPSHOT</pwt.version>
-		<guava.version>15.0</guava.version>
+		<pwt.version>1.0.0</pwt.version>
 		<jetty.plugin.version>9.2.0.v20140526</jetty.plugin.version>
 		<project.compiler.source>1.7</project.compiler.source>
 		<project.compiler.target>1.7</project.compiler.target>
