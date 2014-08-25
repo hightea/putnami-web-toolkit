@@ -34,12 +34,10 @@
 			<strong>PWT</strong> is not over. A lot of good stuff are in the pipe. 
 			</p>
 			<p class="lead">
-			The version 1.0.0-RC2 has been released. It contains all the features expected 1.0.0. See the <a href="#!Download">release notes</a>. 
-			<br/>
-			The version 1.0.0 is planned for end of august. All issues encountered untill this moment are going to fix within the flow. 
+			The version 1.0.0 has been released! See the <a href="#!Download">release notes</a>. 
 			</p>
 			<p class="lead">
-			We're starting simultaneous the 1.1.0.  Those amazing features will change your coder life : 
+			We're now working on the 1.1.0.  Those amazing features will change your coder life : 
 			</p>
 			<ul class="lead">
 				<li>Documentation improvements</li>			
@@ -47,6 +45,9 @@
 				<li>New widgets</li>			
 				<li>New plugins</li>			
 			</ul>
+			<p class="lead">
+			Most of them are already done. Have a look on th 1.1.x branch!
+			</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
 		
