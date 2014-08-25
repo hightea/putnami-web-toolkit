@@ -20,7 +20,7 @@
 		</a:Affix>
 		<g:SimplePanel ui:field="viewContainer" styleName="container-fluid" />
 		<footer class="putnami-sample-footer"> 
-			<p>Sample web app using <a href="https://gwt.putnami.org" target="_blank">PWT - Putnami Web Framework</a>.</p>
+			<p>Sample web app using <a href="https://pwt.putnami.org" target="_blank">PWT - Putnami Web Framework</a>.</p>
 		</footer>		
 	</a:HTMLPanel>
 </ui:UiBinder>
