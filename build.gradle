@@ -20,7 +20,7 @@ task licenseFormatAll
 
 ext {
 	releaseVersion = '1.0.0'
-	snapshotVersion = '1.0.0-SNAPSHOT'
+	snapshotVersion = '1.0.1-SNAPSHOT'
 	gwtVersion = '2.6.1'
 	guavaVersion = '17.0'
 }
@@ -35,7 +35,7 @@ subprojects {
 	
 
 	group = 'fr.putnami.pwt'
-	version = rootProject.releaseVersion
+	version = rootProject.snapshotVersion
 
 	sourceCompatibility = 1.7
 	targetCompatibility = 1.7
