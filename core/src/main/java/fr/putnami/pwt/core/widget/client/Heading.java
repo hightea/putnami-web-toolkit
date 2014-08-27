@@ -16,6 +16,9 @@
  */
 package fr.putnami.pwt.core.widget.client;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
 import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.user.client.ui.HasHTML;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -24,9 +27,13 @@ import fr.putnami.pwt.core.widget.client.base.AbstractWidget;
 
 public class Heading extends AbstractWidget implements HasHTML {
 
+	public static final List<String> HEADING_TAGS = Lists.newArrayList("h1", "h2", "h3", "h4", "h5", "h6");
+	public static final String ATTRIBUTE_DATA_SUMMARY = "data-summary";
+
 	private static final int HEADER_MINIMUM = 1;
 
 	private static final int HEADER_MAXIMUM = 6;
+
 
 	private final int level;
 
@@ -103,7 +110,7 @@ public class Heading extends AbstractWidget implements HasHTML {
 		getElement().setInnerHTML(this.html);
 	}
 
-	public void setNavSpy(NavSpy navSpy) {
-		navSpy.addHeading(this);
+	public void setSummary(String summary) {
+		getElement().setAttribute(ATTRIBUTE_DATA_SUMMARY, summary);
 	}
 }

@@ -52,7 +52,7 @@ public class CommandExecutorImpl extends AbstractCommandExecutor implements Comm
 				method.getReturnType().getName(), paramTypes);
 		this.setCommandDefinition(definition);
 
-		this.logger = LogFactory.getLog(method.getDeclaringClass());
+		this.logger = LogFactory.getLog(method.getDeclaringClass().getCanonicalName());
 
 	}
 
@@ -76,7 +76,7 @@ public class CommandExecutorImpl extends AbstractCommandExecutor implements Comm
 			reponse.setThrown(this.toThrown(CommandService.EXCEPTION_ILLEGAL_ACCESS, e));
 		}
 		catch (InvocationTargetException e) {
-			thrown = e;
+			thrown = e.getCause();
 			reponse.setThrown(this.toThrown(CommandService.EXCEPTION_INVOKATION, e.getTargetException()));
 		}
 

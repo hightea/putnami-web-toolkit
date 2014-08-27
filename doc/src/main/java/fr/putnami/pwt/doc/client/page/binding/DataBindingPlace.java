@@ -16,21 +16,9 @@
  */
 package fr.putnami.pwt.doc.client.page.binding;
 
-import com.google.gwt.core.client.GWT;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
-import fr.putnami.pwt.core.mvp.client.MvpPlace;
-import fr.putnami.pwt.core.mvp.client.ViewProxy;
-
-public class DataBindingPlace extends MvpPlace {
-
-	public static final DataBindingPlace INSTANCE = new DataBindingPlace();
-
-	public DataBindingPlace() {
-		super((ViewProxy) GWT.create(DataBindingView.class), null);
-	}
-
-	@Override
-	public MvpPlace getPlace(String token) {
-		return DataBindingPlace.INSTANCE;
-	}
+@ActivityDescription(view = DataBindingPage.class)
+public class DataBindingPlace extends ViewPlace {
 }

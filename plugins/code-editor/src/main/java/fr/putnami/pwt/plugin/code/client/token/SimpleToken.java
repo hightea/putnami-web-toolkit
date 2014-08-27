@@ -145,4 +145,12 @@ public class SimpleToken<T extends TokenContent> implements Token<T> {
 	public int hashCode() {
 		return Objects.hashCode(this.type, this.tokenStart, this.text, this.content);
 	}
+
+	@Override
+	public String toString() {
+		return Objects.toStringHelper(this)
+				.add("type", type)
+				.add("text", text)
+				.toString();
+	}
 }

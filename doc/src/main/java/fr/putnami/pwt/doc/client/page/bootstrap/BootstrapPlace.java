@@ -16,21 +16,9 @@
  */
 package fr.putnami.pwt.doc.client.page.bootstrap;
 
-import com.google.gwt.core.client.GWT;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
-import fr.putnami.pwt.core.mvp.client.MvpPlace;
-import fr.putnami.pwt.core.mvp.client.ViewProxy;
-
-public class BootstrapPlace extends MvpPlace {
-
-	public static final BootstrapPlace INSTANCE = new BootstrapPlace();
-
-	public BootstrapPlace() {
-		super((ViewProxy) GWT.create(BootstrapView.class), null);
-	}
-
-	@Override
-	public MvpPlace getPlace(String token) {
-		return BootstrapPlace.INSTANCE;
-	}
+@ActivityDescription(view = BootstrapPage.class)
+public class BootstrapPlace extends ViewPlace {
 }

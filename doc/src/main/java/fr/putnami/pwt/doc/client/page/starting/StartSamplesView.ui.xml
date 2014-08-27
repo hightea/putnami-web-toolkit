@@ -24,10 +24,8 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">Start from samples</w:Heading>
+		<w:Heading level="2" summary="docSummary">Start from samples</w:Heading>
 
 		<p>We provide two sample apps in the github repo in the <a href="https://github.com/Putnami/putnami-pwt/tree/master/samples">samples</a> folder :</p>
 		<ul>

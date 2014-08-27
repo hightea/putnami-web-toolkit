@@ -24,10 +24,8 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{tableOfContent}">Forms</w:Heading>
+		<w:Heading level="2" summary="docSummary">Forms</w:Heading>
 		<p>
 			<strong title="Putnami Web Toolkit">PWT</strong> provides a full components set in order to build nice and efficient forms.<br />
 			This framework allow to easily bind data with views, then flush data from views. <br />
@@ -41,7 +39,7 @@
 			The <code>AbstractHTMLPanel</code> inheritance provide a good design flexibility.
 		</p>
 
-		<w:Heading level="3" navSpy="{tableOfContent}">Basic form</w:Heading>
+		<w:Heading level="3" summary="docSummary">Basic form</w:Heading>
 		<p>
 			With the <code>BASIC</code> layout, all components are set to <code>width: 100%;</code>.
 		</p>
@@ -75,7 +73,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="3" navSpy="{tableOfContent}">Inline form</w:Heading>
+		<w:Heading level="3" summary="docSummary">Inline form</w:Heading>
 		<p>The <code>INLINE</code> layout render controls with a left aligned and inline-block. 
 		the label are hidden and only visible for screen readers. Some controls like <code>TextArea</code> still displayed on 100% width. 
 		</p>
@@ -112,7 +110,7 @@
 		</div>
 
 
-		<w:Heading level="3" navSpy="{tableOfContent}">Horizontal form</w:Heading>
+		<w:Heading level="3" summary="docSummary">Horizontal form</w:Heading>
 		<p>
 			The <code>HORIZONTAL</code> layout use the Bootstrap grid system to render the label in the left column and the right column contains the control, the help message and the errors.   
 		</p>
@@ -143,7 +141,7 @@
 			</c:StaticCode>
 		</div>
 
-		<w:Heading level="3" navSpy="{tableOfContent}">Readonly form</w:Heading>
+		<w:Heading level="3" summary="docSummary">Readonly form</w:Heading>
 		<p><code>Form</code> can be set to readonly, in this case the <code>FormGroup</code> use <code>EditorOutput</code>. 
 			If <code>EditorInput</code> is not within the a <code>FormGroup</code> the <code>EditorInput</code> is set to disabled.</p>
 		<div class="showcase-sample-block">
@@ -176,7 +174,7 @@
 			</c:StaticCode>
 		</div>
 
-		<w:Heading level="3" navSpy="{tableOfContent}">Header and Footer</w:Heading>
+		<w:Heading level="3" summary="docSummary">Header and Footer</w:Heading>
 		<p><code>Form</code> accept <code>Header</code> and <code>Footer</code> which are automaticaly positionned. 
 		Those components can be wrapped by the parent container such as <code>Modal</code> or <code>Panel</code>.
 		</p>
@@ -215,7 +213,7 @@
 
 
 
-		<w:Heading level="3" navSpy="{tableOfContent}">Fieldset</w:Heading>
+		<w:Heading level="3" summary="docSummary">Fieldset</w:Heading>
 		<p>Acting like <code>Form</code>, <code>Fieldset</code> allow to structure the <code>Form</code> by managing it's own layout, 
 			and it's own readonly state. Also accept one <code>Legend</code> as child.<br/>
 			As <code>Fieldset</code> extends an <code>AbstractHTMLPanel</code> you have all the needed flexibility.
@@ -276,7 +274,7 @@
 </w:Form>]]></pre>
 			</c:StaticCode>
 		</div>
-		<w:Heading level="3" navSpy="{tableOfContent}">Form groups</w:Heading>
+		<w:Heading level="3" summary="docSummary">Form groups</w:Heading>
 		<p>
 			The <code>FormGroup</code> is a smart component that help you build <code>Forms</code>. 
 			Drived by the <code>FormLayout</code> it position components such as a <code>Label</code>, 
@@ -288,7 +286,7 @@
 				The <code>EditorInput</code> and the <code>EditorOutput</code> are guessed with the property layout.
 		</p>
 		
-		<w:Heading level="4" navSpy="{tableOfContent}">Editable Control</w:Heading>
+		<w:Heading level="4" summary="docSummary">Editable Control</w:Heading>
 		<p>
 			<code>FormGroup</code> exemple with all declarable components.  
 			<ul>
@@ -329,7 +327,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="4" navSpy="{tableOfContent}">Readonly control</w:Heading>
+		<w:Heading level="4" summary="docSummary">Readonly control</w:Heading>
 		<p>
 			When set to readonly, the form group present the <code>OutputEditor</code>
 		</p>
@@ -352,7 +350,7 @@
 			</c:StaticCode>
 		</div>
 
-		<w:Heading level="4" navSpy="{tableOfContent}">Magic FormGroup</w:Heading>
+		<w:Heading level="4" summary="docSummary">Magic FormGroup</w:Heading>
 		<p>
 			Are the FormGroup magic?  no... <br/>
 			In this example all <code>Label</code>, <code>Tooltip</code>, and <code>Help</code> are resolved with a <code>MessageHelper</code> initialized with contants.
@@ -394,7 +392,7 @@ formMagic.setMessageHelper(messageHelper);
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="4" navSpy="{tableOfContent}">Errors</w:Heading>
+		<w:Heading level="4" summary="docSummary">Errors</w:Heading>
 		<p>
 			The errors are automaticaly displayed in the responsible <code>FormGroup</code>.
 		</p>

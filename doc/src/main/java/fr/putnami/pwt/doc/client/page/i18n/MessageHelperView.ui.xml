@@ -24,13 +24,11 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 
-	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">Message Helper</w:Heading>
+		<w:Heading level="2" summary="docSummary">Message Helper</w:Heading>
 		<p class="lead"><strong title="Putnami Web Toolkit">PWT</strong> provides a Helper to use the <code>ConstantsWithLookup</code>.</p>
 					
-		<w:Heading level="3" navSpy="{navSpy}">Example</w:Heading>
+		<w:Heading level="3" summary="docSummary">Example</w:Heading>
 		<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
 ]]></pre>

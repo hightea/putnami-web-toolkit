@@ -23,10 +23,8 @@
 
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">Affix</w:Heading>
+		<w:Heading level="2" summary="docSummary">Affix</w:Heading>
 		<p>The <code>Affix</code> container allow to fix widget position on the screen.</p>
 		<p>The <code>NavSpy</code> on the right is embedded in an <code>Affix</code> component here.</p>
 					

@@ -24,13 +24,11 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">Gradle's users</w:Heading>
+		<w:Heading level="2" summary="docSummary">Gradle's users</w:Heading>
 		<p>From our point of view, Gradle is the best build automation ever made. We realy advice you to use it for your next accomplishments.  </p>
 		
-		<w:Heading level="3" navSpy="{navSpy}">gwt-gradle-plugin</w:Heading>
+		<w:Heading level="3" summary="docSummary">gwt-gradle-plugin</w:Heading>
 		<p>Gradle does not support any official GWT plugin yet. However, there is a very nice one hosted on Github : <a href="https://github.com/steffenschaefer/gwt-gradle-plugin" target="_BLANK">Steffen Schäffer's gwt-gradle-plugin</a>.
 		Unfortunately, today there is a little typo in the source code making impossible to define different modules between production tasks (like compile) and dev tasks (like GWT's SuperDevMode).</p>
 		
@@ -42,7 +40,7 @@
 		
 		<p>On this page only explains the bases of the plugin. You can refer to the <a href="http://steffenschaefer.github.io/gwt-gradle-plugin/" target="_BLANK">official doc</a> to go furher.</p>
 		
-		<w:Heading level="3" navSpy="{navSpy}">Init the build.gradle</w:Heading>
+		<w:Heading level="3" summary="docSummary">Init the build.gradle</w:Heading>
 		<p>You can download have a full working <a href="https://github.com/Putnami/putnami-pwt/blob/master/samples/web-project/build.gradle" target="_BLANK">build.gradle</a></p>
 		<ol>
 			<li>Init the build script to get the non official gwt-gradle-plugin.</li>
@@ -77,7 +75,7 @@ dependencies {
 }]]></pre>
 		</c:StaticCode>
 		
-		<w:Heading level="3" navSpy="{navSpy}">Make a GWT library</w:Heading>
+		<w:Heading level="3" summary="docSummary">Make a GWT library</w:Heading>
 		<p>
 		To build a gwt library you have to use the plugin gwt-base in order to properly set the classpath. 
 		Because GWT need the library sources to generate the javascript we need to include all sources in the jar. 
@@ -104,7 +102,7 @@ gwt {
 
 		<p>Then use the <kbd>gradle build</kbd> to build your library.</p>
 
-		<w:Heading level="3" navSpy="{navSpy}">Make a web app</w:Heading>
+		<w:Heading level="3" summary="docSummary">Make a web app</w:Heading>
 		<p>To build a web app you have to :</p>
 		<ol>
 			<li>Add the gwt plugin.</li>

@@ -19,69 +19,35 @@ package fr.putnami.pwt.core.widget.client.base;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.text.shared.Renderer;
 import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Widget;
 
 import fr.putnami.pwt.core.editor.client.EditorLeaf;
 import fr.putnami.pwt.core.editor.client.EditorOutput;
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
-import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public abstract class AbstractOutput<T> extends Widget implements
 		CloneableWidget,
 		EditorLeaf,
 		EditorOutput<T>,
-		HasText,
 		HasResponsiveVisibility {
-
-	public enum Style implements CssStyle {
-		DEFAULT(null),
-		LABEL("label label-default"),
-		LABEL_PRIMARY("label label-primary"),
-		LABEL_SUCCESS("label label-success"),
-		LABEL_INFO("label label-info"),
-		LABEL_WARNING("label label-warning"),
-		LABEL_DANGER("label label-danger"),
-		BADGE("badge");
-
-		private final String style;
-
-		private Style(String style) {
-			this.style = style;
-		}
-
-		@Override
-		public String get() {
-			return style;
-		}
-	}
 
 	private HandlerManager handlerManager;
 
 	private Element element;
 
 	private String tag = ParagraphElement.TAG;
-	private Style style;
-
-	private Renderer<T> renderer;
 
 	private String path;
 	private T value;
-
-	private String text;
 
 	public AbstractOutput() {
 	}
 
 	protected AbstractOutput(AbstractOutput<T> source) {
 		tag = source.tag;
-		renderer = source.renderer;
-		style = source.style;
 		path = source.path;
-		text = source.text;
 		handlerManager = new HandlerManager(source.handlerManager, this);
 		handlerManager.resetSinkEvents();
 		StyleUtils.cloneStyle(this, source);
@@ -112,19 +78,22 @@ public abstract class AbstractOutput<T> extends Widget implements
 		return ensureElement();
 	}
 
+	public boolean elementExists() {
+		return element != null;
+	}
+
 	private Element ensureElement() {
 		if (element == null) {
 			element = (Element) Document.get().createElement(tag);
 			setElement(element);
-			if (text != null) {
-				setText(text);
-			}
 			StyleUtils.initStyle(this);
 			StyleUtils.addStyle(element, STYLE_CONTROL_STATIC);
-			setStyle(style);
+			ensureElement(element);
 		}
 		return element;
 	}
+
+	protected abstract void ensureElement(Element element);
 
 	public void setTag(String tag) {
 		this.tag = tag;
@@ -145,42 +114,13 @@ public abstract class AbstractOutput<T> extends Widget implements
 		return this.value;
 	}
 
-	public void setRenderer(Renderer<T> renderer) {
-		this.renderer = renderer;
-		if (renderer != null) {
-			setText(renderer.render(value));
-		}
-	}
-
 	@Override
 	public void edit(T value) {
 		this.value = value;
-		setText(renderer.render(value));
+		renderValue(value);
 	}
 
-	@Override
-	public String getText() {
-		return this.text;
-	}
-
-	@Override
-	public void setText(String text) {
-		this.text = text;
-		if (element != null) {
-			element.setInnerText(text);
-		}
-	}
-
-	public Style getStyle() {
-		return style;
-	}
-
-	public void setStyle(Style style) {
-		this.style = style;
-		if (element != null) {
-			StyleUtils.addStyle(element, style);
-		}
-	}
+	protected abstract void renderValue(T value);
 
 	@Override
 	public void setXsVisibility(Visibility xsVisibility) {

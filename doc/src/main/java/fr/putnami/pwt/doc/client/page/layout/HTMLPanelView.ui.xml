@@ -23,10 +23,8 @@
 
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">HTML Panel</w:Heading>
+		<w:Heading level="2" summary="docSummary">HTML Panel</w:Heading>
 		<p>
 			A <code>HTMLPanel</code> is a panel accepting children and HTML content. It extends internal <code>AbstractHTMLPanel</code> providing some usefull utilities.
 		</p>

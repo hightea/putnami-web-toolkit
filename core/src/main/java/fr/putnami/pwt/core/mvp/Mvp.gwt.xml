@@ -26,12 +26,10 @@
 	<inherits name="com.google.common.collect.Collect" />
 	
 	<inherits name="fr.putnami.pwt.core.event.Event" />
-	<inherits name="fr.putnami.pwt.core.service.Service" />
 
 	<source path="client"/>
 	
 	<generate-with class="fr.putnami.pwt.core.mvp.rebind.ProxyViewGenerator">
-		<when-type-assignable class="fr.putnami.pwt.core.mvp.client.View" />
+		<when-type-assignable class="fr.putnami.pwt.core.mvp.client.ViewPlace" />
 	</generate-with>
-
 </module>

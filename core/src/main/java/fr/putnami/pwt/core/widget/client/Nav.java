@@ -94,9 +94,7 @@ public class Nav extends AbstractPanel implements CloneableWidget {
 
 	@Override
 	public void add(IsWidget w) {
-		if (w instanceof Nav.IsNavContent) {
-			addNavContent((Nav.IsNavContent) w);
-		}
+		append(w);
 	}
 
 	public void addNavContent(Nav.IsNavContent navContent) {

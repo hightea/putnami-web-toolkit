@@ -39,16 +39,12 @@ public class TableEditorTH<T> extends TableTH<T> implements
 	private Collection<AbstractTableColumnAspect<T>> aspects = Lists.newArrayList();
 	private String text;
 
-	private String path;
-
 	public TableEditorTH() {
 		super();
 	}
 
 	protected TableEditorTH(TableEditorTH<T> source) {
 		super(source);
-		this.path = source.path;
-
 		for (AbstractTableColumnAspect<T> aspect : source.aspects) {
 			addAspect(aspect.cloneAspect());
 		}
@@ -114,16 +110,6 @@ public class TableEditorTH<T> extends TableTH<T> implements
 			label.setText(text);
 			append(label);
 		}
-	}
-
-	@Override
-	public String getPath() {
-		return path == null ? Path.ROOT_PATH : path;
-	}
-
-	@Override
-	public void setPath(String path) {
-		this.path = path;
 	}
 
 	@Override

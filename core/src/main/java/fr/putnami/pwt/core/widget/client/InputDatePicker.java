@@ -98,6 +98,8 @@ HasValueChangeHandlers<Date> {
 		CALENDAR, MONTH;
 	}
 
+	private static final WidgetParams WIDGET_PARAMS = WidgetParams.Util.get();
+
 	private static final CssStyle STYLE_FADE = new SimpleStyle("fade");
 
 	private static final String ATTRIBUTE_DATA_DATE = "data-date";
@@ -111,8 +113,8 @@ HasValueChangeHandlers<Date> {
 	private static final DateTimeFormatInfo DATE_TIME_FORMAT_INFO = LocaleInfo.getCurrentLocale().getDateTimeFormatInfo();
 	private static final String[] DAYS = DATE_TIME_FORMAT_INFO.weekdaysShortStandalone();
 
-	private static final DateTimeFormat MONTH_YEAR_FORMAT = DateTimeFormat.getFormat(WidgetParams.Util.get().monthYearFull());
-	private static final DateTimeFormat MONTH_ABBR_FORMAT = DateTimeFormat.getFormat(WidgetParams.Util.get().monthAbbr());
+	private static final DateTimeFormat MONTH_YEAR_FORMAT = DateTimeFormat.getFormat(WIDGET_PARAMS.inputDatePickerMonthYearFormat());
+	private static final DateTimeFormat MONTH_ABBR_FORMAT = DateTimeFormat.getFormat(WIDGET_PARAMS.inputDatePickerMonthFormat());
 
 	private static final DateTimeFormat ATTRIBUTE_DATE_FORMAT = DateTimeFormat.getFormat("yyyy-MM-dd");
 

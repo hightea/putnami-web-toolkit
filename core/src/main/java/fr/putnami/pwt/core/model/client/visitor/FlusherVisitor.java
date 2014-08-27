@@ -37,10 +37,10 @@ public class FlusherVisitor<T> extends AbstractVisitor {
 
 	private final Multimap<Context<?>, Error> errors = LinkedListMultimap.create();
 
-	private final Model<?> model;
-	private final T targetValue;
+	private final Model<T> model;
+	private T targetValue;
 
-	public FlusherVisitor(Model<?> model, T targetValue) {
+	public FlusherVisitor(Model<T> model, T targetValue) {
 		this.model = model;
 		this.targetValue = targetValue;
 	}
@@ -74,7 +74,7 @@ public class FlusherVisitor<T> extends AbstractVisitor {
 				}
 			}
 
-			ModelUtils.bindValue(targetValue, this.model, path, value);
+			targetValue = ModelUtils.bindValue(targetValue, this.model, path, value);
 		}
 
 		return true;

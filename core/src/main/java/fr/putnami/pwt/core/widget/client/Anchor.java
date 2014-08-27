@@ -91,10 +91,10 @@ import fr.putnami.pwt.core.widget.client.util.AnchorUtils;
 import fr.putnami.pwt.core.widget.client.util.HTMLUtils;
 
 public class Anchor<T> extends AbstractPanel implements
-		EditorValue<T>, CloneableWidget,
-		HasAllDragAndDropHandlers, HasAllMouseHandlers, HasClickHandlers,
-		HasDoubleClickHandlers, HasAllKeyHandlers, HasAllFocusHandlers,
-		HasAllGestureHandlers, HasAllTouchHandlers
+EditorValue<T>, CloneableWidget,
+HasAllDragAndDropHandlers, HasAllMouseHandlers, HasClickHandlers,
+HasDoubleClickHandlers, HasAllKeyHandlers, HasAllFocusHandlers,
+HasAllGestureHandlers, HasAllTouchHandlers
 {
 	private static final FocusImpl impl = FocusImpl.getFocusImplForPanel();
 
@@ -118,7 +118,7 @@ public class Anchor<T> extends AbstractPanel implements
 	}
 
 	private void endConstruct() {
-		AnchorElement.as(getElement()).setHref(AnchorUtils.DUMMY_HREF);
+		setLinkAsDummy();
 	}
 
 	@Override
@@ -127,6 +127,7 @@ public class Anchor<T> extends AbstractPanel implements
 	}
 
 	public void setText(String text) {
+		getElement().removeAllChildren();
 		getElement().appendChild(Document.get().createTextNode(HTMLUtils.unescapeHTML(text)));
 	}
 
@@ -136,7 +137,16 @@ public class Anchor<T> extends AbstractPanel implements
 
 	public void setLink(String link) {
 		this.link = link;
-		AnchorElement.as(getElement()).setHref(link);
+		if (link == null) {
+			getElement().removeAttribute("href");
+		}
+		else {
+			AnchorElement.as(getElement()).setHref(link);
+		}
+	}
+
+	public void setLinkAsDummy() {
+		AnchorElement.as(getElement()).setHref(AnchorUtils.DUMMY_HREF);
 	}
 
 	@Override

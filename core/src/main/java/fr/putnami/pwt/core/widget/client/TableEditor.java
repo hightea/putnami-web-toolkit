@@ -39,11 +39,11 @@ import fr.putnami.pwt.core.widget.client.helper.PaginationHelper;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class TableEditor<T> extends Table<T> implements
-		HasDriver<Collection<T>, ModelDriver<Collection<T>>>,
-		EditorLeaf,
-		EditorOutput<Collection<T>>,
-		EditorInput<Collection<T>>,
-		EditorModel<T> {
+HasDriver<Collection<T>, ModelDriver<Collection<T>>>,
+EditorLeaf,
+EditorOutput<Collection<T>>,
+EditorInput<Collection<T>>,
+EditorModel<T> {
 
 	private MessageHelper messageHelper;
 	private Model<T> model;
@@ -126,12 +126,26 @@ public class TableEditor<T> extends Table<T> implements
 
 	@Override
 	public Collection<T> flush() {
-		return this.driver.flush();
+		this.driver.flush();
+		// FIXME TableOrder doesn't sort result, so we ask to sort result via TableEditor
+		if (!this.driver.hasErrors()) {
+			return ((TableEditorBody) getDefaultBody()).flush();
+		}
+		return this.driver.getValue();
 	}
 
 	@Override
 	public void edit(Collection<T> value) {
 		driver.edit(value);
+	}
+
+	public <A> boolean removeColumn(AbstractTableColumn<A> column) {
+		ensureTableHead().removeColumn(column);
+		TableBody<T> body = getDefaultBody();
+		if (body instanceof TableEditorBody) {
+			((TableEditorBody) body).removeColumn(column);
+		}
+		return true;
 	}
 
 	private void setPagination(Pagination pagination) {

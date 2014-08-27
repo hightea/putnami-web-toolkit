@@ -42,6 +42,7 @@ import fr.putnami.pwt.core.mvp.client.event.StartActivityEvent.HasStartActivityH
 import fr.putnami.pwt.core.mvp.client.event.StopActivityEvent;
 import fr.putnami.pwt.core.mvp.client.event.StopActivityEvent.Handler;
 import fr.putnami.pwt.core.mvp.client.event.StopActivityEvent.HasStopActivityHandlers;
+import fr.putnami.pwt.core.mvp.client.util.MvpUtils;
 
 public class MvpController extends PlaceController implements
 PlaceHistoryMapper,
@@ -60,7 +61,11 @@ HasMayStopActivityHandlers
 		return MvpController.instance;
 	}
 
-	private final Map<String, PlaceTokenizer<?>> TOKENIZERS = Maps.newHashMap();
+	private static final String PLACE_CROWLER_DELIMITER = "!";
+	private static final String PLACE_SEPARATOR = "/";
+	private static final char PLACE_TOKEN_SEPARATOR = '=';
+
+	private final Map<String, ActivityFactory> ACTIVITY_FACTORIES = Maps.newHashMap();
 
 	private final ActivityManager activityManager;
 	private final PlaceHistoryHandler historyHandler;
@@ -120,36 +125,53 @@ HasMayStopActivityHandlers
 		this.historyHandler.handleCurrentHistory();
 	}
 
-	public void registerActivity(MvpPlace place) {
-		PlaceTokenizer tokenizer = place;
-		String key = getPlacePrefix(place);
-		this.TOKENIZERS.put(key, tokenizer);
-	}
-
-	public void registerAlias(String alias, MvpPlace place) {
-		this.TOKENIZERS.put("!" + alias, place);
+	public void registerActivity(ActivityFactory placeViewMapper) {
+		for (String preffix : placeViewMapper.getPlacePrefixes()) {
+			if (!preffix.startsWith("!")) {
+				preffix = "!" + preffix;
+			}
+			this.ACTIVITY_FACTORIES.put(preffix, placeViewMapper);
+		}
 	}
 
 	@Override
 	public Activity getActivity(Place place) {
-		if (place instanceof MvpPlace) {
-			return new MvpActivity((MvpPlace) place);
+		String key = MvpUtils.getPlacePrefix(place);
+		ActivityFactory activityFactory = ACTIVITY_FACTORIES.get(key);
+		if (activityFactory != null) {
+			return activityFactory.createActivity(place);
 		}
 		return null;
 	}
 
 	@Override
 	public Place getPlace(String token) {
-		int colonAt = token.indexOf(':');
+		String[] placesToken = token.split(PLACE_SEPARATOR);
+		Place result = null;
+		for (String placeToken : placesToken) {
+			Place localPlace = getSimplePlace(placeToken);
+			if (localPlace != null && localPlace instanceof ViewPlace && result instanceof ViewPlace) {
+				((ViewPlace) localPlace).setParent((ViewPlace) result);
+			}
+			result = localPlace;
+		}
+		return result;
+	}
+
+	private Place getSimplePlace(String token) {
+		int colonAt = token.indexOf(PLACE_TOKEN_SEPARATOR);
 		String prefix = token;
 		String rest = null;
 		if (colonAt > 0) {
 			prefix = token.substring(0, colonAt);
 			rest = token.substring(colonAt + 1);
 		}
-		PlaceTokenizer<?> tokenizer = this.TOKENIZERS.get(prefix);
-		if (tokenizer != null) {
-			return tokenizer.getPlace(rest);
+		if (!prefix.startsWith(PLACE_CROWLER_DELIMITER)) {
+			prefix = PLACE_CROWLER_DELIMITER + prefix;
+		}
+		ActivityFactory activityFactory = this.ACTIVITY_FACTORIES.get(prefix);
+		if (activityFactory instanceof PlaceTokenizer) {
+			return ((PlaceTokenizer) activityFactory).getPlace(rest);
 		}
 		return null;
 	}
@@ -159,19 +181,31 @@ HasMayStopActivityHandlers
 		if (place == null) {
 			return null;
 		}
-		String prefix = getPlacePrefix(place);
+		String parentToken = null;
+		if (place instanceof ViewPlace && ((ViewPlace) place).getParent() != null) {
+			parentToken = getToken(((ViewPlace) place).getParent());
+		}
+		String prefix = MvpUtils.getPlacePrefix(place);
 		String token = null;
-		PlaceTokenizer tokenizer = this.TOKENIZERS.get(prefix);
-		if (tokenizer != null) {
-			token = tokenizer.getToken(place);
+		ActivityFactory activityFactory = this.ACTIVITY_FACTORIES.get(prefix);
+		if (activityFactory instanceof PlaceTokenizer) {
+			token = ((PlaceTokenizer) activityFactory).getToken(place);
 		}
 
+		String result = "";
+		if (parentToken != null) {
+			result = parentToken + PLACE_SEPARATOR;
+			if (prefix.startsWith("!")) {
+				prefix = prefix.substring(1);
+			}
+		}
 		if (token != null) {
-			return prefix.length() == 0 ? token : prefix + ":" + token;
+			result += prefix.length() == 0 ? token : prefix + PLACE_TOKEN_SEPARATOR + token;
 		}
 		else {
-			return prefix;
+			result += prefix;
 		}
+		return result;
 	}
 
 	public void setDisplay(AcceptsOneWidget display) {
@@ -217,9 +251,4 @@ HasMayStopActivityHandlers
 	public HandlerRegistration addMayStopActivityHandler(fr.putnami.pwt.core.mvp.client.event.MayStopActivityEvent.Handler handler) {
 		return EventBus.get().addHandler(MayStopActivityEvent.TYPE, handler);
 	}
-
-	private String getPlacePrefix(Place place) {
-		return "!" + place.getClass().getSimpleName().replaceAll("Place$", "");
-	}
-
 }

@@ -16,21 +16,9 @@
  */
 package fr.putnami.pwt.doc.client.page.ajaxbot;
 
-import com.google.gwt.core.client.GWT;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
-import fr.putnami.pwt.core.mvp.client.MvpPlace;
-import fr.putnami.pwt.core.mvp.client.ViewProxy;
-
-public class AjaxBotIndexingPlace extends MvpPlace {
-
-	public static final AjaxBotIndexingPlace INSTANCE = new AjaxBotIndexingPlace();
-
-	public AjaxBotIndexingPlace() {
-		super((ViewProxy) GWT.create(AjaxBotIndexingView.class), null);
-	}
-
-	@Override
-	public MvpPlace getPlace(String token) {
-		return AjaxBotIndexingPlace.INSTANCE;
-	}
+@ActivityDescription(view = AjaxBotIndexingPage.class)
+public class AjaxBotIndexingPlace extends ViewPlace {
 }

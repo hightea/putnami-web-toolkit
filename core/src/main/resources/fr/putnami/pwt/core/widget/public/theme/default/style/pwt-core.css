@@ -310,3 +310,51 @@
 	font-weight: 500;
 	padding-left: 28px
 }
+
+/** 
+* Panel
+*/
+.panel-heading{
+	position: relative;
+}
+
+.panel-commands{
+	position: absolute;
+	top: 5px;
+	right: 15px;	
+}
+.panel-primary>.panel-heading i{
+	color: #fff;
+	background-color: #428bca;
+}
+.panel-success>.panel-heading i{
+  color: #3c763d;
+  background-color: #dff0d8;
+}
+.panel-info>.panel-heading i{
+  color: #31708f;
+  background-color: #d9edf7;
+}
+.panel-warning>.panel-heading i{
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+}
+.panel-danger>.panel-heading i{
+  color: #a94442;
+  background-color: #f2dede;
+}
+
+/**
+* Table
+*/
+table.table .table-action-column{
+	width:1em;
+}
+table.table td.table-order:hover{
+	cursor: ns-resize;
+}
+
+table.table tr.clickable:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}

@@ -35,9 +35,9 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class Table<T> extends AbstractPanel implements
-		HasReadonly,
-		CloneableWidget,
-		RowClickEvent.HasRowClickHandlers {
+HasReadonly,
+CloneableWidget,
+RowClickEvent.HasRowClickHandlers {
 
 	private static final CssStyle STYLE_TABLE = new SimpleStyle("table");
 	private static final CssStyle STYLE_RESPONSIVE = new SimpleStyle("table-responsive");
@@ -163,6 +163,15 @@ public class Table<T> extends AbstractPanel implements
 		return getDefaultBody().addRowClickHandler(handler);
 	}
 
+	public TableBody<T> getBody(String bodyId) {
+		TableBody<T> body = this.bodies.get(bodyId);
+		if (body == null) {
+			body = createBody(bodyId);
+			this.addBody(body);
+		}
+		return body;
+	}
+
 	private void setHead(TableHead head) {
 		this.head = head;
 		tableContainer.append(this.head);
@@ -173,12 +182,7 @@ public class Table<T> extends AbstractPanel implements
 	}
 
 	protected TableBody<T> getDefaultBody() {
-		TableBody<T> body = this.bodies.get(Table.BODY_DEFAULT);
-		if (body == null) {
-			body = createBody(Table.BODY_DEFAULT);
-			this.addBody(body);
-		}
-		return body;
+		return getBody(Table.BODY_DEFAULT);
 	}
 
 	protected TableBody<T> createBody(String bodyId) {
@@ -198,6 +202,10 @@ public class Table<T> extends AbstractPanel implements
 			this.setHead(head);
 		}
 		return this.head;
+	}
+
+	public TableHead getTableHeader() {
+		return ensureTableHead();
 	}
 
 }

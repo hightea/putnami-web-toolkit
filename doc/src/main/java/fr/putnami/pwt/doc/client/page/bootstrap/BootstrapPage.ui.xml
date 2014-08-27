@@ -1,0 +1,83 @@
+<!--
+
+    This file is part of pwt.
+
+    pwt is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+
+	<w:HTMLPanel title="PWT - Theming and bootstrap">
+		<w:Header ui:field="header">
+			<w:Heading level="1" summary="docSummary">Bootstrap</w:Heading>
+			<p class="lead">
+				<strong title="Putnami Web Toolkit">PWT</strong> is fully based on Twitter bootstrap Css framework. 
+				So it is fully responsive and fully themable.
+			</p>
+		</w:Header>
+		<w:HTMLPanel ui:field="content">
+			<w:Heading level="2" summary="docSummary">Bootstrap Theming</w:Heading>
+			<p>Use the following button to change the documentation theme. You can note that those themes are free bootstrap theme downloaded from <a href="http://bootswatch.com/">http://bootswatch.com/</a></p>
+			<div class="text-center">
+				<w:Button ui:field="yetiBtn" text="Theme Yeti" />
+				<w:Button ui:field="amaliaBtn" text="Theme Amelia" />
+			</div>
+			<div class="text-center">
+				<w:Button ui:field="bootstrapBtn" text="Bootstrap default Theme" />
+				<w:Button ui:field="clearBtn" text="PWT documentation Theme" />
+			</div>
+			
+			<w:Heading level="2" summary="docSummary">Create a theme</w:Heading>
+			<p>To use your own theme or use an existing one. 
+				You just have to create a new <code>Theme</code> and add the <code>CssLink</code>, then you can apply it with the <code>ThemeController</code>.
+			</p>
+			<p>
+				When you install a theme the old one (if setted) is properly removed.
+			</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	Theme yetiTheme = new Theme();
+	yetiTheme.addLink(new CssLink("theme/yeti/style/bootstrap-yeti.min.css", 0));
+	ThemeController.get().installTheme(yetiTheme);
+]]></pre>
+			</c:StaticCode>
+			
+			<w:Alert>
+				<h4>Note :</h4>
+				<p>
+					<strong title="Putnami Web Toolkit">PWT</strong> has some components not present in Bootstrap theme. 
+					<br/>
+					If you apply a particular Bootstrap theme, you need to customize the css for those componenents such as <code>NavSpy</code>, <code>InputSlider</code>.
+				</p>
+				<p>You can find all customizations in the <code>pwt-core.css</code> file.</p>
+				<p>Plugins can also provide their own CSS file (<code>pwt.css</code> ).</p>
+			</w:Alert>
+			<w:Heading level="2" summary="docSummary">Global component theming</w:Heading>
+			<p>You may want to theme a particular component specifically. Therefore we set on each component a specific CSS class which is the component simple class name prefixed by "p-" (to avoid collision with existing CSS class).</p>
+			<p>For instance the <code>Container</code> component has a <code>p-container</code> CSS class and the <code>HTMLPanel</code> component has a <code>p-h-t-m-l-panel</code> CSS class (the class name is in lower-hyphen case)</p>
+			<w:Alert type="INFO">
+				<h4>Note :</h4>
+				<p>We never use those specific CSS classes to theme our components. It's fully dedicated to your usage.</p>
+			</w:Alert>
+			
+		</w:HTMLPanel>
+	</w:HTMLPanel>
+
+</ui:UiBinder>

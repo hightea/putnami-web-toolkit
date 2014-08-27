@@ -16,21 +16,9 @@
  */
 package fr.putnami.pwt.doc.client.page.server;
 
-import com.google.gwt.core.client.GWT;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
-import fr.putnami.pwt.core.mvp.client.MvpPlace;
-import fr.putnami.pwt.core.mvp.client.ViewProxy;
-
-public class ServerCallsPlace extends MvpPlace {
-
-	public static final ServerCallsPlace INSTANCE = new ServerCallsPlace();
-
-	public ServerCallsPlace() {
-		super((ViewProxy) GWT.create(ServerCallsView.class), null);
-	}
-
-	@Override
-	public MvpPlace getPlace(String token) {
-		return ServerCallsPlace.INSTANCE;
-	}
+@ActivityDescription(view = ServerCallsPage.class)
+public class ServerCallsPlace extends ViewPlace {
 }

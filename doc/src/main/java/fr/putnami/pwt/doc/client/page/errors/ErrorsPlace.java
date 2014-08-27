@@ -16,21 +16,9 @@
  */
 package fr.putnami.pwt.doc.client.page.errors;
 
-import com.google.gwt.core.client.GWT;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
-import fr.putnami.pwt.core.mvp.client.MvpPlace;
-import fr.putnami.pwt.core.mvp.client.ViewProxy;
-
-public class ErrorsPlace extends MvpPlace {
-
-	public static final ErrorsPlace INSTANCE = new ErrorsPlace();
-
-	public ErrorsPlace() {
-		super((ViewProxy) GWT.create(ErrorsView.class), null);
-	}
-
-	@Override
-	public MvpPlace getPlace(String token) {
-		return ErrorsPlace.INSTANCE;
-	}
+@ActivityDescription(view = ErrorsPage.class)
+public class ErrorsPlace extends ViewPlace {
 }

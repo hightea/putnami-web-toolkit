@@ -23,10 +23,8 @@
 
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">Modal</w:Heading>
+		<w:Heading level="2" summary="docSummary">Modal</w:Heading>
 		<p>We provide a full bootstrap's Carousel support, allowing auto-play, pause on hover and display left and right navigation buttons.</p>
 					
 		<p>A <code>Modal</code> contains one child widget. if this widget has a <code>Header</code> or a <code>Footer</code>, the <code>Modal</code> use them. Else you can add a <code>Header</code> or a <code>Footer</code>. Footer and header can only be set <em>once</em>.</p>
@@ -129,7 +127,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="3" navSpy="{navSpy}">Size</w:Heading>
+		<w:Heading level="3" summary="docSummary">Size</w:Heading>
 		<p>Use the <code>size</code> property to set the modal size(<code>DEFAULT</code>, <code>SMALL</code> or <code>LARGE</code>).</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">

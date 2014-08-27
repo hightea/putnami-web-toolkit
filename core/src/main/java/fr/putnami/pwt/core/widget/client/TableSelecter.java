@@ -32,7 +32,6 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
 import fr.putnami.pwt.core.editor.client.EditorValue;
-import fr.putnami.pwt.core.event.client.EventBus;
 import fr.putnami.pwt.core.model.client.base.HasDrawable;
 import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractTableCell;
@@ -44,6 +43,8 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelectionHandlers {
 
+	private static final CssStyle STYLE_TABLE_SELECTER = new SimpleStyle("table-selecter");
+	private static final CssStyle STYLE_ROW_CLICKABLE = new SimpleStyle("clickable");
 	private static final CssStyle STYLE_ROW_SELECTED = new SimpleStyle("info");
 
 	public enum SelectionMode {
@@ -94,22 +95,23 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 		public void redraw() {
 			inputElem.setChecked(selection.contains(this.value));
 			inputElem.setReadOnly(Boolean.TRUE.equals(this.getReadonly()));
+			inputElem.setDisabled(!enable);
 			StyleUtils.toggleStyle(getParent(), STYLE_ROW_SELECTED, selection.contains(this.value));
 			switch (selectionMode) {
 			case COLUMN:
-				setVisible(true);
+				StyleUtils.toggleStyle(getParent(), STYLE_ROW_CLICKABLE, false);
 				if (clickRegistration == null) {
 					clickRegistration = addDomHandler(this, ClickEvent.getType());
 				}
 				break;
 			case ROW_CLICK:
-				setVisible(false);
+				StyleUtils.toggleStyle(getParent(), STYLE_ROW_CLICKABLE, enable && true);
 				if (parentClickRegistration == null) {
 					parentClickRegistration = getParent().addDomHandler(this, ClickEvent.getType());
 				}
 				break;
 			case BOTH:
-				setVisible(true);
+				StyleUtils.toggleStyle(getParent(), STYLE_ROW_CLICKABLE, enable && true);
 				if (clickRegistration == null) {
 					clickRegistration = addDomHandler(this, ClickEvent.getType());
 				}
@@ -122,6 +124,9 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 
 		@Override
 		public void onClick(ClickEvent event) {
+			if (!enable) {
+				return;
+			}
 			boolean fire = false;
 			if (event.getSource() == this) {
 				fire = setSelected(this.value, inputElem.isChecked());
@@ -134,7 +139,7 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 			}
 
 			if (fire) {
-				EventBus.get().fireEventFromSource(new SelectionEvent(selection), TableSelecter.this);
+				TableSelecter.this.fireEvent(new SelectionEvent(selection));
 			}
 			redraw();
 		}
@@ -149,8 +154,10 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 	private boolean singleSelection = false;
 	private SelectionMode selectionMode = SelectionMode.COLUMN;
 	private String groupId = Document.get().createUniqueId();
+	private boolean enable = true;
 
 	public TableSelecter() {
+		setType(Type.ACTION);
 	}
 
 	protected TableSelecter(TableSelecter<T> source) {
@@ -181,20 +188,25 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 
 	public void setSelectionMode(SelectionMode selectionMode) {
 		this.selectionMode = selectionMode;
+		if (selectionMode == SelectionMode.ROW_CLICK) {
+			setColumnVisibility(ColumnVisibility.HIDE);
+		}
 	}
 
 	@Override
 	public TableTH<T> doCreateHeaderCell() {
 		TableTH<T> headerCell = new TableTH<T>();
-		if (selectionMode == SelectionMode.ROW_CLICK) {
-			headerCell.setVisible(false);
-		}
+		StyleUtils.addStyle(headerCell, STYLE_TABLE_SELECTER);
 		return headerCell;
 	}
 
 	@Override
 	public AbstractTableCell<T> doCreateBodyCell() {
 		TDSelecter cell = new TDSelecter();
+		StyleUtils.addStyle(cell, STYLE_TABLE_SELECTER);
+		if (selectionMode == SelectionMode.ROW_CLICK) {
+			cell.setVisible(false);
+		}
 		cells.add(cell);
 		return cell;
 	}
@@ -219,9 +231,7 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 		if (selected) {
 			selection.add(object);
 		}
-		for (TDSelecter cell : cells) {
-			cell.redraw();
-		}
+		redraw();
 		return hasChanged;
 	}
 
@@ -239,7 +249,28 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 
 	@Override
 	public void fireEvent(GwtEvent<?> event) {
-		EventBus.get().fireEventFromSource(event, this);
+		if (handlerManager != null) {
+			handlerManager.fireEvent(event);
+		}
 	}
 
+	public void clearSelection() {
+		selection.clear();
+		redraw();
+	}
+
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+		redraw();
+	}
+
+	public boolean isEnable() {
+		return enable;
+	}
+
+	private void redraw() {
+		for (TDSelecter cell : cells) {
+			cell.redraw();
+		}
+	}
 }

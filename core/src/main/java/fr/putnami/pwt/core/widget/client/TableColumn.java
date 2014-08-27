@@ -30,13 +30,17 @@ import fr.putnami.pwt.core.widget.client.base.AbstractTableColumn;
 import fr.putnami.pwt.core.widget.client.base.AbstractTableColumnAspect;
 
 public class TableColumn<T> extends AbstractTableColumn<T> implements
-		HasWidgets.ForIsWidget {
+HasWidgets.ForIsWidget {
 
 	private OutputFactory outputFactory;
 	private InputFactory inputFactory;
 	private CloneableWidget widgetFactory;
 
 	private String path;
+
+	private String headerText;
+
+	private TableEditorTH<T> headerCell;
 
 	public TableColumn() {
 
@@ -47,6 +51,7 @@ public class TableColumn<T> extends AbstractTableColumn<T> implements
 		this.outputFactory = source.outputFactory;
 		this.inputFactory = source.inputFactory;
 		this.widgetFactory = source.widgetFactory;
+		this.headerText = source.headerText;
 
 		this.path = source.path;
 	}
@@ -66,11 +71,11 @@ public class TableColumn<T> extends AbstractTableColumn<T> implements
 			addAspect((AbstractTableColumnAspect<T>) w);
 		}
 		if (w instanceof OutputFactory) {
-			assert (outputFactory == null) : "outputFactory may only be set once";
+			assert outputFactory == null : "outputFactory may only be set once";
 			this.outputFactory = (OutputFactory) w;
 		}
 		if (w instanceof InputFactory) {
-			assert (inputFactory == null) : "inputFactory may only be set once";
+			assert inputFactory == null : "inputFactory may only be set once";
 			this.inputFactory = (InputFactory) w;
 		}
 		if (this.inputFactory == null
@@ -83,16 +88,19 @@ public class TableColumn<T> extends AbstractTableColumn<T> implements
 
 	@Override
 	public TableTH<T> doCreateHeaderCell() {
-		TableEditorTH<T> headerCell = new TableEditorTH<T>();
-		headerCell.setPath(path);
-		headerCell.setColspan(getColspan());
-		for (AbstractTableColumnAspect aspect : getAspects()) {
-			if (aspect.getColumnPath() == null) {
-				aspect.setColumnPath(path);
+		if (headerCell == null) {
+			headerCell = new TableEditorTH<T>();
+			headerCell.setPath(path);
+			headerCell.setColspan(getColspan());
+			headerCell.setText(headerText);
+			for (AbstractTableColumnAspect aspect : getAspects()) {
+				if (aspect.getColumnPath() == null) {
+					aspect.setColumnPath(path);
+				}
+				headerCell.addAspect(aspect);
 			}
-			headerCell.addAspect(aspect);
+			headerCell.redraw();
 		}
-
 		return headerCell;
 	}
 
@@ -113,6 +121,10 @@ public class TableColumn<T> extends AbstractTableColumn<T> implements
 	@Override
 	public void add(Widget child) {
 		add((IsWidget) child);
+	}
+
+	public void setHeaderText(String headerText) {
+		this.headerText = headerText;
 	}
 
 	@Override

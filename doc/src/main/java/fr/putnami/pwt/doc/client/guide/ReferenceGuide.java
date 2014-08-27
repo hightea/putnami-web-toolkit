@@ -38,22 +38,21 @@ import fr.putnami.pwt.core.widget.client.Heading;
 import fr.putnami.pwt.core.widget.client.NavSpy;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 import fr.putnami.pwt.doc.client.application.ApplicationConfig;
-import fr.putnami.pwt.doc.client.application.HasTableOfContent;
 import fr.putnami.pwt.doc.client.application.Page;
 import fr.putnami.pwt.doc.client.application.error.ErrorConstants;
 import fr.putnami.pwt.doc.client.application.error.UmbrellaExceptionHandler;
-import fr.putnami.pwt.doc.client.page.binding.DataBindingView;
-import fr.putnami.pwt.doc.client.page.bootstrap.BootstrapView;
-import fr.putnami.pwt.doc.client.page.codeeditor.CodeEditorView;
-import fr.putnami.pwt.doc.client.page.components.ComponentsView;
-import fr.putnami.pwt.doc.client.page.errors.ErrorsView;
-import fr.putnami.pwt.doc.client.page.i18n.InternationalizationView;
-import fr.putnami.pwt.doc.client.page.layout.LayoutView;
-import fr.putnami.pwt.doc.client.page.navigation.NavigationView;
-import fr.putnami.pwt.doc.client.page.server.ServerCallsView;
-import fr.putnami.pwt.doc.client.page.soon.ComingSoonView;
-import fr.putnami.pwt.doc.client.page.starting.GettingStartedView;
-import fr.putnami.pwt.doc.client.page.welcome.WelcomeView;
+import fr.putnami.pwt.doc.client.page.binding.DataBindingPage;
+import fr.putnami.pwt.doc.client.page.bootstrap.BootstrapPage;
+import fr.putnami.pwt.doc.client.page.codeeditor.CodeEditorPage;
+import fr.putnami.pwt.doc.client.page.components.ComponentsPage;
+import fr.putnami.pwt.doc.client.page.errors.ErrorsPage;
+import fr.putnami.pwt.doc.client.page.i18n.InternationalizationPage;
+import fr.putnami.pwt.doc.client.page.layout.LayoutPage;
+import fr.putnami.pwt.doc.client.page.navigation.NavigationPage;
+import fr.putnami.pwt.doc.client.page.server.ServerCallsPage;
+import fr.putnami.pwt.doc.client.page.soon.ComingSoonPage;
+import fr.putnami.pwt.doc.client.page.starting.GettingStartedPage;
+import fr.putnami.pwt.doc.client.page.welcome.WelcomePage;
 import fr.putnami.pwt.plugin.ga.client.GoogleAnalytics;
 
 public class ReferenceGuide extends Composite implements EntryPoint {
@@ -154,21 +153,21 @@ public class ReferenceGuide extends Composite implements EntryPoint {
 		GoogleAnalytics.init(ApplicationConfig.ANALYTICS_TRACKER_ID, ApplicationConfig.DOMAIN).trackPage();
 
 		addHeading("Putnami Web Toolkit", 1);
-		addContent(new WelcomeView(), 0);
-		addContent(new GettingStartedView(), 0);
+		addContent(new WelcomePage(), 0);
+		addContent(new GettingStartedPage(), 0);
 		addHeading("Look and feel", 1);
-		addContent(new BootstrapView(), 1);
-		addContent(new LayoutView(), 1);
-		addContent(new ComponentsView(), 1);
+		addContent(new BootstrapPage(), 1);
+		addContent(new LayoutPage(), 1);
+		addContent(new ComponentsPage(), 1);
 		addHeading("Framework", 1);
-		addContent(new NavigationView(), 1);
-		addContent(new DataBindingView(), 1);
-		addContent(new InternationalizationView(), 1);
-		addContent(new ServerCallsView(), 1);
-		addContent(new ErrorsView(), 1);
+		addContent(new NavigationPage(), 1);
+		addContent(new DataBindingPage(), 1);
+		addContent(new InternationalizationPage(), 1);
+		addContent(new ServerCallsPage(), 1);
+		addContent(new ErrorsPage(), 1);
 		addHeading("Plugins", 1);
-		addContent(new CodeEditorView(), 1);
-		addContent(new ComingSoonView(), 0);
+		addContent(new CodeEditorPage(), 1);
+		addContent(new ComingSoonPage(), 0);
 
 		StringBuffer tableContentBuffer = new StringBuffer();
 		root.draw(tableContentBuffer);
@@ -185,14 +184,14 @@ public class ReferenceGuide extends Composite implements EntryPoint {
 	private void addContent(Widget content, int offset) {
 
 		NavSpy subNav = null;
-		if (content instanceof HasTableOfContent) {
-			subNav = ((HasTableOfContent) content).getTableOfContent();
-		}
-		if (subNav != null) {
-			for (Heading heading : subNav.getHeadings()) {
-				addChapter(heading, offset);
-			}
-		}
+		//		if (content instanceof Page) {
+		//			subNav = ((Page) content).tableOfContent;
+		//		}
+		//		if (subNav != null) {
+		//			for (Heading heading : subNav.getHeadings()) {
+		//				addChapter(heading, offset);
+		//			}
+		//		}
 		if (content instanceof Page) {
 			contentContainer.add(((Page) content).header);
 			contentContainer.add(((Page) content).content);

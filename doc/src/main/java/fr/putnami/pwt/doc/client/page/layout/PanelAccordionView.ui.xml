@@ -23,10 +23,8 @@
 
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">Panel accordion</w:Heading>
+		<w:Heading level="2" summary="docSummary">Panel accordion</w:Heading>
 		<p>A <code>PanelAccordion</code> group multiple <code>Panel</code> with automatic Open / Collapse ability</p>
 					
 		<p>All the <code>Panel</code> must have a <code>Header</code>.</p>

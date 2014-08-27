@@ -16,6 +16,10 @@
  */
 package fr.putnami.pwt.core.widget.client;
 
+import java.util.List;
+
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.LIElement;
 import com.google.gwt.dom.client.UListElement;
@@ -23,11 +27,12 @@ import com.google.gwt.user.client.ui.IsWidget;
 
 import fr.putnami.pwt.core.editor.client.EditorError;
 import fr.putnami.pwt.core.editor.client.Error;
+import fr.putnami.pwt.core.model.client.base.HasDrawable;
 import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractWidget;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public class ErrorGroup extends AbstractWidget implements EditorError {
+public class ErrorGroup extends AbstractWidget implements EditorError, HasDrawable {
 	public enum Color implements CssStyle {
 
 		PRIMARY("bg-primary"),
@@ -53,7 +58,7 @@ public class ErrorGroup extends AbstractWidget implements EditorError {
 
 	private Color color = Color.DANGER;
 
-	private boolean hasError;
+	private List<Error> errors = Lists.newArrayList();
 
 	public ErrorGroup() {
 		super(UListElement.TAG);
@@ -91,20 +96,28 @@ public class ErrorGroup extends AbstractWidget implements EditorError {
 
 	@Override
 	public void clearErrors() {
+		this.errors.clear();
 		getElement().removeAllChildren();
 	}
 
 	@Override
 	public void displayErrors(Iterable<Error> errors) {
-		clearErrors();
+		this.errors.clear();
+		Iterables.addAll(this.errors, errors);
+	}
+
+	public boolean hasError() {
+		return getElement().getChildCount() > 0;
+	}
+
+	@Override
+	public void redraw() {
+		getElement().removeAllChildren();
 		for (Error error : errors) {
 			LIElement errorElement = Document.get().createLIElement();
 			errorElement.setInnerText(error.getMessageKey());
 			this.getElement().appendChild(errorElement);
 		}
-	}
 
-	public boolean hasError() {
-		return getElement().getChildCount() > 0;
 	}
 }

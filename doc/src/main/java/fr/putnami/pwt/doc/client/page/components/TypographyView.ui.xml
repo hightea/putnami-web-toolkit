@@ -23,12 +23,10 @@
 
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">Typography</w:Heading>
+		<w:Heading level="2" summary="docSummary">Typography</w:Heading>
 
-		<w:Heading level="3" navSpy="{navSpy}">Text</w:Heading>
+		<w:Heading level="3" summary="docSummary">Text</w:Heading>
 		<p>This widgets outputs a simple HTML Text node</p>
 					
 		<p>Use the <code>text</code> property or use the <code>HasText</code> text child usage.</p>
@@ -44,7 +42,7 @@
 			</c:StaticCode>
 		</div>
 
-		<w:Heading level="3" navSpy="{navSpy}">Anchor</w:Heading>
+		<w:Heading level="3" summary="docSummary">Anchor</w:Heading>
 		<p>An <code>Anchor</code>  represents a <code>&lt;a&gt;</code> tag.</p>
 					
 		<p>The <code>link</code> property is rendered as <code>href</code> attribute. It can be used to switch place or to link to another weblink</p>
@@ -61,7 +59,7 @@
 			</c:StaticCode>
 		</div>
 
-		<w:Heading level="3" navSpy="{navSpy}">Heading</w:Heading>
+		<w:Heading level="3" summary="docSummary">Heading</w:Heading>
 		<p>This widget renders HTML headings from <code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code></p>
 					
 		<p>Define the level whit the <code>level</code> property.</p>

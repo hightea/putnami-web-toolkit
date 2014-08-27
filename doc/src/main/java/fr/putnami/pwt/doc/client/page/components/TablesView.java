@@ -19,20 +19,19 @@ package fr.putnami.pwt.doc.client.page.components;
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
-import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Widget;
 
-import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
-import fr.putnami.pwt.core.model.client.model.Model;
-import fr.putnami.pwt.core.widget.client.NavSpy;
+import fr.putnami.pwt.core.inject.client.annotation.Initialize;
+import fr.putnami.pwt.core.inject.client.annotation.InjectResource;
+import fr.putnami.pwt.core.inject.client.annotation.PostConstruct;
+import fr.putnami.pwt.core.inject.client.annotation.Templated;
+import fr.putnami.pwt.core.mvp.client.View;
 import fr.putnami.pwt.core.widget.client.TableEditor;
-import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 
-public class TablesView extends Composite {
+@Templated
+public class TablesView extends Composite implements View {
 
 	public static enum Gender {
 		MALE,
@@ -69,15 +68,6 @@ public class TablesView extends Composite {
 		}
 	}
 
-	public interface BeanModel extends Model<Bean> {
-
-		Model<Bean> MODEL = GWT.create(BeanModel.class);
-	}
-
-	interface Binder extends UiBinderLocalized<Widget, TablesView> {
-		Binder BINDER = GWT.create(Binder.class);
-	}
-
 	interface Constants extends ConstantsWithLookup {
 
 		@DefaultStringValue("City")
@@ -102,29 +92,19 @@ public class TablesView extends Composite {
 		String name();
 	}
 
-	@UiField(provided = true)
-	final NavSpy tableOfContent;
-
 	@UiField
+	@Initialize(constantsClass = Constants.class)
 	TableEditor<Bean> firstTable;
 	@UiField
+	@Initialize(constantsClass = Constants.class)
 	TableEditor<Bean> secondTable;
 
-	Constants constants = GWT.create(Constants.class);
+	@InjectResource
+	Constants constants;
 
-	@UiConstructor
-	public TablesView(NavSpy navSpy) {
-		super();
-
-		this.tableOfContent = navSpy;
-
-		initWidget(Binder.BINDER.createAndBindUi(this));
-
-		firstTable.initialize(BeanModel.MODEL);
+	@PostConstruct
+	public void postConstruct() {
 		firstTable.edit(getBeans());
-
-		secondTable.setMessageHelper(new MessageHelper(constants));
-		secondTable.initialize(BeanModel.MODEL);
 		secondTable.edit(getBeans());
 	}
 

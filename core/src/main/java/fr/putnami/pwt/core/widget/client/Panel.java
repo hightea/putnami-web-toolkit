@@ -16,7 +16,11 @@
  */
 package fr.putnami.pwt.core.widget.client;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
 import com.google.gwt.dom.client.DivElement;
+import com.google.gwt.uibinder.client.UiChild;
 import com.google.gwt.user.client.ui.HasOneWidget;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
@@ -46,6 +50,7 @@ HasCollapseHandlers {
 	private static final CssStyle STYLE_PANEL = new SimpleStyle("panel");
 	private static final CssStyle STYLE_BODY = new SimpleStyle("panel-body");
 	private static final CssStyle STYLE_HEADING = new SimpleStyle("panel-heading");
+	private static final CssStyle STYLE_COMMANDS = new SimpleStyle("panel-commands");
 	private static final CssStyle STYLE_FOOTER = new SimpleStyle("panel-footer");
 
 	public enum Color implements CssStyle {
@@ -68,10 +73,13 @@ HasCollapseHandlers {
 		}
 	}
 
+	private final List<IsWidget> commands = Lists.newArrayList();
+
 	private final Container collapsePanel = new Container();
 	private OneWidgetPanel bodyPanel;
 	private Table table;
 
+	private Container commandsContainer;
 	private Header header;
 	private Footer footer;
 
@@ -96,6 +104,12 @@ HasCollapseHandlers {
 		setHeader(WidgetUtils.cloneWidget(source.header));
 		setFooter(WidgetUtils.cloneWidget(source.footer));
 		setWidget(WidgetUtils.cloneWidget(source.getWidget()));
+
+		for (IsWidget command : source.commands) {
+			if (command instanceof CloneableWidget) {
+				this.commands.add(((CloneableWidget) command).cloneWidget());
+			}
+		}
 
 		endConstruct();
 	}
@@ -129,6 +143,11 @@ HasCollapseHandlers {
 			}
 			setWidget(w);
 		}
+	}
+
+	@UiChild(tagname = "command")
+	public void addCommand(IsWidget w) {
+		commands.add(w);
 	}
 
 	@Override
@@ -243,6 +262,17 @@ HasCollapseHandlers {
 		collapsePanel.append(table);
 		collapsePanel.append(footer);
 
+		if (header != null && commands.size() > 0) {
+			if (commandsContainer == null) {
+				commandsContainer = new Container();
+				StyleUtils
+				.addStyle(commandsContainer, STYLE_COMMANDS);
+				header.add(commandsContainer);
+			}
+			for (IsWidget command : commands) {
+				commandsContainer.add(command);
+			}
+		}
 		ensureCollapseHelper();
 	}
 

@@ -16,21 +16,10 @@
  */
 package fr.putnami.pwt.doc.client.page.download;
 
-import com.google.gwt.core.client.GWT;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
-import fr.putnami.pwt.core.mvp.client.MvpPlace;
-import fr.putnami.pwt.core.mvp.client.ViewProxy;
+@ActivityDescription(view = DownloadPage.class)
+public class DownloadPlace extends ViewPlace {
 
-public class DownloadPlace extends MvpPlace {
-
-	public static final DownloadPlace INSTANCE = new DownloadPlace();
-
-	public DownloadPlace() {
-		super((ViewProxy) GWT.create(DownloadView.class), null);
-	}
-
-	@Override
-	public MvpPlace getPlace(String token) {
-		return DownloadPlace.INSTANCE;
-	}
 }

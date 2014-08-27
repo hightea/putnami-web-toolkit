@@ -426,10 +426,10 @@ public class ModelCreator {
 
 	private String extractPropertyNameFromMethod(JMethod method) {
 		String propertyName = method.getName();
-		if(method.getName().startsWith("is")){
+		if (propertyName.startsWith("is")) {
 			propertyName = propertyName.substring(2, propertyName.length());
 		}
-		else{
+		else {
 			propertyName = propertyName.substring(3, propertyName.length());
 		}
 		String firstChar = propertyName.substring(0, 1);

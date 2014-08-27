@@ -16,21 +16,9 @@
  */
 package fr.putnami.pwt.doc.client.page.i18n;
 
-import com.google.gwt.core.client.GWT;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
-import fr.putnami.pwt.core.mvp.client.MvpPlace;
-import fr.putnami.pwt.core.mvp.client.ViewProxy;
-
-public class InternationalizationPlace extends MvpPlace {
-
-	public static final InternationalizationPlace INSTANCE = new InternationalizationPlace();
-
-	public InternationalizationPlace() {
-		super((ViewProxy) GWT.create(InternationalizationView.class), null);
-	}
-
-	@Override
-	public MvpPlace getPlace(String token) {
-		return InternationalizationPlace.INSTANCE;
-	}
+@ActivityDescription(view = InternationalizationPage.class)
+public class InternationalizationPlace extends ViewPlace {
 }

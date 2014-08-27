@@ -16,40 +16,23 @@
  */
 package fr.putnami.pwt.doc.client.page.components;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Widget;
 
-import fr.putnami.pwt.core.widget.client.NavSpy;
+import fr.putnami.pwt.core.inject.client.annotation.Templated;
+import fr.putnami.pwt.core.mvp.client.View;
 import fr.putnami.pwt.core.widget.client.Popover;
 import fr.putnami.pwt.core.widget.client.Tooltip;
-import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 
-public class MoreView extends Composite {
-
-	interface Binder extends UiBinderLocalized<Widget, MoreView> {
-
-		Binder BINDER = GWT.create(Binder.class);
-	}
-
-	@UiField(provided = true)
-	final NavSpy navSpy;
+@Templated
+public class MoreView extends Composite implements View {
 
 	@UiField
 	Popover manualPopover;
 	@UiField
 	Tooltip manualTooltip;
-
-	@UiConstructor
-	public MoreView(NavSpy navSpy) {
-		this.navSpy = navSpy;
-		initWidget(Binder.BINDER.createAndBindUi(this));
-
-	}
 
 	@UiHandler("manualPopoverBtn")
 	public void onManualPopoverBtnClick(ButtonEvent event) {

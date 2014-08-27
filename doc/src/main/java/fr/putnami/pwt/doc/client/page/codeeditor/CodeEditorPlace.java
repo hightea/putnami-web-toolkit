@@ -16,21 +16,9 @@
  */
 package fr.putnami.pwt.doc.client.page.codeeditor;
 
-import com.google.gwt.core.client.GWT;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
-import fr.putnami.pwt.core.mvp.client.MvpPlace;
-import fr.putnami.pwt.core.mvp.client.ViewProxy;
-
-public class CodeEditorPlace extends MvpPlace {
-
-	public static final CodeEditorPlace INSTANCE = new CodeEditorPlace();
-
-	public CodeEditorPlace() {
-		super((ViewProxy) GWT.create(CodeEditorView.class), null);
-	}
-
-	@Override
-	public MvpPlace getPlace(String token) {
-		return CodeEditorPlace.INSTANCE;
-	}
+@ActivityDescription(view = CodeEditorPage.class)
+public class CodeEditorPlace extends ViewPlace {
 }

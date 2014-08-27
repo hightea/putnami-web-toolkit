@@ -37,9 +37,9 @@ import fr.putnami.pwt.core.widget.client.event.RowClickEvent.Handler;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class TableBody<T> extends AbstractPanel implements
-		HasReadonly,
-		CloneableWidget,
-		RowClickEvent.HasRowClickHandlers {
+HasReadonly,
+CloneableWidget,
+RowClickEvent.HasRowClickHandlers {
 
 	private class ClickEventHandler implements ClickHandler {
 
@@ -117,6 +117,12 @@ public class TableBody<T> extends AbstractPanel implements
 		if (clickEventHandler != null) {
 			registrations.add(row.addClickHandler(clickEventHandler));
 		}
+	}
+
+	@Override
+	public void clear() {
+		rows.clear();
+		super.clear();
 	}
 
 	@Override

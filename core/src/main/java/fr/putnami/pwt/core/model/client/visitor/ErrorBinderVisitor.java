@@ -62,12 +62,15 @@ public class ErrorBinderVisitor extends AbstractVisitor {
 
 			List<Error> toDisplay = Lists.newArrayList();
 			for (Error error : errors) {
-				if (error.getPath() != null && error.getPath().equals(path)) {
+				if (path.equals(error.getPath())) {
 					String messageKey = error.getMessageKey();
 					messageKey = fixMessageKey(messageKey);
 					String message = messageHelper.findMessage(propertyType, messageKey);
 					if (error.getParameters() != null) {
 						message = messageHelper.replaceParams(message, error.getParameters());
+					}
+					if (message == null) {
+						message = messageKey;
 					}
 					SimpleError errorToDisplay = new SimpleError(editorError, message, error.getValue(), error.getParameters());
 					toDisplay.add(errorToDisplay);

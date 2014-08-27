@@ -24,16 +24,14 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 
-	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">Navigations</w:Heading>
+		<w:Heading level="2" summary="docSummary">Navigations</w:Heading>
 
 
-		<w:Heading level="3" navSpy="{navSpy}">Navs</w:Heading>
+		<w:Heading level="3" summary="docSummary">Navs</w:Heading>
 		<p>A <code>Nav</code> is a component used to display navigation data.</p>
 		
-		<w:Heading level="4" navSpy="{navSpy}">Nav Tabs</w:Heading>
+		<w:Heading level="4" summary="docSummary">Nav Tabs</w:Heading>
 		<p>Nav can be displayed as Tabs with th use of <code>Nav.Style.TABS</code>.</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
@@ -53,7 +51,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="4" navSpy="{navSpy}">Nav Pills</w:Heading>
+		<w:Heading level="4" summary="docSummary">Nav Pills</w:Heading>
 		<p>Nav can be displayed as Pills with th use of <code>Nav.Style.PILLS</code>.</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
@@ -93,7 +91,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="4" navSpy="{navSpy}">Justified nav</w:Heading>
+		<w:Heading level="4" summary="docSummary">Justified nav</w:Heading>
 		<p>Tabs or Pills can be justified by the use of <code>Nav.Style.TABS_JUSTIFIED</code> or <code>Nav.Style.PILLS_JUSTIFIED</code>.</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
@@ -123,7 +121,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="4" navSpy="{navSpy}">Dropdown use</w:Heading>
+		<w:Heading level="4" summary="docSummary">Dropdown use</w:Heading>
 		<p>Navs can contains <code>NavDropdown</code> to extends the nav display with dropdowns.</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
@@ -253,7 +251,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="4" navSpy="{navSpy}">Icon customization</w:Heading>
+		<w:Heading level="4" summary="docSummary">Icon customization</w:Heading>
 		<p><code>NavLink</code> and <code>NavDropdown</code> can be customize with <code>iconType</code> property like <code>ButtonDropdown</code>.</p>
 			<div class="showcase-sample-block"><div class="showcase-sample">
 				<w:Nav style="TABS">
@@ -383,7 +381,7 @@
 		</div>
 		
 		
-		<w:Heading level="3" navSpy="{navSpy}">Navbar</w:Heading>
+		<w:Heading level="3" summary="docSummary">Navbar</w:Heading>
 		<p>A convenient navigation component which collapse when screen is to small</p>
 		
 		<p>Set the <code>brand</code> property and add <code>Nav</code> child with <code>NavLink</code> children.</p>
@@ -415,7 +413,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="4" navSpy="{navSpy}">Type</w:Heading>
+		<w:Heading level="4" summary="docSummary">Type</w:Heading>
 		<p>Use <code>Navbar.Type.INVERSE</code> to inverse the navbar type</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
@@ -445,7 +443,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="4" navSpy="{navSpy}">ContainerType</w:Heading>
+		<w:Heading level="4" summary="docSummary">ContainerType</w:Heading>
 		<p>Use <code>RESPONSIVE</code> or <code>FLUID</code> (default to <code>FLUID</code>) to set the navbar inner container type.
 		This allows you to have a <code>NavBar</code> with responsive fixed inner width (as in this application navbar) or with a full width inner content.</p>
 		<div class="showcase-sample-block">
@@ -458,7 +456,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="4" navSpy="{navSpy}">Dropdown use</w:Heading>
+		<w:Heading level="4" summary="docSummary">Dropdown use</w:Heading>
 		<p>Add <code>NavDropdown</code> children to extends the navbar display with dropdowns.</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
@@ -504,7 +502,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="4" navSpy="{navSpy}">Icon customization</w:Heading>
+		<w:Heading level="4" summary="docSummary">Icon customization</w:Heading>
 		<p><code>NavLink</code> and <code>NavDropdown</code> can be customize with <code>iconType</code> property like <code>ButtonDropdown</code>.</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
@@ -550,7 +548,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="4" navSpy="{navSpy}">Button use</w:Heading>
+		<w:Heading level="4" summary="docSummary">Button use</w:Heading>
 		<p>Add <code>Button</code> or <code>ButtonGroup</code> children.</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
@@ -588,7 +586,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="4" navSpy="{navSpy}">Alignment</w:Heading>
+		<w:Heading level="4" summary="docSummary">Alignment</w:Heading>
 		<p>Use <code>left</code> and <code>right</code> children to pull left or right Navbar content.</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
@@ -657,7 +655,7 @@
 		</div>
 		
 		
-		<w:Heading level="3" navSpy="{navSpy}">Breadcrumb</w:Heading>
+		<w:Heading level="3" summary="docSummary">Breadcrumb</w:Heading>
 		<p>Indicate the current page's location. As in Bootstrap, separators are automatically add in CSS.</p>
 		
 		<p>Set the <code>active</code> property to disable the link.</p>
@@ -693,7 +691,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="4" navSpy="{navSpy}">Icon customization</w:Heading>
+		<w:Heading level="4" summary="docSummary">Icon customization</w:Heading>
 		<p>Use the <code>iconType</code> property to customize the <code>NavLink</code>.</p>
 		<div class="showcase-sample-block">
 		<div class="showcase-sample">
@@ -728,7 +726,7 @@
 		</div>
 		
 		
-		<w:Heading level="3" navSpy="{navSpy}">Pagination</w:Heading>
+		<w:Heading level="3" summary="docSummary">Pagination</w:Heading>
 					
 		<p>Use the <code>style</code> property to define the type of pagination.</p>
 		<w:Alert type="WARNING">
@@ -750,7 +748,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="3" navSpy="{navSpy}">NavSpy</w:Heading>
+		<w:Heading level="3" summary="docSummary">NavSpy</w:Heading>
 		<p>A <code>NavSpy</code> contains a link to registered <code>Heading</code> widgets, and listen to the scroll of the body or of a particular widget to display the curent active heading.</p>
 					
 		<p>The <code>Heading</code> you want to display in the <code>NavSpy</code> have to be manualy registered with the <code>navSpy</code> property. After all registering you need to call the <code>redraw</code> method on the <code>NavSpy</code> in order to display it.</p>
@@ -759,22 +757,22 @@
 		<p>We use this spy offset in this sample to take into account the navbar height when scrolling and spying scroll on the body</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
-				<w:NavSpy ui:field="sampleNavSpy"/>
+				<w:NavSpy ui:field="sampleNavSpy" spyName="navSpySample"/>
 				<br/>
 				
 				<w:HTMLPanel ui:field="scrollTarget" styleName="pre-scrollable">
-					<w:Heading level="1" navSpy="{sampleNavSpy}">First header</w:Heading>
-					<w:Heading level="2" navSpy="{sampleNavSpy}">First sub header</w:Heading>
+					<w:Heading level="1" summary="navSpySample">First header</w:Heading>
+					<w:Heading level="2" summary="navSpySample">First sub header</w:Heading>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium facilisis nisi ut tempor. Morbi vestibulum turpis et elit faucibus interdum. Etiam sodales diam ut suscipit egestas. Nulla lacinia posuere viverra. Nam et pulvinar turpis. Nam purus massa, porttitor vitae mauris nec, tempus varius quam. Sed ac scelerisque elit. In velit nibh, aliquam ut felis eu, pulvinar suscipit leo. Proin eget sagittis lectus. Maecenas facilisis sem arcu, non consectetur nulla placerat quis.</p>
-					<w:Heading level="2" navSpy="{sampleNavSpy}">Second sub header</w:Heading>
+					<w:Heading level="2" summary="navSpySample">Second sub header</w:Heading>
 					<p>Nam odio neque, consectetur sit amet semper a, interdum eget nisi. Praesent a justo ut nisl ultricies suscipit. In condimentum porta aliquet. Etiam ornare libero justo, sit amet dictum dui rutrum sit amet. Cras egestas laoreet lorem, sit amet tempus dolor ornare eget. Proin libero quam, accumsan et consectetur quis, vulputate quis augue. Aenean venenatis magna eu vehicula lobortis. Suspendisse lorem purus, porttitor at tortor sit amet, ultrices mattis magna. Nullam condimentum a diam non tempus. Mauris id rhoncus eros, eu venenatis purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque eleifend rutrum nunc, vulputate vehicula justo tempus non. Proin consectetur dui at nisl viverra convallis. Proin metus elit, pretium eu mauris quis, tincidunt venenatis sapien.</p>
 					
-					<w:Heading level="1" navSpy="{sampleNavSpy}">Second header</w:Heading>
-					<w:Heading level="2" navSpy="{sampleNavSpy}">First sub header</w:Heading>
+					<w:Heading level="1" summary="navSpySample">Second header</w:Heading>
+					<w:Heading level="2" summary="navSpySample">First sub header</w:Heading>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium facilisis nisi ut tempor. Morbi vestibulum turpis et elit faucibus interdum. Etiam sodales diam ut suscipit egestas. Nulla lacinia posuere viverra. Nam et pulvinar turpis. Nam purus massa, porttitor vitae mauris nec, tempus varius quam. Sed ac scelerisque elit. In velit nibh, aliquam ut felis eu, pulvinar suscipit leo. Proin eget sagittis lectus. Maecenas facilisis sem arcu, non consectetur nulla placerat quis.</p>
-					<w:Heading level="2" navSpy="{sampleNavSpy}">Second sub header</w:Heading>
+					<w:Heading level="2" summary="navSpySample">Second sub header</w:Heading>
 					<p>Nam odio neque, consectetur sit amet semper a, interdum eget nisi. Praesent a justo ut nisl ultricies suscipit. In condimentum porta aliquet. Etiam ornare libero justo, sit amet dictum dui rutrum sit amet. Cras egestas laoreet lorem, sit amet tempus dolor ornare eget. Proin libero quam, accumsan et consectetur quis, vulputate quis augue. Aenean venenatis magna eu vehicula lobortis. Suspendisse lorem purus, porttitor at tortor sit amet, ultrices mattis magna. Nullam condimentum a diam non tempus. Mauris id rhoncus eros, eu venenatis purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque eleifend rutrum nunc, vulputate vehicula justo tempus non. Proin consectetur dui at nisl viverra convallis. Proin metus elit, pretium eu mauris quis, tincidunt venenatis sapien.</p>
-					<w:Heading level="2" navSpy="{sampleNavSpy}">Third sub header</w:Heading>
+					<w:Heading level="2" summary="navSpySample">Third sub header</w:Heading>
 					<p>Nam eu purus ante. Proin dignissim purus nec dolor volutpat porttitor. Aenean quis ante at velit rhoncus tincidunt. Phasellus id justo nec neque vestibulum auctor nec egestas urna. Vivamus sed rhoncus dolor. Donec dapibus semper aliquam. Fusce ac congue libero, non dictum leo. Aliquam porttitor et massa non cursus. Donec pretium ligula sit amet congue molestie. Aenean sit amet est sed magna pretium suscipit. Vivamus rhoncus eros eget justo ultrices, eu euismod odio malesuada. Vivamus aliquet nunc massa, quis pretium justo faucibus at. Proin eget tortor quam. Duis a mauris dictum, bibendum velit sit amet, dictum libero.</p>
 					<p></p>
 				</w:HTMLPanel>
@@ -782,20 +780,20 @@
 			</div>
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
 <pre><![CDATA[
-<w:NavSpy ui:field="sampleNavSpy" scrollWidget="scrollTarget"/>
+<w:NavSpy ui:field="sampleNavSpy" spyName="navSpySample" scrollWidget="scrollTarget"/>
 <w:HTMLPanel ui:field="scrollTarget" styleName="pre-scrollable">
-	<w:Heading level="1" navSpy="{sampleNavSpy}">First header</w:Heading>
-	<w:Heading level="2" navSpy="{sampleNavSpy}">First sub header</w:Heading>
+	<w:Heading level="1" summary="navSpySample">First header</w:Heading>
+	<w:Heading level="2" summary="navSpySample">First sub header</w:Heading>
 	<p>...</p>
-	<w:Heading level="2" navSpy="{sampleNavSpy}">Second sub header</w:Heading>
+	<w:Heading level="2" summary="navSpySample">Second sub header</w:Heading>
 	<p>...</p>
 	
-	<w:Heading level="1" navSpy="{sampleNavSpy}">Second header</w:Heading>
-	<w:Heading level="2" navSpy="{sampleNavSpy}">First sub header</w:Heading>
+	<w:Heading level="1" summary="navSpySample">Second header</w:Heading>
+	<w:Heading level="2" summary="navSpySample">First sub header</w:Heading>
 	<p>...</p>
-	<w:Heading level="2" navSpy="{sampleNavSpy}">Second sub header</w:Heading>
+	<w:Heading level="2" summary="navSpySample">Second sub header</w:Heading>
 	<p>...</p>
-	<w:Heading level="2" navSpy="{sampleNavSpy}">Third sub header</w:Heading>
+	<w:Heading level="2" summary="navSpySample">Third sub header</w:Heading>
 	<p>...</p>
 </w:HTMLPanel>]]></pre>
 			</c:StaticCode>

@@ -39,7 +39,7 @@ public final class DateParser implements Parser<Date> {
 
 	public DateParser(String format) {
 		if (format == null) {
-			formater = DateTimeFormat.getFormat(WidgetParams.Util.get().dateFormatSimple());
+			formater = DateTimeFormat.getFormat(WidgetParams.Util.get().inputDateSimpleFormat());
 		}
 		else {
 			formater = DateTimeFormat.getFormat(format);

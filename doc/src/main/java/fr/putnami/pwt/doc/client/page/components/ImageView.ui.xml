@@ -23,10 +23,8 @@
 
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">Image</w:Heading>
+		<w:Heading level="2" summary="docSummary">Image</w:Heading>
 		<p>
 			<strong title="Putnami Web Toolkit">PWT</strong> privides an image <code>&lt;img&gt;</code> widget.
 		</p>

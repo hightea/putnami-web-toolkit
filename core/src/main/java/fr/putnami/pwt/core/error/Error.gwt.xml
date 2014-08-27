@@ -20,6 +20,7 @@
 
 <module>
 	<source path="client"/>
+	<source path="shared"/>
 	
 	<replace-with class="fr.putnami.pwt.core.error.client.DefaultErrorManager">
 		<when-type-is class="fr.putnami.pwt.core.error.client.ErrorManager"/>

@@ -23,10 +23,8 @@
 
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">Alert</w:Heading>
+		<w:Heading level="2" summary="docSummary">Alert</w:Heading>
 		<p><code>Alert</code> is a HTML Panel containing child widgets</p>
 					
 		<p>Use the <code>type</code> property to customize the <code>Alert</code>.</p>

@@ -119,10 +119,11 @@ public final class ModelUtils {
 		}
 	}
 
-	public static <A, B> void bindValue(Object bean, Model<A> model, Path path, B value) {
+	public static <A, B> A bindValue(A bean, Model<A> model, Path path, B value) {
 		if (model == null || path.size() == 0) {
-			return;
+			return bean;
 		}
+		A targetBean = bean;
 
 		PathElement firstElement = path.get(0);
 		String firstElementName = firstElement.getElementName();
@@ -130,18 +131,25 @@ public final class ModelUtils {
 
 		if (path.size() == 1) {
 			if (firstElementIndex == null) {
-				model.set(bean, firstElementName, value);
+				if (targetBean == null && value != null) {
+					targetBean = model.newInstance();
+					model.set(targetBean, firstElementName, value);
+				}
+				else {
+					model.set(targetBean, firstElementName, value);
+				}
+				model.set(targetBean, firstElementName, value);
 			}
 			else {
 				Object o;
 				if (Path.ROOT_PATH.equals(firstElementName)) {
-					o = bean;
+					o = targetBean;
 				}
 				else {
-					o = model.get(bean, firstElementName);
+					o = model.get(targetBean, firstElementName);
 					if (o == null) {
 						o = model.newInstance();
-						model.set(bean, firstElementName, o);
+						model.set(targetBean, firstElementName, o);
 					}
 				}
 				if (o instanceof List) {
@@ -155,18 +163,18 @@ public final class ModelUtils {
 		}
 		else {
 			if (Path.ROOT_PATH.equals(firstElementName) && firstElementIndex == null) {
-				ModelUtils.bindValue(bean, model, path.subPath(1), value);
+				ModelUtils.bindValue(targetBean, model, path.subPath(1), value);
 			}
 			else if (firstElementIndex != null) {
 				Object o;
 				if (Path.ROOT_PATH.equals(firstElementName)) {
-					o = bean;
+					o = targetBean;
 				}
 				else {
-					o = model.get(bean, firstElementName);
+					o = model.get(targetBean, firstElementName);
 					if (o == null) {
 						o = model.newInstance();
-						model.set(bean, firstElementName, o);
+						model.set(targetBean, firstElementName, o);
 					}
 				}
 				if (o instanceof List) {
@@ -186,15 +194,15 @@ public final class ModelUtils {
 			}
 			else {
 				Model<Object> subModel = (Model<Object>) model.getProperty(firstElementName).getModel();
-				Object subBean = model.get(bean, firstElementName);
+				Object subBean = model.get(targetBean, firstElementName);
 				if (subBean == null) {
 					subBean = subModel.newInstance();
-					model.set(bean, firstElementName, subBean);
+					model.set(targetBean, firstElementName, subBean);
 				}
 				ModelUtils.bindValue(subBean, subModel, path.subPath(1), value);
 			}
 		}
-		return;
+		return targetBean;
 	}
 
 	public static List<Class<?>> getTypeHierachy(Class<?> propertyType) {

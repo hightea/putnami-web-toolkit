@@ -18,9 +18,9 @@ package fr.putnami.pwt.core.widget.client;
 
 import com.google.gwt.user.client.ui.IsWidget;
 
-import fr.putnami.pwt.core.widget.client.base.AbstractOutput;
+import fr.putnami.pwt.core.widget.client.base.AbstractTextOutput;
 
-public class OutputStaticText extends AbstractOutput<Object> {
+public class OutputStaticText extends AbstractTextOutput<Object> {
 
 	public OutputStaticText() {
 	}

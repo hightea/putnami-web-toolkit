@@ -16,21 +16,21 @@
  */
 package fr.putnami.pwt.doc.client.page.welcome;
 
-import com.google.gwt.core.client.GWT;
+import com.google.gwt.place.shared.PlaceTokenizer;
 
-import fr.putnami.pwt.core.mvp.client.MvpPlace;
-import fr.putnami.pwt.core.mvp.client.ViewProxy;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
-public class WelcomePlace extends MvpPlace {
+@ActivityDescription(view = WelcomePage.class)
+public class WelcomePlace extends ViewPlace implements PlaceTokenizer<WelcomePlace> {
 
-	public static final WelcomePlace INSTANCE = new WelcomePlace();
-
-	public WelcomePlace() {
-		super((ViewProxy) GWT.create(WelcomeView.class), null);
+	@Override
+	public WelcomePlace getPlace(String token) {
+		return null;
 	}
 
 	@Override
-	public MvpPlace getPlace(String token) {
-		return WelcomePlace.INSTANCE;
+	public String getToken(WelcomePlace place) {
+		return null;
 	}
 }

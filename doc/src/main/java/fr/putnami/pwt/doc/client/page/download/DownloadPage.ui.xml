@@ -1,0 +1,209 @@
+<!--
+
+    This file is part of pwt.
+
+    pwt is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	>
+	
+	<w:HTMLPanel title="PWT - Downloads center">
+		<w:Header ui:field="header">
+			<w:Heading level="1" summary="docSummary">Download center</w:Heading>
+			<p class="lead">
+			All release are available on our maven repository on <a href="http://repo.putnami.org">http://repo.putnami.org</a>.
+			<br/>
+			You can also checkout the releases on <a href="https://github.com/Putnami/putnami-pwt/releases">GitHub release page</a>.
+			</p>
+		</w:Header>
+		<w:HTMLPanel ui:field="content">
+			<w:Heading level="2" summary="docSummary">Current stable <small>@releaseVersion@</small></w:Heading>
+			
+			<w:Table>
+				<w:TableHead>
+						<w:TableTH><w:Label>Package</w:Label></w:TableTH>
+						<w:TableTH><w:Label>Name</w:Label></w:TableTH>
+						<w:TableTH><w:Label>Version</w:Label></w:TableTH>
+						<w:TableTH></w:TableTH>
+						<w:TableTH></w:TableTH>
+				</w:TableHead>
+				<w:TableBody bodyId="main">
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.0.0</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt/1.0.0/pwt-1.0.0.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt/1.0.0/pwt-1.0.0.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt-code-editor</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.0.0</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-code-editor/1.0.0/pwt-code-editor-1.0.0.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-code-editor/1.0.0/pwt-code-editor-1.0.0.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt-google-analytics</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.0.0</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/1.0.0/pwt-google-analytics-1.0.0.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/1.0.0/pwt-google-analytics-1.0.0.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt-ajax-bot-indexing</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.0.0</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-ajax-bot-indexing/1.0.0/pwt-ajax-bot-indexing-1.0.0.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-ajax-bot-indexing/1.0.0/pwt-ajax-bot-indexing-1.0.0.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+				</w:TableBody>
+			</w:Table>			
+			<w:Panel color="SUCCESS" collapsible="true" collapse="true">
+				<w:Header>Release notes</w:Header>
+				<w:HTMLPanel>
+					<strong>New enhancements :</strong>
+					<ul>
+						<li>An exception is thrown if the application has been redeployed</li>
+						<li>UI - Responsive visibility on table columns</li>
+						<li>UI - Navbar container type</li>
+						<li>UI - Modal size</li>
+					</ul>
+					<strong>Main fixed issues :</strong>
+					<ul>
+						<li>IE8 Compatibility</li>
+						<li>UI - Install the default theme on init</li>
+						<li>UI - Modal scroll fix since Bootstrap 3.2.0</li>
+						<li>UI - InputBoolean fix (flush, label, id)</li>
+						<li>Generated model now uses is...() boolean getters</li>
+						<li>EditorCollection : Visit subEditors with all the visitors</li>
+						<li>Fix place prefix for place names containing 'Place'</li>
+					</ul>
+				</w:HTMLPanel>
+			</w:Panel>
+			<w:Alert type="SUCCESS">
+				<strong>Curent Snapshots <span class="label label-info">@snapshotVersion@</span></strong>
+			</w:Alert>
+			<w:Alert type="INFO">
+				<strong>Gradle and Maven usage</strong>
+				<p>Find more details on the maven and gradle usage with <w:Anchor link="#!GettingStarted" text="Getting started guide" /></p>
+			</w:Alert>
+			
+			<w:Header><w:Heading level="2" summary="docSummary">Version <strong>1.0.0-RC2</strong></w:Heading></w:Header>
+			<w:Table>
+				<w:TableHead>
+						<w:TableTH><w:Label>Package</w:Label></w:TableTH>
+						<w:TableTH><w:Label>Name</w:Label></w:TableTH>
+						<w:TableTH><w:Label>Version</w:Label></w:TableTH>
+						<w:TableTH></w:TableTH>
+						<w:TableTH></w:TableTH>
+				</w:TableHead>
+				<w:TableBody bodyId="main">
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.0.0-RC2</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt/1.0.0-RC2/pwt-1.0.0-RC2.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt/1.0.0-RC2/pwt-1.0.0-RC2.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt-code-editor</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.0.0-RC2</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-code-editor/1.0.0-RC2/pwt-code-editor-1.0.0-RC2.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-code-editor/1.0.0-RC2/pwt-code-editor-1.0.0-RC2.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt-google-analytics</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.0.0-RC2</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/1.0.0-RC2/pwt-google-analytics-1.0.0-RC2.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/1.0.0-RC2/pwt-google-analytics-1.0.0-RC2.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt-ajax-bot-indexing</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.0.0-RC2</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-ajax-bot-indexing/1.0.0-RC2/pwt-ajax-bot-indexing-1.0.0-RC2.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-ajax-bot-indexing/1.0.0-RC2/pwt-ajax-bot-indexing-1.0.0-RC2.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+				</w:TableBody>
+			</w:Table>
+			<w:Panel color="SUCCESS" collapsible="true" collapse="true">
+				<w:Header>Release notes</w:Header>
+				<w:HTMLPanel>
+					<strong>New enhancements :</strong>
+					<ul>
+						<li>Migrate to Bootstrap 3.2</li>
+						<li>UI - AbstractForm rename type to layoutType</li>
+						<li>UI - Alert should extends AbstractForm</li>
+						<li>UI - InputCheckBox</li>
+						<li>UI - Icon customisation</li>
+						<li>UI - Progress Bar</li>
+						<li>UI - InputRadioBox</li>
+						<li>UI - Image</li>
+					</ul>
+					<strong>Fixed issues :</strong>
+					<ul>
+						<li>UI - AlertDismissEvent propagation on Alert clone</li>
+						<li>UI - Modal should be attach to the RootPanel</li>
+						<li>CodeEditor - IE issue</li>
+						<li>InputDatePicker header sunday repeat twice</li>
+						<li>eclipse gwt classpath</li>
+						<li>Google Analitics - divers fixes</li>
+					</ul>
+					
+				</w:HTMLPanel>
+			</w:Panel>
+			
+			<w:Header><w:Heading level="2" summary="docSummary">Version <strong>1.0.0-RC1</strong></w:Heading></w:Header>
+			<w:Table>
+				<w:TableHead>
+						<w:TableTH><w:Label>Package</w:Label></w:TableTH>
+						<w:TableTH><w:Label>Name</w:Label></w:TableTH>
+						<w:TableTH><w:Label>Version</w:Label></w:TableTH>
+						<w:TableTH></w:TableTH>
+						<w:TableTH></w:TableTH>
+				</w:TableHead>
+				<w:TableBody bodyId="main">
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.0.0-RC1</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt/1.0.0-RC1/pwt-1.0.0-RC1.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt/1.0.0-RC1/pwt-1.0.0-RC1.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt-code-editor</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.0.0-RC1</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-code-editor/1.0.0-RC1/pwt-code-editor-1.0.0-RC1.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-code-editor/1.0.0-RC1/pwt-code-editor-1.0.0-RC1.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt-google-analytics</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.0.0-RC1</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/1.0.0-RC1/pwt-google-analytics-1.0.0-RC1.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/1.0.0-RC1/pwt-google-analytics-1.0.0-RC1.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+				</w:TableBody>
+			</w:Table>
+
+		</w:HTMLPanel>
+	</w:HTMLPanel>
+
+</ui:UiBinder>

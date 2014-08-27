@@ -136,16 +136,24 @@ HasAllTouchHandlers
 	private Character accessKey;
 	private Integer tabIndex;
 
+	protected AbstractInput() {
+	}
+
 	public AbstractInput(Widget widget) {
 		initWidget(widget);
 	}
 
 	protected AbstractInput(Widget widget, AbstractInput<I> source) {
 		super(source);
-		initWidget(widget);
 		this.path = source.path;
 		this.htmlId = source.htmlId;
+		if (widget != null) {
+			initWidget(widget);
+			endCopy(source);
+		}
+	}
 
+	protected void endCopy(AbstractInput<I> source) {
 		if (source.tabIndex != null) {
 			setTabIndex(source.tabIndex);
 		}

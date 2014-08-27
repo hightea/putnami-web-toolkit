@@ -128,7 +128,7 @@ public class Path implements Iterable<PathElement> {
 			Path other = (Path) obj;
 			return Objects.equal(elements, other.elements);
 		}
-		return false;
+		return obj == null && isRoot();
 	}
 
 	@Override

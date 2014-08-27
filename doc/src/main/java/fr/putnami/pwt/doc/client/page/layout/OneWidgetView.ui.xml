@@ -23,10 +23,8 @@
 
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">One Widget Panel</w:Heading>
+		<w:Heading level="2" summary="docSummary">One Widget Panel</w:Heading>
 		<p>
 			A <code>OneWidgetPanel</code> is a Panel accepting only one child. It extends internal <code>AbstractComposite</code> providing some usefull utilities.
 		</p>

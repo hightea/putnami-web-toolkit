@@ -32,17 +32,17 @@ public interface WidgetParams extends Constants {
 	}
 
 	@DefaultStringValue("yyyy-MM-dd")
-	String dateFormatSimple();
-
-	@DefaultStringValue("yyyy-mm-dd")
-	String dateFormatSimpleMask();
+	String inputDateSimpleFormat();
 
 	@DefaultStringValue("MMMM yyyy")
-	String monthYearFull();
-
-	@DefaultStringValue("MMMM")
-	String monthFull();
+	String inputDatePickerMonthYearFormat();
 
 	@DefaultStringValue("MMM")
-	String monthAbbr();
+	String inputDatePickerMonthFormat();
+
+	@DefaultBooleanValue(true)
+	boolean inputFileProgressEnable();
+
+	@DefaultIntValue(1000)
+	int inputFileProgressHideDelay();
 }

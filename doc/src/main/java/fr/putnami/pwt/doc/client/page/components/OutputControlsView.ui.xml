@@ -24,10 +24,8 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{tableOfContent}">Output controls</w:Heading>
+		<w:Heading level="2" summary="docSummary">Output controls</w:Heading>
 		<p>
 		</p>
 
@@ -37,7 +35,7 @@
 				
 			<!-- OutputText -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">OutputText</w:Heading>
+				<w:Heading level="3" summary="docSummary">OutputText</w:Heading>
 				<p>The <code>OutputText</code> is a simple text render. If tag attribute is not set, the text is wrapped in <code>&lt;p&gt;</code> tag. 
 				It also accept style attribute such as <code>BADGE</code> or <code>LABEL</code>.</p>
 				
@@ -67,7 +65,7 @@
 			
 			<!-- OutputNumber -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">OutputNumber</w:Heading>
+				<w:Heading level="3" summary="docSummary">OutputNumber</w:Heading>
 				<p>The <code>OutputNumber</code> is an <code>OutputText</code> accepting custom number format.</p>
 				<div class="showcase-sample-block">
 					<div class="showcase-sample">
@@ -83,7 +81,7 @@
 			
 			<!-- OutputDate -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">OutputDate</w:Heading>
+				<w:Heading level="3" summary="docSummary">OutputDate</w:Heading>
 				<p>The <code>OutputDate</code> is an <code>OutputText</code> accepting custom date format.
 				</p>
 				<div class="showcase-sample-block">
@@ -100,7 +98,7 @@
 			
 			<!-- OutputEnum -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">OutputEnum</w:Heading>
+				<w:Heading level="3" summary="docSummary">OutputEnum</w:Heading>
 				<p>The <code>OutputEnum</code> is an <code>OutputText</code> with an <code>EnumRenderer</code> generated with the <code>MessageHelper</code></p>
 				<div class="showcase-sample-block">
 					<div class="showcase-sample">
@@ -114,23 +112,31 @@
 			
 			<!-- OutputBoolean -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">OutputBoolean</w:Heading>
-				<p>The <code>OutputBoolean</code> can customize the rendered value when true or false.</p>
+				<w:Heading level="3" summary="docSummary">OutputBoolean</w:Heading>
+				<p>The <code>OutputBoolean</code> can customize the rendered value when true or false and can use icons too.</p>
 				<div class="showcase-sample-block">
 					<div class="showcase-sample">
 						<w:OutputBoolean path="major" trueLabel="I am major" falseLabel="I am minor"/>
 						<w:OutputBoolean path="notMajor" trueLabel="I am major" falseLabel="I am minor"/>
+						<w:OutputBoolean path="major" trueLabel="I am major" trueIconType="ok" falseLabel="I am minor" falseIconType="cancel"/>
+						<w:OutputBoolean path="notmajor" trueLabel="I am major" trueIconType="ok" falseLabel="I am minor" falseIconType="cancel"/>
+						<w:OutputBoolean path="major" trueIconType="ok" falseIconType="cancel" outputType="ICON"/>
+						<w:OutputBoolean path="notmajor" trueIconType="ok" falseIconType="cancel" outputType="ICON"/>
 					</div>
 					<c:StaticCode configuration="{XML_CONFIGURATION}">
 						<pre><![CDATA[<w:OutputBoolean path="major" trueLabel="I am major" falseLabel="I am minor"/>
-<w:OutputBoolean path="notMajor"  trueLabel="I am major" falseLabel="I am minor" />]]></pre>
+<w:OutputBoolean path="notMajor"  trueLabel="I am major" falseLabel="I am minor" />
+<w:OutputBoolean path="major" trueLabel="I am major" trueIconType="ok" falseLabel="I am minor" falseIconType="cancel"/>
+<w:OutputBoolean path="notmajor" trueLabel="I am major" trueIconType="ok" falseLabel="I am minor" falseIconType="cancel"/>
+<w:OutputBoolean path="major" trueIconType="ok" falseIconType="cancel" outputType="ICON"/>
+<w:OutputBoolean path="notmajor" trueIconType="ok" falseIconType="cancel" outputType="ICON"/>]]></pre>
 					</c:StaticCode>
 				</div>
 			</div>
 			
 			<!-- OutputEmail -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">OutputEmail</w:Heading>
+				<w:Heading level="3" summary="docSummary">OutputEmail</w:Heading>
 				<p>The <code>OuputEmail</code> wrapper the text mailto anchor.</p>
 				<div class="showcase-sample-block">
 					<div class="showcase-sample">
@@ -144,7 +150,7 @@
 			
 			<!-- OutputProgress -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">OutputProgressBar</w:Heading>
+				<w:Heading level="3" summary="docSummary">OutputProgressBar</w:Heading>
 				<p>The <code>OutputProgressBar</code> render a number value on a graphical progress bar.</p>
 				<p><strong>Pameters :</strong></p>
 				<ul>
@@ -179,7 +185,7 @@
 			
 			<!-- OutputList -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">OutputList</w:Heading>
+				<w:Heading level="3" summary="docSummary">OutputList</w:Heading>
 				<p>The <code>OutputList</code> render Collection in list. For each value it will generate a new EditorOutput. 
 					If the EditorOutput is not specified, the <code>OuputList</code> guess the output editor with the property type.</p>
 				<div class="showcase-sample-block">

@@ -25,6 +25,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
 import fr.putnami.pwt.core.editor.client.Editor;
@@ -103,22 +104,33 @@ public abstract class AbstractHTMLPanel extends HTMLPanel implements EditorCompo
 
 	@Override
 	public void addAndReplaceElement(Widget widget, com.google.gwt.user.client.Element toReplace) {
-		if (widget instanceof Editor) {
-			if (editorChildren == null) {
-				editorChildren = Sets.newLinkedHashSet();
-			}
-			this.editorChildren.add((Editor) widget);
-		}
+		addEditor(widget);
 		String elementId = toReplace.getId();
 		children.put(widget, elementId);
 		toReplace.removeAttribute("id");
 		super.addAndReplaceElement(widget, toReplace);
 	}
 
+	@Override
+	@Deprecated
+	protected void add(Widget child, com.google.gwt.user.client.Element container) {
+		super.add(child, container);
+		addEditor(child);
+	}
+
 	protected void insert(Widget child, int beforeIndex, boolean domInsert) {
 		insert(child, getElement(), beforeIndex, domInsert);
 	}
 
+	protected void addEditor(IsWidget widget) {
+		if (widget instanceof Editor) {
+			if (editorChildren == null) {
+				editorChildren = Sets.newLinkedHashSet();
+			}
+			this.editorChildren.add((Editor) widget);
+		}
+
+	}
 	@Override
 	public void setStyleName(String style) {
 		StyleUtils.addStyle(this, new SimpleStyle(style));

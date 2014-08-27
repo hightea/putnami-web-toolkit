@@ -24,12 +24,11 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{tableOfContent}">Tables</w:Heading>
+		<w:Heading level="2" summary="docSummary">Tables</w:Heading>
 		<p><strong title="Putnami Web Toolkit">PWT</strong> provides two ways to create HTML <code>Table</code></p>
 
-		<w:Heading level="3" navSpy="{tableOfContent}">Table (Static Table)</w:Heading>
+		<w:Heading level="3" summary="docSummary">Table (Static Table)</w:Heading>
 		
 		<p>You can declaratively define a table which is compatible with the <strong title="Putnami Web Toolkit">PWT</strong> data binding feature. The <code>Table</code> component extends <code>AbstractPanel</code> so inherit all of it the utilities.</p>
 		<p>Use <code>TableBody</code>, <code>TableRow</code> children and <code>TableTH</code> and <code>TableTD</code> to create table cells (which extends <code>AbstractPanel</code>).</p>
@@ -193,7 +192,7 @@
 		</div>
 		
 		
-		<w:Heading level="3" navSpy="{tableOfContent}">TableEditor (Collection binding)</w:Heading>
+		<w:Heading level="3" summary="docSummary">TableEditor (Collection binding)</w:Heading>
 		
 		<p>With the <strong title="Putnami Web Toolkit">PWT</strong> data binding feature, you can also bind collections of data.</p>
 		<p>To bind a <code>Collection</code> of java bean, the use of <code>TableEditor</code> allows to easily customize the properties and actions you want to display.</p>

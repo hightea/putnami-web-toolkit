@@ -25,13 +25,37 @@ import com.google.gwt.user.client.ui.Widget;
 
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.model.client.base.HasReadonly;
+import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.TableTH;
 
 public abstract class AbstractTableColumn<T> implements
-		HasReadonly,
-		IsWidget,
-		HasResponsiveVisibility,
-		CloneableWidget {
+HasReadonly,
+IsWidget,
+HasResponsiveVisibility,
+CloneableWidget {
+
+	public enum Type implements CssStyle {
+		DEFAULT(null),
+		ACTION("table-action-column");
+
+		private final String style;
+
+		private Type(String style) {
+			this.style = style;
+		}
+
+		@Override
+		public String get() {
+			return style;
+		}
+	}
+
+	public static enum ColumnVisibility {
+		VISIBLE,
+		HIDE,
+		HIDE_READONLY,
+		VISIBLE_READONLY;
+	}
 
 	private Collection<AbstractTableColumnAspect<T>> aspects;
 
@@ -44,6 +68,10 @@ public abstract class AbstractTableColumn<T> implements
 	private Visibility lgVisibility = Visibility.DEFAULT;
 	private Visibility printVisibility = Visibility.DEFAULT;
 
+	private Type type = Type.DEFAULT;
+
+	private ColumnVisibility columnVisibility = ColumnVisibility.VISIBLE;
+
 	public AbstractTableColumn() {
 
 	}
@@ -51,6 +79,8 @@ public abstract class AbstractTableColumn<T> implements
 	protected AbstractTableColumn(AbstractTableColumn<T> source) {
 		this.readonly = source.readonly;
 		this.colspan = source.colspan;
+		this.columnVisibility = source.columnVisibility;
+		this.type = source.type;
 	}
 
 	@Override
@@ -69,6 +99,14 @@ public abstract class AbstractTableColumn<T> implements
 
 	public Integer getColspan() {
 		return colspan;
+	}
+
+	public ColumnVisibility getColumnVisibility() {
+		return columnVisibility;
+	}
+
+	public void setColumnVisibility(ColumnVisibility ColumnVisibility) {
+		this.columnVisibility = ColumnVisibility;
 	}
 
 	public Collection<AbstractTableColumnAspect<T>> getAspects() {
@@ -123,15 +161,27 @@ public abstract class AbstractTableColumn<T> implements
 		this.xsVisibility = printVisibility;
 	}
 
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
 	public final AbstractTableCell<T> createBodyCell() {
 		AbstractTableCell<T> cell = doCreateBodyCell();
 		setResponsiveVisibility(cell);
+		cell.setReadonlyVisibility(columnVisibility);
+		cell.setType(type);
 		return cell;
 	}
 
 	public final TableTH<T> createHeaderCell() {
 		TableTH<T> cell = doCreateHeaderCell();
 		setResponsiveVisibility(cell);
+		cell.setType(type);
+		cell.setReadonlyVisibility(columnVisibility);
 		return cell;
 	}
 

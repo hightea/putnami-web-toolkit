@@ -24,13 +24,11 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 
-	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">More widgets</w:Heading>
+		<w:Heading level="2" summary="docSummary">More widgets</w:Heading>
 
 
-		<w:Heading level="3" navSpy="{navSpy}">Popover and tooltip</w:Heading>
+		<w:Heading level="3" summary="docSummary">Popover and tooltip</w:Heading>
 		<p>A <code>Popover</code> or a <code>Tooltip</code> contains only one widget.</p>
 		<p>Use the <code>text</code> property to set the popover / tooltip content, and the <code>title</code> property to set the popover title.</p>
 		<p>Use the <code>placement</code> property to set the popover / tooltip position (default is set to <code>TOP</code>).</p>
@@ -157,7 +155,7 @@ public void onManualTooltipBtnClick(ButtonEvent event) {
 		</div>
 
 
-		<w:Heading level="3" navSpy="{navSpy}">Carousel</w:Heading>
+		<w:Heading level="3" summary="docSummary">Carousel</w:Heading>
 		<p>We provide a full bootstrap's Carousel support, allowing auto-play, pause on hover and display left and right navigation buttons.</p>
 					
 		<p>Add some <code>CarouselItem</code> to the <code>Carousel</code>. A <code>CarouselItem</code> is a <code>HTMLPanel</code> which can also have a <code>caption</code> child to add some caption to the item. The caption has to be a <code>IsWidget</code>.</p>

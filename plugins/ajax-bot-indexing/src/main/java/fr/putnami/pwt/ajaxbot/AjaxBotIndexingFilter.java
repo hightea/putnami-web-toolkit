@@ -143,10 +143,10 @@ public class AjaxBotIndexingFilter implements Filter {
 
 		StringBuffer prettyUrl = new StringBuffer();
 		prettyUrl.append(request.isSecure() ? "https://" : "http://")
-				.append(request.getServerName());
+		.append(request.getServerName());
 		if (request.getServerPort() != 0) {
 			prettyUrl.append(":")
-					.append(request.getServerPort());
+			.append(request.getServerPort());
 		}
 		prettyUrl.append(request.getRequestURI());
 		prettyUrl.append(rewriteQueryString(request.getQueryString()));

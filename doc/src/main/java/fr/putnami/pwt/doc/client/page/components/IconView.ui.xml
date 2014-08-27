@@ -24,10 +24,8 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">Icon</w:Heading>
+		<w:Heading level="2" summary="docSummary">Icon</w:Heading>
 		<p>
 			Icons are based on a webfont mechanism provided by <a href="http://fontello.com/" target="_blank">fontello</a>. 
 			Uni-color the webfont icons inherit the size and the color from the css. Really lightweight this mecanism reduce the server consumption.
@@ -67,7 +65,7 @@
 			</c:StaticCode>
 		</div>
 		
-		<w:Heading level="3" navSpy="{navSpy}">Customization</w:Heading>
+		<w:Heading level="3" summary="docSummary">Customization</w:Heading>
 		<p>You can customise your Icon set by making your own on <a href="http://fontello.com/" target="_blank">fontello</a> and install the <code>IconFont</code> in your theme following the bellow code. </p>
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[

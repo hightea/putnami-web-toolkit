@@ -24,13 +24,12 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
 	<ui:with field="stateSuggestions" type="java.util.List" />
 	<ui:with field="ageList" type="java.util.List" />
 	<ui:with field="groups" type="java.util.List" />
 
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{tableOfContent}">Input controls</w:Heading>
+		<w:Heading level="2" summary="docSummary">Input controls</w:Heading>
 		<p>
 			<strong title="Putnami Web Toolkit">PWT</strong> provides a full bunch of <code>InputControls</code>.
 			 Those controls are fully supproted by the <a href="#!DataBinding">DataBinding</a> framework.
@@ -43,7 +42,7 @@
 			
 			<!-- InputText -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">InputText</w:Heading>
+				<w:Heading level="3" summary="docSummary">InputText</w:Heading>
 				<p><code>InputText</code> is a simple text box.</p>
 				<div class="showcase-sample-block">
 					<div class="showcase-sample">
@@ -57,7 +56,7 @@
 			
 			<!-- InputPassword -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">InputPassword</w:Heading>
+				<w:Heading level="3" summary="docSummary">InputPassword</w:Heading>
 				<p><code>InputPassword</code> is a simple password box.</p>
 				<div class="showcase-sample-block">
 					<div class="showcase-sample">
@@ -71,7 +70,7 @@
 			
 			<!-- InputTextArea -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">InputTextArea</w:Heading>
+				<w:Heading level="3" summary="docSummary">InputTextArea</w:Heading>
 				<p><code>InputTextArea</code> is a simple text area </p>
 				<div class="showcase-sample-block">
 					<div class="showcase-sample">
@@ -85,7 +84,7 @@
 			
 			<!-- InputTextArea -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">InputBoolean</w:Heading>
+				<w:Heading level="3" summary="docSummary">InputBoolean</w:Heading>
 				<p><code>InputBoolean</code> is a simple control for boolean value. You can easily decorate it with a <code>Label</code>.</p>
 				<div class="showcase-sample-block">
 					<div class="showcase-sample">
@@ -99,7 +98,7 @@
 			
 			<!-- InputEmail -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">InputEmail</w:Heading>
+				<w:Heading level="3" summary="docSummary">InputEmail</w:Heading>
 				<p><code>InputEmail</code> is an advenced text box with  restricted characters on typing and parsing validation on flushing.</p>
 				<div class="showcase-sample-block">
 					<div class="showcase-sample">
@@ -113,7 +112,7 @@
 			
 			<!-- InputNumber -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">InputNumber</w:Heading>
+				<w:Heading level="3" summary="docSummary">InputNumber</w:Heading>
 				<p><code>InputNumber</code> is an Input box with an advanced mask according to the declared type, 
 					it can be controled with arrow keys and the pressed keys are restricted.<br/>
 					The number type supported are <code>FLOAT</code>, <code>DOUBLE</code>, <code>BIG_DECIMAL</code>, 
@@ -132,7 +131,7 @@
 			
 			<!-- InputDateBox -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">InputDateBox</w:Heading>
+				<w:Heading level="3" summary="docSummary">InputDateBox</w:Heading>
 				<p><code>InputDateBox</code> is an input box with advanced mask according to the date format. <br />
 					By default the mask is generated with the localized date format.  <br/>
 					<code>InputDateBox</code> can be controled with arrow keys.
@@ -151,7 +150,7 @@
 			
 			<!-- InputDatePicker -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">InputDatePicker</w:Heading>
+				<w:Heading level="3" summary="docSummary">InputDatePicker</w:Heading>
 				<p><code>InputDatePicker</code> can be use as Date editor or embeded as popup in <Code>InputDate</Code></p>
 				<div class="showcase-sample-block">
 					<div class="showcase-sample">
@@ -165,7 +164,7 @@
 			
 			<!-- InputDate -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">InputDate</w:Heading>
+				<w:Heading level="3" summary="docSummary">InputDate</w:Heading>
 				<p><code>InputDate</code> is an <code>InputGroup</code> mixing <code>InputDateBox</code> and <code>InputDatePicker</code></p>
 				<div class="showcase-sample-block">
 					<div class="showcase-sample">
@@ -181,7 +180,7 @@
 			
 			<!-- InputSelect -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">InputSelect</w:Heading>
+				<w:Heading level="3" summary="docSummary">InputSelect</w:Heading>
 				<p><code>InputSelect</code> is an select box made on bootstrap <code>DropDown</code> component.
 					Options are set with a simple list or a map.
 					Can accept any type of value if you initialize appropriate renderer.</p>
@@ -198,7 +197,7 @@
 			
 			<!-- InputSelect on enumeration -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">InputSelect on enumeration</w:Heading>
+				<w:Heading level="3" summary="docSummary">InputSelect on enumeration</w:Heading>
 				<p>For Enumerations the options are automaticaly resolved from the enum items, 
 					then rendered with message helper passed to the driver </p>
 				<div class="showcase-sample-block">
@@ -213,7 +212,7 @@
 			
 			<!-- InputMultiSelect -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">InputMultiSelect</w:Heading>
+				<w:Heading level="3" summary="docSummary">InputMultiSelect</w:Heading>
 				<p><code>InputMultiSelect</code> is a select box made on bootstrap <code>DropDown</code> component hwich allow the multiselection
 					Such as <code>InputSelect</code>, options are set with a simple list or a map.
 					Can accept any type of value if you initialize appropriate renderer.</p>
@@ -229,7 +228,7 @@
 			
 			<!-- InputRadio -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">InputRadio</w:Heading>
+				<w:Heading level="3" summary="docSummary">InputRadio</w:Heading>
 				<p><code>InputRadio</code> allows you to use Radio Buttons to presents simple selection values.</p>
 				<div class="showcase-sample-block">
 					<div class="showcase-sample">
@@ -245,7 +244,7 @@
 			
 			<!-- InputCheckBox -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">InputCheckBox</w:Heading>
+				<w:Heading level="3" summary="docSummary">InputCheckBox</w:Heading>
 				<p><code>InputCheckBox</code> allows you to use Checkboxes to presents multiselection values.</p>
 				<div class="showcase-sample-block">
 					<div class="showcase-sample">
@@ -261,7 +260,7 @@
 			
 			<!-- InputSlider -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">InputSlider</w:Heading>
+				<w:Heading level="3" summary="docSummary">InputSlider</w:Heading>
 				<p><code>InputSlider</code> allows you to slide between values. It uses a provided <code>List</code> of values (not necessary <code>Number</code>).</p>
 				<div class="showcase-sample-block">
 					<div class="showcase-sample">
@@ -278,7 +277,7 @@
 			
 			<!-- InputSuggest -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">InputSuggest</w:Heading>
+				<w:Heading level="3" summary="docSummary">InputSuggest</w:Heading>
 				<p><code>InputSuggest</code> allows you to provide some suggestions to the input.</p>
 				<div class="showcase-sample-block">
 					<div class="showcase-sample">
@@ -292,7 +291,7 @@
 			
 			<!-- InputGroup -->
 			<div>
-				<w:Heading level="3" navSpy="{tableOfContent}">InputGroup</w:Heading>
+				<w:Heading level="3" summary="docSummary">InputGroup</w:Heading>
 				<p><code>InputGroup</code> extends form controls by adding addon or button before or after the control.</p>
 				<div class="showcase-sample-block">
 					<div class="showcase-sample">
