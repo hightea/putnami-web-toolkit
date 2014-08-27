@@ -102,7 +102,7 @@
 				<p>Find more details on the maven and gradle usage with <w:Anchor link="#!GettingStarted" text="Getting started guide" /></p>
 			</w:Alert>
 			
-			<w:Header><w:Heading level="2" navSpy="{tableOfContent}">Version <strong>1.0.0-RC2</strong></w:Heading></w:Header>
+			<w:Header><w:Heading level="2" summary="docSummary">Version <strong>1.0.0-RC2</strong></w:Heading></w:Header>
 			<w:Table>
 				<w:TableHead>
 						<w:TableTH><w:Label>Package</w:Label></w:TableTH>
