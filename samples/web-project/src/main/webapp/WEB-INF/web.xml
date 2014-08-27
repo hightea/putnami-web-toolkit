@@ -16,7 +16,7 @@
 
   <servlet-mapping>
     <servlet-name>commandService</servlet-name>
-    <url-pattern>SampleWeb/commandService</url-pattern>
+    <url-pattern>commandService</url-pattern>
   </servlet-mapping>
 
 </web-app>

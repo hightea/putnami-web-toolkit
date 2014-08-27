@@ -295,7 +295,12 @@ public class ModelCreator {
 	private void generateCreate(TreeLogger logger, SourceWriter srcWriter) {
 		srcWriter.println("public %s newInstance() {", this.beanType.getSimpleSourceName());
 		srcWriter.indent();
-		srcWriter.println("return new %s();", this.beanType.getSimpleSourceName());
+		if (!this.beanType.isAbstract()) {
+			srcWriter.println("return new %s();", this.beanType.getSimpleSourceName());
+		}
+		else {
+			srcWriter.println("throw new RuntimeException(\"Can not instantiate the abstract class %s\");", this.beanType.getSimpleSourceName());
+		}
 		srcWriter.outdent();
 		srcWriter.println("}");
 	}

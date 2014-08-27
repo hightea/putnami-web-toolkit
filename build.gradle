@@ -16,7 +16,6 @@ task publishAllLibsToMavenLocal
 task licenseAll
 task licenseFormatAll
 
-
 subprojects {
 	apply from : new File(rootProject.projectDir, 'subproject-pwt.gradle').getAbsolutePath()
 }
