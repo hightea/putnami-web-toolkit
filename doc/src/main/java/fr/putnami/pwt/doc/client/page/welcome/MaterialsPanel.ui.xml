@@ -1,0 +1,74 @@
+<!--
+
+    This file is part of pwt.
+
+    pwt is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	>
+
+	<w:Panel>
+		<w:Header><strong>Materials</strong></w:Header>
+		<w:HTMLPanel>
+			<strong>Quick start</strong>
+			<w:List tag="ol">
+				<w:ListItem>
+					<a href="#!GettingStarted">Start with PWT</a>
+				</w:ListItem>
+			</w:List>
+			<strong>Tutorials</strong>
+			<w:List tag="ol">
+				<w:ListItem>
+					<a href="#!">Init a gradle project</a>
+				</w:ListItem>
+				<w:ListItem>
+					<a href="#!">Init a maven project</a>
+				</w:ListItem>
+				<w:ListItem>
+					<a href="#!">Welcome page</a>
+				</w:ListItem>
+				<w:ListItem>
+					<a href="#!">Create more pages</a>
+				</w:ListItem>
+				<w:ListItem>
+					<a href="#!">Bind a contact form</a>
+				</w:ListItem>
+				<w:ListItem>
+					<a href="#!">Issue tracker</a>
+				</w:ListItem>
+				<w:ListItem>
+					<a href="#!">Theme your webapp</a>
+				</w:ListItem>
+				<w:ListItem>
+					<a href="#!">Track with Google Analytics</a>
+				</w:ListItem>
+				<w:ListItem>
+					<a href="#!">Index with Ajax Bot Filter</a>
+				</w:ListItem>
+			</w:List>
+			<strong>Samples</strong>
+			<w:List tag="ol">
+				<w:ListItem>
+					<a href="#!AddressBook">Address book</a>
+				</w:ListItem>
+				<w:ListItem>
+					<a href="#!ContactsTable">Contact tables</a>
+				</w:ListItem>
+			</w:List>
+		</w:HTMLPanel>
+	</w:Panel>
+</ui:UiBinder>

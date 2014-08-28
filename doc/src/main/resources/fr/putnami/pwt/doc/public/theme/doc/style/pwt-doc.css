@@ -348,10 +348,10 @@ a {
 * Social
 */
 .social-bar{
-	margin:auto;
+	margin:0 0 15px 25px;
 }
 .social-bar .btn{
-	color: #afd6ad;
+	color: #d6e9c6;
 	font-size: 3em;
 	background-color: transparent;
 	border: 0;
@@ -362,36 +362,6 @@ a {
 }
 
 /**
-* Welcome
-*/
-.teaser{
-	background-color: #333;
-	color: #ec7600;
-	font-weight: 500;
-	position: relative;
-	overflow: hidden;
-	font-size: 24px;
-	margin-top: 30px;
-	padding-top: 20px;
-}
-
-.teaser h1{
-	color: #4db848;
-	margin: 0 0 10px 0;
-	text-align: center;
-	border: 0;
-}
-
-.teaser .forkMeOnGitHub{
-	position: absolute;
-	top: 0;
-	right: 0;
-}
-.teaser .row{
-	margin: 15px 0; 
-}
-
-/**
 * CodeEditor
 */
 code {
@@ -399,13 +369,15 @@ code {
 	background-color: #ddd;
 	border-radius: 3px;
 }
-
 kbd,
-pre,
-pre.code-editor {
-	font-family: 'Monaco', courier, monospace;
+pre{
 	background-color: #555;
 	color: #ddd;
+}
+pre.code-editor {
+	font-family: 'Monaco', courier, monospace;
+	color: #000;
+	background-color: #fff;
 }
 
 pre.code-editor div.code-editor-line {
@@ -416,7 +388,7 @@ pre.code-editor div.code-editor-line {
 * Provided XML Syntax highlighting
 */
 .code-editor-xml-comment {
-	color: #f9cc21;
+	color: #F9A321;
 }
 .code-editor-xml-doctype {
 	color: #ccc;
@@ -425,7 +397,7 @@ pre.code-editor div.code-editor-line {
 	color: #4db848;
 }
 .code-editor-xml-attribute {
-	color: #ec7600;
+	color: #F9A321;
 }
 .code-editor-xml-attribute-value {
 	color: #ddd;
@@ -436,6 +408,7 @@ pre.code-editor div.code-editor-line {
 */
 .code-editor-java-keyword {
 	color: #4db848;
+	font-weight:bold
 }
 .code-editor-java-string {
 	color: #93C763;
@@ -454,6 +427,9 @@ pre.code-editor div.code-editor-line {
 	color: #f9cc21;
 }
 
+/**
+* Media
+*/
 @media (max-width: 767px) {
 	.teaser{
 		font-weight: 300;

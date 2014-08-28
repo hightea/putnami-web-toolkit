@@ -37,6 +37,7 @@ import fr.putnami.pwt.core.widget.client.HTMLPanel;
 import fr.putnami.pwt.core.widget.client.NavSpy;
 import fr.putnami.pwt.core.widget.client.OneWidgetPanel;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
+import fr.putnami.pwt.doc.client.social.widget.SocialBar;
 
 public class DocumentationDisplay extends Composite implements AcceptsOneWidget {
 
@@ -61,10 +62,13 @@ public class DocumentationDisplay extends Composite implements AcceptsOneWidget 
 	OneWidgetPanel headerContainer;
 	@UiField
 	OneWidgetPanel contentContainer;
+	@UiField
+	SocialBar socialBar;
 
 	public DocumentationDisplay() {
 		initWidget(Binder.BINDER.createAndBindUi(this));
 
+		socialBar.setVisible(false);
 		Window.addResizeHandler(new ResizeHandler() {
 
 			@Override
@@ -89,6 +93,7 @@ public class DocumentationDisplay extends Composite implements AcceptsOneWidget 
 			Page page = (Page) w;
 			noPageContainer.setVisible(false);
 			pageContainer.setVisible(true);
+			socialBar.setVisible(true);
 
 			headerContainer.setWidget(page.header);
 			contentContainer.setWidget(page.content);
@@ -96,6 +101,7 @@ public class DocumentationDisplay extends Composite implements AcceptsOneWidget 
 		else {
 			noPageContainer.setVisible(true);
 			pageContainer.setVisible(false);
+			socialBar.setVisible(false);
 
 			headerContainer.setWidget(null);
 			contentContainer.setWidget(null);
