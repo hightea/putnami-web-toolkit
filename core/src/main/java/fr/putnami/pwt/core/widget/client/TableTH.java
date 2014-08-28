@@ -103,19 +103,24 @@ Editor {
 	}
 
 	private void renderVisible() {
-		switch (readonlyVisibility) {
-		case VISIBLE:
+		if (readonlyVisibility == null) {
 			setVisible(true);
-			break;
-		case HIDE:
-			setVisible(false);
-			break;
-		case HIDE_READONLY:
-			setVisible(!Boolean.TRUE.equals(readonly));
-			break;
-		case VISIBLE_READONLY:
-			setVisible(Boolean.TRUE.equals(readonly));
-			break;
+		}
+		else {
+			switch (readonlyVisibility) {
+			case VISIBLE:
+				setVisible(true);
+				break;
+			case HIDE:
+				setVisible(false);
+				break;
+			case HIDE_READONLY:
+				setVisible(!Boolean.TRUE.equals(readonly));
+				break;
+			case VISIBLE_READONLY:
+				setVisible(Boolean.TRUE.equals(readonly));
+				break;
+			}
 		}
 	}
 
