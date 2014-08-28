@@ -63,8 +63,8 @@
 			</w:Affix>
 		</header>
 		<w:HTMLPanel ui:field="viewContainer" styleName="showcase-section">
+			<w:OneWidgetPanel tag="div" ui:field="noPageContainer" />
 			<div class="container">
-				<w:OneWidgetPanel tag="div" ui:field="noPageContainer" />
 				<w:Container tag="div" ui:field="pageContainer">
 					<w:GridRow>
 						<w:GridColumn>

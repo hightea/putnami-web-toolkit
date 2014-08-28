@@ -22,7 +22,7 @@
 				xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client"
         >
 
-	<w:TabPanel styleName="showcase-samplePanel">
+	<w:TabPanel styleName="showcase-samplePanel container">
 		<w:TabPanelContent active="true">
 			<w:tabLink>
 				<w:NavLink label="Sample" />

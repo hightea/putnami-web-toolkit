@@ -18,8 +18,9 @@ package fr.putnami.pwt.doc.client.page.sample.addressbook;
 
 import fr.putnami.pwt.core.mvp.client.ViewPlace;
 import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
+import fr.putnami.pwt.doc.client.page.sample.decorator.SampleDecorator;
 
-@ActivityDescription(view = AddressBookPage.class)
+@ActivityDescription(view = AddressBookPage.class, viewDecorator = SampleDecorator.class)
 public class AddressBookPlace extends ViewPlace {
 
 }

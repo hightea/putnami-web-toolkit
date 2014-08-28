@@ -21,71 +21,49 @@ import java.util.List;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.Composite;
 
 import fr.putnami.pwt.core.editor.client.event.FlushSuccessEvent;
-import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
+import fr.putnami.pwt.core.inject.client.annotation.Initialize;
 import fr.putnami.pwt.core.inject.client.annotation.PresentHandler;
-import fr.putnami.pwt.core.model.client.model.Model;
+import fr.putnami.pwt.core.inject.client.annotation.Templated;
+import fr.putnami.pwt.core.mvp.client.View;
 import fr.putnami.pwt.core.widget.client.Form;
 import fr.putnami.pwt.core.widget.client.Modal;
 import fr.putnami.pwt.core.widget.client.TableEditor;
-import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.core.widget.client.event.RowClickEvent;
 import fr.putnami.pwt.core.widget.client.event.SelectionEvent;
-import fr.putnami.pwt.doc.client.page.sample.SamplePage;
+import fr.putnami.pwt.doc.client.page.sample.decorator.HasSources;
 import fr.putnami.pwt.doc.shared.page.sample.constants.SampleConstants;
 import fr.putnami.pwt.doc.shared.page.sample.domain.Contact;
-import fr.putnami.pwt.doc.shared.page.sample.domain.Person;
 import fr.putnami.pwt.doc.shared.page.sample.service.ContactService;
 
-public class ContactsTablePage extends SamplePage {
-
-	interface Binder extends UiBinderLocalized<Widget, ContactsTablePage> {
-		UiBinderLocalized<Widget, ContactsTablePage> BINDER = GWT.create(Binder.class);
-	}
-
-	public interface ContactModel extends Model<Contact> {
-
-		Model<Contact> MODEL = GWT.create(ContactModel.class);
-	}
-
-	@UiField(provided = true)
-	final SampleConstants constants = GWT.create(SampleConstants.class);
+@Templated
+public class ContactsTablePage extends Composite implements View, HasSources {
 
 	@UiField(provided = true)
 	final List<Integer> weightItems = generateWeightItems();
 
 	@UiField
+	@Initialize(constantsClass = SampleConstants.class)
 	Form<Contact> contactEditor;
 
 	@UiField
+	@Initialize(constantsClass = SampleConstants.class)
 	TableEditor<Contact> contactTable;
 
 	@UiField
 	Modal modal;
 
-	private final IsWidget sampleWidget;
+	private final Multimap<String, String> sources = LinkedHashMultimap.create();
 
 	public ContactsTablePage() {
 		super();
 
-		sampleWidget = Binder.BINDER.createAndBindUi(this);
-
-		MessageHelper messageHelper = new MessageHelper(constants);
-
-		contactTable.setMessageHelper(messageHelper);
-		contactTable.initialize(ContactModel.MODEL);
-		contactEditor.setMessageHelper(messageHelper);
-		contactEditor.initialize(ContactModel.MODEL);
-
-		Multimap<String, String> sources = LinkedHashMultimap.create();
 		sources.put(VIEW_PANEL, "table/ContactsTablePage.ui.xml");
 		sources.put(VIEW_PANEL, "table/ContactsTablePage.java");
 		sources.put(VIEW_PANEL, "table/ContactsTablePlace.java");
@@ -96,16 +74,15 @@ public class ContactsTablePage extends SamplePage {
 		sources.put(DOMAIN_PANEL, "domain/Gender.java");
 		sources.put(DOMAIN_PANEL, "domain/Group.java");
 		sources.put(CONSTANTS_PANEL, "constants/SampleConstants.java");
-		addSources(sources);
 	}
 
 	@Override
-	protected IsWidget getSampleWidget() {
-		return sampleWidget;
+	public Multimap<String, String> getSourcesMap() {
+		return sources;
 	}
 
 	@PresentHandler
-	public void presentContactsTable(ContactsTablePlace place) {
+	void present(ContactsTablePlace place) {
 		Document.get().setTitle("PWT - Sample - Contact table");
 		contactTable.edit(Lists.<Contact> newArrayList(ContactService.get().getPeople()));
 	}
@@ -118,12 +95,10 @@ public class ContactsTablePage extends SamplePage {
 
 	@UiHandler("contactTable")
 	void onRowClik(RowClickEvent event) {
-		GWT.log("" + event.<Person> getValue().getName());
 	}
 
 	@UiHandler("contactTableSelecter")
 	void onPersonSelected(SelectionEvent event) {
-		GWT.log("yop");
 	}
 
 	@UiHandler("selectContactBoutton")
@@ -142,7 +117,7 @@ public class ContactsTablePage extends SamplePage {
 	void onSave(FlushSuccessEvent event) {
 		ContactService.get().savePerson((Contact) event.getValue());
 		modal.hide();
-		presentContactsTable(null);
+		present(null);
 	}
 
 	private List<Integer> generateWeightItems() {

@@ -24,22 +24,20 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.KeyPressEvent;
-import com.google.gwt.i18n.client.ConstantsWithLookup;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.Composite;
 
 import fr.putnami.pwt.core.editor.client.event.DirtyEvent;
-import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
+import fr.putnami.pwt.core.inject.client.annotation.Initialize;
 import fr.putnami.pwt.core.inject.client.annotation.PresentHandler;
-import fr.putnami.pwt.core.model.client.model.Model;
+import fr.putnami.pwt.core.inject.client.annotation.Templated;
+import fr.putnami.pwt.core.mvp.client.View;
 import fr.putnami.pwt.core.widget.client.Anchor;
 import fr.putnami.pwt.core.widget.client.Button;
 import fr.putnami.pwt.core.widget.client.Form;
@@ -47,47 +45,29 @@ import fr.putnami.pwt.core.widget.client.GridRow;
 import fr.putnami.pwt.core.widget.client.InputMultiSelect;
 import fr.putnami.pwt.core.widget.client.InputText;
 import fr.putnami.pwt.core.widget.client.OutputList;
-import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
-import fr.putnami.pwt.doc.client.page.sample.SamplePage;
+import fr.putnami.pwt.doc.client.page.sample.decorator.HasSources;
 import fr.putnami.pwt.doc.shared.page.sample.constants.SampleConstants;
 import fr.putnami.pwt.doc.shared.page.sample.domain.Contact;
 import fr.putnami.pwt.doc.shared.page.sample.domain.Group;
 import fr.putnami.pwt.doc.shared.page.sample.service.ContactService;
 
-public class AddressBookPage extends SamplePage {
-
-	interface Binder extends UiBinderLocalized<Widget, AddressBookPage> {
-
-		UiBinderLocalized<Widget, AddressBookPage> BINDER = GWT.create(Binder.class);
-	}
-
-	public interface GroupModel extends Model<Group> {
-
-		Model<Group> MODEL = GWT.create(GroupModel.class);
-	}
-
-	public interface ContactModel extends Model<Contact> {
-
-		Model<Contact> MODEL = GWT.create(ContactModel.class);
-	}
-
-	private final SampleConstants constants = GWT.create(SampleConstants.class);
+@Templated
+public class AddressBookPage extends Composite implements View, HasSources {
 
 	@UiField
 	InputText searchBox;
 
 	@UiField
+	@Initialize(constantsClass = SampleConstants.class)
 	OutputList<Group> groupsList;
-	@UiField
-	Form<Group> groupItemTemplate;
 
 	@UiField
+	@Initialize(constantsClass = SampleConstants.class)
 	OutputList<Contact> contactsList;
 	@UiField
+	@Initialize(constantsClass = SampleConstants.class)
 	Form<Contact> contactDetails;
-	@UiField
-	Form<Contact> contactItemTemplate;
 	@UiField
 	InputMultiSelect<String> groupSelect;
 	@UiField
@@ -108,27 +88,10 @@ public class AddressBookPage extends SamplePage {
 	private Group displayedGroup;
 	private List<Contact> displayedList;
 
-	private final IsWidget sampleWidget;
+
+	private final Multimap<String, String> sources = LinkedHashMultimap.create();
 
 	public AddressBookPage() {
-		sampleWidget = Binder.BINDER.createAndBindUi(this);
-
-		MessageHelper messageHelper = new MessageHelper((ConstantsWithLookup) GWT.create(SampleConstants.class));
-
-		contactDetails.setMessageHelper(messageHelper);
-		contactDetails.initialize(ContactModel.MODEL);
-
-		contactsList.setMessageHelper(messageHelper);
-		contactsList.initialize(ContactModel.MODEL);
-		contactItemTemplate.setMessageHelper(messageHelper);
-		contactItemTemplate.initialize(ContactModel.MODEL);
-
-		groupsList.setMessageHelper(messageHelper);
-		groupsList.initialize(GroupModel.MODEL);
-		groupItemTemplate.setMessageHelper(messageHelper);
-		groupItemTemplate.initialize(GroupModel.MODEL);
-
-		Multimap<String, String> sources = LinkedHashMultimap.create();
 		sources.put(VIEW_PANEL, "addressbook/AddressBookPage.ui.xml");
 		sources.put(VIEW_PANEL, "addressbook/AddressBookPage.java");
 		sources.put(VIEW_PANEL, "addressbook/AddressBookPlace.java");
@@ -139,16 +102,15 @@ public class AddressBookPage extends SamplePage {
 		sources.put(DOMAIN_PANEL, "domain/Gender.java");
 		sources.put(DOMAIN_PANEL, "domain/Group.java");
 		sources.put(CONSTANTS_PANEL, "constants/SampleConstants.java");
-		addSources(sources);
 	}
 
 	@Override
-	protected IsWidget getSampleWidget() {
-		return sampleWidget;
+	public Multimap<String, String> getSourcesMap() {
+		return sources;
 	}
 
 	@PresentHandler
-	public void presentAddressBook(AddressBookPlace place) {
+	void presentAddressBook(AddressBookPlace place) {
 		Document.get().setTitle("PWT - Sample - Address book");
 
 		List<Group> groups = ContactService.get().getGroups();

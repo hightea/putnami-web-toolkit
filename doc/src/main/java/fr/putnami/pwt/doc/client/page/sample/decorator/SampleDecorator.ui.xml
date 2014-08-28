@@ -1,0 +1,30 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client"
+	>
+
+	<w:TabPanel styleName="showcase-samplePanel container">
+		<w:TabPanelContent active="true">
+			<w:tabLink>
+				<w:NavLink label="Sample" />
+			</w:tabLink>
+			<w:OneWidgetPanel tag="div" styleName="showcase-tab-content" ui:field="sampleContent"/>
+		</w:TabPanelContent>
+		<w:TabPanelContent>
+			<w:tabLink>
+				<w:NavLink iconType="CODE" label="Sources" />
+			</w:tabLink>
+			<w:HTMLPanel styleName="showcase-tab-content">
+				<w:GridRow>
+					<w:GridColumn size="3">
+						<w:PanelAccordion  ui:field="sourceAccordion" />
+					</w:GridColumn>
+					<w:GridColumn size="9">
+						<c:StaticCode ui:field="sourceCode"/>
+					</w:GridColumn>
+				</w:GridRow>
+			</w:HTMLPanel>
+		</w:TabPanelContent>
+	</w:TabPanel>
+</ui:UiBinder>

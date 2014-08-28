@@ -18,8 +18,9 @@ package fr.putnami.pwt.doc.client.page.sample.table;
 
 import fr.putnami.pwt.core.mvp.client.ViewPlace;
 import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
+import fr.putnami.pwt.doc.client.page.sample.decorator.SampleDecorator;
 
-@ActivityDescription(view = ContactsTablePage.class)
+@ActivityDescription(view = ContactsTablePage.class, viewDecorator = SampleDecorator.class)
 public class ContactsTablePlace extends ViewPlace {
 
 }

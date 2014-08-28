@@ -31,7 +31,7 @@
 					</div>
 				</div>
 				<w:OutputList ui:field="groupsList" type="LIST_GROUP">
-					<w:Form  ui:field="groupItemTemplate">
+					<w:Form>
 						<span class="badge pull-right"><w:OutputNumber path="memberSize" tag="span" /></span>
 						<w:Anchor ui:field="selectGroupAnchor"><w:OutputText ui:field="name" path="name" tag="span"/></w:Anchor>
 						<span class="clearfix" />
@@ -41,7 +41,7 @@
 			<w:GridColumn size="3">
 				<w:ScrollPanel offsetTop="142">
 					<w:OutputList ui:field="contactsList" type="LIST">
-						<w:Form ui:field="contactItemTemplate">
+						<w:Form>
 							<strong><w:Anchor ui:field="openContactAnchor"><w:OutputText ui:field="contactName" path="name" tag="span"/></w:Anchor></strong>
 							 - <w:OutputText path="address.city" tag="span" />
 						</w:Form>
