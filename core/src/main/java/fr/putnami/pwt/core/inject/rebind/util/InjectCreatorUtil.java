@@ -48,6 +48,12 @@ public final class InjectCreatorUtil {
 				methodAnnoted.add(field);
 			}
 		}
+		// Recurse to superclass
+		JClassType superclass = type.getSuperclass();
+		if (superclass != null) {
+			methodAnnoted.addAll(listFields(superclass, annotationClass));
+		}
+
 		return methodAnnoted;
 	}
 
