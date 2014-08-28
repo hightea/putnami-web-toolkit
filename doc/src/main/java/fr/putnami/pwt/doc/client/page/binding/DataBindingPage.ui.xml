@@ -27,7 +27,7 @@
 
 	<w:HTMLPanel title="PWT - Data binding Framework">
 		<w:Header ui:field="header">
-			<w:Heading level="1" summary="docSummary">
+			<w:Heading level="1">
 				Data binding
 			</w:Heading>
 			<p class="lead">

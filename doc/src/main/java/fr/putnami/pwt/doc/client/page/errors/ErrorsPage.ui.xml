@@ -26,7 +26,7 @@
 
 	<w:HTMLPanel title="PWT - Errors management">
 		<w:Header ui:field="header">
-			<w:Heading level="1" summary="docSummary">Errors Handling</w:Heading>
+			<w:Heading level="1">Errors Handling</w:Heading>
 			<p class="lead">
 				<strong title="Putnami Web Toolkit">PWT</strong> provides an easy way to handle errors in the application.
 			</p>

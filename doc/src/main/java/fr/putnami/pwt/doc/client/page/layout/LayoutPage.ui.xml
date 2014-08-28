@@ -25,7 +25,7 @@
 
 	<w:HTMLPanel title="PWT - UI Layouts components">
 		<w:Header ui:field="header">
-			<w:Heading level="1" summary="docSummary">Layout</w:Heading>
+			<w:Heading level="1">Layout</w:Heading>
 			<p class="lead">
 				<strong title="Putnami Web Toolkit">PWT</strong> use Twitter's Bootstrap, so every bootstrap css layout can be applied. 
 				<br/>

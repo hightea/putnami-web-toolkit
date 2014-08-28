@@ -27,7 +27,7 @@
 
 	<w:HTMLPanel title="PWT - Navigation MVP Framework">
 		<w:Header ui:field="header">
-				<w:Heading level="1" summary="docSummary">Navigation</w:Heading>
+				<w:Heading level="1">Navigation</w:Heading>
 				<p class="lead">
 				<strong title="Putnami Web Toolkit">PWT</strong> offer a simple navigation framework. 
 				<br/>

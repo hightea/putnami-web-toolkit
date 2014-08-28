@@ -27,7 +27,7 @@
 
 	<w:HTMLPanel title="PWT - Roadmap - Coming soon on PWT">
 		<w:Header ui:field="header">
-			<w:Heading level="1" summary="docSummary">Coming soon...</w:Heading>
+			<w:Heading level="1">Coming soon...</w:Heading>
 			<p class="lead">
 			<strong>PWT</strong> is not over. A lot of good stuff are in the pipe. 
 			</p>

@@ -27,7 +27,7 @@
 
 	<w:HTMLPanel title="PWT - Server Calls RPC Framework">
 		<w:Header ui:field="header">
-			<w:Heading level="1" summary="docSummary">Server calls</w:Heading>
+			<w:Heading level="1">Server calls</w:Heading>
 			<p class="lead">
 				GWT RPC framework makes it easy to invoke service procedure on server. But not easy enough for <strong title="Putnami Web Toolkit">PWT</strong>. <br/>
 				That's why we improved this mechanism in various ways.

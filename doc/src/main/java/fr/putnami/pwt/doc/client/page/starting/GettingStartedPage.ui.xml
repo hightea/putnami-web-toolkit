@@ -23,7 +23,7 @@
 
 	<w:HTMLPanel title="PWT - Quick start Getting Started">
 		<w:Header ui:field="header">
-			<w:Heading level="1" summary="docSummary">Getting started</w:Heading>
+			<w:Heading level="1">Getting started</w:Heading>
 			<p class="lead">
 			</p>
 		</w:Header>

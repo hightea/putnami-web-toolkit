@@ -23,7 +23,7 @@
 	
 	<w:HTMLPanel title="PWT - Downloads center">
 		<w:Header ui:field="header">
-			<w:Heading level="1" summary="docSummary">Download center</w:Heading>
+			<w:Heading level="1">Download center</w:Heading>
 			<p class="lead">
 			All release are available on our maven repository on <a href="http://repo.putnami.org">http://repo.putnami.org</a>.
 			<br/>

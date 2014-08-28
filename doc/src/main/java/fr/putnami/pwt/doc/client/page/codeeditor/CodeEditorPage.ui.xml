@@ -26,7 +26,7 @@
 
 	<w:HTMLPanel title="PWT - code editor plugins">
 		<w:Header ui:field="header">
-			<w:Heading level="1" summary="docSummary">Code editor plugin</w:Heading>
+			<w:Heading level="1">Code editor plugin</w:Heading>
 			<p class="lead">
 			The code editor plugin provides a way to display highlighted String, and an ability to edit the String with completion. 
 			</p>

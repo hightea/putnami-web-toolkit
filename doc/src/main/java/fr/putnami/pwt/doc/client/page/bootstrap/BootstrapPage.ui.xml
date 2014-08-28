@@ -26,7 +26,7 @@
 
 	<w:HTMLPanel title="PWT - Theming and bootstrap">
 		<w:Header ui:field="header">
-			<w:Heading level="1" summary="docSummary">Bootstrap</w:Heading>
+			<w:Heading level="1">Bootstrap</w:Heading>
 			<p class="lead">
 				<strong title="Putnami Web Toolkit">PWT</strong> is fully based on Twitter bootstrap Css framework. 
 				So it is fully responsive and fully themable.

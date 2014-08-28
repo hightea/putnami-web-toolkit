@@ -26,7 +26,7 @@
 
 	<w:HTMLPanel title="PWT - Google Analytics Plugin">
 		<w:Header ui:field="header">
-			<w:Heading level="1" summary="docSummary">Google analytics plugin</w:Heading>
+			<w:Heading level="1">Google analytics plugin</w:Heading>
 			<p class="lead">
 			This plugin tracks your visitor actions. Each visited places are reported in your google analytics account. 
 			You can also track user events, social network events, and exception events. The Ecommerce tracking is not supported yet. 
