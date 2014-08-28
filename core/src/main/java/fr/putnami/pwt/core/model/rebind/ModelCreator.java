@@ -17,6 +17,7 @@
 package fr.putnami.pwt.core.model.rebind;
 
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -68,6 +69,8 @@ public class ModelCreator {
 			Integer.class.getName(),
 			Long.class.getName(),
 			Short.class.getName(),
+			// BigDecimal
+			BigDecimal.class.getName(),
 			// Others
 			Object.class.getName(),
 			String.class.getName(),
