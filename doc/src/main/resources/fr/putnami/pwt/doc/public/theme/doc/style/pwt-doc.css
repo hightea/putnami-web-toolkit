@@ -344,6 +344,26 @@ a {
 	padding: 5px 15px;
 }
 
+/**
+* Social
+*/
+.social-bar{
+	margin:auto;
+}
+.social-bar .btn{
+	color: #afd6ad;
+	font-size: 3em;
+	background-color: transparent;
+	border: 0;
+	padding: 1px;
+}
+.social-bar .btn:hover{
+	color: #55b04a;
+}
+
+/**
+* Welcome
+*/
 .teaser{
 	background-color: #333;
 	color: #ec7600;
