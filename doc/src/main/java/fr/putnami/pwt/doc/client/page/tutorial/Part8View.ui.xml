@@ -1,0 +1,106 @@
+<!--
+
+    This file is part of pwt.
+
+    pwt is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel title="PWT - Tutorial Part 8 - Add Ajax Bot Filter">
+		<w:Header ui:field="header">
+			<w:Heading level="1">Part 8 - Add Ajax Bot Filter</w:Heading>
+		</w:Header>
+		<w:HTMLPanel ui:field="content">
+		
+			<ul class="pager">
+				<li class="previous"><a href="#!TutorialPart7">&larr; Part 7 : Add Google Analytics to your app</a></li>
+			</ul>
+			
+			<p>In this tutorial, we will will add the ajax bot plugin allowing our app (from  <em><a href="#!TutorialPart7">Part 7 : Add Google Analytics to your app</a></em>) to be indexed by the search engine bots.</p>
+			
+			<w:Heading level="2" summary="docSummary">Step 1 : <em>Add the dependency in the build script</em></w:Heading>
+			<p>Simply add the following dependency in the <code>build.gradle</code> file :</p>
+			
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+dependencies {
+	...
+	compile 'fr.putnami.pwt:pwt-ajax-bot-indexing:@releaseVersion@'
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>or in the <code>pom.xml</code> file :</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<dependency>
+	<groupId>fr.putnami.pwt</groupId>
+	<artifactId>pwt-ajax-bot-indexing</artifactId>
+	<version>@releaseVersion@</version>
+</dependency>]]></pre>
+			</c:StaticCode>
+			
+			<w:Heading level="2" summary="docSummary">Step 2 : <em>Add the servlet filter</em></w:Heading>
+			
+			<p>In order to add the filter, it's very easy !  simply add the following to the <code>web.xml</code> :</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+	<filter>
+		<filter-name>ajax-bot-indexing-filter</filter-name>
+		<description>Filter making passible to render ajax page as HTML.</description>
+		<filter-class>fr.putnami.pwt.ajaxbot.AjaxBotIndexingFilter</filter-class>
+		<init-param>
+			<param-name>cacheFolder</param-name>
+			<!-- Use a valid temp file -->
+			<param-value>/tmp/cacheRenderedAjaxPage</param-value>
+			<description>Rendered html cache folder</description>
+		</init-param>
+		<init-param>
+			<param-name>cacheResetOnStartup</param-name>
+			<param-value>true</param-value>
+			<description>Clear the html cache on server startup</description>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>ajax-bot-indexing-filter</filter-name>
+		<url-pattern>*</url-pattern>
+	</filter-mapping>]]></pre>
+			</c:StaticCode>
+			
+			<p>You can go to <a href="http://localhost:8080/putnami-pwt-tutorial/?_escaped_fragment_=About">http://localhost:8080/putnami-pwt-tutorial/?_escaped_fragment_=About</a> to watch it</p>
+			<p>You'll find detailed informations about this plugin in the <a href="#!AjaxBotIndexing">plugin doc</a>.</p>
+			
+			
+			<w:Heading level="2" summary="docSummary">That's it !</w:Heading>
+
+			<p>You have created a very nice app using PWT.</p>
+			<p>There are a lot of other very nice components described in the <a href="#!Components">Components doc</a>.</p>
+			<p>Now you can build your own app using PWT and be incredibly productive with GWT !</p>
+			<p>We hope to see you soon.</p>
+			<p>@Putnami Team</p>
+
+			<ul class="pager">
+				<li class="previous"><a href="#!TutorialPart7">&larr; Part 7 : Add Google Analytics to your app</a></li>
+			</ul>
+		</w:HTMLPanel>
+	</w:HTMLPanel>
+</ui:UiBinder>

@@ -1,0 +1,339 @@
+<!--
+
+    This file is part of pwt.
+
+    pwt is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel title="PWT - Tutorial Part 1 - Init a PWT Project with Maven">
+		<w:Header ui:field="header">
+			<w:Heading level="1">Part 1 - Init a PWT Project with Maven</w:Heading>
+		</w:Header>
+		<w:HTMLPanel ui:field="content">
+		
+			<ul class="pager">
+				<li class="next"><a href="#!TutorialPart2">Part 2 : Build the welcome Page &rarr;</a></li>
+			</ul>
+			
+			<p>In this tutorial, we will init a <strong title="Putnami Web Toolkit">PWT</strong> project named <em>putnami-pwt-tutorial</em> from scratch.</p>
+			<w:Alert ><h4>Note :</h4><p>In this tutorial, we use Maven to build the project. If you use Gradle, you should see the Gradle version <a href="#!TutorialPart1Gradle">here</a></p></w:Alert>
+			
+			<w:Heading level="2" summary="docSummary">Step 1 : <em>Create the project folder</em></w:Heading>
+			<p>Just create the project root folder named "<em>putnami-pwt-tutorial</em>".</p>
+			<p><kbd>mkdir putnami-pwt-tutorial</kbd></p>
+	
+			<w:Heading level="2" summary="docSummary">Step 2 : <em>Create the build script</em></w:Heading>
+			<p>In the project folder, create the maven build file (<code>pom.xml</code>).</p>
+			<p>We will configure the maven build :</p>
+			<ol>
+				<li>Init the build script by adding our maven repository :
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>fr.putnami.pwt</groupId>
+	<artifactId>putnami-pwt-tutorial</artifactId>
+	<packaging>war</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>Putnami Web Toolkit tutorial web app</name>
+
+	<repositories>
+		<repository>
+			<id>putnami.org</id>
+			<url>http://repo.putnami.org/</url>
+		</repository>
+	</repositories>
+</project>]]></pre>
+					</c:StaticCode>
+				</li>
+				<li>Now we add the needed dependencies : :
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<properties>
+	<gwt.version>2.6.1</gwt.version>
+</properties>
+
+<dependencies>
+	<dependency>
+		<groupId>fr.putnami.pwt</groupId>
+		<artifactId>pwt</artifactId>
+		<version>@releaseVersion@</version>
+	</dependency>
+	<dependency>
+		<groupId>com.google.gwt</groupId>
+		<artifactId>gwt-user</artifactId>
+		<version>${gwt.version}</version>
+		<scope>provided</scope>
+	</dependency>
+	<dependency>
+		<groupId>com.google.gwt</groupId>
+		<artifactId>gwt-servlet</artifactId>
+		<version>${gwt.version}</version>
+	</dependency>
+</dependencies>]]></pre>
+				</c:StaticCode>
+				</li>
+				<li>And now we configure the needed plugins (<code>compiler-plugin</code>, <code>war-plugin</code>, <code>gwt-plugin</code>, <code>jetty-plugin</code>) :
+				<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<properties>
+	...
+	<jetty.plugin.version>9.2.0.v20140526</jetty.plugin.version>
+	<project.compiler.source>1.7</project.compiler.source>
+	<project.compiler.target>1.7</project.compiler.target>
+	<project.sourceEncoding>UTF-8</project.sourceEncoding>
+	<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+</properties>
+
+<build>
+	<outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
+	<pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>${project.compiler.source}</source>
+					<target>${project.compiler.target}</target>
+					<encoding>${project.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>exploded</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<webappDirectory>${webappDirectory}</webappDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<version>${gwt.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!--Your host Page if using dev mode -->
+					<runTarget>/index.html</runTarget>
+					<modules>
+						<module>fr.putnami.pwt.tutorial.Tutorial</module>
+					</modules>
+					<hostedWebapp>${webappDirectory}</hostedWebapp>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>${jetty.plugin.version}</version>
+				<configuration>
+					<webAppSourceDirectory>${webappDirectory}</webAppSourceDirectory>
+					<contextPath>/</contextPath>
+				</configuration>
+			</plugin>
+		</plugins>
+	</pluginManagement>
+	<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+		</plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-war-plugin</artifactId>
+		</plugin>
+		<plugin>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>gwt-maven-plugin</artifactId>
+		</plugin>
+		<plugin>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-maven-plugin</artifactId>
+		</plugin>
+	</plugins>
+</build>]]></pre>
+					</c:StaticCode>
+				</li>
+				<li>Finally we add a profile to use the superDev mode: :
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<profiles>
+	<profile>
+		<id>dev</id>
+		<build>
+			<plugins>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>gwt-maven-plugin</artifactId>
+					<executions>
+						<execution>
+							<phase>compile</phase>
+							<goals>
+								<goal>compile</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<modules>
+							<module>fr.putnami.pwt.tutorial.TutorialDev</module>
+						</modules>
+						<draftCompile>true</draftCompile>
+					</configuration>
+				</plugin>
+			</plugins>
+		</build>
+	</profile>
+</profiles>]]></pre>
+					</c:StaticCode>
+				</li>
+			</ol>
+			
+	
+			<w:Heading level="2" summary="docSummary">Step 3 : <em>Init the folders</em></w:Heading>
+			<p>Now we have a great build script, we need to init the folders.</p>
+			<ul>
+				<li>Create the "<em>src/main/java</em>" folder</li>
+				<li>Create the "<em>src/main/resources</em>" folder</li>
+				<li>Create the "<em>src/main/webapp</em>" folder</li>
+			</ul>
+			
+			<p>On unix systems, just type :</p>
+			<p><kbd>mkdir -p src/main/java src/main/resources src/main/webapp</kbd></p>
+			
+			<w:Heading level="2" summary="docSummary">Step 4 : <em>Create an Entry point and a Module Xml file</em></w:Heading>
+			<p>Now, as a GWT application, we need to create a Module xml file and an entry point.</p>
+			
+			<ol>
+				<li>First we create the <code>fr.putnami.pwt.tutorial.client.TutorialApp</code> java Class, implementing <code>EntryPoint</code> :
+					<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+package fr.putnami.pwt.tutorial.client;
+
+import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.ui.RootPanel;
+
+import fr.putnami.pwt.core.widget.client.OutputStaticText;
+
+public class TutorialApp implements EntryPoint {
+
+	@Override
+	public void onModuleLoad() {
+		RootPanel.get().add(new OutputStaticText("Hello Putnami"));
+	}
+}]]></pre>
+					</c:StaticCode>
+				</li>
+				<li>In the build script configuration, we've used the "<em>fr.putnami.pwt.tutorial.Tutorial</em>" module so we juste have to create it by creating the file <code>fr/putnami/pwt/tutorial/Tutorial.gwt.xml</code>
+				<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to="Tutorial">
+	<!-- PWT Module to extends in order to use PWT widgets-->
+	<inherits name="fr.putnami.pwt.core.widget.Widget"/>
+
+	<entry-point class="fr.putnami.pwt.tutorial.client.TutorialApp"/>
+
+	<!-- This linker will be the default one in later version of GWT -->
+	<add-linker name="xsiframe" />
+</module>]]></pre>
+					</c:StaticCode>
+				</li>
+				<li><p>We also create a GWT module file for the dev tasks : <code>fr/putnami/pwt/tutorial/TutorialDev.gwt.xml</code></p>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to="Tutorial">
+	<inherits name="fr.putnami.pwt.tutorial.Tutorial" />
+
+	<!-- We collapse all properties -->
+	<collapse-property name="user.agent" values="*" />
+	<collapse-property name="locale" values="*" />
+	<collapse-property name="canvasElementSupport" values="*" />
+	<collapse-property name="touchEventSupport" values="*" />
+	<collapse-property name="dragEventSupport" values="*" />
+	<collapse-property name="audioElementSupport" values="*" />
+	<collapse-property name="videoElementSupport" values="*" />
+	<collapse-property name="storageSupport" values="*" />
+
+	<set-configuration-property name="devModeRedirectEnabled" value="true" />
+</module>]]></pre>
+					</c:StaticCode>
+					<w:Alert ><h4>Note :</h4><p>In the dev module, we do not use the <code>collapse-all-properties</code> tag because it induce a bug in source mapping in browsers.</p></w:Alert>
+				</li>
+			</ol>
+	
+	
+			<w:Heading level="2" summary="docSummary">Step 5 : <em>Create the host HTML file</em></w:Heading>
+			<p>Create the <code>src/main/webapp/index.html</code> host file, containing :</p>
+			
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>PWT - Putnami Web Toolkit - Tutorial</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="text/javascript" src="Tutorial/Tutorial.nocache.js"></script>
+	</head>
+	<body>
+		<noscript>Your browser does not support JavaScript!</noscript>
+	</body>
+</html>>]]></pre>
+			</c:StaticCode>
+	
+			<w:Heading level="2" summary="docSummary">Step 6 : <em>Run the app</em></w:Heading>
+			<p>In order to run the app in draft compile mode, use</p>
+			<p><kbd>mvn -Pdev jetty:run</kbd></p>
+			<p>To run it in production mode, use</p>
+			<p><kbd>mvn jetty:run</kbd></p>
+			<p>That's it !</p>
+			
+<blockquote>
+<p>You can checkout the tag <code>Part1</code> on this repo to see the result:
+<code>git checkout Part1</code></p>
+</blockquote>
+	
+			<ul class="pager">
+				<li class="next"><a href="#!TutorialPart2">Part 2 : Build the welcome Page &rarr;</a></li>
+			</ul>
+		</w:HTMLPanel>
+	</w:HTMLPanel>
+</ui:UiBinder>

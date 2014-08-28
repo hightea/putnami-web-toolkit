@@ -16,10 +16,6 @@
  */
 package fr.putnami.pwt.doc.client;
 
-import static fr.putnami.pwt.doc.client.application.ApplicationConfig.ANALYTICS_TRACKER_ID;
-import static fr.putnami.pwt.doc.client.application.ApplicationConfig.COOKIE_COUNT_VISIT;
-import static fr.putnami.pwt.doc.client.application.ApplicationConfig.DOMAIN;
-
 import com.google.common.base.Strings;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -55,8 +51,20 @@ import fr.putnami.pwt.doc.client.page.sample.table.ContactsTablePlace;
 import fr.putnami.pwt.doc.client.page.server.ServerCallsPlace;
 import fr.putnami.pwt.doc.client.page.soon.ComingSoonPlace;
 import fr.putnami.pwt.doc.client.page.starting.GettingStartedPlace;
+import fr.putnami.pwt.doc.client.page.tutorial.TutorialPart1GradlePlace;
+import fr.putnami.pwt.doc.client.page.tutorial.TutorialPart1MavenPlace;
+import fr.putnami.pwt.doc.client.page.tutorial.TutorialPart2Place;
+import fr.putnami.pwt.doc.client.page.tutorial.TutorialPart3Place;
+import fr.putnami.pwt.doc.client.page.tutorial.TutorialPart4Place;
+import fr.putnami.pwt.doc.client.page.tutorial.TutorialPart5Place;
+import fr.putnami.pwt.doc.client.page.tutorial.TutorialPart6Place;
+import fr.putnami.pwt.doc.client.page.tutorial.TutorialPart7Place;
+import fr.putnami.pwt.doc.client.page.tutorial.TutorialPart8Place;
 import fr.putnami.pwt.doc.client.page.welcome.WelcomePlace;
 import fr.putnami.pwt.plugin.ga.client.GoogleAnalytics;
+import static fr.putnami.pwt.doc.client.application.ApplicationConfig.ANALYTICS_TRACKER_ID;
+import static fr.putnami.pwt.doc.client.application.ApplicationConfig.COOKIE_COUNT_VISIT;
+import static fr.putnami.pwt.doc.client.application.ApplicationConfig.DOMAIN;
 
 public class DocumentationApp implements EntryPoint {
 
@@ -118,6 +126,16 @@ public class DocumentationApp implements EntryPoint {
 		controller.registerActivity((ActivityFactory) GWT.create(AddressBookPlace.class));
 		controller.registerActivity((ActivityFactory) GWT.create(ComingSoonPlace.class));
 		controller.registerActivity((ActivityFactory) GWT.create(DownloadPlace.class));
+
+		controller.registerActivity((ActivityFactory) GWT.create(TutorialPart1GradlePlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(TutorialPart1MavenPlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(TutorialPart2Place.class));
+		controller.registerActivity((ActivityFactory) GWT.create(TutorialPart3Place.class));
+		controller.registerActivity((ActivityFactory) GWT.create(TutorialPart4Place.class));
+		controller.registerActivity((ActivityFactory) GWT.create(TutorialPart5Place.class));
+		controller.registerActivity((ActivityFactory) GWT.create(TutorialPart6Place.class));
+		controller.registerActivity((ActivityFactory) GWT.create(TutorialPart7Place.class));
+		controller.registerActivity((ActivityFactory) GWT.create(TutorialPart8Place.class));
 
 		controller.handleCurrentHistory();
 	}

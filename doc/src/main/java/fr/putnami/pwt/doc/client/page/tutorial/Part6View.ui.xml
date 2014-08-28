@@ -1,0 +1,101 @@
+<!--
+
+    This file is part of pwt.
+
+    pwt is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel title="PWT - Tutorial Part 6 : Build a theme">
+		<w:Header ui:field="header">
+			<w:Heading level="1">Part 6 : Build a theme</w:Heading>
+		</w:Header>
+		<w:HTMLPanel ui:field="content">
+		
+			<ul class="pager">
+				<li class="previous"><a href="#!TutorialPart5">&larr; Part 5 : Build a simple issues tracker</a></li>
+				<li class="next"><a href="#!TutorialPart7">Part 7 : Add Google Analytics to your app &rarr;</a></li>
+			</ul>
+			
+			<p>In this tutorial, we will will create a theme to customize our app look-and-feel after the previous part  <em><a href="#!TutorialPart5">Part 5 : Build a simple issues tracker</a></em></p>
+			
+			<w:Heading level="2" summary="docSummary">Step 1 : <em>Customize CSS</em></w:Heading>
+			<p>PWT is great and so is Bootstrap, but you may want to customize a little the app style.</p>
+			<p>To do it, we are going to create a <code>Theme</code>, by simply create a css file overriding Bootstrap classes and creating some custom ones.</p>
+			
+			<p>Create the <code>fr/putnami/pwt/tutorial/public/theme/tutorial/style/pwt-tutorial.css</code> file :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+/** Overriding Bootstrap style */
+a {
+	color: #EE6644;
+}
+
+.btn {
+	color: #EE6644;
+}
+
+/** Tutorial Css */
+.tutorialContent {
+	margin-bottom: 20px;
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>To configure the theme, add to the application entry point (here <code>TutorialApp</code>) :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	Theme theme = new Theme();
+	theme.addLink(new CssLink("theme/tutorial/style/pwt-tutorial.css", 0));
+	ThemeController.get().installTheme(theme);]]></pre>
+			</c:StaticCode>
+			
+			
+			<w:Heading level="2" summary="docSummary">Step 2 : <em>Customize Webfont Icon Set</em></w:Heading>
+			
+			<p>PWT provides a lot of icons (from <a href="http://fontello.com/">Fontello</a>).</p>
+			<p>You may want to provide your own webfont.
+			To do it, put the corresponding files in the module public repository (here we put the css file in the 
+			<code>fr/putnami/pwt/tutorial/public/theme/tutorial/style</code> folder and the font files in the <code>fr/putnami/pwt/tutorial/public/theme/tutorial/font</code> folder)</p>
+			
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	...
+	IconFont font = new IconFont("theme/tutorial/style/pwt-tutorial-font.css", "icon-");
+	//Eventually add aliases :
+	font.addAlias("add", "plus");
+	font.addAlias("view", "search");
+
+	theme.setIconFont(font);
+	ThemeController.get().installTheme(theme);
+	...]]></pre>
+			</c:StaticCode>
+			
+			<p>And that's it !</p>
+
+			<ul class="pager">
+				<li class="previous"><a href="#!TutorialPart5">&larr; Part 5 : Build a simple issues tracker</a></li>
+				<li class="next"><a href="#!TutorialPart7">Part 7 : Add Google Analytics to your app &rarr;</a></li>
+			</ul>
+		</w:HTMLPanel>
+	</w:HTMLPanel>
+</ui:UiBinder>
