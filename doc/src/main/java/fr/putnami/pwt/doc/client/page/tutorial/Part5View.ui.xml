@@ -1,0 +1,628 @@
+<!--
+
+    This file is part of pwt.
+
+    pwt is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel title="PWT - Tutorial Part 5 - Build a simple issues tracker">
+		<w:Header ui:field="header">
+			<w:Heading level="1">Part 5 - Build a simple issues tracker</w:Heading>
+		</w:Header>
+		<w:HTMLPanel ui:field="content">
+		
+			<ul class="pager">
+				<li class="previous"><a href="#!TutorialPart4">&larr; Part 4 : Build a contact form</a></li>
+				<li class="next"><a href="#!TutorialPart6">Part 6 : Build a theme &rarr;</a></li>
+			</ul>
+			
+			<p>In this tutorial, we will will create a simple issue tracker in our project with its contact form <em><a href="#!TutorialPart4">Part 4 : Build a contact form</a></em></p>
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 1 : <em>Create the place, register it and add the item in the NavBar</em></w:Heading>
+			
+			<p>We already know how to create a place so let's do it :</p>
+			
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+package fr.putnami.pwt.tutorial.client.issues;
+
+import com.google.gwt.core.client.GWT;
+
+import fr.putnami.pwt.core.mvp.client.MvpPlace;
+import fr.putnami.pwt.core.mvp.client.ViewProxy;
+
+public class IssuesPlace extends MvpPlace {
+
+	public static final IssuesPlace INSTANCE = new IssuesPlace();
+
+	public IssuesPlace() {
+		super((ViewProxy) GWT.create(IssuesView.class), null);
+	}
+
+	@Override
+	public MvpPlace getPlace(String token) {
+		return IssuesPlace.INSTANCE;
+	}
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>And the view :</p>
+			
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+package fr.putnami.pwt.tutorial.client.issues;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Widget;
+
+import fr.putnami.pwt.core.mvp.client.View;
+import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
+
+public class IssuesView extends Composite implements View<IssuesPlace> {
+
+	interface Binder extends UiBinderLocalized<Widget, IssuesView> {
+		Binder BINDER = GWT.create(Binder.class);
+	}
+
+	public IssuesView() {
+		initWidget(Binder.BINDER.createAndBindUi(this));
+	}
+
+	@Override
+	public void present(IssuesPlace place) {
+		// Do Nothing
+	}
+
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>We will create the ui.xml file in the next step.</p>
+			
+			<p>Now we register the place in the application entry point (here <code>TutorialApp</code>) :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	controller.registerActivity(IssuesPlace.INSTANCE)]]></pre>
+			</c:StaticCode>
+			
+			<p>And now, we add an entry in the NavBar in the <code>PageDecorator.ui.xml</code> :</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+	...
+	<w:Nav>
+		<w:NavLink label="Issues Tracker" link="#!Issues"/>
+		<w:NavLink label="Contact" link="#!Contact"/>
+	...]]></pre>
+			</c:StaticCode>
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 2 : <em>Define the model</em></w:Heading>
+			
+			<p>In the model, we will use somme validation annotaions such as <code>NotNull</code>.
+			To do it, we have to add the dependency to the javax.validation api.</p>
+			
+			
+			<p>For gradle :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+dependencies {
+	...
+	providedCompile 'javax.validation:validation-api:1.0.0.GA'
+}]]></pre>
+			</c:StaticCode>
+			
+			
+			<p>For maven :</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+	<dependency>
+		<groupId>javax.validation</groupId>
+		<artifactId>validation-api</artifactId>
+		<version>1.0.0.GA</version>
+		<scope>provided</scope>
+	</dependency>]]></pre>
+			</c:StaticCode>
+			
+			<p>We will use the following model :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+package fr.putnami.pwt.tutorial.shared.domain;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import com.google.common.collect.Lists;
+
+public class Issue implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
+	@NotNull
+	@Size(min = 5, max = 50)
+	private String name;
+	@NotNull
+	private Type type = Type.MINOR;
+	private List<String> labels = Lists.newArrayList();
+	@NotNull
+	@Size(min = 10, max = 500)
+	private String description;
+
+    ... // Getters and Setters
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>And the <code>Type</code> enum :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+package fr.putnami.pwt.tutorial.shared.domain;
+
+public enum Type {
+
+	OPTIONAL,
+	MINOR,
+	MAJOR,
+	CRITICAL,
+	BLOCKER;
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>And we create the associated constants :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+package fr.putnami.pwt.tutorial.shared.constants;
+
+import fr.putnami.pwt.core.editor.shared.constant.ValidationConstants;
+
+public interface IssueConstants extends ValidationConstants {
+
+	@DefaultStringValue("ID")
+	String id();
+
+	@DefaultStringValue("Name")
+	String name();
+
+	@DefaultStringValue("Type")
+	String type();
+
+	@DefaultStringValue("Labels")
+	String labels();
+
+	@DefaultStringValue("Description")
+	String description();
+
+	/* Enum */
+
+	@DefaultStringValue("Optional")
+	String typeOptionalEnum();
+
+	@DefaultStringValue("Minor")
+	String typeMinorEnum();
+
+	@DefaultStringValue("Major")
+	String typeMajorEnum();
+
+	@DefaultStringValue("Critical")
+	String typeCriticalEnum();
+
+	@DefaultStringValue("Blocker")
+	String typeBlockerEnum();
+
+	/* Placeholders */
+
+	@DefaultStringValue("Simple name of the issue...")
+	String namePlaceholder();
+
+	@DefaultStringValue("Describe the issue here...")
+	String descriptionPlaceholder();
+
+	/* Tooltips */
+
+	@DefaultStringValue("Enter the issue name")
+	String nameTooltip();
+
+	@DefaultStringValue("Select the issue type")
+	String typeTooltip();
+
+	@DefaultStringValue("Select the applying labels")
+	String labelsTooltip();
+
+	@DefaultStringValue("Enter the issue descriptionDescription")
+	String descriptionTooltip();
+
+	/* Help */
+
+	@DefaultStringValue("Enter a short name of the issue.")
+	String nameHelp();
+
+	@DefaultStringValue("Select labels to apply to this issue.")
+	String labelsHelp();
+
+}]]></pre>
+			</c:StaticCode>
+			
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 3 : <em>Display the list of issues</em></w:Heading>
+			
+			<p>We will now display a list of the issues. We have to create the view :</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client">
+
+	<w:HTMLPanel>
+		<w:Heading level="1" text="Issues Tracker" styleName="page-header"/>
+		<w:GridRow>
+			<w:GridColumn size="8" offset="4">
+				<w:TableEditor ui:field="issuesTable" readonly="true">
+					<w:Pagination pageSize="6" />
+					<w:TableColumn path="id" />
+					<w:TableColumn path="type">
+						<w:TableSort />
+					</w:TableColumn>
+					<w:TableColumn path="name">
+						<w:TableSort />
+					</w:TableColumn>
+					<w:TableColumn path="labels">
+						<w:OutputList >
+							<w:OutputText />
+						</w:OutputList>
+					</w:TableColumn>
+					<w:TableColumn >
+						<w:Button ui:field="viewBoutton" type="ICON" iconType="VIEW" />
+					</w:TableColumn>
+				</w:TableEditor>
+			</w:GridColumn>
+		</w:GridRow>
+	</w:HTMLPanel>
+</ui:UiBinder>]]></pre>
+			</c:StaticCode>
+			
+			<p>We have to initialize the <code>TableEditor</code> in the <code>IssuesView</code> :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	interface IssueModel extends Model<Issue> {
+		Model<Issue> MODEL = GWT.create(IssueModel.class);
+	}
+
+	@UiField
+	TableEditor<Issue> issuesTable;
+
+    public IssuesView() {
+        ...
+        MessageHelper helper = new MessageHelper((ConstantsWithLookup) GWT.create(IssueConstants.class));
+		issuesTable.setMessageHelper(helper);
+		issuesTable.initialize(IssueModel.MODEL);
+	}]]></pre>
+			</c:StaticCode>
+			
+			<p>To display some issues, we have to retrieve them from server.
+			We define the Service interface :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+package fr.putnami.pwt.tutorial.shared.service;
+
+import java.util.List;
+
+import fr.putnami.pwt.tutorial.shared.domain.Issue;
+
+public interface IssueService {
+
+	List<Issue> listIssues();
+
+	Issue createIssue(Issue issue);
+
+	Issue editIssue(Issue issue);
+
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>We create the implementation too :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+package fr.putnami.pwt.tutorial.server.service;
+
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
+import fr.putnami.pwt.tutorial.shared.domain.Issue;
+import fr.putnami.pwt.tutorial.shared.service.IssueService;
+
+public class IssueServiceImpl implements IssueService {
+
+	@Override
+	public List<Issue> listIssues() {
+		// Do your implementation
+		return Lists.newArrayList();
+	}
+
+	@Override
+	public Issue createIssue(Issue issue) {
+		// Do your implementation
+		return issue;
+	}
+
+	@Override
+	public Issue editIssue(Issue issue) {
+		// Do your implementation
+		return issue;
+	}
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>And we have to register the service to the <code>CommandService</code> in the <code>web.xml</code> :</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+	...
+	<init-param>
+		<param-name>services</param-name>
+		<param-value>fr.putnami.pwt.tutorial.server.service.ContactServiceImpl;fr.putnami.pwt.tutorial.server.service.IssueServiceImpl</param-value>
+	</init-param>
+	...]]></pre>
+			</c:StaticCode>
+			
+			<p>Now we can bind it on the client <code>IssuesView</code> :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	interface IssueRemoteService extends ServiceProxy<IssuesView, IssueService>, IssueService {
+		IssueRemoteService SERVICE = GWT.create(IssueRemoteService.class);
+	}
+
+	public IssuesView() {
+		...
+		IssueRemoteService.SERVICE.bindService(this);
+	}]]></pre>
+			</c:StaticCode>
+			
+			<p>Now, on the place presenting, we will retrieve the list of issues from the server :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	@Override
+	public void present(IssuesPlace place) {
+		IssueRemoteService.SERVICE.listIssues();
+	}
+
+	@AsyncHandler
+	public void onListIssues(List<Issue> issues) {
+		issuesTable.edit(issues);
+	}]]></pre>
+			</c:StaticCode>
+			
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 4 : <em>Create a search form</em></w:Heading>
+			<p>Now we will add a search form to search by name and / or label.</p>
+			
+			<p>We add two fields on the ui :</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+	...
+	<w:GridRow>
+		<w:GridColumn size="4">
+			<w:Form ui:field="searchEditor" layout="BASIC">
+				<w:FormGroup path="label"/>
+				<w:FormGroup path="name"/>
+				<w:FormResetButton text="Reset" />
+				<w:FormSubmitButton text="Search" />
+			</w:Form>
+		</w:GridColumn>
+		<w:GridColumn size="8">
+			<w:TableEditor ui:field="issuesTable" readonly="true">
+	...]]></pre>
+			</c:StaticCode>
+			
+			<p>And now we define the bean, the constants and init the search form with it in the <code>IssuesView</code> :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	public static class SearchBean {
+		public String label;
+		public String name;
+	}
+
+	interface SearchConstants extends ConstantsWithLookup {
+		@DefaultStringValue("Label")
+		String label();
+
+		@DefaultStringValue("Issue label...")
+		String labelPlaceholder();
+
+		@DefaultStringValue("Name")
+		String name();
+
+		@DefaultStringValue("Issue name...")
+		String namePlaceholder();
+	}
+
+	interface SearchModel extends Model<SearchBean> {
+		Model<SearchBean> MODEL = GWT.create(SearchModel.class);
+	}
+
+	@UiField
+	Form<SearchBean> searchEditor;
+
+	...
+
+	public IssuesView() {
+		...
+		MessageHelper searchHelper = new MessageHelper((ConstantsWithLookup) GWT.create(SearchConstants.class));
+		searchEditor.setMessageHelper(searchHelper);
+		searchEditor.initialize(SearchModel.MODEL);
+		searchEditor.edit(new SearchBean());
+	}]]></pre>
+			</c:StaticCode>
+			
+			<p>And now, we add the handlers to the view :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	@UiHandler("searchEditor")
+	public void onSearchSubmit(FlushSuccessEvent event) {
+		SearchBean search = (SearchBean) event.getValue();
+		IssueRemoteService.SERVICE.searchIssues(search.name, search.label);
+	}
+
+	@UiHandler("searchEditor")
+	public void onSearchReset(ResetDisplayEvent event) {
+		IssueRemoteService.SERVICE.listIssues();
+	}
+
+	@AsyncHandler
+	public void onSearchIssues(List<Issue> issues) {
+		issuesTable.edit(issues);
+	}]]></pre>
+			</c:StaticCode>
+			
+			<p>And That's it !!</p>
+			
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 5 : <em>Create a popup (to declare a new issue)</em></w:Heading>
+			<p>Now we will add a Popup to edit and create the issue.</p>
+			
+			<p>First in the <code>IssuesView.ui.xml</code> file we add :</p>
+			<ol>
+				<li>A <code>ui:with</code> tag :
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<ui:Binder ...>
+	<ui:with field="labelItems" type="java.util.List" />
+	 ...]]></pre>
+					</c:StaticCode>
+				</li>
+				<li>A Button to open the popup :
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+	<w:GridRow>
+		<w:GridColumn size="4">
+			<w:Button ui:field="addIssue" iconType="ADD" text="Declare an issue" type="LINK"/>
+			<w:Form ui:field="searchEditor" layout="BASIC">
+	...]]></pre>
+					</c:StaticCode>
+				</li>
+				<li>The modal :
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+	<w:Modal ui:field="modal" title="Edit an Issue" dismissable="true">
+		<w:Form ui:field="issueEditor" layout="HORIZONTAL">
+			<w:FormGroup path="id" readonly="true" />
+			<w:FormGroup path="name" />
+			<w:FormGroup path="type" />
+			<w:FormGroup path="labels" >
+				<w:InputMultiSelect items="{labelItems}" />
+				<w:OutputList >
+					<w:OutputText />
+				</w:OutputList>
+			</w:FormGroup>
+			<w:FormGroup path="description" >
+				<w:InputTextArea />
+			</w:FormGroup>
+			<w:Footer>
+				<w:FormResetButton text="Reset" />
+				<w:FormSubmitButton text="Save" />
+			</w:Footer>
+		</w:Form>
+	</w:Modal>]]></pre>
+					</c:StaticCode>
+				</li>
+			</ol>
+			<p>Then in the <code>IssuesView</code> class :</p>
+			<ol>	
+				<li><p>The <code>UiField</code>s used in the class :</p>
+					<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	@UiField(provided = true)
+	List<String> labelItems = Arrays.asList("Bug", "Enhancement", "Question", "Duplicate", "Invalid", "WontFix");
+
+	@UiField
+	Form<Issue> issueEditor;
+
+	@UiField
+	Modal modal;]]></pre>
+					</c:StaticCode>
+				</li>
+				<li>We initialize the <code>issueEditor</code> contained in the modal :
+					<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	public IssuesView() {
+		...
+		issueEditor.setMessageHelper(helper); // helper is already defined
+		issueEditor.initialize(IssueModel.MODEL);
+	}]]></pre>
+					</c:StaticCode>
+				</li>
+				<li>We add a method to open the popup on click on the "Declare an issue" button :
+					<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	@UiHandler("addIssue")
+	public void onAddIssueButton(ButtonEvent event) {
+		issueEditor.edit(new Issue());
+		modal.show();
+	}]]></pre>
+					</c:StaticCode>
+				</li>
+				<li>We add a method to open the popup on click on the "View issue" button :
+					<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	@UiHandler("viewBoutton")
+	public void onViewButton(ButtonEvent event) {
+		Issue issue = event.getValue();
+		issueEditor.edit(issue);
+		modal.show();
+	}]]></pre>
+					</c:StaticCode>
+				</li>
+				<li>We add a method to save the issue on flush the popup content :
+					<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	@UiHandler("issueEditor")
+	public void onSaveIssueEditor(FlushSuccessEvent event) {
+		modal.hide();
+		Issue issue = event.getValue();
+		IssueRemoteService.SERVICE.saveIssue(issue);
+	}]]></pre>
+					</c:StaticCode>
+				</li>
+				<li>We add a method to reload the issues on issue save :
+					<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	@AsyncHandler
+	public void onSaveIssue(Issue issue) {
+		searchEditor.edit(new SearchBean());
+		IssueRemoteService.SERVICE.listIssues();
+	}]]></pre>
+					</c:StaticCode>
+				</li>
+			</ol>
+			
+			<p>That's it !</p>
+
+			<ul class="pager">
+				<li class="previous"><a href="#!TutorialPart4">&larr; Part 4 : Build a contact form</a></li>
+				<li class="next"><a href="#!TutorialPart6">Part 6 : Build a theme &rarr;</a></li>
+			</ul>
+		</w:HTMLPanel>
+	</w:HTMLPanel>
+</ui:UiBinder>

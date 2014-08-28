@@ -1,0 +1,218 @@
+<!--
+
+    This file is part of pwt.
+
+    pwt is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel title="PWT - Tutorial Part 2 - Build the Welcome Page">
+		<w:Header ui:field="header">
+			<w:Heading level="1">Part 2 - Build the Welcome Page</w:Heading>
+		</w:Header>
+		<w:HTMLPanel ui:field="content">
+		
+			<ul class="pager">
+				<li class="previous"><a href="#!TutorialPart1Gradle">&larr; Part 1 : Init a PWT project</a></li>
+				<li class="next"><a href="#!TutorialPart3">Part 3 : Build more pages &rarr;</a></li>
+			</ul>
+		
+			<p>In this tutorial, we will will add a static welcome page to the project inited in <em><a href="#!TutorialPart1Gradle">Part 1 : Init a PWT project</a></em></p>
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 1 : <em>Ensure the Module XML configuration</em></w:Heading>
+			<p>In order to use the <strong title="Putnami Web Toolkit">PWT</strong>'s widgets and MVP features, the module XML file must containe the following :</p>
+			
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<!-- PWT Module to extends in order to use PWT widgets-->
+<inherits name="fr.putnami.pwt.core.widget.Widget"/>
+<!-- PWT Module to extends in order to use PWT MVP features-->
+<inherits name="fr.putnami.pwt.core.mvp.Mvp"/>]]></pre>
+			</c:StaticCode>
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 2 : <em>Create the Place</em></w:Heading>
+			
+			<p>To create a place, you have to extends <code>MvpPlace</code>. In the Constructor, we have to provide an associated viewProxy (used to split the client app code, defferring the view content loading).
+			So we need an associated View. The view has to implements at least <code>IsWidget</code>.</p>
+			
+			<p>We create a very simple view for now :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+package fr.putnami.pwt.tutorial.client.welcome;
+
+import com.google.gwt.user.client.ui.Composite;
+
+import fr.putnami.pwt.core.mvp.client.View;
+import fr.putnami.pwt.core.widget.client.OutputStaticText;
+
+public class WelcomeView extends Composite implements View<WelcomePlace> {
+
+	public WelcomeView() {
+		initWidget(new OutputStaticText("Welcome Putnami"));
+	}
+
+	@Override
+	public void present(WelcomePlace place) {
+		// Do Nothing
+	}
+
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>Then the place :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+package fr.putnami.pwt.tutorial.client.welcome;
+
+import com.google.gwt.core.client.GWT;
+
+import fr.putnami.pwt.core.mvp.client.MvpPlace;
+import fr.putnami.pwt.core.mvp.client.ViewProxy;
+
+public class WelcomePlace extends MvpPlace {
+
+	public static final WelcomePlace INSTANCE = new WelcomePlace();
+
+	public WelcomePlace() {
+		super((ViewProxy) GWT.create(WelcomeView.class), null);
+	}
+
+	@Override
+	public MvpPlace getPlace(String token) {
+		return WelcomePlace.INSTANCE;
+	}
+}]]></pre>
+			</c:StaticCode>
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 3 : <em>Declare the place</em></w:Heading>
+			<p>We have some configurations to do to the application.</p>
+			<p>First of all, we have to define the display associated with the <code>ActivityManager</code> and add it to the <code>RootPanel</code>.
+			Then we have to Register the created place and set it as default.</p>
+			
+			<p>So the application entry point <code>TutorialApp</code> becomes: </p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+package fr.putnami.pwt.tutorial.client;
+
+import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.ui.RootPanel;
+
+import fr.putnami.pwt.core.mvp.client.MvpController;
+import fr.putnami.pwt.core.widget.client.OneWidgetPanel;
+
+import fr.putnami.pwt.tutorial.client.welcome.WelcomePlace;
+
+public class TutorialApp implements EntryPoint {
+
+    @Override
+    public void onModuleLoad() {
+        OneWidgetPanel display = new OneWidgetPanel();
+        RootPanel.get().add(display);
+
+        MvpController controller = MvpController.get();
+        controller.setDisplay(display);
+
+        controller.setDefaultPlace(WelcomePlace.INSTANCE);
+        controller.registerActivity(WelcomePlace.INSTANCE);
+
+        // Handles Current token to navigate to the correct place
+        controller.handleCurrentHistory();
+    }
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>You can now run the app with <kbd>gradle jettyDraftWar</kbd> or <kbd>mvn -Pdev jetty:run</kbd>.</p>
+			<p>You should see the <code>WelcomeView</code> content (displays "Welcome Putnami").</p>
+			
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 4 : <em>Build a nice layout with UiBinding</em></w:Heading>
+			<p>We've created the view but it does'nt look very pretty !</p>
+			<p>Let's pimp my View!</p>
+			
+			<p>Modify the view :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+package fr.putnami.pwt.tutorial.client.welcome;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Widget;
+
+import fr.putnami.pwt.core.mvp.client.View;
+import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
+
+public class WelcomeView extends Composite implements View<WelcomePlace> {
+
+	interface Binder extends UiBinderLocalized<Widget, WelcomeView> {
+		Binder BINDER = GWT.create(Binder.class);
+	}
+
+	public WelcomeView() {
+		initWidget(Binder.BINDER.createAndBindUi(this));
+	}
+
+	@Override
+	public void present(WelcomePlace place) {
+		// Do Nothing
+	}
+
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>And now, we use the <code>fr/putnami/pwt/tutorial/client/welcome/WelcomeView.ui.xml</code> file to define the view :</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client">
+
+	<w:HTMLPanel styleName="container">
+		<w:Heading level="1" text="Putnami Web Toolkit tutorial" subtext="Discover PWT" styleName="page-header"/>
+		<w:Container tag="div" styleName="jumbotron text-center">
+			<w:GridRow>
+				<w:GridColumn size="10" offset="1">
+					<p>Welcome to this PWT Tutorial</p>
+				</w:GridColumn>
+			</w:GridRow>
+		</w:Container>
+	</w:HTMLPanel>
+</ui:UiBinder>]]></pre>
+			</c:StaticCode>
+			
+			<w:Alert><h4>Note : </h4><p>As you can see, we also use the Bootstrap's css classes to stylize some components.</p></w:Alert>
+			
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 5 : <em>Test the app</em></w:Heading>
+			<p>In order to run the app in draft compile mode, use</p>
+			<p><kbd>gradle jettyDraftWar</kbd> or <kbd>mvn -Pdev jetty:run</kbd></p>
+			<p>To run it in production mode, use</p>
+			<p><kbd>gradle jettyRunWar</kbd> or <kbd>mvn jetty:run</kbd></p>
+			<p>That's it !</p>
+
+			<ul class="pager">
+				<li class="previous"><a href="#!TutorialPart1Gradle">&larr; Part 1 : Init a PWT project</a></li>
+				<li class="next"><a href="#!TutorialPart3">Part 3 : Build more pages &rarr;</a></li>
+			</ul>
+		</w:HTMLPanel>
+	</w:HTMLPanel>
+</ui:UiBinder>

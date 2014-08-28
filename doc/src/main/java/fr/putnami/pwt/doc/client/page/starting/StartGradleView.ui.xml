@@ -40,7 +40,7 @@
 			We've submited the issue and we wait for the next release. 
 			Waiting we host a patch on our repository : *0.4-PWT_patched*.</p>
 		
-		<p>On this page only explains the bases of the plugin. You can refer to the <a href="http://steffenschaefer.github.io/gwt-gradle-plugin/" target="_BLANK">official doc</a> to go furher.</p>
+		<p>This page only explains the bases of the plugin. You can refer to the <a href="http://steffenschaefer.github.io/gwt-gradle-plugin/" target="_BLANK">official doc</a> to go furher.</p>
 		
 		<w:Heading level="3" navSpy="{navSpy}">Init the build.gradle</w:Heading>
 		<p>You can download have a full working <a href="https://github.com/Putnami/putnami-pwt/blob/master/samples/web-project/build.gradle" target="_BLANK">build.gradle</a></p>

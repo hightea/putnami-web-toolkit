@@ -54,6 +54,15 @@ import fr.putnami.pwt.doc.client.page.sample.table.ContactsTablePlace;
 import fr.putnami.pwt.doc.client.page.server.ServerCallsPlace;
 import fr.putnami.pwt.doc.client.page.soon.ComingSoonPlace;
 import fr.putnami.pwt.doc.client.page.starting.GettingStartedPlace;
+import fr.putnami.pwt.doc.client.page.tutorial.TutorialPart1GradlePlace;
+import fr.putnami.pwt.doc.client.page.tutorial.TutorialPart1MavenPlace;
+import fr.putnami.pwt.doc.client.page.tutorial.TutorialPart2Place;
+import fr.putnami.pwt.doc.client.page.tutorial.TutorialPart3Place;
+import fr.putnami.pwt.doc.client.page.tutorial.TutorialPart4Place;
+import fr.putnami.pwt.doc.client.page.tutorial.TutorialPart5Place;
+import fr.putnami.pwt.doc.client.page.tutorial.TutorialPart6Place;
+import fr.putnami.pwt.doc.client.page.tutorial.TutorialPart7Place;
+import fr.putnami.pwt.doc.client.page.tutorial.TutorialPart8Place;
 import fr.putnami.pwt.doc.client.page.welcome.WelcomePlace;
 import fr.putnami.pwt.plugin.ga.client.GoogleAnalytics;
 
@@ -117,6 +126,16 @@ public class DocumentationApp implements EntryPoint {
 		controller.registerActivity(AddressBookPlace.INSTANCE);
 		controller.registerActivity(ComingSoonPlace.INSTANCE);
 		controller.registerActivity(DownloadPlace.INSTANCE);
+
+		controller.registerActivity(TutorialPart1GradlePlace.INSTANCE);
+		controller.registerActivity(TutorialPart1MavenPlace.INSTANCE);
+		controller.registerActivity(TutorialPart2Place.INSTANCE);
+		controller.registerActivity(TutorialPart3Place.INSTANCE);
+		controller.registerActivity(TutorialPart4Place.INSTANCE);
+		controller.registerActivity(TutorialPart5Place.INSTANCE);
+		controller.registerActivity(TutorialPart6Place.INSTANCE);
+		controller.registerActivity(TutorialPart7Place.INSTANCE);
+		controller.registerActivity(TutorialPart8Place.INSTANCE);
 
 		controller.registerAlias("Tables", ComponentsPlace.INSTANCE);
 		controller.registerAlias("Forms", ComponentsPlace.INSTANCE);

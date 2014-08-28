@@ -1,0 +1,430 @@
+<!--
+
+    This file is part of pwt.
+
+    pwt is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel title="PWT - Tutorial Part 4 - Build a contact form">
+		<w:Header ui:field="header">
+			<w:Heading level="1">Part 4 - Build a contact form</w:Heading>
+		</w:Header>
+		<w:HTMLPanel ui:field="content">
+		
+			<ul class="pager">
+				<li class="previous"><a href="#!TutorialPart3">&larr; Part 3 : Build more pages</a></li>
+				<li class="next"><a href="#!TutorialPart5">Part 5 : Build a simple issues tracker &rarr;</a></li>
+			</ul>
+		
+			<p>In this tutorial, we will will add a contact form to the project inited in <em><a href="#!TutorialPart3">Part 3 : Build more pages</a></em></p>
+		
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 1 : <em>Create the form</em></w:Heading>
+			
+			<p>In the Part 3, we've created the <code>ContactView</code>, but you may have noticed that it was empty...</p>
+			<p>Let's create the form!</p>
+			<p>The contact form will have the following fields:</p>
+			<ul>
+				<li>Name (a String)</li>
+				<li>Email (an email String)</li>
+				<li>Birthday (a Date)</li>
+				<li>Subject (a String among propositions)</li>
+				<li>Note of this tutorial (a number between 0 and 10)</li>
+				<li>Message (a String)</li>
+			</ul>
+			<p>So add the following the <code>ContactView.ui.xml</code></p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client">
+
+	<ui:with field="noteItems" type="java.util.List" />
+	<ui:with field="subjectItems" type="java.util.List" />
+
+	<w:HTMLPanel>
+		<w:Heading level="1" text="Contact" styleName="page-header"/>
+		<w:Form ui:field="contactEditor" layout="HORIZONTAL">
+			<fieldset>
+				<legend>You</legend>
+				<w:InputText path="name" placeholder="Name..."/>
+				<w:InputEmail path="email" placeholder="Email..."/>
+				<w:InputDate path="birthday" />
+			</fieldset>
+			<fieldset>
+				<legend>Your interest in this tutorial</legend>
+				<w:InputSlider path="tutorialNote" items="{noteItems}" />
+			</fieldset>
+			<fieldset>
+				<legend>Your message</legend>
+				<w:InputSelect path="subject" items="{subjectItems}" />
+				<w:InputTextArea  path="message" />
+			</fieldset>
+			<w:Footer>
+				<w:FormResetButton text="Reset" size="LARGE" />
+				<w:FormSubmitButton text="Submit" size="LARGE" />
+			</w:Footer>
+		</w:Form>
+	</w:HTMLPanel>
+</ui:UiBinder>]]></pre>
+			</c:StaticCode>
+			
+			<p>And we add to the <code>ContactView</code> class the following :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	@UiField(provided = true)
+	List<Integer> noteItems = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+	@UiField(provided = true)
+	List<String> subjectItems = Arrays.asList("About this tutorial", "About PWT", "About Putnami Team", "Other");]]></pre>
+			</c:StaticCode>
+			
+			<p>If you run the app you will see the form.</p>
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 2 : <em>Use DataBinding framework</em></w:Heading>
+			
+			<p>The DataBinding framework is a great feature of PWT. It allows you to reduce the needed java code to do great apps.</p>
+			
+			<p>We will bind the following model :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+package fr.putnami.pwt.tutorial.shared.domain;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class Contact implements Serializable{
+
+    private static final long serialVersionUID = 1L;
+
+	private String name;
+	private String email;
+	private Date birthday;
+
+	private Integer tutorialNote = Integer.valueOf(5); // Default Value
+
+	private String subject = "About PWT"; // Default Value
+	private String message;
+
+    ... //Getters and Setters
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>Don't forget to add the <code>shared</code> path (and the <code>client</code> which was implicit) to the GWT source in the Module xml file :</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+	<source path="client" />
+	<source path="shared" />]]></pre>
+			</c:StaticCode>
+			
+			<p>Now we have to create a model form the <code>Contact</code> bean and initialize the <code>Form</code> with it.
+			To do it, we just add to the <code>ContactView</code> class, the following :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	interface ContactModel extends Model<Contact> {
+		Model<Contact> MODEL = GWT.create(ContactModel.class);
+	}
+
+	@UiField
+	Form<Contact> contactEditor;
+
+    ...
+
+    public ContactView() {
+        ...
+        contactEditor.initialize(ContactModel.MODEL);
+        contactEditor.edit(new Contact()); // Init the form with all the default values
+    }]]></pre>
+			</c:StaticCode>
+			
+			<p>Don't forget to add the dependency to the <code>Model</code> module in the Module xml file (here the <code>fr/putnami/pwt/tutorial/Tutorial.gwt.xml</code>) :</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+	<!-- PWT Module to extends in order to use PWT Model features-->
+	<inherits name="fr.putnami.pwt.core.model.Model"/>]]></pre>
+			</c:StaticCode>
+			
+			<p>If you run the app, you can now use the <code>Reset</code> and <code>Submit</code> buttons, wich are enabled when the edited bean change (ie when you change a field value).</p>
+			
+			<w:Alert><h4>Note : </h4><p><em>The <code>Submit</code> button does nothing for now.</em></p></w:Alert>
+			
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 3 : <em>Go further with DataBinding framework</em></w:Heading>
+			
+			<p>The DataBinding framework can do a lot more for you.</p>
+			<p>In the <code>ContactView.ui.xml</code> we've add only <code>Input...</code> widgets. 
+			But PWT provides a <code>FormGroup</code> component which can auto create a <code>Label</code>, <code>EditorInput</code> or <code>EditorOutput</code>, <code>Tooltip</code>, <code>Help</code>, and <code>ErrorGroup</code> for a property. 
+			If you want a specific Input, you can provide it.</p>
+			
+			<p>The <code>ContactView.ui.xml</code> becomes :</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+	...
+	<w:Form ui:field="contactEditor" layout="HORIZONTAL">
+		<fieldset>
+			<legend>You</legend>
+			<w:FormGroup path="name" />
+			<w:FormGroup path="email" >
+				<w:InputEmail />
+			</w:FormGroup>
+			<w:FormGroup path="birthday" />
+		</fieldset>
+		<fieldset>
+			<legend>Your interest in this tutorial</legend>
+			<w:FormGroup path="tutorialNote">
+				<w:InputSlider items="{noteItems}" />
+			</w:FormGroup>
+		</fieldset>
+		<fieldset>
+			<legend>your message</legend>
+			<w:FormGroup path="subject">
+				<w:InputSelect items="{subjectItems}" />
+			</w:FormGroup>
+			<w:FormGroup path="message">
+				<w:InputTextArea />
+			</w:FormGroup>
+		</fieldset>
+		<w:Footer>
+			<w:FormResetButton text="Reset" size="LARGE" />
+			<w:FormSubmitButton text="Submit" size="LARGE" />
+		</w:Footer>
+	</w:Form>
+    ...]]></pre>
+			</c:StaticCode>
+			
+			<p>If you run the app now, you'll see the Contact form with a better layout, but without any labels. Indeed we have to provide them.</p>
+			
+			<p>First, we create a Constant class to define them :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+package fr.putnami.pwt.tutorial.shared.constants;
+
+import fr.putnami.pwt.core.editor.shared.constant.ValidationConstants;
+
+public interface ContactConstants extends ValidationConstants {
+
+	@DefaultStringValue("Name")
+	String name();
+
+	@DefaultStringValue("Email")
+	String email();
+
+	@DefaultStringValue("Birthday")
+	String birthday();
+
+	@DefaultStringValue("Tutorial note")
+	String tutorialnote();
+
+	@DefaultStringValue("Subject")
+	String subject();
+
+	@DefaultStringValue("Message")
+	String message();
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>And now we provide thoses constants to the <code>Form</code> in the <code>ContactView</code> before it initialization :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	public ContactView() {
+		...
+
+		MessageHelper messageHelper = new MessageHelper((ConstantsWithLookup) GWT.create(ContactConstants.class));
+		contactEditor.setMessageHelper(messageHelper);
+
+		contactEditor.initialize(ContactModel.MODEL);
+		...
+	}]]></pre>
+			</c:StaticCode>
+			
+			<p>If you run the app now, you'll see that the Labels are automatically inserted.</p>
+			
+			<p>But we can also generate some placeholder, tooltips and help !
+			Just complement the constants with the following :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	...
+	/* Placeholders */
+
+	@DefaultStringValue("Your name...")
+	String namePlaceholder();
+
+	@DefaultStringValue("Your email...")
+	String emailPlaceholder();
+
+	@DefaultStringValue("Your birthday...")
+	String birthdayPlaceholder();
+
+	@DefaultStringValue("Your message...")
+	String messagePlaceholder();
+
+	/* Tooltips */
+
+	@DefaultStringValue("Enter your name")
+	String nameTooltip();
+
+	@DefaultStringValue("Enter your email")
+	String emailTooltip();
+
+	@DefaultStringValue("Enter your birthday")
+	String birthdayTooltip();
+
+	@DefaultStringValue("Select a note")
+	String tutorialnoteTooltip();
+
+	@DefaultStringValue("Select a subject")
+	String subjectTooltip();
+
+	@DefaultStringValue("Enter your message")
+	String messageTooltip();
+
+	/* Help */
+
+	@DefaultStringValue("Enter your full name (Lastname and Firstname)")
+	String nameHelp();
+
+	@DefaultStringValue("Enter your email so we can contact you back")
+	String emailHelp();
+
+	@DefaultStringValue("Enter your birthday, maybe you'll have some present")
+	String birthdayHelp();
+
+	@DefaultStringValue("Select a note for this tutorial")
+	String tutorialnoteHelp();
+
+	@DefaultStringValue("Select a subject for your message")
+	String subjectHelp();
+
+	@DefaultStringValue("Enter your message, we will read it!")
+	String messageHelp();]]></pre>
+			</c:StaticCode>
+			
+			<p>If you run the app now, you'll see a complete contact form with inputs, labels, tooltips on inputs, and a help for each input!</p>
+			
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 4 : <em>Use ServerCalls framework</em></w:Heading>
+			
+			<p>Now we will send data to the server. To do that we will use the <code>FlushSuccessEvent</code> fired by the <code>FormSubmitButton</code> to send data to the server.</p>
+			<p>First of all, we add the dependency to the <code>Service</code> module in the Module xml file (here the <code>fr/putnami/pwt/tutorial/Tutorial.gwt.xml</code>) :</p>			
+
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+	<!-- PWT Module to extends in order to use PWT Service features-->
+	<inherits name="fr.putnami.pwt.core.service.Service"/>]]></pre>
+			</c:StaticCode>
+			
+			<p>Then, we define the service :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+package fr.putnami.pwt.tutorial.shared.service;
+
+import fr.putnami.pwt.tutorial.shared.domain.Contact;
+
+public interface ContactService {
+
+	void sendContact(Contact contact);
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>and the implementation :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+package fr.putnami.pwt.tutorial.server.service;
+
+import fr.putnami.pwt.tutorial.shared.domain.Contact;
+import fr.putnami.pwt.tutorial.shared.service.ContactService;
+
+public class ContactServiceImpl implements ContactService {
+
+	@Override
+	public void sendContact(Contact contact) {
+		// Do Something
+		System.out.println("Contact received : " + contact.toString());
+	}
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>Now, we register the service in the <code>CommandService</code>. 
+			To do it, we create a <code>BasicCommandService</code> Servlet via the <code>web.xml</code> file, and configure it :</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app
+	PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+	"http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+	<!-- Command service servlet -->
+	<servlet>
+		<servlet-name>commandService</servlet-name>
+		<servlet-class>fr.putnami.pwt.core.service.server.service.BasicCommandService</servlet-class>
+		<init-param>
+			<param-name>services</param-name>
+			<param-value>fr.putnami.pwt.tutorial.server.service.ContactServiceImpl</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>commandService</servlet-name>
+		<url-pattern>commandService</url-pattern>
+	</servlet-mapping>
+</web-app>]]></pre>
+			</c:StaticCode>
+			
+			
+			<p>In the <code>ContactView</code> we have to declare the service proxy and bind it to the view :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	interface ContactRemoteService extends ServiceProxy<ContactView, ContactService>, ContactService {
+		ContactRemoteService SERVICE = GWT.create(ContactRemoteService.class);
+	}
+
+    public ContactView() {
+        ...
+        ContactRemoteService.SERVICE.bindService(this);
+    }]]></pre>
+			</c:StaticCode>
+			
+			<p>Finally we call the service and reset the form when the result returns from server in <code>ContactView</code>:</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	@UiHandler("contactEditor")
+	public void onContactSubmit(FlushSuccessEvent event) {
+		ContactRemoteService.SERVICE.sendContact((Contact) event.getValue());
+	}
+
+	@AsyncHandler
+	public void onSendContact(Void result) {
+		contactEditor.edit(new Contact());
+	}]]></pre>
+			</c:StaticCode>
+			
+			<p>Now run the app and submit some contacts. You'll see on the server console the received Contacts.</p>
+
+			<ul class="pager">
+				<li class="previous"><a href="#!TutorialPart3">&larr; Part 3 : Build more pages</a></li>
+				<li class="next"><a href="#!TutorialPart5">Part 5 : Build a simple issues tracker &rarr;</a></li>
+			</ul>
+		</w:HTMLPanel>
+	</w:HTMLPanel>
+</ui:UiBinder>

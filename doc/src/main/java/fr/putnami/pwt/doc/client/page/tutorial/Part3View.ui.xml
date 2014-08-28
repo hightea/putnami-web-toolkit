@@ -1,0 +1,403 @@
+<!--
+
+    This file is part of pwt.
+
+    pwt is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel title="PWT - Tutorial Part 3 - Build more pages">
+		<w:Header ui:field="header">
+			<w:Heading level="1">Part 3 - Build more pages</w:Heading>
+		</w:Header>
+		<w:HTMLPanel ui:field="content">
+			
+			<ul class="pager">
+				<li class="previous"><a href="#!TutorialPart2">&larr; Part 2 : Build the Welcome Page</a></li>
+				<li class="next"><a href="#!TutorialPart4">Part 4 : Build a contact form &rarr;</a></li>
+			</ul>
+			
+			<p>In this tutorial, we will will add some static content to the project inited in  <em><a href="#!TutorialPart2">Part 2 : Build the Welcome Page</a></em></p>
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 1 : <em>Add new places and views</em></w:Heading>
+			<p>In the <em>Part 2</em> we've seen how to add some place and views, so just add those two views / Places :</p>
+			
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+package fr.putnami.pwt.tutorial.client.contact;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Widget;
+
+import fr.putnami.pwt.core.mvp.client.View;
+import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
+
+public class ContactView extends Composite implements View<ContactPlace> {
+
+	interface Binder extends UiBinderLocalized<Widget, ContactView> {
+		Binder BINDER = GWT.create(Binder.class);
+	}
+
+	public ContactView() {
+		initWidget(Binder.BINDER.createAndBindUi(this));
+	}
+
+	@Override
+	public void present(ContactPlace place) {
+		// Do Nothing
+	}
+
+}]]></pre>
+			</c:StaticCode>
+			
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client">
+
+	<w:HTMLPanel>
+		<w:Heading level="1" text="Contact" styleName="page-header"/>
+	</w:HTMLPanel>
+</ui:UiBinder>]]></pre>
+			</c:StaticCode>
+			
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+package fr.putnami.pwt.tutorial.client.about;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Widget;
+
+import fr.putnami.pwt.core.mvp.client.View;
+import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
+
+public class AboutView extends Composite implements View<AboutPlace> {
+
+	interface Binder extends UiBinderLocalized<Widget, AboutView> {
+		Binder BINDER = GWT.create(Binder.class);
+	}
+
+	public AboutView() {
+		initWidget(Binder.BINDER.createAndBindUi(this));
+	}
+
+	@Override
+	public void present(AboutPlace place) {
+		// Do Nothing
+	}
+
+}]]></pre>
+			</c:StaticCode>
+			
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client">
+
+	<w:HTMLPanel>
+		<w:Heading level="1" text="About" styleName="page-header"/>
+		<w:Heading level="2" text="About this application"/>
+		<w:GridRow>
+			<w:GridColumn size="10" offset="1">
+				<p>This application is the result of a step-by-step tutorial demonstrating the <strong title="Putnami Web Toolkit">PWT</strong> features.</p>
+				<p>For more informations go to the <a href="https://github.com/putnami/putnami-pwt-tutorial" target="_blank"><i class="icon icon-github-squared" />repo hosting this tutorial</a></p>
+			</w:GridColumn>
+		</w:GridRow>
+
+		<w:Heading level="2" text="About PWT"/>
+		<w:GridRow>
+			<w:GridColumn size="10" offset="1">
+				<p>If you want to know more about the <strong title="Putnami Web Toolkit">PWT</strong> framework, visit the <a href="http://pwt.putnami.org" target="_blank">project's page</a>.</p>
+			</w:GridColumn>
+		</w:GridRow>
+	</w:HTMLPanel>
+</ui:UiBinder>]]></pre>
+			</c:StaticCode>
+			
+			<p>Then the places :</p>
+			
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+package fr.putnami.pwt.tutorial.client.contact;
+
+import com.google.gwt.core.client.GWT;
+
+import fr.putnami.pwt.core.mvp.client.MvpPlace;
+import fr.putnami.pwt.core.mvp.client.ViewProxy;
+
+public class ContactPlace extends MvpPlace {
+
+	public static final ContactPlace INSTANCE = new ContactPlace();
+
+	public ContactPlace() {
+		super((ViewProxy) GWT.create(ContactView.class), null);
+	}
+
+	@Override
+	public MvpPlace getPlace(String token) {
+		return ContactPlace.INSTANCE;
+	}
+}]]></pre>
+			</c:StaticCode>
+			
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+package fr.putnami.pwt.tutorial.client.about;
+
+import com.google.gwt.core.client.GWT;
+
+import fr.putnami.pwt.core.mvp.client.MvpPlace;
+import fr.putnami.pwt.core.mvp.client.ViewProxy;
+
+public class AboutPlace extends MvpPlace {
+
+	public static final AboutPlace INSTANCE = new AboutPlace();
+
+	public AboutPlace() {
+		super((ViewProxy) GWT.create(AboutView.class), null);
+	}
+
+	@Override
+	public MvpPlace getPlace(String token) {
+		return AboutPlace.INSTANCE;
+	}
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>Finally, we declare the places to the <code>MvpController</code> in the entry point :</p>
+			
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+    controller.registerActivity(AboutPlace.INSTANCE);
+	controller.registerActivity(ContactPlace.INSTANCE);]]></pre>
+			</c:StaticCode>
+			
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 2 : <em>Navigate between pages</em></w:Heading>
+			
+			<p>To navigate between pages, you have to use the <code>MvpController.goTo(Place)</code> method.</p>
+			<p>So add a button to the "Welcome" view to navigate to the "About" view :</p>
+
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+    <w:Button ui:field="aboutButton" text="About" iconType="HELP" />]]></pre>
+			</c:StaticCode>
+			
+			<p>and in the java class :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	@UiHandler("aboutButton")
+	public void onAboutButton(ButtonEvent event) {
+		MvpController.get().goTo(AboutPlace.INSTANCE);
+	}]]></pre>
+			</c:StaticCode>
+			
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 3 : <em>Create a page decorator</em></w:Heading>
+			
+			<p>At this point, when you navigate between pages, all the content of the page is replaced by the new content.</p>
+			<p>You may want to keep some static content beetween pages. To do so, we will create a decorator (implementing <code>AcceptOneWidget</code>) 
+			and set it as display associated with the <code>ActivityManager</code>.</p>
+			
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+package fr.putnami.pwt.tutorial.client.application;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.Widget;
+
+import fr.putnami.pwt.core.widget.client.OneWidgetPanel;
+import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
+
+public class PageDecorator extends Composite implements AcceptsOneWidget {
+
+	interface Binder extends UiBinderLocalized<Widget, PageDecorator> {
+		Binder BINDER = GWT.create(Binder.class);
+	}
+
+	@UiField
+	OneWidgetPanel viewContainer;
+
+	public PageDecorator() {
+		initWidget(Binder.BINDER.createAndBindUi(this));
+	}
+
+	@Override
+	public void setWidget(IsWidget w) {
+		if (w == null) {
+			return;
+		}
+		viewContainer.setWidget(w);
+	}
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>And the associated ui.xml file :</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client" >
+
+	<ui:style>
+		.tutorialHeader {
+			height : 65px;
+			font-size: 30px;
+			background-color:#EEE;
+		}
+		.tutorialFooter {
+			text-align : center;
+			background-color:#EEE;
+			height: 80px;
+			padding-top: 35px;
+		}
+	</ui:style>
+	<w:HTMLPanel>
+		<w:Header styleName="{style.tutorialHeader}">
+			<div class="container">
+				<a href="#!Welcome"><img src="assets/img/putnami.png" alt="Putnami Logo" /> PWT <small class="hidden-xs">Putnami Web Toolkit Tutorial App</small></a>
+			</div>
+		</w:Header>
+		<w:OneWidgetPanel tag="div" ui:field="viewContainer"  styleName="container tutorialContent" />
+
+		<w:Footer styleName="{style.tutorialFooter}">
+			<ul class="list-inline">
+				<li><a href="https://github.com/putnami" target="_blank">@PutnamiTeam</a></li>
+				<li><a href="https://github.com/putnami/putnami-pwt-tutorial" target="_blank"><i class="icon icon-github-squared" />Tutorial GitHub repo</a></li>
+				<li><a href="https://github.com/putnami/putnami-pwt-tutorial" target="_blank"><i class="icon icon-github-squared" />PWT GitHub repo</a></li>
+				<li><a href="https://groups.google.com/forum/#!forum/putnami-web-toolkit" target="_blank"><i class="icon icon-coffee" />PWT Google Group</a></li>
+				<li><a href="#!Contact"><i class="icon icon-users" />Contact</a></li>
+				<li><a href="#!About"><i class="icon icon-help" />About</a></li>
+			</ul>
+		</w:Footer>
+	</w:HTMLPanel>
+</ui:UiBinder>]]></pre>
+			</c:StaticCode>
+			
+			
+			<p>And set the decorator as <code>ActivityManager</code>'s display in the <code>TutorialApp</code> class :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+    PageDecorator display = new PageDecorator();
+    RootPanel.get().add(display);
+    ...
+    controller.setDisplay(display);]]></pre>
+			</c:StaticCode>
+			
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 4 : <em>Add a NavBar</em></w:Heading>
+			
+			<p>In the page decorator, we add a <code>NavBar</code> to navigate between places :</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:Header ...>
+	...
+</w:Header>
+<w:Navbar position="STATIC_TOP">
+	<w:Brand>
+		<w:Anchor text="PWT Tutorial" link="#!" />
+	</w:Brand>
+	<w:Nav>
+		<w:NavLink label="Contact" link="#!Contact"/>
+		<w:NavLink label="About" link="#!About"/>
+	</w:Nav>
+</w:Navbar>]]></pre>
+			</c:StaticCode>
+			
+			<p>And if you want this NavBar to be static on the top when you scroll, simply put the NavBar in an <code>Affix</code> :</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<w:Affix>
+	<w:Navbar position="STATIC_TOP">
+		<w:Brand>
+			<w:Anchor text="PWT Tutorial" link="#!" />
+		</w:Brand>
+		<w:Nav>
+			<w:NavLink label="Contact" link="#!Contact"/>
+			<w:NavLink label="About" link="#!About"/>
+		</w:Nav>
+	</w:Navbar>
+</w:Affix>]]></pre>
+			</c:StaticCode>
+			
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 5 : <em>Create I18N template</em></w:Heading>
+			
+			<p>With PWT, you can use different templates for different locales.
+			We will use a different template for the french locale (the button is out of the Jumbotron with a different icon) 
+			in the file <code>fr/putnami/pwt/tutorial/client/welcome/WelcomeView_fr.ui.xml</code></p>
+
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client">
+
+	<w:HTMLPanel styleName="container">
+		<w:Heading level="1" text="Putnami Web Toolkit : tutoriel" subtext="Découvrez PWT" styleName="page-header"/>
+ 		<w:Container tag="div" styleName="jumbotron text-center">
+			<w:GridRow>
+				<w:GridColumn size="10" offset="1">
+					<p>Bienvenue sur l'application de tutoriel de PWT.</p>
+				</w:GridColumn>
+			</w:GridRow>
+		</w:Container>
+		<w:Container tag="div" styleName="text-center">
+			<w:Button ui:field="aboutButton" text="A propos" iconType="HELP_CIRCLED" />
+		</w:Container>
+	</w:HTMLPanel>
+</ui:UiBinder>]]></pre>
+			</c:StaticCode>
+
+			<p>Then add the <code>fr</code> locale in the module xml file (<code>fr/putnami/pwt/tutorial/Tutorial.gwt.xml</code>):</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+	<extend-property name="locale" values="fr"/>]]></pre>
+			</c:StaticCode>
+
+			<p>And in order to show the result in dev or superDev mode, remove the "collapse locale property" in the dev module xml file 
+			(<code>fr/putnami/pwt/tutorial/TutorialDev.gwt.xml</code>):</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+	<!-- Disabled to test I18N templates in dev -->
+	<!-- <collapse-property name="locale" values="*" /> -->]]></pre>
+			</c:StaticCode>
+			
+			<p>Then go to <a href="http://localhost:8080/putnami-pwt-tutorial/?locale=fr">http://localhost:8080/putnami-pwt-tutorial/?locale=fr</a> to see the french version of the welcome page.</p>
+			<p>Go to <a href="http://localhost:8080/putnami-pwt-tutorial/?locale=en">http://localhost:8080/putnami-pwt-tutorial/?locale=en</a> to see the default version.</p>
+			
+			<ul class="pager">
+				<li class="previous"><a href="#!TutorialPart2">&larr; Part 2 : Build the Welcome Page</a></li>
+				<li class="next"><a href="#!TutorialPart4">Part 4 : Build a contact form &rarr;</a></li>
+			</ul>
+		</w:HTMLPanel>
+	</w:HTMLPanel>
+</ui:UiBinder>

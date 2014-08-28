@@ -1,0 +1,248 @@
+<!--
+
+    This file is part of pwt.
+
+    pwt is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
+
+	<w:HTMLPanel title="PWT - Tutorial Part 1 - Init a PWT Project with Gradle">
+		<w:Header ui:field="header">
+			<w:Heading level="1">Part 1 - Init a PWT Project with Gradle</w:Heading>
+		</w:Header>
+		<w:HTMLPanel ui:field="content">
+		
+			<ul class="pager">
+				<li class="next"><a href="#!TutorialPart2">Part 2 : Build the welcome Page &rarr;</a></li>
+			</ul>
+			
+			<p>In this tutorial, we will init a <strong title="Putnami Web Toolkit">PWT</strong> project named <em>putnami-pwt-tutorial</em> from scratch.</p>
+			<w:Alert ><h4>Note :</h4><p>In this tutorial, we use Gradle to build the project. If you use Maven, you should see the Maven version <a href="#!TutorialPart1Maven">here</a></p></w:Alert>
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Gradle and GWT notice</w:Heading>
+			<p>Gradle does not support any official GWT plugin yet. However, there is a very nice one hosted on Github : <a href="https://github.com/steffenschaefer/gwt-gradle-plugin" target="_BLANK">Steffen Schäffer's gwt-gradle-plugin</a>.
+			Unfortunately, today there is a little typo in the source code making impossible to define different modules between production tasks (like compile) and dev tasks (like GWT's SuperDevMode).</p>
+	
+			<p>To work, the GWT's SuperDevMode needs some specific configuration in the module gwt.xml file (like a specific linker, etc...). So it is necessary to have the ability to define different modules between dev and production.</p>
+			
+			<p>Therefore we've forked it and fixed it. 
+				We've submited the issue and we wait for the next release. 
+				Waiting we host a patch on our repository : *0.4-PWT_patched*.</p>
+			
+			<p>On this tutorial, we only explains the bases of the plugin. You can refer to the <a href="http://steffenschaefer.github.io/gwt-gradle-plugin/" target="_BLANK">official doc</a> to go furher.</p>
+			
+	
+	
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 1 : <em>Create the project folder</em></w:Heading>
+			<p>Just create the project root folder named "<em>putnami-pwt-tutorial</em>".</p>
+			<p><kbd>mkdir putnami-pwt-tutorial</kbd></p>
+	
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 2 : <em>Create the build script</em></w:Heading>
+			<p>In the project folder, create the gradle build file (<code>build.gradle</code>).</p>
+			<p>We will configure the gradle build :</p>
+			<ol>
+				<li>Configure the build script to use the non official  gwt-gradle-plugin :
+					<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+buildscript {
+    repositories {
+		maven (){ url 'http://repo.putnami.org' }
+	}
+	dependencies {
+		classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.4-PWT_patched'
+	}
+}]]></pre>
+					</c:StaticCode>
+				</li>
+				<li>Add the Maven central repository to download common dependencies and the Putnami maven repository to download the PWT artifacts :
+					<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+repositories {
+	mavenCentral()
+	maven (){ url 'http://repo.putnami.org' }
+}]]></pre>
+				</c:StaticCode>
+				</li>
+				<li>Now we add the <strong title="Putnami Web Toolkit">PWT</strong> dependency :
+				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+dependencies {
+	compile 'fr.putnami.pwt:pwt:@releaseVersion@'
+}]]></pre>
+					</c:StaticCode>
+				</li>
+				<li>In order to use the gwt-gradle-plugin, we have to apply it and configure it :
+					<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+apply plugin: 'gwt'
+
+gwt {
+	gwtVersion = '2.6.1'
+
+	// Modules used in production
+	modules = ['fr.putnami.pwt.tutorial.Tutorial']
+	// Modules used in dev mode and super dev mode.
+	devModules = ['fr.putnami.pwt.tutorial.TutorialDev']
+
+	superDev {
+		noPrecompile=true
+	}
+
+	// You can skip it if you won't use it
+	// If you add it, you'll have to apply the jetty plugin first.
+	gwtDev {
+		// Allows to debug with the standard Dev mode
+		// ( no more supported on Chrome for Linux or on Firefox)
+		jvmArgs('-Xdebug',  '-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000')
+	}
+}]]></pre>
+					</c:StaticCode>
+				</li>
+				<li>Finally, we apply the jetty plugin to launch the web app, and configure a custom task to run the application with draft GWT compilation :
+					<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+apply plugin: 'jetty'
+
+task jettyDraftWar(type: JettyRunWar) {
+	dependsOn draftWar
+	dependsOn.remove('war')
+	webApp=draftWar.archivePath
+}]]></pre>
+					</c:StaticCode>
+				</li>
+			</ol>
+			
+			<w:Alert><h4>Note :</h4><p>You should apply all the plugin in the top of the build file in order to avoid unsatisfied dependencies between plugins.</p></w:Alert>
+	
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 3 : <em>Init the folders</em></w:Heading>
+			<p>Now we have a great build script, we need to init the folders.</p>
+			<ul>
+				<li>Create the "<em>src/main/java</em>" folder</li>
+				<li>Create the "<em>src/main/resources</em>" folder</li>
+				<li>Create the "<em>src/main/webapp</em>" folder</li>
+			</ul>
+			
+			<p>On unix systems, just type :</p>
+			<p><kbd>mkdir -p src/main/java src/main/resources src/main/webapp</kbd></p>
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 4 : <em>Create an Entry point and a Module Xml file</em></w:Heading>
+			<p>Now, as a GWT application, we need to create a Module xml file and an entry point.</p>
+			
+			<ol>
+				<li>First we create the <code>fr.putnami.pwt.tutorial.client.TutorialApp</code> java Class, implementing <code>EntryPoint</code> :
+					<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+package fr.putnami.pwt.tutorial.client;
+
+import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.ui.RootPanel;
+
+import fr.putnami.pwt.core.widget.client.OutputStaticText;
+
+public class TutorialApp implements EntryPoint {
+
+	@Override
+	public void onModuleLoad() {
+		RootPanel.get().add(new OutputStaticText("Hello Putnami"));
+	}
+}]]></pre>
+					</c:StaticCode>
+				</li>
+				<li>In the build script configuration, we used the "<em>fr.putnami.pwt.tutorial.Tutorial</em>" module so we juste have to create it by creating the file <code>fr/putnami/pwt/tutorial/Tutorial.gwt.xml</code>
+				<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to="Tutorial">
+	<!-- PWT Module to extends in order to use PWT widgets-->
+	<inherits name="fr.putnami.pwt.core.widget.Widget"/>
+
+	<entry-point class="fr.putnami.pwt.tutorial.client.TutorialApp"/>
+
+	<!-- This linker will be the default one in later version of GWT -->
+	<add-linker name="xsiframe" />
+</module>]]></pre>
+					</c:StaticCode>
+				</li>
+				<li>We also create a GWT module file for the dev tasks : <code>fr/putnami/pwt/tutorial/TutorialDev.gwt.xml</code>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to="Tutorial">
+	<inherits name="fr.putnami.pwt.tutorial.Tutorial" />
+
+	<!-- We collapse all properties -->
+	<collapse-property name="user.agent" values="*" />
+	<collapse-property name="locale" values="*" />
+	<collapse-property name="canvasElementSupport" values="*" />
+	<collapse-property name="touchEventSupport" values="*" />
+	<collapse-property name="dragEventSupport" values="*" />
+	<collapse-property name="audioElementSupport" values="*" />
+	<collapse-property name="videoElementSupport" values="*" />
+	<collapse-property name="storageSupport" values="*" />
+
+	<set-configuration-property name="devModeRedirectEnabled" value="true" />
+</module>]]></pre>
+					</c:StaticCode>
+					<w:Alert ><h4>Note :</h4><p>In the dev module, we do not use the <code>collapse-all-properties</code> tag because it induce a bug in source mapping in browsers.</p></w:Alert>
+				</li>
+			</ol>
+	
+	
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 5 : <em>Create the host HTML file</em></w:Heading>
+			<p>Create the <code>src/main/webapp/index.html</code> host file, containing :</p>
+			
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>PWT - Putnami Web Toolkit - Tutorial</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="text/javascript" src="Tutorial/Tutorial.nocache.js"></script>
+	</head>
+	<body>
+		<noscript>Your browser does not support JavaScript!</noscript>
+	</body>
+</html>>]]></pre>
+			</c:StaticCode>
+	
+			<w:Heading level="2" navSpy="{tableOfContent}">Step 6 : <em>Run the app</em></w:Heading>
+			<p>In order to run the app in draft compile mode, use</p>
+			<p><kbd>gradle jettyDraftWar</kbd></p>
+			<p>To run it in production mode, use</p>
+			<p><kbd>gradle jettyRunWar</kbd></p>
+			<p>That's it !</p>
+			
+	<blockquote>
+	<p>You can checkout the tag <code>Part1</code> on this repo to see the result:
+	<code>git checkout Part1</code></p>
+	</blockquote>
+			
+			
+			<ul class="pager">
+				<li class="next"><a href="#!TutorialPart2">Part 2 : Build the welcome Page &rarr;</a></li>
+			</ul>
+		</w:HTMLPanel>
+	</w:HTMLPanel>
+</ui:UiBinder>
