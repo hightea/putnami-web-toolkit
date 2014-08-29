@@ -33,8 +33,8 @@
 		<w:HTMLPanel ui:field="content">
 		
 			<ul class="pager">
-				<li class="previous"><a href="#!TutorialPart5">&larr; Part 5 : Build a simple issues tracker</a></li>
-				<li class="next"><a href="#!TutorialPart7">Part 7 : Add Google Analytics to your app &rarr;</a></li>
+				<li class="previous"><a href="#!Tuto5">&larr; Part 5 : Build a simple issues tracker</a></li>
+				<li class="next"><a href="#!Tuto7">Part 7 : Add Google Analytics to your app &rarr;</a></li>
 			</ul>
 			
 			<p>In this tutorial, we will will create a theme to customize our app look-and-feel after the previous part  <em><a href="#!TutorialPart5">Part 5 : Build a simple issues tracker</a></em></p>
@@ -93,8 +93,8 @@ a {
 			<p>And that's it !</p>
 
 			<ul class="pager">
-				<li class="previous"><a href="#!TutorialPart5">&larr; Part 5 : Build a simple issues tracker</a></li>
-				<li class="next"><a href="#!TutorialPart7">Part 7 : Add Google Analytics to your app &rarr;</a></li>
+				<li class="previous"><a href="#!Tuto5">&larr; Part 5 : Build a simple issues tracker</a></li>
+				<li class="next"><a href="#!Tuto7">Part 7 : Add Google Analytics to your app &rarr;</a></li>
 			</ul>
 		</w:HTMLPanel>
 	</w:HTMLPanel>

@@ -20,6 +20,6 @@ import fr.putnami.pwt.core.inject.client.annotation.Templated;
 import fr.putnami.pwt.doc.client.application.Page;
 
 @Templated
-public class Part1MavenView extends Page {
+public class Tuto4BindAFormPage extends Page {
 }
 

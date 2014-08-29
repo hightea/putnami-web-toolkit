@@ -33,7 +33,7 @@
 		<w:HTMLPanel ui:field="content">
 		
 			<ul class="pager">
-				<li class="next"><a href="#!TutorialPart2">Part 2 : Build the welcome Page &rarr;</a></li>
+				<li class="next"><a href="#!Tuto2">Part 2 : Build the welcome Page &rarr;</a></li>
 			</ul>
 			
 			<p>In this tutorial, we will init a <strong title="Putnami Web Toolkit">PWT</strong> project named <em>putnami-pwt-tutorial</em> from scratch.</p>
@@ -332,7 +332,7 @@ public class TutorialApp implements EntryPoint {
 </blockquote>
 	
 			<ul class="pager">
-				<li class="next"><a href="#!TutorialPart2">Part 2 : Build the welcome Page &rarr;</a></li>
+				<li class="next"><a href="#!Tuto2">Part 2 : Build the welcome Page &rarr;</a></li>
 			</ul>
 		</w:HTMLPanel>
 	</w:HTMLPanel>

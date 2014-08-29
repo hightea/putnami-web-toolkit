@@ -33,31 +33,31 @@
 			<strong>Tutorials</strong>
 			<w:List tag="ol">
 				<w:ListItem>
-					<a href="#!">Init a gradle project</a>
+					<a href="#!Tuto1InitGradle">Init a gradle project</a>
 				</w:ListItem>
 				<w:ListItem>
-					<a href="#!">Init a maven project</a>
+					<a href="#!Tuto1InitMaven">Init a maven project</a>
 				</w:ListItem>
 				<w:ListItem>
-					<a href="#!">Welcome page</a>
+					<a href="#!Tuto2FirstPage">First page</a>
 				</w:ListItem>
 				<w:ListItem>
-					<a href="#!">Create more pages</a>
+					<a href="#!Tuto3MorePages">Create more pages</a>
 				</w:ListItem>
 				<w:ListItem>
-					<a href="#!">Bind a contact form</a>
+					<a href="#!Tuto4BindAForm">Bind a form</a>
 				</w:ListItem>
 				<w:ListItem>
-					<a href="#!">Issue tracker</a>
+					<a href="#!Tuto5IssueTracker">Issue tracker</a>
 				</w:ListItem>
 				<w:ListItem>
-					<a href="#!">Theme your webapp</a>
+					<a href="#!Tuto6Theme">Theme your webapp</a>
 				</w:ListItem>
 				<w:ListItem>
-					<a href="#!">Track with Google Analytics</a>
+					<a href="#!Tuto7GoogleAnalytics">Track with Google Analytics</a>
 				</w:ListItem>
 				<w:ListItem>
-					<a href="#!">Index with Ajax Bot Filter</a>
+					<a href="#!Tuto8AjaxBot">Index with Ajax Bot Filter</a>
 				</w:ListItem>
 			</w:List>
 			<strong>Samples</strong>

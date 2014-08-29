@@ -33,8 +33,8 @@
 		<w:HTMLPanel ui:field="content">
 		
 			<ul class="pager">
-				<li class="previous"><a href="#!TutorialPart3">&larr; Part 3 : Build more pages</a></li>
-				<li class="next"><a href="#!TutorialPart5">Part 5 : Build a simple issues tracker &rarr;</a></li>
+				<li class="previous"><a href="#!Tuto3">&larr; Part 3 : Build more pages</a></li>
+				<li class="next"><a href="#!Tuto5">Part 5 : Build a simple issues tracker &rarr;</a></li>
 			</ul>
 		
 			<p>In this tutorial, we will will add a contact form to the project inited in <em><a href="#!TutorialPart3">Part 3 : Build more pages</a></em></p>
@@ -422,8 +422,8 @@ public class ContactServiceImpl implements ContactService {
 			<p>Now run the app and submit some contacts. You'll see on the server console the received Contacts.</p>
 
 			<ul class="pager">
-				<li class="previous"><a href="#!TutorialPart3">&larr; Part 3 : Build more pages</a></li>
-				<li class="next"><a href="#!TutorialPart5">Part 5 : Build a simple issues tracker &rarr;</a></li>
+				<li class="previous"><a href="#!Tuto3">&larr; Part 3 : Build more pages</a></li>
+				<li class="next"><a href="#!Tuto5">Part 5 : Build a simple issues tracker &rarr;</a></li>
 			</ul>
 		</w:HTMLPanel>
 	</w:HTMLPanel>

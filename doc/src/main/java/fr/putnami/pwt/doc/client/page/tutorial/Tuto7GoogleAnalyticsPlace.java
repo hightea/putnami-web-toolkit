@@ -16,9 +16,9 @@
  */
 package fr.putnami.pwt.doc.client.page.tutorial;
 
-import fr.putnami.pwt.core.inject.client.annotation.Templated;
-import fr.putnami.pwt.doc.client.application.Page;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
-@Templated
-public class Part7View extends Page {
+@ActivityDescription(view = Tuto7GoogleAnalyticsPage.class, aliases = "Tuto7")
+public class Tuto7GoogleAnalyticsPlace extends ViewPlace {
 }

@@ -33,8 +33,8 @@
 		<w:HTMLPanel ui:field="content">
 		
 			<ul class="pager">
-				<li class="previous"><a href="#!TutorialPart1Gradle">&larr; Part 1 : Init a PWT project</a></li>
-				<li class="next"><a href="#!TutorialPart3">Part 3 : Build more pages &rarr;</a></li>
+				<li class="previous"><a href="#!Tuto1">&larr; Part 1 : Init a PWT project</a></li>
+				<li class="next"><a href="#!Tuto3">Part 3 : Build more pages &rarr;</a></li>
 			</ul>
 		
 			<p>In this tutorial, we will will add a static welcome page to the project inited in <em><a href="#!TutorialPart1Gradle">Part 1 : Init a PWT project</a></em></p>
@@ -210,8 +210,8 @@ public class WelcomeView extends Composite implements View<WelcomePlace> {
 			<p>That's it !</p>
 
 			<ul class="pager">
-				<li class="previous"><a href="#!TutorialPart1Gradle">&larr; Part 1 : Init a PWT project</a></li>
-				<li class="next"><a href="#!TutorialPart3">Part 3 : Build more pages &rarr;</a></li>
+				<li class="previous"><a href="#!Tuto1">&larr; Part 1 : Init a PWT project</a></li>
+				<li class="next"><a href="#!Tuto3">Part 3 : Build more pages &rarr;</a></li>
 			</ul>
 		</w:HTMLPanel>
 	</w:HTMLPanel>

@@ -33,7 +33,7 @@
 		<w:HTMLPanel ui:field="content">
 		
 			<ul class="pager">
-				<li class="previous"><a href="#!TutorialPart7">&larr; Part 7 : Add Google Analytics to your app</a></li>
+				<li class="previous"><a href="#!Tuto7">&larr; Part 7 : Add Google Analytics to your app</a></li>
 			</ul>
 			
 			<p>In this tutorial, we will will add the ajax bot plugin allowing our app (from  <em><a href="#!TutorialPart7">Part 7 : Add Google Analytics to your app</a></em>) to be indexed by the search engine bots.</p>
@@ -99,7 +99,7 @@ dependencies {
 			<p>@Putnami Team</p>
 
 			<ul class="pager">
-				<li class="previous"><a href="#!TutorialPart7">&larr; Part 7 : Add Google Analytics to your app</a></li>
+				<li class="previous"><a href="#!Tuto7">&larr; Part 7 : Add Google Analytics to your app</a></li>
 			</ul>
 		</w:HTMLPanel>
 	</w:HTMLPanel>

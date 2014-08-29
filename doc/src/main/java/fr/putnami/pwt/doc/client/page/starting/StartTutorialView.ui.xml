@@ -27,5 +27,36 @@
 		<p>We've created a step-by-step tutorial in order to create a PWT based application, guiding you between the powerful features of PWT.</p>
 		<p>You'll find it on its <a href="https://github.com/Putnami/putnami-pwt-tutorial/wiki" target="_blank">Github repo's wiki</a></p>
 		<p>For each major step, you'll find the corresponding commit in order to see the current result.</p>
+		<strong>Tutorials</strong>
+		<w:List tag="ol">
+			<w:ListItem>
+				<a href="#!Tuto1InitGradle">Init a gradle project</a>
+			</w:ListItem>
+			<w:ListItem>
+				<a href="#!Tuto1InitMaven">Init a maven project</a>
+			</w:ListItem>
+			<w:ListItem>
+				<a href="#!Tuto2FirstPage">First page</a>
+			</w:ListItem>
+			<w:ListItem>
+				<a href="#!Tuto3MorePages">Create more pages</a>
+			</w:ListItem>
+			<w:ListItem>
+				<a href="#!Tuto4BindAForm">Bind a form</a>
+			</w:ListItem>
+			<w:ListItem>
+				<a href="#!Tuto5IssueTracker">Issue tracker</a>
+			</w:ListItem>
+			<w:ListItem>
+				<a href="#!Tuto6Theme">Theme your webapp</a>
+			</w:ListItem>
+			<w:ListItem>
+				<a href="#!Tuto7GoogleAnalytics">Track with Google Analytics</a>
+			</w:ListItem>
+			<w:ListItem>
+				<a href="#!Tuto8AjaxBot">Index with Ajax Bot Filter</a>
+			</w:ListItem>
+		</w:List>
+
 	</w:HTMLPanel>
 </ui:UiBinder>

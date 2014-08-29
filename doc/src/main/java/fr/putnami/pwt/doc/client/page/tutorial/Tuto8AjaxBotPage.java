@@ -20,5 +20,5 @@ import fr.putnami.pwt.core.inject.client.annotation.Templated;
 import fr.putnami.pwt.doc.client.application.Page;
 
 @Templated
-public class Part1GradleView extends Page {
+public class Tuto8AjaxBotPage extends Page {
 }

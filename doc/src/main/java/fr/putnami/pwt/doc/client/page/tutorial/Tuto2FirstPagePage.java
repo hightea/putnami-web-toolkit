@@ -20,5 +20,6 @@ import fr.putnami.pwt.core.inject.client.annotation.Templated;
 import fr.putnami.pwt.doc.client.application.Page;
 
 @Templated
-public class Part3View extends Page {
+public class Tuto2FirstPagePage extends Page {
 }
+

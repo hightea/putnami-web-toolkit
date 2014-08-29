@@ -33,8 +33,8 @@
 		<w:HTMLPanel ui:field="content">
 		
 			<ul class="pager">
-				<li class="previous"><a href="#!TutorialPart6">&larr; Part 6 : Build a theme</a></li>
-				<li class="next"><a href="#!TutorialPart8">Part 8 : Add Ajax Bot Filter &rarr;</a></li>
+				<li class="previous"><a href="#!Tuto6">&larr; Part 6 : Build a theme</a></li>
+				<li class="next"><a href="#!Tuto8">Part 8 : Add Ajax Bot Filter &rarr;</a></li>
 			</ul>
 			
 			<p>In this tutorial, we will will add the google analytics plugin allowing our app (from  <em><a href="#!TutorialPart6">Part 6 : Build a theme</a></em>) to be audited via Google Analytics.</p>
@@ -116,8 +116,8 @@ dependencies {
 			
 
 			<ul class="pager">
-				<li class="previous"><a href="#!TutorialPart6">&larr; Part 6 : Build a theme</a></li>
-				<li class="next"><a href="#!TutorialPart8">Part 8 : Add Ajax Bot Filter &rarr;</a></li>
+				<li class="previous"><a href="#!Tuto6">&larr; Part 6 : Build a theme</a></li>
+				<li class="next"><a href="#!Tuto8">Part 8 : Add Ajax Bot Filter &rarr;</a></li>
 			</ul>
 		</w:HTMLPanel>
 	</w:HTMLPanel>

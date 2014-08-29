@@ -19,6 +19,6 @@ package fr.putnami.pwt.doc.client.page.tutorial;
 import fr.putnami.pwt.core.mvp.client.ViewPlace;
 import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
-@ActivityDescription(view = Part2View.class)
-public class TutorialPart2Place extends ViewPlace {
+@ActivityDescription(view = Tuto3MorePagesPage.class, aliases = "Tuto3")
+public class Tuto3MorePagesPlace extends ViewPlace {
 }
