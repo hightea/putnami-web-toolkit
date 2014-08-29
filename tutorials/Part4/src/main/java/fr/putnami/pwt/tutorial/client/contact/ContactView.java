@@ -40,7 +40,7 @@ public class ContactView extends Composite implements View {
 	}
 
 	@UiHandler("contactEditor")
-	public void onContactSubmit(FlushSuccessEvent event) {
+	void onContactSubmit(FlushSuccessEvent event) {
 		service.sendContact((Contact) event.getValue());
 	}
 

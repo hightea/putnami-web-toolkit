@@ -9,6 +9,8 @@
     <!-- PWT Module to extends in order to use PWT Service features-->
 	<inherits name="fr.putnami.pwt.core.service.Service"/>
 
+	<inherits name="fr.putnami.pwt.core.inject.Inject"/>
+
      <entry-point class="fr.putnami.pwt.tutorial.client.TutorialApp"/>
 
      <!-- This linker will be the default one in later version of GWT -->
