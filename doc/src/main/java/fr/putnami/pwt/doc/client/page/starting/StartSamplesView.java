@@ -16,11 +16,48 @@
  */
 package fr.putnami.pwt.doc.client.page.starting;
 
-import com.google.gwt.user.client.ui.Composite;
+import java.util.List;
 
+import com.google.common.collect.Lists;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTMLPanel;
+
+import fr.putnami.pwt.core.inject.client.annotation.PostConstruct;
 import fr.putnami.pwt.core.inject.client.annotation.Templated;
 import fr.putnami.pwt.core.mvp.client.View;
+import fr.putnami.pwt.core.widget.client.InputSwitch;
 
 @Templated
 public class StartSamplesView extends Composite implements View {
+	@UiField(provided=true)
+	List<String> switchItems = Lists.newArrayList("GRADLE", "MAVEN");
+
+	@UiField
+	InputSwitch<String> switchBuild;
+	@UiField
+	HTMLPanel gradlePanel;
+	@UiField
+	HTMLPanel mavenPanel;
+
+	@PostConstruct
+	void postConstruct() {
+		switchBuild.edit("GRADLE");
+		mavenPanel.setVisible(false);
+	}
+
+	@UiHandler("switchBuild")
+	void onSwitch(ValueChangeEvent<String> event) {
+		if ("MAVEN".equals(event.getValue())) {
+			gradlePanel.setVisible(false);
+			mavenPanel.setVisible(true);
+
+		}
+		else {
+			gradlePanel.setVisible(true);
+			mavenPanel.setVisible(false);
+		}
+	}
 }

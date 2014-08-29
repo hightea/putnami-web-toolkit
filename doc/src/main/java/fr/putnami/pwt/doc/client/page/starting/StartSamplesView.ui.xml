@@ -24,10 +24,12 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
+ 	<ui:with field="switchItems" type="java.util.List" />
+ 	
 	<w:HTMLPanel>
 		<w:Heading level="2" summary="docSummary">Start from samples</w:Heading>
 
-		<p>We provide two sample apps in the github repo in the <a href="https://github.com/Putnami/putnami-pwt/tree/master/samples">samples</a> folder :</p>
+		<p>We provide two sample apps in the github repo in the <a href="https://github.com/Putnami/putnami-pwt/tree/master/samples" target="_BLANK">samples</a> folder :</p>
 		<ul>
 			<li>One is a GWT library using PWT</li>
 			<li>One is a GWT Web application using PWT</li>
@@ -35,11 +37,23 @@
 		<p>In each project, you'll find gradle and maven build files.</p>
 		<p>You can easily run the samples following those commands :
 		</p>
+		<w:InputSwitch ui:field="switchBuild" items="{switchItems}" styleName="pull-right"/>
+		<div class="clearfix"></div>
+		<br/>
+		<w:HTMLPanel ui:field="gradlePanel">
 <pre><![CDATA[
 git clone git@github.com:Putnami/putnami-pwt.git
 cd putnami-pwt/samples/web-project
 gradle jettyRunWar
 ]]></pre>
+		</w:HTMLPanel>
+		<w:HTMLPanel ui:field="mavenPanel">
+<pre><![CDATA[
+git clone git@github.com:Putnami/putnami-pwt.git
+cd putnami-pwt/samples/web-project
+mvn -Pdev jetty:run
+]]></pre>
+		</w:HTMLPanel>
 		<p>Then browse the sample on <a href="http://localhost:8080/pwt-sample-web">http://localhost:8080/pwt-sample-web</a>.</p>
 	</w:HTMLPanel>
 </ui:UiBinder>
