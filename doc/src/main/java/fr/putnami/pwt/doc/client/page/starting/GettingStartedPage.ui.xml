@@ -28,8 +28,6 @@
 			</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
-			<c:ThankYouView/>
-			<c:RequirementsView/>
 			<c:StartTutorialView/>
 			<c:StartSamplesView/>
 			<c:StartGradleView/>
