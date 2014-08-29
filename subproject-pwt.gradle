@@ -121,7 +121,7 @@ uploadArchives {
         mavenDeployer {
 	        configuration = configurations.deployerSsh
 	        repository(url: "scp://repo.putnami.org/putnamiRepo") {
-	            authentication(userName: "putnami_preprod")
+	            authentication(userName: "putnami_repo")
 	        }
             //repository(url : new File(rootProject.buildDir, 'repoTest').toURI())
             pom.project {
