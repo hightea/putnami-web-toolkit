@@ -1,0 +1,22 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client">
+
+    <w:HTMLPanel>
+		<w:Heading level="1" text="About" styleName="page-header"/>
+		<w:Heading level="2" text="About this application"/>
+        <w:GridRow>
+			<w:GridColumn size="10" offset="1">
+				<p>This application is the result of a step-by-step tutorial demonstrating the <strong title="Putnami Web Toolkit">PWT</strong> features.</p>
+				<p>For more informations go to the <a href="https://github.com/putnami/putnami-pwt-tutorial" target="_blank"><i class="icon icon-github-squared" />repo hosting this tutorial</a></p>
+			</w:GridColumn>
+		</w:GridRow>
+		
+		<w:Heading level="2" text="About PWT"/>
+        <w:GridRow>
+			<w:GridColumn size="10" offset="1">
+				<p>If you want to know more about the <strong title="Putnami Web Toolkit">PWT</strong> framework, visit the <a href="http://pwt.putnami.org" target="_blank">project's page</a>.</p>
+			</w:GridColumn>
+		</w:GridRow>
+    </w:HTMLPanel>
+</ui:UiBinder>

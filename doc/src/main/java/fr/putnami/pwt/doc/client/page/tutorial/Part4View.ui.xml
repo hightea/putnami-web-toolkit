@@ -421,6 +421,8 @@ public class ContactServiceImpl implements ContactService {
 			
 			<p>Now run the app and submit some contacts. You'll see on the server console the received Contacts.</p>
 
+			<w:Alert ><h4>Note :</h4><p>You can see the result in the <code>doc/tutorials/Part4</code> folder in the PWT sources.</p></w:Alert>			
+			
 			<ul class="pager">
 				<li class="previous"><a href="#!TutorialPart3">&larr; Part 3 : Build more pages</a></li>
 				<li class="next"><a href="#!TutorialPart5">Part 5 : Build a simple issues tracker &rarr;</a></li>

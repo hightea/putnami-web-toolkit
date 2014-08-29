@@ -92,6 +92,8 @@ a {
 			
 			<p>And that's it !</p>
 
+			<w:Alert ><h4>Note :</h4><p>You can see the result in the <code>doc/tutorials/Part6</code> folder in the PWT sources.</p></w:Alert>			
+			
 			<ul class="pager">
 				<li class="previous"><a href="#!TutorialPart5">&larr; Part 5 : Build a simple issues tracker</a></li>
 				<li class="next"><a href="#!TutorialPart7">Part 7 : Add Google Analytics to your app &rarr;</a></li>
