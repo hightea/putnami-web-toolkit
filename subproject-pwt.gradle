@@ -10,6 +10,7 @@ ext {
 
 apply plugin: 'java'
 apply plugin: 'maven-publish'
+apply plugin: 'maven'
 apply plugin: 'eclipse'
 apply plugin: 'gwt-base'
 
@@ -31,6 +32,7 @@ eclipse {
 
 configurations {
 	log4j
+	deployerSsh
 }
 
 repositories {
@@ -43,7 +45,9 @@ dependencies {
 	log4j 'org.slf4j:jcl-over-slf4j:1.6.1'
 	log4j 'org.slf4j:slf4j-log4j12:1.6.1'
 	log4j 'log4j:log4j:1.2.16'
-
+	
+	deployerSsh "org.apache.maven.wagon:wagon-ssh:2.2"
+	
 	compile "com.google.guava:guava:$guavaVersion"
 	compile "com.google.guava:guava-gwt:$guavaVersion"
 	runtime configurations.log4j
@@ -59,33 +63,6 @@ if (applyLicense) {
 		ext.projectName = project.name
 	}
 }
-
-publishing {
-	repositories {
-		maven {
-			url new File(rootProject.buildDir, 'repo').toURI()
-		}
-	}
-	publications {
-		mavenJava(MavenPublication) {
-			pom.withXml {
-				// Keep the 'compile' scope of the dependencies 
-			    asNode().dependencies.'*'.findAll() {
-			        it.scope.text() == 'runtime' && project.configurations.compile.allDependencies.find { dep ->
-			            dep.name == it.artifactId.text()
-			        }
-			    }.each() {
-			        it.scope*.value = 'compile'
-			    }
-				asNode().appendNode('inceptionYear', '2014')
-				def license = asNode().appendNode('licenses').appendNode('license')
-				license.appendNode('name', 'GNU Lesser General Public License')
-				license.appendNode('url', 'http://www.gnu.org/licenses/lgpl-3.0.html')
-			}
-		}
-	}
-}
-
 gwt {
 	gwtVersion =  project.gwtVersion
 	eclipse{
@@ -95,10 +72,10 @@ gwt {
 
 
 if (rootProject.tasks.findByPath(':publishAll') != null) {
-	rootProject.tasks.publishAll.dependsOn project.tasks.publish
+	rootProject.tasks.publishAll.dependsOn project.tasks.uploadArchives
 }
 if (rootProject.tasks.findByPath(':publishAllToMavenLocal') != null) {
-	rootProject.tasks.publishAllToMavenLocal.dependsOn project.tasks.publishToMavenLocal
+	rootProject.tasks.publishAllToMavenLocal.dependsOn project.tasks.install
 }
 if (applyLicense) {
 	project.tasks.publish.dependsOn project.tasks.licenseFormat
@@ -131,10 +108,31 @@ if (project.name != 'pwt-doc'){
 	}
 	
 	if (rootProject.tasks.findByPath(':publishAllLibs') != null) {
-		rootProject.tasks.publishAllLibs.dependsOn project.tasks.publish
+		rootProject.tasks.publishAllLibs.dependsOn project.tasks.uploadArchives
 	}
 	if (rootProject.tasks.findByPath(':publishAllLibsToMavenLocal') != null) {
-		rootProject.tasks.publishAllLibsToMavenLocal.dependsOn project.tasks.publishToMavenLocal
+		rootProject.tasks.publishAllLibsToMavenLocal.dependsOn project.tasks.install
 	}
 }
  
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+	        configuration = configurations.deployerSsh
+	        repository(url: "scp://repo.putnami.org/putnamiRepo") {
+	            authentication(userName: "putnami_preprod")
+	        }
+            //repository(url : new File(rootProject.buildDir, 'repoTest').toURI())
+            pom.project {
+                licenses {
+                    license {
+                        name 'GNU Lesser General Public License'
+                        url 'http://www.gnu.org/licenses/lgpl-3.0.html'
+                        distribution 'repo'
+                    }
+                }
+            }
+        }
+    }
+}
