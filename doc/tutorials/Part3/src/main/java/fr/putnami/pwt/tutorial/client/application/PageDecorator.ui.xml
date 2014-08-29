@@ -1,0 +1,47 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client" >
+
+	<ui:style>
+		.tutorialHeader {
+			height : 65px;
+			font-size: 30px;
+			background-color:#EEE;
+		}
+		.tutorialFooter {
+			text-align : center;
+			background-color:#EEE;
+			height: 80px;
+			padding-top: 35px;
+		}
+	</ui:style>
+	<w:HTMLPanel>
+		<w:Header styleName="{style.tutorialHeader}">
+			<div class="container">
+				<a href="#!Welcome">PWT <small class="hidden-xs">Putnami Web Toolkit Tutorial App</small></a>
+			</div>
+		</w:Header>
+		<w:Affix>
+			<w:Navbar position="STATIC_TOP">
+				<w:Brand>
+					<w:Anchor text="PWT Tutorial" link="#!" />
+				</w:Brand>
+				<w:Nav>
+					<w:NavLink label="Contact" link="#!Contact"/>
+					<w:NavLink label="About" link="#!About"/>
+				</w:Nav>
+			</w:Navbar>
+		</w:Affix>
+		<w:OneWidgetPanel tag="div" ui:field="viewContainer"  styleName="container tutorialContent" />
+
+		<w:Footer styleName="{style.tutorialFooter}">
+			<ul class="list-inline">
+			  <li><a href="https://github.com/putnami" target="_blank">@PutnamiTeam</a></li>
+			  <li><a href="https://github.com/putnami/putnami-pwt" target="_blank"><i class="icon icon-github-squared" />PWT GitHub repo</a></li>
+			  <li><a href="https://groups.google.com/forum/#!forum/putnami-web-toolkit" target="_blank"><i class="icon icon-coffee" />PWT Google Group</a></li>
+			  <li><a href="#!Contact"><i class="icon icon-users" />Contact</a></li>
+			  <li><a href="#!About"><i class="icon icon-help" />About</a></li>
+			</ul>
+		</w:Footer>
+	</w:HTMLPanel>
+</ui:UiBinder>

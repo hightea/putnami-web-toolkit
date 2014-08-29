@@ -37,7 +37,7 @@
 				<li class="next"><a href="#!Tuto5">Part 5 : Build a simple issues tracker &rarr;</a></li>
 			</ul>
 		
-			<p>In this tutorial, we will will add a contact form to the project inited in <em><a href="#!TutorialPart3">Part 3 : Build more pages</a></em></p>
+			<p>In this tutorial, we will will add a contact form to the project inited in <em><a href="#!Tuto3">Part 3 : Build more pages</a></em></p>
 		
 			
 			<w:Heading level="2" summary="docSummary">Step 1 : <em>Create the form</em></w:Heading>
@@ -421,6 +421,8 @@ public class ContactServiceImpl implements ContactService {
 			
 			<p>Now run the app and submit some contacts. You'll see on the server console the received Contacts.</p>
 
+			<w:Alert ><h4>Note :</h4><p>You can see the result in the <code>doc/tutorials/Part4</code> folder in the PWT sources.</p></w:Alert>			
+			
 			<ul class="pager">
 				<li class="previous"><a href="#!Tuto3">&larr; Part 3 : Build more pages</a></li>
 				<li class="next"><a href="#!Tuto5">Part 5 : Build a simple issues tracker &rarr;</a></li>

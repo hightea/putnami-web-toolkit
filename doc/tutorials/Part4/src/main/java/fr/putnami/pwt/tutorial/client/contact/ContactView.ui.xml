@@ -1,0 +1,40 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client">
+
+	<ui:with field="noteItems" type="java.util.List" />
+	<ui:with field="subjectItems" type="java.util.List" />
+
+    <w:HTMLPanel>
+		<w:Heading level="1" text="Contact" styleName="page-header"/>
+		<w:Form ui:field="contactEditor" layout="HORIZONTAL">
+			<fieldset>
+				<legend>You</legend>
+				<w:FormGroup path="name" />
+				<w:FormGroup path="email" >
+					<w:InputEmail />
+				</w:FormGroup>
+				<w:FormGroup path="birthday" />
+			</fieldset>
+			<fieldset>
+				<legend>Your interest in this tutorial</legend>
+				<w:FormGroup path="tutorialNote">
+					<w:InputSlider items="{noteItems}" />
+				</w:FormGroup>
+			</fieldset>
+			<fieldset>
+				<legend>Your message</legend>
+				<w:FormGroup path="subject">
+					<w:InputSelect items="{subjectItems}" />
+				</w:FormGroup>
+				<w:FormGroup path="message">
+					<w:InputTextArea />
+				</w:FormGroup>
+			</fieldset>
+			<w:Footer>
+				<w:FormResetButton text="Reset" size="LARGE" />
+				<w:FormSubmitButton text="Submit" size="LARGE" />
+			</w:Footer>
+		</w:Form>
+    </w:HTMLPanel>
+</ui:UiBinder>

@@ -37,7 +37,7 @@
 				<li class="next"><a href="#!Tuto7">Part 7 : Add Google Analytics to your app &rarr;</a></li>
 			</ul>
 			
-			<p>In this tutorial, we will will create a theme to customize our app look-and-feel after the previous part  <em><a href="#!TutorialPart5">Part 5 : Build a simple issues tracker</a></em></p>
+			<p>In this tutorial, we will will create a theme to customize our app look-and-feel after the previous part  <em><a href="#!Tuto5">Part 5 : Build a simple issues tracker</a></em></p>
 			
 			<w:Heading level="2" summary="docSummary">Step 1 : <em>Customize CSS</em></w:Heading>
 			<p>PWT is great and so is Bootstrap, but you may want to customize a little the app style.</p>
@@ -92,6 +92,8 @@ a {
 			
 			<p>And that's it !</p>
 
+			<w:Alert ><h4>Note :</h4><p>You can see the result in the <code>doc/tutorials/Part6</code> folder in the PWT sources.</p></w:Alert>			
+			
 			<ul class="pager">
 				<li class="previous"><a href="#!Tuto5">&larr; Part 5 : Build a simple issues tracker</a></li>
 				<li class="next"><a href="#!Tuto7">Part 7 : Add Google Analytics to your app &rarr;</a></li>

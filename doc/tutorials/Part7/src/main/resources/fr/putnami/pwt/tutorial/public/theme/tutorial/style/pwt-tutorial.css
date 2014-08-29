@@ -1,0 +1,13 @@
+/** Overriding Bootstrap style */
+a {
+    color: #EE6644;
+}
+ 
+.btn {
+    color: #EE6644;
+}
+ 
+/** Tutorial Css */
+.tutorialContent {
+    margin-bottom: 20px;
+}

@@ -1,0 +1,50 @@
+apply plugin: 'java'
+apply plugin: 'gwt'
+apply plugin: 'jetty'
+
+buildscript {
+	repositories {
+		maven (){ url 'http://repo.putnami.org' }
+	}
+	dependencies {
+		classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.4-PWT_patched'
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven (){ url 'http://repo.putnami.org' }
+}
+
+dependencies {
+	compile 'fr.putnami.pwt:pwt:1.0.0-SNAPSHOT'
+	compile 'fr.putnami.pwt:pwt-google-analytics:1.0.0-SNAPSHOT'
+	providedCompile 'javax.validation:validation-api:1.0.0.GA'
+}
+
+gwt {
+	gwtVersion = '2.6.1'
+
+	// Modules used in production
+	modules = ['fr.putnami.pwt.tutorial.Tutorial']
+	// Modules used in dev mode and super dev mode.
+	devModules = ['fr.putnami.pwt.tutorial.TutorialDev']
+
+	superDev {
+	noPrecompile=true
+	}
+
+	// You can skip it if you won't use it
+	// If you add it, you'll have to apply the jetty plugin first.
+	gwtDev {
+		// Allows to debug with the standard Dev mode
+		// ( no more supported on Chrome for Linux or on Firefox)
+		jvmArgs('-Xdebug',  '-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000')
+	}
+}
+
+task jettyDraftWar(type: JettyRunWar) {
+	dependsOn draftWar
+	dependsOn.remove('war')
+	webApp=draftWar.archivePath
+}
