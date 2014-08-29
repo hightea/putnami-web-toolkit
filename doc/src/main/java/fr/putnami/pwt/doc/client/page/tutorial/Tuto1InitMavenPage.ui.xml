@@ -326,7 +326,7 @@ public class TutorialApp implements EntryPoint {
 			<p><kbd>mvn jetty:run</kbd></p>
 			<p>That's it !</p>
 	
-			<w:Alert ><h4>Note :</h4><p>You can see the result in the <code>doc/tutorials/Part1</code> folder in the PWT sources.</p></w:Alert>			
+			<w:Alert ><h4>Note :</h4><p>You can see the result in the <code>tutorials/Part1</code> folder in the PWT sources.</p></w:Alert>			
 			
 			<ul class="pager">
 				<li class="next"><a href="#!Tuto2">Part 2 : Build the welcome Page &rarr;</a></li>

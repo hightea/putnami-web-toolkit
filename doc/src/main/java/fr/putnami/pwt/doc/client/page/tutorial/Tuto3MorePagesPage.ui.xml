@@ -394,7 +394,7 @@ public class PageDecorator extends Composite implements AcceptsOneWidget {
 			<p>Then go to <a href="http://localhost:8080/putnami-pwt-tutorial/?locale=fr">http://localhost:8080/putnami-pwt-tutorial/?locale=fr</a> to see the french version of the welcome page.</p>
 			<p>Go to <a href="http://localhost:8080/putnami-pwt-tutorial/?locale=en">http://localhost:8080/putnami-pwt-tutorial/?locale=en</a> to see the default version.</p>
 			
-			<w:Alert ><h4>Note :</h4><p>You can see the result in the <code>doc/tutorials/Part3</code> folder in the PWT sources.</p></w:Alert>			
+			<w:Alert ><h4>Note :</h4><p>You can see the result in the <code>tutorials/Part3</code> folder in the PWT sources.</p></w:Alert>			
 			
 			<ul class="pager">
 				<li class="previous"><a href="#!Tuto2">&larr; Part 2 : Build the Welcome Page</a></li>
