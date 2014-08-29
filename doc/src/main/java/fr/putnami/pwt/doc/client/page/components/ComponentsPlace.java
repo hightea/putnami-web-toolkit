@@ -18,9 +18,10 @@ package fr.putnami.pwt.doc.client.page.components;
 
 import fr.putnami.pwt.core.mvp.client.ViewPlace;
 import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
+import fr.putnami.pwt.doc.client.application.SummaryDecorator;
 
 @ActivityDescription(view = ComponentsPage.class, aliases = {
 	"Tables", "Forms"
-})
+}, viewDecorator = SummaryDecorator.class)
 public class ComponentsPlace extends ViewPlace {
 }

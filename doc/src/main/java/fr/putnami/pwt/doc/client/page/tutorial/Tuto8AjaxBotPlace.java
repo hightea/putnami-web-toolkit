@@ -18,7 +18,8 @@ package fr.putnami.pwt.doc.client.page.tutorial;
 
 import fr.putnami.pwt.core.mvp.client.ViewPlace;
 import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
+import fr.putnami.pwt.doc.client.application.SummaryDecorator;
 
-@ActivityDescription(view = Tuto8AjaxBotPage.class, aliases = "Tuto8")
+@ActivityDescription(view = Tuto8AjaxBotPage.class, aliases = "Tuto8", viewDecorator = SummaryDecorator.class)
 public class Tuto8AjaxBotPlace extends ViewPlace {
 }

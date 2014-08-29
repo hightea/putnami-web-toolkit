@@ -32,12 +32,9 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
 import fr.putnami.pwt.core.widget.client.Affix;
-import fr.putnami.pwt.core.widget.client.Container;
 import fr.putnami.pwt.core.widget.client.HTMLPanel;
-import fr.putnami.pwt.core.widget.client.NavSpy;
 import fr.putnami.pwt.core.widget.client.OneWidgetPanel;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
-import fr.putnami.pwt.doc.client.social.widget.SocialBar;
 
 public class DocumentationDisplay extends Composite implements AcceptsOneWidget {
 
@@ -49,26 +46,13 @@ public class DocumentationDisplay extends Composite implements AcceptsOneWidget 
 	Affix affixMenu;
 	@UiField
 	HTMLPanel viewContainer;
-	@UiField
-	Affix tableOfContentAffix;
 
 	@UiField
-	OneWidgetPanel noPageContainer;
-	@UiField
-	Container pageContainer;
-	@UiField
-	NavSpy tableOfContent;
-	@UiField
-	OneWidgetPanel headerContainer;
-	@UiField
-	OneWidgetPanel contentContainer;
-	@UiField
-	SocialBar socialBar;
+	OneWidgetPanel container;
 
 	public DocumentationDisplay() {
 		initWidget(Binder.BINDER.createAndBindUi(this));
 
-		socialBar.setVisible(false);
 		Window.addResizeHandler(new ResizeHandler() {
 
 			@Override
@@ -88,27 +72,7 @@ public class DocumentationDisplay extends Composite implements AcceptsOneWidget 
 
 	@Override
 	public void setWidget(IsWidget w) {
-		noPageContainer.clear();
-		if (w instanceof Page) {
-			Page page = (Page) w;
-			noPageContainer.setVisible(false);
-			pageContainer.setVisible(true);
-			socialBar.setVisible(true);
-
-			headerContainer.setWidget(page.header);
-			contentContainer.setWidget(page.content);
-		}
-		else {
-			noPageContainer.setVisible(true);
-			pageContainer.setVisible(false);
-			socialBar.setVisible(false);
-
-			headerContainer.setWidget(null);
-			contentContainer.setWidget(null);
-			noPageContainer.add(w);
-		}
-
-		tableOfContent.redraw();
+		container.setWidget(w);
 		redraw(true);
 	}
 
@@ -129,7 +93,6 @@ public class DocumentationDisplay extends Composite implements AcceptsOneWidget 
 				Window.scrollTo(Window.getScrollLeft(), 0);
 			}
 		}
-		tableOfContentAffix.reset();
 	}
 
 }

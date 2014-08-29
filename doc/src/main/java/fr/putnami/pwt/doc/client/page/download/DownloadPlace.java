@@ -18,8 +18,9 @@ package fr.putnami.pwt.doc.client.page.download;
 
 import fr.putnami.pwt.core.mvp.client.ViewPlace;
 import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
+import fr.putnami.pwt.doc.client.application.SummaryDecorator;
 
-@ActivityDescription(view = DownloadPage.class)
+@ActivityDescription(view = DownloadPage.class, viewDecorator = SummaryDecorator.class)
 public class DownloadPlace extends ViewPlace {
 
 }
