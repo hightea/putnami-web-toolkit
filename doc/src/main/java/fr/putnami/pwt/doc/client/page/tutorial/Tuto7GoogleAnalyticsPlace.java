@@ -21,16 +21,16 @@ import com.google.gwt.core.client.GWT;
 import fr.putnami.pwt.core.mvp.client.MvpPlace;
 import fr.putnami.pwt.core.mvp.client.ViewProxy;
 
-public class TutorialPart1MavenPlace extends MvpPlace {
+public class Tuto7GoogleAnalyticsPlace extends MvpPlace {
 
-	public static final TutorialPart1MavenPlace INSTANCE = new TutorialPart1MavenPlace();
+	public static final Tuto7GoogleAnalyticsPlace INSTANCE = new Tuto7GoogleAnalyticsPlace();
 
-	public TutorialPart1MavenPlace() {
-		super((ViewProxy) GWT.create(Part1MavenView.class), null);
+	public Tuto7GoogleAnalyticsPlace() {
+		super((ViewProxy) GWT.create(Part7View.class), null);
 	}
 
 	@Override
 	public MvpPlace getPlace(String token) {
-		return TutorialPart1MavenPlace.INSTANCE;
+		return Tuto7GoogleAnalyticsPlace.INSTANCE;
 	}
 }

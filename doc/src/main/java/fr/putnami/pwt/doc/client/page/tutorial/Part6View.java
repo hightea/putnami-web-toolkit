@@ -22,7 +22,7 @@ import com.google.gwt.user.client.ui.Widget;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 import fr.putnami.pwt.doc.client.application.Page;
 
-public class Part6View extends Page<TutorialPart6Place> {
+public class Part6View extends Page<Tuto6ThemePlace> {
 
 	interface Binder extends UiBinderLocalized<Widget, Part6View> {
 	}

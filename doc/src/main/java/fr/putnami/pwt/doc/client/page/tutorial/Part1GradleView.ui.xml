@@ -33,11 +33,11 @@
 		<w:HTMLPanel ui:field="content">
 		
 			<ul class="pager">
-				<li class="next"><a href="#!TutorialPart2">Part 2 : Build the welcome Page &rarr;</a></li>
+				<li class="next"><a href="#!Tuto2FirstPage">Part 2 : Build the welcome Page &rarr;</a></li>
 			</ul>
 			
 			<p>In this tutorial, we will init a <strong title="Putnami Web Toolkit">PWT</strong> project named <em>putnami-pwt-tutorial</em> from scratch.</p>
-			<w:Alert ><h4>Note :</h4><p>In this tutorial, we use Gradle to build the project. If you use Maven, you should see the Maven version <a href="#!TutorialPart1Maven">here</a></p></w:Alert>
+			<w:Alert ><h4>Note :</h4><p>In this tutorial, we use Gradle to build the project. If you use Maven, you should see the Maven version <a href="#!Tuto1InitMaven">here</a></p></w:Alert>
 			
 			<w:Heading level="2" navSpy="{tableOfContent}">Gradle and GWT notice</w:Heading>
 			<p>Gradle does not support any official GWT plugin yet. However, there is a very nice one hosted on Github : <a href="https://github.com/steffenschaefer/gwt-gradle-plugin" target="_BLANK">Steffen Schäffer's gwt-gradle-plugin</a>.
@@ -237,7 +237,7 @@ public class TutorialApp implements EntryPoint {
 			<w:Alert ><h4>Note :</h4><p>You can see the result in the <code>doc/tutorials/Part1</code> folder in the PWT sources.</p></w:Alert>			
 			
 			<ul class="pager">
-				<li class="next"><a href="#!TutorialPart2">Part 2 : Build the welcome Page &rarr;</a></li>
+				<li class="next"><a href="#!Tuto2FirstPage">Part 2 : Build the welcome Page &rarr;</a></li>
 			</ul>
 		</w:HTMLPanel>
 	</w:HTMLPanel>

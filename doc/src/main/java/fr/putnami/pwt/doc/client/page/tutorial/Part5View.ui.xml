@@ -33,11 +33,11 @@
 		<w:HTMLPanel ui:field="content">
 		
 			<ul class="pager">
-				<li class="previous"><a href="#!TutorialPart4">&larr; Part 4 : Build a contact form</a></li>
-				<li class="next"><a href="#!TutorialPart6">Part 6 : Build a theme &rarr;</a></li>
+				<li class="previous"><a href="#!Tuto4BindAForm">&larr; Part 4 : Build a contact form</a></li>
+				<li class="next"><a href="#!Tuto6Theme">Part 6 : Build a theme &rarr;</a></li>
 			</ul>
 			
-			<p>In this tutorial, we will will create a simple issue tracker in our project with its contact form <em><a href="#!TutorialPart4">Part 4 : Build a contact form</a></em></p>
+			<p>In this tutorial, we will will create a simple issue tracker in our project with its contact form <em><a href="#!Tuto4BindAForm">Part 4 : Build a contact form</a></em></p>
 			
 			<w:Heading level="2" navSpy="{tableOfContent}">Step 1 : <em>Create the place, register it and add the item in the NavBar</em></w:Heading>
 			
@@ -622,8 +622,8 @@ public class IssueServiceImpl implements IssueService {
 			<w:Alert ><h4>Note :</h4><p>You can see the result in the <code>doc/tutorials/Part5</code> folder in the PWT sources.</p></w:Alert>			
 			
 			<ul class="pager">
-				<li class="previous"><a href="#!TutorialPart4">&larr; Part 4 : Build a contact form</a></li>
-				<li class="next"><a href="#!TutorialPart6">Part 6 : Build a theme &rarr;</a></li>
+				<li class="previous"><a href="#!Tuto4BindAForm">&larr; Part 4 : Build a contact form</a></li>
+				<li class="next"><a href="#!Tuto6Theme">Part 6 : Build a theme &rarr;</a></li>
 			</ul>
 		</w:HTMLPanel>
 	</w:HTMLPanel>

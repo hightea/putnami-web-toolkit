@@ -22,7 +22,7 @@ import com.google.gwt.user.client.ui.Widget;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 import fr.putnami.pwt.doc.client.application.Page;
 
-public class Part1GradleView extends Page<TutorialPart1GradlePlace> {
+public class Part1GradleView extends Page<Tuto1InitGradlePlace> {
 
 	interface Binder extends UiBinderLocalized<Widget, Part1GradleView> {
 	}

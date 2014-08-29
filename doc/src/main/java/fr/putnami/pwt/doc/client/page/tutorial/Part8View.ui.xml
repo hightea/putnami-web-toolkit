@@ -33,10 +33,10 @@
 		<w:HTMLPanel ui:field="content">
 		
 			<ul class="pager">
-				<li class="previous"><a href="#!TutorialPart7">&larr; Part 7 : Add Google Analytics to your app</a></li>
+				<li class="previous"><a href="#!Tuto7GoogleAnalytics">&larr; Part 7 : Add Google Analytics to your app</a></li>
 			</ul>
 			
-			<p>In this tutorial, we will will add the ajax bot plugin allowing our app (from  <em><a href="#!TutorialPart7">Part 7 : Add Google Analytics to your app</a></em>) to be indexed by the search engine bots.</p>
+			<p>In this tutorial, we will will add the ajax bot plugin allowing our app (from  <em><a href="#!Tuto7GoogleAnalytics">Part 7 : Add Google Analytics to your app</a></em>) to be indexed by the search engine bots.</p>
 			
 			<w:Heading level="2" navSpy="{tableOfContent}">Step 1 : <em>Add the dependency in the build script</em></w:Heading>
 			<p>Simply add the following dependency in the <code>build.gradle</code> file :</p>
@@ -101,7 +101,7 @@ dependencies {
 			<w:Alert ><h4>Note :</h4><p>You can see the result in the <code>doc/tutorials/Part8</code> folder in the PWT sources.</p></w:Alert>			
 			
 			<ul class="pager">
-				<li class="previous"><a href="#!TutorialPart7">&larr; Part 7 : Add Google Analytics to your app</a></li>
+				<li class="previous"><a href="#!Tuto7GoogleAnalytics">&larr; Part 7 : Add Google Analytics to your app</a></li>
 			</ul>
 		</w:HTMLPanel>
 	</w:HTMLPanel>

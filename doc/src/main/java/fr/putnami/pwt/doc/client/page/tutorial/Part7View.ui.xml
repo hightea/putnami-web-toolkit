@@ -33,11 +33,11 @@
 		<w:HTMLPanel ui:field="content">
 		
 			<ul class="pager">
-				<li class="previous"><a href="#!TutorialPart6">&larr; Part 6 : Build a theme</a></li>
-				<li class="next"><a href="#!TutorialPart8">Part 8 : Add Ajax Bot Filter &rarr;</a></li>
+				<li class="previous"><a href="#!Tuto6Theme">&larr; Part 6 : Build a theme</a></li>
+				<li class="next"><a href="#!Tuto8AjaxBot">Part 8 : Add Ajax Bot Filter &rarr;</a></li>
 			</ul>
 			
-			<p>In this tutorial, we will will add the google analytics plugin allowing our app (from  <em><a href="#!TutorialPart6">Part 6 : Build a theme</a></em>) to be audited via Google Analytics.</p>
+			<p>In this tutorial, we will will add the google analytics plugin allowing our app (from  <em><a href="#!Tuto6Theme">Part 6 : Build a theme</a></em>) to be audited via Google Analytics.</p>
 			
 			<w:Heading level="2" navSpy="{tableOfContent}">Step 1 : <em>Add the dependency in the build script</em></w:Heading>
 			
@@ -118,8 +118,8 @@ dependencies {
 			<w:Alert ><h4>Note :</h4><p>You can see the result in the <code>doc/tutorials/Part7</code> folder in the PWT sources.</p></w:Alert>			
 			
 			<ul class="pager">
-				<li class="previous"><a href="#!TutorialPart6">&larr; Part 6 : Build a theme</a></li>
-				<li class="next"><a href="#!TutorialPart8">Part 8 : Add Ajax Bot Filter &rarr;</a></li>
+				<li class="previous"><a href="#!Tuto6Theme">&larr; Part 6 : Build a theme</a></li>
+				<li class="next"><a href="#!Tuto8AjaxBot">Part 8 : Add Ajax Bot Filter &rarr;</a></li>
 			</ul>
 		</w:HTMLPanel>
 	</w:HTMLPanel>

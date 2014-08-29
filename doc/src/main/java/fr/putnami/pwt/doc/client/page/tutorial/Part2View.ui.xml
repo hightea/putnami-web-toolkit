@@ -33,11 +33,11 @@
 		<w:HTMLPanel ui:field="content">
 		
 			<ul class="pager">
-				<li class="previous"><a href="#!TutorialPart1Gradle">&larr; Part 1 : Init a PWT project</a></li>
-				<li class="next"><a href="#!TutorialPart3">Part 3 : Build more pages &rarr;</a></li>
+				<li class="previous"><a href="#!Tuto1InitGradle">&larr; Part 1 : Init a PWT project</a></li>
+				<li class="next"><a href="#!Tuto3MorePages">Part 3 : Build more pages &rarr;</a></li>
 			</ul>
 		
-			<p>In this tutorial, we will will add a static welcome page to the project inited in <em><a href="#!TutorialPart1Gradle">Part 1 : Init a PWT project</a></em></p>
+			<p>In this tutorial, we will will add a static welcome page to the project inited in <em><a href="#!Tuto1InitGradle">Part 1 : Init a PWT project</a></em></p>
 			
 			<w:Heading level="2" navSpy="{tableOfContent}">Step 1 : <em>Ensure the Module XML configuration</em></w:Heading>
 			<p>In order to use the <strong title="Putnami Web Toolkit">PWT</strong>'s widgets and MVP features, the module XML file must containe the following :</p>
@@ -212,8 +212,8 @@ public class WelcomeView extends Composite implements View<WelcomePlace> {
 			<w:Alert ><h4>Note :</h4><p>You can see the result in the <code>doc/tutorials/Part2</code> folder in the PWT sources.</p></w:Alert>			
 			
 			<ul class="pager">
-				<li class="previous"><a href="#!TutorialPart1Gradle">&larr; Part 1 : Init a PWT project</a></li>
-				<li class="next"><a href="#!TutorialPart3">Part 3 : Build more pages &rarr;</a></li>
+				<li class="previous"><a href="#!Tuto1InitGradle">&larr; Part 1 : Init a PWT project</a></li>
+				<li class="next"><a href="#!Tuto3MorePages">Part 3 : Build more pages &rarr;</a></li>
 			</ul>
 		</w:HTMLPanel>
 	</w:HTMLPanel>
