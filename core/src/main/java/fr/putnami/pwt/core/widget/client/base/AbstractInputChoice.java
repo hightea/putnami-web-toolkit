@@ -37,9 +37,9 @@ import fr.putnami.pwt.core.widget.client.event.ChangeEvent;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public abstract class AbstractInputChoice<T, U> extends AbstractInput<U> implements
-		HasValueChangeHandlers<U>,
-		ValueChangeHandler<U>,
-		HasMessageHelper {
+HasValueChangeHandlers<U>,
+ValueChangeHandler<U>,
+HasMessageHelper {
 
 	public interface ChoiceSelectionHandler<T, U> {
 
@@ -150,6 +150,7 @@ public abstract class AbstractInputChoice<T, U> extends AbstractInput<U> impleme
 	public void setItems(Collection<T> items) {
 		orderedItems.clear();
 		orderedItems.addAll(items);
+		redrawInternal();
 	}
 
 	public void setNullRender(String nullRender) {
