@@ -1,0 +1,275 @@
+<!--
+
+    This file is part of pwt.
+
+    pwt is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client"
+	xmlns:s="urn:import:fr.putnami.pwt.doc.client.page.starting">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+ 	<ui:with field="switchItems" type="java.util.List" />
+ 	
+	<w:HTMLPanel>
+		<w:Heading level="2" summary="docSummary">Start from scratch</w:Heading>
+		<p>
+			From our point of view, Gradle is the best build automation ever made. We realy advice to use Gradle for your next accomplishments.
+		</p>
+		
+		<w:InputSwitch ui:field="switchBuild" items="{switchItems}" styleName="pull-right"/>
+		<div class="clearfix"></div>
+		<br/>
+
+		<w:HTMLPanel ui:field="buildGradlePanel">
+			<w:Heading level="3">Build script <small>build.gradle</small></w:Heading>
+	
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+apply plugin: 'java'
+apply plugin: 'gwt'
+apply plugin: 'jetty'
+
+buildscript {
+	repositories.maven (){ url 'http://repo.putnami.org' }
+	dependencies{ classpath = 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.4-PWT_patched' }
+}
+
+repositories {
+	mavenCentral()
+	maven(){ url 'http://repo.putnami.org' }
+}
+
+dependencies {
+	compile 'fr.putnami.pwt:pwt:1.1.0-SNAPSHOT'
+}
+
+gwt {
+	gwtVersion = '2.6.1'
+	modules = 'test.HelloPwt'
+}
+]]></pre>
+			</c:StaticCode>
+		</w:HTMLPanel>
+		
+		<w:HTMLPanel ui:field="buildMavenPanel">
+			<w:Heading level="3">Build script <small>pom.xml</small></w:Heading>
+	
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+ <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+     <modelVersion>4.0.0</modelVersion>
+     <groupId>test</groupId>
+     <artifactId>test</artifactId>
+     <packaging>war</packaging>
+     <version>1.0-SNAPSHOT</version>
+     <name>Putnami Web Toolkit Hello world</name>
+
+     <repositories>
+         <repository>
+             <id>putnami.org</id>
+             <url>http://repo.putnami.org/</url>
+         </repository>
+     </repositories>
+
+     <properties>
+         <pwt.version>1.1.0-SNAPSHOT</pwt.version>
+         <gwt.version>2.6.1</gwt.version>
+         <jetty.plugin.version>9.2.0.v20140526</jetty.plugin.version>
+         <project.compiler.source>1.7</project.compiler.source>
+         <project.compiler.target>1.7</project.compiler.target>
+         <project.sourceEncoding>UTF-8</project.sourceEncoding>
+         <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+     </properties>
+
+     <dependencies>
+         <dependency>
+             <groupId>fr.putnami.pwt</groupId>
+             <artifactId>pwt</artifactId>
+             <version>${pwt.version}</version>
+         </dependency>
+         <dependency>
+             <groupId>com.google.gwt</groupId>
+             <artifactId>gwt-user</artifactId>
+             <version>${gwt.version}</version>
+             <scope>provided</scope>
+         </dependency>
+         <dependency>
+             <groupId>com.google.gwt</groupId>
+             <artifactId>gwt-servlet</artifactId>
+             <version>${gwt.version}</version>
+         </dependency>
+     </dependencies>
+
+     <build>
+         <outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
+         <pluginManagement>
+             <plugins>
+                 <plugin>
+                     <groupId>org.apache.maven.plugins</groupId>
+                     <artifactId>maven-compiler-plugin</artifactId>
+                     <version>3.1</version>
+                     <configuration>
+                         <source>${project.compiler.source}</source>
+                         <target>${project.compiler.target}</target>
+                         <encoding>${project.sourceEncoding}</encoding>
+                     </configuration>
+                 </plugin>
+                 <plugin>
+                     <groupId>org.apache.maven.plugins</groupId>
+                     <artifactId>maven-war-plugin</artifactId>
+                     <version>2.4</version>
+                     <executions>
+                         <execution>
+                             <phase>compile</phase>
+                             <goals>
+                                 <goal>exploded</goal>
+                             </goals>
+                         </execution>
+                     </executions>
+                     <configuration>
+                         <webappDirectory>${webappDirectory}</webappDirectory>
+                     </configuration>
+                 </plugin>
+                 <plugin>
+                     <groupId>org.codehaus.mojo</groupId>
+                     <artifactId>gwt-maven-plugin</artifactId>
+                     <version>${gwt.version}</version>
+                     <executions>
+                         <execution>
+                             <goals>
+                                 <goal>compile</goal>
+                             </goals>
+                         </execution>
+                     </executions>
+                     <configuration>
+                         <runTarget>/index.html</runTarget>
+                         <modules>
+                             <module>test.HelloPwt</module>
+                         </modules>
+                         <hostedWebapp>${webappDirectory}</hostedWebapp>
+                     </configuration>
+                 </plugin>
+                 <plugin>
+                     <groupId>org.eclipse.jetty</groupId>
+                     <artifactId>jetty-maven-plugin</artifactId>
+                     <version>${jetty.plugin.version}</version>
+                     <configuration>
+                         <webAppSourceDirectory>${webappDirectory}</webAppSourceDirectory>
+                         <contextPath>/</contextPath>
+                     </configuration>
+                 </plugin>
+             </plugins>
+         </pluginManagement>
+         <plugins>
+             <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-compiler-plugin</artifactId>
+             </plugin>
+             <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-war-plugin</artifactId>
+             </plugin>
+             <plugin>
+                 <groupId>org.codehaus.mojo</groupId>
+                 <artifactId>gwt-maven-plugin</artifactId>
+             </plugin>
+             <plugin>
+                 <groupId>org.eclipse.jetty</groupId>
+                 <artifactId>jetty-maven-plugin</artifactId>
+             </plugin>
+         </plugins>
+     </build>
+</project>
+]]></pre>
+			</c:StaticCode>
+		</w:HTMLPanel>
+			
+		<w:Heading level="3">GWT module <small>src/main/java/test/HelloPwt.gwt.xml</small></w:Heading>
+		<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to="HelloPwt">
+	<inherits name="fr.putnami.pwt.core.widget.Widget"/>
+	<entry-point class="test.client.HelloPwtApp"/>
+	<add-linker name="xsiframe" />
+</module>
+]]></pre>
+		</c:StaticCode>
+		
+		<w:Heading level="3">EntryPoint <small>src/main/java/test/client/HelloPwtApp.java</small></w:Heading>
+		<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+package test.client;
+
+import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.ui.RootPanel;
+
+import fr.putnami.pwt.core.widget.client.OutputStaticText;
+
+public class HelloPwtApp implements EntryPoint {
+
+	@Override
+	public void onModuleLoad() {
+		RootPanel.get().add(new OutputStaticText("Hello Putnami"));
+	}
+}
+]]></pre>
+		</c:StaticCode>
+		
+		<w:Heading level="3">HTML application holder  <small>src/main/webapp/index.html</small></w:Heading>
+		<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="HelloPwt/HelloPwt.nocache.js"></script>
+  </head>
+  <body>
+  </body>
+</html>
+
+]]></pre>
+		</c:StaticCode>
+	
+		
+		<w:Heading level="3">Run the web app</w:Heading>
+		<w:HTMLPanel ui:field="runGradlePanel">
+<pre><![CDATA[
+gradle jettyRunWar
+]]></pre>
+		</w:HTMLPanel>
+		<w:HTMLPanel ui:field="runMavenPanel">
+<pre><![CDATA[
+mvn gwt:compile jetty:run
+]]></pre>
+		</w:HTMLPanel>
+		<p>Then browse the sample on <a href="http://localhost:8080/test">http://localhost:8080/test</a>.</p>
+	
+		
+		<w:Heading level="3">Go further</w:Heading>
+		<p>
+		To go further, follow the tutorials and read the doc. PWT provides a full framework to build rich and maintainable webapps. Have fun ;)
+		</p>
+
+	</w:HTMLPanel>
+</ui:UiBinder>
