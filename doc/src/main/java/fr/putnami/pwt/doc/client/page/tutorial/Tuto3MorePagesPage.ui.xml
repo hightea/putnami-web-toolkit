@@ -46,29 +46,15 @@
 <pre><![CDATA[
 package fr.putnami.pwt.tutorial.client.contact;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Widget;
 
+import fr.putnami.pwt.core.inject.client.annotation.Templated;
 import fr.putnami.pwt.core.mvp.client.View;
-import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 
-public class ContactView extends Composite implements View<ContactPlace> {
-
-	interface Binder extends UiBinderLocalized<Widget, ContactView> {
-		Binder BINDER = GWT.create(Binder.class);
-	}
-
-	public ContactView() {
-		initWidget(Binder.BINDER.createAndBindUi(this));
-	}
-
-	@Override
-	public void present(ContactPlace place) {
-		// Do Nothing
-	}
-
-}]]></pre>
+@Templated
+public class ContactView extends Composite implements View {
+}
+]]></pre>
 			</c:StaticCode>
 			
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
@@ -87,29 +73,15 @@ public class ContactView extends Composite implements View<ContactPlace> {
 <pre><![CDATA[
 package fr.putnami.pwt.tutorial.client.about;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Widget;
 
+import fr.putnami.pwt.core.inject.client.annotation.Templated;
 import fr.putnami.pwt.core.mvp.client.View;
-import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 
-public class AboutView extends Composite implements View<AboutPlace> {
-
-	interface Binder extends UiBinderLocalized<Widget, AboutView> {
-		Binder BINDER = GWT.create(Binder.class);
-	}
-
-	public AboutView() {
-		initWidget(Binder.BINDER.createAndBindUi(this));
-	}
-
-	@Override
-	public void present(AboutPlace place) {
-		// Do Nothing
-	}
-
-}]]></pre>
+@Templated
+public class AboutView extends Composite implements View {
+}
+]]></pre>
 			</c:StaticCode>
 			
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
@@ -135,7 +107,8 @@ public class AboutView extends Composite implements View<AboutPlace> {
 			</w:GridColumn>
 		</w:GridRow>
 	</w:HTMLPanel>
-</ui:UiBinder>]]></pre>
+</ui:UiBinder>
+]]></pre>
 			</c:StaticCode>
 			
 			<p>Then the places :</p>
@@ -144,56 +117,35 @@ public class AboutView extends Composite implements View<AboutPlace> {
 <pre><![CDATA[
 package fr.putnami.pwt.tutorial.client.contact;
 
-import com.google.gwt.core.client.GWT;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
-import fr.putnami.pwt.core.mvp.client.MvpPlace;
-import fr.putnami.pwt.core.mvp.client.ViewProxy;
-
-public class ContactPlace extends MvpPlace {
-
-	public static final ContactPlace INSTANCE = new ContactPlace();
-
-	public ContactPlace() {
-		super((ViewProxy) GWT.create(ContactView.class), null);
-	}
-
-	@Override
-	public MvpPlace getPlace(String token) {
-		return ContactPlace.INSTANCE;
-	}
-}]]></pre>
+@ActivityDescription(view = ContactView.class)
+public class ContactPlace extends ViewPlace {
+}
+]]></pre>
 			</c:StaticCode>
 			
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
 package fr.putnami.pwt.tutorial.client.about;
 
-import com.google.gwt.core.client.GWT;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
-import fr.putnami.pwt.core.mvp.client.MvpPlace;
-import fr.putnami.pwt.core.mvp.client.ViewProxy;
-
-public class AboutPlace extends MvpPlace {
-
-	public static final AboutPlace INSTANCE = new AboutPlace();
-
-	public AboutPlace() {
-		super((ViewProxy) GWT.create(AboutView.class), null);
-	}
-
-	@Override
-	public MvpPlace getPlace(String token) {
-		return AboutPlace.INSTANCE;
-	}
-}]]></pre>
+@ActivityDescription(view = AboutView.class)
+public class AboutPlace extends ViewPlace {
+}
+]]></pre>
 			</c:StaticCode>
 			
 			<p>Finally, we declare the places to the <code>MvpController</code> in the entry point :</p>
 			
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-    controller.registerActivity(AboutPlace.INSTANCE);
-	controller.registerActivity(ContactPlace.INSTANCE);]]></pre>
+controller.registerActivity((ActivityFactory) GWT.create(AboutPlace.class));
+controller.registerActivity((ActivityFactory) GWT.create(ContactPlace.class));
+]]></pre>
 			</c:StaticCode>
 			
 			
@@ -204,16 +156,18 @@ public class AboutPlace extends MvpPlace {
 
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
 <pre><![CDATA[
-    <w:Button ui:field="aboutButton" text="About" iconType="HELP" />]]></pre>
+<w:Button ui:field="aboutButton" text="About" iconType="HELP" />
+]]></pre>
 			</c:StaticCode>
 			
 			<p>and in the java class :</p>
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-	@UiHandler("aboutButton")
-	public void onAboutButton(ButtonEvent event) {
-		MvpController.get().goTo(AboutPlace.INSTANCE);
-	}]]></pre>
+@UiHandler("aboutButton")
+public void onAboutButton(ButtonEvent event) {
+	MvpController.get().goTo(AboutPlace.INSTANCE);
+}
+]]></pre>
 			</c:StaticCode>
 			
 			
@@ -227,28 +181,20 @@ public class AboutPlace extends MvpPlace {
 <pre><![CDATA[
 package fr.putnami.pwt.tutorial.client.application;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Widget;
 
+import fr.putnami.pwt.core.inject.client.annotation.Templated;
+import fr.putnami.pwt.core.mvp.client.View;
 import fr.putnami.pwt.core.widget.client.OneWidgetPanel;
-import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 
-public class PageDecorator extends Composite implements AcceptsOneWidget {
-
-	interface Binder extends UiBinderLocalized<Widget, PageDecorator> {
-		Binder BINDER = GWT.create(Binder.class);
-	}
+@Templated
+public class PageDecorator extends Composite implements AcceptsOneWidget, View {
 
 	@UiField
 	OneWidgetPanel viewContainer;
-
-	public PageDecorator() {
-		initWidget(Binder.BINDER.createAndBindUi(this));
-	}
 
 	@Override
 	public void setWidget(IsWidget w) {
@@ -257,7 +203,8 @@ public class PageDecorator extends Composite implements AcceptsOneWidget {
 		}
 		viewContainer.setWidget(w);
 	}
-}]]></pre>
+}
+]]></pre>
 			</c:StaticCode>
 			
 			<p>And the associated ui.xml file :</p>
@@ -306,10 +253,12 @@ public class PageDecorator extends Composite implements AcceptsOneWidget {
 			<p>And set the decorator as <code>ActivityManager</code>'s display in the <code>TutorialApp</code> class :</p>
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-    PageDecorator display = new PageDecorator();
-    RootPanel.get().add(display);
-    ...
-    controller.setDisplay(display);]]></pre>
+PageDecorator display = new PageDecorator();
+RootPanel.get().add(display);
+...
+MvpController controller = MvpController.get();
+controller.setDisplay(display);
+]]></pre>
 			</c:StaticCode>
 			
 			

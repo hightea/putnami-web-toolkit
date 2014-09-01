@@ -47,24 +47,13 @@
 <pre><![CDATA[
 package fr.putnami.pwt.tutorial.client.issues;
 
-import com.google.gwt.core.client.GWT;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
-import fr.putnami.pwt.core.mvp.client.MvpPlace;
-import fr.putnami.pwt.core.mvp.client.ViewProxy;
-
-public class IssuesPlace extends MvpPlace {
-
-	public static final IssuesPlace INSTANCE = new IssuesPlace();
-
-	public IssuesPlace() {
-		super((ViewProxy) GWT.create(IssuesView.class), null);
-	}
-
-	@Override
-	public MvpPlace getPlace(String token) {
-		return IssuesPlace.INSTANCE;
-	}
-}]]></pre>
+@ActivityDescription(view = IssuesView.class)
+public class IssuesPlace extends ViewPlace {
+}
+]]></pre>
 			</c:StaticCode>
 			
 			<p>And the view :</p>
@@ -77,25 +66,14 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
+import fr.putnami.pwt.core.inject.client.annotation.Templated;
 import fr.putnami.pwt.core.mvp.client.View;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 
-public class IssuesView extends Composite implements View<IssuesPlace> {
-
-	interface Binder extends UiBinderLocalized<Widget, IssuesView> {
-		Binder BINDER = GWT.create(Binder.class);
-	}
-
-	public IssuesView() {
-		initWidget(Binder.BINDER.createAndBindUi(this));
-	}
-
-	@Override
-	public void present(IssuesPlace place) {
-		// Do Nothing
-	}
-
-}]]></pre>
+@Templated
+public class IssuesView extends Composite implements View {
+}
+]]></pre>
 			</c:StaticCode>
 			
 			<p>We will create the ui.xml file in the next step.</p>
@@ -103,7 +81,8 @@ public class IssuesView extends Composite implements View<IssuesPlace> {
 			<p>Now we register the place in the application entry point (here <code>TutorialApp</code>) :</p>
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-	controller.registerActivity(IssuesPlace.INSTANCE)]]></pre>
+controller.registerActivity((ActivityFactory) GWT.create(IssuesPlace.class));
+]]></pre>
 			</c:StaticCode>
 			
 			<p>And now, we add an entry in the NavBar in the <code>PageDecorator.ui.xml</code> :</p>
@@ -113,7 +92,8 @@ public class IssuesView extends Composite implements View<IssuesPlace> {
 	<w:Nav>
 		<w:NavLink label="Issues Tracker" link="#!Issues"/>
 		<w:NavLink label="Contact" link="#!Contact"/>
-	...]]></pre>
+	...
+]]></pre>
 			</c:StaticCode>
 			
 			<w:Heading level="2" summary="docSummary">Step 2 : <em>Define the model</em></w:Heading>
@@ -306,19 +286,10 @@ public interface IssueConstants extends ValidationConstants {
 			<p>We have to initialize the <code>TableEditor</code> in the <code>IssuesView</code> :</p>
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-	interface IssueModel extends Model<Issue> {
-		Model<Issue> MODEL = GWT.create(IssueModel.class);
-	}
-
-	@UiField
-	TableEditor<Issue> issuesTable;
-
-    public IssuesView() {
-        ...
-        MessageHelper helper = new MessageHelper((ConstantsWithLookup) GWT.create(IssueConstants.class));
-		issuesTable.setMessageHelper(helper);
-		issuesTable.initialize(IssueModel.MODEL);
-	}]]></pre>
+@UiField
+@Initialize(constantsClass = IssueConstants.class)
+TableEditor<Issue> issuesTable;
+]]></pre>
 			</c:StaticCode>
 			
 			<p>To display some issues, we have to retrieve them from server.
@@ -373,45 +344,43 @@ public class IssueServiceImpl implements IssueService {
 		// Do your implementation
 		return issue;
 	}
-}]]></pre>
+}
+]]></pre>
 			</c:StaticCode>
 			
 			<p>And we have to register the service to the <code>CommandService</code> in the <code>web.xml</code> :</p>
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
 <pre><![CDATA[
-	...
-	<init-param>
-		<param-name>services</param-name>
-		<param-value>fr.putnami.pwt.tutorial.server.service.ContactServiceImpl;fr.putnami.pwt.tutorial.server.service.IssueServiceImpl</param-value>
-	</init-param>
-	...]]></pre>
+...
+<init-param>
+	<param-name>services</param-name>
+	<param-value>fr.putnami.pwt.tutorial.server.service.ContactServiceImpl;fr.putnami.pwt.tutorial.server.service.IssueServiceImpl</param-value>
+</init-param>
+...
+]]></pre>
 			</c:StaticCode>
 			
 			<p>Now we can bind it on the client <code>IssuesView</code> :</p>
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-	interface IssueRemoteService extends ServiceProxy<IssuesView, IssueService>, IssueService {
-		IssueRemoteService SERVICE = GWT.create(IssueRemoteService.class);
-	}
-
-	public IssuesView() {
-		...
-		IssueRemoteService.SERVICE.bindService(this);
-	}]]></pre>
+@InjectService
+IssueService service;
+]]></pre>
 			</c:StaticCode>
 			
-			<p>Now, on the place presenting, we will retrieve the list of issues from the server :</p>
+			<p>Now, on the place presenting (<code>@PresentHandler</code> methods), we will retrieve the list of issues from the server :</p>
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-	@Override
-	public void present(IssuesPlace place) {
-		IssueRemoteService.SERVICE.listIssues();
-	}
+@PresentHandler
+void present(IssuesPlace place) {
+	service.listIssues();
+}
 
-	@AsyncHandler
-	public void onListIssues(List<Issue> issues) {
-		issuesTable.edit(issues);
-	}]]></pre>
+@AsyncHandler
+void onListIssues(List<Issue> issues) {
+	issuesTable.edit(issues);
+}
+]]></pre>
 			</c:StaticCode>
 			
 			
@@ -421,79 +390,75 @@ public class IssueServiceImpl implements IssueService {
 			<p>We add two fields on the ui :</p>
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
 <pre><![CDATA[
-	...
-	<w:GridRow>
-		<w:GridColumn size="4">
-			<w:Form ui:field="searchEditor" layout="BASIC">
-				<w:FormGroup path="label"/>
-				<w:FormGroup path="name"/>
-				<w:FormResetButton text="Reset" />
-				<w:FormSubmitButton text="Search" />
-			</w:Form>
-		</w:GridColumn>
-		<w:GridColumn size="8">
-			<w:TableEditor ui:field="issuesTable" readonly="true">
-	...]]></pre>
+...
+<w:GridRow>
+	<w:GridColumn size="4">
+		<w:Form ui:field="searchEditor" layout="BASIC">
+			<w:FormGroup path="label"/>
+			<w:FormGroup path="name"/>
+			<w:FormResetButton text="Reset" />
+			<w:FormSubmitButton text="Search" />
+		</w:Form>
+	</w:GridColumn>
+	<w:GridColumn size="8">
+		<w:TableEditor ui:field="issuesTable" readonly="true">
+...
+]]></pre>
 			</c:StaticCode>
 			
 			<p>And now we define the bean, the constants and init the search form with it in the <code>IssuesView</code> :</p>
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-	public static class SearchBean {
-		public String label;
-		public String name;
-	}
+public static class SearchBean {
+	public String label;
+	public String name;
+}
 
-	interface SearchConstants extends ConstantsWithLookup {
-		@DefaultStringValue("Label")
-		String label();
+interface SearchConstants extends ConstantsWithLookup {
+	@DefaultStringValue("Label")
+	String label();
 
-		@DefaultStringValue("Issue label...")
-		String labelPlaceholder();
+	@DefaultStringValue("Issue label...")
+	String labelPlaceholder();
 
-		@DefaultStringValue("Name")
-		String name();
+	@DefaultStringValue("Name")
+	String name();
 
-		@DefaultStringValue("Issue name...")
-		String namePlaceholder();
-	}
+	@DefaultStringValue("Issue name...")
+	String namePlaceholder();
+}
 
-	interface SearchModel extends Model<SearchBean> {
-		Model<SearchBean> MODEL = GWT.create(SearchModel.class);
-	}
+@UiField
+@Initialize(constantsClass = SearchConstants.class)
+Form<SearchBean> searchEditor;
 
-	@UiField
-	Form<SearchBean> searchEditor;
-
+@PresentHandler
+void present(IssuesPlace place) {
 	...
-
-	public IssuesView() {
-		...
-		MessageHelper searchHelper = new MessageHelper((ConstantsWithLookup) GWT.create(SearchConstants.class));
-		searchEditor.setMessageHelper(searchHelper);
-		searchEditor.initialize(SearchModel.MODEL);
-		searchEditor.edit(new SearchBean());
-	}]]></pre>
+	searchEditor.edit(new SearchBean());
+}
+]]></pre>
 			</c:StaticCode>
 			
 			<p>And now, we add the handlers to the view :</p>
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-	@UiHandler("searchEditor")
-	public void onSearchSubmit(FlushSuccessEvent event) {
-		SearchBean search = (SearchBean) event.getValue();
-		IssueRemoteService.SERVICE.searchIssues(search.name, search.label);
-	}
+@UiHandler("searchEditor")
+void onSearchSubmit(FlushSuccessEvent event) {
+	SearchBean search = (SearchBean) event.getValue();
+	service.searchIssues(search.name, search.label);
+}
 
-	@UiHandler("searchEditor")
-	public void onSearchReset(ResetDisplayEvent event) {
-		IssueRemoteService.SERVICE.listIssues();
-	}
+@UiHandler("searchEditor")
+void onSearchReset(ResetDisplayEvent event) {
+	service.listIssues();
+}
 
-	@AsyncHandler
-	public void onSearchIssues(List<Issue> issues) {
-		issuesTable.edit(issues);
-	}]]></pre>
+@AsyncHandler
+void onSearchIssues(List<Issue> issues) {
+	issuesTable.edit(issues);
+}
+]]></pre>
 			</c:StaticCode>
 			
 			<p>And That's it !!</p>
@@ -509,7 +474,8 @@ public class IssueServiceImpl implements IssueService {
 <pre><![CDATA[
 <ui:Binder ...>
 	<ui:with field="labelItems" type="java.util.List" />
-	 ...]]></pre>
+	 ...
+]]></pre>
 					</c:StaticCode>
 				</li>
 				<li>A Button to open the popup :
@@ -519,32 +485,34 @@ public class IssueServiceImpl implements IssueService {
 		<w:GridColumn size="4">
 			<w:Button ui:field="addIssue" iconType="ADD" text="Declare an issue" type="LINK"/>
 			<w:Form ui:field="searchEditor" layout="BASIC">
-	...]]></pre>
+	...
+]]></pre>
 					</c:StaticCode>
 				</li>
 				<li>The modal :
 					<c:StaticCode configuration="{XML_CONFIGURATION}">
 <pre><![CDATA[
-	<w:Modal ui:field="modal" title="Edit an Issue" dismissable="true">
-		<w:Form ui:field="issueEditor" layout="HORIZONTAL">
-			<w:FormGroup path="id" readonly="true" />
-			<w:FormGroup path="name" />
-			<w:FormGroup path="type" />
-			<w:FormGroup path="labels" >
-				<w:InputMultiSelect items="{labelItems}" />
-				<w:OutputList >
-					<w:OutputText />
-				</w:OutputList>
-			</w:FormGroup>
-			<w:FormGroup path="description" >
-				<w:InputTextArea />
-			</w:FormGroup>
-			<w:Footer>
-				<w:FormResetButton text="Reset" />
-				<w:FormSubmitButton text="Save" />
-			</w:Footer>
-		</w:Form>
-	</w:Modal>]]></pre>
+<w:Modal ui:field="modal" title="Edit an Issue" dismissable="true">
+	<w:Form ui:field="issueEditor" layout="HORIZONTAL">
+		<w:FormGroup path="id" readonly="true" />
+		<w:FormGroup path="name" />
+		<w:FormGroup path="type" />
+		<w:FormGroup path="labels" >
+			<w:InputMultiSelect items="{labelItems}" />
+			<w:OutputList >
+				<w:OutputText />
+			</w:OutputList>
+		</w:FormGroup>
+		<w:FormGroup path="description" >
+			<w:InputTextArea />
+		</w:FormGroup>
+		<w:Footer>
+			<w:FormResetButton text="Reset" />
+			<w:FormSubmitButton text="Save" />
+		</w:Footer>
+	</w:Form>
+</w:Modal>
+]]></pre>
 					</c:StaticCode>
 				</li>
 			</ol>
@@ -553,66 +521,62 @@ public class IssueServiceImpl implements IssueService {
 				<li><p>The <code>UiField</code>s used in the class :</p>
 					<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-	@UiField(provided = true)
-	List<String> labelItems = Arrays.asList("Bug", "Enhancement", "Question", "Duplicate", "Invalid", "WontFix");
+@UiField(provided = true)
+final List<String> labelItems = Arrays.asList("Bug", "Enhancement", "Question", "Duplicate", "Invalid", "WontFix");
 
-	@UiField
-	Form<Issue> issueEditor;
+@UiField
+@Initialize(constantsClass = IssueConstants.class)
+Form<Issue> issueEditor;
 
-	@UiField
-	Modal modal;]]></pre>
-					</c:StaticCode>
-				</li>
-				<li>We initialize the <code>issueEditor</code> contained in the modal :
-					<c:StaticCode configuration="{JAVA_CONFIGURATION}">
-<pre><![CDATA[
-	public IssuesView() {
-		...
-		issueEditor.setMessageHelper(helper); // helper is already defined
-		issueEditor.initialize(IssueModel.MODEL);
-	}]]></pre>
+@UiField
+Modal modal;
+]]></pre>
 					</c:StaticCode>
 				</li>
 				<li>We add a method to open the popup on click on the "Declare an issue" button :
 					<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-	@UiHandler("addIssue")
-	public void onAddIssueButton(ButtonEvent event) {
-		issueEditor.edit(new Issue());
-		modal.show();
-	}]]></pre>
+@UiHandler("addIssue")
+void onAddIssueButton(ButtonEvent event) {
+	issueEditor.edit(new Issue());
+	modal.show();
+}
+]]></pre>
 					</c:StaticCode>
 				</li>
 				<li>We add a method to open the popup on click on the "View issue" button :
 					<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-	@UiHandler("viewBoutton")
-	public void onViewButton(ButtonEvent event) {
-		Issue issue = event.getValue();
-		issueEditor.edit(issue);
-		modal.show();
-	}]]></pre>
+@UiHandler("viewBoutton")
+void onViewButton(ButtonEvent event) {
+	Issue issue = event.getValue();
+	issueEditor.edit(issue);
+	modal.show();
+}
+]]></pre>
 					</c:StaticCode>
 				</li>
 				<li>We add a method to save the issue on flush the popup content :
 					<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-	@UiHandler("issueEditor")
-	public void onSaveIssueEditor(FlushSuccessEvent event) {
-		modal.hide();
-		Issue issue = event.getValue();
-		IssueRemoteService.SERVICE.saveIssue(issue);
-	}]]></pre>
+@UiHandler("issueEditor")
+void onSaveIssueEditor(FlushSuccessEvent event) {
+	modal.hide();
+	Issue issue = event.getValue();
+	service.saveIssue(issue);
+}
+]]></pre>
 					</c:StaticCode>
 				</li>
 				<li>We add a method to reload the issues on issue save :
 					<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-	@AsyncHandler
-	public void onSaveIssue(Issue issue) {
-		searchEditor.edit(new SearchBean());
-		IssueRemoteService.SERVICE.listIssues();
-	}]]></pre>
+@AsyncHandler
+void onSaveIssue(Issue issue) {
+	searchEditor.edit(new SearchBean());
+	service.listIssues();
+}
+]]></pre>
 					</c:StaticCode>
 				</li>
 			</ol>

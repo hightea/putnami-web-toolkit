@@ -58,7 +58,7 @@ public class IssuesView extends Composite implements View {
 	TableEditor<Issue> issuesTable;
 
 	@UiField(provided = true)
-	List<String> labelItems = Arrays.asList("Bug", "Enhancement", "Question", "Duplicate", "Invalid", "WontFix");
+	final List<String> labelItems = Arrays.asList("Bug", "Enhancement", "Question", "Duplicate", "Invalid", "WontFix");
 
 	@UiField
 	@Initialize(constantsClass = IssueConstants.class)

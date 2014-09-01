@@ -138,31 +138,21 @@ public class Contact implements Serializable{
 	<source path="shared" />]]></pre>
 			</c:StaticCode>
 			
-			<p>Now we have to create a model form the <code>Contact</code> bean and initialize the <code>Form</code> with it.
-			To do it, we just add to the <code>ContactView</code> class, the following :</p>
+			<p>We add the contactEditor in the <code>ContactView</code>. The annotation <code>@Initialize</code> helps to initialize the form with a Model generated from the <code>Contact</code> bean.</p>
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-	interface ContactModel extends Model<Contact> {
-		Model<Contact> MODEL = GWT.create(ContactModel.class);
-	}
-
 	@UiField
+	@Initialize
 	Form<Contact> contactEditor;
-
-    ...
-
-    public ContactView() {
-        ...
-        contactEditor.initialize(ContactModel.MODEL);
-        contactEditor.edit(new Contact()); // Init the form with all the default values
-    }]]></pre>
+]]></pre>
 			</c:StaticCode>
 			
 			<p>Don't forget to add the dependency to the <code>Model</code> module in the Module xml file (here the <code>fr/putnami/pwt/tutorial/Tutorial.gwt.xml</code>) :</p>
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
 <pre><![CDATA[
 	<!-- PWT Module to extends in order to use PWT Model features-->
-	<inherits name="fr.putnami.pwt.core.model.Model"/>]]></pre>
+	<inherits name="fr.putnami.pwt.core.model.Model"/>
+]]></pre>
 			</c:StaticCode>
 			
 			<p>If you run the app, you can now use the <code>Reset</code> and <code>Submit</code> buttons, wich are enabled when the edited bean change (ie when you change a field value).</p>
@@ -210,7 +200,8 @@ public class Contact implements Serializable{
 			<w:FormSubmitButton text="Submit" size="LARGE" />
 		</w:Footer>
 	</w:Form>
-    ...]]></pre>
+    ...
+]]></pre>
 			</c:StaticCode>
 			
 			<p>If you run the app now, you'll see the Contact form with a better layout, but without any labels. Indeed we have to provide them.</p>
@@ -244,18 +235,13 @@ public interface ContactConstants extends ValidationConstants {
 }]]></pre>
 			</c:StaticCode>
 			
-			<p>And now we provide thoses constants to the <code>Form</code> in the <code>ContactView</code> before it initialization :</p>
+			<p>And now we provide thoses constants to the <code>Form</code> by adding the <code>constantsClass</code> attribute on the <code>@Initialize</code> annotation.</p>
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-	public ContactView() {
-		...
-
-		MessageHelper messageHelper = new MessageHelper((ConstantsWithLookup) GWT.create(ContactConstants.class));
-		contactEditor.setMessageHelper(messageHelper);
-
-		contactEditor.initialize(ContactModel.MODEL);
-		...
-	}]]></pre>
+	@UiField
+	@Initialize(constantsClass = ContactConstants.class)
+	Form<Contact> contactEditor;
+]]></pre>
 			</c:StaticCode>
 			
 			<p>If you run the app now, you'll see that the Labels are automatically inserted.</p>
@@ -317,7 +303,8 @@ public interface ContactConstants extends ValidationConstants {
 	String subjectHelp();
 
 	@DefaultStringValue("Enter your message, we will read it!")
-	String messageHelp();]]></pre>
+	String messageHelp();
+]]></pre>
 			</c:StaticCode>
 			
 			<p>If you run the app now, you'll see a complete contact form with inputs, labels, tooltips on inputs, and a help for each input!</p>
@@ -331,7 +318,8 @@ public interface ContactConstants extends ValidationConstants {
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
 <pre><![CDATA[
 	<!-- PWT Module to extends in order to use PWT Service features-->
-	<inherits name="fr.putnami.pwt.core.service.Service"/>]]></pre>
+	<inherits name="fr.putnami.pwt.core.service.Service"/>
+]]></pre>
 			</c:StaticCode>
 			
 			<p>Then, we define the service :</p>
@@ -344,7 +332,8 @@ import fr.putnami.pwt.tutorial.shared.domain.Contact;
 public interface ContactService {
 
 	void sendContact(Contact contact);
-}]]></pre>
+}
+]]></pre>
 			</c:StaticCode>
 			
 			<p>and the implementation :</p>
@@ -392,17 +381,15 @@ public class ContactServiceImpl implements ContactService {
 			</c:StaticCode>
 			
 			
-			<p>In the <code>ContactView</code> we have to declare the service proxy and bind it to the view :</p>
+			<p>In the <code>ContactView</code> we have to declare and inject the service. The service is binded to the view <code>@AsyncHandler</code> methods.</p>
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-	interface ContactRemoteService extends ServiceProxy<ContactView, ContactService>, ContactService {
-		ContactRemoteService SERVICE = GWT.create(ContactRemoteService.class);
-	}
-
-    public ContactView() {
-        ...
-        ContactRemoteService.SERVICE.bindService(this);
-    }]]></pre>
+import fr.putnami.pwt.core.inject.client.annotation.InjectService;
+import fr.putnami.pwt.tutorial.shared.service.ContactService;
+...
+@InjectService
+ContactService service;
+]]></pre>
 			</c:StaticCode>
 			
 			<p>Finally we call the service and reset the form when the result returns from server in <code>ContactView</code>:</p>
@@ -410,13 +397,14 @@ public class ContactServiceImpl implements ContactService {
 <pre><![CDATA[
 	@UiHandler("contactEditor")
 	public void onContactSubmit(FlushSuccessEvent event) {
-		ContactRemoteService.SERVICE.sendContact((Contact) event.getValue());
+		service.sendContact((Contact) event.getValue());
 	}
 
 	@AsyncHandler
 	public void onSendContact(Void result) {
 		contactEditor.edit(new Contact());
-	}]]></pre>
+	}
+]]></pre>
 			</c:StaticCode>
 			
 			<p>Now run the app and submit some contacts. You'll see on the server console the received Contacts.</p>
