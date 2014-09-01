@@ -22,7 +22,6 @@ import com.google.common.collect.Maps;
 
 import fr.putnami.pwt.core.editor.client.Context;
 import fr.putnami.pwt.core.editor.client.Editor;
-import fr.putnami.pwt.core.editor.client.EditorCollection;
 import fr.putnami.pwt.core.editor.client.EditorInput;
 import fr.putnami.pwt.core.editor.client.EditorOutput;
 import fr.putnami.pwt.core.editor.client.Path;
@@ -144,7 +143,7 @@ public class EditorFactoryVisitor extends AbstractVisitor {
 			Class<A> propertyType = null;
 			ModelDriver<?> driver = context.getDriver();
 			Model<?> model = ModelUtils.resolveModel(driver.getModel(), path);
-			if (model instanceof ModelCollection && editor instanceof EditorCollection) {
+			if (model instanceof ModelCollection && path.get(path.size() - 1).getIndexKey() != null) {
 				propertyType = (Class<A>) model.getLeafType();
 			}
 			else {
