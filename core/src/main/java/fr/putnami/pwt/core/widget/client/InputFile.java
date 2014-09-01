@@ -66,7 +66,7 @@ import fr.putnami.pwt.core.widget.shared.domain.FileDto;
 import fr.putnami.pwt.core.widget.shared.domain.UploadStatus;
 
 public class InputFile extends InputGroup<FileDto>
-implements HasDrawable, EditorInput<FileDto> {
+		implements HasDrawable, EditorInput<FileDto> {
 
 	private static final String MULTIPART_BOUNDARY = "x-x-x-x-x";
 	private static final String EOL = "\r\n";
@@ -160,7 +160,7 @@ implements HasDrawable, EditorInput<FileDto> {
 	}
 
 	protected InputFile(InputFile source) {
-		super(source);
+		super(source, false);
 		endConstruct();
 	}
 
@@ -317,6 +317,7 @@ implements HasDrawable, EditorInput<FileDto> {
 					handleStatusJson(response.getText());
 				}
 			}
+
 			@Override
 			public void onError(Request request, Throwable exception) {
 			}
@@ -343,6 +344,7 @@ implements HasDrawable, EditorInput<FileDto> {
 					displayError("Couldn't retrieve JSON (" + response.getStatusText() + ")");
 				}
 			}
+
 			@Override
 			public void onError(Request request, Throwable exception) {
 				displayError("Couldn't retrieve JSON");
@@ -355,10 +357,10 @@ implements HasDrawable, EditorInput<FileDto> {
 
 		StringBuffer requestBody = new StringBuffer();
 		requestBody.append("--").append(MULTIPART_BOUNDARY).append(EOL)
-		.append("Content-Disposition: form-data; name=\"data\"; filename=\"").append(fileName).append("\"").append(EOL)
-		.append("Content-Type: ").append(type).append(EOL).append(EOL)
-		.append(base64data).append(EOL)
-		.append("--").append(MULTIPART_BOUNDARY).append("--");
+				.append("Content-Disposition: form-data; name=\"data\"; filename=\"").append(fileName).append("\"").append(EOL)
+				.append("Content-Type: ").append(type).append(EOL).append(EOL)
+				.append(base64data).append(EOL)
+				.append("--").append(MULTIPART_BOUNDARY).append("--");
 
 		try {
 			RequestBuilder requestBuilder = new RequestBuilder(RequestBuilder.POST, URL_UPLOAD + fileId);

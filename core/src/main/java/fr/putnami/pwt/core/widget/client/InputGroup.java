@@ -79,16 +79,18 @@ public class InputGroup<T> extends AbstractPanel implements EditorInput<T> {
 		setSize(size);
 	}
 
-	protected InputGroup(InputGroup source) {
+	protected InputGroup(InputGroup<T> source, boolean cloneSourceWidgets) {
 		super(source);
 		setStyle(source.style);
 		setSize(source.size);
-		cloneSourceWidgets(source);
+		if (cloneSourceWidgets) {
+			cloneSourceWidgets(source);
+		}
 	}
 
 	@Override
 	public IsWidget cloneWidget() {
-		return new InputGroup<T>(this);
+		return new InputGroup<T>(this, true);
 	}
 
 	@Override
