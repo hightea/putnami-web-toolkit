@@ -83,9 +83,30 @@ subprojects {
 			addGwtContainer=false
 		}
 	}
+	
+	uploadArchives {
+	    repositories {
+	        mavenDeployer {
+		        configuration = configurations.deployerSsh
+		        repository(url: "scp://repo.putnami.org/putnamiRepo") {
+		            authentication(userName: "putnami_repo")
+		        }
+	            //repository(url : new File(rootProject.buildDir, 'repoTest').toURI())
+	            pom.project {
+	                licenses {
+	                    license {
+	                        name 'GNU Lesser General Public License'
+	                        url 'http://www.gnu.org/licenses/lgpl-3.0.html'
+	                        distribution 'repo'
+	                    }
+	                }
+	            }
+	        }
+	    }
+	}
 
-	project.tasks.publish.dependsOn project.tasks.licenseFormat
-	project.tasks.publishToMavenLocal.dependsOn project.tasks.licenseFormat
+	project.tasks.uploadArchives.dependsOn project.tasks.licenseFormat
+	project.tasks.install.dependsOn project.tasks.licenseFormat
 	rootProject.tasks.publishAll.dependsOn project.tasks.uploadArchives
 	rootProject.tasks.publishAllToMavenLocal.dependsOn project.tasks.install
 	rootProject.tasks.licenseAll.dependsOn project.tasks.license
@@ -101,34 +122,8 @@ configure(subprojects.findAll { it.name != 'pwt-doc' } ){
 		from sourceSets.main.allJava
 	}
 
-	publishing {
-		publications {
-			mavenJava(MavenPublication) {
-			    from components.java
-			}
-		}
-	}
 	rootProject.tasks.publishAllLibs.dependsOn project.tasks.uploadArchives
 	rootProject.tasks.publishAllLibsToMavenLocal.dependsOn project.tasks.install
 }
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-	        configuration = configurations.deployerSsh
-	        repository(url: "scp://repo.putnami.org/putnamiRepo") {
-	            authentication(userName: "putnami_repo")
-	        }
-            //repository(url : new File(rootProject.buildDir, 'repoTest').toURI())
-            pom.project {
-                licenses {
-                    license {
-                        name 'GNU Lesser General Public License'
-                        url 'http://www.gnu.org/licenses/lgpl-3.0.html'
-                        distribution 'repo'
-                    }
-                }
-            }
-        }
-    }
-}
+

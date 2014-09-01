@@ -72,10 +72,3 @@ task jettyDraftWar(type: JettyRunWar) {
 	webApp=draftWar.archivePath
 }
 
-publishing {
-	publications {
-		mavenJava(MavenPublication) {
-		    from components.web
-		}
-	}
-}
