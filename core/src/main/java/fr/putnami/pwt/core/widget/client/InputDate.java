@@ -38,11 +38,10 @@ import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.core.widget.client.helper.CompositeFocusHelper;
 
 public class InputDate extends InputGroup<Date> implements
-DirtyEvent.HasDirtyHandlers,
-HasAllFocusHandlers,
-Focusable,
-HasPlaceholder {
-
+		DirtyEvent.HasDirtyHandlers,
+		HasAllFocusHandlers,
+		Focusable,
+		HasPlaceholder {
 
 	private final InputDateBox dateBox = new InputDateBox();
 	private final Button<Date> calendarButton = new Button<Date>();
@@ -63,9 +62,9 @@ HasPlaceholder {
 	}
 
 	protected InputDate(InputDate source) {
+		super(source, false);
 		endConstruct();
 		setFormat(source.getFormat());
-		setPath(source.getPath());
 		setPlaceholder(source.getPlaceholder());
 	}
 
@@ -82,16 +81,6 @@ HasPlaceholder {
 	@Override
 	public IsWidget cloneWidget() {
 		return new InputDate(this);
-	}
-
-	@Override
-	public void setPath(String path) {
-		dateBox.setPath(path);
-	}
-
-	@Override
-	public String getPath() {
-		return dateBox.getPath();
 	}
 
 	public String getFormat() {
