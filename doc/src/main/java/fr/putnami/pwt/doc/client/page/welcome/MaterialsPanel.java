@@ -17,32 +17,18 @@
 package fr.putnami.pwt.doc.client.page.welcome;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Document;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-import fr.putnami.pwt.core.mvp.client.View;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 
-public class WelcomeView extends Composite implements View<WelcomePlace> {
+public class MaterialsPanel extends Composite {
 
-	interface Binder extends UiBinderLocalized<Widget, WelcomeView> {
+	interface Binder extends UiBinderLocalized<Widget, MaterialsPanel> {
 		Binder BINDER = GWT.create(Binder.class);
 	}
 
-	public WelcomeView() {
+	public MaterialsPanel() {
 		initWidget(Binder.BINDER.createAndBindUi(this));
 	}
-
-	@Override
-	public void present(WelcomePlace place) {
-		String title = getElement().getTitle();
-		if (title != null && title.length() > 0) {
-			Document.get().setTitle(title);
-		}
-		else {
-			Document.get().setTitle("PWT - Putnami Web Toolkit");
-		}
-	}
-
 }

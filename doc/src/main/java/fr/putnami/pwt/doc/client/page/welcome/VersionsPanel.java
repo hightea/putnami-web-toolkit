@@ -14,31 +14,21 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.doc.client.page.starting;
+package fr.putnami.pwt.doc.client.page.welcome;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.uibinder.client.UiConstructor;
-import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-import fr.putnami.pwt.core.widget.client.NavSpy;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 
-public class ThankYouView extends Composite {
+public class VersionsPanel extends Composite {
 
-	interface Binder extends UiBinderLocalized<Widget, ThankYouView> {
-
+	interface Binder extends UiBinderLocalized<Widget, VersionsPanel> {
 		Binder BINDER = GWT.create(Binder.class);
 	}
 
-	@UiField(provided = true)
-	final NavSpy navSpy;
-
-	@UiConstructor
-	public ThankYouView(NavSpy navSpy) {
-		this.navSpy = navSpy;
+	public VersionsPanel() {
 		initWidget(Binder.BINDER.createAndBindUi(this));
 	}
-
 }

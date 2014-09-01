@@ -19,20 +19,25 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
-	xmlns:c="urn:import:fr.putnami.pwt.doc.client.page.starting">
+	>
 
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-	
-	<w:HTMLPanel title="PWT - Quick start Getting Started">
-		<w:Header ui:field="header">
-			<w:Heading level="1" navSpy="{tableOfContent}">Getting started</w:Heading>
-			<p class="lead">
-			</p>
-		</w:Header>
-		<w:HTMLPanel ui:field="content">
-			<c:StartTutorialView navSpy="{tableOfContent}" />
-			<c:StartSamplesView navSpy="{tableOfContent}" />
-			<c:StartFromScratchView navSpy="{tableOfContent}" />
-		</w:HTMLPanel>
+	<w:HTMLPanel>
+		<w:Heading level="1">Putnami Web Toolkit</w:Heading>
+		<w:GridRow>
+			<w:GridColumn size="6"><w:Icon type="LOCK_OPEN" />Open Source</w:GridColumn>
+			<w:GridColumn size="6"><w:Icon type="SIGNAL" />Raise your productivity</w:GridColumn>
+		</w:GridRow>
+		<w:GridRow>
+			<w:GridColumn size="6"><w:Icon type="THUMBS_UP_ALT" />GWT is now easy</w:GridColumn>
+			<w:GridColumn size="6"><w:Icon type="DOLLAR" />Reduce your costs</w:GridColumn>
+		</w:GridRow>
+		<w:GridRow>
+			<w:GridColumn size="6"><w:Icon type="HEART" />Get better application</w:GridColumn>
+			<w:GridColumn size="6"><w:Icon type="CODE" />Do less code</w:GridColumn>
+		</w:GridRow>
+		<w:GridRow>
+			<w:GridColumn size="6"><w:Icon type="USERS" />Made by coders, for coders</w:GridColumn>
+			<w:GridColumn size="6"><w:Icon type="PUZZLE" />Extensible</w:GridColumn>
+		</w:GridRow>
 	</w:HTMLPanel>
 </ui:UiBinder>

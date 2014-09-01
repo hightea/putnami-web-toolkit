@@ -14,35 +14,31 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.doc.client.page.welcome;
+package fr.putnami.pwt.doc.client.page.starting;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Document;
+import com.google.gwt.uibinder.client.UiConstructor;
+import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-import fr.putnami.pwt.core.mvp.client.View;
+import fr.putnami.pwt.core.widget.client.NavSpy;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 
-public class WelcomeView extends Composite implements View<WelcomePlace> {
+public class StartFromScratchView extends Composite {
 
-	interface Binder extends UiBinderLocalized<Widget, WelcomeView> {
+	interface Binder extends UiBinderLocalized<Widget, StartFromScratchView> {
+
 		Binder BINDER = GWT.create(Binder.class);
 	}
 
-	public WelcomeView() {
-		initWidget(Binder.BINDER.createAndBindUi(this));
-	}
+	@UiField(provided = true)
+	final NavSpy navSpy;
 
-	@Override
-	public void present(WelcomePlace place) {
-		String title = getElement().getTitle();
-		if (title != null && title.length() > 0) {
-			Document.get().setTitle(title);
-		}
-		else {
-			Document.get().setTitle("PWT - Putnami Web Toolkit");
-		}
+	@UiConstructor
+	public StartFromScratchView(NavSpy navSpy) {
+		this.navSpy = navSpy;
+		initWidget(Binder.BINDER.createAndBindUi(this));
 	}
 
 }

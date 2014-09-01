@@ -18,15 +18,26 @@
 -->
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client">
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	>
 
-
-	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
-	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">Thank you</w:Heading>
-		<p class="lead">First of all, we want to thank you to use and, why not help us to improve, <strong title="Putnami Web Toolkit">PWT</strong>.</p>
-		<p>We've built this framework because we needed it. But we think that you or other may need it too. That's why we open-sourced it.</p>
-		<p>As we've made it for us foremost, we may have forgotten some fetaures, so don't hesitate to help us and submit your ideas.</p>
-	</w:HTMLPanel>
+	<w:Panel color="SUCCESS">
+		<w:Header><strong>Versions</strong></w:Header>
+		<w:List tag="ul" type="LIST">
+			<w:ListItem>
+				<span class="pull-right label label-primary">last stable</span>
+				1.0.0
+			</w:ListItem>
+			<w:ListItem>
+				<span class="pull-right label label-default">dev</span>
+				<a href="/version/1.1.0-SNAPSHOT">1.1.0-SNAPSHOT</a>
+			</w:ListItem>
+			<w:ListItem>
+				<a href="/version/1.0.0-RC2">1.0.0-RC2</a>
+			</w:ListItem>
+			<w:ListItem>
+				<a href="/version/1.0.0-RC1">1.0.0-RC1</a>
+			</w:ListItem>
+		</w:List>
+	</w:Panel>
 </ui:UiBinder>

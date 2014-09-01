@@ -27,7 +27,8 @@
 		<w:Heading level="2" navSpy="{navSpy}">Start from tutorial</w:Heading>
 
 		<p>We've created a step-by-step tutorial in order to create a PWT based application, guiding you between the powerful features of PWT.</p>
-		<p>For each tutorial, you'll find the corresponding result in the project sources.</p>
+		<p>For each major step, you'll find source code in <a href="https://github.com/Putnami/putnami-pwt/tree/1.0.x/tutorials">https://github.com/Putnami/putnami-pwt/tree/1.0.x/tutorials</a>.</p>
+		<strong>Tutorials</strong>
 		<w:List tag="ol">
 			<w:ListItem>
 				<a href="#!Tuto1InitGradle">Init a gradle project</a>

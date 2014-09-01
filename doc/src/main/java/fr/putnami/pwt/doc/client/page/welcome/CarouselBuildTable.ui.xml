@@ -19,35 +19,50 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
-	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
-
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client"
+	>
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="navSpy" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel>
-		<w:Heading level="2" navSpy="{navSpy}">Start from samples</w:Heading>
-
-		<p>We provide two sample apps in the github repo in the <a href="https://github.com/Putnami/putnami-pwt/tree/master/samples">samples</a> folder :</p>
-		<ul>
-			<li>One is a GWT library using PWT</li>
-			<li>One is a GWT Web application using PWT</li>
-		</ul>
-		<p>In each project, you'll find gradle and maven build files.</p>
-		<p>You can easily run the samples following those commands :
-		</p>
+		<w:Heading level="1">Bind a table</w:Heading>
+		<w:GridRow>
+			<w:GridColumn size="6">
+				<strong>ui.xml</strong>
+				<c:StaticCode configuration="{XML_CONFIGURATION}">
 <pre><![CDATA[
-git clone git@github.com:Putnami/putnami-pwt.git
-cd putnami-pwt/samples/web-project
-gradle jettyRunWar
-]]></pre>
-		<p>or with Maven</p>
+<w:TableEditor ui:field="table">
+	<w:Pagination pageSize="3" />
+	<w:TableSelecter ui:field="selecter" />
+	<w:TableColumn path="name">
+		<w:TableSort />
+	</w:TableColumn/>
+	<w:TableColumn path="email">
+		<w:OutputEmail />
+	</w:TableColumn>
+	<w:TableColumn path="address.city" xsVisibility="HIDDEN"/>
+</w:TableEditor>]]></pre>
+				</c:StaticCode>
+			</w:GridColumn>
+			<w:GridColumn size="6">
+				<strong>java</strong>
+				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-git clone git@github.com:Putnami/putnami-pwt.git
-cd putnami-pwt/samples/web-project
-mvn -Pdev jetty:run
+public interface PersonModel extends Model<Person> {}
+...
+@UiField 
+TableEditor<Person> table;
+...
+table.initialize(GWT.<Model<Person>> create(PersonModel.class));
+table.edit(people);
+...
+@UiHandler("selecter")
+void onSelect(SelectionEvent event) { 
+...
+}
 ]]></pre>
-		<p>Then browse the sample on <a href="http://localhost:8080/pwt-sample-web">http://localhost:8080/pwt-sample-web</a>.</p>
+				</c:StaticCode>
+			</w:GridColumn>
+		</w:GridRow>
 	</w:HTMLPanel>
 </ui:UiBinder>

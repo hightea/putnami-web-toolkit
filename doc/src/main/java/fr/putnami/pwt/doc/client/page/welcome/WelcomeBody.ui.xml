@@ -1,0 +1,45 @@
+<!--
+
+    This file is part of pwt.
+
+    pwt is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	>
+
+	<w:HTMLPanel>
+		<w:Heading level="2">Putnami Web Toolkit</w:Heading>
+		<p class="lead">
+			<strong title="Putnami Web Toolkit">PWT</strong> is a modern and powerful UI framework. 
+			<br/>
+			Built upon <a href="http://www.gwtproject.org/" >GWT</a>, <strong>PWT</strong> is robust, lightweight and efficient.
+			Made for ourself, we designed it to increase our productivity, focusing on removing the useless code.
+			<strong>Free</strong> and Open source, <strong>PWT</strong> is published under <a href="#" >LGPL v 3.0</a>.
+		</p>
+		<ul class="lead">
+			<li>Thanks to <a href="http://getbootstrap.com/" target="_BLANK">Twitter 's Bootstrap</a>, your webapp is <strong>responsive</strong> and easily <strong>themable</strong>.</li>
+			<li>The nice <a href="#!Components">widgets</a> are easy to extend and to customize.</li>
+			<li>The <a href="#!DataBinding">data binding</a> is a pushover, build forms and dynamic tables is so simple.</li>
+			<li><a href="#!ServerCalls">Server calls</a> are optimized and simplified. Multiplex your queries, and bind the callbacks with annotations.</li>
+			<li>The <a href="#!Navigation">Navigation</a> is done to simplify MVP. <strong>Split</strong> and <strong>scale</strong> your webapp without even taking care about it.</li>
+			<li>Neither third librairies nor external JS are required. Providing <strong>security</strong> and serenity for your achievements and your future.</li>
+		</ul>
+		<p class="lead">
+			<strong>Easy to start</strong>, <strong>PWT</strong> is a serious alternative for your next webapp.
+		</p>
+	</w:HTMLPanel>
+</ui:UiBinder>
