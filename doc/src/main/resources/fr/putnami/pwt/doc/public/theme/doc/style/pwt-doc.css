@@ -210,6 +210,45 @@ pre{
 	background-color: #F6F6F6;
 }
 
+.teaser {
+	background-color: #2c2c2c;
+	color: #ec7600;
+	font-weight: 500;
+	position: relative;
+	overflow: hidden;
+	font-size: 1.8em;
+	padding-top: 30px;
+	padding-bottom: 10px;
+}
+
+.teaser h1{
+	color: #BDBDBD;
+	margin: 0 0 10px 0;
+	text-align: center;
+	border: 0;
+	font-size: 2em;
+}
+
+.teaser .forkMeOnGitHub{
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+.teaser .row{
+	margin: 15px 0; 
+}
+
+.teaser .carousel .carousel-indicators{
+	bottom: 0;
+}
+.teaser .carousel .carousel-indicators li{
+	margin: 0 5px;
+}
+.carouselIntro, .carouselForm, .carouselTable, .carouselService {
+	height: 400px;
+}
+	
+
 /**
 * Footer
 */
@@ -391,7 +430,7 @@ pre.code-editor div.code-editor-line {
 	color: #F9A321;
 }
 .code-editor-xml-doctype {
-	color: #ccc;
+	color: #888;
 }
 .code-editor-xml-tag {
 	color: #4db848;
@@ -400,7 +439,7 @@ pre.code-editor div.code-editor-line {
 	color: #F9A321;
 }
 .code-editor-xml-attribute-value {
-	color: #ddd;
+	color: #777;
 }
 
 /**
@@ -424,36 +463,39 @@ pre.code-editor div.code-editor-line {
 	color: #d44950;
 }
 .code-editor-java-annotation {
-	color: #f9cc21;
+	color: #FFBB00;
 }
 
 /**
 * Media
 */
 @media (max-width: 767px) {
-	.teaser{
-		font-weight: 300;
-		font-size: 1.3em;
-	}
-	
-	.teaser h1{
-		font-size: 1.2em;
-		
-	}
 	
 	.teaser .forkMeOnGitHub{
 		display: none;
 	}
 
-	.teaser .row{
-		margin: 0 -15px 0 -15px; 
+	.carouselIntro, .carouselForm, .carouselTable, .carouselService {
+		height: 250px;
+	}
+	.headerCarousel {
+		background: url(../../../../assets/img/logo_putnami_250.png) no-repeat center;
 	}
 }
-
 @media (min-width: 768px) and  (max-width: 991px) {
-        #pwt-header .nav > li > a{
-                font-size: 0.9em !important;
-                padding: 17px 9px;
-        }
+	 	
+	.carouselIntro, .carouselService {
+		height: 450px;
+	}
+	.carouselForm {
+		height: 570px;
+	}
+	.carouselTable {
+		height: 650px;
+	}
+	#pwt-header .nav > li > a{
+		font-size: 0.9em !important;
+		 padding: 17px 9px;
+	}
 }
 

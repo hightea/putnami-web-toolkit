@@ -24,35 +24,22 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<w:HTMLPanel styleName="carouselForm">
-		<w:Heading level="1">Easy form binding</w:Heading>
+	<w:HTMLPanel styleName="carouselService">
+		<w:Heading level="1">Simple use of services</w:Heading>
 		<w:GridRow xsVisibility="HIDDEN">
-			<w:GridColumn size="6">
-				<strong>ui.xml</strong>
-				<c:StaticCode configuration="{XML_CONFIGURATION}">
-<pre><![CDATA[
-<w:Form ui:field="form">
-	<w:FormGroup path="name" />
-	<w:FormGroup path="email">
-		<w:InputEmail />
-	</w:FormGroup>
-	<w:FormGroup path="address.email">
-	<w:FormSubmitButton>Submit</w:FormSubmitButton>
-</w:Form>
-]]></pre>
-				</c:StaticCode>
-			</w:GridColumn>
-			<w:GridColumn size="6">
-				<strong>java</strong>
+			<w:GridColumn size="12">
 				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-@UiField @Initialize(constantsClass = ...)
-Form<Person> form;
+@InjectService
+MyService service;
 ...
-form.edit(person);
+service.method(String arg)
 ...
-@UiHandler("form")
-void onFlush(FlushSuccessEvent event) { ... };
+@AsyncHandler
+void onMethod(String result) { ... };
+...
+@AsyncHandler
+void onMethodThrown(Throwable thrown) { ... };
 
 ]]></pre>
 				</c:StaticCode>
