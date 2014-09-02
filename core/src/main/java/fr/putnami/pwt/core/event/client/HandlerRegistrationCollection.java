@@ -21,17 +21,36 @@ import java.util.Collection;
 import com.google.common.collect.Lists;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
+/**
+ * A utility class to help deal with {@link HandlerRegistration handler registrations}.
+ * 
+ * @since 1.0
+ */
 public class HandlerRegistrationCollection implements HandlerRegistration, com.google.gwt.event.shared.HandlerRegistration {
 
 	private final Collection<HandlerRegistration> handlers = Lists.newArrayList();
 
+
+	/**
+	 * Instantiates a new handler registration collection.
+	 */
 	public HandlerRegistrationCollection() {
 	}
 
+	/**
+	 * Adds on handler registration to the collection.
+	 * 
+	 * @param handler
+	 *           the handler
+	 */
 	public void add(HandlerRegistration handler) {
 		handlers.add(handler);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.google.web.bindery.event.shared.HandlerRegistration#removeHandler()
+	 */
 	@Override
 	public void removeHandler() {
 		for (HandlerRegistration handler : handlers) {
@@ -40,6 +59,11 @@ public class HandlerRegistrationCollection implements HandlerRegistration, com.g
 		handlers.clear();
 	}
 
+	/**
+	 * Size of the collection.
+	 * 
+	 * @return the int
+	 */
 	public int size() {
 		return handlers.size();
 	}

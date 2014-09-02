@@ -19,10 +19,23 @@ package fr.putnami.pwt.core.event.client;
 import com.google.web.bindery.event.shared.Event;
 import com.google.web.bindery.event.shared.SimpleEventBus;
 
+/**
+ * The Class is basic implementation of {@link com.google.web.bindery.event.shared.EventBus}.
+ * <p>
+ * This instance has a static get method for providing one singleton which may be used within all the framework.
+ * </p>
+ * 
+ * @since 1.0
+ */
 public class EventBus extends SimpleEventBus {
 
 	private static EventBus instance;
 
+	/**
+	 * Get the singleton.
+	 * 
+	 * @return the event bus
+	 */
 	public static EventBus get() {
 		if (EventBus.instance == null) {
 			EventBus.instance = new EventBus();
@@ -34,16 +47,25 @@ public class EventBus extends SimpleEventBus {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see SimpleEventBus#getHandler(com.google.web.bindery.event.shared.Event.Type, int)
+	 */
 	@Override
 	protected <H> H getHandler(Event.Type<H> type, int index) {
 		return super.getHandler(type, index);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.web.bindery.event.shared.SimpleEventBus#getHandlerCount(com.google.web.bindery.event.shared.Event.Type)
+	 */
 	@Override
 	protected int getHandlerCount(Event.Type<?> eventKey) {
 		return super.getHandlerCount(eventKey);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.web.bindery.event.shared.SimpleEventBus#isEventHandled(com.google.web.bindery.event.shared.Event.Type)
+	 */
 	@Override
 	protected boolean isEventHandled(Event.Type<?> eventKey) {
 		return super.isEventHandled(eventKey);
