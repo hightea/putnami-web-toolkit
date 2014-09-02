@@ -188,9 +188,10 @@ public class InputBoolean extends AbstractInput<Boolean> implements
 	public void setText(String text) {
 		this.text = text;
 		labelElement.removeAllChildren();
-		labelElement.appendChild(checkbocElement);
+		labelElement.setInnerHTML("&nbsp;");
+		labelElement.insertFirst(checkbocElement);
 		if (text != null) {
-			labelElement.appendChild(Document.get().createTextNode(" " + text));
+			labelElement.appendChild(Document.get().createTextNode(text));
 		}
 	}
 
