@@ -33,6 +33,7 @@ import com.google.gwt.user.rebind.SourceWriter;
 
 import fr.putnami.pwt.core.inject.rebind.factory.DecoratorPresenterCreatorFactory;
 import fr.putnami.pwt.core.inject.rebind.factory.InitializeFormCreatorFactory;
+import fr.putnami.pwt.core.inject.rebind.factory.MayStopActivityCreatorFactory;
 import fr.putnami.pwt.core.inject.rebind.factory.ModelCreatorFactory;
 import fr.putnami.pwt.core.inject.rebind.factory.PostconstructCreatorFactory;
 import fr.putnami.pwt.core.inject.rebind.factory.PresenterCreatorFactory;
@@ -50,6 +51,7 @@ public class InjectorProxyCreator {
 		delegateFactories.add(new ResourceCreatorFactory());
 		delegateFactories.add(new ServiceCreatorFactory());
 		delegateFactories.add(new PresenterCreatorFactory());
+		delegateFactories.add(new MayStopActivityCreatorFactory());
 		delegateFactories.add(new DecoratorPresenterCreatorFactory());
 		delegateFactories.add(new ModelCreatorFactory());
 		delegateFactories.add(new TemplatedCreatorFactory());
