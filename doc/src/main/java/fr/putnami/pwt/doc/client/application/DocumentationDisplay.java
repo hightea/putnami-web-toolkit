@@ -72,8 +72,10 @@ public class DocumentationDisplay extends Composite implements AcceptsOneWidget 
 
 	@Override
 	public void setWidget(IsWidget w) {
-		container.setWidget(w);
-		redraw(true);
+		if (w != null) {
+			container.setWidget(w);
+			redraw(true);
+		}
 	}
 
 	private void redraw(boolean autoScroll) {
