@@ -40,6 +40,7 @@ import fr.putnami.pwt.core.inject.rebind.factory.PresenterCreatorFactory;
 import fr.putnami.pwt.core.inject.rebind.factory.ResourceCreatorFactory;
 import fr.putnami.pwt.core.inject.rebind.factory.SecurityCreatorFactory;
 import fr.putnami.pwt.core.inject.rebind.factory.ServiceCreatorFactory;
+import fr.putnami.pwt.core.inject.rebind.factory.StopActivityCreatorFactory;
 import fr.putnami.pwt.core.inject.rebind.factory.TemplatedCreatorFactory;
 
 public class InjectorProxyCreator {
@@ -52,6 +53,7 @@ public class InjectorProxyCreator {
 		delegateFactories.add(new ServiceCreatorFactory());
 		delegateFactories.add(new PresenterCreatorFactory());
 		delegateFactories.add(new MayStopActivityCreatorFactory());
+		delegateFactories.add(new StopActivityCreatorFactory());
 		delegateFactories.add(new DecoratorPresenterCreatorFactory());
 		delegateFactories.add(new ModelCreatorFactory());
 		delegateFactories.add(new TemplatedCreatorFactory());
