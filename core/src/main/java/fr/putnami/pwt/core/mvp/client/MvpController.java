@@ -31,6 +31,7 @@ import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.place.shared.PlaceHistoryMapper;
 import com.google.gwt.place.shared.PlaceTokenizer;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
@@ -104,11 +105,14 @@ HasMayStopActivityHandlers
 			return;
 		}
 
-		String warning = this.maybeGoTo(newPlace);
-		if (warning == null) {
+		PlaceChangeRequestEvent willChange = new PlaceChangeRequestEvent(newPlace);
+		EventBus.get().fireEvent(willChange);
+		String warning = willChange.getWarning();
+		if (warning == null || Window.confirm(warning)) {
 			this.doGo(newPlace);
 		}
 		else {
+			goTo(this.getWhere());
 		}
 	}
 
@@ -224,12 +228,6 @@ HasMayStopActivityHandlers
 	private void doGo(Place newPlace) {
 		this.currentPlace = newPlace;
 		EventBus.get().fireEvent(new PlaceChangeEvent(newPlace));
-	}
-
-	private String maybeGoTo(Place newPlace) {
-		PlaceChangeRequestEvent willChange = new PlaceChangeRequestEvent(newPlace);
-		EventBus.get().fireEvent(willChange);
-		return willChange.getWarning();
 	}
 
 	@Override
