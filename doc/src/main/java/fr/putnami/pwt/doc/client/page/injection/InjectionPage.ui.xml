@@ -1,0 +1,58 @@
+<!--
+
+    This file is part of pwt.
+
+    pwt is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client"
+	>
+	
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<w:HTMLPanel title="PWT - Injection Framework">
+		<w:Header ui:field="header">
+			<w:Heading level="1">Injection</w:Heading>
+			<p class="lead">
+				<strong title="Putnami Web Toolkit">PWT</strong> provides a lot of good features, reducing the amount of code needed to develop great applications.<br/>
+				But we think that it is still too much. That's why we developped the injection part of the framework, further reducing the code amount.
+			</p>
+		</w:Header>
+		<w:HTMLPanel ui:field="content">
+			<w:Heading level="2" summary="docSummary">What can be injected?</w:Heading>
+			<p>We provide the following annotations :</p>
+			<ul>
+				<li><code>Templated</code> used on class to auto bind view to template (see <a href="#!Internationalization">Internationalization</a>)</li>
+				<li><code>PresentHandler</code>, <code>MayStopActivityHandler</code> and <code>StopActivityHandler</code> used on methods for handling the lifecycle of an activity (see <a href="#!Navigation">Navigation</a>)</li>
+				<li><code>PostConstruct</code> used on method in order to do some things with injected stuff at init time.</li>
+				<li><code>InjectResource</code> used on field to generate <code>GWT.create</code> call</li>
+				<li><code>InjectService</code> used on service interface to init and bind the service to the view (see <a href="#!ServerCalls">ServerCalls</a>)</li>
+				<li><code>InjectModel</code> used on field of type <code>Model&lt;T&gt;</code> to generate a specific model (see <a href="#!DataBinding">DataBinding</a>)</li>
+				<li><code>Initialize</code> used on <code>EditorModel</code> implementing field to initialize the forms (see <a href="#!DataBinding">DataBinding</a>)</li>
+				<li><code>Secured</code> used on view to secure them</li>
+				<li><code>ErrorHandler</code> used on method to generate <code>ErrorHandler</code> extending classes (see <a href="#!Errors">Errors handling</a>)</li>
+			</ul>
+			<w:Alert type="INFO">
+				<h4>Note :</h4>
+				<ul>
+					<li>All those annotation work with GWT rebind feature, and wok only on <code>View</code> implementing classes.</li>
+				</ul> 
+			</w:Alert>
+		</w:HTMLPanel>
+	</w:HTMLPanel>
+</ui:UiBinder>

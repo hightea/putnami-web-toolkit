@@ -66,31 +66,41 @@
 			<p>
 				In the following sample, you can see a simple implementation of blog place / view mechanism.
 			</p>
-			<w:Heading level="3" summary="docSummary">Init the Framework</w:Heading>
+			<w:Heading level="3" summary="docSummary">Build a View</w:Heading>
 			<div class="showcase-sample-block">
 				<div class="showcase-sample">
-					To Initialize the framework. you have to : 
-					<ul>
-						<li><strong>Set the display :</strong> The display is a <code>AcceptsOneWidget</code> which will recieve the view when presented.</li>
-						<li><strong>Set the default place :</strong> The place to present when no place are presented.</li>
-						<li><strong>Register acitivity :</strong> All activities are created from the registered place.</li>
-						<li><strong>Handle the current history :</strong> Handle the current history token or go to the default place.</li>
-					</ul>
+					Build a view which implements <code>View</code> in order to present your place.<br/>
+					Anotate methods in the view with <code>@PresentHandler</code> with a <code>Place</code> argument in order to have them called on place presenting. <br/>
+					Anotate methods in the view with <code>@MayStopActivityHandler</code> with a <code>String</code> return in order to have them called when place may stop. <br/>
+					Anotate methods in the view with <code>@StopActivityHandler</code> without argument in order to have them called on place stopping.  
+					<w:Alert>
+						<h4>Note :</h4>
+						<p>All server calls during the view presentation are collected and send once to the server. Please see <a href="#!ServerCalls">Server calls</a> for mor details about it.</p>
+					</w:Alert>
 				</div>
 				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-public class MyApp implements EntryPoint {
-	public void onModuleLoad() {
-		MvpController controller = MvpController.get();
-
-		AcceptsOneWidget display = new SimplePanel();
-		controller.setDisplay(display);
-
-		controller.setDefaultPlace(new WelcomePlace());
-		
-		controller.registerActivity(new BlogPlace(null));
-		controller.handleCurrentHistory();
+public class BlogView extends Composite implements View {
+	public BlogView(){
+		//Build your view.
 	}
+	
+	@PresentHandler
+	public void present(BlogPlace place) {
+		String blogId = place.getToken();
+		// get the post on the server and display it.
+	}
+	
+	@MayStopActivityHandler
+	public String mayStop() {
+		return "The message displayed if we don't want the activity to stop, null else";
+	}
+	
+	@StopActivityHandler
+	public void stopActivity() {
+		//Do something
+	}
+	
 }
 ]]></pre>
 				</c:StaticCode>
@@ -105,44 +115,55 @@ public class MyApp implements EntryPoint {
 						<li>Host <code>ProxyView</code> to get the view to display.</li>
 						<li>Place Tokenizer in order to register the token in the browser history.</li>
 					</ul>
+					Using the <a href="#!Injection">Injection feature</a> make it a pushover :
 				</div>
 				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
+@ActivityDescription(view = BlogView.class)
 public class BlogPlace extends ViewPlace {
 	public BlogPlace(String postId) {
-		super((ViewProxy) GWT.create(BlogView.class), postId);
-	}
-	@Override
-	public ViewPlace getPlace(String token) {
-		return new  BlogPlace(String token);
+		super(postId);
 	}
 }
 ]]></pre>
 				</c:StaticCode>
+				<p>The <code>@ActivityDescription</code> annotation have the following parameters :</p>
+				<ul>
+					<li><code>view</code> : The <code>Composite</code> extending view class presented by this place</li>
+					<li><code>viewDecorator</code> : The <code>ViewDecorator</code> implementing class decorating the associated view</li>
+					<li><code>placeTokenizer</code> : The <code>PlaceTokenizer</code> implementing class used for this place</li>
+					<li><code>asyncView</code> : indicate wether the view should be loaded via <code>GWT.runAsync</code> or not (default is async)</li>
+					<li><code>aliases</code> : list of the aliases associated to the place</li>
+					<li><code>scope</code> : indicate wether the view should recreated at each call (<code>PROTOTYPE</code>) or if the same view should be used everytime (<code>SINGLETON</code> (default))</li>
+				</ul>
 			</div>
 			
-			<w:Heading level="3" summary="docSummary">Build a View</w:Heading>
+			<w:Heading level="3" summary="docSummary">Init the Framework</w:Heading>
 			<div class="showcase-sample-block">
 				<div class="showcase-sample">
-					Build a view which implements <code>View&lt;PLACE&gt;</code> in order to present your place.
-					<w:Alert>
-						<h4>Note :</h4>
-						<p>All server calls during the view presentation are collected and send once to the server. Please see <a href="#!ServerCalls">Server calls</a> for mor details about it.</p>
-					</w:Alert>
+					To Initialize the framework. you have to : 
+					<ul>
+						<li><strong>Set the display :</strong> The display is a <code>AcceptsOneWidget</code> which will recieve the view when presented.</li>
+						<li><strong>Set the default place :</strong> The place to present when no place are presented.</li>
+						<li><strong>Register acitivity :</strong> All activities are created from the registered places.</li>
+						<li><strong>Handle the current history :</strong> Handle the current history token or go to the default place.</li>
+					</ul>
+					The <code>ViewPlace</code> implements <code>ActivityFactory</code> when rebinded via the <a href="#!Injection">Injection feature</a>, so it can be registered in the <code>MvpController</code>.
 				</div>
 				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-public class BlogView extends Composite extends View<BlogPlace> {
-	public BlogView(){
-		//Build your view.
+public class MyApp implements EntryPoint {
+	public void onModuleLoad() {
+		MvpController controller = MvpController.get();
+
+		AcceptsOneWidget display = new SimplePanel();
+		controller.setDisplay(display);
+
+		controller.setDefaultPlace(new WelcomePlace());
+		
+		controller.registerActivity(GWT.<ActivityFactory> create(BlogPlace.class));
+		controller.handleCurrentHistory();
 	}
-	
-	@Override
-	public void present(BlogPlace place) {
-		String blogId = place.getToken();
-		// get the post on the server and display it.
-	}
-	
 }
 ]]></pre>
 				</c:StaticCode>
@@ -174,17 +195,20 @@ MvpController.get().goTo(new BlogPlace("myPost"));
 				</div>
 				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-public class MyView_ProxyView implements ViewProxy {
+public class MyView_ProxyView extends MetaPropertyPlace implements ViewProxy<MetaPropertyPlace> {
     private static MyView view;
     
-    public void getView(final ViewProxy.Callback callback) {
-      GWT.runAsync(MyView.class, new RunAsyncCallback() {
+    public void loadView(final ViewProxy.Callback callback) {
+     GWT.runAsync(MetaPropertyPage.class, new RunAsyncCallback() {
         public void onFailure(Throwable reason) {
-          throw new RuntimeException(reason);
+          if (ApplicationUnreachableException.HTTP_DOWNLOAD_FAILURE_EXCEPTION.equals(reason.getClass().getSimpleName())) {
+            reason = new ApplicationUnreachableException(reason);
+          }
+          GWT.reportUncaughtException(reason);
         }
         public void onSuccess() {
-          if(view == null){
-            view = new MyView();
+          if(view == null || false){
+            view = GWT.create(MyView.class);
           }
           callback.showView(view);
         }

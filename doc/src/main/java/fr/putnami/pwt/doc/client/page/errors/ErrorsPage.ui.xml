@@ -80,6 +80,15 @@ public class MyExceptionErrorHandler extends AbstractErrorHandler {
 ErrorManager.get().registerHandler(new MyExceptionErrorHandler());]]></pre>
 			</c:StaticCode>
 			
+			<p>Using the <a href="#!Injection">Injection feature</a> (on <code>View</code> implementing views), you can define and register <code>ErrorHandler</code> by using the <code>@ErrorHandler</code> annotation :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	@ErrorHandler
+	public boolean handleAnError(Throwable error) {
+		...
+	}]]></pre>
+			</c:StaticCode>
+			
 			<w:Heading level="2" summary="docSummary">Error Displayer</w:Heading>
 			<p>In most cases, the errors need to be displayed to the end user. We provide a simple <code>ErrorDisplayer</code> : <code>SimpleErrorDisplayer</code> which display errors with their stacktrace.</p>
 			<p>You can set a <code>ConstantsWithLookup</code> to the <code>SimpleErrorDisplayer</code> to eventually set the error title and message from the error class</p>

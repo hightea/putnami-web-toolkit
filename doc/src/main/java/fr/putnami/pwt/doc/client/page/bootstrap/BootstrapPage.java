@@ -44,9 +44,8 @@ public class BootstrapPage extends Page {
 	public void postConstructBootstrapView() {
 		yeti.addLink(new CssLink("theme/yeti/style/bootstrap-yeti.min.css", 0));
 		amelia.addLink(new CssLink("theme/amelia/style/bootstrap-amelia.min.css", 0));
-		doc.addLink(new CssLink("theme/doc/style/pwt.css", 0));
+		doc.addLink(new CssLink("theme/doc/style/pwt-doc.css", 0));
 	}
-
 
 	@UiHandler("yetiBtn")
 	public void onYetiClick(ButtonEvent event) {

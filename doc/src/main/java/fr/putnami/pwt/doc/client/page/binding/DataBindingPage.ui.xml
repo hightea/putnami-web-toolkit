@@ -122,14 +122,21 @@
 			</ul>
 			
 			<w:Heading level="3" summary="docSummary">Generate a bean model</w:Heading>
-			<p><strong>PWT</strong> provides a <code>ModelGenerator</code> which generates the model for you. 
-				<br/>
-				To generate the model, you only have to implement an interface <code>Model&lt;BEAN_CLASS&gt;</code> and allow it to be rebinded with <code>GWT.create(...)</code>.
+			<p><strong>PWT</strong> provides a <code>ModelGenerator</code> which generates the model for you. </p>
+			
+			<p>To generate the model, you only have to implement an interface <code>Model&lt;BEAN_CLASS&gt;</code> and allow it to be rebinded with <code>GWT.create(...)</code>.
 			</p>
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
 public interface PersonModel extends Model<Person> {}
 private final Model<Person> personModel = GWT.create(PersonModel.class);
+]]></pre>
+			</c:StaticCode>
+			<p>If the view in wich you use the model implements the <code>View</code> interface, you can use the <a href="#!Injection">Injection feature</a> :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@InjectModel
+Model<Person> personModel;
 ]]></pre>
 			</c:StaticCode>
 
@@ -205,6 +212,15 @@ beanForm.setMessageHelper(new MessageHelper(constants));
 beanForm.initialize(personModel);
 ]]></pre>
 				</c:StaticCode>
+				<p>If you use the <a href="#!Injection">Injection feature</a> (if the view implements the <code>View</code> interface), you can use the following :</p>
+				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@UiField
+@Initialize(constantsClass = Constants.class)
+Form<Person> beanForm;
+]]></pre>
+				</c:StaticCode>
+				<w:Alert><h4>Note :</h4>As you can see, with the <a href="#!Injection">Injection feature</a>, the Model is automatically generated and the form is automatically initialized.</w:Alert>
 			</div>
 			
 			<w:Heading level="4" summary="docSummary">Embedded sub-forms</w:Heading>
@@ -291,6 +307,16 @@ tableEditor.setMessageHelper(new MessageHelper(constants));
 tableEditor.initialize(personModel);
 tableEditor.edit(people);
 ]]></pre>				
+				</c:StaticCode>
+				<p>If you use the <a href="#!Injection">Injection feature</a> (if the view implements the <code>View</code> interface), you can use the following :</p>
+				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@UiField
+@Initialize(constantsClass = Constants.class)
+TableEditor<Person> tableEditor;
+List<Person> people = ...
+tableEditor.edit(people);
+]]></pre>
 				</c:StaticCode>
 			</div>
 			

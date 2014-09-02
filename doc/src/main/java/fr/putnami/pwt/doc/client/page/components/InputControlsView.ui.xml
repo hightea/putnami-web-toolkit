@@ -258,6 +258,20 @@
 				</div>
 			</div>
 			
+			<!-- InputSwitch -->
+			<div>
+				<w:Heading level="3" summary="docSummary">InputSwitch</w:Heading>
+				<p><code>InputSwitch</code> is a graphical component useful to switch between values.</p>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:InputSwitch path="mainGroup" items="{groups}" />
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:InputSwitch items="{groups}" />]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
+			
 			<!-- InputSlider -->
 			<div>
 				<w:Heading level="3" summary="docSummary">InputSlider</w:Heading>

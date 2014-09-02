@@ -38,6 +38,14 @@ interface Binder extends UiBinderLocalized<Widget, TemplateView> {
 	Binder BINDER = GWT.create(Binder.class);
 }]]></pre>
 		</c:StaticCode>
+		<p>And if you use the <a href="#!Injection">Injection feature</a> (if your view implements the <code>View</code> interface), you can just annotate your view with <code>@Templated</code> :</p>
+		<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@Templated
+public TemplateView implements View {
+	...
+}]]></pre>
+		</c:StaticCode>
 		<p>And create the following templates :</p>
 		<ul>
 			<li><strong>TemplateView.ui.xml</strong> : The default template</li>

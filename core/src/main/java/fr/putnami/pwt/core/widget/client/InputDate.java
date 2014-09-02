@@ -65,7 +65,6 @@ public class InputDate extends InputGroup<Date> implements
 		super(source, false);
 		endConstruct();
 		setFormat(source.getFormat());
-		// setPath(source.getPath());
 		setPlaceholder(source.getPlaceholder());
 	}
 
@@ -83,16 +82,6 @@ public class InputDate extends InputGroup<Date> implements
 	public IsWidget cloneWidget() {
 		return new InputDate(this);
 	}
-
-//	@Override
-//	public void setPath(String path) {
-//		dateBox.setPath(path);
-//	}
-
-//	@Override
-//	public String getPath() {
-//		return dateBox.getPath();
-//	}
 
 	public String getFormat() {
 		return dateBox.getFormat();

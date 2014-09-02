@@ -47,11 +47,13 @@
 							<w:NavLink label="Internationalization" link="#!Internationalization" />
 							<w:NavLink label="Server calls" link="#!ServerCalls" />
 							<w:NavLink label="Errors handling" link="#!Errors" />
+							<w:NavLink label="Injection" link="#!Injection"/>
 						</w:NavDropdown>
 						<w:NavDropdown label="Plugins" >
 							<w:NavLink label="Code editor" link="#!CodeEditor"/>
 							<w:NavLink label="Google analytics" link="#!GoogleAnalytics"/>
 							<w:NavLink label="Ajax bot indexing" link="#!AjaxBotIndexing"/>
+							<w:NavLink label="Spring integration" link="#!Spring"/>
 						</w:NavDropdown>
 						<w:NavDropdown label="Samples" >
 							<w:NavLink label="Address book" link="#!AddressBook"/>

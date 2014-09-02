@@ -164,6 +164,13 @@ public PersonView(){
 }
 ]]></pre>
 				</c:StaticCode>
+				<p>If you use the <a href="#!Injection">Injection feature</a> (if the view implements the <code>View</code> interface), you can use the ()very simple) following :</p>
+				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@InjectService
+PersonService personService;
+]]></pre>
+				</c:StaticCode>
 			</div>
 			
 			<w:Heading level="3" summary="docSummary">Standard async method</w:Heading>
