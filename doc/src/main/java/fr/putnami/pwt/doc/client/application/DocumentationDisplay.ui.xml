@@ -27,7 +27,6 @@
 			<div class="pwt-top-header">
 				<div id="pwt-title" class="container" title="PWT - Putnami Web Tool Kit">
 					<img src="assets/img/putnami.png" alt="Putnami Logo" /> PWT <small class="hidden-xs">Putnami Web Toolkit</small>
-					<a:NewsPopup />
 				</div>
 					
 			</div>

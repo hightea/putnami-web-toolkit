@@ -30,13 +30,7 @@
 			</w:ListItem>
 			<w:ListItem>
 				<span class="pull-right label label-default">dev</span>
-				<a href="/version/1.1.0-SNAPSHOT">1.1.0-SNAPSHOT</a>
-			</w:ListItem>
-			<w:ListItem>
-				<a href="/version/1.0.0-RC2">1.0.0-RC2</a>
-			</w:ListItem>
-			<w:ListItem>
-				<a href="/version/1.0.0-RC1">1.0.0-RC1</a>
+				1.1.0-SNAPSHOT
 			</w:ListItem>
 		</w:List>
 	</w:Panel>
