@@ -22,15 +22,15 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import com.google.gwt.place.shared.PlaceTokenizer;
+import com.google.gwt.user.client.ui.IsWidget;
 
-import fr.putnami.pwt.core.mvp.client.View;
 import fr.putnami.pwt.core.mvp.client.ViewDecorator;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface ActivityDescription {
 
-	Class<? extends View> view();
+	Class<? extends IsWidget> view();
 
 	Class<? extends ViewDecorator> viewDecorator() default ViewDecorator.class;;
 

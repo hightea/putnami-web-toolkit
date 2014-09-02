@@ -29,48 +29,50 @@ import fr.putnami.pwt.core.service.shared.domain.CommandResponse;
 public class SuspendServiceOnPresentCreator extends InjectorCreatorDelegate {
 
 	private final String injectorName;
+	private boolean hasService;
 
-	public SuspendServiceOnPresentCreator(String injectorName) {
+	public SuspendServiceOnPresentCreator(String injectorName, boolean hasService) {
 		this.injectorName = injectorName;
-
+		this.hasService = hasService;
 	}
 
 	@Override
 	public void initComposer(ClassSourceFileComposerFactory composerFactory) {
-		composerFactory.addImport(CommandController.class.getName());
-		composerFactory.addImport(CallbackAdapter.class.getName());
-		composerFactory.addImport(List.class.getName());
-		composerFactory.addImport(CommandResponse.class.getName());
+		if (hasService) {
+			composerFactory.addImport(CommandController.class.getName());
+			composerFactory.addImport(CallbackAdapter.class.getName());
+			composerFactory.addImport(List.class.getName());
+			composerFactory.addImport(CommandResponse.class.getName());
+		}
 	}
 
 	@Override
 	public void writeBeforePresent(SourceWriter srcWriter) {
-		srcWriter.println("CommandController commandController = CommandController.get();");
-		srcWriter.println("boolean isSuspended = commandController.isSuspended();");
-		srcWriter.println("commandController.setSuspended(true);");
-
+		if (hasService) {
+			srcWriter.println("CommandController commandController = CommandController.get();");
+			srcWriter.println("boolean isSuspended = commandController.isSuspended();");
+			srcWriter.println("commandController.setSuspended(true);");
+		}
 	}
 
 	@Override
 	public void writeAfterPresent(SourceWriter srcWriter) {
-		srcWriter.println("if (flush) {");
-		srcWriter.indent();
-		srcWriter.println("commandController.flush(new CallbackAdapter<List<CommandResponse>>() {");
-		srcWriter.indent();
-		srcWriter.println("@Override");
-		srcWriter.println("public void onSuccess(List<CommandResponse> result) {");
-		srcWriter.indent();
-		srcWriter.println("displayer.setWidget(%s.this);", injectorName);
-		srcWriter.outdent();
-		srcWriter.println("};");
-		srcWriter.outdent();
-		srcWriter.println("});");
-		srcWriter.outdent();
-		srcWriter.println("} else {");
-		srcWriter.indent();
-		srcWriter.println("displayer.setWidget(%s.this);", injectorName);
-		srcWriter.outdent();
-		srcWriter.println("}");
-		srcWriter.println("commandController.setSuspended(isSuspended);");
+		if (!hasService) {
+			srcWriter.println("displayer.setWidget(%s.this);", injectorName);
+		}
+		else {
+			srcWriter.println("commandController.flush(new CallbackAdapter<List<CommandResponse>>() {");
+			srcWriter.indent();
+			srcWriter.println("@Override");
+			srcWriter.println("public void onSuccess(List<CommandResponse> result) {");
+			srcWriter.indent();
+			srcWriter.println("displayer.setWidget(%s.this);", injectorName);
+			srcWriter.outdent();
+			srcWriter.println("};");
+			srcWriter.outdent();
+			srcWriter.println("});");
+			srcWriter.println("commandController.setSuspended(isSuspended);");
+
+		}
 	}
 }

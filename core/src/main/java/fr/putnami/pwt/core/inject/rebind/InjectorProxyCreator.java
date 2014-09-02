@@ -31,7 +31,6 @@ import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
-import fr.putnami.pwt.core.inject.rebind.delegate.SuspendServiceOnPresentCreator;
 import fr.putnami.pwt.core.inject.rebind.factory.DecoratorPresenterCreatorFactory;
 import fr.putnami.pwt.core.inject.rebind.factory.InitializeFormCreatorFactory;
 import fr.putnami.pwt.core.inject.rebind.factory.ModelCreatorFactory;
@@ -43,7 +42,7 @@ import fr.putnami.pwt.core.inject.rebind.factory.ServiceCreatorFactory;
 import fr.putnami.pwt.core.inject.rebind.factory.TemplatedCreatorFactory;
 
 public class InjectorProxyCreator {
-	private static final String PROXY_SUFFIX = "_Injector";
+	public static final String PROXY_SUFFIX = "_Injector";
 
 	private static final Collection<InjectorDelegateFactorty> delegateFactories = Lists.newArrayList();
 
@@ -72,12 +71,8 @@ public class InjectorProxyCreator {
 		this.proxyQualifiedName = injectableType.getPackage().getName() + "." + proxyName;
 
 		for (InjectorDelegateFactorty factory : delegateFactories) {
-			Collection<InjectorCreatorDelegate> delegates = factory.createDelegates(injectableType);
-			if (delegates != null) {
-				this.delegates.addAll(delegates);
-			}
+			factory.createDelegates(injectableType, this.delegates);
 		}
-		this.delegates.add(new SuspendServiceOnPresentCreator(proxyName));
 
 		Collections.sort(this.delegates, new Comparator<InjectorCreatorDelegate>() {
 			@Override
@@ -85,6 +80,10 @@ public class InjectorProxyCreator {
 				return Integer.compare(o1.getOrder(), o2.getOrder());
 			}
 		});
+	}
+
+	public boolean shallRebind(){
+		return delegates.size() > 0;
 	}
 
 	public String create(TreeLogger logger, GeneratorContext context) {
@@ -117,7 +116,7 @@ public class InjectorProxyCreator {
 		srcWriter.outdent();
 		srcWriter.println("}");
 		// presenter
-		srcWriter.println("public <P extends Place> void present(P place, final AcceptsOneWidget displayer, boolean flush){");
+		srcWriter.println("public <P extends Place> void present(P place, final AcceptsOneWidget displayer){");
 		srcWriter.indent();
 		for (InjectorCreatorDelegate delegate : delegates) {
 			delegate.writeBeforePresent(srcWriter);

@@ -23,6 +23,9 @@
 	<source path="shared"/>
 	
 	<generate-with class="fr.putnami.pwt.core.inject.rebind.InjectorProxyGenerator">
+		<when-type-assignable class="fr.putnami.pwt.core.inject.client.Injection" />
+	</generate-with>
+	<generate-with class="fr.putnami.pwt.core.inject.rebind.InjectorProxyGenerator">
 		<when-type-assignable class="fr.putnami.pwt.core.mvp.client.View" />
 	</generate-with>
 

@@ -42,7 +42,7 @@ public class InjectDecoratorPresenterCreator extends InjectorCreatorDelegate {
 		srcWriter.println("if (view instanceof Presenter) {");
 		srcWriter.indent();
 		srcWriter.println("Presenter presenter = (Presenter) view;");
-		srcWriter.println("presenter.present(place, this, false);");
+		srcWriter.println("presenter.present(place, this);");
 		srcWriter.outdent();
 		srcWriter.println("}");
 		srcWriter.outdent();

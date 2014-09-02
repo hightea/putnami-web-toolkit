@@ -18,24 +18,28 @@ package fr.putnami.pwt.core.inject.rebind.factory;
 
 import java.util.Collection;
 
-import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.google.gwt.core.ext.typeinfo.JField;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 
+import fr.putnami.pwt.core.inject.client.annotation.InjectService;
 import fr.putnami.pwt.core.inject.client.annotation.PresentHandler;
 import fr.putnami.pwt.core.inject.rebind.InjectorCreatorDelegate;
 import fr.putnami.pwt.core.inject.rebind.InjectorDelegateFactorty;
+import fr.putnami.pwt.core.inject.rebind.InjectorProxyCreator;
 import fr.putnami.pwt.core.inject.rebind.delegate.InjectPresenterCreator;
+import fr.putnami.pwt.core.inject.rebind.delegate.SuspendServiceOnPresentCreator;
 import fr.putnami.pwt.core.inject.rebind.util.InjectCreatorUtil;
 
 public class PresenterCreatorFactory implements InjectorDelegateFactorty {
 
 	@Override
-	public Collection<InjectorCreatorDelegate> createDelegates(JClassType injectableType) {
-		Collection<InjectorCreatorDelegate> delegates = Lists.newArrayList();
+	public void createDelegates(JClassType injectableType, Collection<InjectorCreatorDelegate> delegates) {
 		Collection<JMethod> methods = InjectCreatorUtil.listMethod(injectableType, PresentHandler.class);
 		delegates.add(new InjectPresenterCreator(methods));
-		return delegates;
+		Collection<JField> services = InjectCreatorUtil.listFields(injectableType, InjectService.class);
+		String injectorName = injectableType.getSimpleSourceName() + InjectorProxyCreator.PROXY_SUFFIX;
+		delegates.add(new SuspendServiceOnPresentCreator(injectorName, services.size() > 0));
 	}
 
 }

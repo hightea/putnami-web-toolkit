@@ -18,7 +18,6 @@ package fr.putnami.pwt.core.inject.rebind.factory;
 
 import java.util.Collection;
 
-import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 
 import fr.putnami.pwt.core.inject.client.annotation.Secured;
@@ -29,13 +28,11 @@ import fr.putnami.pwt.core.inject.rebind.delegate.InjectSecuritedCreator;
 public class SecurityCreatorFactory implements InjectorDelegateFactorty {
 
 	@Override
-	public Collection<InjectorCreatorDelegate> createDelegates(JClassType injectableType) {
-		Collection<InjectorCreatorDelegate> delegates = Lists.newArrayList();
+	public void createDelegates(JClassType injectableType, Collection<InjectorCreatorDelegate> delegates) {
 		Secured securedAnnotation = injectableType.getAnnotation(Secured.class);
 		if (securedAnnotation != null) {
 			delegates.add(new InjectSecuritedCreator(securedAnnotation));
 		}
-		return delegates;
 	}
 
 }

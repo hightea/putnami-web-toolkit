@@ -22,5 +22,5 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 
 public interface InjectorDelegateFactorty {
 
-	Collection<InjectorCreatorDelegate> createDelegates(JClassType injectableType);
+	void createDelegates(JClassType injectableType, Collection<InjectorCreatorDelegate> delegates);
 }

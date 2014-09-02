@@ -21,5 +21,5 @@ import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 public interface Presenter {
 
-	public <P extends Place> void present(P place, AcceptsOneWidget displayer, boolean flush);
+	public <P extends Place> void present(P place, AcceptsOneWidget displayer);
 }

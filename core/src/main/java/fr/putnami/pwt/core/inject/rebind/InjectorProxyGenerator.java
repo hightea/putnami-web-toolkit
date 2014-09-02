@@ -22,6 +22,7 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.google.gwt.dev.javac.StandardGeneratorContext;
 
 public class InjectorProxyGenerator extends Generator {
 
@@ -37,7 +38,17 @@ public class InjectorProxyGenerator extends Generator {
 		}
 
 		InjectorProxyCreator injectorCreator = new InjectorProxyCreator(viewType);
-		return injectorCreator.create(logger, context);
+		if (injectorCreator.shallRebind()) {
+			return injectorCreator.create(logger, context);
+		}
+		if (context instanceof StandardGeneratorContext) {
+			StandardGeneratorContext standardContext = (StandardGeneratorContext) context;
+			if (standardContext.checkRebindRuleAvailable(typeName)) {
+				return typeName;
+			}
+		}
+
+		return typeName;
 	}
 
 

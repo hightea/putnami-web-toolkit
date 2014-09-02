@@ -4,7 +4,7 @@
 	<inherits name="fr.putnami.pwt.core.widget.Widget"/>
 	<!-- PWT Module to extends in order to use PWT MVP features-->
 	<inherits name="fr.putnami.pwt.core.mvp.Mvp"/>
-	<inherits name="fr.putnami.pwt.core.service.Service"/>
+	<!-- PWT Module to extends in order to use PWT Inject features-->
 	<inherits name="fr.putnami.pwt.core.inject.Inject"/>
  
      <entry-point class="fr.putnami.pwt.tutorial.client.TutorialApp"/>

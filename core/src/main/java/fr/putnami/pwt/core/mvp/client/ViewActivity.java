@@ -62,14 +62,9 @@ public final class ViewActivity implements Activity, ViewProxy.Callback {
 
 	@Override
 	public void showView(IsWidget view) {
-		this.startView(this.panel, view);
-	}
-
-	protected void startView(final AcceptsOneWidget container, final IsWidget widget) {
-		StartActivityEvent.fire(this, this.place, container, widget);
-		if (widget instanceof Presenter) {
-			Presenter presenter = (Presenter) widget;
-			presenter.present(this.place, container, true);
+		StartActivityEvent.fire(this, this.place, this.panel, view);
+		if (view instanceof Presenter) {
+			((Presenter) view).present(this.place, this.panel);
 		}
 	}
 
