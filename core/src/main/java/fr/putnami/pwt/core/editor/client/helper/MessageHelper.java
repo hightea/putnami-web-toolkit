@@ -104,7 +104,7 @@ public class MessageHelper {
 		return labelKey;
 	}
 
-	public String replaceParams(String pMessage, Object[] parameters) {
+	public static String replaceParams(String pMessage, Object... parameters) {
 		int i = 0;
 		String message = pMessage;
 		if (message != null && parameters != null && parameters.length > 0) {
