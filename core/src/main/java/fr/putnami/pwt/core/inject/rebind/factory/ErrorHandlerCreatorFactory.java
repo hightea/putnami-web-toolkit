@@ -21,21 +21,22 @@ import java.util.Collection;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 
-import fr.putnami.pwt.core.inject.client.annotation.MayStopActivityHandler;
+import fr.putnami.pwt.core.inject.client.annotation.ErrorHandler;
 import fr.putnami.pwt.core.inject.rebind.InjectorCreatorDelegate;
 import fr.putnami.pwt.core.inject.rebind.InjectorDelegateFactorty;
 import fr.putnami.pwt.core.inject.rebind.InjectorProxyCreator;
-import fr.putnami.pwt.core.inject.rebind.delegate.InjectMayStopActivityCreator;
+import fr.putnami.pwt.core.inject.rebind.delegate.InjectErrorHandlerCreator;
 import fr.putnami.pwt.core.inject.rebind.util.InjectCreatorUtil;
 
-public class MayStopActivityCreatorFactory implements InjectorDelegateFactorty {
+public class ErrorHandlerCreatorFactory implements InjectorDelegateFactorty {
 
 	@Override
 	public void createDelegates(JClassType injectableType, Collection<InjectorCreatorDelegate> delegates) {
-		Collection<JMethod> methods = InjectCreatorUtil.listMethod(injectableType, MayStopActivityHandler.class);
+		Collection<JMethod> methods = InjectCreatorUtil.listMethod(injectableType, ErrorHandler.class);
 		if (!methods.isEmpty()) {
 			String injectorName = injectableType.getSimpleSourceName() + InjectorProxyCreator.PROXY_SUFFIX;
-			delegates.add(new InjectMayStopActivityCreator(methods, injectorName));
+			delegates.add(new InjectErrorHandlerCreator(methods, injectorName));
 		}
 	}
+
 }
