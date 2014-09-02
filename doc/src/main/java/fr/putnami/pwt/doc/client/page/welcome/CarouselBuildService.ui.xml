@@ -24,42 +24,30 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<w:HTMLPanel styleName="carouselTable">
-		<w:Heading level="1">Table and collection binding</w:Heading>
+	<w:HTMLPanel styleName="carouselService">
+		<w:Heading level="1">Simple use of services</w:Heading>
 		<w:GridRow xsVisibility="HIDDEN">
-			<w:GridColumn size="6">
-				<strong>ui.xml</strong>
-				<c:StaticCode configuration="{XML_CONFIGURATION}">
-<pre><![CDATA[
-<w:TableEditor ui:field="table">
-	<w:Pagination pageSize="3" />
-	<w:TableSelecter ui:field="selecter" />
-	<w:TableColumn path="name">
-		<w:TableSort />
-	</w:TableColumn/>
-	<w:TableColumn path="email">
-		<w:OutputEmail />
-	</w:TableColumn>
-	<w:TableColumn path="address.city" xsVisibility="HIDDEN"/>
-</w:TableEditor>]]></pre>
-				</c:StaticCode>
-			</w:GridColumn>
-			<w:GridColumn size="6">
-				<strong>java</strong>
+			<w:GridColumn size="12">
 				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-public interface PersonModel extends Model<Person> {}
-...
-@UiField 
-TableEditor<Person> table;
-...
-table.initialize(GWT.<Model<Person>> create(PersonModel.class));
-table.edit(people);
-...
-@UiHandler("selecter")
-void onSelect(SelectionEvent event) { 
-...
+@InjectService
+interface MyRemoteService extends ServiceProxy<MyView, MyService>, MyService {
+	MyRemoteService SERVICE = GWT.create(MyRemoteService.class);
 }
+
+public MyView() {
+    ...
+    MyRemoteService.SERVICE.bindService(this);
+}
+...
+MyRemoteService.SERVICE.method(String arg)
+...
+@AsyncHandler
+void onMethod(String result) { ... };
+...
+@AsyncHandler
+void onMethodThrown(Throwable thrown) { ... };
+
 ]]></pre>
 				</c:StaticCode>
 			</w:GridColumn>

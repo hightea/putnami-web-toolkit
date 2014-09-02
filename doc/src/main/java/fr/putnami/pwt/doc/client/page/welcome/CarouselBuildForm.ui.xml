@@ -24,9 +24,9 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<w:HTMLPanel>
-		<w:Heading level="1">Bind a form</w:Heading>
-		<w:GridRow>
+	<w:HTMLPanel styleName="carouselForm">
+		<w:Heading level="1">Easy form binding</w:Heading>
+		<w:GridRow xsVisibility="HIDDEN">
 			<w:GridColumn size="6">
 				<strong>ui.xml</strong>
 				<c:StaticCode configuration="{XML_CONFIGURATION}">
