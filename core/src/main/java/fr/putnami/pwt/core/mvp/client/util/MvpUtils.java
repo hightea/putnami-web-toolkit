@@ -69,7 +69,11 @@ public final class MvpUtils {
 	}
 
 	public static String getDefaultPrefix(Place place) {
-		return "!" + place.getClass().getSimpleName().replaceAll("Place$", "");
+		String prefix = place.getClass().getSimpleName().replaceAll("Place$", "");
+		if (prefix.indexOf('$') > 0) {
+			prefix = prefix.substring(prefix.indexOf('$') + 1);
+		}
+		return "!" + prefix;
 	}
 
 	private MvpUtils(){}

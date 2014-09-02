@@ -58,10 +58,12 @@ public class ProxyViewCreator {
 	public ProxyViewCreator(JClassType placeType) {
 		this.placeType = placeType;
 		this.packageName = this.placeType.getPackage().getName();
-		this.viewProxyQualifiedName = this.placeType.getQualifiedSourceName() + ProxyViewCreator.PROXY_SUFFIX;
-		this.viewProxySimpleName = this.placeType.getSimpleSourceName() + ProxyViewCreator.PROXY_SUFFIX;
+		String viewProxyQualifiedName = this.placeType.getQualifiedSourceName() + ProxyViewCreator.PROXY_SUFFIX;
+		this.viewProxyQualifiedName = viewProxyQualifiedName.replace(placeType.getName(), placeType.getName().replace('.', '_'));
+		this.viewProxySimpleName = this.viewProxyQualifiedName.replace(this.packageName + ".", "");
 		this.activityDescrition = placeType.getAnnotation(ActivityDescription.class);
 		this.placeTokenizerClass = activityDescrition.placeTokenizer();
+
 		if (PlaceTokenizer.class.equals(placeTokenizerClass)) {
 			placeTokenizerClass = null;
 			try {
@@ -83,9 +85,7 @@ public class ProxyViewCreator {
 	}
 
 	public String create(TreeLogger logger, GeneratorContext context) throws UnableToCompleteException {
-		String packageName = this.placeType.getPackage().getName();
-		String className = this.viewProxySimpleName;
-		PrintWriter printWriter = context.tryCreate(logger, packageName, className);
+		PrintWriter printWriter = context.tryCreate(logger, packageName, viewProxySimpleName);
 		if (printWriter == null) {
 			return this.viewProxyQualifiedName;
 		}
