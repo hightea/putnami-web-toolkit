@@ -1,6 +1,8 @@
 Putnami Web Toolkit
 ===================
 
+* [![Build Status](https://secure.travis-ci.org/resty-gwt/resty-gwt.png)](http://travis-ci.org/resty-gwt/resty-gwt)
+
 Putnami Web Toolkit is a [GWT](http://www.gwtproject.org/) based framework, providing nice graphical components (based on [Bootstrap](http://www.getbootstrap.com/)), and a bunch of nice features like data binding, unified server calls, etc.
 
 The **main goal** of this framework is to improve your productivity by removing unnecessary, useless code. The framework will then generate what's necessary.
