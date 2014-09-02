@@ -57,7 +57,7 @@ public final class ViewActivity implements Activity, ViewProxy.Callback {
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		this.panel = panel;
-		this.viewMapper.getView(this);
+		this.viewMapper.loadView(this);
 	}
 
 	@Override

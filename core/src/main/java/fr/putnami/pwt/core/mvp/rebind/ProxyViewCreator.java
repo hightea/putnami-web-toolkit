@@ -190,7 +190,7 @@ public class ProxyViewCreator {
 		srcWriter.println("private static %s view;", viewName);
 		srcWriter.println();
 		srcWriter.println("@Override");
-		srcWriter.println("public void getView(final ViewProxy.Callback callback) {");
+		srcWriter.println("public void loadView(final ViewProxy.Callback callback) {");
 		srcWriter.indent();
 		if (activityDescrition.asyncView()) {
 			srcWriter.println("GWT.runAsync(%s.class, new RunAsyncCallback() {", viewName);

@@ -27,6 +27,6 @@ public interface ViewProxy<P extends Place> extends PlaceTokenizer<P>, ActivityF
 		void showView(IsWidget view);
 	}
 
-	void getView(Callback callback);
+	void loadView(Callback callback);
 
 }
