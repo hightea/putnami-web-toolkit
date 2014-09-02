@@ -20,7 +20,13 @@ import com.google.gwt.user.client.ui.Composite;
 
 import fr.putnami.pwt.core.inject.client.annotation.Templated;
 import fr.putnami.pwt.core.mvp.client.View;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 
 @Templated
 public class WelcomePage extends Composite implements View {
+
+	@ActivityDescription(view = WelcomePage.class)
+	public static class WelcomePlace extends ViewPlace {
+	}
 }

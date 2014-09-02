@@ -17,8 +17,16 @@
 package fr.putnami.pwt.doc.client.page.components;
 
 import fr.putnami.pwt.core.inject.client.annotation.Templated;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 import fr.putnami.pwt.doc.client.application.Page;
+import fr.putnami.pwt.doc.client.application.SummaryDecorator;
 
 @Templated
 public class ComponentsPage extends Page {
+	@ActivityDescription(view = ComponentsPage.class, aliases = {
+			"Tables", "Forms"
+	}, viewDecorator = SummaryDecorator.class)
+	public static class ComponentsPlace extends ViewPlace {
+	}
 }

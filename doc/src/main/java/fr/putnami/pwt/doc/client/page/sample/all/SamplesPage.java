@@ -23,9 +23,14 @@ import com.google.gwt.user.client.ui.Widget;
 
 import fr.putnami.pwt.core.inject.client.annotation.PresentHandler;
 import fr.putnami.pwt.core.mvp.client.View;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 
 public class SamplesPage extends Composite implements View {
+	@ActivityDescription(view = SamplesPage.class)
+	public static class SamplesPlace extends ViewPlace {
+	}
 
 	interface Binder extends UiBinderLocalized<Widget, SamplesPage> {
 		Binder BINDER = GWT.create(Binder.class);

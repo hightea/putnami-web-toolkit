@@ -19,12 +19,19 @@ package fr.putnami.pwt.doc.client.page.errors;
 import com.google.gwt.uibinder.client.UiHandler;
 
 import fr.putnami.pwt.core.inject.client.annotation.Templated;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.doc.client.application.Page;
+import fr.putnami.pwt.doc.client.application.SummaryDecorator;
 import fr.putnami.pwt.doc.client.application.error.CustomRuntimeException;
 
 @Templated
 public class ErrorsPage extends Page {
+
+	@ActivityDescription(view = ErrorsPage.class, viewDecorator = SummaryDecorator.class)
+	public static class ErrorsPlace extends ViewPlace {
+	}
 
 	@UiHandler("errorBtn")
 	public void onErrorButtonClick(ButtonEvent evt) {

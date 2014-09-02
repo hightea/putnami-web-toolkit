@@ -38,6 +38,8 @@ import fr.putnami.pwt.core.inject.client.annotation.Initialize;
 import fr.putnami.pwt.core.inject.client.annotation.PresentHandler;
 import fr.putnami.pwt.core.inject.client.annotation.Templated;
 import fr.putnami.pwt.core.mvp.client.View;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 import fr.putnami.pwt.core.widget.client.Anchor;
 import fr.putnami.pwt.core.widget.client.Button;
 import fr.putnami.pwt.core.widget.client.Form;
@@ -47,6 +49,7 @@ import fr.putnami.pwt.core.widget.client.InputText;
 import fr.putnami.pwt.core.widget.client.OutputList;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.doc.client.page.sample.decorator.HasSources;
+import fr.putnami.pwt.doc.client.page.sample.decorator.SampleDecorator;
 import fr.putnami.pwt.doc.shared.page.sample.constants.SampleConstants;
 import fr.putnami.pwt.doc.shared.page.sample.domain.Contact;
 import fr.putnami.pwt.doc.shared.page.sample.domain.Group;
@@ -54,6 +57,9 @@ import fr.putnami.pwt.doc.shared.page.sample.service.ContactService;
 
 @Templated
 public class AddressBookPage extends Composite implements View, HasSources {
+	@ActivityDescription(view = AddressBookPage.class, viewDecorator = SampleDecorator.class)
+	public static class AddressBookPlace extends ViewPlace {
+	}
 
 	@UiField
 	InputText searchBox;

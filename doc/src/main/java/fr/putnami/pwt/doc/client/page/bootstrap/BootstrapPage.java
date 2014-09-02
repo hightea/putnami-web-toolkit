@@ -20,14 +20,20 @@ import com.google.gwt.uibinder.client.UiHandler;
 
 import fr.putnami.pwt.core.inject.client.annotation.PostConstruct;
 import fr.putnami.pwt.core.inject.client.annotation.Templated;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 import fr.putnami.pwt.core.theme.client.CssLink;
 import fr.putnami.pwt.core.theme.client.Theme;
 import fr.putnami.pwt.core.theme.client.ThemeController;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.doc.client.application.Page;
+import fr.putnami.pwt.doc.client.application.SummaryDecorator;
 
 @Templated
 public class BootstrapPage extends Page {
+	@ActivityDescription(view = BootstrapPage.class, viewDecorator = SummaryDecorator.class)
+	public static class BootstrapPlace extends ViewPlace {
+	}
 
 	private final Theme defaultTheme = new Theme();
 	private final Theme yeti = new Theme();

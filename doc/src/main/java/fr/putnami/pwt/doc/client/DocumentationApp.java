@@ -16,11 +16,9 @@
  */
 package fr.putnami.pwt.doc.client;
 
-import com.google.common.base.Strings;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
-import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import fr.putnami.pwt.core.error.client.ErrorManager;
@@ -34,36 +32,35 @@ import fr.putnami.pwt.doc.client.application.DocumentationDisplay;
 import fr.putnami.pwt.doc.client.application.error.ApplicationUnreachableExceptionHandler;
 import fr.putnami.pwt.doc.client.application.error.ErrorConstants;
 import fr.putnami.pwt.doc.client.application.error.UmbrellaExceptionHandler;
-import fr.putnami.pwt.doc.client.page.ajaxbot.AjaxBotIndexingPlace;
-import fr.putnami.pwt.doc.client.page.analytics.GoogleAnalyticsPlace;
-import fr.putnami.pwt.doc.client.page.binding.DataBindingPlace;
-import fr.putnami.pwt.doc.client.page.bootstrap.BootstrapPlace;
-import fr.putnami.pwt.doc.client.page.codeeditor.CodeEditorPlace;
-import fr.putnami.pwt.doc.client.page.components.ComponentsPlace;
-import fr.putnami.pwt.doc.client.page.download.DownloadPlace;
-import fr.putnami.pwt.doc.client.page.errors.ErrorsPlace;
-import fr.putnami.pwt.doc.client.page.i18n.InternationalizationPlace;
-import fr.putnami.pwt.doc.client.page.layout.LayoutsPlace;
-import fr.putnami.pwt.doc.client.page.navigation.NavigationPlace;
-import fr.putnami.pwt.doc.client.page.sample.addressbook.AddressBookPlace;
-import fr.putnami.pwt.doc.client.page.sample.all.SamplesPlace;
-import fr.putnami.pwt.doc.client.page.sample.table.ContactsTablePlace;
-import fr.putnami.pwt.doc.client.page.server.ServerCallsPlace;
-import fr.putnami.pwt.doc.client.page.soon.ComingSoonPlace;
-import fr.putnami.pwt.doc.client.page.starting.GettingStartedPlace;
-import fr.putnami.pwt.doc.client.page.tutorial.Tuto4BindAFormPlace;
-import fr.putnami.pwt.doc.client.page.tutorial.Tuto2FirstPagePlace;
-import fr.putnami.pwt.doc.client.page.tutorial.Tuto1InitGradlePlace;
-import fr.putnami.pwt.doc.client.page.tutorial.Tuto1InitMavenPlace;
-import fr.putnami.pwt.doc.client.page.tutorial.Tuto3MorePagesPlace;
-import fr.putnami.pwt.doc.client.page.tutorial.Tuto5IssueTrackerPlace;
-import fr.putnami.pwt.doc.client.page.tutorial.Tuto6ThemePlace;
-import fr.putnami.pwt.doc.client.page.tutorial.Tuto7GoogleAnalyticsPlace;
-import fr.putnami.pwt.doc.client.page.tutorial.Tuto8AjaxBotPlace;
-import fr.putnami.pwt.doc.client.page.welcome.WelcomePlace;
+import fr.putnami.pwt.doc.client.page.ajaxbot.AjaxBotIndexingPage;
+import fr.putnami.pwt.doc.client.page.analytics.GoogleAnalyticsPage;
+import fr.putnami.pwt.doc.client.page.binding.DataBindingPage;
+import fr.putnami.pwt.doc.client.page.bootstrap.BootstrapPage;
+import fr.putnami.pwt.doc.client.page.codeeditor.CodeEditorPage;
+import fr.putnami.pwt.doc.client.page.components.ComponentsPage;
+import fr.putnami.pwt.doc.client.page.download.DownloadPage;
+import fr.putnami.pwt.doc.client.page.errors.ErrorsPage;
+import fr.putnami.pwt.doc.client.page.i18n.InternationalizationPage;
+import fr.putnami.pwt.doc.client.page.layout.LayoutPage;
+import fr.putnami.pwt.doc.client.page.navigation.NavigationPage;
+import fr.putnami.pwt.doc.client.page.sample.addressbook.AddressBookPage;
+import fr.putnami.pwt.doc.client.page.sample.all.SamplesPage;
+import fr.putnami.pwt.doc.client.page.sample.table.ContactsTablePage;
+import fr.putnami.pwt.doc.client.page.server.ServerCallsPage;
+import fr.putnami.pwt.doc.client.page.soon.ComingSoonPage;
+import fr.putnami.pwt.doc.client.page.starting.GettingStartedPage;
+import fr.putnami.pwt.doc.client.page.tutorial.Tuto1InitGradlePage;
+import fr.putnami.pwt.doc.client.page.tutorial.Tuto1InitMavenPage;
+import fr.putnami.pwt.doc.client.page.tutorial.Tuto2FirstPagePage;
+import fr.putnami.pwt.doc.client.page.tutorial.Tuto3MorePagesPage;
+import fr.putnami.pwt.doc.client.page.tutorial.Tuto4BindAFormPage;
+import fr.putnami.pwt.doc.client.page.tutorial.Tuto5IssueTrackerPage;
+import fr.putnami.pwt.doc.client.page.tutorial.Tuto6ThemePage;
+import fr.putnami.pwt.doc.client.page.tutorial.Tuto7GoogleAnalyticsPage;
+import fr.putnami.pwt.doc.client.page.tutorial.Tuto8AjaxBotPage;
+import fr.putnami.pwt.doc.client.page.welcome.WelcomePage;
 import fr.putnami.pwt.plugin.ga.client.GoogleAnalytics;
 import static fr.putnami.pwt.doc.client.application.ApplicationConfig.ANALYTICS_TRACKER_ID;
-import static fr.putnami.pwt.doc.client.application.ApplicationConfig.COOKIE_COUNT_VISIT;
 import static fr.putnami.pwt.doc.client.application.ApplicationConfig.DOMAIN;
 
 public class DocumentationApp implements EntryPoint {
@@ -73,21 +70,6 @@ public class DocumentationApp implements EntryPoint {
 		Theme theme = new Theme();
 		theme.addLink(new CssLink("theme/doc/style/pwt-doc.css", 0));
 		ThemeController.get().installTheme(theme);
-
-		if (Cookies.isCookieEnabled()) {
-			int cnt = 0;
-			try {
-				String cntString = Cookies.getCookie(COOKIE_COUNT_VISIT);
-				if (!Strings.isNullOrEmpty(cntString)) {
-					cnt = Integer.parseInt(cntString);
-				}
-			}
-			catch (NumberFormatException e) {
-				cnt = 0;
-			}
-			cnt++;
-			Cookies.setCookie(COOKIE_COUNT_VISIT, "" + cnt);
-		}
 
 		GoogleAnalytics analytics = GoogleAnalytics.init(ANALYTICS_TRACKER_ID, DOMAIN);
 		analytics.forceSSL(true);
@@ -106,36 +88,36 @@ public class DocumentationApp implements EntryPoint {
 		final MvpController controller = MvpController.get();
 		controller.setDisplay(display);
 
-		controller.setDefaultPlace(new WelcomePlace());
+		controller.setDefaultPlace(new WelcomePage.WelcomePlace());
 
-		controller.registerActivity((ActivityFactory) GWT.create(WelcomePlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(GettingStartedPlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(BootstrapPlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(LayoutsPlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(ComponentsPlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(DataBindingPlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(InternationalizationPlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(NavigationPlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(ServerCallsPlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(ErrorsPlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(CodeEditorPlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(AjaxBotIndexingPlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(GoogleAnalyticsPlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(SamplesPlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(ContactsTablePlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(AddressBookPlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(ComingSoonPlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(DownloadPlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(WelcomePage.WelcomePlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(GettingStartedPage.GettingStartedPlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(BootstrapPage.BootstrapPlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(LayoutPage.LayoutsPlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(ComponentsPage.ComponentsPlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(DataBindingPage.DataBindingPlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(InternationalizationPage.InternationalizationPlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(NavigationPage.NavigationPlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(ServerCallsPage.ServerCallsPlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(ErrorsPage.ErrorsPlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(CodeEditorPage.CodeEditorPlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(AjaxBotIndexingPage.AjaxBotIndexingPlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(GoogleAnalyticsPage.GoogleAnalyticsPlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(SamplesPage.SamplesPlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(ContactsTablePage.ContactsTablePlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(AddressBookPage.AddressBookPlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(ComingSoonPage.ComingSoonPlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(DownloadPage.DownloadPlace.class));
 
-		controller.registerActivity((ActivityFactory) GWT.create(Tuto1InitGradlePlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(Tuto1InitMavenPlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(Tuto2FirstPagePlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(Tuto3MorePagesPlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(Tuto4BindAFormPlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(Tuto5IssueTrackerPlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(Tuto6ThemePlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(Tuto7GoogleAnalyticsPlace.class));
-		controller.registerActivity((ActivityFactory) GWT.create(Tuto8AjaxBotPlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(Tuto1InitGradlePage.Tuto1InitGradlePlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(Tuto1InitMavenPage.Tuto1InitMavenPlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(Tuto2FirstPagePage.Tuto2FirstPagePlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(Tuto3MorePagesPage.Tuto3MorePagesPlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(Tuto4BindAFormPage.Tuto4BindAFormPlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(Tuto5IssueTrackerPage.Tuto5IssueTrackerPlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(Tuto6ThemePage.Tuto6ThemePlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(Tuto7GoogleAnalyticsPage.Tuto7GoogleAnalyticsPlace.class));
+		controller.registerActivity((ActivityFactory) GWT.create(Tuto8AjaxBotPage.Tuto8AjaxBotPlace.class));
 
 		controller.handleCurrentHistory();
 	}

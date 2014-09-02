@@ -31,6 +31,8 @@ import fr.putnami.pwt.core.inject.client.annotation.Initialize;
 import fr.putnami.pwt.core.inject.client.annotation.PresentHandler;
 import fr.putnami.pwt.core.inject.client.annotation.Templated;
 import fr.putnami.pwt.core.mvp.client.View;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 import fr.putnami.pwt.core.widget.client.Form;
 import fr.putnami.pwt.core.widget.client.Modal;
 import fr.putnami.pwt.core.widget.client.TableEditor;
@@ -38,12 +40,17 @@ import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.core.widget.client.event.RowClickEvent;
 import fr.putnami.pwt.core.widget.client.event.SelectionEvent;
 import fr.putnami.pwt.doc.client.page.sample.decorator.HasSources;
+import fr.putnami.pwt.doc.client.page.sample.decorator.SampleDecorator;
 import fr.putnami.pwt.doc.shared.page.sample.constants.SampleConstants;
 import fr.putnami.pwt.doc.shared.page.sample.domain.Contact;
 import fr.putnami.pwt.doc.shared.page.sample.service.ContactService;
 
 @Templated
 public class ContactsTablePage extends Composite implements View, HasSources {
+	@ActivityDescription(view = ContactsTablePage.class, viewDecorator = SampleDecorator.class)
+	public static class ContactsTablePlace extends ViewPlace {
+
+	}
 
 	@UiField(provided = true)
 	final List<Integer> weightItems = generateWeightItems();

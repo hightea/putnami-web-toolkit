@@ -17,10 +17,17 @@
 package fr.putnami.pwt.doc.client.page.download;
 
 import fr.putnami.pwt.core.inject.client.annotation.Templated;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 import fr.putnami.pwt.doc.client.application.Page;
+import fr.putnami.pwt.doc.client.application.SummaryDecorator;
 
 @Templated
 public class DownloadPage extends Page {
+	@ActivityDescription(view = DownloadPage.class, viewDecorator = SummaryDecorator.class)
+	public static class DownloadPlace extends ViewPlace {
+	}
+
 	//	@UiHandler("content")
 	//	public void onClick(ClickEvent evt) {
 	//		GoogleAnalytics.get(ApplicationConfig.ANALYTICS_TRACKER_ID).trackEvent("download", "pwt-core-jar");

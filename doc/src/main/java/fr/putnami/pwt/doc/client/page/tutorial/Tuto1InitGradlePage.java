@@ -17,8 +17,14 @@
 package fr.putnami.pwt.doc.client.page.tutorial;
 
 import fr.putnami.pwt.core.inject.client.annotation.Templated;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 import fr.putnami.pwt.doc.client.application.Page;
+import fr.putnami.pwt.doc.client.application.SummaryDecorator;
 
 @Templated
 public class Tuto1InitGradlePage extends Page {
+	@ActivityDescription(view = Tuto1InitGradlePage.class, aliases = "Tuto1", viewDecorator = SummaryDecorator.class)
+	public static class Tuto1InitGradlePlace extends ViewPlace {
+	}
 }

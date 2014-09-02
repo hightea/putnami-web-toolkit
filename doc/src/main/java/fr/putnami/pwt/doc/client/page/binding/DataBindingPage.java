@@ -28,14 +28,20 @@ import fr.putnami.pwt.core.editor.shared.constant.ValidationConstants;
 import fr.putnami.pwt.core.inject.client.annotation.Initialize;
 import fr.putnami.pwt.core.inject.client.annotation.PostConstruct;
 import fr.putnami.pwt.core.inject.client.annotation.Templated;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 import fr.putnami.pwt.core.widget.client.Form;
 import fr.putnami.pwt.core.widget.client.InputList;
 import fr.putnami.pwt.core.widget.client.OutputList;
 import fr.putnami.pwt.core.widget.client.TableEditor;
 import fr.putnami.pwt.doc.client.application.Page;
+import fr.putnami.pwt.doc.client.application.SummaryDecorator;
 
 @Templated
 public class DataBindingPage extends Page {
+	@ActivityDescription(view = DataBindingPage.class, viewDecorator = SummaryDecorator.class)
+	public static class DataBindingPlace extends ViewPlace {
+	}
 
 	public static class Address {
 		@NotNull

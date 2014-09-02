@@ -17,9 +17,13 @@
 package fr.putnami.pwt.doc.client.page.navigation;
 
 import fr.putnami.pwt.core.inject.client.annotation.Templated;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 import fr.putnami.pwt.doc.client.application.Page;
+import fr.putnami.pwt.doc.client.application.SummaryDecorator;
 
 @Templated
 public class NavigationPage extends Page {
-
+	@ActivityDescription(view = NavigationPage.class, viewDecorator = SummaryDecorator.class)
+	public static class NavigationPlace extends fr.putnami.pwt.core.mvp.client.ViewPlace {
+	}
 }
