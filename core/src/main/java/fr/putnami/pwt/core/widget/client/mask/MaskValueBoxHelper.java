@@ -122,6 +122,8 @@ public class MaskValueBoxHelper implements KeyUpHandler, KeyDownHandler, KeyPres
 					preventDefault = maskHelper.focusNext();
 				}
 				break;
+			default:
+				break;
 			}
 
 			if (preventDefault) {
@@ -254,7 +256,7 @@ public class MaskValueBoxHelper implements KeyUpHandler, KeyDownHandler, KeyPres
 		int cnt = 0;
 		for (TokenHelper helper : helpers) {
 			String token = helper.flush();
-			int tokenLenght = (token != null) ? token.length() : 0;
+			int tokenLenght = token != null ? token.length() : 0;
 			if (cursorPosition <= cnt + tokenLenght) {
 				currentHelper = helper;
 				focus(helpers.indexOf(currentHelper));

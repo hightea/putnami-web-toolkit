@@ -453,6 +453,8 @@ HasValueChangeHandlers<Date> {
 			setFocus(false);
 			handleKey = true;
 			break;
+		default:
+			break;
 		}
 		if (handleKey) {
 			redraw();

@@ -128,6 +128,8 @@ public class IntegerTokenHelper extends TokenHelper {
 		case KeyCodes.KEY_UP:
 			setValue(++value);
 			break;
+		default:
+			break;
 		}
 		return true;
 	}

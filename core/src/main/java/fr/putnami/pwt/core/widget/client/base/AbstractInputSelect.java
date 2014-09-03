@@ -344,6 +344,8 @@ HasPlaceholder {
 		case Event.ONKEYPRESS:
 			keyPressHandler.handleKeyPress(event.getCharCode());
 			break;
+		default:
+			break;
 		}
 
 		if (mustKillEvent) {

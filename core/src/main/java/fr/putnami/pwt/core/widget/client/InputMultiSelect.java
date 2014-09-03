@@ -226,7 +226,11 @@ public class InputMultiSelect<T> extends AbstractInputSelect<T, List<T>> {
 			case KeyCodes.KEY_ESCAPE:
 				getDropdown().close();
 				break;
+			default:
+				break;
 			}
+			break;
+		default:
 			break;
 		}
 		if (mustKillEvent) {

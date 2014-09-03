@@ -158,6 +158,8 @@ public class CompositeFocusHelper implements HasAllFocusHandlers {
 				focus();
 			}
 			break;
+		default:
+			break;
 		}
 	}
 

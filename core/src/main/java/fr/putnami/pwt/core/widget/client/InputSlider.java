@@ -52,8 +52,8 @@ import fr.putnami.pwt.core.widget.client.event.ChangeEvent;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class InputSlider<T> extends AbstractInput<T> implements
-		HasValueChangeHandlers<T>,
-		ValueChangeHandler<T> {
+HasValueChangeHandlers<T>,
+ValueChangeHandler<T> {
 
 	private static final CssStyle STYLE_BACKGROUNG = new SimpleStyle("input-slider-background");
 	private static final CssStyle STYLE_HANDLE = new SimpleStyle("input-slider-handle");
@@ -140,6 +140,8 @@ public class InputSlider<T> extends AbstractInput<T> implements
 			case KeyCodes.KEY_RIGHT:
 				InputSlider.this.handleWidget.moveRight(paddingValue);
 				killEvent(event);
+				break;
+			default:
 				break;
 			}
 		}
@@ -394,6 +396,8 @@ public class InputSlider<T> extends AbstractInput<T> implements
 			if (handleWidget.focused) {
 				dragHandler.onMouseWheel(event);
 			}
+			break;
+		default:
 			break;
 		}
 	}

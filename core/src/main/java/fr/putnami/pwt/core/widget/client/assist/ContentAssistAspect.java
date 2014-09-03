@@ -333,6 +333,8 @@ public class ContentAssistAspect {
 					case KeyCodes.KEY_ESCAPE:
 						suggestionDisplay.hideSuggestions();
 						break;
+					default:
+						break;
 					}
 				}
 				if (mustKillEvent) {
@@ -351,6 +353,8 @@ public class ContentAssistAspect {
 					case KeyCodes.KEY_TAB:
 					case KeyCodes.KEY_ESCAPE:
 						return;
+					default:
+						break;
 					}
 				}
 				refreshSuggestions();
