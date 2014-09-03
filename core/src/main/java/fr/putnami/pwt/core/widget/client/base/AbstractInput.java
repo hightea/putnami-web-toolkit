@@ -118,7 +118,7 @@ HasAllMouseHandlers,
 HasAllTouchHandlers
 {
 
-	public static CssStyle STYLE_CONTROL = new SimpleStyle("form-control");
+	public static final CssStyle STYLE_CONTROL = new SimpleStyle("form-control");
 
 	private static final FocusImpl focusImpl = FocusImpl.getFocusImplForPanel();
 
