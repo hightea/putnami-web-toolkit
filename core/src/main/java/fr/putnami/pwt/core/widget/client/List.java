@@ -57,7 +57,7 @@ public class List extends AbstractPanel implements CloneableWidget {
 
 	@UiConstructor
 	public List(String tag) {
-		super(tag == OListElement.TAG || tag == UListElement.TAG ? tag : UListElement.TAG);
+		super(OListElement.TAG.equals(tag) || UListElement.TAG.equals(tag) ? tag : UListElement.TAG);
 		setType(type);
 	}
 
