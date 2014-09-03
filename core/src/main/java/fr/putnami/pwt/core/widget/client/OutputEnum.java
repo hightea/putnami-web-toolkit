@@ -28,7 +28,7 @@ public class OutputEnum<E extends Enum<E>> extends AbstractTextOutput<E> impleme
 	private MessageHelper messageHelper;
 
 	public OutputEnum() {
-		setRenderer(new EnumRenderer<E>(messageHelper));
+		setRenderer(new EnumRenderer<E>(null));
 	}
 
 	protected OutputEnum(OutputEnum<E> source) {
