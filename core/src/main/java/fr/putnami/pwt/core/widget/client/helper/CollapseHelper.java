@@ -54,7 +54,7 @@ public class CollapseHelper implements ClickHandler, HasCollapseHandlers {
 	private Element collapsableElement;
 	private Widget toggleWidget;
 
-	private boolean collapsed;
+	private boolean collapsed = false;
 	private boolean enabled = true;
 
 	public CollapseHelper(Widget toggleWidget, Element collapsableElement) {
