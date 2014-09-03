@@ -16,20 +16,70 @@
  */
 package fr.putnami.pwt.core.error.client;
 
+/**
+ * The Interface ErrorDisplayer.
+ * 
+ * @since 1.0
+ */
 public interface ErrorDisplayer {
 
+	/**
+	 * Error Severity.
+	 */
 	public static enum Severity {
 		INFO,
 		WARNING,
 		DANGER;
 	}
 
+	/**
+	 * Display the error.
+	 * 
+	 * @param error
+	 *           the error to display
+	 * @param severity
+	 *           the severity of the error
+	 */
 	void display(Throwable error, Severity severity);
 
+	/**
+	 * Display the error.
+	 * 
+	 * @param message
+	 *           the message to display
+	 * @param error
+	 *           the error to display
+	 * @param severity
+	 *           the severity of the error
+	 */
 	void display(String message, Throwable error, Severity severity);
 
+	/**
+	 * Display the error.
+	 * 
+	 * @param title
+	 *           the title of the error
+	 * @param message
+	 *           the message of the error
+	 * @param error
+	 *           the error to display
+	 * @param severity
+	 *           the severity of the error
+	 */
 	void display(String title, String message, Throwable error, Severity severity);
 
+	/**
+	 * Display the error.
+	 * 
+	 * @param title
+	 *           the title of the error
+	 * @param message
+	 *           the message of the error
+	 * @param details
+	 *           the details of the error
+	 * @param severity
+	 *           the severity of the error
+	 */
 	void display(String title, String message, String details, Severity severity);
 
 }

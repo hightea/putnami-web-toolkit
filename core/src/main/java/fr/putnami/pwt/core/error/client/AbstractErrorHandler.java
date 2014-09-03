@@ -16,14 +16,26 @@
  */
 package fr.putnami.pwt.core.error.client;
 
- 
+
+/**
+ * The Class AbstractErrorHandler is an adapter providing a default priority. the handle method must be implemented.
+ * 
+ * @since 1.0
+ */
 public abstract class AbstractErrorHandler implements ErrorHandler {
 
+	/*
+	 * (non-Javadoc)
+	 * @see fr.putnami.pwt.core.error.client.ErrorHandler#getPriority()
+	 */
 	@Override
 	public int getPriority() {
 		return DEFAULT_PRIORITY;
 	}
 
+	/* (non-Javadoc)
+	 * @see fr.putnami.pwt.core.error.client.ErrorHandler#handle(java.lang.Throwable)
+	 */
 	@Override
 	public abstract boolean handle(Throwable error);
 }

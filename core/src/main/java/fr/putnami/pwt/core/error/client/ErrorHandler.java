@@ -16,6 +16,39 @@
  */
 package fr.putnami.pwt.core.error.client;
 
+/**
+ * The ErrorHandler is responsible to handle or not the exception.
+ * <p>
+ * You can register your handler implementation in {@link ErrorManager}
+ * </p>
+ * <p>
+ * <strong>Register a handler</strong>
+ * 
+ * <pre>
+ * ErrorManager.get().registerErrorHandler(handler);
+ * </pre>
+ * 
+ * </p>
+ * <p>
+ * <strong>Simple handler</strong>
+ * 
+ * <pre>
+ * public class SimpleHandler implements ErrorHandler {
+ * 	public int getPriority() {
+ * 		return DEFAULT_PRIORITY;
+ * 	}
+ * 
+ * 	public boolean handle(Throwable error) {
+ * 		Window.alert(error.getMessage());
+ * 		return true;
+ * 	}
+ * }
+ * </pre>
+ * 
+ * </p>
+ * 
+ * @since 1.0
+ */
 public interface ErrorHandler {
 
 	int DEFAULT_PRIORITY = 0;
@@ -24,8 +57,26 @@ public interface ErrorHandler {
 	int HIGH_PRIORITY = Integer.valueOf(1000);
 	int HIGHER_PRIORITY = Integer.MAX_VALUE;
 
+	/**
+	 * Handle the error. If the handler can manage the exception, it must return true to stop the chaining, otherwise false to follow the chain.
+	 * <p>
+	 * </p>
+	 * 
+	 * @param error
+	 *           to handle
+	 * @return true, if error handled
+	 * @see ErrorManager
+	 */
 	boolean handle(Throwable error);
 
+	/**
+	 * The priority of the handler within the {@link ErrorManager}
+	 * <p>
+	 * Higher the priority is, Sooner the handler will be used
+	 * </p>
+	 * 
+	 * @return int the priority of the handler
+	 */
 	int getPriority();
 
 }
