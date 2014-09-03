@@ -39,7 +39,6 @@ import com.google.gwt.user.client.ui.SuggestOracle;
 import com.google.gwt.user.client.ui.SuggestOracle.Request;
 import com.google.gwt.user.client.ui.SuggestOracle.Response;
 import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
-import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 
 import fr.putnami.pwt.core.theme.client.CssStyle;
@@ -141,8 +140,6 @@ public class ContentAssistAspect {
 
 		private boolean hideWhenEmpty = true;
 
-		private UIObject positionRelativeTo;
-
 		public SuggestionDisplayImpl() {
 			suggestionPopup = new PopupPanel(true, false);
 			suggestionPopup.setPreviewingAllNativeEvents(true);
@@ -242,8 +239,7 @@ public class ContentAssistAspect {
 				suggestionPopup.addAutoHidePartner(lastTextInput.asWidget().getElement());
 			}
 
-			suggestionPopup.showRelativeTo(positionRelativeTo != null
-					? positionRelativeTo : lastTextInput.asWidget());
+			suggestionPopup.showRelativeTo(lastTextInput.asWidget());
 			scrollToSelected();
 		}
 
