@@ -50,7 +50,11 @@ public class InputRadio<T> extends AbstractInputChoice<T, T> {
 		}
 	}
 
-	private static int RADIO_GROUP_ID = 0;
+	private static long SEQ = 0;
+
+	static long incrementeAndGetSeq() {
+		return ++SEQ;
+	}
 
 	private class SingleChoiceHandler implements ChoiceSelectionHandler<T, T> {
 		private T selectedItem;
@@ -118,7 +122,7 @@ public class InputRadio<T> extends AbstractInputChoice<T, T> {
 
 	}
 
-	private final int radioGroupNum = RADIO_GROUP_ID++;
+	private final long radioGroupNum = incrementeAndGetSeq();
 
 	private ChoiceSelectionHandler<T, T> selectionHandler = new SingleChoiceHandler();
 	private ChoiceRenderer<T> choiceRenderer = new ChoiceRendererImpl();

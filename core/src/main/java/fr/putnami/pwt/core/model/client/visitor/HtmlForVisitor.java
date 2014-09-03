@@ -33,6 +33,10 @@ public class HtmlForVisitor extends AbstractVisitor {
 
 	private static long SEQ = 0;
 
+	private static long incrementeAndGetSeq() {
+		return ++SEQ;
+	}
+
 	private final Map<Path, String> htmlForIds = Maps.newHashMap();
 	private final Set<Context> htmlIdContexts = Sets.newLinkedHashSet();
 
@@ -48,7 +52,7 @@ public class HtmlForVisitor extends AbstractVisitor {
 				Path path = context.getPath();
 				String htmlFor = htmlForIds.get(path);
 				if (htmlFor == null) {
-					htmlFor = "uid-" + (++SEQ);
+					htmlFor = "uid-" + incrementeAndGetSeq();
 					htmlForIds.put(path, htmlFor);
 				}
 				hasHtmlFor.setHtmlFor(htmlFor);
