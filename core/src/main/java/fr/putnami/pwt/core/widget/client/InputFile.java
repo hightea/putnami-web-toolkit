@@ -66,7 +66,7 @@ import fr.putnami.pwt.core.widget.shared.domain.FileDto;
 import fr.putnami.pwt.core.widget.shared.domain.UploadStatus;
 
 public class InputFile extends InputGroup<FileDto>
-		implements HasDrawable, EditorInput<FileDto> {
+implements HasDrawable, EditorInput<FileDto> {
 
 	private static final String MULTIPART_BOUNDARY = "x-x-x-x-x";
 	private static final String EOL = "\r\n";
@@ -283,9 +283,9 @@ public class InputFile extends InputGroup<FileDto>
 	}
 
 	@Override
-	public void edit(FileDto value) {
+	public void edit(FileDto object) {
 		FileDto oldValue = this.getValue();
-		super.edit(value);
+		super.edit(object);
 		timer.cancel();
 		redraw();
 	}
@@ -357,10 +357,10 @@ public class InputFile extends InputGroup<FileDto>
 
 		StringBuffer requestBody = new StringBuffer();
 		requestBody.append("--").append(MULTIPART_BOUNDARY).append(EOL)
-				.append("Content-Disposition: form-data; name=\"data\"; filename=\"").append(fileName).append("\"").append(EOL)
-				.append("Content-Type: ").append(type).append(EOL).append(EOL)
-				.append(base64data).append(EOL)
-				.append("--").append(MULTIPART_BOUNDARY).append("--");
+		.append("Content-Disposition: form-data; name=\"data\"; filename=\"").append(fileName).append("\"").append(EOL)
+		.append("Content-Type: ").append(type).append(EOL).append(EOL)
+		.append(base64data).append(EOL)
+		.append("--").append(MULTIPART_BOUNDARY).append("--");
 
 		try {
 			RequestBuilder requestBuilder = new RequestBuilder(RequestBuilder.POST, URL_UPLOAD + fileId);
