@@ -284,7 +284,6 @@ implements HasDrawable, EditorInput<FileDto> {
 
 	@Override
 	public void edit(FileDto object) {
-		FileDto oldValue = this.getValue();
 		super.edit(object);
 		timer.cancel();
 		redraw();
