@@ -121,9 +121,9 @@ public class ContentAssistAspect {
 
 	}
 
-	class SuggestionDisplayImpl implements SuggestionDisplay {
+	static class SuggestionDisplayImpl implements SuggestionDisplay {
 
-		private class DropdownMenu extends AbstractPanel {
+		private static class DropdownMenu extends AbstractPanel {
 			public DropdownMenu() {
 				super(UListElement.TAG);
 				StyleUtils.addStyle(this, STYLE_MENU);
