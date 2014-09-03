@@ -120,8 +120,6 @@ HasAllTouchHandlers
 
 	public static CssStyle STYLE_CONTROL = new SimpleStyle("form-control");
 
-	String ATTRIBUTE_TYPE = "type";
-
 	private static final FocusImpl focusImpl = FocusImpl.getFocusImplForPanel();
 
 	private String path;
