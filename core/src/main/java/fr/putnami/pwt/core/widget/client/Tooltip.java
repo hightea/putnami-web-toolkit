@@ -34,7 +34,7 @@ public class Tooltip extends AbstractHover implements EditorLabel {
 	private static final CssStyle STYLE_INNER = new SimpleStyle("tooltip-inner");
 	private static final CssStyle STYLE_FADE = new SimpleStyle("fade");
 
-	public class TooltipWidget extends Widget {
+	public static class TooltipWidget extends Widget {
 
 		private DivElement container;
 		private DivElement inner;

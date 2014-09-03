@@ -36,7 +36,7 @@ public class Popover extends AbstractHover implements EditorLabel {
 	private static final CssStyle STYLE_INNER = new SimpleStyle("popover-content");
 	private static final CssStyle STYLE_FADE = new SimpleStyle("fade");
 
-	public class PopoverContainer extends Widget {
+	public static class PopoverContainer extends Widget {
 
 		private DivElement container;
 

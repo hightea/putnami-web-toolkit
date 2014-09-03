@@ -173,7 +173,7 @@ public class ServiceBinderCreator {
 		srcWriter.println("private final %s serializer = new %s();", this.serializerTypeName, this.serializerTypeName);
 	}
 
-	private class CallbackMethod {
+	private static class CallbackMethod {
 		String successMethodName;
 		String failureMethodName;
 

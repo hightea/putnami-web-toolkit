@@ -92,7 +92,7 @@ public class InputSuggest extends AbstractInputBox<TextBox, String> {
 		return compositeFocus.addFocusHandler(handler);
 	}
 
-	class TextBoxContentAssistHandler extends AbstractContentAssistHandler {
+	static class TextBoxContentAssistHandler extends AbstractContentAssistHandler {
 
 		public TextBoxContentAssistHandler(MultiWordSuggestOracle oracle) {
 			super(oracle);
