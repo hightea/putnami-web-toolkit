@@ -163,7 +163,7 @@ ValueChangeHandler<T> {
 			StyleUtils.addStyle(this, STYLE_CONTROL);
 			StyleUtils.addStyle(this, STYLE_HANDLE);
 
-			addBlurHandler(new BlurHandler() {
+			super.addBlurHandler(new BlurHandler() {
 
 				@Override
 				public void onBlur(BlurEvent event) {
@@ -171,7 +171,7 @@ ValueChangeHandler<T> {
 				}
 			});
 
-			addFocusHandler(new FocusHandler() {
+			super.addFocusHandler(new FocusHandler() {
 
 				@Override
 				public void onFocus(FocusEvent event) {
