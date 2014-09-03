@@ -52,13 +52,11 @@ public class CollapseHelper implements ClickHandler, HasCollapseHandlers {
 	private static final CssStyle STYLE_VISIBLE = new SimpleStyle("in");
 
 	private Element collapsableElement;
-	private Widget toggleWidget;
 
 	private boolean collapsed = false;
 	private boolean enabled = true;
 
 	public CollapseHelper(Widget toggleWidget, Element collapsableElement) {
-		this.toggleWidget = toggleWidget;
 		this.collapsableElement = collapsableElement;
 		StyleUtils.addStyle(collapsableElement, STYLE_COLLAPSE);
 		toggleWidget.addDomHandler(this, ClickEvent.getType());
