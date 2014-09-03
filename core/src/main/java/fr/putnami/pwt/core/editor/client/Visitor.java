@@ -16,6 +16,7 @@
  */
 package fr.putnami.pwt.core.editor.client;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 import com.google.common.base.Predicate;
@@ -25,7 +26,7 @@ public interface Visitor {
 
 	int PRECEDENCE_NORMAL = 0;
 
-	class VisitorComparator implements Comparator<Visitor> {
+	class VisitorComparator implements Comparator<Visitor>, Serializable {
 
 		@Override
 		public int compare(Visitor o1, Visitor o2) {
@@ -42,7 +43,7 @@ public interface Visitor {
 
 		@Override
 		public boolean apply(Visitor input) {
-			return (input != null) && equals(input.trigerOn());
+			return input != null && equals(input.trigerOn());
 		}
 
 	}
