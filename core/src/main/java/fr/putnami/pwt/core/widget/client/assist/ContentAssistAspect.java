@@ -267,7 +267,7 @@ public class ContentAssistAspect {
 
 	}
 
-	class SuggestionItem extends Widget {
+	static class SuggestionItem extends Widget {
 
 		private final Suggestion suggestion;
 
