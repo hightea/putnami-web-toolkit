@@ -13,7 +13,7 @@ public class UUID {
 		char[] uuid = new char[len];
 		// Compact form
 		for (int i = 0; i < len; i++) {
-			uuid[i] = CHARS[(int)(Math.random()*radix)];
+			uuid[i] = CHARS[randomInt(radix)];
 		}
 		return new String(uuid);
 	}
@@ -27,10 +27,14 @@ public class UUID {
 
 		for (int i = 0; i < 36; i++) {
 			if (uuid[i] == 0) {
-				r = (int) (Math.random()*16);
+				r = randomInt(16);
 				uuid[i] = CHARS[i == 19 ? r & 0x3 | 0x8 : r & 0xf];
 			}
 		}
 		return new String(uuid);
+	}
+
+	private static int randomInt(int radix) {
+		return (int) (Math.random() * radix);
 	}
 }
