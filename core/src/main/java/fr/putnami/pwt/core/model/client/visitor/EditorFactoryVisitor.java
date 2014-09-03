@@ -44,7 +44,7 @@ import fr.putnami.pwt.core.model.client.util.ModelUtils;
 
 public class EditorFactoryVisitor extends AbstractVisitor {
 
-	private class InternalEditorProvider implements EditorProvider {
+	private static class InternalEditorProvider implements EditorProvider {
 		final Context<?> parentContext;
 		final Class propertyType;
 
@@ -170,7 +170,7 @@ public class EditorFactoryVisitor extends AbstractVisitor {
 
 			EditorProvider provider = new InternalEditorProvider(context, propertyType,
 					inputFactory == null ? widgetFactory : inputFactory,
-					outputFactory == null ? widgetFactory : outputFactory
+							outputFactory == null ? widgetFactory : outputFactory
 					);
 
 			((HasEditorProvider) editor).setEditorProvider(provider);
