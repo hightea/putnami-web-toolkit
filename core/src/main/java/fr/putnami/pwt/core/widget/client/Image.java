@@ -75,7 +75,7 @@ public class Image extends AbstractWidget implements EditorOutput<String> {
 		setSrc(source.src);
 		setAlt(source.alt);
 		this.widthPx = source.widthPx;
-		this.widthPx = source.widthPx;
+		this.heightPx = source.heightPx;
 		this.keepPropertions = source.keepPropertions;
 
 		resetSize();
