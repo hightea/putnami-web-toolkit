@@ -16,6 +16,8 @@
  */
 package fr.putnami.pwt.core.editor.client.impl;
 
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+
 import fr.putnami.pwt.core.editor.client.Editor;
 import fr.putnami.pwt.core.editor.client.Error;
 import fr.putnami.pwt.core.editor.client.Path;
@@ -56,7 +58,7 @@ public class SimpleError implements Error {
 
 	@Override
 	public Object[] getParameters() {
-		return this.parameters;
+		return Lists.newArrayList(parameters).toArray();
 	}
 
 	@Override
