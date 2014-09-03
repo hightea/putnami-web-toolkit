@@ -96,7 +96,7 @@ public class TableSort<T> extends AbstractTableColumnAspect<T> implements HasDra
 		if (asc == null) {
 			asc = Boolean.TRUE;
 		}
-		else if (asc == Boolean.TRUE) {
+		else if (Boolean.TRUE.equals(asc)) {
 			asc = Boolean.FALSE;
 		}
 		else {
