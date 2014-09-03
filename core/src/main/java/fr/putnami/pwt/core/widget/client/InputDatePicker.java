@@ -227,7 +227,7 @@ HasValueChangeHandlers<Date> {
 
 	@Override
 	public Date getValue() {
-		return value;
+		return value == null ? null : new Date(value.getTime());
 	}
 
 	@Override
