@@ -16,7 +16,8 @@
  */
 package fr.putnami.pwt.core.editor.client.impl;
 
-import com.google.gwt.thirdparty.guava.common.collect.Lists;
+
+import com.google.common.collect.Lists;
 
 import fr.putnami.pwt.core.editor.client.Editor;
 import fr.putnami.pwt.core.editor.client.Error;
