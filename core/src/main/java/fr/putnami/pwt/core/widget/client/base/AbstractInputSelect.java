@@ -339,6 +339,8 @@ HasPlaceholder {
 				selectionHandler.onDownKeyDown();
 				mustKillEvent = true;
 				break;
+			default:
+				break;
 			}
 			break;
 		case Event.ONKEYPRESS:
