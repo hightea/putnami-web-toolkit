@@ -75,7 +75,7 @@ public class Path implements Iterable<PathElement> {
 		}
 	}
 
-	public static String SEPARATOR_PATH = ".";
+	public static final String SEPARATOR_PATH = ".";
 	public static final String ROOT_PATH = "";
 
 	final List<PathElement> elements = Lists.newLinkedList();
