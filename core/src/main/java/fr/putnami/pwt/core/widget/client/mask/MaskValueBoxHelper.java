@@ -43,7 +43,6 @@ public class MaskValueBoxHelper implements KeyUpHandler, KeyDownHandler, KeyPres
 		protected MaskValueBoxHelper maskHelper;
 
 		protected String placeHolder = "";
-		protected int index;
 		protected boolean optional = false;
 
 		protected String token;
@@ -52,10 +51,6 @@ public class MaskValueBoxHelper implements KeyUpHandler, KeyDownHandler, KeyPres
 
 		public void setPlaceHolder(String placeHolder) {
 			this.placeHolder = placeHolder;
-		}
-
-		protected void setIndex(int index) {
-			this.index = index;
 		}
 
 		public void setToken(String token) {
@@ -183,7 +178,6 @@ public class MaskValueBoxHelper implements KeyUpHandler, KeyDownHandler, KeyPres
 
 	public void addTokenHelper(TokenHelper helper) {
 		helpers.add(helper);
-		helper.index = helpers.indexOf(helper);
 		helper.maskHelper = this;
 	}
 
