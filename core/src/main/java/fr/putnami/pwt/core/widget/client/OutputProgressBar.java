@@ -135,7 +135,6 @@ public class OutputProgressBar<T extends Number> extends AbstractWidget implemen
 			val = min;
 		}
 
-		value.doubleValue();
 		progressBarElement.setAttribute(ATT_ARIA_VALUE, value + "");
 		double percent = 100 * (val - min) / (max - min);
 		progressBarElement.getStyle().setProperty("width", percent, Unit.PCT);
