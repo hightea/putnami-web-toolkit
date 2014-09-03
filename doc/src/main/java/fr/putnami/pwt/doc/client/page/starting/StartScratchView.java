@@ -32,7 +32,7 @@ import fr.putnami.pwt.core.widget.client.InputSwitch;
 
 @Templated
 public class StartScratchView extends Composite implements View {
-	@UiField(provided=true)
+	@UiField(provided = true)
 	List<String> switchItems = Lists.newArrayList("GRADLE", "MAVEN");
 
 	@UiField
@@ -52,7 +52,7 @@ public class StartScratchView extends Composite implements View {
 	void postConstruct() {
 		switchBuild.edit("GRADLE");
 		buildMavenPanel.setVisible(false);
-		buildMavenPanel.setVisible(false);
+		runMavenPanel.setVisible(false);
 	}
 
 	@UiHandler("switchBuild")
@@ -61,14 +61,14 @@ public class StartScratchView extends Composite implements View {
 			buildGradlePanel.setVisible(false);
 			runGradlePanel.setVisible(false);
 			buildMavenPanel.setVisible(true);
-			buildMavenPanel.setVisible(true);
+			runMavenPanel.setVisible(true);
 
 		}
 		else {
 			buildGradlePanel.setVisible(true);
 			runGradlePanel.setVisible(true);
 			buildMavenPanel.setVisible(false);
-			buildMavenPanel.setVisible(false);
+			runMavenPanel.setVisible(false);
 		}
 	}
 }

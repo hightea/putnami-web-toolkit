@@ -362,6 +362,30 @@
 					</c:StaticCode>
 				</div>
 			</div>
+			
+			<!-- InputFile -->
+			<div>
+				<w:Heading level="3" summary="docSummary">InputFile</w:Heading>
+				<p><code>InputFile</code> is a graphical component allowing to upload files and watch the upload status.</p>
+				<p>This componenet need server side methods mapping the following urls :</p>
+				<ul>
+					<li><code>file/upload/{uploadId}</code> handling multipart form data.</li>
+					<li><code>file/status/{uploadId}</code> returning a <code>UploadStatus</code> object</li>
+					<li><code>file/download/{uploadId}</code> returning the file.</li>
+				</ul>
+				<div class="showcase-sample-block">
+					<div class="showcase-sample">
+						<w:InputFile path="file"/>
+						<br/>
+						<w:Alert type="WARNING">
+						<p><em>This sample doesn't work because there is no server side</em></p> 
+						</w:Alert>
+					</div>
+					<c:StaticCode configuration="{XML_CONFIGURATION}">
+						<pre><![CDATA[<w:InputFile path="..."/>]]></pre>
+					</c:StaticCode>
+				</div>
+			</div>
 		</w:Form>
 
 	</w:HTMLPanel>

@@ -23,6 +23,8 @@
 	
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+	
+	<ui:with field="switchItems" type="java.util.List" />
 
 	<w:HTMLPanel title="PWT - code editor plugins">
 		<w:Header ui:field="header">
@@ -216,6 +218,39 @@ public void handleSuggestionSelected(IsWidget textInput, Suggestion suggestion) 
 		  	
 		  	
 		  	<w:Heading level="2" summary="docSummary">Code editor usage</w:Heading>
+		  	
+		  	<w:Heading level="3">Dependency</w:Heading>
+		  	<w:InputSwitch ui:field="switchBuild" items="{switchItems}" styleName="pull-right"/>
+			<p>In order to use it, you'll have to add the needed dependency :</p>
+			<div class="clearfix"></div>
+			
+			<w:HTMLPanel styleName="showcase-sample-block" ui:field="buildGradlePanel">
+	  			<div class="showcase-sample">
+	  				<p>in the <code>build.gradle</code> file</p>
+	  			</div>
+	  			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+					<pre><![CDATA[
+dependencies {
+	"fr.putnami.pwt:pwt-code-editor:$pwtVersion"
+}
+]]></pre>
+	  			</c:StaticCode>
+  			</w:HTMLPanel>
+  			<w:HTMLPanel styleName="showcase-sample-block" ui:field="buildMavenPanel">
+	  			<div class="showcase-sample">
+	  				<p>in the <code>pom.xml</code> file</p>
+	  			</div>
+	  			<c:StaticCode configuration="{XML_CONFIGURATION}">
+					<pre><![CDATA[
+<dependency>
+	<groupId>fr.putnami.pwt</groupId>
+	<artifactId>pwt-code-editor</artifactId>
+	<version>${pwt.version}</version>
+</dependency>
+]]></pre>
+		  		</c:StaticCode>
+	  		</w:HTMLPanel>
+	  		
 		  	<w:Heading level="3">Code editor configuration</w:Heading>
 		  	<p>In order to use the code editor you just need to provide him a <code>CodeEditorConfiguration</code>. Either you write your own, either you use one of the provided ones.</p>
 		  	<p>Today we provide two configurations :</p>

@@ -24,6 +24,8 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 
+	<ui:with field="switchItems" type="java.util.List" />
+	
 	<w:HTMLPanel title="PWT - Google Analytics Plugin">
 		<w:Header ui:field="header">
 			<w:Heading level="1">Google analytics plugin</w:Heading>
@@ -33,6 +35,40 @@
 			</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
+			
+			<w:Heading level="2" summary="docSummary">Dependency</w:Heading>
+			
+			<w:InputSwitch ui:field="switchBuild" items="{switchItems}" styleName="pull-right"/>
+			<p>First you need to add a dependency on the google analytics indexing plugin :</p>
+			<div class="clearfix"></div>
+			
+			<w:HTMLPanel styleName="showcase-sample-block" ui:field="buildGradlePanel">
+				<div class="showcase-sample">
+					<p>in the <code>build.gradle</code> file</p>
+				</div>
+	  			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+					<pre><![CDATA[
+dependencies {
+	"fr.putnami.pwt:pwt-google-analytics:$pwtVersion"
+}
+]]></pre>
+	  			</c:StaticCode>
+  			</w:HTMLPanel>
+ 			<w:HTMLPanel styleName="showcase-sample-block" ui:field="buildMavenPanel">
+				<div class="showcase-sample">
+					<p>in the <code>pom.xml</code> file</p>
+				</div>
+	  			<c:StaticCode configuration="{XML_CONFIGURATION}">
+					<pre><![CDATA[
+<dependency>
+	<groupId>fr.putnami.pwt</groupId>
+	<artifactId>pwt-google-analytics</artifactId>
+	<version>${pwt.version}</version>
+</dependency>
+]]></pre>
+		  		</c:StaticCode>
+			</w:HTMLPanel>
+		
 			<w:Heading level="2" summary="docSummary">Setup</w:Heading>
 			<p>
 			To setup the plugin you have to call init method on <code>GoogleAnalytics</code> class. 

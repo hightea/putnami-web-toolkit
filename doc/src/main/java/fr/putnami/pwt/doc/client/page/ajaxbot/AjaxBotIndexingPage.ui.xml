@@ -24,6 +24,8 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 
+	<ui:with field="switchItems" type="java.util.List" />
+	
 	<w:HTMLPanel title="PWT - Ajax Bot Indexing Plugin">
 		<w:Header ui:field="header">
 			<w:Heading level="1">Ajax bot indexing plugin</w:Heading>
@@ -68,12 +70,14 @@
 			
 			<w:Heading level="2" summary="docSummary">Making it work</w:Heading>
 			<w:Heading level="3" summary="docSummary">Add dependency</w:Heading>
-			<p>
-			First you need to add a dependency on the ajax bot indexing plugin.
-			</p>
-			<div class="showcase-sample-block">
+			
+			<w:InputSwitch ui:field="switchBuild" items="{switchItems}" styleName="pull-right"/>
+			<p>First you need to add a dependency on the ajax bot indexing plugin :</p>
+			<div class="clearfix"></div>
+			
+			<w:HTMLPanel styleName="showcase-sample-block" ui:field="buildGradlePanel">
 				<div class="showcase-sample">
-					<strong>With Gradle</strong>
+					<p>in the <code>build.gradle</code> file</p>
 				</div>
 	  			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 					<pre><![CDATA[
@@ -82,8 +86,10 @@ dependencies {
 }
 ]]></pre>
 	  			</c:StaticCode>
+  			</w:HTMLPanel>
+ 			<w:HTMLPanel styleName="showcase-sample-block" ui:field="buildMavenPanel">
 				<div class="showcase-sample">
-					<strong>Or with Maven</strong>
+					<p>in the <code>pom.xml</code> file</p>
 				</div>
 	  			<c:StaticCode configuration="{XML_CONFIGURATION}">
 					<pre><![CDATA[
@@ -94,7 +100,7 @@ dependencies {
 </dependency>
 ]]></pre>
 		  		</c:StaticCode>
-			</div>
+			</w:HTMLPanel>
 			<w:Heading level="3" summary="docSummary">Web.xml</w:Heading>
 			<p>
 				Then you initialize the filter in the web.xml.

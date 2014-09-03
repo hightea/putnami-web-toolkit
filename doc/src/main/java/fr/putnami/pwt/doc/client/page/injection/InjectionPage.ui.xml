@@ -34,6 +34,11 @@
 			</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
+			<w:Heading level="2" summary="docSummary">How does it work?</w:Heading>
+			<p>We use the rebind feature of GWT. So each view implementing the <code>View</code> interface go through this mecanism when it is created via the <code>GWT.create</code> method.</p>
+			<w:Alert type="INFO">
+				<h4>Note :</h4>The view associated to places via <code>@ActivityDescription</code> annotation are created via the <code>GWT.create</code> method.
+			</w:Alert>
 			<w:Heading level="2" summary="docSummary">What can be injected?</w:Heading>
 			<p>We provide the following annotations :</p>
 			<ul>
@@ -50,7 +55,7 @@
 			<w:Alert type="INFO">
 				<h4>Note :</h4>
 				<ul>
-					<li>All those annotation work with GWT rebind feature, and wok only on <code>View</code> implementing classes.</li>
+					<li>All those annotation work with GWT rebind feature, and work only on <code>View</code> implementing classes.</li>
 				</ul> 
 			</w:Alert>
 		</w:HTMLPanel>

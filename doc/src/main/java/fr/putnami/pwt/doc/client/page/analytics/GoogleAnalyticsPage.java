@@ -16,9 +16,19 @@
  */
 package fr.putnami.pwt.doc.client.page.analytics;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+
+import fr.putnami.pwt.core.inject.client.annotation.PostConstruct;
 import fr.putnami.pwt.core.inject.client.annotation.Templated;
 import fr.putnami.pwt.core.mvp.client.ViewPlace;
 import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
+import fr.putnami.pwt.core.widget.client.HTMLPanel;
+import fr.putnami.pwt.core.widget.client.InputSwitch;
 import fr.putnami.pwt.doc.client.application.Page;
 import fr.putnami.pwt.doc.client.application.SummaryDecorator;
 
@@ -28,4 +38,33 @@ public class GoogleAnalyticsPage extends Page {
 	public static class GoogleAnalyticsPlace extends ViewPlace {
 	}
 
+	@UiField(provided = true)
+	List<String> switchItems = Lists.newArrayList("GRADLE", "MAVEN");
+
+	@UiField
+	InputSwitch<String> switchBuild;
+
+	@UiField
+	HTMLPanel buildGradlePanel;
+	@UiField
+	HTMLPanel buildMavenPanel;
+
+	@PostConstruct
+	void postConstruct() {
+		switchBuild.edit("GRADLE");
+		buildMavenPanel.setVisible(false);
+	}
+
+	@UiHandler("switchBuild")
+	void onSwitch(ValueChangeEvent<String> event) {
+		if ("MAVEN".equals(event.getValue())) {
+			buildGradlePanel.setVisible(false);
+			buildMavenPanel.setVisible(true);
+
+		}
+		else {
+			buildGradlePanel.setVisible(true);
+			buildMavenPanel.setVisible(false);
+		}
+	}
 }

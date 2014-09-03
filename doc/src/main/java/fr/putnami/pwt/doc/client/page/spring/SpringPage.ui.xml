@@ -24,14 +24,60 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 
+	<ui:with field="switchItems" type="java.util.List" />
+	
 	<w:HTMLPanel title="PWT - Spring Plugin">
 		<w:Header ui:field="header">
 			<w:Heading level="1">Spring plugin</w:Heading>
 			<p class="lead">
-				We provide a <strong>Spring</strong> integration making easier the server calls handling and providing a new widget. 
+				We provide a <strong>Spring</strong> integration making easier the server calls handling and providing InputFile widget server side support. 
 			</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
+			<w:Heading level="2" summary="docSummary">How to use?</w:Heading>
+			
+			<w:InputSwitch ui:field="switchBuild" items="{switchItems}" styleName="pull-right"/>
+			<p>In order to use it, you'll have to add the needed dependency :</p>
+			<div class="clearfix"></div>
+			
+			<w:HTMLPanel styleName="showcase-sample-block" ui:field="buildGradlePanel">
+	  			<div class="showcase-sample">
+	  				<p>in the <code>build.gradle</code> file</p>
+	  			</div>
+	  			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+					<pre><![CDATA[
+dependencies {
+	"fr.putnami.pwt:pwt-spring:$pwtVersion"
+}
+]]></pre>
+	  			</c:StaticCode>
+  			</w:HTMLPanel>
+  			<w:HTMLPanel styleName="showcase-sample-block" ui:field="buildMavenPanel">
+	  			<div class="showcase-sample">
+	  				<p>in the <code>pom.xml</code> file</p>
+	  			</div>
+	  			<c:StaticCode configuration="{XML_CONFIGURATION}">
+					<pre><![CDATA[
+<dependency>
+	<groupId>fr.putnami.pwt</groupId>
+	<artifactId>pwt-spring</artifactId>
+	<version>${pwt.version}</version>
+</dependency>
+]]></pre>
+		  		</c:StaticCode>
+	  		</w:HTMLPanel>
+	  		
+			<w:Heading level="2" summary="docSummary">CommandServiceController</w:Heading>
+			<p>Without spring, you have to register all the remote accessible services in the web.xml file.</p>
+			<p>Spring provides powerful annotation such as <code>@Service</code>.
+			We provide a <code>CommandServiceController</code> which scan @Service annotated beans and inject them in the <code>CommandExecutor</code>.</p>
+			<p>The only thing you have to do is to inject the <code>CommandServiceController</code> in the spring configuration instead of configuring the command controller in the web.xml</p>
+			
+			<w:Heading level="2" summary="docSummary">InputFile server side support</w:Heading>
+			<p>In <strong>PWT</strong>, we provide a <code>FileInput</code> widget. But this specific widget need a server side.</p>
+			<p>That's why we provide a spring controller handling the three methods (upload, status and download) out of the box.</p>
+			<p>The upload dir is defined by the <code>filetransfertcontroller.tempdir</code> property.</p>
+			<p>You just have to inject the <code>FileTransfertController</code> in the spring configuration.</p>
 		</w:HTMLPanel>
 	</w:HTMLPanel>
 </ui:UiBinder>

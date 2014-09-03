@@ -32,6 +32,7 @@ import fr.putnami.pwt.core.inject.client.annotation.Templated;
 import fr.putnami.pwt.core.mvp.client.View;
 import fr.putnami.pwt.core.widget.client.Form;
 import fr.putnami.pwt.core.widget.client.helper.DateParser;
+import fr.putnami.pwt.core.widget.shared.domain.FileDto;
 
 @Templated
 public class InputControlsView extends Composite implements View {
@@ -59,6 +60,8 @@ public class InputControlsView extends Composite implements View {
 		public String mainGroup = "Friends";
 		public List<String> groups = Lists.newArrayList("Friends", "Colleague");
 		public List<String> emails = Lists.newArrayList("john.doe@gmail.com", "john.doe@aol.com");
+
+		public FileDto file;
 	}
 
 	interface Constants extends ConstantsWithLookup, ValidationConstants {
