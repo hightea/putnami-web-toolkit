@@ -50,10 +50,10 @@ public class InputRadio<T> extends AbstractInputChoice<T, T> {
 		}
 	}
 
-	private static long SEQ = 0;
+	private static long seq = 0;
 
 	static long incrementeAndGetSeq() {
-		return ++SEQ;
+		return ++seq;
 	}
 
 	private class SingleChoiceHandler implements ChoiceSelectionHandler<T, T> {

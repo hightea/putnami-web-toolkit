@@ -33,8 +33,8 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class InputGroup<T> extends AbstractPanel implements EditorInput<T> {
 
-	CssStyle STYLE_INPUT_GROUP_ADDON = new SimpleStyle("input-group-addon");
-	CssStyle STYLE_INPUT_GROUP_BUTTON = new SimpleStyle("input-group-btn");
+	private static final CssStyle STYLE_INPUT_GROUP_ADDON = new SimpleStyle("input-group-addon");
+	private static final CssStyle STYLE_INPUT_GROUP_BUTTON = new SimpleStyle("input-group-btn");
 
 	public enum Style implements CssStyle {
 		UNSTYLED(null),

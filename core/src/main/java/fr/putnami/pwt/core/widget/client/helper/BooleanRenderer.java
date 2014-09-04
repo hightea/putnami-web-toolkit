@@ -20,13 +20,13 @@ import com.google.gwt.text.shared.AbstractRenderer;
 
 public final class BooleanRenderer extends AbstractRenderer<Boolean> {
 
-	private static BooleanRenderer INSTANCE;
+	private static BooleanRenderer instance;
 
 	public static BooleanRenderer get() {
-		if (INSTANCE == null) {
-			INSTANCE = new BooleanRenderer();
+		if (instance == null) {
+			instance = new BooleanRenderer();
 		}
-		return INSTANCE;
+		return instance;
 	}
 
 	public BooleanRenderer() {

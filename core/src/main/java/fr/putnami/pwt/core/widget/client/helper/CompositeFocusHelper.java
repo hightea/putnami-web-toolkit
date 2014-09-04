@@ -45,7 +45,7 @@ import com.google.web.bindery.event.shared.HandlerRegistration;
 
 import fr.putnami.pwt.core.widget.client.util.FocusUtils;
 
-public class CompositeFocusHelper implements HasAllFocusHandlers {
+public final class CompositeFocusHelper implements HasAllFocusHandlers {
 
 	public static CompositeFocusHelper createFocusHelper(IsWidget containerWidget, HasFocusHandlers... focusContents) {
 		assert containerWidget != null : "containerWidget cannot be null";

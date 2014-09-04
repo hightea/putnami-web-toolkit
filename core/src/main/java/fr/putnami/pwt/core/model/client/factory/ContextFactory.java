@@ -25,13 +25,13 @@ import fr.putnami.pwt.core.model.client.ModelDriver;
 public interface ContextFactory {
 
 	public static class Util {
-		private static ContextFactory INSTANCE;
+		private static ContextFactory instance;
 
 		public static ContextFactory get() {
-			if (INSTANCE == null) {
-				INSTANCE = GWT.create(ContextFactory.class);
+			if (instance == null) {
+				instance = GWT.create(ContextFactory.class);
 			}
-			return INSTANCE;
+			return instance;
 
 		}
 

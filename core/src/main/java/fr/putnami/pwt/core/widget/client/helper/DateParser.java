@@ -26,13 +26,13 @@ import fr.putnami.pwt.core.widget.client.constant.WidgetParams;
 
 public final class DateParser implements Parser<Date> {
 
-	private static DateParser INSTANCE;
+	private static DateParser instance;
 
 	public static DateParser get() {
-		if (INSTANCE == null) {
-			INSTANCE = new DateParser(null);
+		if (instance == null) {
+			instance = new DateParser(null);
 		}
-		return INSTANCE;
+		return instance;
 	}
 
 	private final DateTimeFormat formater;

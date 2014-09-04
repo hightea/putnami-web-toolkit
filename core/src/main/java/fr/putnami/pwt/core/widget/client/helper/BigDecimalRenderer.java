@@ -21,7 +21,7 @@ import java.math.BigDecimal;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.text.shared.AbstractRenderer;
 
-public class BigDecimalRenderer extends AbstractRenderer<BigDecimal> {
+public final class BigDecimalRenderer extends AbstractRenderer<BigDecimal> {
 	private static BigDecimalRenderer instance;
 
 	public static BigDecimalRenderer get() {

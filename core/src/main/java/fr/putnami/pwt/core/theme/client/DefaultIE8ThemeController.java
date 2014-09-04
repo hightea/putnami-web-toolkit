@@ -22,7 +22,7 @@ import com.google.gwt.dom.client.ScriptElement;
 
 public class DefaultIE8ThemeController extends DefaultThemeController {
 
-	private static String RESPOND_JS_LOCATION = "theme/default/script/respond.min.js";
+	private static final String RESPOND_JS_LOCATION = "theme/default/script/respond.min.js";
 
 	private ScriptElement respondJsScript;
 

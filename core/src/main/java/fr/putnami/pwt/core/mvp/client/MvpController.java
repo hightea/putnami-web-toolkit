@@ -76,7 +76,7 @@ HasMayStopActivityHandlers
 
 	private HandlerRegistration historyRegistration;
 
-	private MvpController() {
+	protected MvpController() {
 		super(EventBus.get());
 
 		this.activityManager = new ActivityManager(this, EventBus.get());

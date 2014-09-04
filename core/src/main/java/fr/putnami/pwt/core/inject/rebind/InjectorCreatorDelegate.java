@@ -30,30 +30,39 @@ public abstract class InjectorCreatorDelegate {
 	}
 
 	public void initComposer(ClassSourceFileComposerFactory composerFactory) {
+		// Do nothing, can be overrided
 	}
 
 	public void writeStatic(SourceWriter srcWriter) {
+		// Do nothing, can be overrided
 	}
 
 	public void writeFields(SourceWriter srcWriter) {
+		// Do nothing, can be overrided
 	}
 
 	public void writeConstructor(SourceWriter srcWriter) {
+		// Do nothing, can be overrided
 	}
 
 	public void writeMethods(SourceWriter srcWriter) {
+		// Do nothing, can be overrided
 	}
 
 	public void writePresent(SourceWriter srcWriter) {
+		// Do nothing, can be overrided
 	}
 
 	public void writeBeforePresent(SourceWriter srcWriter) {
+		// Do nothing, can be overrided
 	}
 
 	public void writeAfterPresent(SourceWriter srcWriter) {
+		// Do nothing, can be overrided
 	}
 
 	public void create(TreeLogger logger, GeneratorContext context) {
+		// Do nothing, can be overrided
 	}
 
 }

@@ -19,7 +19,7 @@ package fr.putnami.pwt.core.widget.client.helper;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.text.shared.AbstractRenderer;
 
-public class FloatRenderer extends AbstractRenderer<Float> {
+public final class FloatRenderer extends AbstractRenderer<Float> {
 	private static FloatRenderer instance;
 
 	public static FloatRenderer get() {

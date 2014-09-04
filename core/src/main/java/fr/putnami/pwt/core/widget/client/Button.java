@@ -111,7 +111,7 @@ Focusable {
 
 	}
 
-	private static final FocusImpl focusImpl = FocusImpl.getFocusImplForPanel();
+	private static final FocusImpl FOCUS_IMPL = FocusImpl.getFocusImplForPanel();
 
 	private final AnchorElement element;
 
@@ -331,28 +331,28 @@ Focusable {
 
 	@Override
 	public int getTabIndex() {
-		return focusImpl.getTabIndex(getElement());
+		return FOCUS_IMPL.getTabIndex(getElement());
 	}
 
 	@Override
 	public void setAccessKey(char key) {
-		focusImpl.setAccessKey(getElement(), key);
+		FOCUS_IMPL.setAccessKey(getElement(), key);
 	}
 
 	@Override
 	public void setFocus(boolean focused) {
 		if (focused) {
-			focusImpl.focus(getElement());
+			FOCUS_IMPL.focus(getElement());
 		}
 		else {
-			focusImpl.blur(getElement());
+			FOCUS_IMPL.blur(getElement());
 		}
 	}
 
 	@Override
 	public void setTabIndex(int index) {
 		this.tabIndex = index;
-		focusImpl.setTabIndex(getElement(), index);
+		FOCUS_IMPL.setTabIndex(getElement(), index);
 	}
 
 }

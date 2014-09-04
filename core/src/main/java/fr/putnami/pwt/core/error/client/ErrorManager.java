@@ -42,7 +42,7 @@ import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
  */
 public abstract class ErrorManager implements UncaughtExceptionHandler {
 
-	private static ErrorManager INSTANCE;
+	private static ErrorManager instance;
 
 	/**
 	 * Get the singleton.
@@ -59,10 +59,10 @@ public abstract class ErrorManager implements UncaughtExceptionHandler {
 	 * @return the error manager
 	 */
 	public static ErrorManager get() {
-		if (INSTANCE == null) {
-			INSTANCE = GWT.create(ErrorManager.class);
+		if (instance == null) {
+			instance = GWT.create(ErrorManager.class);
 		}
-		return INSTANCE;
+		return instance;
 	}
 
 	/**

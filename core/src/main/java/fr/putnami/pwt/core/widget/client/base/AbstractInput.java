@@ -120,7 +120,7 @@ HasAllTouchHandlers
 
 	public static final CssStyle STYLE_CONTROL = new SimpleStyle("form-control");
 
-	private static final FocusImpl focusImpl = FocusImpl.getFocusImplForPanel();
+	private static final FocusImpl FOCUS_IMPL = FocusImpl.getFocusImplForPanel();
 
 	private String path;
 
@@ -257,17 +257,17 @@ HasAllTouchHandlers
 	@Override
 	public void setFocus(boolean focused) {
 		if (focused) {
-			focusImpl.focus(getElement());
+			FOCUS_IMPL.focus(getElement());
 		}
 		else {
-			focusImpl.blur(getElement());
+			FOCUS_IMPL.blur(getElement());
 		}
 	}
 
 	@Override
 	public void setTabIndex(int index) {
 		this.tabIndex = index;
-		focusImpl.setTabIndex(getElement(), index);
+		FOCUS_IMPL.setTabIndex(getElement(), index);
 	}
 
 	@Override
@@ -407,13 +407,13 @@ HasAllTouchHandlers
 
 	@Override
 	public int getTabIndex() {
-		return focusImpl.getTabIndex(getElement());
+		return FOCUS_IMPL.getTabIndex(getElement());
 	}
 
 	@Override
 	public void setAccessKey(char key) {
 		this.accessKey = key;
-		focusImpl.setAccessKey(getElement(), key);
+		FOCUS_IMPL.setAccessKey(getElement(), key);
 	}
 
 	public char getAccessKey() {

@@ -25,13 +25,13 @@ import fr.putnami.pwt.core.widget.client.constant.WidgetParams;
 
 public final class DateRenderer extends AbstractRenderer<Date> {
 
-	private static DateRenderer INSTANCE;
+	private static DateRenderer instance;
 
 	public static DateRenderer get() {
-		if (INSTANCE == null) {
-			INSTANCE = new DateRenderer(null);
+		if (instance == null) {
+			instance = new DateRenderer(null);
 		}
-		return INSTANCE;
+		return instance;
 	}
 
 	private final DateTimeFormat formater;

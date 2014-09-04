@@ -16,6 +16,7 @@
  */
 package fr.putnami.pwt.core.service.client;
 
+import com.google.common.base.Throwables;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class CallbackAdapter<T> implements AsyncCallback<T> {
@@ -26,14 +27,7 @@ public class CallbackAdapter<T> implements AsyncCallback<T> {
 
 	@Override
 	public void onFailure(Throwable caught) {
-		if (caught != null) {
-			if (caught instanceof RuntimeException) {
-				throw (RuntimeException) caught;
-			}
-			else {
-				throw new RuntimeException(caught);
-			}
-		}
+		Throwables.propagate(caught);
 	}
 
 }

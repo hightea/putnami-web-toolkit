@@ -21,7 +21,7 @@ import java.math.BigInteger;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.text.shared.AbstractRenderer;
 
-public class BigIntegerRenderer extends AbstractRenderer<BigInteger> {
+public final class BigIntegerRenderer extends AbstractRenderer<BigInteger> {
 	private static BigIntegerRenderer instance;
 
 	public static BigIntegerRenderer get() {

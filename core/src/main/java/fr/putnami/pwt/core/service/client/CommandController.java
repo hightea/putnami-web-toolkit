@@ -31,13 +31,13 @@ public abstract class CommandController implements
 		HasCommandRequestHandlers,
 		HasCommandResponseHandlers {
 
-	private static CommandController INSTANCE;
+	private static CommandController instance;
 
 	public static CommandController get() {
-		if (INSTANCE == null) {
-			INSTANCE = GWT.create(CommandController.class);
+		if (instance == null) {
+			instance = GWT.create(CommandController.class);
 		}
-		return INSTANCE;
+		return instance;
 	}
 
 	public abstract CommandRequest invokeCommand(CommandDefinition commandDefinition, CommandParam commandParam);

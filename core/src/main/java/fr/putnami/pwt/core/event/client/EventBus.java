@@ -27,7 +27,7 @@ import com.google.web.bindery.event.shared.SimpleEventBus;
  * 
  * @since 1.0
  */
-public class EventBus extends SimpleEventBus {
+public final class EventBus extends SimpleEventBus {
 
 	private static EventBus instance;
 

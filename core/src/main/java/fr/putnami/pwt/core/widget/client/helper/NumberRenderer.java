@@ -21,13 +21,13 @@ import com.google.gwt.text.shared.AbstractRenderer;
 
 public final class NumberRenderer extends AbstractRenderer<Number> {
 
-	private static NumberRenderer INSTANCE;
+	private static NumberRenderer instance;
 
 	public static NumberRenderer get() {
-		if (INSTANCE == null) {
-			INSTANCE = new NumberRenderer(null);
+		if (instance == null) {
+			instance = new NumberRenderer(null);
 		}
-		return INSTANCE;
+		return instance;
 	}
 
 	private final NumberFormat formater;

@@ -21,7 +21,7 @@ import java.text.ParseException;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.text.shared.Parser;
 
-public class FloatParser implements Parser<Float> {
+public final class FloatParser implements Parser<Float> {
 	private static FloatParser instance;
 
 	public static FloatParser get() {

@@ -20,13 +20,13 @@ import com.google.gwt.text.shared.AbstractRenderer;
 
 public final class StringRenderer extends AbstractRenderer<String> {
 
-	private static StringRenderer INSTANCE;
+	private static StringRenderer instance;
 
 	public static StringRenderer get() {
-		if (INSTANCE == null) {
-			INSTANCE = new StringRenderer();
+		if (instance == null) {
+			instance = new StringRenderer();
 		}
-		return INSTANCE;
+		return instance;
 	}
 
 	public StringRenderer() {

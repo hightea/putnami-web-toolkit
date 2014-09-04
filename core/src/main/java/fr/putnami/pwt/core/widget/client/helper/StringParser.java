@@ -20,7 +20,7 @@ import java.text.ParseException;
 
 import com.google.gwt.text.shared.Parser;
 
-public class StringParser implements Parser<String> {
+public final class StringParser implements Parser<String> {
 	private static StringParser instance;
 
 	public static StringParser get() {

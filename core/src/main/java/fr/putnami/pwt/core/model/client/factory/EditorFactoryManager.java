@@ -35,13 +35,13 @@ import fr.putnami.pwt.core.model.client.util.ModelUtils;
 
 public class EditorFactoryManager {
 
-	private static EditorFactoryManager INSTANCE;
+	private static EditorFactoryManager instance;
 
 	public static final EditorFactoryManager get() {
-		if (INSTANCE == null) {
-			INSTANCE = GWT.create(EditorFactoryManager.class);
+		if (instance == null) {
+			instance = GWT.create(EditorFactoryManager.class);
 		}
-		return INSTANCE;
+		return instance;
 	}
 
 	private final Map<Class<?>, InputFactory> inputFactories = Maps.newHashMap();

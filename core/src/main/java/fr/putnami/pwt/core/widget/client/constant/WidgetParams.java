@@ -21,13 +21,13 @@ import com.google.gwt.i18n.client.Constants;
 
 public interface WidgetParams extends Constants {
 	class Util {
-		private static WidgetParams INSTANCE;
+		private static WidgetParams instance;
 
 		public static WidgetParams get() {
-			if (INSTANCE == null) {
-				INSTANCE = GWT.create(WidgetParams.class);
+			if (instance == null) {
+				instance = GWT.create(WidgetParams.class);
 			}
-			return INSTANCE;
+			return instance;
 		}
 	}
 

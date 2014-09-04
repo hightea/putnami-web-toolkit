@@ -47,22 +47,23 @@ import fr.putnami.pwt.core.inject.rebind.factory.TemplatedCreatorFactory;
 public class InjectorProxyCreator {
 	public static final String PROXY_SUFFIX = "_Injector";
 
-	private static final Collection<InjectorDelegateFactorty> delegateFactories = Lists.newArrayList();
+	private static final Collection<InjectorDelegateFactorty> FACTORIES = Lists.newArrayList();
 
 	static {
-		delegateFactories.add(new ResourceCreatorFactory());
-		delegateFactories.add(new ServiceCreatorFactory());
-		delegateFactories.add(new PresenterCreatorFactory());
-		delegateFactories.add(new MayStopActivityCreatorFactory());
-		delegateFactories.add(new StopActivityCreatorFactory());
-		delegateFactories.add(new ErrorHandlerCreatorFactory());
-		delegateFactories.add(new DecoratorPresenterCreatorFactory());
-		delegateFactories.add(new ModelCreatorFactory());
-		delegateFactories.add(new TemplatedCreatorFactory());
-		delegateFactories.add(new PostconstructCreatorFactory());
-		delegateFactories.add(new SecurityCreatorFactory());
-		delegateFactories.add(new InitializeFormCreatorFactory());
+		FACTORIES.add(new ResourceCreatorFactory());
+		FACTORIES.add(new ServiceCreatorFactory());
+		FACTORIES.add(new PresenterCreatorFactory());
+		FACTORIES.add(new MayStopActivityCreatorFactory());
+		FACTORIES.add(new StopActivityCreatorFactory());
+		FACTORIES.add(new ErrorHandlerCreatorFactory());
+		FACTORIES.add(new DecoratorPresenterCreatorFactory());
+		FACTORIES.add(new ModelCreatorFactory());
+		FACTORIES.add(new TemplatedCreatorFactory());
+		FACTORIES.add(new PostconstructCreatorFactory());
+		FACTORIES.add(new SecurityCreatorFactory());
+		FACTORIES.add(new InitializeFormCreatorFactory());
 	}
+
 	private final JClassType injectableType;
 	private final String packageName;
 	private final String proxyName;
@@ -76,7 +77,7 @@ public class InjectorProxyCreator {
 		this.proxyName = injectableType.getSimpleSourceName() + PROXY_SUFFIX;
 		this.proxyQualifiedName = injectableType.getPackage().getName() + "." + proxyName;
 
-		for (InjectorDelegateFactorty factory : delegateFactories) {
+		for (InjectorDelegateFactorty factory : FACTORIES) {
 			factory.createDelegates(injectableType, this.delegates);
 		}
 

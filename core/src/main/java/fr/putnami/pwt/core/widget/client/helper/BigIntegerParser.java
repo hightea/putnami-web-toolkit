@@ -22,7 +22,7 @@ import java.text.ParseException;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.text.shared.Parser;
 
-public class BigIntegerParser implements Parser<BigInteger> {
+public final class BigIntegerParser implements Parser<BigInteger> {
 	private static BigIntegerParser instance;
 
 	public static BigIntegerParser get() {

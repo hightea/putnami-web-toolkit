@@ -31,10 +31,10 @@ import fr.putnami.pwt.core.model.client.base.HasHtmlId;
 
 public class HtmlForVisitor extends AbstractVisitor {
 
-	private static long SEQ = 0;
+	private static long seq = 0;
 
 	private static long incrementeAndGetSeq() {
-		return ++SEQ;
+		return ++seq;
 	}
 
 	private final Map<Path, String> htmlForIds = Maps.newHashMap();

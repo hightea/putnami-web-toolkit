@@ -26,7 +26,7 @@ import com.google.gwt.user.server.rpc.SerializationPolicy;
 import com.google.gwt.user.server.rpc.impl.SerializabilityUtil;
 import com.google.gwt.user.server.rpc.impl.TypeNameObfuscator;
 
-public class CommandSerializationPolicy extends SerializationPolicy implements TypeNameObfuscator {
+public final class CommandSerializationPolicy extends SerializationPolicy implements TypeNameObfuscator {
 
 	private static final String ELISION_ERROR = "Type name elision in RPC payloads is only supported if the RPC whitelist file is used.";
 
@@ -70,13 +70,13 @@ public class CommandSerializationPolicy extends SerializationPolicy implements T
 			java.util.Vector.class
 			);
 
-	private static CommandSerializationPolicy INSTANCE;
+	private static CommandSerializationPolicy instance;
 
 	public static CommandSerializationPolicy get() {
-		if (CommandSerializationPolicy.INSTANCE == null) {
-			CommandSerializationPolicy.INSTANCE = new CommandSerializationPolicy();
+		if (CommandSerializationPolicy.instance == null) {
+			CommandSerializationPolicy.instance = new CommandSerializationPolicy();
 		}
-		return CommandSerializationPolicy.INSTANCE;
+		return CommandSerializationPolicy.instance;
 	}
 
 	private CommandSerializationPolicy() {

@@ -96,7 +96,7 @@ HasAllDragAndDropHandlers, HasAllMouseHandlers, HasClickHandlers,
 HasDoubleClickHandlers, HasAllKeyHandlers, HasAllFocusHandlers,
 HasAllGestureHandlers, HasAllTouchHandlers
 {
-	private static final FocusImpl impl = FocusImpl.getFocusImplForPanel();
+	private static final FocusImpl FOCUS_IMPL = FocusImpl.getFocusImplForPanel();
 
 	private T value;
 	private String link;
@@ -165,24 +165,24 @@ HasAllGestureHandlers, HasAllTouchHandlers
 	}
 
 	public int getTabIndex() {
-		return impl.getTabIndex(getElement());
+		return FOCUS_IMPL.getTabIndex(getElement());
 	}
 
 	public void setAccessKey(char key) {
-		impl.setAccessKey(getElement(), key);
+		FOCUS_IMPL.setAccessKey(getElement(), key);
 	}
 
 	public void setFocus(boolean focused) {
 		if (focused) {
-			impl.focus(getElement());
+			FOCUS_IMPL.focus(getElement());
 		}
 		else {
-			impl.blur(getElement());
+			FOCUS_IMPL.blur(getElement());
 		}
 	}
 
 	public void setTabIndex(int index) {
-		impl.setTabIndex(getElement(), index);
+		FOCUS_IMPL.setTabIndex(getElement(), index);
 	}
 
 	@Override
