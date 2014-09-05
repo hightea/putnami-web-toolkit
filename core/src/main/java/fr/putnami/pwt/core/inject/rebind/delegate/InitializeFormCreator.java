@@ -29,10 +29,14 @@ import com.google.gwt.user.rebind.SourceWriter;
 
 import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
 import fr.putnami.pwt.core.inject.client.annotation.Initialize;
-import fr.putnami.pwt.core.inject.rebind.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterConstructor;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterSubGenerate;
 import fr.putnami.pwt.core.model.rebind.ModelCreator;
 
-public class InitializeFormCreator extends InjectorCreatorDelegate {
+public class InitializeFormCreator extends InjectorCreatorDelegate implements InjectorWritterSubGenerate, InjectorWritterConstructor,
+		InjectorWritterInit {
 
 	private final JField modelField;
 	private final JType fieldType;
@@ -64,7 +68,7 @@ public class InitializeFormCreator extends InjectorCreatorDelegate {
 	}
 
 	@Override
-	public void create(TreeLogger logger, GeneratorContext context) {
+	public void subGenerate(TreeLogger logger, GeneratorContext context) {
 		ModelCreator modelCreator = new ModelCreator(beanType);
 		modelImplClass = modelCreator.create(logger, context);
 	}

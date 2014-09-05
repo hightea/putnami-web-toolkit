@@ -16,11 +16,15 @@
  */
 package fr.putnami.pwt.core.inject.rebind;
 
-import java.util.Collection;
-
 import com.google.gwt.core.ext.typeinfo.JClassType;
 
-public interface InjectorDelegateFactorty {
+import fr.putnami.pwt.core.inject.rebind.base.AbstractInjectorGenerator;
 
-	void createDelegates(JClassType injectableType, Collection<InjectorCreatorDelegate> delegates);
+public class InjectorModuleGenerator extends AbstractInjectorGenerator<InjectorModuleCreator> {
+
+	@Override
+	protected InjectorModuleCreator newCreator(JClassType viewType) {
+		return new InjectorModuleCreator(viewType);
+	}
+
 }

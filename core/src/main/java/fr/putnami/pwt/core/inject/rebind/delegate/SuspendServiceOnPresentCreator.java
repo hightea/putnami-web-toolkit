@@ -21,12 +21,16 @@ import java.util.List;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
-import fr.putnami.pwt.core.inject.rebind.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterAfterPresent;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterBeforePresent;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
 import fr.putnami.pwt.core.service.client.CallbackAdapter;
 import fr.putnami.pwt.core.service.client.CommandController;
 import fr.putnami.pwt.core.service.shared.domain.CommandResponse;
 
-public class SuspendServiceOnPresentCreator extends InjectorCreatorDelegate {
+public class SuspendServiceOnPresentCreator extends InjectorCreatorDelegate implements InjectorWritterAfterPresent, InjectorWritterBeforePresent,
+		InjectorWritterInit {
 
 	private final String injectorName;
 	private boolean hasService;

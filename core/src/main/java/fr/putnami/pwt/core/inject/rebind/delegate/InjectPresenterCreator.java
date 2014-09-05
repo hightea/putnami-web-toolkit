@@ -22,13 +22,16 @@ import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JParameterizedType;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.place.shared.Place;
+import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
-import fr.putnami.pwt.core.inject.rebind.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterPresent;
 import fr.putnami.pwt.core.mvp.client.Presenter;
 
-public class InjectPresenterCreator extends InjectorCreatorDelegate {
+public class InjectPresenterCreator extends InjectorCreatorDelegate implements InjectorWritterInit, InjectorWritterPresent {
 
 	private final Collection<JMethod> presenterMethods;
 
@@ -76,6 +79,7 @@ public class InjectPresenterCreator extends InjectorCreatorDelegate {
 		}
 
 		composerFactory.addImplementedInterface(Presenter.class.getSimpleName());
+		composerFactory.addImport(AcceptsOneWidget.class.getName());
 	}
 
 }

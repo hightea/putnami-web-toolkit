@@ -24,10 +24,12 @@ import com.google.gwt.user.rebind.SourceWriter;
 
 import fr.putnami.pwt.core.event.client.EventBus;
 import fr.putnami.pwt.core.event.client.HandlerRegistrationCollection;
-import fr.putnami.pwt.core.inject.rebind.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterPresent;
 import fr.putnami.pwt.core.mvp.client.event.StopActivityEvent;
 
-public class InjectStopActivityCreator extends InjectorCreatorDelegate {
+public class InjectStopActivityCreator extends InjectorCreatorDelegate implements InjectorWritterInit, InjectorWritterPresent {
 
 	private final Collection<JMethod> presenterMethods;
 	private final String injectorName;

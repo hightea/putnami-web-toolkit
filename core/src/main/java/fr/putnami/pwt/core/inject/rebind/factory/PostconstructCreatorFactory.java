@@ -22,8 +22,8 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 
 import fr.putnami.pwt.core.inject.client.annotation.PostConstruct;
-import fr.putnami.pwt.core.inject.rebind.InjectorCreatorDelegate;
-import fr.putnami.pwt.core.inject.rebind.InjectorDelegateFactorty;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorDelegateFactorty;
 import fr.putnami.pwt.core.inject.rebind.delegate.InjectPostconstructCreator;
 import fr.putnami.pwt.core.inject.rebind.util.InjectCreatorUtil;
 

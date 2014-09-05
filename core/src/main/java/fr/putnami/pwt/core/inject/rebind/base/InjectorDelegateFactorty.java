@@ -14,24 +14,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.core.inject.rebind.factory;
+package fr.putnami.pwt.core.inject.rebind.base;
 
 import java.util.Collection;
 
 import com.google.gwt.core.ext.typeinfo.JClassType;
 
-import fr.putnami.pwt.core.inject.client.annotation.Templated;
-import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
-import fr.putnami.pwt.core.inject.rebind.base.InjectorDelegateFactorty;
-import fr.putnami.pwt.core.inject.rebind.delegate.InjectTemplateCreator;
+public interface InjectorDelegateFactorty {
 
-public class TemplatedCreatorFactory implements InjectorDelegateFactorty {
-
-	@Override
-	public void createDelegates(JClassType injectableType, Collection<InjectorCreatorDelegate> delegates) {
-		if (injectableType.getAnnotation(Templated.class) != null) {
-			delegates.add(new InjectTemplateCreator(injectableType));
-		}
-	}
-
+	void createDelegates(JClassType injectableType, Collection<InjectorCreatorDelegate> delegates);
 }

@@ -24,9 +24,9 @@ import com.google.gwt.core.ext.typeinfo.JMethod;
 
 import fr.putnami.pwt.core.inject.client.annotation.InjectService;
 import fr.putnami.pwt.core.inject.client.annotation.PresentHandler;
-import fr.putnami.pwt.core.inject.rebind.InjectorCreatorDelegate;
-import fr.putnami.pwt.core.inject.rebind.InjectorDelegateFactorty;
-import fr.putnami.pwt.core.inject.rebind.InjectorProxyCreator;
+import fr.putnami.pwt.core.inject.rebind.InjectorViewCreator;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorDelegateFactorty;
 import fr.putnami.pwt.core.inject.rebind.delegate.InjectPresenterCreator;
 import fr.putnami.pwt.core.inject.rebind.delegate.SuspendServiceOnPresentCreator;
 import fr.putnami.pwt.core.inject.rebind.util.InjectCreatorUtil;
@@ -38,7 +38,7 @@ public class PresenterCreatorFactory implements InjectorDelegateFactorty {
 		Collection<JMethod> methods = InjectCreatorUtil.listMethod(injectableType, PresentHandler.class);
 		delegates.add(new InjectPresenterCreator(methods));
 		Collection<JField> services = InjectCreatorUtil.listFields(injectableType, InjectService.class);
-		String injectorName = injectableType.getSimpleSourceName() + InjectorProxyCreator.PROXY_SUFFIX;
+		String injectorName = injectableType.getSimpleSourceName() + InjectorViewCreator.PROXY_SUFFIX;
 		delegates.add(new SuspendServiceOnPresentCreator(injectorName, services.size() > 0));
 	}
 

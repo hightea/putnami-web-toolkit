@@ -20,10 +20,12 @@ import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
 import fr.putnami.pwt.core.inject.client.annotation.Secured;
-import fr.putnami.pwt.core.inject.rebind.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterBeforePresent;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
 import fr.putnami.pwt.core.security.client.controller.SessionController;
 
-public class InjectSecuritedCreator extends InjectorCreatorDelegate {
+public class InjectSecuritedCreator extends InjectorCreatorDelegate implements InjectorWritterBeforePresent, InjectorWritterInit {
 
 	private final Secured securedAnnotation;
 

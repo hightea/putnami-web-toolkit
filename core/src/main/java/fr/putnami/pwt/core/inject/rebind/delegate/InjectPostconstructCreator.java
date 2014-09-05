@@ -19,9 +19,10 @@ package fr.putnami.pwt.core.inject.rebind.delegate;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.user.rebind.SourceWriter;
 
-import fr.putnami.pwt.core.inject.rebind.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterConstructor;
 
-public class InjectPostconstructCreator extends InjectorCreatorDelegate {
+public class InjectPostconstructCreator extends InjectorCreatorDelegate implements InjectorWritterConstructor {
 
 	private final JMethod postConstructMethod;
 

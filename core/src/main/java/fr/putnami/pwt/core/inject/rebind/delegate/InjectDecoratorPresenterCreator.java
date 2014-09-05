@@ -16,11 +16,16 @@
  */
 package fr.putnami.pwt.core.inject.rebind.delegate;
 
+import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
-import fr.putnami.pwt.core.inject.rebind.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterMethod;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterPresent;
 
-public class InjectDecoratorPresenterCreator extends InjectorCreatorDelegate {
+public class InjectDecoratorPresenterCreator extends InjectorCreatorDelegate implements InjectorWritterMethod, InjectorWritterPresent, InjectorWritterInit {
 
 	public InjectDecoratorPresenterCreator() {
 	}
@@ -47,6 +52,11 @@ public class InjectDecoratorPresenterCreator extends InjectorCreatorDelegate {
 		srcWriter.println("}");
 		srcWriter.outdent();
 		srcWriter.println("}");
+	}
+
+	@Override
+	public void initComposer(ClassSourceFileComposerFactory composerFactory) {
+		composerFactory.addImport(AcceptsOneWidget.class.getName());
 	}
 
 }

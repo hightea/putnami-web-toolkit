@@ -16,9 +16,6 @@
  */
 package fr.putnami.pwt.doc.client;
 
-import static fr.putnami.pwt.doc.client.application.ApplicationConfig.ANALYTICS_TRACKER_ID;
-import static fr.putnami.pwt.doc.client.application.ApplicationConfig.DOMAIN;
-
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
@@ -26,6 +23,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 import fr.putnami.pwt.core.error.client.ErrorManager;
 import fr.putnami.pwt.core.error.client.widget.SimpleErrorDisplayer;
+import fr.putnami.pwt.core.inject.client.Module;
+import fr.putnami.pwt.core.inject.client.annotation.InjectResource;
 import fr.putnami.pwt.core.mvp.client.ActivityFactory;
 import fr.putnami.pwt.core.mvp.client.MvpController;
 import fr.putnami.pwt.core.theme.client.CssLink;
@@ -65,8 +64,19 @@ import fr.putnami.pwt.doc.client.page.tutorial.Tuto7GoogleAnalyticsPage;
 import fr.putnami.pwt.doc.client.page.tutorial.Tuto8AjaxBotPage;
 import fr.putnami.pwt.doc.client.page.welcome.WelcomePage;
 import fr.putnami.pwt.plugin.ga.client.GoogleAnalytics;
+import static fr.putnami.pwt.doc.client.application.ApplicationConfig.ANALYTICS_TRACKER_ID;
+import static fr.putnami.pwt.doc.client.application.ApplicationConfig.DOMAIN;
 
-public class DocumentationApp implements EntryPoint {
+
+public class DocumentationApp implements EntryPoint, Module {
+
+	@InjectResource
+	DocumentationDisplay display;
+
+	@fr.putnami.pwt.core.inject.client.annotation.EntryPoint
+	void onModuleStart() {
+
+	}
 
 	@Override
 	public void onModuleLoad() {
@@ -79,7 +89,6 @@ public class DocumentationApp implements EntryPoint {
 		analytics.displayfeatures();
 		analytics.handleUncaughtException(true);
 
-		DocumentationDisplay display = new DocumentationDisplay();
 		RootPanel.get().add(display);
 
 		SimpleErrorDisplayer errorDisplayer = new SimpleErrorDisplayer();

@@ -22,11 +22,14 @@
 	<source path="client"/>
 	<source path="shared"/>
 	
-	<generate-with class="fr.putnami.pwt.core.inject.rebind.InjectorProxyGenerator">
-		<when-type-assignable class="fr.putnami.pwt.core.inject.client.Injection" />
+	<generate-with class="fr.putnami.pwt.core.inject.rebind.InjectorModuleGenerator">
+		<when-type-assignable class="fr.putnami.pwt.core.inject.client.Module" />
 	</generate-with>
-	<generate-with class="fr.putnami.pwt.core.inject.rebind.InjectorProxyGenerator">
+	<generate-with class="fr.putnami.pwt.core.inject.rebind.InjectorViewGenerator">
 		<when-type-assignable class="fr.putnami.pwt.core.mvp.client.View" />
+	</generate-with>
+	<generate-with class="fr.putnami.pwt.core.inject.rebind.InjectorBasicGenerator">
+		<when-type-assignable class="fr.putnami.pwt.core.inject.client.Injected" />
 	</generate-with>
 
 	

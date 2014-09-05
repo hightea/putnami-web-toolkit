@@ -22,10 +22,13 @@ import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
-import fr.putnami.pwt.core.inject.rebind.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterConstructor;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterStatic;
 import fr.putnami.pwt.core.service.client.ServiceProxy;
 
-public class InjectServiceCreator extends InjectorCreatorDelegate {
+public class InjectServiceCreator extends InjectorCreatorDelegate implements InjectorWritterStatic, InjectorWritterInit, InjectorWritterConstructor {
 
 	private final JType viewType;
 	private final JField serviceField;

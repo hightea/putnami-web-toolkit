@@ -1,5 +1,5 @@
 package fr.putnami.pwt.core.inject.client;
 
-public interface Injection {
+public interface Module {
 
 }

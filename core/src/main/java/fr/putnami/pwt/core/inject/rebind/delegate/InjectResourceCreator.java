@@ -21,9 +21,11 @@ import com.google.gwt.core.ext.typeinfo.JField;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
-import fr.putnami.pwt.core.inject.rebind.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterConstructor;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
 
-public class InjectResourceCreator extends InjectorCreatorDelegate {
+public class InjectResourceCreator extends InjectorCreatorDelegate implements InjectorWritterInit, InjectorWritterConstructor {
 
 	private final JField resourceField;
 

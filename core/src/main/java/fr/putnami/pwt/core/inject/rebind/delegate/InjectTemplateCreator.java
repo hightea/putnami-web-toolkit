@@ -24,10 +24,13 @@ import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
 import fr.putnami.pwt.core.inject.client.annotation.Templated;
-import fr.putnami.pwt.core.inject.rebind.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterConstructor;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterStatic;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 
-public class InjectTemplateCreator extends InjectorCreatorDelegate {
+public class InjectTemplateCreator extends InjectorCreatorDelegate implements InjectorWritterStatic, InjectorWritterInit, InjectorWritterConstructor {
 
 	private final JClassType viewType;
 	private final String templateInterfaceName;

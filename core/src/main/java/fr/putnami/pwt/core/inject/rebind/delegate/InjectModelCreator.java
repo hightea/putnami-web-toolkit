@@ -26,11 +26,15 @@ import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
-import fr.putnami.pwt.core.inject.rebind.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterConstructor;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterSubGenerate;
 import fr.putnami.pwt.core.model.client.model.Model;
 import fr.putnami.pwt.core.model.rebind.ModelCreator;
 
-public class InjectModelCreator extends InjectorCreatorDelegate {
+public class InjectModelCreator extends InjectorCreatorDelegate implements InjectorWritterSubGenerate, InjectorWritterConstructor,
+		InjectorWritterInit {
 
 	private final JField modelField;
 	private final JType fieldType;
@@ -53,7 +57,7 @@ public class InjectModelCreator extends InjectorCreatorDelegate {
 	}
 
 	@Override
-	public void create(TreeLogger logger, GeneratorContext context) {
+	public void subGenerate(TreeLogger logger, GeneratorContext context) {
 		ModelCreator modelCreator = new ModelCreator(beanType);
 		modelImplClass = modelCreator.create(logger, context);
 	}

@@ -22,9 +22,9 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 
 import fr.putnami.pwt.core.inject.client.annotation.ErrorHandler;
-import fr.putnami.pwt.core.inject.rebind.InjectorCreatorDelegate;
-import fr.putnami.pwt.core.inject.rebind.InjectorDelegateFactorty;
-import fr.putnami.pwt.core.inject.rebind.InjectorProxyCreator;
+import fr.putnami.pwt.core.inject.rebind.InjectorViewCreator;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
+import fr.putnami.pwt.core.inject.rebind.base.InjectorDelegateFactorty;
 import fr.putnami.pwt.core.inject.rebind.delegate.InjectErrorHandlerCreator;
 import fr.putnami.pwt.core.inject.rebind.util.InjectCreatorUtil;
 
@@ -34,7 +34,7 @@ public class ErrorHandlerCreatorFactory implements InjectorDelegateFactorty {
 	public void createDelegates(JClassType injectableType, Collection<InjectorCreatorDelegate> delegates) {
 		Collection<JMethod> methods = InjectCreatorUtil.listMethod(injectableType, ErrorHandler.class);
 		if (!methods.isEmpty()) {
-			String injectorName = injectableType.getSimpleSourceName() + InjectorProxyCreator.PROXY_SUFFIX;
+			String injectorName = injectableType.getSimpleSourceName() + InjectorViewCreator.PROXY_SUFFIX;
 			delegates.add(new InjectErrorHandlerCreator(methods, injectorName));
 		}
 	}
