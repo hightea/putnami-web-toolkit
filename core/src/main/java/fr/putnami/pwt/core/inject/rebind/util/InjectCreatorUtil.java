@@ -57,6 +57,9 @@ public final class InjectCreatorUtil {
 		return methodAnnoted;
 	}
 
+	public static String toClassName(Class<?> clazz) {
+		return clazz == null ? null : clazz.getName().replace('$', '.');
+	}
 	private InjectCreatorUtil() {
 
 	}

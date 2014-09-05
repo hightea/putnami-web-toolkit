@@ -17,22 +17,16 @@
 package fr.putnami.pwt.doc.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.i18n.client.ConstantsWithLookup;
-import com.google.gwt.user.client.ui.RootPanel;
 
-import fr.putnami.pwt.core.error.client.ErrorManager;
 import fr.putnami.pwt.core.error.client.widget.SimpleErrorDisplayer;
 import fr.putnami.pwt.core.inject.client.Module;
-import fr.putnami.pwt.core.inject.client.annotation.InjectResource;
-import fr.putnami.pwt.core.mvp.client.ActivityFactory;
-import fr.putnami.pwt.core.mvp.client.MvpController;
-import fr.putnami.pwt.core.theme.client.CssLink;
-import fr.putnami.pwt.core.theme.client.Theme;
-import fr.putnami.pwt.core.theme.client.ThemeController;
+import fr.putnami.pwt.core.inject.client.annotation.EntryPointHandler;
+import fr.putnami.pwt.core.inject.client.annotation.ErrorHandler;
+import fr.putnami.pwt.core.inject.client.annotation.ErrorManagmentDescritpion;
+import fr.putnami.pwt.core.inject.client.annotation.MvpDescritpion;
+import fr.putnami.pwt.core.inject.client.annotation.ThemeDescritpion;
 import fr.putnami.pwt.doc.client.application.DocumentationDisplay;
 import fr.putnami.pwt.doc.client.application.error.ApplicationUnreachableExceptionHandler;
-import fr.putnami.pwt.doc.client.application.error.ErrorConstants;
 import fr.putnami.pwt.doc.client.application.error.UmbrellaExceptionHandler;
 import fr.putnami.pwt.doc.client.page.ajaxbot.AjaxBotIndexingPage;
 import fr.putnami.pwt.doc.client.page.analytics.GoogleAnalyticsPage;
@@ -63,76 +57,73 @@ import fr.putnami.pwt.doc.client.page.tutorial.Tuto6ThemePage;
 import fr.putnami.pwt.doc.client.page.tutorial.Tuto7GoogleAnalyticsPage;
 import fr.putnami.pwt.doc.client.page.tutorial.Tuto8AjaxBotPage;
 import fr.putnami.pwt.doc.client.page.welcome.WelcomePage;
+import fr.putnami.pwt.doc.client.page.welcome.WelcomePage.WelcomePlace;
 import fr.putnami.pwt.plugin.ga.client.GoogleAnalytics;
 import static fr.putnami.pwt.doc.client.application.ApplicationConfig.ANALYTICS_TRACKER_ID;
 import static fr.putnami.pwt.doc.client.application.ApplicationConfig.DOMAIN;
 
+@MvpDescritpion(
+		display = DocumentationDisplay.class,
+		defaultPlace = WelcomePlace.class,
+		activities = {
+			WelcomePage.WelcomePlace.class,
+			GettingStartedPage.GettingStartedPlace.class,
+			BootstrapPage.BootstrapPlace.class,
+			LayoutPage.LayoutsPlace.class,
+			ComponentsPage.ComponentsPlace.class,
+			InjectionPage.InjectionPlace.class,
+			DataBindingPage.DataBindingPlace.class,
+			InternationalizationPage.InternationalizationPlace.class,
+			NavigationPage.NavigationPlace.class,
+			ServerCallsPage.ServerCallsPlace.class,
+			ErrorsPage.ErrorsPlace.class,
+			CodeEditorPage.CodeEditorPlace.class,
+			AjaxBotIndexingPage.AjaxBotIndexingPlace.class,
+			GoogleAnalyticsPage.GoogleAnalyticsPlace.class,
+			SpringPage.SpringPlace.class,
+			SamplesPage.SamplesPlace.class,
+			ContactsTablePage.ContactsTablePlace.class,
+			AddressBookPage.AddressBookPlace.class,
+			ComingSoonPage.ComingSoonPlace.class,
+			DownloadPage.DownloadPlace.class,
+			Tuto1InitGradlePage.Tuto1InitGradlePlace.class,
+			Tuto1InitMavenPage.Tuto1InitMavenPlace.class,
+			Tuto2FirstPagePage.Tuto2FirstPagePlace.class,
+			Tuto3MorePagesPage.Tuto3MorePagesPlace.class,
+			Tuto4BindAFormPage.Tuto4BindAFormPlace.class,
+			Tuto5IssueTrackerPage.Tuto5IssueTrackerPlace.class,
+			Tuto6ThemePage.Tuto6ThemePlace.class,
+			Tuto7GoogleAnalyticsPage.Tuto7GoogleAnalyticsPlace.class,
+			Tuto8AjaxBotPage.Tuto8AjaxBotPlace.class
+		}
+		)
+@ErrorManagmentDescritpion(
+		errorDisplay = SimpleErrorDisplayer.class,
+		errorHandlers = {
+			UmbrellaExceptionHandler.class, ApplicationUnreachableExceptionHandler.class
+		})
+@ThemeDescritpion(
+		styleSheets = "theme/doc/style/pwt-doc.css"
+		)
+public class DocumentationApp implements Module, EntryPoint {
 
-public class DocumentationApp implements EntryPoint, Module {
-
-	@InjectResource
-	DocumentationDisplay display;
-
-	@fr.putnami.pwt.core.inject.client.annotation.EntryPoint
+	@EntryPointHandler
 	void onModuleStart() {
-
-	}
-
-	@Override
-	public void onModuleLoad() {
-		Theme theme = new Theme();
-		theme.addLink(new CssLink("theme/doc/style/pwt-doc.css", 0));
-		ThemeController.get().installTheme(theme);
-
 		GoogleAnalytics analytics = GoogleAnalytics.init(ANALYTICS_TRACKER_ID, DOMAIN);
 		analytics.forceSSL(true);
 		analytics.displayfeatures();
 		analytics.handleUncaughtException(true);
 
-		RootPanel.get().add(display);
+	}
 
-		SimpleErrorDisplayer errorDisplayer = new SimpleErrorDisplayer();
-		errorDisplayer.setConstants((ConstantsWithLookup) GWT.create(ErrorConstants.class));
-		ErrorManager.get().setErrorDisplayer(errorDisplayer);
-		ErrorManager.get().registerErrorHandler(new UmbrellaExceptionHandler());
-		ErrorManager.get().registerErrorHandler(new ApplicationUnreachableExceptionHandler());
+	@ErrorHandler
+	boolean handleError(Throwable error){
+		return false;
+	}
 
-		final MvpController controller = MvpController.get();
-		controller.setDisplay(display);
+	@Override
+	public void onModuleLoad() {
+		// TODO Auto-generated method stub
 
-		controller.setDefaultPlace(new WelcomePage.WelcomePlace());
-
-		controller.registerActivity(GWT.<ActivityFactory> create(WelcomePage.WelcomePlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(GettingStartedPage.GettingStartedPlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(BootstrapPage.BootstrapPlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(LayoutPage.LayoutsPlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(ComponentsPage.ComponentsPlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(InjectionPage.InjectionPlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(DataBindingPage.DataBindingPlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(InternationalizationPage.InternationalizationPlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(NavigationPage.NavigationPlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(ServerCallsPage.ServerCallsPlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(ErrorsPage.ErrorsPlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(CodeEditorPage.CodeEditorPlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(AjaxBotIndexingPage.AjaxBotIndexingPlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(GoogleAnalyticsPage.GoogleAnalyticsPlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(SpringPage.SpringPlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(SamplesPage.SamplesPlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(ContactsTablePage.ContactsTablePlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(AddressBookPage.AddressBookPlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(ComingSoonPage.ComingSoonPlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(DownloadPage.DownloadPlace.class));
-
-		controller.registerActivity(GWT.<ActivityFactory> create(Tuto1InitGradlePage.Tuto1InitGradlePlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(Tuto1InitMavenPage.Tuto1InitMavenPlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(Tuto2FirstPagePage.Tuto2FirstPagePlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(Tuto3MorePagesPage.Tuto3MorePagesPlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(Tuto4BindAFormPage.Tuto4BindAFormPlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(Tuto5IssueTrackerPage.Tuto5IssueTrackerPlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(Tuto6ThemePage.Tuto6ThemePlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(Tuto7GoogleAnalyticsPage.Tuto7GoogleAnalyticsPlace.class));
-		controller.registerActivity(GWT.<ActivityFactory> create(Tuto8AjaxBotPage.Tuto8AjaxBotPlace.class));
-
-		controller.handleCurrentHistory();
 	}
 }
