@@ -77,7 +77,7 @@ public class InjectorModuleCreator extends AbstractInjectorCreator {
 			}
 		}
 		catch (NotFoundException e) {
-			throw new RuntimeException(e);
+			// Nothing to do.
 		}
 
 		for (InjectorWritterEntryPoint delegate : Iterables.filter(delegates, InjectorWritterEntryPoint.class)) {

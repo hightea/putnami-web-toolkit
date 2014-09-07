@@ -16,8 +16,6 @@
  */
 package fr.putnami.pwt.doc.client;
 
-import com.google.gwt.core.client.EntryPoint;
-
 import fr.putnami.pwt.core.error.client.widget.SimpleErrorDisplayer;
 import fr.putnami.pwt.core.inject.client.Module;
 import fr.putnami.pwt.core.inject.client.annotation.EntryPointHandler;
@@ -105,7 +103,7 @@ import static fr.putnami.pwt.doc.client.application.ApplicationConfig.DOMAIN;
 @ThemeDescritpion(
 		styleSheets = "theme/doc/style/pwt-doc.css"
 		)
-public class DocumentationApp implements Module, EntryPoint {
+public class DocumentationApp implements Module {
 
 	@EntryPointHandler
 	void onModuleStart() {
@@ -119,11 +117,5 @@ public class DocumentationApp implements Module, EntryPoint {
 	@ErrorHandler
 	boolean handleError(Throwable error){
 		return false;
-	}
-
-	@Override
-	public void onModuleLoad() {
-		// TODO Auto-generated method stub
-
 	}
 }
