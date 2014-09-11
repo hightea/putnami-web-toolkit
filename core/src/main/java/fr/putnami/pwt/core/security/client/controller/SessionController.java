@@ -79,11 +79,15 @@ public abstract class SessionController implements HasSignInHandlers, HasSignOut
 		return false;
 	}
 
-	public void checkAuthorized(String role, Place fallback) {
-		boolean hasRole = hasRole(role);
-		if (!hasRole) {
-			throw new SecurityException("Unauthorized", fallback);
+	public void checkAuthorized(Place fallback, String... roles) {
+		if (roles != null) {
+			for (String role : roles) {
+				if (hasRole(role)) {
+					return;
+				}
+			}
 		}
+		throw new SecurityException("Unauthorized", fallback);
 	}
 
 	public void setSession(SessionDto session) {

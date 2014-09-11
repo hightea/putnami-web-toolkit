@@ -29,7 +29,6 @@ public class InjectSecuritedCreator extends InjectorCreatorDelegate implements I
 
 	private final Secured securedAnnotation;
 
-
 	public InjectSecuritedCreator(Secured securedAnnotation) {
 		this.securedAnnotation = securedAnnotation;
 	}
@@ -42,9 +41,11 @@ public class InjectSecuritedCreator extends InjectorCreatorDelegate implements I
 	@Override
 	public void writeBeforePresent(SourceWriter srcWriter) {
 		if (securedAnnotation.value() != null) {
+			srcWriter.print("SessionController.get().checkAuthorized(place");
 			for (String value : securedAnnotation.value()) {
-				srcWriter.println("SessionController.get().checkAuthorized(\"%s\", place);", value);
+				srcWriter.print(", \"%s\"", value);
 			}
+			srcWriter.println(");");
 		}
 
 	}

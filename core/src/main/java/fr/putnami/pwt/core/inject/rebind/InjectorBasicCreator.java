@@ -31,7 +31,6 @@ import fr.putnami.pwt.core.inject.rebind.factory.InitializeFormCreatorFactory;
 import fr.putnami.pwt.core.inject.rebind.factory.ModelCreatorFactory;
 import fr.putnami.pwt.core.inject.rebind.factory.PostconstructCreatorFactory;
 import fr.putnami.pwt.core.inject.rebind.factory.ResourceCreatorFactory;
-import fr.putnami.pwt.core.inject.rebind.factory.SecurityCreatorFactory;
 import fr.putnami.pwt.core.inject.rebind.factory.ServiceCreatorFactory;
 import fr.putnami.pwt.core.inject.rebind.factory.TemplatedCreatorFactory;
 
@@ -50,7 +49,6 @@ public class InjectorBasicCreator extends AbstractInjectorCreator {
 		factories.add(new ModelCreatorFactory());
 		factories.add(new TemplatedCreatorFactory());
 		factories.add(new PostconstructCreatorFactory());
-		factories.add(new SecurityCreatorFactory());
 		factories.add(new InitializeFormCreatorFactory());
 		return factories;
 	}
