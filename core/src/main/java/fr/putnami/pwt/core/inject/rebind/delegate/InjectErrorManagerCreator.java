@@ -29,7 +29,7 @@ import fr.putnami.pwt.core.error.client.ErrorDisplayer;
 import fr.putnami.pwt.core.error.client.ErrorHandler;
 import fr.putnami.pwt.core.error.client.ErrorManager;
 import fr.putnami.pwt.core.error.client.widget.SimpleErrorDisplayer;
-import fr.putnami.pwt.core.inject.client.annotation.ErrorManagmentDescritpion;
+import fr.putnami.pwt.core.inject.client.annotation.ErrorManagmentDescription;
 import fr.putnami.pwt.core.inject.rebind.InjectorViewCreator;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterEntryPoint;
@@ -44,7 +44,7 @@ public class InjectErrorManagerCreator extends InjectorCreatorDelegate implement
 	private final Collection<JMethod> handlerMethods;
 	private final String injectorName;
 
-	public InjectErrorManagerCreator(JClassType injectableType, ErrorManagmentDescritpion errorManagmentDescritpion) {
+	public InjectErrorManagerCreator(JClassType injectableType, ErrorManagmentDescription errorManagmentDescritpion) {
 		this.injectorName = injectableType.getSimpleSourceName() + InjectorViewCreator.PROXY_SUFFIX;
 		this.errorDisplay = errorManagmentDescritpion.errorDisplay();
 		this.errorHandlers = errorManagmentDescritpion.errorHandlers();

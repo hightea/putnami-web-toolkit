@@ -21,16 +21,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.google.gwt.user.client.ui.AcceptsOneWidget;
-
-import fr.putnami.pwt.core.mvp.client.ViewPlace;
-
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface MvpDescritpion {
-	Class<? extends AcceptsOneWidget> display() default AcceptsOneWidget.class;
-
-	Class<? extends ViewPlace> defaultPlace() default ViewPlace.class;
-
-	Class<? extends ViewPlace>[] activities() default {};
+public @interface ThemeDescription {
+	String[] styleSheets() default {};
 }

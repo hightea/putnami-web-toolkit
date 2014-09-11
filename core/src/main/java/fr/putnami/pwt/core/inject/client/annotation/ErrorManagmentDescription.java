@@ -26,7 +26,7 @@ import fr.putnami.pwt.core.error.client.ErrorHandler;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface ErrorManagmentDescritpion {
+public @interface ErrorManagmentDescription {
 	Class<? extends ErrorDisplayer> errorDisplay() default ErrorDisplayer.class;
 
 	Class<? extends ErrorHandler>[] errorHandlers() default {};

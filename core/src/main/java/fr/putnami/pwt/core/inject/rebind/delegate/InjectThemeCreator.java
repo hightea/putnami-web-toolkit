@@ -24,7 +24,7 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
-import fr.putnami.pwt.core.inject.client.annotation.ThemeDescritpion;
+import fr.putnami.pwt.core.inject.client.annotation.ThemeDescription;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterEntryPoint;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
@@ -36,7 +36,7 @@ public class InjectThemeCreator extends InjectorCreatorDelegate implements Injec
 
 	private final List<String> styles = Lists.newArrayList();
 
-	public InjectThemeCreator(JClassType injectableType, ThemeDescritpion themeDescritpion) {
+	public InjectThemeCreator(JClassType injectableType, ThemeDescription themeDescritpion) {
 		if (themeDescritpion.styleSheets() != null) {
 			for (String style : themeDescritpion.styleSheets()) {
 				styles.add(style);

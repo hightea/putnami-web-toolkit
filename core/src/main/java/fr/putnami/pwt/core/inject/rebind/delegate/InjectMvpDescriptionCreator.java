@@ -26,7 +26,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
-import fr.putnami.pwt.core.inject.client.annotation.MvpDescritpion;
+import fr.putnami.pwt.core.inject.client.annotation.MvpDescription;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterEntryPoint;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
@@ -40,7 +40,7 @@ public class InjectMvpDescriptionCreator extends InjectorCreatorDelegate impleme
 	private final Class<? extends ViewPlace> defaultPlace;
 	private final List<Class<? extends ViewPlace>> activities = Lists.newArrayList();
 
-	public InjectMvpDescriptionCreator(JClassType injectableType, MvpDescritpion moduleDescritpion) {
+	public InjectMvpDescriptionCreator(JClassType injectableType, MvpDescription moduleDescritpion) {
 		this.display = moduleDescritpion.display();
 		this.defaultPlace = moduleDescritpion.defaultPlace();
 		if (moduleDescritpion.activities() != null) {

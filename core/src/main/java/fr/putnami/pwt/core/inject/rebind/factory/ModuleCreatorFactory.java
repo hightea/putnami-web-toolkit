@@ -20,9 +20,9 @@ import java.util.Collection;
 
 import com.google.gwt.core.ext.typeinfo.JClassType;
 
-import fr.putnami.pwt.core.inject.client.annotation.ErrorManagmentDescritpion;
-import fr.putnami.pwt.core.inject.client.annotation.MvpDescritpion;
-import fr.putnami.pwt.core.inject.client.annotation.ThemeDescritpion;
+import fr.putnami.pwt.core.inject.client.annotation.ErrorManagmentDescription;
+import fr.putnami.pwt.core.inject.client.annotation.MvpDescription;
+import fr.putnami.pwt.core.inject.client.annotation.ThemeDescription;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorDelegateFactorty;
 import fr.putnami.pwt.core.inject.rebind.delegate.InjectErrorManagerCreator;
@@ -33,14 +33,14 @@ public class ModuleCreatorFactory implements InjectorDelegateFactorty {
 
 	@Override
 	public void createDelegates(JClassType injectableType, Collection<InjectorCreatorDelegate> delegates) {
-		if (injectableType.getAnnotation(MvpDescritpion.class) != null) {
-			delegates.add(new InjectMvpDescriptionCreator(injectableType, injectableType.getAnnotation(MvpDescritpion.class)));
+		if (injectableType.getAnnotation(MvpDescription.class) != null) {
+			delegates.add(new InjectMvpDescriptionCreator(injectableType, injectableType.getAnnotation(MvpDescription.class)));
 		}
-		if (injectableType.getAnnotation(ThemeDescritpion.class) != null) {
-			delegates.add(new InjectThemeCreator(injectableType, injectableType.getAnnotation(ThemeDescritpion.class)));
+		if (injectableType.getAnnotation(ThemeDescription.class) != null) {
+			delegates.add(new InjectThemeCreator(injectableType, injectableType.getAnnotation(ThemeDescription.class)));
 		}
-		if (injectableType.getAnnotation(ErrorManagmentDescritpion.class) != null) {
-			delegates.add(new InjectErrorManagerCreator(injectableType, injectableType.getAnnotation(ErrorManagmentDescritpion.class)));
+		if (injectableType.getAnnotation(ErrorManagmentDescription.class) != null) {
+			delegates.add(new InjectErrorManagerCreator(injectableType, injectableType.getAnnotation(ErrorManagmentDescription.class)));
 		}
 	}
 

@@ -16,13 +16,15 @@
  */
 package fr.putnami.pwt.doc.client;
 
+import static fr.putnami.pwt.doc.client.application.ApplicationConfig.ANALYTICS_TRACKER_ID;
+import static fr.putnami.pwt.doc.client.application.ApplicationConfig.DOMAIN;
 import fr.putnami.pwt.core.error.client.widget.SimpleErrorDisplayer;
 import fr.putnami.pwt.core.inject.client.Module;
 import fr.putnami.pwt.core.inject.client.annotation.EntryPointHandler;
 import fr.putnami.pwt.core.inject.client.annotation.ErrorHandler;
-import fr.putnami.pwt.core.inject.client.annotation.ErrorManagmentDescritpion;
-import fr.putnami.pwt.core.inject.client.annotation.MvpDescritpion;
-import fr.putnami.pwt.core.inject.client.annotation.ThemeDescritpion;
+import fr.putnami.pwt.core.inject.client.annotation.ErrorManagmentDescription;
+import fr.putnami.pwt.core.inject.client.annotation.MvpDescription;
+import fr.putnami.pwt.core.inject.client.annotation.ThemeDescription;
 import fr.putnami.pwt.doc.client.application.DocumentationDisplay;
 import fr.putnami.pwt.doc.client.application.error.ApplicationUnreachableExceptionHandler;
 import fr.putnami.pwt.doc.client.application.error.UmbrellaExceptionHandler;
@@ -57,52 +59,48 @@ import fr.putnami.pwt.doc.client.page.tutorial.Tuto8AjaxBotPage;
 import fr.putnami.pwt.doc.client.page.welcome.WelcomePage;
 import fr.putnami.pwt.doc.client.page.welcome.WelcomePage.WelcomePlace;
 import fr.putnami.pwt.plugin.ga.client.GoogleAnalytics;
-import static fr.putnami.pwt.doc.client.application.ApplicationConfig.ANALYTICS_TRACKER_ID;
-import static fr.putnami.pwt.doc.client.application.ApplicationConfig.DOMAIN;
 
-@MvpDescritpion(
+@MvpDescription(
 		display = DocumentationDisplay.class,
 		defaultPlace = WelcomePlace.class,
 		activities = {
-			WelcomePage.WelcomePlace.class,
-			GettingStartedPage.GettingStartedPlace.class,
-			BootstrapPage.BootstrapPlace.class,
-			LayoutPage.LayoutsPlace.class,
-			ComponentsPage.ComponentsPlace.class,
-			InjectionPage.InjectionPlace.class,
-			DataBindingPage.DataBindingPlace.class,
-			InternationalizationPage.InternationalizationPlace.class,
-			NavigationPage.NavigationPlace.class,
-			ServerCallsPage.ServerCallsPlace.class,
-			ErrorsPage.ErrorsPlace.class,
-			CodeEditorPage.CodeEditorPlace.class,
-			AjaxBotIndexingPage.AjaxBotIndexingPlace.class,
-			GoogleAnalyticsPage.GoogleAnalyticsPlace.class,
-			SpringPage.SpringPlace.class,
-			SamplesPage.SamplesPlace.class,
-			ContactsTablePage.ContactsTablePlace.class,
-			AddressBookPage.AddressBookPlace.class,
-			ComingSoonPage.ComingSoonPlace.class,
-			DownloadPage.DownloadPlace.class,
-			Tuto1InitGradlePage.Tuto1InitGradlePlace.class,
-			Tuto1InitMavenPage.Tuto1InitMavenPlace.class,
-			Tuto2FirstPagePage.Tuto2FirstPagePlace.class,
-			Tuto3MorePagesPage.Tuto3MorePagesPlace.class,
-			Tuto4BindAFormPage.Tuto4BindAFormPlace.class,
-			Tuto5IssueTrackerPage.Tuto5IssueTrackerPlace.class,
-			Tuto6ThemePage.Tuto6ThemePlace.class,
-			Tuto7GoogleAnalyticsPage.Tuto7GoogleAnalyticsPlace.class,
-			Tuto8AjaxBotPage.Tuto8AjaxBotPlace.class
-		}
-		)
-@ErrorManagmentDescritpion(
+				WelcomePage.WelcomePlace.class,
+				GettingStartedPage.GettingStartedPlace.class,
+				BootstrapPage.BootstrapPlace.class,
+				LayoutPage.LayoutsPlace.class,
+				ComponentsPage.ComponentsPlace.class,
+				InjectionPage.InjectionPlace.class,
+				DataBindingPage.DataBindingPlace.class,
+				InternationalizationPage.InternationalizationPlace.class,
+				NavigationPage.NavigationPlace.class,
+				ServerCallsPage.ServerCallsPlace.class,
+				ErrorsPage.ErrorsPlace.class,
+				CodeEditorPage.CodeEditorPlace.class,
+				AjaxBotIndexingPage.AjaxBotIndexingPlace.class,
+				GoogleAnalyticsPage.GoogleAnalyticsPlace.class,
+				SpringPage.SpringPlace.class,
+				SamplesPage.SamplesPlace.class,
+				ContactsTablePage.ContactsTablePlace.class,
+				AddressBookPage.AddressBookPlace.class,
+				ComingSoonPage.ComingSoonPlace.class,
+				DownloadPage.DownloadPlace.class,
+				Tuto1InitGradlePage.Tuto1InitGradlePlace.class,
+				Tuto1InitMavenPage.Tuto1InitMavenPlace.class,
+				Tuto2FirstPagePage.Tuto2FirstPagePlace.class,
+				Tuto3MorePagesPage.Tuto3MorePagesPlace.class,
+				Tuto4BindAFormPage.Tuto4BindAFormPlace.class,
+				Tuto5IssueTrackerPage.Tuto5IssueTrackerPlace.class,
+				Tuto6ThemePage.Tuto6ThemePlace.class,
+				Tuto7GoogleAnalyticsPage.Tuto7GoogleAnalyticsPlace.class,
+				Tuto8AjaxBotPage.Tuto8AjaxBotPlace.class
+		})
+@ErrorManagmentDescription(
 		errorDisplay = SimpleErrorDisplayer.class,
 		errorHandlers = {
-			UmbrellaExceptionHandler.class, ApplicationUnreachableExceptionHandler.class
+				UmbrellaExceptionHandler.class, ApplicationUnreachableExceptionHandler.class
 		})
-@ThemeDescritpion(
-		styleSheets = "theme/doc/style/pwt-doc.css"
-		)
+@ThemeDescription(
+		styleSheets = "theme/doc/style/pwt-doc.css")
 public class DocumentationApp implements Module {
 
 	@EntryPointHandler
@@ -115,7 +113,7 @@ public class DocumentationApp implements Module {
 	}
 
 	@ErrorHandler
-	boolean handleError(Throwable error){
+	boolean handleError(Throwable error) {
 		return false;
 	}
 }
