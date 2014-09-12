@@ -169,6 +169,42 @@ public class MyApp implements EntryPoint {
 				</c:StaticCode>
 			</div>
 			
+			<div class="showcase-sample-block">
+				<div class="showcase-sample">
+					If you use the <a href="#!Injection">Injection features</a>, you can use the annotations to do the same things.<br/>
+					You just need to implement the <code>Module</code> interface instead of <code>EntryPoint</code>.
+				</div>
+				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@MvpDescription(
+		display = SimplePanel.class,
+		defaultPlace = WelcomePlace.class,
+		activities = {
+				BlogPlace.class
+		})
+public class MyApp implements Module {
+	
+}
+]]></pre>
+				</c:StaticCode>
+				<w:Alert>
+					<h4>Note :</h4><p>The rebinded class call the <code>MvpController.get().handleCurrentHistory()</code> method at the end of init.</p>
+				</w:Alert>
+				<div class="showcase-sample">
+					You can add some methods annotated with <code>@EntryPointHandler</code> to add some comportment at init time.
+				</div>
+				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	...
+	@EntryPointHandler
+	public void start() {
+		//Do Something
+	}
+	...
+]]></pre>
+				</c:StaticCode>
+			</div>
+			
 			<w:Heading level="3" summary="docSummary">Go to a Place</w:Heading>
 			<div class="showcase-sample-block">
 				<div class="showcase-sample">

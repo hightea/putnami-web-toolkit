@@ -24,7 +24,8 @@
 	<entry-point class="fr.putnami.pwt.doc.client.DocumentationApp"/>
 	
 	<!-- To get sourceCode of used classes in samples -->
-	<public path="client/page" includes="sample/" excludes="**/*.class,all/**,SampleView.java,SampleLayoutView.ui.xml"/>
+	<public path="client/page" includes="sample/" excludes="**/*.class,all/**,decorator/**,SamplePage.java,SampleLayoutView.ui.xml"/>
+	<public path="shared/page" includes="sample/" excludes="**/*.class"/>
 	
 	<add-linker name="xsiframe" />
 </module>

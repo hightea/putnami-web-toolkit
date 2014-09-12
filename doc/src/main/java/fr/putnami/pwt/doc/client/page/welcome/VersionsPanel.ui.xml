@@ -26,17 +26,11 @@
 		<w:List tag="ul" type="LIST">
 			<w:ListItem>
 				<span class="pull-right label label-primary">last stable</span>
-				<a href="/version/1.0.0">1.0.0</a>
+				<a href="http://pwt.putnami.org">1.0.0</a>
 			</w:ListItem>
 			<w:ListItem>
 				<span class="pull-right label label-default">dev</span>
-				1.1.0-SNAPSHOT
-			</w:ListItem>
-			<w:ListItem>
-				<a href="/version/1.0.0-RC2">1.0.0-RC2</a>
-			</w:ListItem>
-			<w:ListItem>
-				<a href="/version/1.0.0-RC1">1.0.0-RC1</a>
+				1.1.0-RC1
 			</w:ListItem>
 		</w:List>
 	</w:Panel>

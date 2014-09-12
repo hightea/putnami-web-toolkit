@@ -80,7 +80,7 @@ public class MyExceptionErrorHandler extends AbstractErrorHandler {
 ErrorManager.get().registerHandler(new MyExceptionErrorHandler());]]></pre>
 			</c:StaticCode>
 			
-			<p>Using the <a href="#!Injection">Injection feature</a> (on <code>View</code> implementing views), you can define and register <code>ErrorHandler</code> by using the <code>@ErrorHandler</code> annotation :</p>
+			<p>Using the <a href="#!Injection">Injection feature</a> (on <code>Injected</code>, <code>View</code> or <code>Module</code> implementing views), you can define and register <code>ErrorHandler</code> by using the <code>@ErrorHandler</code> annotation :</p>
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
 	@ErrorHandler
@@ -120,7 +120,20 @@ public interface ErrorConstants extends ConstantsWithLookup {
 	String runtimeExceptionMessage();
 }]]></pre>
 	</c:StaticCode>
-			<w:Heading level="3" summary="docSummary">Try it !</w:Heading>
+			<w:Heading level="2" summary="docSummary">Injection feature usage</w:Heading>
+			<p>In the application entry point, if you use the <a href="#!Injection">Injection feature</a> (the class must implement the <code>Module</code> interface), you can easily init the <code>ErrorManager</code></p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@ErrorManagmentDescription(
+		errorDisplay = SimpleErrorDisplayer.class,
+		errorHandlers = {
+				UmbrellaExceptionHandler.class, ApplicationUnreachableExceptionHandler.class
+		})
+public class MyApp implements Module {
+
+}]]></pre>
+			</c:StaticCode>
+			<w:Heading level="2" summary="docSummary">Try it !</w:Heading>
 			<w:Button ui:field="errorBtn" text="Runtime Exception" />
 			<w:Button ui:field="customErrorBtn" text="Custom Runtime Exception" />
 			<w:Button ui:field="otherErrorBtn" text="Other Exception" />

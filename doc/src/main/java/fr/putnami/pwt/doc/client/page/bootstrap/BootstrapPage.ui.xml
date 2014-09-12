@@ -77,6 +77,17 @@
 				<p>We never use those specific CSS classes to theme our components. It's fully dedicated to your usage.</p>
 			</w:Alert>
 			
+			
+			<w:Heading level="2" summary="docSummary">Injection feature usage</w:Heading>
+			<p>In the application entry point, if you use the <a href="#!Injection">Injection feature</a> (the class must implement the <code>Module</code> interface), you can easily init the theme</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@ThemeDescription(
+		styleSheets = {"theme/doc/style/pwt-doc.css", "theme/doc/style/pwt-component.css"})
+public class MyApp implements Module {
+
+}]]></pre>
+			</c:StaticCode>
 		</w:HTMLPanel>
 	</w:HTMLPanel>
 

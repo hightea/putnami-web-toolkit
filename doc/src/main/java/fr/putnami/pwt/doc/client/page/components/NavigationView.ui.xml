@@ -749,15 +749,17 @@
 		</div>
 		
 		<w:Heading level="3" summary="docSummary">NavSpy</w:Heading>
-		<p>A <code>NavSpy</code> contains a link to registered <code>Heading</code> widgets, and listen to the scroll of the body or of a particular widget to display the curent active heading.</p>
-					
-		<p>The <code>Heading</code> you want to display in the <code>NavSpy</code> have to be manualy registered with the <code>navSpy</code> property. After all registering you need to call the <code>redraw</code> method on the <code>NavSpy</code> in order to display it.</p>
+		<p>A <code>NavSpy</code> contains links to registered <code>Heading</code> widgets, and listen to the scroll of the body or of a particular widget to display the curent active heading.</p>
+		
+		<p>You need to define the <code>spyName</code> property to identify the <code>NavSpy</code>.</p>			
+		<p>The <code>Heading</code> you want to display in the <code>NavSpy</code> have to be manualy registered with the <code>summary</code> property pointing to the <code>spyName</code> value of the <code>NavSpy</code>. After all registering you need to call the <code>redraw</code> method on the <code>NavSpy</code> in order to display it.</p>
+		<p>Use the <code>headingContainer</code> property to set the container to scan to find the <code>Heading</code>s to register.</p>
 		<p>Use the <code>scrollWidget</code> property to set the targeting scroll widget. If no one is set, the the <code>body</code> element will be used.</p>
 		<p>Eventually you may want to apply an offset to the top of the scroll widget to spy the scroll or to navigate to the selected <code>Heading</code>. Use the <code>spyOffset</code> property.</p>
 		<p>We use this spy offset in this sample to take into account the navbar height when scrolling and spying scroll on the body</p>
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
-				<w:NavSpy ui:field="sampleNavSpy" spyName="navSpySample"/>
+				<w:NavSpy ui:field="sampleNavSpy" spyName="navSpySample" scrollWidget="{scrollTarget}" headingContainer="{scrollTarget}"/>
 				<br/>
 				
 				<w:HTMLPanel ui:field="scrollTarget" styleName="pre-scrollable">
@@ -780,7 +782,7 @@
 			</div>
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
 <pre><![CDATA[
-<w:NavSpy ui:field="sampleNavSpy" spyName="navSpySample" scrollWidget="scrollTarget"/>
+<w:NavSpy ui:field="sampleNavSpy" spyName="navSpySample" scrollWidget="{scrollTarget}" headingContainer="{scrollTarget}"/>
 <w:HTMLPanel ui:field="scrollTarget" styleName="pre-scrollable">
 	<w:Heading level="1" summary="navSpySample">First header</w:Heading>
 	<w:Heading level="2" summary="navSpySample">First sub header</w:Heading>
@@ -801,11 +803,8 @@
 <pre><![CDATA[
 @UiField
 NavSpy sampleNavSpy;
-@UiField
-HTMLPanel scrollTarget;
 	...
 sampleNavSpy.redraw();
-sampleNavSpy.setScrollWidget(scrollTarget);
 ]]></pre>
 			</c:StaticCode>
 		</div>

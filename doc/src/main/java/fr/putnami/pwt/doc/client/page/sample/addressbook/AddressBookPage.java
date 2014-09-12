@@ -94,13 +94,11 @@ public class AddressBookPage extends Composite implements View, HasSources {
 	private Group displayedGroup;
 	private List<Contact> displayedList;
 
-
 	private final Multimap<String, String> sources = LinkedHashMultimap.create();
 
 	public AddressBookPage() {
 		sources.put(VIEW_PANEL, "addressbook/AddressBookPage.ui.xml");
 		sources.put(VIEW_PANEL, "addressbook/AddressBookPage.java");
-		sources.put(VIEW_PANEL, "addressbook/AddressBookPlace.java");
 		sources.put(SERVICE_PANEL, "service/ContactService.java");
 		sources.put(DOMAIN_PANEL, "domain/Person.java");
 		sources.put(DOMAIN_PANEL, "domain/Contact.java");

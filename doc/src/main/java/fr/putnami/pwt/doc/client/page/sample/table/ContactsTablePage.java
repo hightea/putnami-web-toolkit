@@ -73,7 +73,6 @@ public class ContactsTablePage extends Composite implements View, HasSources {
 
 		sources.put(VIEW_PANEL, "table/ContactsTablePage.ui.xml");
 		sources.put(VIEW_PANEL, "table/ContactsTablePage.java");
-		sources.put(VIEW_PANEL, "table/ContactsTablePlace.java");
 		sources.put(SERVICE_PANEL, "service/ContactService.java");
 		sources.put(DOMAIN_PANEL, "domain/Person.java");
 		sources.put(DOMAIN_PANEL, "domain/Contact.java");

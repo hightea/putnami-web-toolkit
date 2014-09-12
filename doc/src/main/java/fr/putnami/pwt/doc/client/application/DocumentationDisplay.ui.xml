@@ -42,12 +42,13 @@
 							<w:NavLink label="Components" link="#!Components"/>
 						</w:NavDropdown>
 						<w:NavDropdown label="Framework" >
+							<w:NavLink label="Injection" link="#!Injection"/>
 							<w:NavLink label="Navigation" link="#!Navigation"/>
 							<w:NavLink label="Data binding" link="#!DataBinding" />
 							<w:NavLink label="Internationalization" link="#!Internationalization" />
 							<w:NavLink label="Server calls" link="#!ServerCalls" />
 							<w:NavLink label="Errors handling" link="#!Errors" />
-							<w:NavLink label="Injection" link="#!Injection"/>
+							<w:NavLink label="Security" link="#!Security" />
 						</w:NavDropdown>
 						<w:NavDropdown label="Plugins" >
 							<w:NavLink label="Code editor" link="#!CodeEditor"/>

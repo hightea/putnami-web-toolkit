@@ -20,7 +20,7 @@
 					<w:Affix ui:field="tableOfContentAffix" layerIndex="2" offsetTop="80" offsetBottom="250" xsVisibility="HIDDEN" smVisibility="HIDDEN" styleName="pwt-spy-affix">
 						<w:Container tag="div">
 							<s:SocialBar ui:field="socialBar"/>
-							<w:NavSpy ui:field="tableOfContent" target="{contentContainer}" spyName="docSummary" spyOffset="50" />
+							<w:NavSpy ui:field="tableOfContent" headingContainer="{contentContainer}" spyName="docSummary" spyOffset="61" />
 						</w:Container>
 					</w:Affix>
 				</w:GridColumn>

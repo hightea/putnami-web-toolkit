@@ -43,6 +43,7 @@ import fr.putnami.pwt.doc.client.page.navigation.NavigationPage;
 import fr.putnami.pwt.doc.client.page.sample.addressbook.AddressBookPage;
 import fr.putnami.pwt.doc.client.page.sample.all.SamplesPage;
 import fr.putnami.pwt.doc.client.page.sample.table.ContactsTablePage;
+import fr.putnami.pwt.doc.client.page.security.SecurityPage;
 import fr.putnami.pwt.doc.client.page.server.ServerCallsPage;
 import fr.putnami.pwt.doc.client.page.soon.ComingSoonPage;
 import fr.putnami.pwt.doc.client.page.spring.SpringPage;
@@ -74,6 +75,7 @@ import fr.putnami.pwt.plugin.ga.client.GoogleAnalytics;
 				InternationalizationPage.InternationalizationPlace.class,
 				NavigationPage.NavigationPlace.class,
 				ServerCallsPage.ServerCallsPlace.class,
+				SecurityPage.SecurityPlace.class,
 				ErrorsPage.ErrorsPlace.class,
 				CodeEditorPage.CodeEditorPlace.class,
 				AjaxBotIndexingPage.AjaxBotIndexingPlace.class,

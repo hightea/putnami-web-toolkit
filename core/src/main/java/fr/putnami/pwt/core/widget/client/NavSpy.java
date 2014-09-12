@@ -103,7 +103,7 @@ public class NavSpy extends AbstractComposite implements HasDrawable {
 
 	private int spyOffset;
 
-	private Widget target;
+	private Widget headingContainer;
 	private String spyName;
 
 	private final RepeatingCommand refreshCommand = new RepeatingCommand() {
@@ -144,12 +144,12 @@ public class NavSpy extends AbstractComposite implements HasDrawable {
 		}
 	}
 
-	public Widget getTarget() {
-		return target;
+	public Widget getHeadingContainer() {
+		return headingContainer;
 	}
 
-	public void setTarget(Widget target) {
-		this.target = target;
+	public void setHeadingContainer(Widget target) {
+		this.headingContainer = target;
 	}
 
 	public String getSpyName() {
@@ -176,11 +176,11 @@ public class NavSpy extends AbstractComposite implements HasDrawable {
 
 	@Override
 	public void redraw() {
-		if (target == null) {
-			target = RootPanel.get();
+		if (headingContainer == null) {
+			headingContainer = RootPanel.get();
 		}
 		headings.clear();
-		collectHeadings(target.getElement(), headings);
+		collectHeadings(headingContainer.getElement(), headings);
 
 		int lowestNavLevel = 6;
 		navs.clear();

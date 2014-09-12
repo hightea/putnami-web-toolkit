@@ -14,29 +14,17 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.doc.client.page.components;
+package fr.putnami.pwt.doc.client.page.security;
 
-import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Composite;
-
-import fr.putnami.pwt.core.inject.client.annotation.PostConstruct;
 import fr.putnami.pwt.core.inject.client.annotation.Templated;
-import fr.putnami.pwt.core.mvp.client.View;
-import fr.putnami.pwt.core.widget.client.HTMLPanel;
-import fr.putnami.pwt.core.widget.client.NavSpy;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
+import fr.putnami.pwt.doc.client.application.Page;
+import fr.putnami.pwt.doc.client.application.SummaryDecorator;
 
 @Templated
-public class NavigationView extends Composite implements View {
-
-	@UiField
-	NavSpy sampleNavSpy;
-
-	@UiField
-	HTMLPanel scrollTarget;
-
-	@PostConstruct
-	public void postConstruct() {
-		sampleNavSpy.redraw();
+public class SecurityPage extends Page {
+	@ActivityDescription(view = SecurityPage.class, viewDecorator = SummaryDecorator.class)
+	public static class SecurityPlace extends ViewPlace {
 	}
-
 }

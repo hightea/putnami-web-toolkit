@@ -1,0 +1,86 @@
+<!--
+
+    This file is part of pwt.
+
+    pwt is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client"
+	>
+	
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<w:HTMLPanel title="PWT - Security">
+		<w:Header ui:field="header">
+			<w:Heading level="1">Security</w:Heading>
+			<p class="lead">
+				<strong title="Putnami Web Toolkit">PWT</strong> provides a easy way to secure a <code>View</code>.
+			</p>
+		</w:Header>
+		<w:HTMLPanel ui:field="content">
+			<w:Heading level="2" summary="docSummary">How does it work?</w:Heading>
+			<p>We use the rebind feature of GWT on <code>View</code> implementing classes.</p>
+			<p>Securing a view means to check if a user has at least one role among a list of authorized roles before presenting the view.</p>
+			<p>If the user has not on of the roles, the application throw a <code>SecurityException</code>. 
+			You can intercept this exception with an <code>ErrorHandler</code> in order to redirect to a sign in page or whatever you want !</p>
+			
+			<p>Example :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@Secured({"ROLE_BUSINESS_ADMIN", "ROLE_TECH_ADMIN"})
+public class UsersView extends Composite implements View {
+	...
+}]]></pre>
+			</c:StaticCode>
+			<p>And an example of an associated error handler (in the app entry point or elsewhere):</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+ErrorManager.get().registerErrorHandler(new AbstractErrorHandler() {
+	@Override
+	public boolean handle(Throwable error) {
+		if (error instanceof SecurityException) {
+			MvpController.get().goTo(new SigninPlace());
+			return true;
+		}
+		return false;
+	}
+
+});]]></pre>
+			</c:StaticCode>
+			
+			<w:Heading level="2" summary="docSummary">Requirements</w:Heading>
+			<p>In order to use the security features, you'll have to import the <code>Security</code> module in your module xml file</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+	<inherits name="fr.putnami.pwt.core.security.Security"/>]]></pre>
+			</c:StaticCode>
+			
+			<p>In order to use the <code>@Secured</code> annotation, you'll have to import the <code>Inject</code> module in your module xml file</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+	<inherits name="fr.putnami.pwt.core.inject.Inject"/>]]></pre>
+			</c:StaticCode>
+			
+			<p>Then you'll have to provide a <code>SessionController</code>. <br />
+			By default, the <code>SessionController</code> is replaced by <code>DefaultSessionController</code>, but you can replace it with your own impmplementation.</p>
+			
+			<p>The built-in <code>DefaultSessionController</code>  needs you to expose a server based service in charge of managing the user session.<br/>
+			This service must implement the <code>SessionService</code> interface.</p>
+		</w:HTMLPanel>
+	</w:HTMLPanel>
+</ui:UiBinder>

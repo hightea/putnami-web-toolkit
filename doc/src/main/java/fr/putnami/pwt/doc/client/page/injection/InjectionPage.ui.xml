@@ -30,34 +30,78 @@
 			<w:Heading level="1">Injection</w:Heading>
 			<p class="lead">
 				<strong title="Putnami Web Toolkit">PWT</strong> provides a lot of good features, reducing the amount of code needed to develop great applications.<br/>
-				But we think that it is still too much. That's why we developped the injection part of the framework, further reducing the code amount.
+				But we think that it is still not enough. That's why we developped the injection part of the framework, further reducing the code amount.
 			</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
 			<w:Heading level="2" summary="docSummary">How does it work?</w:Heading>
-			<p>We use the rebind feature of GWT. So each view implementing the <code>View</code> interface go through this mecanism when it is created via the <code>GWT.create</code> method.</p>
+			<p>We use the rebind feature of GWT. This feature can be enabled on classes which <em>implement specific interface</em>. Such classes go throught the rebind mecanism when they are created via the <code>GWT.create</code> method.</p>
+			
+			<p>We created some interfaces to implements in order to allow this injection :
+				<ul>
+					<li><code>Injected</code> for standard classes</li>
+					<li><code>View</code> for view classes</li>
+					<li><code>Module</code> for entry point classes</li>
+				</ul>
+				Each one accepts different annotations corresponding to its role in the application.
+			</p>
 			<w:Alert type="INFO">
 				<h4>Note :</h4>The view associated to places via <code>@ActivityDescription</code> annotation are created via the <code>GWT.create</code> method.
 			</w:Alert>
 			<w:Heading level="2" summary="docSummary">What can be injected?</w:Heading>
+			<w:Heading level="3" summary="docSummary">On <em>Injected</em>, <em>View</em> or <em>Module</em> classes</w:Heading>
 			<p>We provide the following annotations :</p>
 			<ul>
-				<li><code>Templated</code> used on class to auto bind view to template (see <a href="#!Internationalization">Internationalization</a>)</li>
-				<li><code>PresentHandler</code>, <code>MayStopActivityHandler</code> and <code>StopActivityHandler</code> used on methods for handling the lifecycle of an activity (see <a href="#!Navigation">Navigation</a>)</li>
-				<li><code>PostConstruct</code> used on method in order to do some things with injected stuff at init time.</li>
-				<li><code>InjectResource</code> used on field to generate <code>GWT.create</code> call</li>
-				<li><code>InjectService</code> used on service interface to init and bind the service to the view (see <a href="#!ServerCalls">ServerCalls</a>)</li>
+				<li><code>PostConstruct</code> used on method in order to do some things with injected stuff (after injection) at init time.</li>
+				<li><code>Templated</code> used on <code>Composite</code> extending class to bind it to template (see <a href="#!Internationalization">Internationalization</a>)</li>
+				<li><code>InjectResource</code> used on field to generate <code>GWT.create</code> call.</li>
+				<li><code>InjectService</code> used on service interface to init and bind the service to the class (see <a href="#!ServerCalls">ServerCalls</a>)</li>
 				<li><code>InjectModel</code> used on field of type <code>Model&lt;T&gt;</code> to generate a specific model (see <a href="#!DataBinding">DataBinding</a>)</li>
 				<li><code>Initialize</code> used on <code>EditorModel</code> implementing field to initialize the forms (see <a href="#!DataBinding">DataBinding</a>)</li>
-				<li><code>Secured</code> used on view to secure them</li>
 				<li><code>ErrorHandler</code> used on method to generate <code>ErrorHandler</code> extending classes (see <a href="#!Errors">Errors handling</a>)</li>
 			</ul>
 			<w:Alert type="INFO">
 				<h4>Note :</h4>
 				<ul>
-					<li>All those annotation work with GWT rebind feature, and work only on <code>View</code> implementing classes.</li>
+					<li>All those annotations work with GWT rebind feature, and work only on <code>Injected</code>, <code>View</code> or <code>Module</code> implementing classes.</li>
 				</ul> 
 			</w:Alert>
+			
+			
+			<w:Heading level="3" summary="docSummary">On <em>View</em> classes</w:Heading>
+			<p>In addition, we provide the following annotations :</p>
+			<ul>
+				<li><code>PresentHandler</code>, <code>MayStopActivityHandler</code> and <code>StopActivityHandler</code> used on methods for handling the lifecycle of an activity (see <a href="#!Navigation">Navigation</a>)</li>
+				<li><code>Secured</code> used on view class to secure them (see <a href="#!Security">Security</a>)</li>
+			</ul>
+			<w:Alert type="INFO">
+				<h4>Note :</h4>
+				<ul>
+					<li>Those annotations work with GWT rebind feature, and work only on <code>View</code> implementing classes.</li>
+				</ul> 
+			</w:Alert>
+			
+			<w:Heading level="3" summary="docSummary">On <em>Module</em> classes</w:Heading>
+			<p>In addition, we provide the following annotations :</p>
+			<ul>
+				<li><code>MvpDescription</code> used on the class to describe the Mvp part of the app : display panel, default place, availables activities (see <a href="#!Navigation">Navigation</a>)</li>
+				<li><code>ThemeDescription</code> used on the class to init the theme of the application (see <a href="#!Bootstrap">Bootstrap</a>)</li>
+				<li><code>ErrorManagmentDescription</code> used on the class to describe the Error handling : set the error manager, add some error handlers. (see <a href="#!Errors">Errors handling</a>)</li>
+				<li><code>EntryPointHandler</code> used on methods to be called on entry point start instead of <code>onModuleStart()</code> method (see <a href="#!Navigation">Navigation</a>)</li>
+			</ul>
+			<w:Alert type="INFO">
+				<h4>Note :</h4>
+				<ul>
+					<li>Those annotations work with GWT rebind feature, and work only on <code>Module</code> implementing classes.</li>
+				</ul> 
+			</w:Alert>
+			
+			<w:Heading level="2" summary="docSummary">Requirements</w:Heading>
+			<p>In order to use the annotations, you'll have to import the <code>Inject</code> module in your module xml file</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+	<inherits name="fr.putnami.pwt.core.inject.Inject"/>]]></pre>
+			</c:StaticCode>
 		</w:HTMLPanel>
 	</w:HTMLPanel>
 </ui:UiBinder>
