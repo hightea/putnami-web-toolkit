@@ -38,7 +38,7 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         include '**/*.properties'
         include '**/*.xml'
-		filter(ReplaceTokens, tokens: rootProject.ext.getProperties())
+		filter(ReplaceTokens, tokens: project.ext.getProperties())
     }
     from(sourceSets.main.resources.srcDirs) {
         exclude '**/*.properties'
@@ -49,7 +49,7 @@ processResources {
 war {
 	from(webAppDirName) {
 		include '**/*.html' 
-		filter(ReplaceTokens, tokens: rootProject.ext.getProperties())
+		filter(ReplaceTokens, tokens: project.ext.getProperties())
 	}
 	from(webAppDirName) {
 		exclude '**/*.html' 
@@ -59,7 +59,7 @@ war {
 draftWar {
 	from(webAppDirName) {
 		include '**/*.html' 
-		filter(ReplaceTokens, tokens: rootProject.ext.getProperties())
+		filter(ReplaceTokens, tokens: project.ext.getProperties())
 	}
 	from(webAppDirName) {
 		exclude '**/*.html' 
