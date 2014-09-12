@@ -1,5 +1,5 @@
 ext {
-	releaseVersion = '1.1.0-RC1'
+	releaseVersion = '1.1.0-RC2'
 	snapshotVersion = '1.1.0-SNAPSHOT'
 	gwtVersion = '2.6.1'
 	guavaVersion = '17.0'
@@ -19,7 +19,7 @@ if (applyLicense) {
 }
 
 group = 'fr.putnami.pwt'
-version = project.releaseVersion
+version = project.snapshotVersion
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
