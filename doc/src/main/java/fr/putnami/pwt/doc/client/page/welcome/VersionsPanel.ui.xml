@@ -30,7 +30,7 @@
 			</w:ListItem>
 			<w:ListItem>
 				<span class="pull-right label label-default">dev</span>
-				1.1.0-SNAPSHOT
+				<a href="http://pwt.putnami.org/1.1.x/">1.1.0-RC1</a>
 			</w:ListItem>
 		</w:List>
 	</w:Panel>
