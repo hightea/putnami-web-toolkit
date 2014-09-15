@@ -64,11 +64,23 @@ a {
 			<p>To configure the theme, add to the application entry point (here <code>TutorialApp</code>) :</p>
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-	Theme theme = new Theme();
-	theme.addLink(new CssLink("theme/tutorial/style/pwt-tutorial.css", 0));
-	ThemeController.get().installTheme(theme);]]></pre>
+	@EntryPointHandler
+	void installTheme() {
+		Theme theme = new Theme();
+		theme.addLink(new CssLink("theme/tutorial/style/pwt-tutorial.css", 0));
+		ThemeController.get().installTheme(theme);
+	}]]></pre>
 			</c:StaticCode>
 			
+			<w:Alert><h4>Note :</h4><p>If you just have css in your theme (no Icon set customization), you can simply use the following annotation in your entry point :</p>
+				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@ThemeDescription(
+	styleSheets = {"theme/tutorial/style/pwt-tutorial.css", "other/css.css"})
+public class TutorialApp implements Module {
+	...]]></pre>
+			</c:StaticCode>
+			</w:Alert>
 			
 			<w:Heading level="2" summary="docSummary">Step 2 : <em>Customize Webfont Icon Set</em></w:Heading>
 			
@@ -79,15 +91,18 @@ a {
 			
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-	...
-	IconFont font = new IconFont("theme/tutorial/style/pwt-tutorial-font.css", "icon-");
-	//Eventually add aliases :
-	font.addAlias("add", "plus");
-	font.addAlias("view", "search");
-
-	theme.setIconFont(font);
-	ThemeController.get().installTheme(theme);
-	...]]></pre>
+	@EntryPointHandler
+	void installTheme() {
+		Theme theme = new Theme();
+		theme.addLink(new CssLink("theme/tutorial/style/pwt-tutorial.css", 0));
+		IconFont font = new IconFont("theme/tutorial/style/pwt-tutorial-font.css", "icon-");
+		//Eventually add aliases :
+		font.addAlias("add", "plus");
+		font.addAlias("view", "search");
+	
+		theme.setIconFont(font);
+		ThemeController.get().installTheme(theme);
+	}]]></pre>
 			</c:StaticCode>
 			
 			<p>And that's it !</p>

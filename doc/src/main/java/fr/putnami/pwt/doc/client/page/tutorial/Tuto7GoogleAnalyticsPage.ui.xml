@@ -70,11 +70,14 @@ dependencies {
 			
 			<w:Heading level="2" summary="docSummary">Step 2 : <em>Init the plugin and track Places</em></w:Heading>
 			
-			<p>To init the plugin, add to the application entry point (here <code>TutorialApp</code>), before place navigation :</p>
+			<p>To init the plugin, add to the application entry point (here <code>TutorialApp</code>) :</p>
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-	GoogleAnalytics analytics = GoogleAnalytics.init("UA-XXXXXXXX-Y", "your-domain.tld");
-	analytics.forceSSL(true); // If you want to force SSL]]></pre>
+	@EntryPointHandler
+	void installGA() {
+		GoogleAnalytics analytics = GoogleAnalytics.init("UA-XXXXXXXX-Y", "your-domain.tld");
+		analytics.forceSSL(true); //If you want to force ssl
+	}]]></pre>
 			</c:StaticCode>
 			
 			<p>This activate the Place change auditing (ie. it treat a place as if it was a page for Google Analytics).</p>

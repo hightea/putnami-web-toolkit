@@ -81,7 +81,12 @@ public class IssuesView extends Composite implements View {
 			<p>Now we register the place in the application entry point (here <code>TutorialApp</code>) :</p>
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-controller.registerActivity((ActivityFactory) GWT.create(IssuesPlace.class));
+@MvpDescription(
+		...
+		activities = {
+				...,
+				IssuesPlace.class
+		})
 ]]></pre>
 			</c:StaticCode>
 			

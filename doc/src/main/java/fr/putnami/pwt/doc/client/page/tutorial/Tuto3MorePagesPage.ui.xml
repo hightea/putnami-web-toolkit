@@ -139,13 +139,21 @@ public class AboutPlace extends ViewPlace {
 ]]></pre>
 			</c:StaticCode>
 			
-			<p>Finally, we declare the places to the <code>MvpController</code> in the entry point :</p>
+			<p>Finally, we declare the activities to the <code>MvpDescription</code> in the entry point :</p>
 			
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-controller.registerActivity((ActivityFactory) GWT.create(AboutPlace.class));
-controller.registerActivity((ActivityFactory) GWT.create(ContactPlace.class));
-]]></pre>
+@MvpDescription(
+		display = OneWidgetPanel.class,
+		defaultPlace = WelcomePlace.class,
+		activities = {
+				WelcomePlace.class,
+				AboutPlace.class,
+				ContactPlace.class
+		})
+public class TutorialApp implements Module {
+
+}]]></pre>
 			</c:StaticCode>
 			
 			
@@ -253,12 +261,13 @@ public class PageDecorator extends Composite implements AcceptsOneWidget, View {
 			<p>And set the decorator as <code>ActivityManager</code>'s display in the <code>TutorialApp</code> class :</p>
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-PageDecorator display = new PageDecorator();
-RootPanel.get().add(display);
-...
-MvpController controller = MvpController.get();
-controller.setDisplay(display);
-]]></pre>
+@MvpDescription(
+		display = PageDecorator.class,
+		...
+		)
+public class TutorialApp implements Module {
+
+}]]></pre>
 			</c:StaticCode>
 			
 			

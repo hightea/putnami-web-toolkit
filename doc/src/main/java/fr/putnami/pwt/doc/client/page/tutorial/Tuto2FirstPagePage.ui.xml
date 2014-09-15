@@ -92,38 +92,35 @@ public class WelcomePlace extends ViewPlace {
 			<p>We have some configurations to do in the application entry point.</p>
 			<p>First of all, we have to define the display associated with the <code>ActivityManager</code> and add it to the <code>RootPanel</code>.
 			Then we have to Register the new place <code>WelcomePlace</code> and set it as default.</p>
+			<p>To do that, We will use the annotation based configuration. Our entry point has now to implements the <code>Module</code> interface.</p>
+			
+			<p>Don't forget to add the dependency to the <code>Inject</code> module in the Module xml file (here the <code>fr/putnami/pwt/tutorial/Tutorial.gwt.xml</code>) :</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+	<!-- PWT Module to extends in order to use PWT Inject features-->
+	<inherits name="fr.putnami.pwt.core.inject.Inject"/>
+]]></pre>
+			</c:StaticCode>
 			
 			<p>So the application entry point <code>TutorialApp</code> becomes: </p>
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
 package fr.putnami.pwt.tutorial.client;
 
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.ui.RootPanel;
-
-import fr.putnami.pwt.core.mvp.client.ActivityFactory;
-import fr.putnami.pwt.core.mvp.client.MvpController;
+import fr.putnami.pwt.core.inject.client.Module;
+import fr.putnami.pwt.core.inject.client.annotation.MvpDescription;
 import fr.putnami.pwt.core.widget.client.OneWidgetPanel;
 
 import fr.putnami.pwt.tutorial.client.welcome.WelcomePlace;
 
-public class TutorialApp implements EntryPoint {
+@MvpDescription(
+		display = OneWidgetPanel.class,
+		defaultPlace = WelcomePlace.class,
+		activities = {
+				WelcomePlace.class
+		})
+public class TutorialApp implements Module {
 
-    @Override
-    public void onModuleLoad() {
-		OneWidgetPanel display = new OneWidgetPanel();
-		RootPanel.get().add(display);
-		
-		MvpController controller = MvpController.get();
-		controller.setDisplay(display);
-
-		controller.setDefaultPlace(new WelcomePlace());
-		controller.registerActivity((ActivityFactory) GWT.create(WelcomePlace.class));
-		
-		// Handles Current token to navigate to the correct place
-		controller.handleCurrentHistory();
-    }
 }]]></pre>
 			</c:StaticCode>
 			
@@ -134,14 +131,6 @@ public class TutorialApp implements EntryPoint {
 			<w:Heading level="2" summary="docSummary">Step 4 : <em>Build a nice layout with UiBinding</em></w:Heading>
 			<p>We've created the view but it does'nt look very pretty !</p>
 			<p>Let's pimp my View!</p>
-			
-			<p>Don't forget to add the dependency to the <code>Inject</code> module in the Module xml file (here the <code>fr/putnami/pwt/tutorial/Tutorial.gwt.xml</code>) :</p>
-			<c:StaticCode configuration="{XML_CONFIGURATION}">
-<pre><![CDATA[
-	<!-- PWT Module to extends in order to use PWT Inject features-->
-	<inherits name="fr.putnami.pwt.core.inject.Inject"/>
-]]></pre>
-			</c:StaticCode>
 			
 			<p>Make the view as <code>@Templated</code> :</p>
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">

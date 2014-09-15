@@ -29,11 +29,11 @@
 		<w:Header ui:field="header">
 			<w:Heading level="1">Security</w:Heading>
 			<p class="lead">
-				<strong title="Putnami Web Toolkit">PWT</strong> provides a easy way to secure a <code>View</code>.
+				<strong title="Putnami Web Toolkit">PWT</strong> provides a easy way to secure a <code>View</code> or just a part of a view.
 			</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
-			<w:Heading level="2" summary="docSummary">How does it work?</w:Heading>
+			<w:Heading level="2" summary="docSummary">Securing the view</w:Heading>
 			<p>We use the rebind feature of GWT on <code>View</code> implementing classes.</p>
 			<p>Securing a view means to check if a user has at least one role among a list of authorized roles before presenting the view.</p>
 			<p>If the user has not on of the roles, the application throw a <code>SecurityException</code>. 
@@ -63,6 +63,27 @@ ErrorManager.get().registerErrorHandler(new AbstractErrorHandler() {
 });]]></pre>
 			</c:StaticCode>
 			
+			<w:Heading level="2" summary="docSummary">Securing part of a view</w:Heading>
+			<p>We provide a <code>Secure</code> widget usable in ui templates.
+			<br/>The Widget content of the widget is displayed only if the user has the <code>hasRole</code> role, or, if the <code>negate</code> property is set to <code>true</code>, if the user doesn't has the role</p>
+			
+			<p>Example :</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:s="urn:import:fr.putnami.pwt.core.security.client.widget">
+	...
+	<s:Secure hasRole="AUTHENTICATED">
+		<w:Button type="PRIMARY" text="I am authenticated" />
+	</s:Secure>
+	<s:Secure hasRole="AUTHENTICATED" negate="true">
+		<w:Button type="WARNING" text="I am NOT authenticated" />
+	</s:Secure>]]></pre>
+			</c:StaticCode>
+			
+			<p>This widget listen to the <code>SignInEvent</code> and <code>SignOutEvent</code> events to display or not the contained widget.</p>
+			
 			<w:Heading level="2" summary="docSummary">Requirements</w:Heading>
 			<p>In order to use the security features, you'll have to import the <code>Security</code> module in your module xml file</p>
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
@@ -77,7 +98,7 @@ ErrorManager.get().registerErrorHandler(new AbstractErrorHandler() {
 			</c:StaticCode>
 			
 			<p>Then you'll have to provide a <code>SessionController</code>. <br />
-			By default, the <code>SessionController</code> is replaced by <code>DefaultSessionController</code>, but you can replace it with your own impmplementation.</p>
+			By default, the <code>SessionController</code> is replaced by <code>DefaultSessionController</code>, but you can replace it with your own implementation.</p>
 			
 			<p>The built-in <code>DefaultSessionController</code>  needs you to expose a server based service in charge of managing the user session.<br/>
 			This service must implement the <code>SessionService</code> interface.</p>
