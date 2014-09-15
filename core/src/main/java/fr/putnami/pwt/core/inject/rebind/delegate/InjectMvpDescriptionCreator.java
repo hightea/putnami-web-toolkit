@@ -16,6 +16,8 @@
  */
 package fr.putnami.pwt.core.inject.rebind.delegate;
 
+import static fr.putnami.pwt.core.inject.rebind.util.InjectCreatorUtil.toClassName;
+
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -23,6 +25,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
@@ -33,7 +36,7 @@ import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
 import fr.putnami.pwt.core.mvp.client.ActivityFactory;
 import fr.putnami.pwt.core.mvp.client.MvpController;
 import fr.putnami.pwt.core.mvp.client.ViewPlace;
-import static fr.putnami.pwt.core.inject.rebind.util.InjectCreatorUtil.toClassName;
+
 public class InjectMvpDescriptionCreator extends InjectorCreatorDelegate implements InjectorWritterInit, InjectorWritterEntryPoint {
 
 	private final Class<? extends AcceptsOneWidget> display;
@@ -51,7 +54,6 @@ public class InjectMvpDescriptionCreator extends InjectorCreatorDelegate impleme
 		}
 	}
 
-
 	@Override
 	public void initComposer(ClassSourceFileComposerFactory composerFactory) {
 		composerFactory.addImport(EntryPoint.class.getName());
@@ -60,6 +62,7 @@ public class InjectMvpDescriptionCreator extends InjectorCreatorDelegate impleme
 		composerFactory.addImport(EntryPoint.class.getName());
 		composerFactory.addImport(AcceptsOneWidget.class.getName());
 		composerFactory.addImport(IsWidget.class.getName());
+		composerFactory.addImport(RootPanel.class.getName());
 
 		composerFactory.addImplementedInterface(EntryPoint.class.getName());
 	}

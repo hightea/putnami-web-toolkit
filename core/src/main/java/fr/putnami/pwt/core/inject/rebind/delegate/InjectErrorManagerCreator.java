@@ -16,12 +16,13 @@
  */
 package fr.putnami.pwt.core.inject.rebind.delegate;
 
+import static fr.putnami.pwt.core.inject.rebind.util.InjectCreatorUtil.toClassName;
+
 import java.util.Collection;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
@@ -35,7 +36,6 @@ import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterEntryPoint;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
 import fr.putnami.pwt.core.inject.rebind.util.InjectCreatorUtil;
-import static fr.putnami.pwt.core.inject.rebind.util.InjectCreatorUtil.toClassName;
 
 public class InjectErrorManagerCreator extends InjectorCreatorDelegate implements InjectorWritterInit, InjectorWritterEntryPoint {
 
@@ -54,7 +54,6 @@ public class InjectErrorManagerCreator extends InjectorCreatorDelegate implement
 	@Override
 	public void initComposer(ClassSourceFileComposerFactory composerFactory) {
 		composerFactory.addImport(EntryPoint.class.getName());
-		composerFactory.addImport(RootPanel.class.getName());
 		composerFactory.addImport(SimpleErrorDisplayer.class.getName());
 		composerFactory.addImport(ErrorManager.class.getName());
 		composerFactory.addImport(ErrorDisplayer.class.getName());
