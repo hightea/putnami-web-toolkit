@@ -19,6 +19,7 @@ package fr.putnami.pwt.plugin.ga.client;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.ScriptElement;
+import com.google.gwt.user.client.Window;
 
 import fr.putnami.pwt.core.error.client.AbstractErrorHandler;
 import fr.putnami.pwt.core.error.client.ErrorHandler;
@@ -67,7 +68,7 @@ public class GoogleAnalyticsImpl extends GoogleAnalytics implements StartActivit
 	@Override
 	public void onStartActivity(StartActivityEvent event) {
 		String placeToken = MvpController.get().getToken(event.getPlace());
-		trackPage("/#" + placeToken);
+		trackPage(Window.Location.getPath() + "#" + placeToken);
 	}
 
 	@Override
@@ -149,14 +150,13 @@ public class GoogleAnalyticsImpl extends GoogleAnalytics implements StartActivit
 	   $wnd.ga('send', 'event', category, action, label, value);
 	}-*/;
 
-
 	@Override
 	public native void trackException(String description, boolean fatal)
 	/*-{
-   	$wnd.ga('send', 'exception', {
-   		'exDescription': description,
-  			'exFatal': fatal
-   	});
+		$wnd.ga('send', 'exception', {
+			'exDescription': description,
+			'exFatal': fatal
+		});
 	}-*/;
 
 	@Override
