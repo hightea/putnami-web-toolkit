@@ -44,7 +44,7 @@
 <pre><![CDATA[
 dependencies {
 	...
-	compile 'fr.putnami.pwt:pwt-spring:@releaseVersion@'
+	compile 'fr.putnami.pwt:pwt-spring:@snapshotVersion@'
 }]]></pre>
 			</c:StaticCode>
 			
@@ -54,7 +54,7 @@ dependencies {
 <dependency>
 	<groupId>fr.putnami.pwt</groupId>
 	<artifactId>pwt-spring</artifactId>
-	<version>@releaseVersion@</version>
+	<version>@snapshotVersion@</version>
 </dependency>]]></pre>
 			</c:StaticCode>
 			

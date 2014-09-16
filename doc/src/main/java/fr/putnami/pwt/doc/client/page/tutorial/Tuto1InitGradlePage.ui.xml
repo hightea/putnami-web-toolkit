@@ -85,7 +85,7 @@ repositories {
 				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
 dependencies {
-	compile 'fr.putnami.pwt:pwt:@releaseVersion@'
+	compile 'fr.putnami.pwt:pwt:@snapshotVersion@'
 }]]></pre>
 					</c:StaticCode>
 				</li>

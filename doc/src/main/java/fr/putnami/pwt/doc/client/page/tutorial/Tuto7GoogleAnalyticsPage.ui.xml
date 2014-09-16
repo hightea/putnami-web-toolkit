@@ -44,7 +44,7 @@
 <pre><![CDATA[
 dependencies {
 	...
-	compile 'fr.putnami.pwt:pwt-google-analytics:@releaseVersion@'
+	compile 'fr.putnami.pwt:pwt-google-analytics:@snapshotVersion@'
 }]]></pre>
 			</c:StaticCode>
 			
@@ -54,7 +54,7 @@ dependencies {
 <dependency>
 	<groupId>fr.putnami.pwt</groupId>
 	<artifactId>pwt-google-analytics</artifactId>
-	<version>@releaseVersion@</version>
+	<version>@snapshotVersion@</version>
 </dependency>]]></pre>
 			</c:StaticCode>
 			
