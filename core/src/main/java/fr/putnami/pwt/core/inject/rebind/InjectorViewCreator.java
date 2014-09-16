@@ -54,6 +54,7 @@ public class InjectorViewCreator extends AbstractInjectorCreator {
 		Collection<InjectorDelegateFactorty> factories = Lists.newArrayList();
 		factories.add(new ResourceCreatorFactory());
 		factories.add(new ServiceCreatorFactory());
+		factories.add(new SecurityCreatorFactory());
 		factories.add(new PresenterCreatorFactory());
 		factories.add(new MayStopActivityCreatorFactory());
 		factories.add(new StopActivityCreatorFactory());
@@ -62,7 +63,6 @@ public class InjectorViewCreator extends AbstractInjectorCreator {
 		factories.add(new ModelCreatorFactory());
 		factories.add(new TemplatedCreatorFactory());
 		factories.add(new PostconstructCreatorFactory());
-		factories.add(new SecurityCreatorFactory());
 		factories.add(new InitializeFormCreatorFactory());
 		return factories;
 	}
