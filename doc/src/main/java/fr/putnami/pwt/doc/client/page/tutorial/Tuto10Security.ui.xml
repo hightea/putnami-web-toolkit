@@ -1,0 +1,415 @@
+<!--
+
+    This file is part of pwt.
+
+    pwt is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<w:HTMLPanel title="PWT - Tutorial Part 10 - Add some security">
+		<w:Header ui:field="header"> 
+			<w:Heading level="1">Part 10 - Add some security</w:Heading>
+		</w:Header>
+		<w:HTMLPanel ui:field="content">
+		
+			<ul class="pager">
+				<li class="previous"><a href="#!Tuto9">&larr; Part 9 : Add Server side Spring support</a></li>
+			</ul>
+			
+			<p>In this tutorial, we will will add some security to our app (from  <em><a href="#!Tuto9">Part 9 : Add Server side Spring support</a></em>).</p>
+			<p>To do that, we will use Spring security.</p>
+			
+			<w:Heading level="2" summary="docSummary">Step 1 : <em>Add the dependencies in the build script</em></w:Heading>
+			
+			<p>Simply add the following dependency in the <code>build.gradle</code> file :</p>
+			
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+dependencies {
+	...
+	compile 'org.springframework.security:spring-security-config:3.2.5.RELEASE'
+	compile 'org.springframework.security:spring-security-web:3.2.5.RELEASE'
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>or in the <code>pom.xml</code> file :</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<dependency>
+	<groupId>org.springframework.security</groupId>
+	<artifactId>spring-security-config</artifactId>
+	<version>3.2.5.RELEASE</version>
+</dependency>
+<dependency>
+	<groupId>org.springframework.security</groupId>
+	<artifactId>spring-security-web</artifactId>
+	<version>3.2.5.RELEASE</version>
+</dependency>]]></pre>
+			</c:StaticCode>
+			
+			<w:Heading level="2" summary="docSummary">Step 2 : <em>Configure Spring security</em></w:Heading>
+			<p><a href="http://projects.spring.io/spring-security/">Spring security</a> need some configuration. we will simply configure it with one user with the following credentials : admin / 123456</p>
+			
+			<p>So we create the following config file <code>fr.putnami.pwt.tutorial.server.config.SecurityConfig</code>:</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+ 
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+	  auth.inMemoryAuthentication().withUser("admin").password("123456").roles("ADMIN");
+	}
+ 
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests().anyRequest().anonymous();
+	}
+	
+	@Bean(name="authenticationManager")
+   @Override
+   public AuthenticationManager authenticationManagerBean() throws Exception {
+       return super.authenticationManagerBean();
+   }
+	
+	// Auto configure the sevlet filter
+	public static class SpringSecurityInitializer extends AbstractSecurityWebApplicationInitializer {
+	   //do nothing
+	}
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>We import it in the <code>MvcConfig</code> config and register a <code>RequestContextInterceptor</code> needed for our custom session service :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@Import({ComandServiceConfig.class, SecurityConfig.class})
+...
+
+	...
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new RequestContextInterceptor());
+	}]]></pre>
+			</c:StaticCode>
+			
+			<w:Heading level="2" summary="docSummary">Step 3 : <em>Create a server side SessionService</em></w:Heading>
+			<p>Now in order to use the security features of PWT, we have to expose a SessionService. We will create it in the <code>server.service</code> package wich isused by the spring plugin to expose the services (see <a href="#!Tuto9">our previous configuration</a>) </p>
+			
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@Service
+public class SessionServiceImpl implements SessionService {
+
+	@Autowired
+	private AuthenticationManager authenticationManager;
+
+	@Override
+	public SessionDto getCurrentSession() {
+		SessionDto session = new SessionDto();
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Object principal = authentication.getPrincipal();
+
+		if (principal instanceof UserDetails) {
+			UserDetails userDetails = (UserDetails) principal;
+			session.setUsername(userDetails.getUsername());
+		}
+		else {
+			session.setUsername(principal.toString());
+		}
+
+		session.getRoles().addAll(AuthorityUtils.authorityListToSet(authentication.getAuthorities()));
+
+		return session;
+	}
+
+	@Override
+	public SessionDto signIn(SigninDto request) {
+		String username = request.getUsername();
+		String password = request.getPassword();
+
+		UsernamePasswordAuthenticationToken authRequest =
+				new UsernamePasswordAuthenticationToken(username, password);
+
+		authRequest.setDetails(new WebAuthenticationDetails(RequestThreadLocalUtils.getRequest()));
+
+		Authentication authResponse = authenticationManager.authenticate(authRequest);
+		SecurityContextHolder.getContext().setAuthentication(authResponse);
+
+		return getCurrentSession();
+	}
+
+	@Override
+	public SessionDto signOut() {
+		RequestThreadLocalUtils.getSession().invalidate();
+		SecurityContextHolder.clearContext();
+
+		AnonymousAuthenticationToken authRequest = new AnonymousAuthenticationToken(
+				SecurityConstants.USER_ANONYMOUS, SecurityConstants.USER_ANONYMOUS,
+				AuthorityUtils.createAuthorityList(SecurityConstants.ROLE_ANONYMOUS));
+
+		authRequest.setDetails(new WebAuthenticationDetails(RequestThreadLocalUtils.getRequest()));
+
+		SecurityContextHolder.getContext().setAuthentication(authRequest);
+
+		return getCurrentSession();
+	}
+
+}]]></pre>
+			</c:StaticCode>
+			
+			<w:Heading level="2" summary="docSummary">Step 5 : <em>Secure a view</em></w:Heading>
+			<p>On the clien side, to use the security features, we first have to inherit the corresponding module in the module gwt.xml file :</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+    <!-- PWT Module to extends in order to use PWT Security features-->
+	<inherits name="fr.putnami.pwt.core.security.Security"/>]]></pre>
+			</c:StaticCode>
+			
+			<p>Then to secure a view, simply annotate it withe the PWT's <code>@Secured</code> annotation.</p>
+			<p>We will secure the IssuesView :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@Templated
+@Secured("ROLE_ADMIN")
+public class IssuesView extends Composite implements View {
+	...]]></pre>
+			</c:StaticCode>
+			
+			<p>Now, if you run the app, you won't be able to access the IssuesView anymore !</p>
+			
+			<w:Heading level="2" summary="docSummary">Step 4 : <em>Create the login page</em></w:Heading>
+			<p>We have to create a login form in order to access to the IssuesView.</p>
+			<p>We create the following in the <code>fr.putnami.pwt.tutorial.client.user</code> package :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@Templated
+public class SigninPage extends Composite implements View {
+
+
+	public interface Constants extends ConstantsWithLookup, ValidationConstants {
+		@DefaultStringValue("Username (admin)")
+		String username();
+
+		@DefaultStringValue("Password (123456)")
+		String password();
+
+		@DefaultStringValue("admin")
+		String usernamePlaceholder();
+
+		@DefaultStringValue("123456")
+		String passwordPlaceholder();
+
+		@DefaultStringValue("Vos identifiant sont incorrect!")
+		String messageSigninFailed();
+	}
+
+	private final SessionController sessionController = SessionController.get();
+
+	@InjectResource
+	Constants constants;
+
+	@InjectService
+	SessionService service;
+
+	@UiField
+	@Initialize(constantsClass = Constants.class)
+	Form<SigninDto> signinForm;
+	
+	private Place fallback;
+
+	@PresentHandler
+	void onPresent(SigninPlace place) {
+		this.fallback = place.getFallback();
+		signinForm.edit(new SigninDto());
+	}
+
+	@UiHandler("signinForm")
+	void onSubmitSignIn(FlushSuccessEvent event) {
+		service.signIn(event.<SigninDto> getValue());
+	}
+
+	@AsyncHandler
+	void onSignIn(SessionDto session) {
+		sessionController.setSession(session);
+		if (fallback != null) {
+			MvpController.get().goTo(fallback);
+		}
+		else {
+			MvpController.get().goToDefaultPlace();
+		}
+	}
+
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>With the corresponding template :</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client">
+	
+	<w:HTMLPanel title="Putnami CPQ - Indentifiez vous!">
+		<w:Form ui:field="signinForm" layout="HORIZONTAL">
+			<w:Header>
+				<w:Heading level="2">Connecting</w:Heading>
+			</w:Header>
+			<w:FormGroup path="username" >
+				<w:InputText />
+			</w:FormGroup>
+			<w:FormGroup path="password" >
+				<w:InputPassword />
+			</w:FormGroup>
+			<w:ErrorGroup />
+			<w:Footer>
+				<w:FormSubmitButton text="Login" />
+			</w:Footer>
+		</w:Form>
+	</w:HTMLPanel>
+</ui:UiBinder>]]></pre>
+			</c:StaticCode>
+			
+			<p>And the place :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@ActivityDescription(view = SigninPage.class)
+public class SigninPlace extends ViewPlace {
+
+	private Place fallback;
+
+	public SigninPlace() {
+	}
+
+	public SigninPlace(Place fallback) {
+		this.fallback = fallback;
+	}
+
+	public Place getFallback() {
+		return fallback;
+	}
+
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>And we register the activity in the entry point <code>TutorialApp</code> :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@MvpDescription(
+		...
+		activities = {
+				...,
+				SigninPlace.class
+		})]]></pre>
+			</c:StaticCode>
+			
+			<p>Finally we just need to catch the <code>SecurityError</code> to redirect to the <code>SigninPlace</code>. To do it, add an entry point method in the <code>TutorialApp</code> :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	@EntryPointHandler
+	void catchSecurityError() {
+		ErrorManager.get().registerErrorHandler(new AbstractErrorHandler() {
+			@Override
+			public boolean handle(Throwable error) {
+				if (error instanceof SecurityException) {
+					MvpController.get().goTo(new SigninPlace(((SecurityException) error).getFallback()));
+					return true;
+				}
+				return false;
+			}
+		});
+	}]]></pre>
+			</c:StaticCode>
+			
+			<p>Now you can try to access the <code>IssuesPlace</code> and sign-in.</p>
+			
+			<w:Heading level="2" summary="docSummary">Step 6 : <em>Secure a widget</em></w:Heading>
+			<p>PWT allows you secure just one widget by encapsuling it in a <code>Secure</code> widget.</p>
+			<p> In the NavBar, we will add a logout link displayed only if the user is logged in.</p>
+			
+			<p>In the <code>PageDecorator.ui.xml</code> template, we add in the navbar :</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:s="urn:import:fr.putnami.pwt.core.security.client.widget"
+	>
+	...
+		</w:Nav>
+		<w:right>
+			<w:Nav>
+				<s:Secure hasRole="ADMIN">
+					<w:NavLink label="logout" link="#!Signout" />
+				</s:Secure>
+			</w:Nav>
+		</w:right>
+	</w:Navbar>]]></pre>
+			</c:StaticCode>
+			
+			<p>Now you can see the the button is displayed only when the user is logged in.</p>
+			
+			<w:Heading level="2" summary="docSummary">Step 7 : <em>Add a logout place</em></w:Heading>
+			<p>Finally we just need a way to log out!</p>
+			<p>To do it, PWT provide some nice activities : <code>ActionPlace</code>. Such places have a <code>run()</code> method to execute an action.</p>
+			<p>We just creat the following place in the <code>client.user</code> package :</p>
+			
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+public class SignoutPlace extends ActionPlace {
+
+	@Override
+	public void run() {
+		SessionController.get().signOut();
+		MvpController.get().goToDefaultPlace();
+	}
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>and we register it in the <code>MvpController</code> as an activity in the entry point <code>TutorialApp</code></p> 
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+	@EntryPointHandler
+	void registerActions() {
+		MvpController.get().registerActivity(new SignoutPlace());
+	}]]></pre>
+			</c:StaticCode>
+			
+			<p> You can now logout !</p>
+			
+			<w:Alert ><h4>Note :</h4><p>You can see the result in the <code>tutorials/Part10</code> folder in the PWT sources.</p></w:Alert>			
+
+			<w:Heading level="2" summary="docSummary">That's it !</w:Heading>
+
+			<p>You have created a very nice app using PWT.</p>
+			<p>There are a lot of other very nice components described in the <a href="#!Components">Components doc</a>.</p>
+			<p>Now you can build your own app using PWT and be incredibly productive with GWT !</p>
+			<p>We hope to see you soon.</p>
+			<p>@Putnami Team</p>
+
+			
+			<ul class="pager">
+				<li class="previous"><a href="#!Tuto9">&larr; Part 9 : Add Server side Spring support</a></li>
+			</ul>
+		</w:HTMLPanel>
+	</w:HTMLPanel>
+</ui:UiBinder>

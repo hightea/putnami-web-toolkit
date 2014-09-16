@@ -48,6 +48,7 @@ import fr.putnami.pwt.doc.client.page.server.ServerCallsPage;
 import fr.putnami.pwt.doc.client.page.soon.ComingSoonPage;
 import fr.putnami.pwt.doc.client.page.spring.SpringPage;
 import fr.putnami.pwt.doc.client.page.starting.GettingStartedPage;
+import fr.putnami.pwt.doc.client.page.tutorial.Tuto10Security;
 import fr.putnami.pwt.doc.client.page.tutorial.Tuto1InitGradlePage;
 import fr.putnami.pwt.doc.client.page.tutorial.Tuto1InitMavenPage;
 import fr.putnami.pwt.doc.client.page.tutorial.Tuto2FirstPagePage;
@@ -57,6 +58,7 @@ import fr.putnami.pwt.doc.client.page.tutorial.Tuto5IssueTrackerPage;
 import fr.putnami.pwt.doc.client.page.tutorial.Tuto6ThemePage;
 import fr.putnami.pwt.doc.client.page.tutorial.Tuto7GoogleAnalyticsPage;
 import fr.putnami.pwt.doc.client.page.tutorial.Tuto8AjaxBotPage;
+import fr.putnami.pwt.doc.client.page.tutorial.Tuto9SpringPage;
 import fr.putnami.pwt.doc.client.page.welcome.WelcomePage;
 import fr.putnami.pwt.doc.client.page.welcome.WelcomePage.WelcomePlace;
 import fr.putnami.pwt.plugin.ga.client.GoogleAnalytics;
@@ -94,7 +96,9 @@ import fr.putnami.pwt.plugin.ga.client.GoogleAnalytics;
 				Tuto5IssueTrackerPage.Tuto5IssueTrackerPlace.class,
 				Tuto6ThemePage.Tuto6ThemePlace.class,
 				Tuto7GoogleAnalyticsPage.Tuto7GoogleAnalyticsPlace.class,
-				Tuto8AjaxBotPage.Tuto8AjaxBotPlace.class
+				Tuto8AjaxBotPage.Tuto8AjaxBotPlace.class,
+				Tuto9SpringPage.Tuto9SpringPlace.class,
+				Tuto10Security.Tuto10SecurityPlace.class
 		})
 @ErrorManagmentDescription(
 		errorDisplay = SimpleErrorDisplayer.class,

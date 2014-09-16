@@ -1,0 +1,62 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client">
+	
+	<ui:with field="labelItems" type="java.util.List" />
+	
+    <w:HTMLPanel>
+		<w:Heading level="1" text="Issues Tracker" styleName="page-header"/>
+       	<w:GridRow>
+       		<w:GridColumn size="4">
+       			<w:Button ui:field="addIssue" iconType="ADD" text="Declare an issue" type="LINK"/>
+       			<w:Form ui:field="searchEditor" layout="BASIC">
+       				<w:FormGroup path="label"/>
+       				<w:FormGroup path="name"/>
+       				<w:FormResetButton text="Reset" />
+					<w:FormSubmitButton text="Search" />
+       			</w:Form>
+       		</w:GridColumn>
+			<w:GridColumn size="8">
+				<w:TableEditor ui:field="issuesTable" readonly="true">
+					<w:Pagination pageSize="6" />
+					<w:TableColumn path="id" />
+					<w:TableColumn path="type">
+						<w:TableSort />
+					</w:TableColumn>
+					<w:TableColumn path="name">
+						<w:TableSort />
+					</w:TableColumn>
+					<w:TableColumn path="labels">
+						<w:OutputList >
+							<w:OutputText />
+						</w:OutputList>
+					</w:TableColumn>
+					<w:TableColumn >
+						<w:Button ui:field="viewBoutton" type="ICON" iconType="VIEW" />
+					</w:TableColumn>
+				</w:TableEditor>
+			</w:GridColumn>
+		</w:GridRow>
+		
+		<w:Modal ui:field="modal" title="Edit an Issue" dismissable="true">
+			<w:Form ui:field="issueEditor" layout="HORIZONTAL">
+				<w:FormGroup path="id" readonly="true" />
+				<w:FormGroup path="name" />
+				<w:FormGroup path="type" />
+				<w:FormGroup path="labels" >
+					<w:InputMultiSelect items="{labelItems}" />		
+					<w:OutputList >
+							<w:OutputText />
+						</w:OutputList>		
+				</w:FormGroup>
+				<w:FormGroup path="description" >
+					<w:InputTextArea />
+				</w:FormGroup>
+				<w:Footer>
+					<w:FormResetButton text="Reset" />
+					<w:FormSubmitButton text="Save" />
+				</w:Footer>
+			</w:Form>
+ 		</w:Modal>
+    </w:HTMLPanel>
+</ui:UiBinder>

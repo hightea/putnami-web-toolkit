@@ -24,8 +24,6 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel title="PWT - Tutorial Part 3 - Build more pages">
 		<w:Header ui:field="header">
 			<w:Heading level="1">Part 3 - Build more pages</w:Heading>
@@ -37,7 +35,7 @@
 				<li class="next"><a href="#!Tuto4">Part 4 : Build a contact form &rarr;</a></li>
 			</ul>
 			
-			<p>In this tutorial, we will will add some static content to the project inited in  <em><a href="#!Tuto2">Part 2 : Build the Welcome Page</a></em></p>
+			<p>In this tutorial, we will add some static content to the project inited in  <em><a href="#!Tuto2">Part 2 : Build the Welcome Page</a></em></p>
 			
 			<w:Heading level="2" summary="docSummary">Step 1 : <em>Add new places and views</em></w:Heading>
 			<p>In the <em>Part 2</em> we've seen how to add some place and views, so just add those two views / Places :</p>

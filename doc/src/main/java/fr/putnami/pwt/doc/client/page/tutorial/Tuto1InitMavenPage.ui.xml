@@ -24,8 +24,6 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel title="PWT - Tutorial Part 1 - Init a PWT Project with Maven">
 		<w:Header ui:field="header">
 			<w:Heading level="1">Part 1 - Init a PWT Project with Maven</w:Heading>

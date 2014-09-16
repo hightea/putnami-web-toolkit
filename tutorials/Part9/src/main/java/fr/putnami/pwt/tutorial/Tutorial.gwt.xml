@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <module rename-to="Tutorial">
+	<!-- PWT Module to extends in order to use PWT widgets-->
+	<inherits name="fr.putnami.pwt.core.widget.Widget"/>
+	<!-- PWT Module to extends in order to use PWT MVP features-->
+	<inherits name="fr.putnami.pwt.core.mvp.Mvp"/>
+    <!-- PWT Module to extends in order to use PWT Model features-->
+    <inherits name="fr.putnami.pwt.core.model.Model"/>
+    <!-- PWT Module to extends in order to use PWT Service features-->
+	<inherits name="fr.putnami.pwt.core.service.Service"/>
+	<!-- PWT Module to extends in order to use PWT Inject features-->
+	<inherits name="fr.putnami.pwt.core.inject.Inject"/>
+    <!-- PWT Module to extends in order to use PWT Google analytics features-->
+    <inherits name="fr.putnami.pwt.plugin.ga.GoogleAnalytics"/>
+
+     <entry-point class="fr.putnami.pwt.tutorial.client.TutorialApp"/>
+
+     <!-- This linker will be the default one in later version of GWT -->
+     <add-linker name="xsiframe" />
+
+     <source path="client"/>
+     <source path="shared"/>
+
+     <!-- Add the fr locale -->
+     <extend-property name="locale" values="fr"/>
+ </module>

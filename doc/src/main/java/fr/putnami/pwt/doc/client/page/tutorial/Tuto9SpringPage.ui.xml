@@ -1,0 +1,155 @@
+<!--
+
+    This file is part of pwt.
+
+    pwt is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client">
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<w:HTMLPanel title="PWT - Tutorial Part 9 - Add Server side Spring support">
+		<w:Header ui:field="header">
+			<w:Heading level="1">Part 9 - Add Server side Spring support</w:Heading>
+		</w:Header>
+		<w:HTMLPanel ui:field="content">
+		
+			<ul class="pager">
+				<li class="previous"><a href="#!Tuto8">&larr; Part 8 : Add Ajax Bot Filter</a></li>
+				<li class="next"><a href="#!Tuto10">Part 10 : Add some Security &rarr;</a></li>
+			</ul>
+			
+			<p>In this tutorial, we will use the <a href="http://projects.spring.io/spring-framework/">Spring framework</a> to expose our server side services in our app (from  <em><a href="#!Tuto8">Part 8 : Add Ajax Bot Filter</a></em>).</p>
+			
+			<w:Heading level="2" summary="docSummary">Step 1 : <em>Add the dependency in the build script</em></w:Heading>
+			<p>Simply add the following dependency in the <code>build.gradle</code> file :</p>
+			
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+dependencies {
+	...
+	compile 'fr.putnami.pwt:pwt-spring:@releaseVersion@'
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>or in the <code>pom.xml</code> file :</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+<dependency>
+	<groupId>fr.putnami.pwt</groupId>
+	<artifactId>pwt-spring</artifactId>
+	<version>@releaseVersion@</version>
+</dependency>]]></pre>
+			</c:StaticCode>
+			
+			<w:Heading level="2" summary="docSummary">Step 2 : <em>Setting up the Spring configuration</em></w:Heading>
+			
+			<p>Spring offers multiple way to configure the application context (xml, component scan, etc..). In this tutorial we choose the java with annotation solution with component scan, but you can do as you want!</p>
+			
+			<p>First, we create a controller handling the <code>/</code> path in <code>fr/putnami/pwt/tutorial/server/controller/WelcomeController</code> :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@Controller
+public class WelcomeController {
+
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String welcomePage() {
+		return "forward:/index.html";
+	}
+
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>Then we create a Spring configuration class in <code>fr/putnami/pwt/tutorial/server/config/MvcConfig</code> :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@Configuration
+@Import(ComandServiceConfig.class)
+@EnableWebMvc
+@ComponentScan(basePackages = {"fr.putnami.pwt.tutorial.server.controller", "fr.putnami.pwt.tutorial.server.service"})
+public class MvcConfig extends WebMvcConfigurerAdapter {
+
+	private static final int RESOURCE_CACHE_PERIOD = 60 * 60 * 24 * 7; // 1 week in second
+
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/index.html").addResourceLocations("/index.html").setCachePeriod(RESOURCE_CACHE_PERIOD);
+		registry.addResourceHandler("/Tutorial/**").addResourceLocations("/Tutorial/").setCachePeriod(RESOURCE_CACHE_PERIOD);
+	}
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>Finally, in order to use the Spring dispatcher, we need to remove the old <code>CommandController</code> configuration and replace it by the spring configuration.</p>
+			<c:StaticCode configuration="{XML_CONFIGURATION}">
+<pre><![CDATA[
+	<!-- Spring configuration -->
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextClass</param-name>
+			<param-value>
+				org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>fr.putnami.pwt.tutorial.server.config</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>]]></pre>
+			</c:StaticCode>
+			
+			<w:Alert ><h4>Note :</h4><p>You can see that we don't register the services in the web.xml anymore</p></w:Alert>
+			
+			<w:Heading level="2" summary="docSummary">Step 3 : <em>Annotate your services</em></w:Heading>
+			<p>In order to have your services exposed to PWT client side, they have to be annotated with the <code>@Service</code> annotation.</p>
+			<p>(In this tutorial the <code>@Service</code> annotation use allows the registration of the services classe in the spring context thanks to component scan)</p>
+			
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@Service
+public class ContactServiceImpl implements ContactService {
+	...
+}]]></pre>
+			</c:StaticCode>
+			<p>and</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+@Service
+public class IssueServiceImpl implements IssueService {
+	...
+}]]></pre>
+			</c:StaticCode>
+			
+			<p>You can go to <a href="http://localhost:8080/putnami-pwt-tutorial/#!Issues">http://localhost:8080/putnami-pwt-tutorial/#!Issues</a> to try the use of the services.</p>
+			
+			<w:Alert ><h4>Note :</h4><p>You can see the result in the <code>tutorials/Part9</code> folder in the PWT sources.</p></w:Alert>			
+			
+			<ul class="pager">
+				<li class="previous"><a href="#!Tuto8">&larr; Part 8 : Add Ajax Bot Filter</a></li>
+				<li class="next"><a href="#!Tuto10">Part 10 : Add some Security &rarr;</a></li>
+			</ul>
+		</w:HTMLPanel>
+	</w:HTMLPanel>
+</ui:UiBinder>

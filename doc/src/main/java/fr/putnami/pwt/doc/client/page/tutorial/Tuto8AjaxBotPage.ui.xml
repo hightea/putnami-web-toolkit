@@ -24,8 +24,6 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel title="PWT - Tutorial Part 8 - Add Ajax Bot Filter">
 		<w:Header ui:field="header">
 			<w:Heading level="1">Part 8 - Add Ajax Bot Filter</w:Heading>
@@ -34,9 +32,10 @@
 		
 			<ul class="pager">
 				<li class="previous"><a href="#!Tuto7">&larr; Part 7 : Add Google Analytics to your app</a></li>
+				<li class="next"><a href="#!Tuto9">Part 9 : Add Server side Spring support &rarr;</a></li>
 			</ul>
 			
-			<p>In this tutorial, we will will add the ajax bot plugin allowing our app (from  <em><a href="#!Tuto7">Part 7 : Add Google Analytics to your app</a></em>) to be indexed by the search engine bots.</p>
+			<p>In this tutorial, we will add the ajax bot plugin allowing our app (from  <em><a href="#!Tuto7">Part 7 : Add Google Analytics to your app</a></em>) to be indexed by the search engine bots.</p>
 			
 			<w:Heading level="2" summary="docSummary">Step 1 : <em>Add the dependency in the build script</em></w:Heading>
 			<p>Simply add the following dependency in the <code>build.gradle</code> file :</p>
@@ -90,18 +89,13 @@ dependencies {
 			<p>You'll find detailed informations about this plugin in the <a href="#!AjaxBotIndexing">plugin doc</a>.</p>
 			
 			
-			<w:Heading level="2" summary="docSummary">That's it !</w:Heading>
-
-			<p>You have created a very nice app using PWT.</p>
-			<p>There are a lot of other very nice components described in the <a href="#!Components">Components doc</a>.</p>
-			<p>Now you can build your own app using PWT and be incredibly productive with GWT !</p>
-			<p>We hope to see you soon.</p>
-			<p>@Putnami Team</p>
+			
 
 			<w:Alert ><h4>Note :</h4><p>You can see the result in the <code>tutorials/Part8</code> folder in the PWT sources.</p></w:Alert>			
 			
 			<ul class="pager">
 				<li class="previous"><a href="#!Tuto7">&larr; Part 7 : Add Google Analytics to your app</a></li>
+				<li class="next"><a href="#!Tuto9">Part 9 : Add Server side Spring support &rarr;</a></li>
 			</ul>
 		</w:HTMLPanel>
 	</w:HTMLPanel>

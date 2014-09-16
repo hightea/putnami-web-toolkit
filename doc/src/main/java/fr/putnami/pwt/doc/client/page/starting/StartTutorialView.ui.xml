@@ -55,6 +55,12 @@
 			<w:ListItem>
 				<a href="#!Tuto8AjaxBot">Index with Ajax Bot Filter</a>
 			</w:ListItem>
+			<w:ListItem>
+				<a href="#!Tuto9Spring">Add server side Spring framework support</a>
+			</w:ListItem>
+			<w:ListItem>
+				<a href="#!Tuto10Security">Secure your webapp</a>
+			</w:ListItem>
 		</w:List>
 
 	</w:HTMLPanel>

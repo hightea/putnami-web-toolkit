@@ -24,8 +24,6 @@
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
 	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
 
-	<ui:with field="tableOfContent" type="fr.putnami.pwt.core.widget.client.NavSpy" />
-
 	<w:HTMLPanel title="PWT - Tutorial Part 7 - Add Google Analytics to your app">
 		<w:Header ui:field="header">
 			<w:Heading level="1">Part 7 - Add Google Analytics to your app</w:Heading>
@@ -37,7 +35,7 @@
 				<li class="next"><a href="#!Tuto8">Part 8 : Add Ajax Bot Filter &rarr;</a></li>
 			</ul>
 			
-			<p>In this tutorial, we will will add the google analytics plugin allowing our app (from  <em><a href="#!Tuto6">Part 6 : Build a theme</a></em>) to be audited via Google Analytics.</p>
+			<p>In this tutorial, we will add the google analytics plugin allowing our app (from  <em><a href="#!Tuto6">Part 6 : Build a theme</a></em>) to be audited via Google Analytics.</p>
 			
 			<w:Heading level="2" summary="docSummary">Step 1 : <em>Add the dependency in the build script</em></w:Heading>
 			
