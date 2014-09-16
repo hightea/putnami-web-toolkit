@@ -1,6 +1,5 @@
 ext {
-	springVersion = '4.0.5.RELEASE'
-	springSecurityVersion = '3.2.4.RELEASE'
+	springVersion = '4.1.0.RELEASE'
 }
 
 dependencies {
@@ -9,9 +8,6 @@ dependencies {
 	compile "org.springframework:spring-context:$springVersion"
 	compile "org.springframework:spring-web:$springVersion"
 	compile "org.springframework:spring-webmvc:$springVersion"
-
-	compile "org.springframework.security:spring-security-config:$springSecurityVersion"
-	compile "org.springframework.security:spring-security-web:$springSecurityVersion"
 
 	compile "commons-fileupload:commons-fileupload:+"
 	compile "org.codehaus.jackson:jackson-mapper-asl:1.9.5"
