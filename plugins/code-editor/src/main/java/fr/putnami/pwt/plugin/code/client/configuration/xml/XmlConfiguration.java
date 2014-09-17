@@ -53,7 +53,7 @@ public class XmlConfiguration implements CodeEditorConfiguration {
 
 		@Override
 		public boolean isWordPart(char c) {
-			if (c == '/' || c == '>' || c == ':' || c == '.') {
+			if (c == '/' || c == '>' || c == ':' || c == '.' || c == '-') {
 				return true;
 			}
 			return CharMatcher.JAVA_LETTER_OR_DIGIT.matches(c);
@@ -62,7 +62,7 @@ public class XmlConfiguration implements CodeEditorConfiguration {
 
 	static class XMLStartTagDetector extends RegExpWordMatcher {
 		public XMLStartTagDetector(TokenContent tokenContent) {
-			super(tokenContent, "\\<(/)?[a-zA-Z0-9\\:\\.]*((/)?\\>)?");
+			super(tokenContent, "\\<(/)?[a-zA-Z0-9\\:\\.\\-]*((/)?\\>)?");
 		}
 	}
 
