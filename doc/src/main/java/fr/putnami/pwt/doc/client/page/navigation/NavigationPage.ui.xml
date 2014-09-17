@@ -143,7 +143,7 @@ public class BlogPlace extends ViewPlace {
 				<div class="showcase-sample">
 					To Initialize the framework. you have to : 
 					<ul>
-						<li><strong>Set the display :</strong> The display is a <code>AcceptsOneWidget</code> which will recieve the view when presented.</li>
+						<li><strong>Set the display :</strong> The display is a <code>AcceptsOneWidget</code> which will receive the view when presented.</li>
 						<li><strong>Set the default place :</strong> The place to present when no place are presented.</li>
 						<li><strong>Register acitivity :</strong> All activities are created from the registered places.</li>
 						<li><strong>Handle the current history :</strong> Handle the current history token or go to the default place.</li>
@@ -189,15 +189,13 @@ public class MyApp implements Module {
 				</c:StaticCode>
 				<p>The <code>@MvpDescription</code> annotation have the following parameters :</p>
 				<ul>
-					<li><code>display</code> : The <code>AcceptOneWidget</code> extending component which will recieve the view when presented. </li>
+					<li><code>display</code> : The <code>AcceptOneWidget</code> extending component which will receive the view when presented. </li>
 					<li><code>defaultPlace</code> : The <code>Place</code> extending place to present when no place are presented</li>
 					<li><code>activities</code> : The list of <code>ActivityFactory</code> to register. they are registered with the following code <code>mvpController.registerActivity(GWT.&lt;ActivityFactory&gt; create(<em>class</em>))</code>.
 					The <code>ViewPlace</code> extending places are accepted, because they are rebinded to <code>ViewProxy</code> (wich extends <code>ActivityFactory</code>) and <code>ActionPlace</code> too because they implements directly <code>ActivityFactory</code>. 
 					</li>
+					<li><code>handleCurrentHistory</code> (default true) : Indicate wether or not the <code>MvpController.get().handleCurrentHistory()</code> is called at the end of module init</li>
 				</ul>
-				<w:Alert>
-					<h4>Note :</h4><p>The rebinded class call the <code>MvpController.get().handleCurrentHistory()</code> method at the end of init.</p>
-				</w:Alert>
 				<div class="showcase-sample">
 					You can add some methods annotated with <code>@EntryPointHandler</code> to add some comportment at init time.
 				</div>

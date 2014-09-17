@@ -29,6 +29,7 @@ import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.user.rebind.SourceWriter;
 
 import fr.putnami.pwt.core.inject.client.annotation.EntryPointHandler;
+import fr.putnami.pwt.core.inject.client.annotation.MvpDescription;
 import fr.putnami.pwt.core.inject.rebind.base.AbstractInjectorCreator;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorDelegateFactorty;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterEntryPoint;
@@ -88,7 +89,10 @@ public class InjectorModuleCreator extends AbstractInjectorCreator {
 		}
 
 		srcWriter.println();
-		srcWriter.println("MvpController.get().handleCurrentHistory();");
+		MvpDescription mvpAnnotation = injectableType.getAnnotation(MvpDescription.class);
+		if (mvpAnnotation != null && mvpAnnotation.handleCurrentHistory()) {
+			srcWriter.println("MvpController.get().handleCurrentHistory();");
+		}
 		srcWriter.outdent();
 		srcWriter.println("}");
 	}

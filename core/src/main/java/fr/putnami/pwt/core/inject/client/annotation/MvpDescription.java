@@ -27,8 +27,18 @@ import com.google.gwt.user.client.ui.AcceptsOneWidget;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface MvpDescription {
+	/**
+	 * The display is a <code>AcceptsOneWidget</code> which will receive the view when presented.
+	 * 
+	 * @return
+	 */
 	Class<? extends AcceptsOneWidget> display() default AcceptsOneWidget.class;
 
+	/**
+	 * The place to present when no place are presented
+	 * 
+	 * @return
+	 */
 	Class<? extends Place> defaultPlace() default Place.class;
 
 	/**
@@ -37,4 +47,11 @@ public @interface MvpDescription {
 	 * @return
 	 */
 	Class<?>[] activities() default {};
+
+	/**
+	 * Add the MvpController.get().handleCurrentHistory() instruction at the end of the module load
+	 * 
+	 * @return
+	 */
+	boolean handleCurrentHistory() default true;
 }
