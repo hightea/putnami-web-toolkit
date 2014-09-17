@@ -1,5 +1,5 @@
 ext {
-	springVersion = '4.1.0.RELEASE'
+	springVersion = '4.0.7.RELEASE'
 }
 
 dependencies {
