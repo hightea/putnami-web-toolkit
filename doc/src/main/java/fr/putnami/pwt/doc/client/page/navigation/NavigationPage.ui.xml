@@ -187,6 +187,14 @@ public class MyApp implements Module {
 }
 ]]></pre>
 				</c:StaticCode>
+				<p>The <code>@MvpDescription</code> annotation have the following parameters :</p>
+				<ul>
+					<li><code>display</code> : The <code>AcceptOneWidget</code> extending component which will recieve the view when presented. </li>
+					<li><code>defaultPlace</code> : The <code>Place</code> extending place to present when no place are presented</li>
+					<li><code>activities</code> : The list of <code>ActivityFactory</code> to register. they are registered with the following code <code>mvpController.registerActivity(GWT.&lt;ActivityFactory&gt; create(<em>class</em>))</code>.
+					The <code>ViewPlace</code> extending places are accepted, because they are rebinded to <code>ViewProxy</code> (wich extends <code>ActivityFactory</code>) and <code>ActionPlace</code> too because they implements directly <code>ActivityFactory</code>. 
+					</li>
+				</ul>
 				<w:Alert>
 					<h4>Note :</h4><p>The rebinded class call the <code>MvpController.get().handleCurrentHistory()</code> method at the end of init.</p>
 				</w:Alert>

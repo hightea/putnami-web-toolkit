@@ -23,6 +23,7 @@ import java.util.List;
 import com.google.common.collect.Lists;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -35,19 +36,18 @@ import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterEntryPoint;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
 import fr.putnami.pwt.core.mvp.client.ActivityFactory;
 import fr.putnami.pwt.core.mvp.client.MvpController;
-import fr.putnami.pwt.core.mvp.client.ViewPlace;
 
 public class InjectMvpDescriptionCreator extends InjectorCreatorDelegate implements InjectorWritterInit, InjectorWritterEntryPoint {
 
 	private final Class<? extends AcceptsOneWidget> display;
-	private final Class<? extends ViewPlace> defaultPlace;
-	private final List<Class<? extends ViewPlace>> activities = Lists.newArrayList();
+	private final Class<? extends Place> defaultPlace;
+	private final List<Class<?>> activities = Lists.newArrayList();
 
-	public InjectMvpDescriptionCreator(JClassType injectableType, MvpDescription moduleDescritpion) {
-		this.display = moduleDescritpion.display();
-		this.defaultPlace = moduleDescritpion.defaultPlace();
-		if (moduleDescritpion.activities() != null) {
-			for (Class<? extends ViewPlace> activity : moduleDescritpion.activities()) {
+	public InjectMvpDescriptionCreator(JClassType injectableType, MvpDescription moduleDescription) {
+		this.display = moduleDescription.display();
+		this.defaultPlace = moduleDescription.defaultPlace();
+		if (moduleDescription.activities() != null) {
+			for (Class<?> activity : moduleDescription.activities()) {
 				activities.add(activity);
 			}
 
@@ -85,10 +85,10 @@ public class InjectMvpDescriptionCreator extends InjectorCreatorDelegate impleme
 		srcWriter.outdent();
 		srcWriter.println("}");
 
-		if (defaultPlace != null && !ViewPlace.class.equals(defaultPlace)) {
+		if (defaultPlace != null && !Place.class.equals(defaultPlace)) {
 			srcWriter.println("mvpController.setDefaultPlace(new %s());", toClassName(defaultPlace));
 		}
-		for (Class<? extends ViewPlace> activity : activities) {
+		for (Class<?> activity : activities) {
 			srcWriter.println("mvpController.registerActivity(GWT.<ActivityFactory> create(%s.class));", toClassName(activity));
 		}
 	}

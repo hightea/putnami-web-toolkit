@@ -21,16 +21,20 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
-
-import fr.putnami.pwt.core.mvp.client.ViewPlace;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface MvpDescription {
 	Class<? extends AcceptsOneWidget> display() default AcceptsOneWidget.class;
 
-	Class<? extends ViewPlace> defaultPlace() default ViewPlace.class;
+	Class<? extends Place> defaultPlace() default Place.class;
 
-	Class<? extends ViewPlace>[] activities() default {};
+	/**
+	 * Each activity class will be registered in the MvpController with the following : GWT.<ActivityFactory> create(class)
+	 * 
+	 * @return
+	 */
+	Class<?>[] activities() default {};
 }

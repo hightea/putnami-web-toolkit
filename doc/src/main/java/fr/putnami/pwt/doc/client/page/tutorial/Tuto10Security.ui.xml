@@ -388,10 +388,12 @@ public class SignoutPlace extends ActionPlace {
 			<p>and we register it in the <code>MvpController</code> as an activity in the entry point <code>TutorialApp</code></p> 
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-	@EntryPointHandler
-	void registerActions() {
-		MvpController.get().registerActivity(new SignoutPlace());
-	}]]></pre>
+@MvpDescription(
+		...
+		activities = {
+				...,
+				SignoutPlace.class
+		})]]></pre>
 			</c:StaticCode>
 			
 			<p> You can now logout !</p>

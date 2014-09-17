@@ -28,7 +28,8 @@ import fr.putnami.pwt.tutorial.client.user.SignoutPlace;
 				AboutPlace.class,
 				ContactPlace.class,
 				IssuesPlace.class,
-				SigninPlace.class
+				SigninPlace.class,
+				SignoutPlace.class
 		})
 public class TutorialApp implements Module {
 
@@ -65,11 +66,6 @@ public class TutorialApp implements Module {
 				return false;
 			}
 		});
-	}
-	
-	@EntryPointHandler
-	void registerActions() {
-		MvpController.get().registerActivity(new SignoutPlace());
 	}
 }
 
