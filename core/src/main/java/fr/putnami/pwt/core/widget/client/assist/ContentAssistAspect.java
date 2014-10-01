@@ -55,6 +55,7 @@ public class ContentAssistAspect {
 	private static final CssStyle STYLE_SCROLLABLE = new SimpleStyle("scrollable-dropdown");
 	private static final CssStyle STYLE_MENU = new SimpleStyle("dropdown-menu");
 	private static final CssStyle STYLE_OPEN = new SimpleStyle("open");
+	private static final CssStyle STYLE_POPUP = new SimpleStyle("dropdown-popup");
 
 	protected IsWidget textInput;
 	protected SuggestionDisplay suggestionDisplay;
@@ -146,6 +147,7 @@ public class ContentAssistAspect {
 		public SuggestionDisplayImpl() {
 			suggestionPopup = new PopupPanel(true, false);
 			suggestionPopup.setPreviewingAllNativeEvents(true);
+			StyleUtils.addStyle(suggestionPopup, STYLE_POPUP);
 			FlowPanel dropdownContainer = new FlowPanel();
 			StyleUtils.addStyle(dropdownContainer, STYLE_DROPDOWN);
 			StyleUtils.addStyle(dropdownContainer, STYLE_OPEN);
