@@ -13,6 +13,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'maven'
 apply plugin: 'eclipse'
 apply plugin: 'gwt-base'
+apply plugin: 'checkstyle'
 
 if (applyLicense) {
 	apply plugin: 'license'
@@ -69,7 +70,9 @@ gwt {
 		addGwtContainer=false
 	}
 }
-
+checkstyle{
+	configFile rootProject.file('settings/checkstyle/pwt-checkstyle.xml')
+}
 
 if (rootProject.tasks.findByPath(':publishAll') != null) {
 	rootProject.tasks.publishAll.dependsOn project.tasks.uploadArchives
