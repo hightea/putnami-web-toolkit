@@ -1,8 +1,5 @@
 package fr.putnami.pwt.sample.web.client.view.addressbook;
 
-import java.util.Collection;
-import java.util.List;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -18,6 +15,9 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
+
+import java.util.Collection;
+import java.util.List;
 
 import fr.putnami.pwt.core.editor.client.event.DirtyEvent;
 import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
@@ -53,7 +53,6 @@ public class AddressBookView extends Composite implements View<AddressBookPlace>
 	}
 
 	interface Constants extends ConstantsWithLookup, SampleCommonConstants, ContactConstants, AddressConstants, GenderConstants {
-
 	}
 
 	public interface GroupModel extends Model<Group> {
@@ -172,8 +171,7 @@ public class AddressBookView extends Composite implements View<AddressBookPlace>
 				String query = source.flush();
 				if (query == null || query.length() == 0) {
 					displayList(displayedList);
-				}
-				else {
+				} else {
 					final String queryToCompare = query.toLowerCase().trim();
 					Iterable<Contact> filteredIteable = Iterables.filter(displayedList, new Predicate<Contact>() {
 

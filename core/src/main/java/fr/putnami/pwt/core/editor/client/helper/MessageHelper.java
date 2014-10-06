@@ -75,7 +75,7 @@ public class MessageHelper {
 					label = constants.getString(key);
 				}
 			} catch (MissingResourceException e) {
-				// Loop
+				continue; // Loop
 			}
 			typeToLookup = typeToLookup.getSuperclass();
 		}

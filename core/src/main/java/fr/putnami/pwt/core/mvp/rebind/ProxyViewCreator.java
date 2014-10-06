@@ -65,8 +65,8 @@ public class ProxyViewCreator {
 
 		if (PlaceTokenizer.class.equals(this.placeTokenizerClass)) {
 			this.placeTokenizerClass = null;
+			this.getClass();
 			try {
-				this.getClass();
 				Class<? extends ViewPlace> placeClass =
 						(Class<? extends ViewPlace>) Class.forName(this.placeType.getQualifiedSourceName());
 				for (Class<?> inter : placeClass.getInterfaces()) {
@@ -75,7 +75,7 @@ public class ProxyViewCreator {
 					}
 				}
 			} catch (ClassNotFoundException e) {
-				// Nothing to do
+				this.placeTokenizerClass = null;
 			}
 		}
 		this.viewDecoratorClass = this.activityDescrition.viewDecorator();

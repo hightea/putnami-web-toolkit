@@ -54,29 +54,4 @@ public final class EventBus extends SimpleEventBus {
 	protected <H> H getHandler(Event.Type<H> type, int index) {
 		return super.getHandler(type, index);
 	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * com.google.web.bindery.event.shared.SimpleEventBus#getHandlerCount(com.google.web.bindery.event
-	 * .shared.Event.Type)
-	 */
-	@Override
-	protected int getHandlerCount(Event.Type<?> eventKey) {
-		return super.getHandlerCount(eventKey);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * com.google.web.bindery.event.shared.SimpleEventBus#isEventHandled(com.google.web.bindery.event
-	 * .shared.Event.Type)
-	 */
-	@Override
-	protected boolean isEventHandled(Event.Type<?> eventKey) {
-		return super.isEventHandled(eventKey);
-	}
-
 }

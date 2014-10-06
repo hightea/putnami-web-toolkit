@@ -92,7 +92,6 @@ public final class Primitives {
 	}
 
 	public static void asPrimitive(Void value) {
-		return;
 	}
 
 }

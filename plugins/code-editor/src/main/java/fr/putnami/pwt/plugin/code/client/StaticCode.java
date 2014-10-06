@@ -79,7 +79,7 @@ public class StaticCode extends AbstractComposite implements CodeEditor, HasHTML
 	}
 
 	/**
-	 * To be use only by UIBinder (provide escaped HTML)
+	 * To be use only by UIBinder (provide escaped HTML).
 	 */
 	@Override
 	public void setHTML(String html) {

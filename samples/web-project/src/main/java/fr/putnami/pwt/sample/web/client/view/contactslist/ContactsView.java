@@ -1,7 +1,5 @@
 package fr.putnami.pwt.sample.web.client.view.contactslist;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
@@ -10,6 +8,8 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
+
+import java.util.List;
 
 import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
 import fr.putnami.pwt.core.model.client.model.Model;
@@ -40,14 +40,12 @@ public class ContactsView extends Composite implements View<ContactsPlace> {
 
 	interface ContactRemote extends ServiceProxy<ContactsView, ContactService>, ContactService {
 		ContactRemote SERVICE = (ContactRemote) GWT.create(ContactRemote.class);
-
 	}
 
 	interface Constants extends ConstantsWithLookup, SampleCommonConstants, PersonConstants, AddressConstants, GenderConstants {
 
 		@DefaultStringValue("Edit a contact !")
 		String newPersonTitle();
-
 	}
 
 	public interface ContactModel extends Model<Contact> {
@@ -85,7 +83,6 @@ public class ContactsView extends Composite implements View<ContactsPlace> {
 	@Override
 	public void present(ContactsPlace place) {
 		ContactRemote.SERVICE.getPeople();
-
 	}
 
 	@UiHandler("clickMeBoutton")

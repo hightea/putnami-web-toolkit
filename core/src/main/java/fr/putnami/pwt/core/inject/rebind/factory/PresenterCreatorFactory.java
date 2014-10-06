@@ -22,7 +22,7 @@ import java.util.Collection;
 
 import fr.putnami.pwt.core.inject.client.annotation.InjectService;
 import fr.putnami.pwt.core.inject.client.annotation.PresentHandler;
-import fr.putnami.pwt.core.inject.rebind.InjectorViewCreator;
+import fr.putnami.pwt.core.inject.rebind.base.AbstractInjectorCreator;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorDelegateFactorty;
 import fr.putnami.pwt.core.inject.rebind.delegate.InjectPresenterCreator;
@@ -38,7 +38,7 @@ public class PresenterCreatorFactory implements InjectorDelegateFactorty {
 				InjectCreatorUtil.listMethod(injectableType, PresentHandler.class);
 		delegates.add(new InjectPresenterCreator(methods));
 		Collection<JField> services = InjectCreatorUtil.listFields(injectableType, InjectService.class);
-		String injectorName = injectableType.getSimpleSourceName() + InjectorViewCreator.PROXY_SUFFIX;
+		String injectorName = injectableType.getSimpleSourceName() + AbstractInjectorCreator.PROXY_SUFFIX;
 		delegates.add(new SuspendServiceOnPresentCreator(injectorName, services.size() > 0));
 	}
 

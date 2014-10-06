@@ -64,15 +64,4 @@ public class IconFont extends CssLink {
 	protected String transformClassName(String iStr) {
 		return iStr.toLowerCase().replaceAll("_", "-");
 	}
-
-	@Override
-	public int hashCode() {
-		return super.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		return super.equals(obj);
-	}
-
 }

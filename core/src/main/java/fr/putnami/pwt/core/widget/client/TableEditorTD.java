@@ -93,7 +93,7 @@ HasInputEditorFactory<T>, HasWidgetFactory, HasEditorProvider {
 
 	@Override
 	public void add(IsWidget w) {
-		throw new java.lang.UnsupportedOperationException(
+		throw new UnsupportedOperationException(
 				"TableEditorTD does not support add(IsWidget) method");
 	}
 }

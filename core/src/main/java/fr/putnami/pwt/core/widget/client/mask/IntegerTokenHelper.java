@@ -14,6 +14,7 @@
  */
 package fr.putnami.pwt.core.widget.client.mask;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.i18n.client.NumberFormat;
@@ -81,12 +82,14 @@ public class IntegerTokenHelper extends TokenHelper {
 	@Override
 	public void setToken(String token) {
 		super.setToken(token);
-		this.value = this.defaultValue;
-		if (token != null && token.length() > 0) {
+		if (!Strings.isNullOrEmpty(token)) {
 			try {
 				this.value = Integer.valueOf(token);
 			} catch (NumberFormatException e) {
+				this.value = this.defaultValue;
 			}
+		} else {
+			this.value = this.defaultValue;
 		}
 	}
 

@@ -214,11 +214,9 @@ public class ContentAssistAspect {
 				if (selected == null) {
 					selected = suggestionItem;
 				}
-				if (this.selectedItem != null) {
-					if (currentSuggestion.getReplacementString().equals(
+				if (this.selectedItem != null && currentSuggestion.getReplacementString().equals(
 							this.selectedItem.suggestion.getReplacementString())) {
 						selected = suggestionItem;
-					}
 				}
 
 				suggestionItem.addDomHandler(new MouseUpHandler() {

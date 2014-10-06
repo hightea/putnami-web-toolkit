@@ -46,13 +46,11 @@ public class HandlerManager implements HasHandlers {
 			return super.getHandler(type, index);
 		}
 
-		@Override
-		protected int getHandlerCount(Event.Type<?> eventKey) {
+		private int superGetHandlerCount(Event.Type<?> eventKey) {
 			return super.getHandlerCount(eventKey);
 		}
 
-		@Override
-		protected boolean isEventHandled(Event.Type<?> eventKey) {
+		private boolean superIsEventHandled(Event.Type<?> eventKey) {
 			return super.isEventHandled(eventKey);
 		}
 	}
@@ -167,7 +165,7 @@ public class HandlerManager implements HasHandlers {
 	 * @return the number of registered handlers
 	 */
 	public int getHandlerCount(GwtEvent.Type<?> type) {
-		return this.eventBus.getHandlerCount(type);
+		return this.eventBus.superGetHandlerCount(type);
 	}
 
 	/**
@@ -177,7 +175,7 @@ public class HandlerManager implements HasHandlers {
 	 * @return whether the given event type is handled
 	 */
 	public boolean isEventHandled(GwtEvent.Type<?> e) {
-		return this.eventBus.isEventHandled(e);
+		return this.eventBus.superIsEventHandled(e);
 	}
 
 	/**

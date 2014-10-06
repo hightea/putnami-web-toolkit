@@ -114,7 +114,7 @@ public class TableEditorTH<T> extends TableTH<T> implements EditorLabel {
 
 	@Override
 	public void add(IsWidget w) {
-		throw new java.lang.UnsupportedOperationException(
+		throw new UnsupportedOperationException(
 				"TableEditorTH does not support add(IsWidget) method");
 	}
 }

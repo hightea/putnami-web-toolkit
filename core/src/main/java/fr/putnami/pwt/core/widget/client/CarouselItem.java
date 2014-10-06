@@ -35,7 +35,7 @@ public class CarouselItem extends AbstractHTMLPanel {
 
 	@Override
 	public IsWidget cloneWidget() {
-		throw new java.lang.UnsupportedOperationException("CarouselItem cannot be cloned");
+		throw new UnsupportedOperationException("CarouselItem cannot be cloned");
 	}
 
 	@UiChild(limit = 1, tagname = "caption")

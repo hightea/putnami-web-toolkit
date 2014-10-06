@@ -73,7 +73,7 @@ public class InjectorModuleCreator extends AbstractInjectorCreator {
 				srcWriter.println("super.onModuleLoad();");
 			}
 		} catch (NotFoundException e) {
-			// Nothing to do.
+			srcWriter.println("");
 		}
 
 		for (InjectorWritterEntryPoint delegate : Iterables.filter(this.delegates,

@@ -17,7 +17,7 @@ package fr.putnami.pwt.core.service.client.error.constant;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
 
 /**
- * Client Errors default messages (sources http://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
+ * Client Errors default messages (sources http://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
  */
 public interface ClientErrorConstants extends ConstantsWithLookup {
 

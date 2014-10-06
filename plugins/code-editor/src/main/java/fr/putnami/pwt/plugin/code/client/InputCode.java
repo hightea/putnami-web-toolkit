@@ -213,7 +213,7 @@ FocusHandler, ClickHandler, BlurHandler, HasHTML {
 	}
 
 	/**
-	 * To be use only by UIBinder (provide escaped HTML)
+	 * To be use only by UIBinder (provide escaped HTML).
 	 */
 	@Override
 	public void setHTML(String html) {

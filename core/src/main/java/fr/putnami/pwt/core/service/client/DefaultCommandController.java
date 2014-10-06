@@ -87,7 +87,7 @@ public final class DefaultCommandController extends CommandController {
 									requestCallback.onFailure(response.getThrown());
 									caught = true;
 								} catch (RuntimeException e) {
-									// Exception not handled.
+									continue; // Exception not handled.
 								}
 							}
 							if (!caught) {

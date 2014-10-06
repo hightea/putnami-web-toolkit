@@ -208,7 +208,7 @@ public final class ModelUtils {
 
 	public static boolean isEnumType(Class propertyType) {
 		for (Class<?> parentClass : ModelUtils.getTypeHierachy(propertyType)) {
-			if (parentClass != null && Enum.class.equals(parentClass)) {
+			if (Enum.class.equals(parentClass)) {
 				return true;
 			}
 		}

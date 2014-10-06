@@ -239,7 +239,6 @@ FocusHandler, BlurHandler, MouseUpHandler {
 				}
 			}
 		}
-		return;
 	}
 
 	private void focusOnCursor() {

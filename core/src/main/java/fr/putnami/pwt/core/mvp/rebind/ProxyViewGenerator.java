@@ -35,9 +35,8 @@ public class ProxyViewGenerator extends Generator {
 			throw new UnableToCompleteException();
 		}
 
-		ProxyViewCreator proxyCreator = new ProxyViewCreator(placeType);
-
-		return proxyCreator.create(logger, context);
+			ProxyViewCreator proxyCreator = new ProxyViewCreator(placeType);
+			return proxyCreator.create(logger, context);
 	}
 
 }

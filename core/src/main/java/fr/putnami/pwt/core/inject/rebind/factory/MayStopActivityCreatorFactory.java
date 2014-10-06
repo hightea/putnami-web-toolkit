@@ -20,7 +20,7 @@ import com.google.gwt.core.ext.typeinfo.JMethod;
 import java.util.Collection;
 
 import fr.putnami.pwt.core.inject.client.annotation.MayStopActivityHandler;
-import fr.putnami.pwt.core.inject.rebind.InjectorViewCreator;
+import fr.putnami.pwt.core.inject.rebind.base.AbstractInjectorCreator;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorDelegateFactorty;
 import fr.putnami.pwt.core.inject.rebind.delegate.InjectMayStopActivityCreator;
@@ -34,7 +34,7 @@ public class MayStopActivityCreatorFactory implements InjectorDelegateFactorty {
 		Collection<JMethod> methods =
 				InjectCreatorUtil.listMethod(injectableType, MayStopActivityHandler.class);
 		if (!methods.isEmpty()) {
-			String injectorName = injectableType.getSimpleSourceName() + InjectorViewCreator.PROXY_SUFFIX;
+			String injectorName = injectableType.getSimpleSourceName() + AbstractInjectorCreator.PROXY_SUFFIX;
 			delegates.add(new InjectMayStopActivityCreator(methods, injectorName));
 		}
 	}

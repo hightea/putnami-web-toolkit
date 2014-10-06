@@ -20,7 +20,7 @@ import com.google.gwt.core.ext.typeinfo.JMethod;
 import java.util.Collection;
 
 import fr.putnami.pwt.core.inject.client.annotation.StopActivityHandler;
-import fr.putnami.pwt.core.inject.rebind.InjectorViewCreator;
+import fr.putnami.pwt.core.inject.rebind.base.AbstractInjectorCreator;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorDelegateFactorty;
 import fr.putnami.pwt.core.inject.rebind.delegate.InjectStopActivityCreator;
@@ -34,7 +34,7 @@ public class StopActivityCreatorFactory implements InjectorDelegateFactorty {
 		Collection<JMethod> methods =
 				InjectCreatorUtil.listMethod(injectableType, StopActivityHandler.class);
 		if (!methods.isEmpty()) {
-			String injectorName = injectableType.getSimpleSourceName() + InjectorViewCreator.PROXY_SUFFIX;
+			String injectorName = injectableType.getSimpleSourceName() + AbstractInjectorCreator.PROXY_SUFFIX;
 			delegates.add(new InjectStopActivityCreator(methods, injectorName));
 		}
 	}

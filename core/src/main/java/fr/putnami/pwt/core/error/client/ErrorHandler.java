@@ -68,7 +68,7 @@ public interface ErrorHandler {
 	boolean handle(Throwable error);
 
 	/**
-	 * The priority of the handler within the {@link ErrorManager}
+	 * The priority of the handler within the {@link ErrorManager}.
 	 * <p>
 	 * Higher the priority is, Sooner the handler will be used
 	 * </p>

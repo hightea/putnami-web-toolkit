@@ -1,9 +1,9 @@
 package fr.putnami.pwt.sample.web.shared.domain;
 
-import java.io.Serializable;
-
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
+
+import java.io.Serializable;
 
 public class Address implements Serializable {
 

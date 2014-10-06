@@ -50,6 +50,7 @@ public class CommandServiceCompositeSerializer implements Serializer {
 					return o;
 				}
 			} catch (SerializationException e) {
+				continue;
 			}
 		}
 		throw new SerializationException(typeSignature);
@@ -63,6 +64,7 @@ public class CommandServiceCompositeSerializer implements Serializer {
 				serializer.serialize(stream, instance, typeSignature);
 				return;
 			} catch (SerializationException e) {
+				continue;
 			}
 		}
 		throw new SerializationException(typeSignature);
@@ -76,6 +78,7 @@ public class CommandServiceCompositeSerializer implements Serializer {
 				serializer.deserialize(stream, instance, typeSignature);
 				return;
 			} catch (SerializationException e) {
+				continue;
 			}
 		}
 		throw new SerializationException(typeSignature);

@@ -41,6 +41,5 @@ public class SampleWebApp implements EntryPoint {
 		controller.registerActivity(AddressBookPlace.INSTANCE);
 
 		controller.handleCurrentHistory();
-
 	}
 }
