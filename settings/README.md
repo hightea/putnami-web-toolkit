@@ -1,38 +1,38 @@
 Eclipse setup instructions
+===================
 
-These instructions are intended for contributors to the GWT source
-code repository that want to run the Eclipse IDE. It describes how to
-configure Eclipse for the correct coding styles and how to setup a GWT
-project for debugging the core GWT code.
+These instructions are intended for contributors to the PWT source
+code repository that want to run the Eclipse IDE. 
+It describes how to configure Eclipse for the correct coding styles and how to setup a PWT project.
 
 
-== Configure Eclipse Environment==
+# Configure Eclipse Environment #
 
-All relative paths are relative to the GWT source repository's
-'trunk/eclipse' folder.
+All relative paths are relative to the PWT source repository's
+'putnami-pwt' folder.
 
----------------- Encoding -----------------
+## Encoding ##
 
 Window->Preferences->General->Workspace->Text file encoding
 Use "UTF-8"
 
----------------- Spelling -----------------
+## Spelling ##
 
 Window->Preferences->General->Editors->Text Editors->Spelling
 Enable spell checking
 Use "settings/english.dictionary".
 
----------- Code style/formatting ----------
+## Code style/formatting ##
 
 Window->Preferences->Java->Code Style->Formatter->Import...
   settings/code-style/pwt-format.xml
 
------------ Import organization -----------
+## Import organization ##
 
 Window->Preferences->Java->Code Style->Organize Imports->Import...
   settings/code-style/pwt.importorder
 
------------- Member sort order ------------
+## Member sort order ##
 
 Window->Preferences->Java->Appearance->Members Sort Order
 
@@ -55,7 +55,7 @@ Second, members in the same category should be sorted by visibility.
 Third, within a category/visibility combination, members should be sorted
 alphabetically.
  
-------- Compiler errors & warnings --------
+## Compiler errors & warnings ##
 Window->Preferences->Java->Compiler->Errors/Warnings
 
 The following errors are suggested.
@@ -83,7 +83,7 @@ Annotations:
 - Annotation is used as super interface
 - Enable @SuppressWarnings annotations
 
-== Checkstyle ==
+# Checkstyle #
 
 Checkstyle is used to enforce good programming style. Its use in
 Eclipse is optional, since it is also run as part of the acceptance
