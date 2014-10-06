@@ -31,7 +31,6 @@ import fr.putnami.pwt.core.service.shared.domain.CommandResponse;
 import fr.putnami.pwt.core.service.shared.service.CommandService;
 
 public class CommandExecutorImpl extends AbstractCommandExecutor implements CommandExecutor {
-
   protected final Log executorLogger;
 
   private final Object service;
@@ -46,10 +45,9 @@ public class CommandExecutorImpl extends AbstractCommandExecutor implements Comm
     for (int i = 0; i < method.getParameterTypes().length; i++) {
       paramTypes[i] = method.getParameterTypes()[i].getName();
     }
-    CommandDefinition definition = new CommandDefinition(
-        method.getDeclaringClass().getName(),
-        method.getName(),
-        method.getReturnType().getName(), paramTypes);
+    CommandDefinition definition =
+        new CommandDefinition(method.getDeclaringClass().getName(), method.getName(), method
+            .getReturnType().getName(), paramTypes);
     this.setCommandDefinition(definition);
 
     this.executorLogger = LogFactory.getLog(method.getDeclaringClass().getCanonicalName());
@@ -66,16 +64,13 @@ public class CommandExecutorImpl extends AbstractCommandExecutor implements Comm
       this.executorLogger.info("execute : " + this.getCommandDefinition());
       Object result = this.method.invoke(this.service, argsArray.toArray());
       reponse.setResult(Lists.newArrayList(result));
-    }
-    catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       thrown = e;
       reponse.setThrown(this.toThrown(CommandService.EXCEPTION_ILLEGAL_ARGUMENT, e));
-    }
-    catch (IllegalAccessException e) {
+    } catch (IllegalAccessException e) {
       thrown = e;
       reponse.setThrown(this.toThrown(CommandService.EXCEPTION_ILLEGAL_ACCESS, e));
-    }
-    catch (InvocationTargetException e) {
+    } catch (InvocationTargetException e) {
       thrown = e.getCause();
       reponse.setThrown(this.toThrown(CommandService.EXCEPTION_INVOKATION, e.getTargetException()));
     }
