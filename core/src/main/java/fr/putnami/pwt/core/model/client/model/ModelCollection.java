@@ -16,13 +16,13 @@
  */
 package fr.putnami.pwt.core.model.client.model;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 public class ModelCollection<T> extends AbstractModel<Collection<T>> {
 
@@ -87,7 +87,6 @@ public class ModelCollection<T> extends AbstractModel<Collection<T>> {
 		if (beanToClone == null) {
 			return null;
 		}
-		else {
 			Collection<T> result = newInstance();
 			for (T val : beanToClone) {
 				if (beanModel != null) {
@@ -98,6 +97,5 @@ public class ModelCollection<T> extends AbstractModel<Collection<T>> {
 				}
 			}
 			return result;
-		}
 	}
 }

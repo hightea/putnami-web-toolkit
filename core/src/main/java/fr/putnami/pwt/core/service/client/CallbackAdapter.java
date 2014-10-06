@@ -20,20 +20,18 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class CallbackAdapter<T> implements AsyncCallback<T> {
 
-	@Override
-	public void onSuccess(T result) {
-	}
+  @Override
+  public void onSuccess(T result) {
+  }
 
-	@Override
-	public void onFailure(Throwable caught) {
-		if (caught != null) {
-			if (caught instanceof RuntimeException) {
-				throw (RuntimeException) caught;
-			}
-			else {
-				throw new RuntimeException(caught);
-			}
-		}
-	}
+  @Override
+  public void onFailure(Throwable caught) {
+    if (caught != null) {
+      if (caught instanceof RuntimeException) {
+        throw (RuntimeException) caught;
+      }
+      throw new RuntimeException(caught);
+    }
+  }
 
 }

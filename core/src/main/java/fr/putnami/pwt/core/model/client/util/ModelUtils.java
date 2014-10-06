@@ -16,12 +16,12 @@
  */
 package fr.putnami.pwt.core.model.client.util;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 
 import fr.putnami.pwt.core.editor.client.Path;
 import fr.putnami.pwt.core.editor.client.Path.PathElement;
@@ -32,201 +32,199 @@ import fr.putnami.pwt.core.model.client.model.PropertyDescription;
 
 public final class ModelUtils {
 
-	public static <A> PropertyDescription resolveProperty(Model<?> model, Path path) {
-		if (model == null || path.size() == 0) {
-			return null;
-		}
-		String firstElementName = path.get(0).getElementName();
-		if (path.size() == 1) {
-			return model.getProperty(firstElementName);
-		}
-		else if (Path.ROOT_PATH.equals(firstElementName)) {
-			return ModelUtils.resolveProperty(model, path.subPath(1));
-		}
-		else {
-			PropertyDescription propertyDescription = model.getProperty(firstElementName);
-			Model<Object> subModel = (Model<Object>) propertyDescription.getModel();
-			return ModelUtils.resolveProperty(subModel, path.subPath(1));
-		}
-	}
+  public static <A> PropertyDescription resolveProperty(Model<?> model, Path path) {
+    if (model == null || path.size() == 0) {
+      return null;
+    }
+    String firstElementName = path.get(0).getElementName();
+    if (path.size() == 1) {
+      return model.getProperty(firstElementName);
+    }
+    else if (Path.ROOT_PATH.equals(firstElementName)) {
+      return ModelUtils.resolveProperty(model, path.subPath(1));
+    }
+    else {
+      PropertyDescription propertyDescription = model.getProperty(firstElementName);
+      Model<Object> subModel = propertyDescription.getModel();
+      return ModelUtils.resolveProperty(subModel, path.subPath(1));
+    }
+  }
 
-	public static <A> Collection<Validator<A>> resolveValidators(Model<?> model, Path path) {
-		PropertyDescription propertyDescription = resolveProperty(model, path);
-		Collection<Validator<?>> validators = null;
-		if (propertyDescription != null) {
-			validators = propertyDescription.getValidators();
-		}
-		return validators == null ? Collections.EMPTY_LIST : validators;
-	}
+  public static <A> Collection<Validator<A>> resolveValidators(Model<?> model, Path path) {
+    PropertyDescription propertyDescription = resolveProperty(model, path);
+    Collection<Validator<?>> validators = null;
+    if (propertyDescription != null) {
+      validators = propertyDescription.getValidators();
+    }
+    return validators == null ? Collections.EMPTY_LIST : validators;
+  }
 
-	public static <A, B> Model<A> resolveModel(Model<B> model, Path path) {
-		PropertyDescription propertyDescription = resolveProperty(model, path);
-		if (propertyDescription != null) {
-			return (Model<A>) propertyDescription.getModel();
-		}
-		return (Model<A>) model;
-	}
+  public static <A, B> Model<A> resolveModel(Model<B> model, Path path) {
+    PropertyDescription propertyDescription = resolveProperty(model, path);
+    if (propertyDescription != null) {
+      return (Model<A>) propertyDescription.getModel();
+    }
+    return (Model<A>) model;
+  }
 
-	public static <A, B> Class<A> resolveType(Model<B> model, Path path) {
-		if (path.size() == 0) {
-			return (Class<A>) model.getLeafType();
-		}
-		PropertyDescription propertyDescription = resolveProperty(model, path);
-		if (propertyDescription != null) {
-			return (Class<A>) propertyDescription.getClazz();
-		}
-		return null;
-	}
+  public static <A, B> Class<A> resolveType(Model<B> model, Path path) {
+    if (path.size() == 0) {
+      return (Class<A>) model.getLeafType();
+    }
+    PropertyDescription propertyDescription = resolveProperty(model, path);
+    if (propertyDescription != null) {
+      return (Class<A>) propertyDescription.getClazz();
+    }
+    return null;
+  }
 
-	public static <A, B> A resolveValue(Object bean, Model<B> model, Path path) {
-		if (model == null || path.size() == 0) {
-			return (A) bean;
-		}
+  public static <A, B> A resolveValue(Object bean, Model<B> model, Path path) {
+    if (model == null || path.size() == 0) {
+      return (A) bean;
+    }
 
-		PathElement firstElement = path.get(0);
-		String firstElementName = firstElement.getElementName();
-		firstElementName = firstElementName == null ? Path.ROOT_PATH : firstElementName;
-		Integer firstElementIndex = firstElement.getIndexKey();
+    PathElement firstElement = path.get(0);
+    String firstElementName = firstElement.getElementName();
+    firstElementName = firstElementName == null ? Path.ROOT_PATH : firstElementName;
+    Integer firstElementIndex = firstElement.getIndexKey();
 
-		Object value = bean;
-		Model<?> leafModel = model;
-		if (leafModel instanceof ModelCollection) {
-			leafModel = ((ModelCollection) model).getLeafModel();
-		}
+    Object value = bean;
+    Model<?> leafModel = model;
+    if (leafModel instanceof ModelCollection) {
+      leafModel = ((ModelCollection) model).getLeafModel();
+    }
 
-		if (leafModel != null && !Path.ROOT_PATH.equals(firstElementName)) {
-			value = leafModel.get(bean, firstElementName);
-		}
+    if (leafModel != null && !Path.ROOT_PATH.equals(firstElementName)) {
+      value = leafModel.get(bean, firstElementName);
+    }
 
-		if (firstElementIndex != null && value instanceof Collection) {
-			Collection collection = (Collection) value;
-			if (collection.size() > firstElement.getIndexKey()) {
-				value = Iterables.get(collection, firstElementIndex);
-			}
-			else {
-				value = null;
-			}
-		}
+    if (firstElementIndex != null && value instanceof Collection) {
+      Collection collection = (Collection) value;
+      if (collection.size() > firstElement.getIndexKey()) {
+        value = Iterables.get(collection, firstElementIndex);
+      }
+      else {
+        value = null;
+      }
+    }
 
-		if (path.size() == 1) {
-			return (A) value;
-		}
-		else {
-			if (!Path.ROOT_PATH.equals(firstElementName)) {
-				leafModel = leafModel.getProperty(firstElementName).getModel();
-			}
-			return ModelUtils.resolveValue(value, leafModel, path.subPath(1));
-		}
-	}
+    if (path.size() == 1) {
+      return (A) value;
+    }
+    if (!Path.ROOT_PATH.equals(firstElementName)) {
+      leafModel = leafModel.getProperty(firstElementName).getModel();
+    }
+    return ModelUtils.resolveValue(value, leafModel, path.subPath(1));
+  }
 
-	public static <A, B> A bindValue(A bean, Model<A> model, Path path, B value) {
-		if (model == null || path.size() == 0) {
-			return bean;
-		}
-		A targetBean = bean;
+  public static <A, B> A bindValue(A bean, Model<A> model, Path path, B value) {
+    if (model == null || path.size() == 0) {
+      return bean;
+    }
+    A targetBean = bean;
 
-		PathElement firstElement = path.get(0);
-		String firstElementName = firstElement.getElementName();
-		Integer firstElementIndex = firstElement.getIndexKey();
+    PathElement firstElement = path.get(0);
+    String firstElementName = firstElement.getElementName();
+    Integer firstElementIndex = firstElement.getIndexKey();
 
-		if (path.size() == 1) {
-			if (firstElementIndex == null) {
-				if (targetBean == null && value != null) {
-					targetBean = model.newInstance();
-					model.set(targetBean, firstElementName, value);
-				}
-				else {
-					model.set(targetBean, firstElementName, value);
-				}
-				model.set(targetBean, firstElementName, value);
-			}
-			else {
-				Object o;
-				if (Path.ROOT_PATH.equals(firstElementName)) {
-					o = targetBean;
-				}
-				else {
-					o = model.get(targetBean, firstElementName);
-					if (o == null) {
-						o = model.newInstance();
-						model.set(targetBean, firstElementName, o);
-					}
-				}
-				if (o instanceof List) {
-					List list = (List) o;
-					while (list.size() <= firstElementIndex.intValue()) {
-						list.add(null);
-					}
-					list.set(firstElementIndex, value);
-				}
-			}
-		}
-		else {
-			if (Path.ROOT_PATH.equals(firstElementName) && firstElementIndex == null) {
-				ModelUtils.bindValue(targetBean, model, path.subPath(1), value);
-			}
-			else if (firstElementIndex != null) {
-				Object o;
-				if (Path.ROOT_PATH.equals(firstElementName)) {
-					o = targetBean;
-				}
-				else {
-					o = model.get(targetBean, firstElementName);
-					if (o == null) {
-						o = model.newInstance();
-						model.set(targetBean, firstElementName, o);
-					}
-				}
-				if (o instanceof List) {
-					List list = (List) o;
-					while (list.size() <= firstElementIndex.intValue()) {
-						list.add(null);
-					}
-					Object subBean = list.get(firstElementIndex);
+    if (path.size() == 1) {
+      if (firstElementIndex == null) {
+        if (targetBean == null && value != null) {
+          targetBean = model.newInstance();
+          model.set(targetBean, firstElementName, value);
+        }
+        else {
+          model.set(targetBean, firstElementName, value);
+        }
+        model.set(targetBean, firstElementName, value);
+      }
+      else {
+        Object o;
+        if (Path.ROOT_PATH.equals(firstElementName)) {
+          o = targetBean;
+        }
+        else {
+          o = model.get(targetBean, firstElementName);
+          if (o == null) {
+            o = model.newInstance();
+            model.set(targetBean, firstElementName, o);
+          }
+        }
+        if (o instanceof List) {
+          List list = (List) o;
+          while (list.size() <= firstElementIndex.intValue()) {
+            list.add(null);
+          }
+          list.set(firstElementIndex, value);
+        }
+      }
+    }
+    else {
+      if (Path.ROOT_PATH.equals(firstElementName) && firstElementIndex == null) {
+        ModelUtils.bindValue(targetBean, model, path.subPath(1), value);
+      }
+      else if (firstElementIndex != null) {
+        Object o;
+        if (Path.ROOT_PATH.equals(firstElementName)) {
+          o = targetBean;
+        }
+        else {
+          o = model.get(targetBean, firstElementName);
+          if (o == null) {
+            o = model.newInstance();
+            model.set(targetBean, firstElementName, o);
+          }
+        }
+        if (o instanceof List) {
+          List list = (List) o;
+          while (list.size() <= firstElementIndex.intValue()) {
+            list.add(null);
+          }
+          Object subBean = list.get(firstElementIndex);
 
-					Model<Object> subModel = model.getLeafModel();
-					if (subBean == null) {
-						subBean = subModel.newInstance();
-						list.set(firstElementIndex, subBean);
-					}
-					ModelUtils.bindValue(subBean, subModel, path.subPath(1), value);
-				}
-			}
-			else {
-				Model<Object> subModel = (Model<Object>) model.getProperty(firstElementName).getModel();
-				Object subBean = model.get(targetBean, firstElementName);
-				if (subBean == null) {
-					subBean = subModel.newInstance();
-					model.set(targetBean, firstElementName, subBean);
-				}
-				ModelUtils.bindValue(subBean, subModel, path.subPath(1), value);
-			}
-		}
-		return targetBean;
-	}
+          Model<Object> subModel = model.getLeafModel();
+          if (subBean == null) {
+            subBean = subModel.newInstance();
+            list.set(firstElementIndex, subBean);
+          }
+          ModelUtils.bindValue(subBean, subModel, path.subPath(1), value);
+        }
+      }
+      else {
+        Model<Object> subModel = model.getProperty(firstElementName).getModel();
+        Object subBean = model.get(targetBean, firstElementName);
+        if (subBean == null) {
+          subBean = subModel.newInstance();
+          model.set(targetBean, firstElementName, subBean);
+        }
+        ModelUtils.bindValue(subBean, subModel, path.subPath(1), value);
+      }
+    }
+    return targetBean;
+  }
 
-	public static List<Class<?>> getTypeHierachy(Class<?> propertyType) {
-		List<Class<?>> result = Lists.newArrayList();
-		if (propertyType != null) {
-			Class<?> parentClass = propertyType.getSuperclass();
-			while (parentClass != null) {
-				result.add(parentClass);
-				parentClass = parentClass.getSuperclass();
-			}
-		}
-		return result;
-	}
+  public static List<Class<?>> getTypeHierachy(Class<?> propertyType) {
+    List<Class<?>> result = Lists.newArrayList();
+    if (propertyType != null) {
+      Class<?> parentClass = propertyType.getSuperclass();
+      while (parentClass != null) {
+        result.add(parentClass);
+        parentClass = parentClass.getSuperclass();
+      }
+    }
+    return result;
+  }
 
-	private ModelUtils() {
-	}
+  private ModelUtils() {
+  }
 
-	public static boolean isEnumType(Class propertyType) {
-		for (Class<?> parentClass : ModelUtils.getTypeHierachy(propertyType)) {
-			if (parentClass != null && Enum.class.equals(parentClass)) {
-				return true;
-			}
-		}
-		return false;
-	}
+  public static boolean isEnumType(Class propertyType) {
+    for (Class<?> parentClass : ModelUtils.getTypeHierachy(propertyType)) {
+      if (parentClass != null && Enum.class.equals(parentClass)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
 }

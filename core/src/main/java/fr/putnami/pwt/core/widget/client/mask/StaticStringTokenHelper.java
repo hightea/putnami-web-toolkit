@@ -16,62 +16,58 @@
  */
 package fr.putnami.pwt.core.widget.client.mask;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
+
+import java.util.List;
 
 import fr.putnami.pwt.core.widget.client.mask.MaskValueBoxHelper.TokenHelper;
 
 public class StaticStringTokenHelper extends TokenHelper {
 
-	private final List<Character> delimiters;
-	private final String value;
+  private final List<Character> delimiters;
+  private final String value;
 
-	public StaticStringTokenHelper(String value, boolean optional) {
-		this.value = value;
-		this.optional = optional;
-		this.delimiters = Lists.newArrayList(value.charAt(0));
-	}
+  public StaticStringTokenHelper(String value, boolean optional) {
+    this.value = value;
+    this.optional = optional;
+    this.delimiters = Lists.newArrayList(value.charAt(0));
+  }
 
-	public StaticStringTokenHelper(String value, boolean optional, Character... delimiters) {
-		this.value = value;
-		this.optional = optional;
-		this.delimiters = Lists.newArrayList(delimiters);
-	}
+  public StaticStringTokenHelper(String value, boolean optional, Character... delimiters) {
+    this.value = value;
+    this.optional = optional;
+    this.delimiters = Lists.newArrayList(delimiters);
+  }
 
-	@Override
-	protected String flush() {
-		if (optional) {
-			return token == null ? "" : token;
-		}
-		else {
-			return value;
-		}
-	}
+  @Override
+  protected String flush() {
+    if (optional) {
+      return token == null ? "" : token;
+    }
+    return value;
+  }
 
-	@Override
-	protected void focus(boolean forward) {
-		if (forward) {
-			maskHelper.focusNext();
-		}
-		else {
-			maskHelper.focusPrevious();
-		}
-	}
+  @Override
+  protected void focus(boolean forward) {
+    if (forward) {
+      maskHelper.focusNext();
+    }
+    else {
+      maskHelper.focusPrevious();
+    }
+  }
 
-	@Override
-	protected boolean handleKeyDown(int keyDown) {
-		return value.equals(token);
-	}
+  @Override
+  protected boolean handleKeyDown(int keyDown) {
+    return value.equals(token);
+  }
 
-	@Override
-	protected boolean handleKeyPress(char charPressed) {
-		if (delimiters.contains(charPressed)) {
-			this.token = value;
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
+  @Override
+  protected boolean handleKeyPress(char charPressed) {
+    if (delimiters.contains(charPressed)) {
+      this.token = value;
+      return true;
+    }
+    return false;
+  }
 }

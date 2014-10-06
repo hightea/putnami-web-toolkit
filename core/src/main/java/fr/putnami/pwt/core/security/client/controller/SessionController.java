@@ -35,103 +35,101 @@ import fr.putnami.pwt.core.security.shared.exception.SecurityException;
 
 public abstract class SessionController implements HasSignInHandlers, HasSignOutHandlers, HasSignFailledHandlers {
 
-	private static SessionController instance;
+  private static SessionController instance;
 
-	public static SessionController get() {
-		if (instance == null) {
-			instance = GWT.create(SessionController.class);
-		}
-		return instance;
-	}
+  public static SessionController get() {
+    if (instance == null) {
+      instance = GWT.create(SessionController.class);
+    }
+    return instance;
+  }
 
-	private SessionDto session;
+  private SessionDto session;
 
-	protected SessionController() {
+  protected SessionController() {
 
-	}
+  }
 
-	public SessionDto getCurrentSession() {
-		return session;
-	}
+  public SessionDto getCurrentSession() {
+    return session;
+  }
 
-	public boolean isAuthenticated() {
-		return session != null
-				&& !SecurityConstants.USER_ANONYMOUS.equals(session.getUsername());
-	}
+  public boolean isAuthenticated() {
+    return session != null
+        && !SecurityConstants.USER_ANONYMOUS.equals(session.getUsername());
+  }
 
-	public boolean hasRole(String role) {
-		if (session != null) {
-			String corrected = role;
-			if (!corrected.startsWith(SecurityConstants.PREFFIX_ROLE)) {
-				corrected = SecurityConstants.PREFFIX_ROLE + role;
-			}
-			corrected = corrected.toUpperCase();
-			if (SecurityConstants.ROLE_ANONYMOUS.equals(corrected)) {
-				return !isAuthenticated();
-			}
-			if (SecurityConstants.ROLE_AUTHENTICATED.equals(corrected)) {
-				return isAuthenticated();
-			}
-			else {
-				return session.getRoles().contains(corrected);
-			}
-		}
-		return false;
-	}
+  public boolean hasRole(String role) {
+    if (session != null) {
+      String corrected = role;
+      if (!corrected.startsWith(SecurityConstants.PREFFIX_ROLE)) {
+        corrected = SecurityConstants.PREFFIX_ROLE + role;
+      }
+      corrected = corrected.toUpperCase();
+      if (SecurityConstants.ROLE_ANONYMOUS.equals(corrected)) {
+        return !isAuthenticated();
+      }
+      if (SecurityConstants.ROLE_AUTHENTICATED.equals(corrected)) {
+        return isAuthenticated();
+      }
+      return session.getRoles().contains(corrected);
+    }
+    return false;
+  }
 
-	public void checkAuthorized(Place fallback, String... roles) {
-		if (roles != null) {
-			for (String role : roles) {
-				if (hasRole(role)) {
-					return;
-				}
-			}
-		}
-		throw new SecurityException("Unauthorized", fallback);
-	}
+  public void checkAuthorized(Place fallback, String... roles) {
+    if (roles != null) {
+      for (String role : roles) {
+        if (hasRole(role)) {
+          return;
+        }
+      }
+    }
+    throw new SecurityException("Unauthorized", fallback);
+  }
 
-	public void setSession(SessionDto session) {
-		if (this.session == null || !this.session.equals(session)) {
-			this.session = session;
-			fireSignIn();
-		}
-	}
+  public void setSession(SessionDto session) {
+    if (this.session == null || !this.session.equals(session)) {
+      this.session = session;
+      fireSignIn();
+    }
+  }
 
-	protected void fireSignIn() {
-		fireEvent(new SignInEvent(session));
-	}
+  protected void fireSignIn() {
+    fireEvent(new SignInEvent(session));
+  }
 
-	protected void fireSignFailled() {
-		fireEvent(new SignFailledEvent(session));
-	}
+  protected void fireSignFailled() {
+    fireEvent(new SignFailledEvent(session));
+  }
 
-	protected void fireSignOut() {
-		fireEvent(new SignOutEvent(session));
-		fireSignIn();
-	}
+  protected void fireSignOut() {
+    fireEvent(new SignOutEvent(session));
+    fireSignIn();
+  }
 
-	@Override
-	public HandlerRegistration addSignInHandler(Handler handler) {
-		return EventBus.get().addHandlerToSource(SignInEvent.TYPE, this, handler);
-	}
+  @Override
+  public HandlerRegistration addSignInHandler(Handler handler) {
+    return EventBus.get().addHandlerToSource(SignInEvent.TYPE, this, handler);
+  }
 
-	@Override
-	public HandlerRegistration addSignOutHandler(SignOutEvent.Handler handler) {
-		return EventBus.get().addHandlerToSource(SignOutEvent.TYPE, this, handler);
-	}
+  @Override
+  public HandlerRegistration addSignOutHandler(SignOutEvent.Handler handler) {
+    return EventBus.get().addHandlerToSource(SignOutEvent.TYPE, this, handler);
+  }
 
-	@Override
-	public HandlerRegistration addSignFailledHandler(SignFailledEvent.Handler handler) {
-		return EventBus.get().addHandlerToSource(SignFailledEvent.TYPE, this, handler);
-	}
+  @Override
+  public HandlerRegistration addSignFailledHandler(SignFailledEvent.Handler handler) {
+    return EventBus.get().addHandlerToSource(SignFailledEvent.TYPE, this, handler);
+  }
 
-	@Override
-	public void fireEvent(GwtEvent<?> event) {
-		EventBus.get().fireEventFromSource(event, this);
-	}
+  @Override
+  public void fireEvent(GwtEvent<?> event) {
+    EventBus.get().fireEventFromSource(event, this);
+  }
 
-	public abstract void signOut();
+  public abstract void signOut();
 
-	public abstract void loadSession();
+  public abstract void loadSession();
 
 }

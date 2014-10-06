@@ -16,9 +16,9 @@
  */
 package fr.putnami.pwt.core.model.client.visitor;
 
-import java.util.Map;
-
 import com.google.common.collect.Maps;
+
+import java.util.Map;
 
 import fr.putnami.pwt.core.editor.client.Context;
 import fr.putnami.pwt.core.editor.client.Editor;
@@ -44,145 +44,142 @@ import fr.putnami.pwt.core.model.client.util.ModelUtils;
 
 public class EditorFactoryVisitor extends AbstractVisitor {
 
-	private static class InternalEditorProvider implements EditorProvider {
-		final Context<?> parentContext;
-		final Class propertyType;
+  private static class InternalEditorProvider implements EditorProvider {
+    final Context<?> parentContext;
+    final Class propertyType;
 
-		CloneableWidget inputFactory;
-		CloneableWidget outputFactory;
+    CloneableWidget inputFactory;
+    CloneableWidget outputFactory;
 
-		private Map<Integer, Editor> inputEditors;
-		private Map<Integer, Editor> outputEditors;
+    private Map<Integer, Editor> inputEditors;
+    private Map<Integer, Editor> outputEditors;
 
-		private InternalEditorProvider(
-				Context<?> parentContext, Class propertyType,
-				CloneableWidget inputFactory, CloneableWidget outputFactory) {
-			super();
-			this.parentContext = parentContext;
-			this.propertyType = propertyType;
-			this.inputFactory = inputFactory;
-			this.outputFactory = outputFactory;
-		}
+    private InternalEditorProvider(
+        Context<?> parentContext, Class propertyType,
+        CloneableWidget inputFactory, CloneableWidget outputFactory) {
+      super();
+      this.parentContext = parentContext;
+      this.propertyType = propertyType;
+      this.inputFactory = inputFactory;
+      this.outputFactory = outputFactory;
+    }
 
-		@Override
-		public <E extends Editor> E getEditor(Boolean readonly) {
-			return ensureEditor(readonly, null);
-		}
+    @Override
+    public <E extends Editor> E getEditor(Boolean readonly) {
+      return ensureEditor(readonly, null);
+    }
 
-		@Override
-		public <E extends Editor> E getEditorForTraversal(Boolean readonly, Integer index) {
-			return ensureEditor(readonly, index);
-		}
+    @Override
+    public <E extends Editor> E getEditorForTraversal(Boolean readonly, Integer index) {
+      return ensureEditor(readonly, index);
+    }
 
-		private <E extends Editor> E ensureEditor(Boolean readonly, Integer index) {
-			if (!Boolean.FALSE.equals(readonly)) {
-				if (outputEditors == null) {
-					outputEditors = Maps.newHashMap();
-				}
-				Editor editor = outputEditors.get(index);
-				if (editor == null) {
-					editor = (Editor) getOutputFacoty().cloneWidget();
-					outputEditors.put(index, editor);
-					initEditor(editor, index);
-				}
-				return (E) editor;
-			}
-			else {
-				if (inputEditors == null) {
-					inputEditors = Maps.newHashMap();
-				}
-				Editor editor = inputEditors.get(index);
-				if (editor == null) {
-					editor = (Editor) getInputFacoty().cloneWidget();
-					inputEditors.put(index, editor);
-					initEditor(editor, index);
-				}
-				return (E) editor;
+    private <E extends Editor> E ensureEditor(Boolean readonly, Integer index) {
+      if (!Boolean.FALSE.equals(readonly)) {
+        if (outputEditors == null) {
+          outputEditors = Maps.newHashMap();
+        }
+        Editor editor = outputEditors.get(index);
+        if (editor == null) {
+          editor = (Editor) getOutputFacoty().cloneWidget();
+          outputEditors.put(index, editor);
+          initEditor(editor, index);
+        }
+        return (E) editor;
+      }
+      if (inputEditors == null) {
+        inputEditors = Maps.newHashMap();
+      }
+      Editor editor = inputEditors.get(index);
+      if (editor == null) {
+        editor = (Editor) getInputFacoty().cloneWidget();
+        inputEditors.put(index, editor);
+        initEditor(editor, index);
+      }
+      return (E) editor;
+    }
 
-			}
-		}
+    private CloneableWidget getOutputFacoty() {
+      if (outputFactory == null) {
+        outputFactory = EditorFactoryManager.get().createOutputForType(propertyType, parentContext);
+      }
+      assert outputFactory != null : "output factory is null, can not create an output editor for " + propertyType;
+      return outputFactory;
+    }
 
-		private CloneableWidget getOutputFacoty() {
-			if (outputFactory == null) {
-				outputFactory = EditorFactoryManager.get().createOutputForType(propertyType, parentContext);
-			}
-			assert outputFactory != null : "output factory is null, can not create an output editor for " + propertyType;
-			return outputFactory;
-		}
+    private CloneableWidget getInputFacoty() {
+      if (inputFactory == null) {
+        inputFactory = EditorFactoryManager.get().createInputForType(propertyType, parentContext);
+      }
+      assert inputFactory != null : "intput factory is null, can not create an input editor for " + propertyType;
+      return inputFactory;
+    }
 
-		private CloneableWidget getInputFacoty() {
-			if (inputFactory == null) {
-				inputFactory = EditorFactoryManager.get().createInputForType(propertyType, parentContext);
-			}
-			assert inputFactory != null : "intput factory is null, can not create an input editor for " + propertyType;
-			return inputFactory;
-		}
+    void initEditor(Editor editor, Integer index) {
+      if (index != null) {
+        String path = "[" + index + "]";
+        editor.setPath(path);
+      }
+      ModelDriver<?> driver = parentContext.getDriver();
+      Context<?> context = ContextFactory.Util.get().createContext(driver, parentContext, editor);
+      driver.accept(new BinderVisitor(driver, driver.getValue()), context);
+    }
+  }
 
-		void initEditor(Editor editor, Integer index) {
-			if (index != null) {
-				String path = "[" + index + "]";
-				editor.setPath(path);
-			}
-			ModelDriver<?> driver = parentContext.getDriver();
-			Context<?> context = ContextFactory.Util.get().createContext(driver, parentContext, editor);
-			driver.accept(new BinderVisitor(driver, driver.getValue()), context);
-		}
-	}
+  public static interface IndexedEditorFactory {
 
-	public static interface IndexedEditorFactory {
+    EditorInput newInput(Integer index);
 
-		EditorInput newInput(Integer index);
+    EditorOutput newOutput(Integer index);
+  }
 
-		EditorOutput newOutput(Integer index);
-	}
+  @Override
+  public <A, B extends Editor> boolean visit(Context<B> context) {
+    Editor editor = context.getEditor();
+    if (editor instanceof HasEditorProvider) {
+      Path path = context.getPath();
+      Class<A> propertyType = null;
+      ModelDriver<?> driver = context.getDriver();
+      Model<?> model = ModelUtils.resolveModel(driver.getModel(), path);
+      if (model instanceof ModelCollection &&
+          (editor instanceof EditorCollection || path.get(path.size() - 1).getIndexKey() != null)) {
+        propertyType = (Class<A>) model.getLeafType();
+      }
+      else {
+        propertyType = ModelUtils.resolveType(driver.getModel(), path);
+      }
 
-	@Override
-	public <A, B extends Editor> boolean visit(Context<B> context) {
-		Editor editor = context.getEditor();
-		if (editor instanceof HasEditorProvider) {
-			Path path = context.getPath();
-			Class<A> propertyType = null;
-			ModelDriver<?> driver = context.getDriver();
-			Model<?> model = ModelUtils.resolveModel(driver.getModel(), path);
-			if (model instanceof ModelCollection &&
-					(editor instanceof EditorCollection || path.get(path.size() - 1).getIndexKey() != null)) {
-				propertyType = (Class<A>) model.getLeafType();
-			}
-			else {
-				propertyType = ModelUtils.resolveType(driver.getModel(), path);
-			}
+      CloneableWidget widgetFactory = null;
+      InputFactory inputFactory = null;
+      OutputFactory outputFactory = null;
 
-			CloneableWidget widgetFactory = null;
-			InputFactory inputFactory = null;
-			OutputFactory outputFactory = null;
+      if (editor instanceof HasWidgetFactory) {
+        widgetFactory = ((HasWidgetFactory) editor).getWidgetFactory();
+      }
 
-			if (editor instanceof HasWidgetFactory) {
-				widgetFactory = ((HasWidgetFactory) editor).getWidgetFactory();
-			}
+      if (editor instanceof HasInputEditorFactory) {
+        inputFactory = ((HasInputEditorFactory) editor).getInputFactory();
+      }
 
-			if (editor instanceof HasInputEditorFactory) {
-				inputFactory = ((HasInputEditorFactory) editor).getInputFactory();
-			}
+      if (editor instanceof HasOutputEditorFactory) {
+        outputFactory = ((HasOutputEditorFactory) editor).getOutputFactory();
+      }
 
-			if (editor instanceof HasOutputEditorFactory) {
-				outputFactory = ((HasOutputEditorFactory) editor).getOutputFactory();
-			}
+      EditorProvider provider = new InternalEditorProvider(context, propertyType,
+          inputFactory == null ? widgetFactory : inputFactory,
+              outputFactory == null ? widgetFactory : outputFactory
+          );
 
-			EditorProvider provider = new InternalEditorProvider(context, propertyType,
-					inputFactory == null ? widgetFactory : inputFactory,
-							outputFactory == null ? widgetFactory : outputFactory
-					);
+      ((HasEditorProvider) editor).setEditorProvider(provider);
 
-			((HasEditorProvider) editor).setEditorProvider(provider);
+    }
 
-		}
+    return true;
+  }
 
-		return true;
-	}
-
-	@Override
-	public VisitorTrigger trigerOn() {
-		return VisitorTrigger.INITALIZE;
-	}
+  @Override
+  public VisitorTrigger trigerOn() {
+    return VisitorTrigger.INITALIZE;
+  }
 
 }
