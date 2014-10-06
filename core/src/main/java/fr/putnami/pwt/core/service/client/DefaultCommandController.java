@@ -16,11 +16,6 @@
  */
 package fr.putnami.pwt.core.service.client;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Stack;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.gwt.core.client.GWT;
@@ -39,6 +34,11 @@ import com.google.gwt.user.client.rpc.impl.RequestCallbackAdapter.ResponseReader
 import com.google.gwt.user.client.rpc.impl.RpcStatsContext;
 import com.google.gwt.user.client.rpc.impl.Serializer;
 import com.google.web.bindery.event.shared.HandlerRegistration;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Stack;
 
 import fr.putnami.pwt.core.error.client.ErrorManager;
 import fr.putnami.pwt.core.event.client.EventBus;

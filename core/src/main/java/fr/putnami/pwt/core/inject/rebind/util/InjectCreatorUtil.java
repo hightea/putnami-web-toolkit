@@ -16,13 +16,13 @@
  */
 package fr.putnami.pwt.core.inject.rebind.util;
 
-import java.lang.annotation.Annotation;
-import java.util.Collection;
-
 import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JField;
 import com.google.gwt.core.ext.typeinfo.JMethod;
+
+import java.lang.annotation.Annotation;
+import java.util.Collection;
 
 public final class InjectCreatorUtil {
 

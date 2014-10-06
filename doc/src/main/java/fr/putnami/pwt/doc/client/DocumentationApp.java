@@ -18,6 +18,7 @@ package fr.putnami.pwt.doc.client;
 
 import static fr.putnami.pwt.doc.client.application.ApplicationConfig.ANALYTICS_TRACKER_ID;
 import static fr.putnami.pwt.doc.client.application.ApplicationConfig.DOMAIN;
+
 import fr.putnami.pwt.core.error.client.widget.SimpleErrorDisplayer;
 import fr.putnami.pwt.core.inject.client.Module;
 import fr.putnami.pwt.core.inject.client.annotation.EntryPointHandler;

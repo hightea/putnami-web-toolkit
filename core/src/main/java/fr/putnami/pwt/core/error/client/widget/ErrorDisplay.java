@@ -16,8 +16,6 @@
  */
 package fr.putnami.pwt.core.error.client.widget;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
@@ -26,6 +24,8 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.RootPanel;
+
+import java.util.List;
 
 import fr.putnami.pwt.core.widget.client.Alert;
 import fr.putnami.pwt.core.widget.client.Modal;

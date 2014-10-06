@@ -16,9 +16,9 @@
  */
 package fr.putnami.pwt.core.editor.client.validator;
 
-import java.util.Date;
-
 import com.google.gwt.i18n.client.DateTimeFormat;
+
+import java.util.Date;
 
 public class FutureValidator extends AbstracValidator<Date> {
 

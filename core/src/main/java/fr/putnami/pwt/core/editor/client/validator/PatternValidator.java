@@ -16,10 +16,10 @@
  */
 package fr.putnami.pwt.core.editor.client.validator;
 
-import java.util.Collection;
-
 import com.google.gwt.regexp.shared.MatchResult;
 import com.google.gwt.regexp.shared.RegExp;
+
+import java.util.Collection;
 
 public class PatternValidator<T> extends AbstracValidator<T> {
 

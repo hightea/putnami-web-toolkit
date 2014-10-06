@@ -1,11 +1,5 @@
 package fr.putnami.pwt.core.inject.rebind.base;
 
-import java.io.PrintWriter;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.gwt.core.client.GWT;
@@ -14,6 +8,12 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
+
+import java.io.PrintWriter;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public abstract class AbstractInjectorCreator {
 	public static final String PROXY_SUFFIX = "_Injector";

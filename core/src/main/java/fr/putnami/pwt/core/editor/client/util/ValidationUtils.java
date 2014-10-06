@@ -16,9 +16,9 @@
  */
 package fr.putnami.pwt.core.editor.client.util;
 
-import java.util.Collection;
-
 import com.google.common.collect.Lists;
+
+import java.util.Collection;
 
 import fr.putnami.pwt.core.editor.client.EditorInput;
 import fr.putnami.pwt.core.editor.client.Error;

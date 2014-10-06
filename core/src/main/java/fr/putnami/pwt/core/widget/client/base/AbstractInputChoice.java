@@ -16,9 +16,6 @@
  */
 package fr.putnami.pwt.core.widget.client.base;
 
-import java.util.Collection;
-import java.util.List;
-
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
@@ -27,6 +24,9 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.text.shared.Renderer;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.HandlerRegistration;
+
+import java.util.Collection;
+import java.util.List;
 
 import fr.putnami.pwt.core.editor.client.event.DirtyEvent.Handler;
 import fr.putnami.pwt.core.editor.client.helper.MessageHelper;

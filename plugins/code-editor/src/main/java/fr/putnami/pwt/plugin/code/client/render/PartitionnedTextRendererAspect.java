@@ -16,12 +16,12 @@
  */
 package fr.putnami.pwt.plugin.code.client.render;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 import fr.putnami.pwt.plugin.code.client.aspect.CodeEditorAspect;
 import fr.putnami.pwt.plugin.code.client.token.Token;

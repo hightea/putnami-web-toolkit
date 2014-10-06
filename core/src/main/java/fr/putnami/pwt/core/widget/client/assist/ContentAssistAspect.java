@@ -16,8 +16,6 @@
  */
 package fr.putnami.pwt.core.widget.client.assist;
 
-import java.util.Collection;
-
 import com.google.gwt.dom.client.AnchorElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.UListElement;
@@ -40,6 +38,8 @@ import com.google.gwt.user.client.ui.SuggestOracle.Request;
 import com.google.gwt.user.client.ui.SuggestOracle.Response;
 import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 import com.google.gwt.user.client.ui.Widget;
+
+import java.util.Collection;
 
 import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.Nav.LinkStyle;

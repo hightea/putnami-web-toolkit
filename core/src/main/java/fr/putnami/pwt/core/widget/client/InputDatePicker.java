@@ -16,10 +16,6 @@
  */
 package fr.putnami.pwt.core.widget.client;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -55,6 +51,10 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
+
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 import fr.putnami.pwt.core.editor.client.EditorInput;
 import fr.putnami.pwt.core.editor.client.EditorLeaf;

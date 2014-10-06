@@ -16,14 +16,14 @@
  */
 package fr.putnami.pwt.core.widget.client.util;
 
-import java.util.Iterator;
-import java.util.Set;
-
 import com.google.common.collect.Sets;
 import com.google.gwt.user.client.ui.HasOneWidget;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
+
+import java.util.Iterator;
+import java.util.Set;
 
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 

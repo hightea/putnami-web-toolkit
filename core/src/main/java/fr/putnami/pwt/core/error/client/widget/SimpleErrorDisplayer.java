@@ -16,11 +16,11 @@
  */
 package fr.putnami.pwt.core.error.client.widget;
 
-import java.util.MissingResourceException;
-
 import com.google.common.base.CaseFormat;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
 import com.google.gwt.logging.impl.StackTracePrintStream;
+
+import java.util.MissingResourceException;
 
 import fr.putnami.pwt.core.error.client.ErrorDisplayer;
 import fr.putnami.pwt.core.service.shared.exception.CommandException;

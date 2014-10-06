@@ -16,12 +16,12 @@
  */
 package fr.putnami.pwt.core.widget.client;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
+
+import java.util.List;
 
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.event.client.HandlerRegistrationCollection;

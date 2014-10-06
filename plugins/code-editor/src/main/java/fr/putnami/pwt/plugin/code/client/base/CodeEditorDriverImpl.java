@@ -16,11 +16,11 @@
  */
 package fr.putnami.pwt.plugin.code.client.base;
 
-import java.util.Collections;
-import java.util.List;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
+import java.util.Collections;
+import java.util.List;
 
 import fr.putnami.pwt.core.editor.client.Error;
 import fr.putnami.pwt.plugin.code.client.aspect.CodeEditorAspect;

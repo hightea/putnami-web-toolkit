@@ -16,10 +16,10 @@
  */
 package fr.putnami.pwt.core.widget.client.helper;
 
-import java.math.BigDecimal;
-
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.text.shared.AbstractRenderer;
+
+import java.math.BigDecimal;
 
 public final class BigDecimalRenderer extends AbstractRenderer<BigDecimal> {
 	private static BigDecimalRenderer instance;

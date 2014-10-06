@@ -16,12 +16,12 @@
  */
 package fr.putnami.pwt.core.model.client.model;
 
-import java.util.Map;
-import java.util.Set;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+
+import java.util.Map;
+import java.util.Set;
 
 import fr.putnami.pwt.core.editor.client.validator.Validator;
 

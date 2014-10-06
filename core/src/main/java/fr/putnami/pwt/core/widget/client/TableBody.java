@@ -16,8 +16,6 @@
  */
 package fr.putnami.pwt.core.widget.client;
 
-import java.util.List;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.gwt.dom.client.TableSectionElement;
@@ -26,6 +24,8 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.user.client.ui.IsWidget;
+
+import java.util.List;
 
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.event.client.EventBus;

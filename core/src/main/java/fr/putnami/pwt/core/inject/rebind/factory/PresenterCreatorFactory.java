@@ -16,11 +16,11 @@
  */
 package fr.putnami.pwt.core.inject.rebind.factory;
 
-import java.util.Collection;
-
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JField;
 import com.google.gwt.core.ext.typeinfo.JMethod;
+
+import java.util.Collection;
 
 import fr.putnami.pwt.core.inject.client.annotation.InjectService;
 import fr.putnami.pwt.core.inject.client.annotation.PresentHandler;

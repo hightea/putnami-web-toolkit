@@ -16,11 +16,11 @@
  */
 package fr.putnami.pwt.core.widget.client.util;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.dom.client.KeyCodes;
+
+import java.util.List;
 
 public final class KeyEventUtils {
 

@@ -16,11 +16,11 @@
  */
 package fr.putnami.pwt.core.model.client.factory;
 
-import java.util.Map;
-
 import com.google.common.collect.Maps;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.IsWidget;
+
+import java.util.Map;
 
 import fr.putnami.pwt.core.editor.client.Context;
 import fr.putnami.pwt.core.editor.client.Editor;

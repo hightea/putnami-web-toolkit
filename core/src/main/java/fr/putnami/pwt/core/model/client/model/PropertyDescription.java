@@ -16,9 +16,9 @@
  */
 package fr.putnami.pwt.core.model.client.model;
 
-import java.util.Collection;
-
 import com.google.common.collect.Lists;
+
+import java.util.Collection;
 
 import fr.putnami.pwt.core.editor.client.validator.Validator;
 

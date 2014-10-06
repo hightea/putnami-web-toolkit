@@ -16,10 +16,6 @@
  */
 package fr.putnami.pwt.core.widget.client.base;
 
-import java.util.Collections;
-import java.util.Set;
-import java.util.logging.Logger;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.gwt.dom.client.Document;
@@ -28,6 +24,10 @@ import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
+
+import java.util.Collections;
+import java.util.Set;
+import java.util.logging.Logger;
 
 import fr.putnami.pwt.core.editor.client.Editor;
 import fr.putnami.pwt.core.editor.client.EditorComposite;

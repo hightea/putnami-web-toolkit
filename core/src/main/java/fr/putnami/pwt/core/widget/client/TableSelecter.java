@@ -16,9 +16,6 @@
  */
 package fr.putnami.pwt.core.widget.client;
 
-import java.util.Collections;
-import java.util.List;
-
 import com.google.common.collect.Lists;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.InputElement;
@@ -30,6 +27,9 @@ import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.web.bindery.event.shared.HandlerRegistration;
+
+import java.util.Collections;
+import java.util.List;
 
 import fr.putnami.pwt.core.editor.client.EditorValue;
 import fr.putnami.pwt.core.model.client.base.HasDrawable;

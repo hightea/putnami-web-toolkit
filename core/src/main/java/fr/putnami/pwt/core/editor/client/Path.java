@@ -16,13 +16,13 @@
  */
 package fr.putnami.pwt.core.editor.client;
 
-import java.util.Iterator;
-import java.util.List;
-
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
+import java.util.Iterator;
+import java.util.List;
 
 import fr.putnami.pwt.core.editor.client.Path.PathElement;
 

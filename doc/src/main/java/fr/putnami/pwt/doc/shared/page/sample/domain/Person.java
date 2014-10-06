@@ -16,15 +16,15 @@
  */
 package fr.putnami.pwt.doc.shared.page.sample.domain;
 
+import com.google.common.base.Objects;
+import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.collect.ComparisonChain;
+
 import java.io.Serializable;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
-import com.google.common.collect.ComparisonChain;
 
 public class Person implements Serializable, Comparable<Person> {
 

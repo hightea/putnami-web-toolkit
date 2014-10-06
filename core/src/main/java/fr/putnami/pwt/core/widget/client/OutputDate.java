@@ -16,9 +16,9 @@
  */
 package fr.putnami.pwt.core.widget.client;
 
-import java.util.Date;
-
 import com.google.gwt.user.client.ui.IsWidget;
+
+import java.util.Date;
 
 import fr.putnami.pwt.core.widget.client.base.AbstractTextOutput;
 import fr.putnami.pwt.core.widget.client.helper.DateRenderer;

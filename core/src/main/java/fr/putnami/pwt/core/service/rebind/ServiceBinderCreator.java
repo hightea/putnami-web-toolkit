@@ -16,11 +16,6 @@
  */
 package fr.putnami.pwt.core.service.rebind;
 
-import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Set;
-
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -44,6 +39,11 @@ import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.google.gwt.user.rebind.rpc.SerializableTypeOracleBuilder;
 import com.google.gwt.user.rebind.rpc.TypeSerializerCreator;
+
+import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Set;
 
 import fr.putnami.pwt.core.service.client.AbstractServiceBinder;
 import fr.putnami.pwt.core.service.client.CallbackAdapter;

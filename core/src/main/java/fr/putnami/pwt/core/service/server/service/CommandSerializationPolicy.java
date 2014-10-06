@@ -16,15 +16,15 @@
  */
 package fr.putnami.pwt.core.service.server.service;
 
-import java.io.Serializable;
-import java.util.Set;
-
 import com.google.common.collect.Sets;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.gwt.user.client.rpc.SerializationException;
 import com.google.gwt.user.server.rpc.SerializationPolicy;
 import com.google.gwt.user.server.rpc.impl.SerializabilityUtil;
 import com.google.gwt.user.server.rpc.impl.TypeNameObfuscator;
+
+import java.io.Serializable;
+import java.util.Set;
 
 public final class CommandSerializationPolicy extends SerializationPolicy implements TypeNameObfuscator {
 

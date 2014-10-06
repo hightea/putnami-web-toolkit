@@ -16,10 +16,10 @@
  */
 package fr.putnami.pwt.core.service.client;
 
-import java.util.List;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+
+import java.util.List;
 
 import fr.putnami.pwt.core.service.client.event.CommandRequestEvent.HasCommandRequestHandlers;
 import fr.putnami.pwt.core.service.client.event.CommandResponseEvent.HasCommandResponseHandlers;

@@ -16,10 +16,10 @@
  */
 package fr.putnami.pwt.core.service.client.error;
 
-import java.util.MissingResourceException;
-
 import com.google.gwt.i18n.client.ConstantsWithLookup;
 import com.google.gwt.user.client.rpc.StatusCodeException;
+
+import java.util.MissingResourceException;
 
 import fr.putnami.pwt.core.error.client.AbstractErrorHandler;
 

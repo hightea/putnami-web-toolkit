@@ -16,14 +16,14 @@
  */
 package fr.putnami.pwt.core.widget.client;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.user.client.ui.IsWidget;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import fr.putnami.pwt.core.editor.client.EditorCollection;
 import fr.putnami.pwt.core.editor.client.EditorInput;

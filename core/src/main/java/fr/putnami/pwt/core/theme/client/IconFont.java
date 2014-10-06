@@ -16,10 +16,10 @@
  */
 package fr.putnami.pwt.core.theme.client;
 
-import java.util.Map;
-
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
+
+import java.util.Map;
 
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 

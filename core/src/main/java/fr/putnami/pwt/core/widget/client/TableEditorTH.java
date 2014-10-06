@@ -16,13 +16,13 @@
  */
 package fr.putnami.pwt.core.widget.client;
 
-import java.util.Collection;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
+
+import java.util.Collection;
 
 import fr.putnami.pwt.core.editor.client.Editor;
 import fr.putnami.pwt.core.editor.client.EditorLabel;

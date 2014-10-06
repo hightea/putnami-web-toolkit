@@ -16,9 +16,9 @@
  */
 package fr.putnami.pwt.plugin.code.client.token;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
+
+import java.util.List;
 
 public class TokenScannerImpl implements TokenScanner {
 

@@ -16,10 +16,6 @@
  */
 package fr.putnami.pwt.plugin.spring.rpc.server.controller;
 
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +26,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import fr.putnami.pwt.core.service.server.service.AbstractCommandService;
 import fr.putnami.pwt.plugin.spring.rpc.server.util.RequestThreadLocalUtils;

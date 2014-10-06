@@ -16,9 +16,9 @@
  */
 package fr.putnami.pwt.core.inject.rebind.factory;
 
-import java.util.Collection;
-
 import com.google.gwt.core.ext.typeinfo.JClassType;
+
+import java.util.Collection;
 
 import fr.putnami.pwt.core.inject.client.annotation.ErrorManagmentDescription;
 import fr.putnami.pwt.core.inject.client.annotation.MvpDescription;

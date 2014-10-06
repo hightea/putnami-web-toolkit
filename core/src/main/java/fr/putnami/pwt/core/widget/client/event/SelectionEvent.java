@@ -16,13 +16,13 @@
  */
 package fr.putnami.pwt.core.widget.client.event;
 
-import java.util.Collections;
-import java.util.List;
-
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
 import com.google.web.bindery.event.shared.HandlerRegistration;
+
+import java.util.Collections;
+import java.util.List;
 
 public class SelectionEvent extends GwtEvent<SelectionEvent.Handler> {
 

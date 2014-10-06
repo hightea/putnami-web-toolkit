@@ -16,9 +16,6 @@
  */
 package fr.putnami.pwt.doc.client.guide;
 
-import java.util.List;
-import java.util.logging.Logger;
-
 import com.google.common.collect.Lists;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -27,6 +24,9 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
+
+import java.util.List;
+import java.util.logging.Logger;
 
 import fr.putnami.pwt.core.error.client.ErrorManager;
 import fr.putnami.pwt.core.error.client.widget.SimpleErrorDisplayer;

@@ -16,14 +16,14 @@
  */
 package fr.putnami.pwt.plugin.code.client.output;
 
-import java.util.List;
-
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.dom.client.Text;
 import com.google.gwt.user.client.ui.Widget;
+
+import java.util.List;
 
 import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;

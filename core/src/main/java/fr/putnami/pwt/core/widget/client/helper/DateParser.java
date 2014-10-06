@@ -16,11 +16,11 @@
  */
 package fr.putnami.pwt.core.widget.client.helper;
 
-import java.text.ParseException;
-import java.util.Date;
-
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.text.shared.Parser;
+
+import java.text.ParseException;
+import java.util.Date;
 
 import fr.putnami.pwt.core.widget.client.constant.WidgetParams;
 

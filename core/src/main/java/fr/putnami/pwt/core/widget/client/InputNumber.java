@@ -16,9 +16,6 @@
  */
 package fr.putnami.pwt.core.widget.client;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.i18n.client.constants.NumberConstants;
 import com.google.gwt.text.client.DoubleParser;
@@ -32,6 +29,9 @@ import com.google.gwt.text.shared.Renderer;
 import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.TextBox;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import fr.putnami.pwt.core.editor.client.validator.MinValidator;
 import fr.putnami.pwt.core.editor.client.validator.Validator;

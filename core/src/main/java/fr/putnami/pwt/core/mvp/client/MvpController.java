@@ -16,8 +16,6 @@
  */
 package fr.putnami.pwt.core.mvp.client;
 
-import java.util.Map;
-
 import com.google.common.collect.Maps;
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityManager;
@@ -34,6 +32,8 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.web.bindery.event.shared.HandlerRegistration;
+
+import java.util.Map;
 
 import fr.putnami.pwt.core.event.client.EventBus;
 import fr.putnami.pwt.core.mvp.client.event.MayStopActivityEvent;

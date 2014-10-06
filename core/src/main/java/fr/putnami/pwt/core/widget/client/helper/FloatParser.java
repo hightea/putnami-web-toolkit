@@ -16,10 +16,10 @@
  */
 package fr.putnami.pwt.core.widget.client.helper;
 
-import java.text.ParseException;
-
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.text.shared.Parser;
+
+import java.text.ParseException;
 
 public final class FloatParser implements Parser<Float> {
 	private static FloatParser instance;

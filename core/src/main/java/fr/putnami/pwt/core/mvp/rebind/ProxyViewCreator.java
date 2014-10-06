@@ -16,9 +16,6 @@
  */
 package fr.putnami.pwt.core.mvp.rebind;
 
-import java.io.PrintWriter;
-import java.util.List;
-
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.gwt.activity.shared.Activity;
@@ -33,6 +30,9 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceTokenizer;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
+
+import java.io.PrintWriter;
+import java.util.List;
 
 import fr.putnami.pwt.core.mvp.client.ViewActivity;
 import fr.putnami.pwt.core.mvp.client.ViewDecorator;

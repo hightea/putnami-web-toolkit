@@ -16,9 +16,6 @@
  */
 package fr.putnami.pwt.core.widget.client;
 
-import java.util.Collections;
-import java.util.Iterator;
-
 import com.google.common.collect.Sets;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.uibinder.client.UiConstructor;
@@ -26,6 +23,9 @@ import com.google.gwt.user.client.ui.HasOneWidget;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
+
+import java.util.Collections;
+import java.util.Iterator;
 
 import fr.putnami.pwt.core.editor.client.Editor;
 import fr.putnami.pwt.core.editor.client.EditorComposite;

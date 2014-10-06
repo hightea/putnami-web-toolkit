@@ -16,9 +16,6 @@
  */
 package fr.putnami.pwt.doc.client.page.sample.addressbook;
 
-import java.util.Collection;
-import java.util.List;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
@@ -32,6 +29,9 @@ import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
+
+import java.util.Collection;
+import java.util.List;
 
 import fr.putnami.pwt.core.editor.client.event.DirtyEvent;
 import fr.putnami.pwt.core.inject.client.annotation.Initialize;

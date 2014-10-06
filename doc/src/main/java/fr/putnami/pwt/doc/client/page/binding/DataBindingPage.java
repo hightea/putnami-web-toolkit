@@ -16,13 +16,13 @@
  */
 package fr.putnami.pwt.doc.client.page.binding;
 
-import java.util.List;
-
-import javax.validation.constraints.NotNull;
-
 import com.google.common.collect.Lists;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
 import com.google.gwt.uibinder.client.UiField;
+
+import java.util.List;
+
+import javax.validation.constraints.NotNull;
 
 import fr.putnami.pwt.core.editor.shared.constant.ValidationConstants;
 import fr.putnami.pwt.core.inject.client.annotation.Initialize;

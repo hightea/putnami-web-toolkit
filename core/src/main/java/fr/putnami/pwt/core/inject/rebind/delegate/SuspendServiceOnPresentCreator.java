@@ -16,10 +16,10 @@
  */
 package fr.putnami.pwt.core.inject.rebind.delegate;
 
-import java.util.List;
-
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
+
+import java.util.List;
 
 import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterAfterPresent;

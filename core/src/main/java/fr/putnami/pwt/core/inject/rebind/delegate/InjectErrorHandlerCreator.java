@@ -16,13 +16,13 @@
  */
 package fr.putnami.pwt.core.inject.rebind.delegate;
 
-import java.util.Collection;
-import java.util.List;
-
 import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
+
+import java.util.Collection;
+import java.util.List;
 
 import fr.putnami.pwt.core.error.client.ErrorManager;
 import fr.putnami.pwt.core.event.client.EventBus;

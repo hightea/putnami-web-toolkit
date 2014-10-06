@@ -16,11 +16,11 @@
  */
 package fr.putnami.pwt.doc.shared.page.sample.domain;
 
-import java.io.Serializable;
-import java.util.List;
-
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
+
+import java.io.Serializable;
+import java.util.List;
 
 public class Group implements Serializable {
 

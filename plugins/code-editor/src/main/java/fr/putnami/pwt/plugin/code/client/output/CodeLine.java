@@ -16,9 +16,9 @@
  */
 package fr.putnami.pwt.plugin.code.client.output;
 
-import java.util.List;
-
 import com.google.gwt.user.client.ui.IsWidget;
+
+import java.util.List;
 
 import fr.putnami.pwt.plugin.code.client.token.Token;
 

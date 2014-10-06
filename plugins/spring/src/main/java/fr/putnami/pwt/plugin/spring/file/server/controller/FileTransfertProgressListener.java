@@ -1,8 +1,8 @@
 package fr.putnami.pwt.plugin.spring.file.server.controller;
 
-import java.io.Serializable;
-
 import org.apache.commons.fileupload.ProgressListener;
+
+import java.io.Serializable;
 
 public class FileTransfertProgressListener implements ProgressListener, Serializable {
 

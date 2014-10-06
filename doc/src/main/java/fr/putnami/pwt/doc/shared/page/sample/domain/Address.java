@@ -16,10 +16,10 @@
  */
 package fr.putnami.pwt.doc.shared.page.sample.domain;
 
-import java.io.Serializable;
-
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
+
+import java.io.Serializable;
 
 public class Address implements Serializable {
 

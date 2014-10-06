@@ -16,14 +16,14 @@
  */
 package fr.putnami.pwt.core.error.client;
 
+import com.google.common.collect.Lists;
+import com.google.gwt.core.client.GWT;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import com.google.common.collect.Lists;
-import com.google.gwt.core.client.GWT;
 
 /**
  * The Class DefaultErrorManager is the default implementation of the {@link ErrorManager} .

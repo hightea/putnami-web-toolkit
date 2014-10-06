@@ -16,13 +16,13 @@
  */
 package fr.putnami.pwt.core.widget.client;
 
-import java.util.Map;
-
 import com.google.common.collect.Maps;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.TableElement;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.web.bindery.event.shared.HandlerRegistration;
+
+import java.util.Map;
 
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.model.client.base.HasReadonly;

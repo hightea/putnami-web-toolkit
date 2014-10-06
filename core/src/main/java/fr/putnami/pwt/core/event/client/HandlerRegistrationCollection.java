@@ -16,10 +16,10 @@
  */
 package fr.putnami.pwt.core.event.client;
 
-import java.util.Collection;
-
 import com.google.common.collect.Lists;
 import com.google.web.bindery.event.shared.HandlerRegistration;
+
+import java.util.Collection;
 
 /**
  * A utility class to help deal with {@link HandlerRegistration handler registrations}.

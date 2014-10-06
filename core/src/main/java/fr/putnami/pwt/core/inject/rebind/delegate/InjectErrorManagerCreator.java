@@ -16,15 +16,15 @@
  */
 package fr.putnami.pwt.core.inject.rebind.delegate;
 
-import static fr.putnami.pwt.core.inject.rebind.util.InjectCreatorUtil.toClassName;
-
-import java.util.Collection;
-
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
+
+import java.util.Collection;
+
+import static fr.putnami.pwt.core.inject.rebind.util.InjectCreatorUtil.toClassName;
 
 import fr.putnami.pwt.core.error.client.ErrorDisplayer;
 import fr.putnami.pwt.core.error.client.ErrorHandler;

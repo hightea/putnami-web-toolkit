@@ -16,9 +16,9 @@
  */
 package fr.putnami.pwt.core.widget.client.helper;
 
-import java.text.ParseException;
-
 import com.google.gwt.text.shared.Parser;
+
+import java.text.ParseException;
 
 public final class StringParser implements Parser<String> {
 	private static StringParser instance;

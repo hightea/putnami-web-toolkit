@@ -16,10 +16,10 @@
  */
 package fr.putnami.pwt.core.model.client.visitor;
 
-import java.util.Collection;
-
 import com.google.common.collect.Lists;
 import com.google.web.bindery.event.shared.HandlerRegistration;
+
+import java.util.Collection;
 
 import fr.putnami.pwt.core.editor.client.Context;
 import fr.putnami.pwt.core.editor.client.Editor;

@@ -16,10 +16,10 @@
  */
 package fr.putnami.pwt.core.security.shared.domain;
 
+import com.google.common.collect.Lists;
+
 import java.io.Serializable;
 import java.util.List;
-
-import com.google.common.collect.Lists;
 
 public class SessionDto implements Serializable {
 

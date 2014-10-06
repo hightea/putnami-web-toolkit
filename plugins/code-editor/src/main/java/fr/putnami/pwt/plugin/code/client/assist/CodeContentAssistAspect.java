@@ -16,12 +16,12 @@
  */
 package fr.putnami.pwt.plugin.code.client.assist;
 
-import java.util.Arrays;
-import java.util.List;
-
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
+
+import java.util.Arrays;
+import java.util.List;
 
 import fr.putnami.pwt.core.widget.client.assist.AbstractContentAssistHandler;
 import fr.putnami.pwt.core.widget.client.assist.ContentAssistAspect;

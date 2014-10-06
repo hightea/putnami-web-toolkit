@@ -16,11 +16,11 @@
  */
 package fr.putnami.pwt.core.widget.client.base;
 
-import java.util.Collections;
-import java.util.Set;
-
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.HandlerRegistration;
+
+import java.util.Collections;
+import java.util.Set;
 
 import fr.putnami.pwt.core.editor.client.EditorInput;
 import fr.putnami.pwt.core.editor.client.EditorLeaf;

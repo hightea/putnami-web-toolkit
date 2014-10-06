@@ -16,13 +16,13 @@
  */
 package fr.putnami.pwt.core.editor.client.helper;
 
-import java.util.Map;
-import java.util.MissingResourceException;
-
 import com.google.common.base.CaseFormat;
 import com.google.common.collect.Maps;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
 import com.google.gwt.regexp.shared.RegExp;
+
+import java.util.Map;
+import java.util.MissingResourceException;
 
 import fr.putnami.pwt.core.editor.client.Path;
 

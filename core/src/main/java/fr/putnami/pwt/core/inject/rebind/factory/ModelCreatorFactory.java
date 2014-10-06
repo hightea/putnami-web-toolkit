@@ -16,10 +16,10 @@
  */
 package fr.putnami.pwt.core.inject.rebind.factory;
 
-import java.util.Collection;
-
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JField;
+
+import java.util.Collection;
 
 import fr.putnami.pwt.core.inject.client.annotation.InjectModel;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;

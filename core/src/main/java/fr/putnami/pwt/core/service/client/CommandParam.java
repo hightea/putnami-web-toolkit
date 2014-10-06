@@ -16,10 +16,10 @@
  */
 package fr.putnami.pwt.core.service.client;
 
-import java.util.List;
-
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.impl.Serializer;
+
+import java.util.List;
 
 public class CommandParam {
 	private final boolean lazy;

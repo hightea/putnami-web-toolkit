@@ -16,12 +16,12 @@
  */
 package fr.putnami.pwt.core.inject.client.annotation;
 
+import com.google.gwt.i18n.client.ConstantsWithLookup;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-
-import com.google.gwt.i18n.client.ConstantsWithLookup;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

@@ -16,10 +16,10 @@
  */
 package fr.putnami.pwt.core.service.server.service;
 
+import com.google.common.collect.Maps;
+
 import java.lang.reflect.Method;
 import java.util.Map;
-
-import com.google.common.collect.Maps;
 
 import fr.putnami.pwt.core.service.shared.domain.CommandDefinition;
 import fr.putnami.pwt.core.service.shared.exception.CommandException;

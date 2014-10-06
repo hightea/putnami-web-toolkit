@@ -16,11 +16,11 @@
  */
 package fr.putnami.pwt.core.editor.client;
 
-import java.io.Serializable;
-import java.util.Comparator;
-
 import com.google.common.base.Predicate;
 import com.google.common.primitives.Ints;
+
+import java.io.Serializable;
+import java.util.Comparator;
 
 public interface Visitor {
 

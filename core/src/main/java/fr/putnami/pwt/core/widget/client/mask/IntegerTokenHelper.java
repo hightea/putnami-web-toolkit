@@ -16,11 +16,11 @@
  */
 package fr.putnami.pwt.core.widget.client.mask;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.i18n.client.NumberFormat;
+
+import java.util.List;
 
 import fr.putnami.pwt.core.widget.client.mask.MaskValueBoxHelper.TokenHelper;
 

@@ -16,14 +16,14 @@
  */
 package fr.putnami.pwt.core.inject.rebind;
 
-import java.util.Collection;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.user.rebind.SourceWriter;
+
+import java.util.Collection;
 
 import fr.putnami.pwt.core.inject.rebind.base.AbstractInjectorCreator;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorDelegateFactorty;

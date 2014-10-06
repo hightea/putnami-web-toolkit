@@ -16,11 +16,11 @@
  */
 package fr.putnami.pwt.core.editor.client.impl;
 
-import java.util.Map;
-
 import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.Maps;
+
+import java.util.Map;
 
 import fr.putnami.pwt.core.editor.client.Context;
 import fr.putnami.pwt.core.editor.client.Driver;

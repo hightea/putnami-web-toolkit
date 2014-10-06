@@ -16,8 +16,6 @@
  */
 package fr.putnami.pwt.core.inject.rebind.delegate;
 
-import java.util.Collection;
-
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JParameterizedType;
 import com.google.gwt.core.ext.typeinfo.JType;
@@ -25,6 +23,8 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
+
+import java.util.Collection;
 
 import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;

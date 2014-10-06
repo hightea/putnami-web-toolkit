@@ -16,10 +16,10 @@
  */
 package fr.putnami.pwt.core.model.client.visitor;
 
+import com.google.common.collect.Lists;
+
 import java.util.Collection;
 import java.util.List;
-
-import com.google.common.collect.Lists;
 
 import fr.putnami.pwt.core.editor.client.Context;
 import fr.putnami.pwt.core.editor.client.Editor;

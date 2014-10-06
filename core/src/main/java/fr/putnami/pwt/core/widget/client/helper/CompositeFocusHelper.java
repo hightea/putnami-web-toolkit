@@ -16,8 +16,6 @@
  */
 package fr.putnami.pwt.core.widget.client.helper;
 
-import java.util.Set;
-
 import com.google.common.collect.Sets;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
@@ -42,6 +40,8 @@ import com.google.gwt.user.client.Event.NativePreviewHandler;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.HandlerRegistration;
+
+import java.util.Set;
 
 import fr.putnami.pwt.core.widget.client.util.FocusUtils;
 

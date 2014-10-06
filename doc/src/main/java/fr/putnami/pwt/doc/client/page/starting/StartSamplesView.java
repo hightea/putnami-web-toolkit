@@ -16,14 +16,14 @@
  */
 package fr.putnami.pwt.doc.client.page.starting;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
+
+import java.util.List;
 
 import fr.putnami.pwt.core.inject.client.annotation.PostConstruct;
 import fr.putnami.pwt.core.inject.client.annotation.Templated;

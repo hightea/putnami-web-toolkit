@@ -16,9 +16,9 @@
  */
 package fr.putnami.pwt.plugin.code.client.aspect;
 
-import java.util.List;
-
 import com.google.common.base.Predicate;
+
+import java.util.List;
 
 import fr.putnami.pwt.plugin.code.client.base.CodeEditorDriver;
 

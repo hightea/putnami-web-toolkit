@@ -16,10 +16,6 @@
  */
 package fr.putnami.pwt.core.inject.rebind.delegate;
 
-import static fr.putnami.pwt.core.inject.rebind.util.InjectCreatorUtil.toClassName;
-
-import java.util.List;
-
 import com.google.common.collect.Lists;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.ext.typeinfo.JClassType;
@@ -29,6 +25,10 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
+
+import java.util.List;
+
+import static fr.putnami.pwt.core.inject.rebind.util.InjectCreatorUtil.toClassName;
 
 import fr.putnami.pwt.core.inject.client.annotation.MvpDescription;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;

@@ -16,12 +16,12 @@
  */
 package fr.putnami.pwt.core.service.client;
 
-import java.util.Collection;
-
 import com.google.gwt.user.client.rpc.SerializationException;
 import com.google.gwt.user.client.rpc.SerializationStreamReader;
 import com.google.gwt.user.client.rpc.SerializationStreamWriter;
 import com.google.gwt.user.client.rpc.impl.Serializer;
+
+import java.util.Collection;
 
 public class CommandServiceCompositeSerializer implements Serializer {
 

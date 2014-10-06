@@ -16,8 +16,6 @@
  */
 package fr.putnami.pwt.core.inject.rebind;
 
-import java.util.Collection;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.GeneratorContext;
@@ -27,6 +25,8 @@ import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.user.rebind.SourceWriter;
+
+import java.util.Collection;
 
 import fr.putnami.pwt.core.inject.client.annotation.EntryPointHandler;
 import fr.putnami.pwt.core.inject.client.annotation.MvpDescription;

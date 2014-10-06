@@ -1,5 +1,12 @@
 package fr.putnami.pwt.plugin.spring.file.server.support;
 
+import com.google.common.collect.Maps;
+import com.google.common.io.Files;
+
+import org.apache.commons.io.FilenameUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,13 +18,6 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-
-import org.apache.commons.io.FilenameUtils;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
-import com.google.common.collect.Maps;
-import com.google.common.io.Files;
 
 import fr.putnami.pwt.core.widget.shared.domain.FileDto;
 

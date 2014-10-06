@@ -16,11 +16,11 @@
  */
 package fr.putnami.pwt.core.model.client.visitor;
 
-import java.util.Map;
-import java.util.Set;
-
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+
+import java.util.Map;
+import java.util.Set;
 
 import fr.putnami.pwt.core.editor.client.Context;
 import fr.putnami.pwt.core.editor.client.Editor;

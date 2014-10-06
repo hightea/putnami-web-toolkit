@@ -16,14 +16,14 @@
  */
 package fr.putnami.pwt.plugin.code.client.render;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.gwt.regexp.shared.MatchResult;
 import com.google.gwt.regexp.shared.RegExp;
+
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 import fr.putnami.pwt.plugin.code.client.aspect.CodeEditorAspect;
 import fr.putnami.pwt.plugin.code.client.base.CodeEditorDriver;

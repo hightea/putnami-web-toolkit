@@ -16,8 +16,6 @@
  */
 package fr.putnami.pwt.core.widget.client.base;
 
-import java.text.ParseException;
-
 import com.google.common.base.Objects;
 import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -29,6 +27,8 @@ import com.google.gwt.text.shared.Renderer;
 import com.google.gwt.user.client.ui.HasEnabled;
 import com.google.gwt.user.client.ui.TextBoxBase;
 import com.google.web.bindery.event.shared.HandlerRegistration;
+
+import java.text.ParseException;
 
 import fr.putnami.pwt.core.editor.client.event.DirtyEvent.Handler;
 import fr.putnami.pwt.core.editor.client.util.ValidationUtils;

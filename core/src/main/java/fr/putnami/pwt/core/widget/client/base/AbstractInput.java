@@ -16,9 +16,6 @@
  */
 package fr.putnami.pwt.core.widget.client.base;
 
-import java.util.Collection;
-import java.util.Collections;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.gwt.event.dom.client.BlurEvent;
@@ -88,6 +85,9 @@ import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.impl.FocusImpl;
 import com.google.web.bindery.event.shared.HandlerRegistration;
+
+import java.util.Collection;
+import java.util.Collections;
 
 import fr.putnami.pwt.core.editor.client.EditorInput;
 import fr.putnami.pwt.core.editor.client.EditorLeaf;

@@ -16,8 +16,6 @@
  */
 package fr.putnami.pwt.core.widget.client;
 
-import java.util.List;
-
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.gwt.dom.client.Element;
@@ -40,6 +38,8 @@ import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.web.bindery.event.shared.HandlerRegistration;
+
+import java.util.List;
 
 import fr.putnami.pwt.core.editor.client.event.DirtyEvent;
 import fr.putnami.pwt.core.editor.client.event.DirtyEvent.Handler;

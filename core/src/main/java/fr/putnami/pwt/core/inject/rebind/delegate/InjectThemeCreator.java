@@ -16,13 +16,13 @@
  */
 package fr.putnami.pwt.core.inject.rebind.delegate;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
+
+import java.util.List;
 
 import fr.putnami.pwt.core.inject.client.annotation.ThemeDescription;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;

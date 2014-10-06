@@ -16,9 +16,9 @@
  */
 package fr.putnami.pwt.doc.shared.page.sample.domain;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
+
+import java.util.List;
 
 public class Contact extends Person {
 

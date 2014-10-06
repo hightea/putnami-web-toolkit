@@ -16,11 +16,11 @@
  */
 package fr.putnami.pwt.core.theme.client;
 
-import java.util.Collections;
-import java.util.List;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
+import java.util.Collections;
+import java.util.List;
 
 public class Theme {
 

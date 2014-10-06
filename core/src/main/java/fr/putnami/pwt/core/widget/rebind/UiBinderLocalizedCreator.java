@@ -16,9 +16,6 @@
  */
 package fr.putnami.pwt.core.widget.rebind;
 
-import java.io.PrintWriter;
-import java.util.Map;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
@@ -31,6 +28,9 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
+
+import java.io.PrintWriter;
+import java.util.Map;
 
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 

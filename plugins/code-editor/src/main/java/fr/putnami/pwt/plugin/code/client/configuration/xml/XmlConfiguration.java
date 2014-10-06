@@ -16,10 +16,10 @@
  */
 package fr.putnami.pwt.plugin.code.client.configuration.xml;
 
-import java.util.List;
-
 import com.google.common.base.CharMatcher;
 import com.google.common.collect.Lists;
+
+import java.util.List;
 
 import fr.putnami.pwt.plugin.code.client.aspect.CodeEditorAspect;
 import fr.putnami.pwt.plugin.code.client.configuration.CodeEditorConfiguration;

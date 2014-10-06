@@ -16,10 +16,10 @@
  */
 package fr.putnami.pwt.plugin.ga.client;
 
-import java.util.Map;
-
 import com.google.common.collect.Maps;
 import com.google.gwt.core.shared.GWT;
+
+import java.util.Map;
 
 public abstract class GoogleAnalytics {
 

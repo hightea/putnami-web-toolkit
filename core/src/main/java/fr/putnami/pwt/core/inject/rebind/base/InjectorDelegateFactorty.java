@@ -16,9 +16,9 @@
  */
 package fr.putnami.pwt.core.inject.rebind.base;
 
-import java.util.Collection;
-
 import com.google.gwt.core.ext.typeinfo.JClassType;
+
+import java.util.Collection;
 
 public interface InjectorDelegateFactorty {
 

@@ -16,10 +16,10 @@
  */
 package fr.putnami.pwt.core.error.client;
 
-import java.util.List;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
+
+import java.util.List;
 
 /**
  * The Class ErrorManager manages with the top level uncaught exceptions.

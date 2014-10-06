@@ -16,10 +16,10 @@
  */
 package fr.putnami.pwt.core.widget.client.base;
 
+import com.google.common.collect.Lists;
+
 import java.util.Iterator;
 import java.util.List;
-
-import com.google.common.collect.Lists;
 
 import fr.putnami.pwt.core.theme.client.CssStyle;
 

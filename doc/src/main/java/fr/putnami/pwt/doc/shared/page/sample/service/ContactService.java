@@ -16,14 +16,14 @@
  */
 package fr.putnami.pwt.doc.shared.page.sample.service;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 
 import fr.putnami.pwt.doc.shared.page.sample.domain.Address;
 import fr.putnami.pwt.doc.shared.page.sample.domain.Contact;

@@ -16,9 +16,9 @@
  */
 package fr.putnami.pwt.core.widget.client.base;
 
-import java.util.List;
-
 import com.google.gwt.user.client.ui.IsWidget;
+
+import java.util.List;
 
 import fr.putnami.pwt.core.editor.client.Context;
 import fr.putnami.pwt.core.editor.client.Editor;
