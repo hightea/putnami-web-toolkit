@@ -8,7 +8,10 @@ tasks.withType(FindBugs) {
     }
  }
  
- findbugs {
+findbugs {
     ignoreFailures = true
 }
- 
+
+pmd{
+    ignoreFailures = true
+} 
