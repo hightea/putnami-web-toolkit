@@ -19,11 +19,22 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.LinkElement;
 
+/**
+ * The Class CssLink wraps a {@link LinkElement} of one stylesheet.
+ *
+ * @since 1.0
+ */
 public class CssLink implements Comparable<CssLink> {
 
 	private final int precedence;
 	private final LinkElement link = Document.get().createLinkElement();
 
+	/**
+	 * Instantiates a new css link.
+	 *
+	 * @param href the link of the Css
+	 * @param precedence the css, lower is the precedence value, higher is the priority.
+	 */
 	public CssLink(String href, int precedence) {
 		super();
 		this.precedence = precedence;
@@ -31,19 +42,42 @@ public class CssLink implements Comparable<CssLink> {
 		this.link.setHref(GWT.getModuleBaseForStaticFiles() + href);
 	}
 
+	/**
+	 * Gets the precedence.
+	 * <p>
+	 * lower is the precedence value, higher is the priority
+	 * </p>
+	 *
+	 * @return the precedence
+	 */
 	public int getPrecedence() {
 		return this.precedence;
 	}
 
+	/**
+	 * Gets the link element of the css.
+	 *
+	 * @return the link element of the css
+	 */
 	public LinkElement getLink() {
 		return this.link;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hashCode(this.link.getHref());
 	}
 
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof CssLink) {
@@ -53,6 +87,11 @@ public class CssLink implements Comparable<CssLink> {
 		return false;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
 	@Override
 	public int compareTo(CssLink o) {
 		if (o == null) {

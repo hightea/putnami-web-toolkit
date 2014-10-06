@@ -21,8 +21,27 @@ import fr.putnami.pwt.core.theme.client.IconFont;
 import fr.putnami.pwt.core.theme.client.Theme;
 import fr.putnami.pwt.core.theme.client.ThemeController;
 
-public class WidgetBoot implements EntryPoint {
+/**
+ * The BootstrapThemeBoot init the default theme with bootstrap, fontello fontawesome, and pwt css
+ * resources.
+ *
+ * <pre>
+ *Theme defaultTheme = ThemeController.get().getDefaultTheme();
+ *defaultTheme.addLink(new CssLink("theme/default/style/bootstrap.min.css", -2));
+ *defaultTheme.addLink(new CssLink("theme/default/style/pwt-core.css", 0));
+ *IconFont font = new IconFont("theme/default/style/fontello.css", "icon-");
+ *defaultTheme.setIconFont(font);
+ *ThemeController.get().installDefaultTheme();
+ * </pre>
+ *
+ */
+public class BootstrapThemeLoader implements EntryPoint {
 
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
+	 */
 	@Override
 	public void onModuleLoad() {
 		Theme defaultTheme = ThemeController.get().getDefaultTheme();

@@ -21,6 +21,20 @@ import java.util.Map;
 
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 
+/**
+ * The IconFont is an extention of CssLink.
+ * <p>
+ * <strong>Fontello :</strong>
+ * </p>
+ *
+ * <pre>
+ * IconFont fontello = new IconFont("theme/default/style/fontello.css", "icon-");
+ * fontello.addAlias("add", "plus");
+ * ThemeController.get().setIconFont(fontello);
+ * </pre>
+ *
+ * @since 1.0
+ */
 public class IconFont extends CssLink {
 
 	public static final String ICON_CALENDAR = "calendar";
@@ -41,15 +55,38 @@ public class IconFont extends CssLink {
 	private final String preffix;
 	private final Map<String, String> aliases = Maps.newHashMap();
 
+	/**
+	 * Instantiates a new icon font.
+	 *
+	 * @param href the link of the icon font css
+	 * @param preffix of the icons
+	 */
 	public IconFont(String href, String preffix) {
 		super(href, -1);
 		this.preffix = preffix == null ? "" : preffix;
 	}
 
+	/**
+	 * Adds an icon alias. Allowing to map a fake icon to an other one.
+	 *
+	 * <pre>
+	 * // map the icon "add" to the icon "plus"
+	 * font.addAlias("add", "plus");
+	 * </pre>
+	 *
+	 * @param alias the alias
+	 * @param target the target
+	 */
 	public void addAlias(String alias, String target) {
 		this.aliases.put(alias, target);
 	}
 
+	/**
+	 * Gets the {@link CssStyle} of the icon.
+	 *
+	 * @param iconName the icon name
+	 * @return the style
+	 */
 	public CssStyle getStyle(String iconName) {
 		if (Strings.isNullOrEmpty(iconName)) {
 			return SimpleStyle.EMPTY_STYLE;
@@ -61,7 +98,17 @@ public class IconFont extends CssLink {
 		return new SimpleStyle(this.preffix + className);
 	}
 
-	protected String transformClassName(String iStr) {
-		return iStr.toLowerCase().replaceAll("_", "-");
+	/**
+	 * Transform icon name to the css class name.
+	 * <ol>
+	 * <li>transform the iconName to lowerCase</li>
+	 * <li>replace '_' with '-'</li>
+	 * </ol>
+	 *
+	 * @param iconName the name of the icon
+	 * @return the css class name
+	 */
+	private String transformClassName(String iconName) {
+		return iconName.toLowerCase().replace('_', '-');
 	}
 }

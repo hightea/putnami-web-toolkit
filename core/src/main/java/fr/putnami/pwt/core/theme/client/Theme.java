@@ -20,11 +20,33 @@ import com.google.common.collect.Lists;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Theme helps to define the webapp's look.
+ * <p>
+ * By collecting {@link CssLink}s and {@link IconFont}, it manage all CSS of the webapp.
+ * </p>
+ * <p>
+ * <strong>To create a new theme :</strong>
+ * </p>
+ *
+ * <pre>
+ * Theme yetiTheme = new Theme();
+ * yetiTheme.addLink(new CssLink("theme/yeti/style/bootstrap-yeti.min.css", 0));
+ * ThemeController.get().installTheme(yetiTheme);
+ * </pre>
+ *
+ * @since 1.0
+ */
 public class Theme {
 
 	private final List<CssLink> links = Lists.newArrayList();
 	private IconFont iconFontCss;
 
+	/**
+	 * Adds a {@link CssLink} to the theme. The css precedence is declared within the {@link CssLink}.
+	 *
+	 * @param link the link
+	 */
 	public void addLink(CssLink link) {
 		if (!this.links.contains(link)) {
 			this.links.add(link);
@@ -32,16 +54,31 @@ public class Theme {
 		Collections.sort(this.links);
 	}
 
+	/**
+	 * Gets the links of the Theme. the links are wrapped in an unmodifiable Iterable.
+	 *
+	 * @return the links
+	 */
 	public Iterable<CssLink> getLinks() {
 		return Iterables.unmodifiableIterable(this.links);
 	}
 
+	/**
+	 * Gets the icon font installed in the Theme.
+	 *
+	 * @return the icon font
+	 */
 	public IconFont getIconFont() {
 		return this.iconFontCss;
 	}
 
-	public void setIconFont(IconFont iconFontCss) {
-		this.iconFontCss = iconFontCss;
+	/**
+	 * Sets the {@ling IconFont} to the theme.
+	 *
+	 * @param iconFont the new icon font
+	 */
+	public void setIconFont(IconFont iconFont) {
+		this.iconFontCss = iconFont;
 	}
 
 }

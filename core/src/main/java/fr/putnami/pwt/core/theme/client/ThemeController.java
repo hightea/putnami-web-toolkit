@@ -16,10 +16,40 @@ package fr.putnami.pwt.core.theme.client;
 
 import com.google.gwt.core.client.GWT;
 
+
+/**
+ * The ThemeController manages the webapp theming.
+ *
+ * <p>
+ * The default implementations are {@link DefaultThemeController}, or (
+ * {@link DefaultIE8ThemeController} for IE8.
+ * </p>
+ * <p>
+ * You can implement your own ThemeController by setting the below lines in your module .gwt.xml
+ * </p>
+ *
+ * <pre>
+ * &lt;replace-with class="you.package.CustomThemeController">
+ * 	&lt;when-type-is class="fr.putnami.pwt.core.theme.client.ThemeController"/>
+ * &lt;/replace-with>
+ * </pre>
+ *
+ * @since 1.0
+ */
 public abstract class ThemeController {
+
 
 	private static ThemeController instance;
 
+	/**
+	 * Gets the singleton.
+	 * <p>
+	 * The singleton is instantiated with GWT.create(ThemeController.class), so you can customize your
+	 * implementation in your module .gwt.xml
+	 * </p>
+	 *
+	 * @return the theme controller
+	 */
 	public static ThemeController get() {
 		if (ThemeController.instance == null) {
 			ThemeController.instance = GWT.create(ThemeController.class);
@@ -27,17 +57,61 @@ public abstract class ThemeController {
 		return ThemeController.instance;
 	}
 
+	/**
+	 * protected theme controller constructor.
+	 * <p>
+	 * This constructor is protected you must get the ThemeController via the static get() method.
+	 * </p>
+	 */
 	protected ThemeController() {
 	}
 
+	/**
+	 * Gets the default theme.
+	 * <p>
+	 * The default theme is initialized in
+	 * {@link fr.putnami.pwt.core.widget.client.boot.BootstrapThemeLoader}
+	 * </p>
+	 *
+	 * @return the default theme
+	 */
 	public abstract Theme getDefaultTheme();
 
+	/**
+	 * Install a theme.
+	 * <ol>
+	 * <li>Remove all css links from the html header</li>
+	 * <li>Install all default theme css</li>
+	 * <li>Install all current theme css</li>
+	 * </ol>
+	 *
+	 * @param theme the theme
+	 */
 	public abstract void installTheme(Theme theme);
 
+	/**
+	 * Install default theme.
+	 * <p>
+	 * Remove the current theme then init the default theme.
+	 * </p>
+	 */
 	public abstract void installDefaultTheme();
 
+	/**
+	 * Reset the current theme in the html header.
+	 */
 	public abstract void resetTheme();
 
+	/**
+	 * Gets the icon style name from the icon name.
+	 * <p>
+	 * For example, the default fontello as "icon-" prefix. so getInconStyle("plus") returns
+	 * "icon-plus"
+	 * </p>
+	 *
+	 * @param iconName the icon name
+	 * @return the css icon style name
+	 */
 	public abstract CssStyle getIconStyle(String iconName);
 
 }

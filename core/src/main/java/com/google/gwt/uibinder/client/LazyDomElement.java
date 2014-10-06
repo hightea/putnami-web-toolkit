@@ -14,6 +14,8 @@ import com.google.gwt.dom.client.Element;
 /**
  * This file is derived from the original LazyDomElement. This version doesn't remove the 'id'
  * attribute.
+ *
+ * @param <T> lazy dom element.
  */
 public class LazyDomElement<T extends Element> {
 

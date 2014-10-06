@@ -18,12 +18,22 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ScriptElement;
 
+/**
+ * The Class DefaultIE8ThemeController is the IE8 theme controller. it adds the twitter bootstrap
+ * respond js file in the documment head
+ *
+ *
+ * @since 1.0
+ */
 public class DefaultIE8ThemeController extends DefaultThemeController {
 
 	private static final String RESPOND_JS_LOCATION = "theme/default/script/respond.min.js";
 
 	private ScriptElement respondJsScript;
 
+	/* (non-Javadoc)
+	 * @see fr.putnami.pwt.core.theme.client.DefaultThemeController#resetTheme()
+	 */
 	@Override
 	public void resetTheme() {
 		this.ensureRespondJsScriptElement();
@@ -32,6 +42,9 @@ public class DefaultIE8ThemeController extends DefaultThemeController {
 		this.getHead().appendChild(this.respondJsScript);
 	}
 
+	/**
+	 * Ensure respond js script element.
+	 */
 	private void ensureRespondJsScriptElement() {
 		if (this.respondJsScript == null) {
 			this.respondJsScript = Document.get().createScriptElement();

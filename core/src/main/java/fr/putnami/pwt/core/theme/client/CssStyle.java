@@ -14,7 +14,17 @@
  */
 package fr.putnami.pwt.core.theme.client;
 
+/**
+ * The Interface CssStyle wrapps a css class name.
+ *
+ * @since 1.0
+ */
 public interface CssStyle {
 
+	/**
+	 * Gets the the css class name to apply to the element.
+	 *
+	 * @return the string
+	 */
 	String get();
 }

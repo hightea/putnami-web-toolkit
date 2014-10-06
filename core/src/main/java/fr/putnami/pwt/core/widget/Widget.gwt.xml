@@ -30,7 +30,7 @@
 	<inherits name="fr.putnami.pwt.core.model.Model"/>
 	<inherits name="fr.putnami.pwt.core.theme.Theme"/>
 
-	<entry-point class="fr.putnami.pwt.core.widget.client.boot.WidgetBoot"/>
+	<entry-point class="fr.putnami.pwt.core.widget.client.boot.BootstrapThemeLoader"/>
 
 
 	<source path="client"/>

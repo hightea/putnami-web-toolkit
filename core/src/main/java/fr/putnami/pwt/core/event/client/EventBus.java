@@ -14,7 +14,6 @@
  */
 package fr.putnami.pwt.core.event.client;
 
-import com.google.web.bindery.event.shared.Event;
 import com.google.web.bindery.event.shared.SimpleEventBus;
 
 /**
@@ -43,15 +42,5 @@ public final class EventBus extends SimpleEventBus {
 	}
 
 	private EventBus() {
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see SimpleEventBus#getHandler(com.google.web.bindery.event.shared.Event.Type, int)
-	 */
-	@Override
-	protected <H> H getHandler(Event.Type<H> type, int index) {
-		return super.getHandler(type, index);
 	}
 }
