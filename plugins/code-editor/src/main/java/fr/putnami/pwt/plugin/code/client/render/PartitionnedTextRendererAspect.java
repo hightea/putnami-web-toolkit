@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.plugin.code.client.render;
 
@@ -33,7 +31,7 @@ public class PartitionnedTextRendererAspect extends AbstractTextRendererAspect {
 
 	private boolean addPartitionWithoutScanner;
 
-	private TokenScanner tokenPartitionner = buildScanner();
+	private TokenScanner tokenPartitionner = this.buildScanner();
 	private Map<TokenContent, TokenScanner> partitionScanners = Maps.newHashMap();
 
 	public PartitionnedTextRendererAspect() {
@@ -59,7 +57,7 @@ public class PartitionnedTextRendererAspect extends AbstractTextRendererAspect {
 		List<Token<?>> resultTokenList = Lists.newArrayList();
 
 		// Partition of the String
-		List<Token<?>> partitionnedValue = getTokens(value, tokenPartitionner);
+		List<Token<?>> partitionnedValue = this.getTokens(value, this.tokenPartitionner);
 
 		// Tokenization of each partition
 		for (Token<?> curToken : partitionnedValue) {
@@ -67,11 +65,10 @@ public class PartitionnedTextRendererAspect extends AbstractTextRendererAspect {
 				resultTokenList.add(curToken);
 				break;
 			}
-			TokenScanner curScanner = partitionScanners.get(curToken.getContent());
+			TokenScanner curScanner = this.partitionScanners.get(curToken.getContent());
 			if (curScanner != null) {
-				resultTokenList.addAll(getTokens(curToken.getText(), curScanner));
-			}
-			else if (addPartitionWithoutScanner) {
+				resultTokenList.addAll(this.getTokens(curToken.getText(), curScanner));
+			} else if (this.addPartitionWithoutScanner) {
 				resultTokenList.add(curToken);
 			}
 		}
@@ -90,28 +87,28 @@ public class PartitionnedTextRendererAspect extends AbstractTextRendererAspect {
 	}
 
 	public void registerPartitionner(TokenEvaluator partitionner) {
-		tokenPartitionner.registerEvaluator(partitionner);
+		this.tokenPartitionner.registerEvaluator(partitionner);
 	}
 
 	public void registerPartitionScanner(TokenContent key, TokenEvaluator evaluator) {
-		TokenScanner curScanner = getOrRegisterScanner(key);
+		TokenScanner curScanner = this.getOrRegisterScanner(key);
 		curScanner.registerEvaluator(evaluator);
 	}
 
 	public void registerPartitionScanners(TokenContent key, TokenEvaluator... evaluators) {
-		registerPartitionScanners(key, Lists.newArrayList(evaluators));
+		this.registerPartitionScanners(key, Lists.newArrayList(evaluators));
 	}
 
 	public void registerPartitionScanners(TokenContent key, List<TokenEvaluator> evaluators) {
-		TokenScanner curScanner = getOrRegisterScanner(key);
+		TokenScanner curScanner = this.getOrRegisterScanner(key);
 		curScanner.registerAllEvaluator(evaluators);
 	}
 
 	private TokenScanner getOrRegisterScanner(TokenContent key) {
-		TokenScanner curScanner = partitionScanners.get(key);
+		TokenScanner curScanner = this.partitionScanners.get(key);
 		if (curScanner == null) {
-			curScanner = buildScanner();
-			partitionScanners.put(key, curScanner);
+			curScanner = this.buildScanner();
+			this.partitionScanners.put(key, curScanner);
 		}
 		return curScanner;
 	}
@@ -122,12 +119,13 @@ public class PartitionnedTextRendererAspect extends AbstractTextRendererAspect {
 
 	@Override
 	public CodeEditorAspect copy() {
-		PartitionnedTextRendererAspect copy = new PartitionnedTextRendererAspect(tokenPartitionner.getEvaluators());
-		for (Entry<TokenContent, TokenScanner> entry : partitionScanners.entrySet()) {
+		PartitionnedTextRendererAspect copy =
+				new PartitionnedTextRendererAspect(this.tokenPartitionner.getEvaluators());
+		for (Entry<TokenContent, TokenScanner> entry : this.partitionScanners.entrySet()) {
 			copy.registerPartitionScanners(entry.getKey(), entry.getValue().getEvaluators());
 		}
-		copy.setAddPartitionWithoutScanner(addPartitionWithoutScanner);
-		copy.setAutoAddEOLToken(getAutoAddEOLToken());
+		copy.setAddPartitionWithoutScanner(this.addPartitionWithoutScanner);
+		copy.setAutoAddEOLToken(this.getAutoAddEOLToken());
 		return copy;
 	}
 

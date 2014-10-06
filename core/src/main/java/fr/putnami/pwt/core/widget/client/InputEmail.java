@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -34,16 +32,9 @@ public class InputEmail extends AbstractInputBox<TextBox, String> {
 		public void onKeyPress(KeyPressEvent event) {
 			boolean valid = false;
 			char pressed = event.getCharCode();
-			if (pressed >= 'a' && pressed <= 'z'
-					|| pressed >= 'A' && pressed <= 'Z'
-					|| pressed >= '0' && pressed <= '9'
-					|| pressed == '@'
-					|| pressed == '.'
-					|| pressed == '+'
-					|| pressed == '-'
-					|| pressed == '_'
-					|| pressed == '%'
-			) {
+			if (pressed >= 'a' && pressed <= 'z' || pressed >= 'A' && pressed <= 'Z' || pressed >= '0'
+					&& pressed <= '9' || pressed == '@' || pressed == '.' || pressed == '+' || pressed == '-'
+					|| pressed == '_' || pressed == '%') {
 				valid = true;
 			}
 			if (!valid) {
@@ -56,16 +47,16 @@ public class InputEmail extends AbstractInputBox<TextBox, String> {
 	public InputEmail() {
 		super(new TextBox());
 
-		setParser(StringParser.get());
-		setRenderer(StringRenderer.get());
+		this.setParser(StringParser.get());
+		this.setRenderer(StringRenderer.get());
 
-		addValidator(new EmailValidator());
-		getInput().addKeyPressHandler(EMAIL_CHAR_VALIDATOR);
+		this.addValidator(new EmailValidator());
+		this.getInput().addKeyPressHandler(InputEmail.EMAIL_CHAR_VALIDATOR);
 	}
 
 	protected InputEmail(InputEmail source) {
 		super(new TextBox(), source);
-		getInput().addKeyPressHandler(EMAIL_CHAR_VALIDATOR);
+		this.getInput().addKeyPressHandler(InputEmail.EMAIL_CHAR_VALIDATOR);
 	}
 
 	@Override
@@ -78,7 +69,7 @@ public class InputEmail extends AbstractInputBox<TextBox, String> {
 		String email = super.flush();
 		if (email != null) {
 			email = email.toLowerCase();
-			setValue(email);
+			this.setValue(email);
 		}
 		return email;
 	}

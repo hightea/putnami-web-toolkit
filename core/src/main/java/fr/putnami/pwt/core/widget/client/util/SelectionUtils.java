@@ -4,7 +4,7 @@ import com.google.gwt.dom.client.Element;
 
 public final class SelectionUtils {
 
-	public native static void disableTextSelectInternal(Element e, boolean disable)
+	public static native void disableTextSelectInternal(Element e, boolean disable)
 	/*-{
 	    if (disable) {
 	      e.ondrag = function () { return false; };
@@ -16,6 +16,5 @@ public final class SelectionUtils {
 	  }-*/;
 
 	private SelectionUtils() {
-
 	}
 }

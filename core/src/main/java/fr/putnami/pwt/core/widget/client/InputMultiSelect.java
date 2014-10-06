@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -44,7 +42,8 @@ public class InputMultiSelect<T> extends AbstractInputSelect<T, List<T>> {
 	private Comparator<T> simpleComparator = new Comparator<T>() {
 		@Override
 		public int compare(T o1, T o2) {
-			return Integer.compare(InputMultiSelect.this.getOrderedItems().indexOf(o1), InputMultiSelect.this.getOrderedItems().indexOf(o2));
+			return Integer.compare(InputMultiSelect.this.getOrderedItems().indexOf(o1),
+					InputMultiSelect.this.getOrderedItems().indexOf(o2));
 		};
 	};
 
@@ -54,7 +53,7 @@ public class InputMultiSelect<T> extends AbstractInputSelect<T, List<T>> {
 		public String render(List<T> values) {
 			String result = "";
 			if (values != null) {
-				Collections.sort(values, simpleComparator);
+				Collections.sort(values, InputMultiSelect.this.simpleComparator);
 				result = Joiner.on(", ").join(Iterables.transform(values, new Function<T, String>() {
 					@Override
 					public String apply(T input) {
@@ -72,50 +71,50 @@ public class InputMultiSelect<T> extends AbstractInputSelect<T, List<T>> {
 
 		@Override
 		public void onItemClick(T item) {
-			if (selectedItems == null) {
-				selectedItems = new ArrayList<T>();
+			if (this.selectedItems == null) {
+				this.selectedItems = new ArrayList<T>();
 			}
-			boolean selectItem = !selectedItems.contains(item);
-			selectItem(item, selectItem);
+			boolean selectItem = !this.selectedItems.contains(item);
+			this.selectItem(item, selectItem);
 			if (selectItem) {
-				selectedItems.add(item);
-			}
-			else {
-				selectedItems.remove(item);
-				if (selectedItems.isEmpty()) {
-					selectedItems = null;
+				this.selectedItems.add(item);
+			} else {
+				this.selectedItems.remove(item);
+				if (this.selectedItems.isEmpty()) {
+					this.selectedItems = null;
 				}
 			}
-			highlightByIndex(InputMultiSelect.this.getOrderedItems().indexOf(item));
-			ValueChangeEvent.fire(InputMultiSelect.this, selectedItems);
+			this.highlightByIndex(InputMultiSelect.this.getOrderedItems().indexOf(item));
+			ValueChangeEvent.fire(InputMultiSelect.this, this.selectedItems);
 		}
 
 		@Override
 		public void onHomeKeyDown() {
-			highlightByIndex(0);
+			this.highlightByIndex(0);
 		}
 
 		@Override
 		public void onEndKeyDown() {
-			highlightByIndex(InputMultiSelect.this.getOrderedItems().size() - 1);
+			this.highlightByIndex(InputMultiSelect.this.getOrderedItems().size() - 1);
 		}
 
 		@Override
 		public void onUpKeyDown() {
-			highlightByIndex(currentHighlightedIndex - 1);
+			this.highlightByIndex(this.currentHighlightedIndex - 1);
 		}
 
 		@Override
 		public void onDownKeyDown() {
-			highlightByIndex(currentHighlightedIndex + 1);
+			this.highlightByIndex(this.currentHighlightedIndex + 1);
 		}
 
 		private void highlightByIndex(int index) {
-			int newIndex = Math.min(InputMultiSelect.this.getOrderedItems().size() - 1, Math.max(0, index));
-			highlightItem(currentHighlightedIndex, false);
-			highlightItem(newIndex, true);
-			currentHighlightedIndex = newIndex;
-			scrollToHighlighted();
+			int newIndex =
+					Math.min(InputMultiSelect.this.getOrderedItems().size() - 1, Math.max(0, index));
+			this.highlightItem(this.currentHighlightedIndex, false);
+			this.highlightItem(newIndex, true);
+			this.currentHighlightedIndex = newIndex;
+			this.scrollToHighlighted();
 		}
 
 		private void highlightItem(int itemIndex, boolean highlighted) {
@@ -123,47 +122,47 @@ public class InputMultiSelect<T> extends AbstractInputSelect<T, List<T>> {
 				T item = InputMultiSelect.this.getOrderedItems().get(itemIndex);
 				NavLink currentSelection = InputMultiSelect.this.getItemsLinks().get(item);
 				if (currentSelection != null) {
-					StyleUtils.toggleStyle(currentSelection, STYLE_HIGHLIGHTED, highlighted);
+					StyleUtils.toggleStyle(currentSelection, InputMultiSelect.STYLE_HIGHLIGHTED, highlighted);
 				}
 			}
 		}
 
 		public void onEnterKeyDown() {
-			if (currentHighlightedIndex != -1) {
-				onItemClick(InputMultiSelect.this.getOrderedItems().get(currentHighlightedIndex));
+			if (this.currentHighlightedIndex != -1) {
+				this.onItemClick(InputMultiSelect.this.getOrderedItems().get(this.currentHighlightedIndex));
 			}
 		}
 
 		@Override
 		public void onItemSearch(T searchResult) {
-			highlightByIndex(InputMultiSelect.this.getOrderedItems().indexOf(searchResult));
+			this.highlightByIndex(InputMultiSelect.this.getOrderedItems().indexOf(searchResult));
 		}
 
 		@Override
 		public void setSelection(List<T> selection, boolean fireEvents) {
-			List<T> oldSelection = selectedItems;
+			List<T> oldSelection = this.selectedItems;
 			if (oldSelection != null) {
 				for (T item : oldSelection) {
-					selectItem(item, false);
+					this.selectItem(item, false);
 				}
 			}
 
-			selectedItems = selection;
+			this.selectedItems = selection;
 			if (selection != null) {
 				for (T item : selection) {
-					selectItem(item, true);
+					this.selectItem(item, true);
 				}
 			}
-			highlightItem(currentHighlightedIndex, false);
-			currentHighlightedIndex = -1;
+			this.highlightItem(this.currentHighlightedIndex, false);
+			this.currentHighlightedIndex = -1;
 			if (fireEvents) {
 				ValueChangeEvent.fireIfNotEqual(InputMultiSelect.this, oldSelection, selection);
 			}
 		}
 
 		private void scrollToHighlighted() {
-			if (InputMultiSelect.this.getDropdown().isOpen() && currentHighlightedIndex != -1) {
-				T item = InputMultiSelect.this.getOrderedItems().get(currentHighlightedIndex);
+			if (InputMultiSelect.this.getDropdown().isOpen() && this.currentHighlightedIndex != -1) {
+				T item = InputMultiSelect.this.getOrderedItems().get(this.currentHighlightedIndex);
 				NavLink currentSelection = InputMultiSelect.this.getItemsLinks().get(item);
 				if (currentSelection != null) {
 					currentSelection.getElement().scrollIntoView();
@@ -175,27 +174,27 @@ public class InputMultiSelect<T> extends AbstractInputSelect<T, List<T>> {
 			NavLink currentSelection = InputMultiSelect.this.getItemsLinks().get(item);
 			if (currentSelection != null) {
 				currentSelection.setActive(selected);
-				StyleUtils.toggleStyle(currentSelection, STYLE_SELECTED, selected);
+				StyleUtils.toggleStyle(currentSelection, InputMultiSelect.STYLE_SELECTED, selected);
 			}
 		}
 
 		@Override
 		public List<T> getSelection() {
-			return selectedItems;
+			return this.selectedItems;
 		}
 	}
 
 	public InputMultiSelect() {
 		super();
-		setMultiple(true);
-		setSelectionHandler(new MultiSelectionHandler());
-		setSelectionRenderer(new MultiSelectionRenderer());
+		this.setMultiple(true);
+		this.setSelectionHandler(new MultiSelectionHandler());
+		this.setSelectionRenderer(new MultiSelectionRenderer());
 	}
 
 	protected InputMultiSelect(InputMultiSelect<T> source) {
 		super(source);
-		setSelectionHandler(new MultiSelectionHandler());
-		setSelectionRenderer(new MultiSelectionRenderer());
+		this.setSelectionHandler(new MultiSelectionHandler());
+		this.setSelectionRenderer(new MultiSelectionRenderer());
 	}
 
 	@Override
@@ -206,7 +205,7 @@ public class InputMultiSelect<T> extends AbstractInputSelect<T, List<T>> {
 	@Override
 	public void addItem(T item) {
 		super.addItem(item);
-		getItemsLinks().get(item).setPreventClickWhenActive(false);
+		this.getItemsLinks().get(item).setPreventClickWhenActive(false);
 	}
 
 	@Override
@@ -214,24 +213,24 @@ public class InputMultiSelect<T> extends AbstractInputSelect<T, List<T>> {
 		super.onBrowserEvent(event);
 		boolean mustKillEvent = false;
 		switch (DOM.eventGetType(event)) {
-		case Event.ONKEYDOWN:
-			switch (event.getKeyCode()) {
-			case KeyCodes.KEY_ENTER:
-				if (getDropdown().isOpen()) {
-					((MultiSelectionHandler) getSelectionHandler()).onEnterKeyDown();
-					mustKillEvent = true;
+			case Event.ONKEYDOWN:
+				switch (event.getKeyCode()) {
+					case KeyCodes.KEY_ENTER:
+						if (this.getDropdown().isOpen()) {
+							((MultiSelectionHandler) this.getSelectionHandler()).onEnterKeyDown();
+							mustKillEvent = true;
+						}
+						break;
+					case KeyCodes.KEY_TAB:
+					case KeyCodes.KEY_ESCAPE:
+						this.getDropdown().close();
+						break;
+					default:
+						break;
 				}
-				break;
-			case KeyCodes.KEY_TAB:
-			case KeyCodes.KEY_ESCAPE:
-				getDropdown().close();
 				break;
 			default:
 				break;
-			}
-			break;
-		default:
-			break;
 		}
 		if (mustKillEvent) {
 			event.preventDefault();

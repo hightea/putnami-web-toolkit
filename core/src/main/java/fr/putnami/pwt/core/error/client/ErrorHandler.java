@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.error.client;
 
@@ -23,30 +21,30 @@ package fr.putnami.pwt.core.error.client;
  * </p>
  * <p>
  * <strong>Register a handler</strong>
- * 
+ *
  * <pre>
  * ErrorManager.get().registerErrorHandler(handler);
  * </pre>
- * 
+ *
  * </p>
  * <p>
  * <strong>Simple handler</strong>
- * 
+ *
  * <pre>
  * public class SimpleHandler implements ErrorHandler {
  * 	public int getPriority() {
  * 		return DEFAULT_PRIORITY;
  * 	}
- * 
+ *
  * 	public boolean handle(Throwable error) {
  * 		Window.alert(error.getMessage());
  * 		return true;
  * 	}
  * }
  * </pre>
- * 
+ *
  * </p>
- * 
+ *
  * @since 1.0
  */
 public interface ErrorHandler {
@@ -58,12 +56,12 @@ public interface ErrorHandler {
 	int HIGHER_PRIORITY = Integer.MAX_VALUE;
 
 	/**
-	 * Handle the error. If the handler can manage the exception, it must return true to stop the chaining, otherwise false to follow the chain.
+	 * Handle the error. If the handler can manage the exception, it must return true to stop the
+	 * chaining, otherwise false to follow the chain.
 	 * <p>
 	 * </p>
-	 * 
-	 * @param error
-	 *           to handle
+	 *
+	 * @param error to handle
 	 * @return true, if error handled
 	 * @see ErrorManager
 	 */
@@ -74,7 +72,7 @@ public interface ErrorHandler {
 	 * <p>
 	 * Higher the priority is, Sooner the handler will be used
 	 * </p>
-	 * 
+	 *
 	 * @return int the priority of the handler
 	 */
 	int getPriority();

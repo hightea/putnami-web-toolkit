@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -39,10 +37,7 @@ import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
-public class Modal extends AbstractPanel implements
-		HasOneWidget,
-		CloneableWidget,
-		HasDrawable {
+public class Modal extends AbstractPanel implements HasOneWidget, CloneableWidget, HasDrawable {
 
 	private static final CssStyle STYLE_MODAL = new SimpleStyle("modal");
 	private static final CssStyle STYLE_MODAL_OPEN = new SimpleStyle("modal-open");
@@ -60,9 +55,9 @@ public class Modal extends AbstractPanel implements
 	private static class ModalBackdrop extends Widget {
 
 		public ModalBackdrop() {
-			setElement(Document.get().createDivElement());
-			StyleUtils.addStyle(this, STYLE_BACKDROP);
-			StyleUtils.addStyle(this, STYLE_FADE);
+			this.setElement(Document.get().createDivElement());
+			StyleUtils.addStyle(this, Modal.STYLE_BACKDROP);
+			StyleUtils.addStyle(this, Modal.STYLE_FADE);
 		}
 
 		public void show() {
@@ -70,13 +65,13 @@ public class Modal extends AbstractPanel implements
 			Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 				@Override
 				public void execute() {
-					StyleUtils.addStyle(ModalBackdrop.this, STYLE_VISIBLE);
+					StyleUtils.addStyle(ModalBackdrop.this, Modal.STYLE_VISIBLE);
 				}
 			});
 		}
 
 		public void hide() {
-			StyleUtils.removeStyle(ModalBackdrop.this, STYLE_VISIBLE);
+			StyleUtils.removeStyle(ModalBackdrop.this, Modal.STYLE_VISIBLE);
 			Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
 
 				@Override
@@ -89,9 +84,7 @@ public class Modal extends AbstractPanel implements
 	}
 
 	public enum Size implements CssStyle {
-		SMALL("modal-sm"),
-		DEFAULT(null),
-		LARGE("modal-lg");
+		SMALL("modal-sm"), DEFAULT(null), LARGE("modal-lg");
 
 		private final String style;
 
@@ -126,15 +119,15 @@ public class Modal extends AbstractPanel implements
 	public Modal() {
 		super(DivElement.TAG);
 
-		StyleUtils.addStyle(this, STYLE_MODAL);
-		StyleUtils.addStyle(this, STYLE_FADE);
+		StyleUtils.addStyle(this, Modal.STYLE_MODAL);
+		StyleUtils.addStyle(this, Modal.STYLE_FADE);
 
-		append(dialogContainer);
-		dialogContainer.append(contentContainer);
+		this.append(this.dialogContainer);
+		this.dialogContainer.append(this.contentContainer);
 
-		StyleUtils.addStyle(dialogContainer, STYLE_DIALOG);
-		StyleUtils.addStyle(contentContainer, STYLE_CONTENT);
-		StyleUtils.addStyle(bodyContainer, STYLE_BODY);
+		StyleUtils.addStyle(this.dialogContainer, Modal.STYLE_DIALOG);
+		StyleUtils.addStyle(this.contentContainer, Modal.STYLE_CONTENT);
+		StyleUtils.addStyle(this.bodyContainer, Modal.STYLE_BODY);
 	}
 
 	protected Modal(Modal source) {
@@ -144,9 +137,9 @@ public class Modal extends AbstractPanel implements
 		this.dismissable = source.dismissable;
 		this.title = source.title;
 
-		setHeader(WidgetUtils.cloneWidget(header));
-		setFooter(WidgetUtils.cloneWidget(footer));
-		setWidget(WidgetUtils.cloneWidget(widget));
+		this.setHeader(WidgetUtils.cloneWidget(this.header));
+		this.setFooter(WidgetUtils.cloneWidget(this.footer));
+		this.setWidget(WidgetUtils.cloneWidget(this.widget));
 		throw new UnsupportedOperationException("not implemented yet");
 	}
 
@@ -158,20 +151,20 @@ public class Modal extends AbstractPanel implements
 	@Override
 	public void add(IsWidget w) {
 		if (w instanceof Header) {
-			setHeader((Header) w);
+			this.setHeader((Header) w);
 			return;
 		}
 		if (w instanceof Footer) {
-			setFooter((Footer) w);
+			this.setFooter((Footer) w);
 			return;
 		}
 		if (w instanceof HasHeader) {
-			setHeader(((HasHeader) w).getHeader());
+			this.setHeader(((HasHeader) w).getHeader());
 		}
 		if (w instanceof HasFooter) {
-			setFooter(((HasFooter) w).getFooter());
+			this.setFooter(((HasFooter) w).getFooter());
 		}
-		setWidget(w);
+		this.setWidget(w);
 	}
 
 	public void setHeader(Header header) {
@@ -188,43 +181,42 @@ public class Modal extends AbstractPanel implements
 		}
 		assert this.footer == null : "footer may only be set once";
 		this.footer = footer;
-		StyleUtils.addStyle(footer, STYLE_FOOTER);
+		StyleUtils.addStyle(footer, Modal.STYLE_FOOTER);
 	}
 
 	public void show() {
-		ensureDismissButton();
-		redraw();
-		visible = true;
+		this.ensureDismissButton();
+		this.redraw();
+		this.visible = true;
 		Modal.MODAL_BACKDROP.show();
-		if (getParent() != null) {
-			removeFromParent();
+		if (this.getParent() != null) {
+			this.removeFromParent();
 		}
 		RootPanel.get().add(this);
-		getElement().getStyle().setDisplay(Display.BLOCK);
-		StyleUtils.addStyle(RootPanel.get(), STYLE_MODAL_OPEN);
+		this.getElement().getStyle().setDisplay(Display.BLOCK);
+		StyleUtils.addStyle(RootPanel.get(), Modal.STYLE_MODAL_OPEN);
 		Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
 
 			@Override
 			public boolean execute() {
-				StyleUtils.addStyle(Modal.this, STYLE_VISIBLE);
+				StyleUtils.addStyle(Modal.this, Modal.STYLE_VISIBLE);
 				return false;
 			}
 		}, 150);
-
 	}
 
 	public void hide() {
-		visible = false;
-		StyleUtils.removeStyle(Modal.this, STYLE_VISIBLE);
+		this.visible = false;
+		StyleUtils.removeStyle(Modal.this, Modal.STYLE_VISIBLE);
 		Modal.MODAL_BACKDROP.hide();
-		StyleUtils.removeStyle(RootPanel.get(), STYLE_MODAL_OPEN);
+		StyleUtils.removeStyle(RootPanel.get(), Modal.STYLE_MODAL_OPEN);
 		Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
 
 			@Override
 			public boolean execute() {
-				getElement().getStyle().clearDisplay();
-				if (getParent() != null) {
-					removeFromParent();
+				Modal.this.getElement().getStyle().clearDisplay();
+				if (Modal.this.getParent() != null) {
+					Modal.this.removeFromParent();
 				}
 				return false;
 			}
@@ -232,28 +224,27 @@ public class Modal extends AbstractPanel implements
 	}
 
 	public void toggleVisibility() {
-		if (visible) {
-			hide();
-		}
-		else {
-			show();
+		if (this.visible) {
+			this.hide();
+		} else {
+			this.show();
 		}
 	}
 
 	@Override
 	public Widget getWidget() {
-		return widget;
+		return this.widget;
 	}
 
 	@Override
 	public void setWidget(IsWidget w) {
-		setWidget(w.asWidget());
+		this.setWidget(w.asWidget());
 	}
 
 	@Override
 	public void setWidget(Widget w) {
-		widget = w;
-		bodyContainer.append(widget);
+		this.widget = w;
+		this.bodyContainer.append(this.widget);
 	}
 
 	@Override
@@ -264,7 +255,7 @@ public class Modal extends AbstractPanel implements
 
 	@Override
 	public String getTitle() {
-		return title;
+		return this.title;
 	}
 
 	public void setDismissable(boolean dismissable) {
@@ -272,53 +263,52 @@ public class Modal extends AbstractPanel implements
 	}
 
 	public Size getSize() {
-		return size;
+		return this.size;
 	}
 
 	public void setSize(Size size) {
 		this.size = size;
-		StyleUtils.addStyle(contentContainer, this.size);
+		StyleUtils.addStyle(this.contentContainer, this.size);
 	}
 
 	@Override
 	public void redraw() {
-		headerContainer.clear();
+		this.headerContainer.clear();
 
-		if (dismissable) {
-			headerContainer.append(ensureDismissButton());
+		if (this.dismissable) {
+			this.headerContainer.append(this.ensureDismissButton());
 		}
-		if (header != null) {
-			headerContainer.append(header);
-		}
-		else if (title != null) {
+		if (this.header != null) {
+			this.headerContainer.append(this.header);
+		} else if (this.title != null) {
 			Heading titleHeading = new Heading(4);
-			titleHeading.setText(title);
-			headerContainer.append(titleHeading);
+			titleHeading.setText(this.title);
+			this.headerContainer.append(titleHeading);
 		}
 
-		if (headerContainer.getWidgetCount() > 0) {
-			StyleUtils.addStyle(headerContainer, STYLE_HEADER);
+		if (this.headerContainer.getWidgetCount() > 0) {
+			StyleUtils.addStyle(this.headerContainer, Modal.STYLE_HEADER);
 		}
 
-		contentContainer.clear();
-		contentContainer.append(headerContainer);
-		contentContainer.append(bodyContainer);
-		contentContainer.append(footer);
+		this.contentContainer.clear();
+		this.contentContainer.append(this.headerContainer);
+		this.contentContainer.append(this.bodyContainer);
+		this.contentContainer.append(this.footer);
 	}
 
 	private Anchor<?> ensureDismissButton() {
-		if (dismissable && dismissButton == null) {
-			dismissButton = new Anchor("&times;");
-			StyleUtils.addStyle(dismissButton, STYLE_CLOSE);
-			dismissButton.addClickHandler(new ClickHandler() {
+		if (this.dismissable && this.dismissButton == null) {
+			this.dismissButton = new Anchor("&times;");
+			StyleUtils.addStyle(this.dismissButton, Modal.STYLE_CLOSE);
+			this.dismissButton.addClickHandler(new ClickHandler() {
 
 				@Override
 				public void onClick(ClickEvent event) {
-					hide();
+					Modal.this.hide();
 				}
 
 			});
 		}
-		return dismissButton;
+		return this.dismissButton;
 	}
 }

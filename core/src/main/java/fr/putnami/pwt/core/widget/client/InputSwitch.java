@@ -30,16 +30,16 @@ public class InputSwitch<T> extends AbstractInputChoice<T, T> {
 
 		@Override
 		public void onItemClick(T item) {
-			selectedItem = item;
-			ValueChangeEvent.fire(InputSwitch.this, selectedItem);
-			resetSlider(item);
+			this.selectedItem = item;
+			ValueChangeEvent.fire(InputSwitch.this, this.selectedItem);
+			InputSwitch.this.resetSlider(item);
 		}
 
 		@Override
 		public void setSelection(T selection, boolean fireEvents) {
-			T oldValue = selectedItem;
-			resetSlider(selection);
-			selectedItem = selection;
+			T oldValue = this.selectedItem;
+			InputSwitch.this.resetSlider(selection);
+			this.selectedItem = selection;
 			if (fireEvents) {
 				ValueChangeEvent.fireIfNotEqual(InputSwitch.this, oldValue, selection);
 			}
@@ -47,7 +47,7 @@ public class InputSwitch<T> extends AbstractInputChoice<T, T> {
 
 		@Override
 		public T getSelection() {
-			return selectedItem;
+			return this.selectedItem;
 		}
 	}
 
@@ -57,14 +57,14 @@ public class InputSwitch<T> extends AbstractInputChoice<T, T> {
 
 		public SwitchItem(T value) {
 			this.value = value;
-			StyleUtils.addStyle(this, STYLE_ITEM);
-			getElement().setInnerHTML(getChoiceRenderer().renderItem(value));
-			addDomHandler(this, ClickEvent.getType());
+			StyleUtils.addStyle(this, InputSwitch.STYLE_ITEM);
+			this.getElement().setInnerHTML(InputSwitch.this.getChoiceRenderer().renderItem(value));
+			this.addDomHandler(this, ClickEvent.getType());
 		}
 
 		@Override
 		public void onClick(ClickEvent event) {
-			getSelectionHandler().onItemClick(value);
+			InputSwitch.this.getSelectionHandler().onItemClick(this.value);
 		}
 	}
 
@@ -77,19 +77,19 @@ public class InputSwitch<T> extends AbstractInputChoice<T, T> {
 
 	public InputSwitch() {
 		super(new Container());
-		container = (Container) getWidget();
-		endConstruct();
-		slider = new Container();
-		StyleUtils.addStyle(slider, STYLE_CHOICE_ITEM_SLIDER);
-		StyleUtils.addStyle(this, STYLE_CHOICE_SLIDER);
+		this.container = (Container) this.getWidget();
+		this.endConstruct();
+		this.slider = new Container();
+		StyleUtils.addStyle(this.slider, InputSwitch.STYLE_CHOICE_ITEM_SLIDER);
+		StyleUtils.addStyle(this, InputSwitch.STYLE_CHOICE_SLIDER);
 	}
 
 	protected InputSwitch(AbstractInputSelect<T, T> source) {
 		super(new Container(), source);
-		container = (Container) getWidget();
-		slider = new Container();
-		StyleUtils.addStyle(slider, STYLE_CHOICE_ITEM_SLIDER);
-		endConstruct();
+		this.container = (Container) this.getWidget();
+		this.slider = new Container();
+		StyleUtils.addStyle(this.slider, InputSwitch.STYLE_CHOICE_ITEM_SLIDER);
+		this.endConstruct();
 	}
 
 	@Override
@@ -99,21 +99,21 @@ public class InputSwitch<T> extends AbstractInputChoice<T, T> {
 
 	@Override
 	protected void redrawInternal() {
-		container.clear();
-		items.clear();
-		container.add(slider);
+		this.container.clear();
+		this.items.clear();
+		this.container.add(this.slider);
 
-		for (T item : getOrderedItems()) {
+		for (T item : this.getOrderedItems()) {
 			SwitchItem choiceItem = new SwitchItem(item);
-			container.add(choiceItem);
-			items.put(item, choiceItem);
+			this.container.add(choiceItem);
+			this.items.put(item, choiceItem);
 		}
-		resetSlider(getValue());
+		this.resetSlider(this.getValue());
 	}
 
 	@Override
 	protected ChoiceRenderer<T> getChoiceRenderer() {
-		return choiceRenderer;
+		return this.choiceRenderer;
 	}
 
 	@Override
@@ -123,7 +123,7 @@ public class InputSwitch<T> extends AbstractInputChoice<T, T> {
 
 	@Override
 	protected ChoiceSelectionHandler<T, T> getSelectionHandler() {
-		return selectionHandler;
+		return this.selectionHandler;
 	}
 
 	@Override
@@ -132,19 +132,21 @@ public class InputSwitch<T> extends AbstractInputChoice<T, T> {
 	}
 
 	private void resetSlider(T value) {
-		for (SwitchItem item : items.values()) {
-			StyleUtils.removeStyle(item, STYLE_ACTIVE);
+		for (SwitchItem item : this.items.values()) {
+			StyleUtils.removeStyle(item, InputSwitch.STYLE_ACTIVE);
 		}
-		final SwitchItem item = items.get(value);
+		final SwitchItem item = this.items.get(value);
 		if (item != null) {
 
-			StyleUtils.addStyle(item, STYLE_ACTIVE);
+			StyleUtils.addStyle(item, InputSwitch.STYLE_ACTIVE);
 			Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 				@Override
 				public void execute() {
 					Element itemElement = item.getElement();
-					slider.getElement().getStyle().setWidth(itemElement.getClientWidth(), Unit.PX);
-					slider.getElement().getStyle().setMarginLeft(itemElement.getOffsetLeft() - 5, Unit.PX);
+					InputSwitch.this.slider.getElement().getStyle().setWidth(itemElement.getClientWidth(),
+							Unit.PX);
+					InputSwitch.this.slider.getElement().getStyle().setMarginLeft(
+							itemElement.getOffsetLeft() - 5, Unit.PX);
 				}
 			});
 		}

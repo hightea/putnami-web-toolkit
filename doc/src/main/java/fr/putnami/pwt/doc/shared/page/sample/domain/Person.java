@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.doc.shared.page.sample.domain;
 
@@ -41,7 +39,7 @@ public class Person implements Serializable, Comparable<Person> {
 	private Boolean enable;
 
 	public long getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(long id) {
@@ -89,7 +87,7 @@ public class Person implements Serializable, Comparable<Person> {
 	}
 
 	public Boolean getEnable() {
-		return enable;
+		return this.enable;
 	}
 
 	public void setEnable(Boolean enable) {
@@ -97,7 +95,7 @@ public class Person implements Serializable, Comparable<Person> {
 	}
 
 	public boolean isNew() {
-		return id == 0;
+		return this.id == 0;
 	}
 
 	@Override
@@ -125,9 +123,7 @@ public class Person implements Serializable, Comparable<Person> {
 	@Override
 	public int compareTo(Person o) {
 		if (o != null) {
-			return ComparisonChain.start()
-					.compare(name, o.name)
-					.result();
+			return ComparisonChain.start().compare(this.name, o.name).result();
 		}
 		return 1;
 	}

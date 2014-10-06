@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.plugin.ga.client;
 
@@ -36,7 +34,7 @@ public class GoogleAnalyticsImpl extends GoogleAnalytics implements StartActivit
 
 	private void loadAnalyticsScript() {
 		ScriptElement script = Document.get().createScriptElement();
-		script.setSrc(SCRIPT_URL);
+		script.setSrc(GoogleAnalyticsImpl.SCRIPT_URL);
 		script.setType("text/javascript");
 		script.setAttribute("async", "true");
 
@@ -45,48 +43,47 @@ public class GoogleAnalyticsImpl extends GoogleAnalytics implements StartActivit
 	}
 
 	private void initScript() {
-		if (isInit) {
+		if (GoogleAnalyticsImpl.isInit) {
 			return;
 		}
-		isInit = true;
-		createGaObject();
-		loadAnalyticsScript();
+		GoogleAnalyticsImpl.isInit = true;
+		this.createGaObject();
+		this.loadAnalyticsScript();
 	}
 
 	@Override
 	protected void initialize(String account) {
-		initialize(account, "auto");
+		this.initialize(account, "auto");
 	}
 
 	@Override
 	protected void initialize(String account, String domain) {
-		initScript();
+		this.initScript();
 		MvpController.get().addStartActivityHandler(this);
-		createTracker(account, domain);
+		this.createTracker(account, domain);
 	}
 
 	@Override
 	public void onStartActivity(StartActivityEvent event) {
 		String placeToken = MvpController.get().getToken(event.getPlace());
-		trackPage(Window.Location.getPath() + "#" + placeToken);
+		this.trackPage(Window.Location.getPath() + "#" + placeToken);
 	}
 
 	@Override
 	public void handleUncaughtException(boolean enable) {
 		if (enable) {
-			if (errorHandler == null) {
-				errorHandler = new AbstractErrorHandler() {
+			if (this.errorHandler == null) {
+				this.errorHandler = new AbstractErrorHandler() {
 					@Override
 					public boolean handle(Throwable error) {
-						trackException(error.getMessage(), false);
+						GoogleAnalyticsImpl.this.trackException(error.getMessage(), false);
 						return false;
 					}
 				};
 			}
-			ErrorManager.get().registerErrorHandler(errorHandler);
-		}
-		else {
-			ErrorManager.get().removeErrorHandler(errorHandler);
+			ErrorManager.get().registerErrorHandler(this.errorHandler);
+		} else {
+			ErrorManager.get().removeErrorHandler(this.errorHandler);
 		}
 	}
 

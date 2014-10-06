@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.doc.client.page.components;
 
@@ -37,9 +35,7 @@ import fr.putnami.pwt.core.widget.client.helper.DateParser;
 public class OutputControlsView extends Composite implements View {
 
 	public enum Gender {
-		MALE,
-		FEMALE,
-		UNKNOWN
+		MALE, FEMALE, UNKNOWN
 	}
 
 	public static class Bean {
@@ -54,7 +50,8 @@ public class OutputControlsView extends Composite implements View {
 		public int age = 65;
 		public double height = Random.nextInt(1000000) / 100D;
 		public Date birthdate = new DateParser("dd/MM/yyyy").parseOrNull("02/03/1985");
-		public String remarks = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lobortis elementum vestibulum. Aliquam luctus semper congue. Fusce placerat tempus lectus, et pulvinar elit aliquam eget. Suspendisse placerat vitae risus vitae sagittis. Suspendisse dignissim orci urna, in aliquam lectus pharetra eu. Donec velit elit, tincidunt semper mollis et, adipiscing vel dui. Morbi rhoncus dui sit amet libero gravida sagittis. Duis tincidunt luctus elit, ac cursus nisi tempus in. Fusce quis quam quam. Suspendisse hendrerit lobortis metus, non fermentum nibh tincidunt gravida.";
+		public String remarks =
+				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lobortis elementum vestibulum. Aliquam luctus semper congue. Fusce placerat tempus lectus, et pulvinar elit aliquam eget. Suspendisse placerat vitae risus vitae sagittis. Suspendisse dignissim orci urna, in aliquam lectus pharetra eu. Donec velit elit, tincidunt semper mollis et, adipiscing vel dui. Morbi rhoncus dui sit amet libero gravida sagittis. Duis tincidunt luctus elit, ac cursus nisi tempus in. Fusce quis quam quam. Suspendisse hendrerit lobortis metus, non fermentum nibh tincidunt gravida.";
 
 		public String mainGroup = "Friends";
 		public List<String> groups = Lists.newArrayList("Friends", "Colleague");
@@ -84,8 +81,8 @@ public class OutputControlsView extends Composite implements View {
 
 	@PostConstruct
 	public void postConstruct() {
-		editorOutputControls.edit(new Bean());
-		editorOutputControls.getDriver().setAutoFlush(true);
+		this.editorOutputControls.edit(new Bean());
+		this.editorOutputControls.getDriver().setAutoFlush(true);
 	}
 
 }

@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.plugin.code.client.render;
 
@@ -60,13 +58,13 @@ public abstract class AbstractTextRendererAspect implements CodeEditorAspect {
 		List<Token<?>> tokenizedValue = Lists.newArrayList();
 
 		if (!Strings.isNullOrEmpty(editorDriver.getValue())) {
-			tokenizedValue = extractTokenList(editorDriver.getValue());
+			tokenizedValue = this.extractTokenList(editorDriver.getValue());
 
-			if (autoAddEOLToken) {
-				tokenizedValue = addEOLToken(editorDriver.getValue(), tokenizedValue);
+			if (this.autoAddEOLToken) {
+				tokenizedValue = this.addEOLToken(editorDriver.getValue(), tokenizedValue);
 			}
 		}
-		render(editorDriver, tokenizedValue);
+		this.render(editorDriver, tokenizedValue);
 	}
 
 	protected abstract List<Token<?>> extractTokenList(String value);
@@ -78,8 +76,7 @@ public abstract class AbstractTextRendererAspect implements CodeEditorAspect {
 			if (tokenVal.isNewLine()) {
 				editorDriver.getCodeOutput().renderNextLine(codeLine);
 				codeLine = new CodeLineImpl();
-			}
-			else {
+			} else {
 				codeLine.addToken(tokenVal);
 			}
 		}
@@ -99,15 +96,15 @@ public abstract class AbstractTextRendererAspect implements CodeEditorAspect {
 					// current token is after last EL match
 					break;
 				}
-				if (getTokenEnd(currToken) <= eolMatcher.getIndex()) {
+				if (this.getTokenEnd(currToken) <= eolMatcher.getIndex()) {
 					// current token is before last EL match
 					resultTokenList.add(currToken);
 					it.remove();
-				}
-				else {
+				} else {
 					// current token contains last EOL match
 					it.remove();
-					splitTokenAndAddEOL(tokenList, resultTokenList, it, regExp.getLastIndex(), eolMatcher, currToken);
+					this.splitTokenAndAddEOL(tokenList, resultTokenList, it, regExp.getLastIndex(),
+							eolMatcher, currToken);
 					break;
 				}
 			}
@@ -117,43 +114,43 @@ public abstract class AbstractTextRendererAspect implements CodeEditorAspect {
 		return resultTokenList;
 	}
 
-	private void splitTokenAndAddEOL(List<Token<?>> tokenizedValue, List<Token<?>> resultTokenizedValue, Iterator<Token<?>> tokenIterator,
-			int lastMatchEndIndex, MatchResult eolMatcher,
-			Token<?> currToken) {
+	private void splitTokenAndAddEOL(List<Token<?>> tokenizedValue,
+			List<Token<?>> resultTokenizedValue, Iterator<Token<?>> tokenIterator, int lastMatchEndIndex,
+			MatchResult eolMatcher, Token<?> currToken) {
 
 		if (currToken.getTokenStart() == eolMatcher.getIndex()) {
 			String eolStr = "";
 			// MultiChar EOL
-			while (getTokenEnd(currToken) < lastMatchEndIndex) {
+			while (this.getTokenEnd(currToken) < lastMatchEndIndex) {
 				eolStr += currToken.getText();
 				currToken = tokenIterator.next();
 				tokenIterator.remove();
 			}
-			if (getTokenEnd(currToken) == lastMatchEndIndex) {
+			if (this.getTokenEnd(currToken) == lastMatchEndIndex) {
 				eolStr += currToken.getText();
-			}
-			else {
+			} else {
 				eolStr += currToken.getText().substring(0, lastMatchEndIndex - currToken.getTokenStart());
-				// Nead to go out of the iterator (in the call) after because of ConcurrentModificationException
-				tokenizedValue.add(0,
-						new SimpleToken<TokenContent>(lastMatchEndIndex, currToken.getText().substring(lastMatchEndIndex - currToken.getTokenStart()),
-								currToken.getContent()));
+				// Nead to go out of the iterator (in the call) after because of
+				// ConcurrentModificationException
+				tokenizedValue.add(0, new SimpleToken<TokenContent>(lastMatchEndIndex, currToken.getText()
+						.substring(lastMatchEndIndex - currToken.getTokenStart()), currToken.getContent()));
 			}
 			resultTokenizedValue.add(SimpleToken.createNewlineToken(eolMatcher.getIndex(), eolStr));
-		}
-		else {
+		} else {
 			// We extract the first part of token and recall the method to go on the first condition
-			resultTokenizedValue.add(new SimpleToken<TokenContent>(currToken.getTokenStart(), currToken.getText().substring(0,
-					lastMatchEndIndex - currToken.getTokenStart() - 1), currToken.getContent()));
-			currToken = new SimpleToken<TokenContent>(eolMatcher.getIndex(), currToken.getText()
-					.substring(lastMatchEndIndex - currToken.getTokenStart() - 1), currToken.getContent());
-			splitTokenAndAddEOL(tokenizedValue, resultTokenizedValue, tokenIterator, lastMatchEndIndex, eolMatcher, currToken);
+			resultTokenizedValue.add(new SimpleToken<TokenContent>(currToken.getTokenStart(), currToken
+					.getText().substring(0, lastMatchEndIndex - currToken.getTokenStart() - 1), currToken
+					.getContent()));
+			currToken =
+					new SimpleToken<TokenContent>(eolMatcher.getIndex(), currToken.getText().substring(
+							lastMatchEndIndex - currToken.getTokenStart() - 1), currToken.getContent());
+			this.splitTokenAndAddEOL(tokenizedValue, resultTokenizedValue, tokenIterator,
+					lastMatchEndIndex, eolMatcher, currToken);
 		}
-
 	}
 
 	public boolean getAutoAddEOLToken() {
-		return autoAddEOLToken;
+		return this.autoAddEOLToken;
 	}
 
 	public void setAutoAddEOLToken(boolean autoAddEOLToken) {

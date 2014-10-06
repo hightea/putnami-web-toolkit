@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.plugin.code.client.output;
 
@@ -38,18 +36,18 @@ public class CodeLineImpl extends Widget implements CodeLine {
 	private List<Token<?>> tokenList = Lists.newArrayList();
 
 	public CodeLineImpl() {
-		setElement(Document.get().createDivElement());
-		StyleUtils.addStyle(this, STYLE_LINE);
+		this.setElement(Document.get().createDivElement());
+		StyleUtils.addStyle(this, CodeLineImpl.STYLE_LINE);
 	}
 
 	@Override
 	public void addToken(Token<?> token) {
-		tokenList.add(token);
+		this.tokenList.add(token);
 	}
 
 	@Override
 	public List<Token<?>> getTokens() {
-		return tokenList;
+		return this.tokenList;
 	}
 
 	@Override
@@ -60,24 +58,22 @@ public class CodeLineImpl extends Widget implements CodeLine {
 	@Override
 	public void clear() {
 		this.tokenList.clear();
-		redraw();
+		this.redraw();
 	}
 
 	@Override
 	public void redraw() {
-		getElement().removeAllChildren();
-		for (Token<?> token : tokenList) {
-			if (token.getContent() != null
-					&& token.getContent() instanceof CssRendererTokenContent
+		this.getElement().removeAllChildren();
+		for (Token<?> token : this.tokenList) {
+			if (token.getContent() != null && token.getContent() instanceof CssRendererTokenContent
 					&& ((CssRendererTokenContent) token.getContent()).getCssStyle() != null) {
 				SpanElement spanElement = Document.get().createSpanElement();
 				spanElement.addClassName(((CssRendererTokenContent) token.getContent()).getCssStyle());
 				spanElement.setInnerText(token.getText());
-				getElement().appendChild(spanElement);
-			}
-			else {
+				this.getElement().appendChild(spanElement);
+			} else {
 				Text textElement = Document.get().createTextNode(token.getText());
-				getElement().appendChild(textElement);
+				this.getElement().appendChild(textElement);
 			}
 		}
 	}

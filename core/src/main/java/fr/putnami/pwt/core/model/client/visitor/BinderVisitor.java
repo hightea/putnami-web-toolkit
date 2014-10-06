@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.model.client.visitor;
 
@@ -40,7 +38,7 @@ public class BinderVisitor extends AbstractVisitor {
 		private final List<Context<EditorValue>> contexts = Lists.newArrayList();
 
 		public List<Context<EditorValue>> getContexts() {
-			return contexts;
+			return this.contexts;
 		}
 	}
 
@@ -60,15 +58,16 @@ public class BinderVisitor extends AbstractVisitor {
 		A value = null;
 
 		if (editor instanceof EditorValue) {
-			value = (A) ModelUtils.resolveValue(object, driver.getModel(), path);
+			value = (A) ModelUtils.resolveValue(this.object, this.driver.getModel(), path);
 		}
 
-		if (context != driver.getRootContext() && editor instanceof EditorValue) {
+		if (context != this.driver.getRootContext() && editor instanceof EditorValue) {
 			EditorValue<A> editorValue = (EditorValue) editor;
 			editorValue.edit(value);
 		}
 
-		if (context == driver.getRootContext() && editor instanceof EditorCollection && value instanceof Collection) {
+		if (context == this.driver.getRootContext() && editor instanceof EditorCollection
+				&& value instanceof Collection) {
 			TraversalEditorsAspect aspect = context.getAspect(TraversalEditorsAspect.class);
 			if (aspect == null) {
 				aspect = new TraversalEditorsAspect();
@@ -79,17 +78,20 @@ public class BinderVisitor extends AbstractVisitor {
 			Collection collectionToBind = (Collection) value;
 
 			while (collectionToBind.size() < aspect.contexts.size()) {
-				driver.removeContext(aspect.contexts.remove(collectionToBind.size()));
+				this.driver.removeContext(aspect.contexts.remove(collectionToBind.size()));
 			}
 
 			int i = 0;
 			for (Object o : collectionToBind) {
 				EditorValue traversalEditor = editorList.getEditorForTraversal(i);
-				Context<EditorValue> contextCreated = (Context<EditorValue>) driver.getContext(traversalEditor);
+				Context<EditorValue> contextCreated =
+						(Context<EditorValue>) this.driver.getContext(traversalEditor);
 				if (contextCreated == null) {
-					contextCreated = ContextFactory.Util.get().createContext(driver, null, traversalEditor);
+					contextCreated =
+							ContextFactory.Util.get().createContext(this.driver, null, traversalEditor);
 					if (editor instanceof HasReadonly) {
-						driver.accept(new ReadonlyVisitor(editor, ((HasReadonly) editor).getReadonly(), true), contextCreated);
+						this.driver.accept(new ReadonlyVisitor(editor, ((HasReadonly) editor).getReadonly(),
+								true), contextCreated);
 					}
 					aspect.contexts.add(contextCreated);
 				}

@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -49,26 +47,26 @@ import fr.putnami.pwt.core.widget.client.mask.StaticStringTokenHelper;
 public class InputNumber<N extends Number> extends AbstractInputBox<TextBox, N> {
 
 	public static enum NumberType {
-		FLOAT(Float.class, FloatRenderer.get(), FloatParser.get()),
-		DOUBLE(Double.class, DoubleRenderer.instance(), DoubleParser.instance()),
-		BIG_DECIMAL(BigDecimal.class, BigDecimalRenderer.get(), BigDecimalParser.get()),
-		INTEGER(Integer.class, IntegerRenderer.instance(), IntegerParser.instance()),
-		LONG(Long.class, LongRenderer.instance(), LongParser.instance()),
-		BIG_INTEGER(BigInteger.class, BigIntegerRenderer.get(), BigIntegerParser.get());
+		FLOAT(Float.class, FloatRenderer.get(), FloatParser.get()), DOUBLE(Double.class, DoubleRenderer
+				.instance(), DoubleParser.instance()), BIG_DECIMAL(BigDecimal.class, BigDecimalRenderer
+						.get(), BigDecimalParser.get()), INTEGER(Integer.class, IntegerRenderer.instance(),
+								IntegerParser.instance()), LONG(Long.class, LongRenderer.instance(), LongParser.instance()), BIG_INTEGER(
+										BigInteger.class, BigIntegerRenderer.get(), BigIntegerParser.get());
 
 		private final Class<? extends Number> numberType;
 		private final Renderer<? extends Number> renderer;
 		private final Parser<? extends Number> parser;
 
-		private NumberType(Class<? extends Number> numberType, Renderer<? extends Number> renderer, Parser<? extends Number> parser) {
+		private NumberType(Class<? extends Number> numberType, Renderer<? extends Number> renderer,
+				Parser<? extends Number> parser) {
 			this.numberType = numberType;
 			this.renderer = renderer;
 			this.parser = parser;
 		}
-
 	}
 
-	protected static final NumberConstants NUMBER_CONSTANTS = LocaleInfo.getCurrentLocale().getNumberConstants();
+	protected static final NumberConstants NUMBER_CONSTANTS = LocaleInfo.getCurrentLocale()
+			.getNumberConstants();
 
 	protected final MaskValueBoxHelper maskHelper;
 
@@ -79,16 +77,16 @@ public class InputNumber<N extends Number> extends AbstractInputBox<TextBox, N> 
 	public InputNumber(NumberType type) {
 		super(new TextBox());
 		this.type = type;
-		maskHelper = new MaskValueBoxHelper(getInput());
-		reset();
+		this.maskHelper = new MaskValueBoxHelper(this.getInput());
+		this.reset();
 	}
 
 	protected InputNumber(InputNumber<N> source) {
 		super(new TextBox(), source);
-		type = source.type;
-		signed = source.signed;
-		maskHelper = new MaskValueBoxHelper(getInput());
-		reset();
+		this.type = source.type;
+		this.signed = source.signed;
+		this.maskHelper = new MaskValueBoxHelper(this.getInput());
+		this.reset();
 	}
 
 	@Override
@@ -97,58 +95,62 @@ public class InputNumber<N extends Number> extends AbstractInputBox<TextBox, N> 
 	}
 
 	public NumberType getNumberType() {
-		return type;
+		return this.type;
 	}
 
 	public void setNumberType(NumberType numberType) {
 		this.type = numberType;
-		reset();
+		this.reset();
 	}
 
 	public boolean isSigned() {
-		return signed;
+		return this.signed;
 	}
 
 	public void setSigned(boolean signed) {
 		this.signed = signed;
-		reset();
+		this.reset();
 	}
 
 	@Override
 	public void addValidator(Validator<N> validator) {
 		super.addValidator(validator);
-		if (signed && validator instanceof MinValidator) {
+		if (this.signed && validator instanceof MinValidator) {
 			MinValidator minValidator = (MinValidator) validator;
 			if (minValidator.getMin() >= 0) {
 				this.signed = false;
-				reset();
+				this.reset();
 			}
 		}
 	}
 
 	protected void reset() {
-		if (type == null) {
-			type = type.LONG;
+		if (this.type == null) {
+			this.type = NumberType.LONG;
 		}
 
-		setRenderer((Renderer<N>) type.renderer);
-		setParser((Parser<N>) type.parser);
+		this.setRenderer((Renderer<N>) this.type.renderer);
+		this.setParser((Parser<N>) this.type.parser);
 
-		maskHelper.reset();
-		if (signed) {
-			maskHelper.addTokenHelper(new StaticStringTokenHelper(NUMBER_CONSTANTS.minusSign(), true));
+		this.maskHelper.reset();
+		if (this.signed) {
+			this.maskHelper.addTokenHelper(new StaticStringTokenHelper(InputNumber.NUMBER_CONSTANTS
+					.minusSign(), true));
 		}
-		maskHelper.addTokenHelper(new IntegerTokenHelper(0, Integer.MIN_VALUE, Integer.MAX_VALUE, -1, "0"));
+		this.maskHelper.addTokenHelper(new IntegerTokenHelper(0, Integer.MIN_VALUE, Integer.MAX_VALUE,
+				-1, "0"));
 
-		switch (type) {
-		case FLOAT:
-		case DOUBLE:
-		case BIG_DECIMAL:
-			maskHelper.addTokenHelper(new StaticStringTokenHelper(NUMBER_CONSTANTS.decimalSeparator(), true, ',', '.'));
-			maskHelper.addTokenHelper(new IntegerTokenHelper(0, Integer.MIN_VALUE, Integer.MAX_VALUE, -1, "0"));
-			break;
-		default:
-			break;
+		switch (this.type) {
+			case FLOAT:
+			case DOUBLE:
+			case BIG_DECIMAL:
+				this.maskHelper.addTokenHelper(new StaticStringTokenHelper(InputNumber.NUMBER_CONSTANTS
+						.decimalSeparator(), true, ',', '.'));
+				this.maskHelper.addTokenHelper(new IntegerTokenHelper(0, Integer.MIN_VALUE,
+						Integer.MAX_VALUE, -1, "0"));
+				break;
+			default:
+				break;
 		}
 	}
 

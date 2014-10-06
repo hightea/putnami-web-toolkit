@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.error.client;
 
@@ -27,12 +25,13 @@ import java.util.logging.Logger;
 
 /**
  * The Class DefaultErrorManager is the default implementation of the {@link ErrorManager} .
- * 
+ *
  * @since 1.0
  */
-public class DefaultErrorManager extends ErrorManager {
+public final class DefaultErrorManager extends ErrorManager {
 
-	private static final Comparator<ErrorHandler> PRIORITY_COMPARATOR = new Comparator<ErrorHandler>() {
+	private static final Comparator<ErrorHandler> PRIORITY_COMPARATOR =
+			new Comparator<ErrorHandler>() {
 
 		@Override
 		public int compare(ErrorHandler o1, ErrorHandler o2) {
@@ -50,18 +49,20 @@ public class DefaultErrorManager extends ErrorManager {
 	};
 
 	/**
-	 * Default error handler. It logs the error in the console without handle it for making possible the chaining.
+	 * Default error handler. It logs the error in the console without handle it for making possible
+	 * the chaining.
 	 */
 	private final class DefaultErrorHandler extends AbstractErrorHandler {
-		private final Logger LOGGER = Logger.getLogger(DefaultErrorHandler.class.getSimpleName());
+		private final Logger logger = Logger.getLogger(DefaultErrorHandler.class.getSimpleName());
 
 		/*
 		 * (non-Javadoc)
+		 *
 		 * @see fr.putnami.pwt.core.error.client.AbstractErrorHandler#handle(Trowable error)
 		 */
 		@Override
 		public boolean handle(Throwable error) {
-			LOGGER.log(Level.SEVERE, error.getMessage(), error);
+			this.logger.log(Level.SEVERE, error.getMessage(), error);
 			return false;
 		}
 	}
@@ -75,42 +76,57 @@ public class DefaultErrorManager extends ErrorManager {
 		GWT.setUncaughtExceptionHandler(this);
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.putnami.pwt.core.error.client.ErrorManager#registerErrorHandlers(fr.putnami.pwt.core.error.client.ErrorHandler[])
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * fr.putnami.pwt.core.error.client.ErrorManager#registerErrorHandlers(fr.putnami.pwt.core.error
+	 * .client.ErrorHandler[])
 	 */
 	@Override
 	public void registerErrorHandlers(ErrorHandler... handlers) {
 		if (handlers != null) {
 			for (ErrorHandler handler : handlers) {
-				registerErrorHandler(handler);
+				this.registerErrorHandler(handler);
 			}
-		}
-	}
-
-	/* (non-Javadoc)
-	 * @see fr.putnami.pwt.core.error.client.ErrorManager#registerErrorHandler(fr.putnami.pwt.core.error.client.ErrorHandler)
-	 */
-	@Override
-	public void registerErrorHandler(ErrorHandler handler) {
-		if (handler != null) {
-			errorHandlers.add(handler);
-			Collections.sort(errorHandlers, PRIORITY_COMPARATOR);
-		}
-	}
-
-	/* (non-Javadoc)
-	 * @see fr.putnami.pwt.core.error.client.ErrorManager#removeErrorHandler(fr.putnami.pwt.core.error.client.ErrorHandler)
-	 */
-	@Override
-	public void removeErrorHandler(ErrorHandler handler) {
-		if (handler != null) {
-			errorHandlers.remove(handler);
 		}
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see fr.putnami.pwt.core.error.client.ErrorManager#setDefaultErrorHandler(fr.putnami.pwt.core.error.client.ErrorHandler)
+	 *
+	 * @see
+	 * fr.putnami.pwt.core.error.client.ErrorManager#registerErrorHandler(fr.putnami.pwt.core.error
+	 * .client.ErrorHandler)
+	 */
+	@Override
+	public void registerErrorHandler(ErrorHandler handler) {
+		if (handler != null) {
+			this.errorHandlers.add(handler);
+			Collections.sort(this.errorHandlers, DefaultErrorManager.PRIORITY_COMPARATOR);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * fr.putnami.pwt.core.error.client.ErrorManager#removeErrorHandler(fr.putnami.pwt.core.error.
+	 * client.ErrorHandler)
+	 */
+	@Override
+	public void removeErrorHandler(ErrorHandler handler) {
+		if (handler != null) {
+			this.errorHandlers.remove(handler);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * fr.putnami.pwt.core.error.client.ErrorManager#setDefaultErrorHandler(fr.putnami.pwt.core.error
+	 * .client.ErrorHandler)
 	 */
 	@Override
 	public void setDefaultErrorHandler(ErrorHandler handler) {
@@ -120,46 +136,57 @@ public class DefaultErrorManager extends ErrorManager {
 
 	/*
 	 * (non-Javadoc)
+	 *
 	 * @see fr.putnami.pwt.core.error.client.ErrorManager#getErrorHandlers()
 	 */
 	@Override
 	public List<ErrorHandler> getErrorHandlers() {
-		return errorHandlers;
+		return this.errorHandlers;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.gwt.core.client.GWT.UncaughtExceptionHandler#onUncaughtException(java.lang.Throwable)
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * com.google.gwt.core.client.GWT.UncaughtExceptionHandler#onUncaughtException(java.lang.Throwable
+	 * )
 	 */
 	@Override
 	public void onUncaughtException(Throwable throwable) {
-		for (ErrorHandler handler : errorHandlers) {
+		for (ErrorHandler handler : this.errorHandlers) {
 			if (handler.handle(throwable)) {
 				return;
 			}
 		}
-		defaultHandler.handle(throwable);
+		this.defaultHandler.handle(throwable);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see fr.putnami.pwt.core.error.client.ErrorManager#hasErrorDisplayer()
 	 */
 	@Override
 	public boolean hasErrorDisplayer() {
-		return errorDisplayer != null;
+		return this.errorDisplayer != null;
 	}
 
 	/*
 	 * (non-Javadoc)
+	 *
 	 * @see fr.putnami.pwt.core.error.client.ErrorManager#getErrorDisplayer()
 	 */
 	@Override
 	public ErrorDisplayer getErrorDisplayer() {
-		return errorDisplayer;
+		return this.errorDisplayer;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see fr.putnami.pwt.core.error.client.ErrorManager#setErrorDisplayer(fr.putnami.pwt.core.error.client.ErrorDisplayer)
+	 *
+	 * @see
+	 * fr.putnami.pwt.core.error.client.ErrorManager#setErrorDisplayer(fr.putnami.pwt.core.error.client
+	 * .ErrorDisplayer)
 	 */
 	@Override
 	public void setErrorDisplayer(ErrorDisplayer errorDisplayer) {

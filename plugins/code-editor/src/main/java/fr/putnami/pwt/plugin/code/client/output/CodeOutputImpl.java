@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.plugin.code.client.output;
 
@@ -37,25 +35,24 @@ public class CodeOutputImpl extends ComplexPanel implements CodeOutput {
 	private int currentLine;
 
 	public CodeOutputImpl() {
-		setElement(Document.get().createElement(PreElement.TAG));
-		StyleUtils.addStyle(this, STYLE_CODE_EDITOR);
-		StyleUtils.addStyle(this, STYLE_PRE_SCROLLABLE);
+		this.setElement(Document.get().createElement(PreElement.TAG));
+		StyleUtils.addStyle(this, CodeOutputImpl.STYLE_CODE_EDITOR);
+		StyleUtils.addStyle(this, CodeOutputImpl.STYLE_PRE_SCROLLABLE);
 	}
 
 	@Override
 	public void startRender() {
-		currentLine = -1;
+		this.currentLine = -1;
 	}
 
 	@Override
 	public void renderLine(int lineNumber, CodeLine line) {
-		currentLine = lineNumber;
-		if (lineNumber >= lines.size()) {
+		this.currentLine = lineNumber;
+		if (lineNumber >= this.lines.size()) {
 			this.lines.add(line);
 			line.redraw();
-			add(line.asWidget(), getElement());
-		}
-		else { // Reuse the line
+			this.add(line.asWidget(), this.getElement());
+		} else { // Reuse the line
 			CodeLine oldLine = this.lines.get(lineNumber);
 			if (!oldLine.equals(line)) {
 				oldLine.setTokens(line.getTokens());
@@ -66,12 +63,12 @@ public class CodeOutputImpl extends ComplexPanel implements CodeOutput {
 
 	@Override
 	public void renderNextLine(CodeLine line) {
-		renderLine(++currentLine, line);
+		this.renderLine(++this.currentLine, line);
 	}
 
 	@Override
 	public void endRender() {
-		endRender(++currentLine);
+		this.endRender(++this.currentLine);
 	}
 
 	@Override
@@ -87,10 +84,10 @@ public class CodeOutputImpl extends ComplexPanel implements CodeOutput {
 
 	@Override
 	public void clear() {
-		for (CodeLine line : lines) {
+		for (CodeLine line : this.lines) {
 			line.asWidget().removeFromParent();
 		}
-		getElement().removeAllChildren();
+		this.getElement().removeAllChildren();
 		this.lines.clear();
 	}
 }

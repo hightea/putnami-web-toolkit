@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.plugin.code.client.base;
 
@@ -47,7 +45,8 @@ public class CodeEditorDriverImpl implements CodeEditorDriver, LiveValueChangeEv
 	}
 
 	public Iterable<Error> getErrors() {
-		return this.errors == null ? Collections.<Error> emptyList() : Iterables.unmodifiableIterable(this.errors);
+		return this.errors == null ? Collections.<Error> emptyList() : Iterables
+				.unmodifiableIterable(this.errors);
 	}
 
 	public void addError(Error error) {
@@ -58,6 +57,7 @@ public class CodeEditorDriverImpl implements CodeEditorDriver, LiveValueChangeEv
 		return this.errors != null && this.errors.size() > 0;
 	}
 
+	@Override
 	public void addAspect(CodeEditorAspect aspect) {
 		this.aspects.add(aspect);
 		if (aspect.trigerOn().contains(CodeEditorAspect.AspectTrigger.INITALIZE)) {
@@ -65,34 +65,40 @@ public class CodeEditorDriverImpl implements CodeEditorDriver, LiveValueChangeEv
 		}
 	}
 
+	@Override
 	public void setConfiguration(CodeEditorConfiguration configuration) {
 		this.aspects.clear();
-		applyConfiguration(configuration);
+		this.applyConfiguration(configuration);
 	}
 
+	@Override
 	public void applyConfiguration(CodeEditorConfiguration configuration) {
 		for (CodeEditorAspect aspect : configuration.getAspects()) {
-			addAspect(aspect.copy());
+			this.addAspect(aspect.copy());
 		}
 		if (this.value != null) {
-			edit(this.value);
+			this.edit(this.value);
 		}
 	}
 
+	@Override
 	public void edit(String object) {
 		this.value = object;
 		if (this.codeInput != null) {
-			codeInput.setText(this.value);
+			this.codeInput.setText(this.value);
 		}
-		for (CodeEditorAspect strategy : Iterables.filter(this.aspects, CodeEditorAspect.AspectTrigger.EDIT)) {
+		for (CodeEditorAspect strategy : Iterables.filter(this.aspects,
+				CodeEditorAspect.AspectTrigger.EDIT)) {
 			strategy.apply(this);
 		}
 	}
 
+	@Override
 	public String flush() {
-		errors.clear();
-		String result = value;
-		for (CodeEditorAspect strategy : Iterables.filter(this.aspects, CodeEditorAspect.AspectTrigger.FLUSH)) {
+		this.errors.clear();
+		String result = this.value;
+		for (CodeEditorAspect strategy : Iterables.filter(this.aspects,
+				CodeEditorAspect.AspectTrigger.FLUSH)) {
 			strategy.apply(this);
 		}
 
@@ -100,11 +106,13 @@ public class CodeEditorDriverImpl implements CodeEditorDriver, LiveValueChangeEv
 	}
 
 	public void change() {
-		for (CodeEditorAspect strategy : Iterables.filter(this.aspects, CodeEditorAspect.AspectTrigger.CHANGE)) {
+		for (CodeEditorAspect strategy : Iterables.filter(this.aspects,
+				CodeEditorAspect.AspectTrigger.CHANGE)) {
 			strategy.apply(this);
 		}
 	}
 
+	@Override
 	public String getValue() {
 		return this.value;
 	}
@@ -122,7 +130,7 @@ public class CodeEditorDriverImpl implements CodeEditorDriver, LiveValueChangeEv
 	@Override
 	public void onLiveValueChange(LiveValueChangeEvent event) {
 		this.value = event.getValue();
-		change();
+		this.change();
 	}
 
 	@Override

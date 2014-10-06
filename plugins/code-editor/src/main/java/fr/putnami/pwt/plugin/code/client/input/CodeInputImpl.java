@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.plugin.code.client.input;
 
@@ -34,7 +32,8 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.plugin.code.client.event.LiveValueChangeEvent;
 import fr.putnami.pwt.plugin.code.client.event.LiveValueChangeEvent.Handler;
 
-public class CodeInputImpl extends Composite implements CodeInput, ValueChangeHandler<String>, KeyUpHandler {
+public class CodeInputImpl extends Composite implements CodeInput, ValueChangeHandler<String>,
+		KeyUpHandler {
 
 	private static final CssStyle INPUT_STYLE = new SimpleStyle("code-editor-input");
 
@@ -43,10 +42,10 @@ public class CodeInputImpl extends Composite implements CodeInput, ValueChangeHa
 	private String currentValue;
 
 	public CodeInputImpl() {
-		addValueChangeHandler(this);
-		addKeyUpHandler(this);
-		initWidget(textArea);
-		StyleUtils.addStyle(this, INPUT_STYLE);
+		this.addValueChangeHandler(this);
+		this.addKeyUpHandler(this);
+		this.initWidget(this.textArea);
+		StyleUtils.addStyle(this, CodeInputImpl.INPUT_STYLE);
 	}
 
 	@Override
@@ -76,7 +75,7 @@ public class CodeInputImpl extends Composite implements CodeInput, ValueChangeHa
 
 	@Override
 	public HandlerRegistration addLiveValueChangeHandler(Handler handler) {
-		return addHandler(handler, LiveValueChangeEvent.TYPE);
+		return this.addHandler(handler, LiveValueChangeEvent.TYPE);
 	}
 
 	@Override
@@ -133,12 +132,12 @@ public class CodeInputImpl extends Composite implements CodeInput, ValueChangeHa
 
 	@Override
 	public void onKeyUp(KeyUpEvent event) {
-		fireLiveValueChangeEvent();
+		this.fireLiveValueChangeEvent();
 	}
 
 	@Override
 	public void onValueChange(ValueChangeEvent<String> event) {
-		fireLiveValueChangeEvent();
+		this.fireLiveValueChangeEvent();
 	}
 
 	private void fireLiveValueChangeEvent() {

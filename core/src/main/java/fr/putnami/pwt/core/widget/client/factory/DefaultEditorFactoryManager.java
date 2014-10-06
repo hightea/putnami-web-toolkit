@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client.factory;
 
@@ -40,57 +38,57 @@ public class DefaultEditorFactoryManager extends EditorFactoryManager {
 
 	public DefaultEditorFactoryManager() {
 		// Register labelFactory
-		setLabelFactory(LabelEditorFactory.INSTANCE);
+		this.setLabelFactory(LabelEditorFactory.INSTANCE);
 		// Register tooltipFactory
-		setTooltipFactory(TooltipEditorFactory.INSTANCE);
+		this.setTooltipFactory(TooltipEditorFactory.INSTANCE);
 
 		// Register inputFactories
 		{
-			registerInputFactory(String.class, new InputText());
+			this.registerInputFactory(String.class, new InputText());
 
-			registerInputFactory(BigDecimal.class, new InputNumber<Double>(NumberType.DOUBLE));
-			registerInputFactory(Double.class, new InputNumber<Double>(NumberType.DOUBLE));
-			registerInputFactory(double.class, new InputNumber<Double>(NumberType.DOUBLE));
-			registerInputFactory(Float.class, new InputNumber<Float>(NumberType.FLOAT));
-			registerInputFactory(float.class, new InputNumber<Float>(NumberType.FLOAT));
-			registerInputFactory(Integer.class, new InputNumber<Integer>(NumberType.INTEGER));
-			registerInputFactory(int.class, new InputNumber<Integer>(NumberType.INTEGER));
-			registerInputFactory(Long.class, new InputNumber<Long>(NumberType.LONG));
-			registerInputFactory(long.class, new InputNumber<Long>(NumberType.LONG));
+			this.registerInputFactory(BigDecimal.class, new InputNumber<Double>(NumberType.DOUBLE));
+			this.registerInputFactory(Double.class, new InputNumber<Double>(NumberType.DOUBLE));
+			this.registerInputFactory(double.class, new InputNumber<Double>(NumberType.DOUBLE));
+			this.registerInputFactory(Float.class, new InputNumber<Float>(NumberType.FLOAT));
+			this.registerInputFactory(float.class, new InputNumber<Float>(NumberType.FLOAT));
+			this.registerInputFactory(Integer.class, new InputNumber<Integer>(NumberType.INTEGER));
+			this.registerInputFactory(int.class, new InputNumber<Integer>(NumberType.INTEGER));
+			this.registerInputFactory(Long.class, new InputNumber<Long>(NumberType.LONG));
+			this.registerInputFactory(long.class, new InputNumber<Long>(NumberType.LONG));
 
-			registerInputFactory(Date.class, new InputDate());
+			this.registerInputFactory(Date.class, new InputDate());
 
-			registerInputFactory(Boolean.class, new InputBoolean());
-			registerInputFactory(boolean.class, new InputBoolean());
+			this.registerInputFactory(Boolean.class, new InputBoolean());
+			this.registerInputFactory(boolean.class, new InputBoolean());
 
-			registerInputFactory(Enum.class, new InputSelect());
+			this.registerInputFactory(Enum.class, new InputSelect());
 
-			registerInputFactory(List.class, new InputList());
-			registerInputFactory(Collection.class, new InputList());
+			this.registerInputFactory(List.class, new InputList());
+			this.registerInputFactory(Collection.class, new InputList());
 		}
 		// Register outputFactories
 		{
-			registerOutputFactory(String.class, new OutputText());
+			this.registerOutputFactory(String.class, new OutputText());
 
-			registerOutputFactory(BigDecimal.class, new OutputNumber());
-			registerOutputFactory(Double.class, new OutputNumber());
-			registerOutputFactory(double.class, new OutputNumber());
-			registerOutputFactory(Float.class, new OutputNumber());
-			registerOutputFactory(float.class, new OutputNumber());
-			registerOutputFactory(Integer.class, new OutputNumber());
-			registerOutputFactory(int.class, new OutputNumber());
-			registerOutputFactory(Long.class, new OutputNumber());
-			registerOutputFactory(long.class, new OutputNumber());
+			this.registerOutputFactory(BigDecimal.class, new OutputNumber());
+			this.registerOutputFactory(Double.class, new OutputNumber());
+			this.registerOutputFactory(double.class, new OutputNumber());
+			this.registerOutputFactory(Float.class, new OutputNumber());
+			this.registerOutputFactory(float.class, new OutputNumber());
+			this.registerOutputFactory(Integer.class, new OutputNumber());
+			this.registerOutputFactory(int.class, new OutputNumber());
+			this.registerOutputFactory(Long.class, new OutputNumber());
+			this.registerOutputFactory(long.class, new OutputNumber());
 
-			registerOutputFactory(Date.class, new OutputDate());
+			this.registerOutputFactory(Date.class, new OutputDate());
 
-			registerOutputFactory(Boolean.class, new OutputBoolean());
-			registerOutputFactory(boolean.class, new OutputBoolean());
+			this.registerOutputFactory(Boolean.class, new OutputBoolean());
+			this.registerOutputFactory(boolean.class, new OutputBoolean());
 
-			registerOutputFactory(Enum.class, new OutputEnum());
+			this.registerOutputFactory(Enum.class, new OutputEnum());
 
-			registerOutputFactory(List.class, new OutputList());
-			registerOutputFactory(Collection.class, new OutputList());
+			this.registerOutputFactory(List.class, new OutputList());
+			this.registerOutputFactory(Collection.class, new OutputList());
 		}
 	}
 }

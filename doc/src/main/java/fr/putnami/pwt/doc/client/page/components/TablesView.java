@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.doc.client.page.components;
 
@@ -34,9 +32,7 @@ import fr.putnami.pwt.core.widget.client.TableEditor;
 public class TablesView extends Composite implements View {
 
 	public static enum Gender {
-		MALE,
-		FEMALE,
-		UNKNOWN
+		MALE, FEMALE, UNKNOWN
 	}
 
 	public static class Address {
@@ -57,7 +53,6 @@ public class TablesView extends Composite implements View {
 		public Address address;
 
 		public Bean() {
-
 		}
 
 		public Bean(Gender gender, String name, String email, String city) {
@@ -104,8 +99,8 @@ public class TablesView extends Composite implements View {
 
 	@PostConstruct
 	public void postConstruct() {
-		firstTable.edit(getBeans());
-		secondTable.edit(getBeans());
+		this.firstTable.edit(this.getBeans());
+		this.secondTable.edit(this.getBeans());
 	}
 
 	private List<Bean> getBeans() {
@@ -115,7 +110,8 @@ public class TablesView extends Composite implements View {
 		result.add(new Bean(Gender.MALE, "Roger Waren", "roger.waren@waren.org", "Chicago"));
 		result.add(new Bean(Gender.FEMALE, "Irene Waren", "irene.waren@waren.org", "Chicago"));
 		result.add(new Bean(Gender.MALE, "Fred Stone", "fredstone@stone-family.com", "Springfield"));
-		result.add(new Bean(Gender.FEMALE, "Amber Stone", "amber.stone@stone-family.com", "Springfield"));
+		result
+				.add(new Bean(Gender.FEMALE, "Amber Stone", "amber.stone@stone-family.com", "Springfield"));
 		return result;
 	}
 

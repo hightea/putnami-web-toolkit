@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -46,9 +44,7 @@ public class Pagination extends AbstractComposite implements HasPageChangeHandle
 
 	public enum Size implements CssStyle {
 
-		SMALL("pagination-sm"),
-		DEFAULT(null),
-		LARGE("pagination-lg");
+		SMALL("pagination-sm"), DEFAULT(null), LARGE("pagination-lg");
 
 		private final String style;
 
@@ -60,12 +56,10 @@ public class Pagination extends AbstractComposite implements HasPageChangeHandle
 		public String get() {
 			return this.style;
 		}
-
 	}
 
 	public enum Style implements CssStyle {
-		PAGER("pager"),
-		PAGINATION("pagination");
+		PAGER("pager"), PAGINATION("pagination");
 
 		private final String style;
 
@@ -77,33 +71,31 @@ public class Pagination extends AbstractComposite implements HasPageChangeHandle
 		public String get() {
 			return this.style;
 		}
-
 	}
 
 	private class Page extends Widget implements ClickHandler {
 		private final int page;
 
 		public Page(String label, int page) {
-			setElement(Document.get().createLIElement());
+			this.setElement(Document.get().createLIElement());
 			this.page = page;
-			if (currentPage == page) {
-				StyleUtils.addStyle(this, STYLE_ACTIVE);
-			}
-			else {
-				addDomHandler(this, ClickEvent.getType());
+			if (Pagination.this.currentPage == page) {
+				StyleUtils.addStyle(this, Pagination.STYLE_ACTIVE);
+			} else {
+				this.addDomHandler(this, ClickEvent.getType());
 			}
 			AnchorElement anchor = Document.get().createAnchorElement();
 			anchor.setHref(AnchorUtils.DUMMY_HREF);
 			anchor.setInnerText(label);
-			getElement().appendChild(anchor);
+			this.getElement().appendChild(anchor);
 		}
 
 		@Override
 		public void onClick(ClickEvent event) {
-			int oldPage = currentPage;
-			setCurrentPage(page);
-			if (oldPage != page) {
-				EventBus.get().fireEventFromSource(new PageChangeEvent(page), Pagination.this);
+			int oldPage = Pagination.this.currentPage;
+			Pagination.this.setCurrentPage(this.page);
+			if (oldPage != this.page) {
+				EventBus.get().fireEventFromSource(new PageChangeEvent(this.page), Pagination.this);
 			}
 		}
 	}
@@ -114,24 +106,25 @@ public class Pagination extends AbstractComposite implements HasPageChangeHandle
 
 		public NavigationPage(boolean previous) {
 			this.previous = previous;
-			setElement(Document.get().createLIElement());
-			addDomHandler(this, ClickEvent.getType());
+			this.setElement(Document.get().createLIElement());
+			this.addDomHandler(this, ClickEvent.getType());
 			AnchorElement anchor = Document.get().createAnchorElement();
 			anchor.setHref(AnchorUtils.DUMMY_HREF);
 			anchor.setInnerHTML(previous ? "&laquo;" : "&raquo;");
-			getElement().appendChild(anchor);
-			StyleUtils.addStyle(this, previous ? PREVIOUS_STYLE : NEXT_STYLE);
+			this.getElement().appendChild(anchor);
+			StyleUtils.addStyle(this, previous ? Pagination.PREVIOUS_STYLE : Pagination.NEXT_STYLE);
 		}
 
 		@Override
 		public void onClick(ClickEvent event) {
-			if (previous) {
-				currentStartPage -= Math.min(nbPageMax, nbPage);
+			if (this.previous) {
+				Pagination.this.currentStartPage -=
+						Math.min(Pagination.this.nbPageMax, Pagination.this.nbPage);
+			} else {
+				Pagination.this.currentStartPage +=
+						Math.min(Pagination.this.nbPageMax, Pagination.this.nbPage);
 			}
-			else {
-				currentStartPage += Math.min(nbPageMax, nbPage);
-			}
-			redrawFromCurrentStart();
+			Pagination.this.redrawFromCurrentStart();
 		}
 	}
 
@@ -148,9 +141,9 @@ public class Pagination extends AbstractComposite implements HasPageChangeHandle
 	private int currentStartPage;
 
 	public Pagination() {
-		initWidget(content);
-		setStyle(style);
-		setSize(size);
+		this.initWidget(this.content);
+		this.setStyle(this.style);
+		this.setSize(this.size);
 	}
 
 	protected Pagination(Pagination source) {
@@ -159,9 +152,9 @@ public class Pagination extends AbstractComposite implements HasPageChangeHandle
 		this.pageSize = source.pageSize;
 		this.currentPage = source.currentPage;
 
-		initWidget(content);
-		setStyle(source.style);
-		setSize(source.size);
+		this.initWidget(this.content);
+		this.setStyle(source.style);
+		this.setSize(source.size);
 	}
 
 	@Override
@@ -175,7 +168,7 @@ public class Pagination extends AbstractComposite implements HasPageChangeHandle
 	}
 
 	public Style getStyle() {
-		return style;
+		return this.style;
 	}
 
 	public void setStyle(Style style) {
@@ -184,7 +177,7 @@ public class Pagination extends AbstractComposite implements HasPageChangeHandle
 	}
 
 	public Size getSize() {
-		return size;
+		return this.size;
 	}
 
 	public void setSize(Size size) {
@@ -193,61 +186,62 @@ public class Pagination extends AbstractComposite implements HasPageChangeHandle
 	}
 
 	public int getPageSize() {
-		return pageSize;
+		return this.pageSize;
 	}
 
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
-		redraw();
+		this.redraw();
 	}
 
 	public int getCurrentPage() {
-		return currentPage;
+		return this.currentPage;
 	}
 
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
-		redraw();
+		this.redraw();
 	}
 
 	public int getNbPageMax() {
-		return nbPageMax;
+		return this.nbPageMax;
 	}
 
 	public void setNbPageMax(int nbPageMax) {
 		this.nbPageMax = nbPageMax;
-		redraw();
+		this.redraw();
 	}
 
 	public int getNbPage() {
-		return nbPage;
+		return this.nbPage;
 	}
 
 	public void setNbPage(int nbPage) {
 		this.nbPage = nbPage;
-		redraw();
+		this.redraw();
 	}
 
 	@Override
 	public void redraw() {
-		int nbPageToDraw = Math.min(nbPageMax, nbPage);
-		currentStartPage = currentPage - nbPageToDraw / 2;
-		redrawFromCurrentStart();
+		int nbPageToDraw = Math.min(this.nbPageMax, this.nbPage);
+		this.currentStartPage = this.currentPage - nbPageToDraw / 2;
+		this.redrawFromCurrentStart();
 	}
 
 	public void redrawFromCurrentStart() {
-		content.clear();
-		int nbPageToDraw = Math.min(nbPageMax, nbPage);
-		currentStartPage = Math.max(0, currentStartPage);
-		currentStartPage = Math.min(nbPage - nbPageToDraw, currentStartPage);
-		if (currentStartPage > 0) {
-			content.append(new NavigationPage(true));
+		this.content.clear();
+		int nbPageToDraw = Math.min(this.nbPageMax, this.nbPage);
+		this.currentStartPage = Math.max(0, this.currentStartPage);
+		this.currentStartPage = Math.min(this.nbPage - nbPageToDraw, this.currentStartPage);
+		if (this.currentStartPage > 0) {
+			this.content.append(new NavigationPage(true));
 		}
 		for (int i = 0; i < nbPageToDraw; i++) {
-			content.append(new Page("" + (currentStartPage + i + 1), currentStartPage + i));
+			this.content
+			.append(new Page("" + (this.currentStartPage + i + 1), this.currentStartPage + i));
 		}
-		if (currentStartPage + nbPageToDraw < nbPage) {
-			content.append(new NavigationPage(false));
+		if (this.currentStartPage + nbPageToDraw < this.nbPage) {
+			this.content.append(new NavigationPage(false));
 		}
 	}
 

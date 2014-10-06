@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.plugin.code.client.token;
 
@@ -46,35 +44,36 @@ public class TokenScannerImpl implements TokenScanner {
 
 	@Override
 	public void setValueToScan(String value) {
-		charScanner.setStringToScan(value);
+		this.charScanner.setStringToScan(value);
 	}
 
 	@Override
 	public void setValueToScan(String value, int startRange, int endRange) {
-		charScanner.setStringToScan(value, startRange, endRange);
+		this.charScanner.setStringToScan(value, startRange, endRange);
 	}
 
 	@Override
 	public Token<?> nextToken() {
-		charScanner.mark();
-		int charScanned = charScanner.read();
+		this.charScanner.mark();
+		int charScanned = this.charScanner.read();
 		if (charScanned == CharacterScanner.EOF) {
-			return SimpleToken.createEOFToken(charScanner.getMark());
+			return SimpleToken.createEOFToken(this.charScanner.getMark());
 		}
-		charScanner.unread();
+		this.charScanner.unread();
 
-		if (evaluators != null) {
-			for (TokenEvaluator evaluator : evaluators) {
-				Token<?> token = (evaluator.evaluate(charScanner));
+		if (this.evaluators != null) {
+			for (TokenEvaluator evaluator : this.evaluators) {
+				Token<?> token = (evaluator.evaluate(this.charScanner));
 				if (!token.isUndefined()) {
 					return token;
 				}
-				charScanner.resetToMark();
+				this.charScanner.resetToMark();
 			}
 		}
 		// Default
-		charScanner.read();
-		return new SimpleToken<TokenContent>(charScanner.getMark(), Character.toString((char) charScanned), defaultReturnTokenContent);
+		this.charScanner.read();
+		return new SimpleToken<TokenContent>(this.charScanner.getMark(), Character
+				.toString((char) charScanned), this.defaultReturnTokenContent);
 	}
 
 	@Override
@@ -84,6 +83,6 @@ public class TokenScannerImpl implements TokenScanner {
 
 	@Override
 	public List<TokenEvaluator> getEvaluators() {
-		return evaluators;
+		return this.evaluators;
 	}
 }

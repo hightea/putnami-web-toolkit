@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.error.client.widget;
 
@@ -70,8 +68,8 @@ public class ErrorDisplay implements AlertDismissEvent.Handler {
 
 	@Override
 	public void onAlertDismiss(AlertDismissEvent event) {
-		displayedErrors.remove(event.getSource());
-		if (displayedErrors.isEmpty()) {
+		this.displayedErrors.remove(event.getSource());
+		if (this.displayedErrors.isEmpty()) {
 			this.hide();
 		}
 	}
@@ -79,9 +77,9 @@ public class ErrorDisplay implements AlertDismissEvent.Handler {
 	public void addErrorAlert(ErrorAlert errorAlert) {
 		Alert alert = errorAlert.getAlert();
 		alert.addAlertDismissHandler(this);
-		displayedErrors.add(alert);
-		modalContent.add(alert);
-		show();
+		this.displayedErrors.add(alert);
+		this.modalContent.add(alert);
+		this.show();
 	}
 
 	@UiHandler("reloadButton")
@@ -91,22 +89,22 @@ public class ErrorDisplay implements AlertDismissEvent.Handler {
 
 	@UiHandler("continueButton")
 	void onContinue(ButtonEvent event) {
-		hide();
+		this.hide();
 	}
 
 	public void hide() {
-		modal.hide();
-		modalContent.clear();
-		displayedErrors.clear();
-		showing = false;
+		this.modal.hide();
+		this.modalContent.clear();
+		this.displayedErrors.clear();
+		this.showing = false;
 	}
 
 	public void show() {
-		if (!showing) {
-			RootPanel.get().add(modal);
-			modal.show();
+		if (!this.showing) {
+			RootPanel.get().add(this.modal);
+			this.modal.show();
 		}
-		showing = true;
+		this.showing = true;
 	}
 
 }

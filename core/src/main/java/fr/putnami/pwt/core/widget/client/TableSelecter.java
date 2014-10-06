@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -51,9 +49,7 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 		COLUMN, ROW_CLICK, BOTH;
 	}
 
-	private class TDSelecter extends AbstractTableCell<T> implements
-	ClickHandler,
-	EditorValue<T>,
+	private class TDSelecter extends AbstractTableCell<T> implements ClickHandler, EditorValue<T>,
 	HasDrawable {
 
 		private final InputElement inputElem;
@@ -65,85 +61,89 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 
 		public TDSelecter() {
 			super(TableCellElement.TAG_TD);
-			if (singleSelection) {
-				inputElem = InputElement.as(DOM.createInputRadio(groupId));
+			if (TableSelecter.this.singleSelection) {
+				this.inputElem = InputElement.as(DOM.createInputRadio(TableSelecter.this.groupId));
+			} else {
+				this.inputElem = InputElement.as(DOM.createInputCheck());
 			}
-			else {
-				inputElem = InputElement.as(DOM.createInputCheck());
-			}
-			getElement().appendChild(inputElem);
+			this.getElement().appendChild(this.inputElem);
 		}
 
 		@Override
 		public void setReadonly(Boolean readonly) {
 			super.setReadonly(readonly);
-			inputElem.setReadOnly(Boolean.TRUE.equals(readonly));
+			this.inputElem.setReadOnly(Boolean.TRUE.equals(readonly));
 		}
 
 		@Override
 		public T getValue() {
-			return value;
+			return this.value;
 		}
 
 		@Override
 		public void edit(T value) {
 			this.value = value;
-			redraw();
+			this.redraw();
 		}
 
 		@Override
 		public void redraw() {
-			inputElem.setChecked(selection.contains(this.value));
-			inputElem.setReadOnly(Boolean.TRUE.equals(this.getReadonly()));
-			inputElem.setDisabled(!enable);
-			StyleUtils.toggleStyle(getParent(), STYLE_ROW_SELECTED, selection.contains(this.value));
-			switch (selectionMode) {
-			case COLUMN:
-				StyleUtils.toggleStyle(getParent(), STYLE_ROW_CLICKABLE, false);
-				if (clickRegistration == null) {
-					clickRegistration = addDomHandler(this, ClickEvent.getType());
-				}
-				break;
-			case ROW_CLICK:
-				StyleUtils.toggleStyle(getParent(), STYLE_ROW_CLICKABLE, enable && true);
-				if (parentClickRegistration == null) {
-					parentClickRegistration = getParent().addDomHandler(this, ClickEvent.getType());
-				}
-				break;
-			case BOTH:
-				StyleUtils.toggleStyle(getParent(), STYLE_ROW_CLICKABLE, enable && true);
-				if (clickRegistration == null) {
-					clickRegistration = addDomHandler(this, ClickEvent.getType());
-				}
-				if (parentClickRegistration == null) {
-					parentClickRegistration = getParent().addDomHandler(this, ClickEvent.getType());
-				}
-				break;
+			this.inputElem.setChecked(TableSelecter.this.selection.contains(this.value));
+			this.inputElem.setReadOnly(Boolean.TRUE.equals(this.getReadonly()));
+			this.inputElem.setDisabled(!TableSelecter.this.enable);
+			StyleUtils.toggleStyle(this.getParent(), TableSelecter.STYLE_ROW_SELECTED,
+					TableSelecter.this.selection.contains(this.value));
+			switch (TableSelecter.this.selectionMode) {
+				case COLUMN:
+					StyleUtils.toggleStyle(this.getParent(), TableSelecter.STYLE_ROW_CLICKABLE, false);
+					if (this.clickRegistration == null) {
+						this.clickRegistration = this.addDomHandler(this, ClickEvent.getType());
+					}
+					break;
+				case ROW_CLICK:
+					StyleUtils.toggleStyle(this.getParent(), TableSelecter.STYLE_ROW_CLICKABLE,
+							TableSelecter.this.enable && true);
+					if (this.parentClickRegistration == null) {
+						this.parentClickRegistration =
+								this.getParent().addDomHandler(this, ClickEvent.getType());
+					}
+					break;
+				case BOTH:
+					StyleUtils.toggleStyle(this.getParent(), TableSelecter.STYLE_ROW_CLICKABLE,
+							TableSelecter.this.enable && true);
+					if (this.clickRegistration == null) {
+						this.clickRegistration = this.addDomHandler(this, ClickEvent.getType());
+					}
+					if (this.parentClickRegistration == null) {
+						this.parentClickRegistration =
+								this.getParent().addDomHandler(this, ClickEvent.getType());
+					}
+					break;
 			}
 		}
 
 		@Override
 		public void onClick(ClickEvent event) {
-			if (!enable) {
+			if (!TableSelecter.this.enable) {
 				return;
 			}
 			boolean fire = false;
 			if (event.getSource() == this) {
-				fire = setSelected(this.value, inputElem.isChecked());
+				fire = TableSelecter.this.setSelected(this.value, this.inputElem.isChecked());
 				event.stopPropagation();
-			}
-			else if (event.getSource() instanceof TableRow) {
+			} else if (event.getSource() instanceof TableRow) {
 				TableRow row = (TableRow) event.getSource();
 				T clickedValue = (T) row.getValue();
-				fire = setSelected(clickedValue, !isSelected(clickedValue));
+				fire =
+						TableSelecter.this.setSelected(clickedValue, !TableSelecter.this
+								.isSelected(clickedValue));
 			}
 
 			if (fire) {
-				TableSelecter.this.fireEvent(new SelectionEvent(selection));
+				TableSelecter.this.fireEvent(new SelectionEvent(TableSelecter.this.selection));
 			}
-			redraw();
+			this.redraw();
 		}
-
 	}
 
 	private HandlerManager handlerManager;
@@ -157,7 +157,7 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 	private boolean enable = true;
 
 	public TableSelecter() {
-		setType(Type.ACTION);
+		this.setType(Type.ACTION);
 	}
 
 	protected TableSelecter(TableSelecter<T> source) {
@@ -165,8 +165,8 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 		this.singleSelection = source.singleSelection;
 		this.selectionMode = source.selectionMode;
 
-		handlerManager = new HandlerManager(source.handlerManager, this);
-		handlerManager.resetSinkEvents();
+		this.handlerManager = new HandlerManager(source.handlerManager, this);
+		this.handlerManager.resetSinkEvents();
 	}
 
 	@Override
@@ -175,7 +175,7 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 	}
 
 	public boolean isSingleSelection() {
-		return singleSelection;
+		return this.singleSelection;
 	}
 
 	public void setSingleSelection(boolean singleSelection) {
@@ -183,93 +183,92 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 	}
 
 	public SelectionMode getSelectionMode() {
-		return selectionMode;
+		return this.selectionMode;
 	}
 
 	public void setSelectionMode(SelectionMode selectionMode) {
 		this.selectionMode = selectionMode;
 		if (selectionMode == SelectionMode.ROW_CLICK) {
-			setColumnVisibility(ColumnVisibility.HIDE);
+			this.setColumnVisibility(ColumnVisibility.HIDE);
 		}
 	}
 
 	@Override
 	public TableTH<T> doCreateHeaderCell() {
 		TableTH<T> headerCell = new TableTH<T>();
-		StyleUtils.addStyle(headerCell, STYLE_TABLE_SELECTER);
+		StyleUtils.addStyle(headerCell, TableSelecter.STYLE_TABLE_SELECTER);
 		return headerCell;
 	}
 
 	@Override
 	public AbstractTableCell<T> doCreateBodyCell() {
 		TDSelecter cell = new TDSelecter();
-		StyleUtils.addStyle(cell, STYLE_TABLE_SELECTER);
-		if (selectionMode == SelectionMode.ROW_CLICK) {
+		StyleUtils.addStyle(cell, TableSelecter.STYLE_TABLE_SELECTER);
+		if (this.selectionMode == SelectionMode.ROW_CLICK) {
 			cell.setVisible(false);
 		}
-		cells.add(cell);
+		this.cells.add(cell);
 		return cell;
 	}
 
 	public boolean isSelected(T object) {
-		return selection.contains(object);
+		return this.selection.contains(object);
 	}
 
 	public List<T> getSelection() {
-		return Collections.unmodifiableList(selection);
+		return Collections.unmodifiableList(this.selection);
 	}
 
 	public boolean setSelected(T object, boolean selected) {
-		boolean hasChanged = selected && !selection.contains(object);
-		hasChanged |= !selected && selection.contains(object);
-		if (singleSelection) {
-			selection.clear();
-		}
-		else {
-			selection.remove(object);
+		boolean hasChanged = selected && !this.selection.contains(object);
+		hasChanged |= !selected && this.selection.contains(object);
+		if (this.singleSelection) {
+			this.selection.clear();
+		} else {
+			this.selection.remove(object);
 		}
 		if (selected) {
-			selection.add(object);
+			this.selection.add(object);
 		}
-		redraw();
+		this.redraw();
 		return hasChanged;
 	}
 
 	@Override
 	public HandlerRegistration addSelectionHandler(SelectionEvent.Handler handler) {
-		return createHandlerManager().addHandler(SelectionEvent.TYPE, handler);
+		return this.createHandlerManager().addHandler(SelectionEvent.TYPE, handler);
 	}
 
 	protected HandlerManager createHandlerManager() {
-		if (handlerManager == null) {
-			handlerManager = new HandlerManager(this);
+		if (this.handlerManager == null) {
+			this.handlerManager = new HandlerManager(this);
 		}
-		return handlerManager;
+		return this.handlerManager;
 	}
 
 	@Override
 	public void fireEvent(GwtEvent<?> event) {
-		if (handlerManager != null) {
-			handlerManager.fireEvent(event);
+		if (this.handlerManager != null) {
+			this.handlerManager.fireEvent(event);
 		}
 	}
 
 	public void clearSelection() {
-		selection.clear();
-		redraw();
+		this.selection.clear();
+		this.redraw();
 	}
 
 	public void setEnable(boolean enable) {
 		this.enable = enable;
-		redraw();
+		this.redraw();
 	}
 
 	public boolean isEnable() {
-		return enable;
+		return this.enable;
 	}
 
 	private void redraw() {
-		for (TDSelecter cell : cells) {
+		for (TDSelecter cell : this.cells) {
 			cell.redraw();
 		}
 	}

@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.doc.client.page.starting;
 
@@ -50,25 +48,24 @@ public class StartScratchView extends Composite implements View {
 
 	@PostConstruct
 	void postConstruct() {
-		switchBuild.edit("GRADLE");
-		buildMavenPanel.setVisible(false);
-		runMavenPanel.setVisible(false);
+		this.switchBuild.edit("GRADLE");
+		this.buildMavenPanel.setVisible(false);
+		this.runMavenPanel.setVisible(false);
 	}
 
 	@UiHandler("switchBuild")
 	void onSwitch(ValueChangeEvent<String> event) {
 		if ("MAVEN".equals(event.getValue())) {
-			buildGradlePanel.setVisible(false);
-			runGradlePanel.setVisible(false);
-			buildMavenPanel.setVisible(true);
-			runMavenPanel.setVisible(true);
+			this.buildGradlePanel.setVisible(false);
+			this.runGradlePanel.setVisible(false);
+			this.buildMavenPanel.setVisible(true);
+			this.runMavenPanel.setVisible(true);
 
-		}
-		else {
-			buildGradlePanel.setVisible(true);
-			runGradlePanel.setVisible(true);
-			buildMavenPanel.setVisible(false);
-			runMavenPanel.setVisible(false);
+		} else {
+			this.buildGradlePanel.setVisible(true);
+			this.runGradlePanel.setVisible(true);
+			this.buildMavenPanel.setVisible(false);
+			this.runMavenPanel.setVisible(false);
 		}
 	}
 }

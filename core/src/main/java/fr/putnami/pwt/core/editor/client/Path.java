@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.editor.client;
 
@@ -40,20 +38,20 @@ public class Path implements Iterable<PathElement> {
 		}
 
 		public String getElementName() {
-			return elementName;
+			return this.elementName;
 		}
 
 		public Integer getIndexKey() {
-			return indexKey;
+			return this.indexKey;
 		}
 
 		@Override
 		public String toString() {
 			StringBuffer sb = new StringBuffer();
-			sb.append(elementName);
-			if (indexKey != null) {
+			sb.append(this.elementName);
+			if (this.indexKey != null) {
 				sb.append("[");
-				sb.append(indexKey);
+				sb.append(this.indexKey);
 				sb.append("]");
 			}
 			return sb.toString();
@@ -61,15 +59,15 @@ public class Path implements Iterable<PathElement> {
 
 		@Override
 		public int hashCode() {
-			return Objects.hashCode(elementName, indexKey);
+			return Objects.hashCode(this.elementName, this.indexKey);
 		}
 
 		@Override
 		public boolean equals(Object obj) {
 			if (obj instanceof PathElement) {
 				PathElement other = (PathElement) obj;
-				return Objects.equal(elementName, other.elementName)
-						&& Objects.equal(indexKey, other.indexKey);
+				return Objects.equal(this.elementName, other.elementName)
+						&& Objects.equal(this.indexKey, other.indexKey);
 			}
 			return false;
 		}
@@ -82,21 +80,21 @@ public class Path implements Iterable<PathElement> {
 
 	public void add(PathElement element) {
 		if (element != null) {
-			elements.add(element);
+			this.elements.add(element);
 		}
 	}
 
 	@Override
 	public Iterator<PathElement> iterator() {
-		return Iterables.<PathElement> unmodifiableIterable(elements).iterator();
+		return Iterables.<PathElement> unmodifiableIterable(this.elements).iterator();
 	}
 
 	public int size() {
-		return elements.size();
+		return this.elements.size();
 	}
 
 	public PathElement get(int index) {
-		return elements.size() > index ? elements.get(index) : null;
+		return this.elements.size() > index ? this.elements.get(index) : null;
 	}
 
 	public Path subPath(int start) {
@@ -105,34 +103,34 @@ public class Path implements Iterable<PathElement> {
 
 	public Path subPath(int start, int end) {
 		Path path = new Path();
-		if (elements.size() > start) {
-			for (int i = start; i < end && elements.size() > i; i++) {
-				path.add(elements.get(i));
+		if (this.elements.size() > start) {
+			for (int i = start; i < end && this.elements.size() > i; i++) {
+				path.add(this.elements.get(i));
 			}
 		}
 		return path;
 	}
 
 	public boolean isRoot() {
-		return size() == 0;
+		return this.size() == 0;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hashCode(elements);
+		return Objects.hashCode(this.elements);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Path) {
 			Path other = (Path) obj;
-			return Objects.equal(elements, other.elements);
+			return Objects.equal(this.elements, other.elements);
 		}
-		return obj == null && isRoot();
+		return obj == null && this.isRoot();
 	}
 
 	@Override
 	public String toString() {
-		return Joiner.on(SEPARATOR_PATH).join(elements);
+		return Joiner.on(Path.SEPARATOR_PATH).join(this.elements);
 	}
 }

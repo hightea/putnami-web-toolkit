@@ -15,7 +15,8 @@ import fr.putnami.pwt.core.inject.client.annotation.PostConstruct;
 @Controller
 public class FileTransfertMultipartResolver extends CommonsMultipartResolver {
 
-	private static ThreadLocal<FileTransfertProgressListener> tlUploadId = new ThreadLocal<FileTransfertProgressListener>();
+	private static ThreadLocal<FileTransfertProgressListener> tlUploadId =
+			new ThreadLocal<FileTransfertProgressListener>();
 
 	@Value("${filetransfertcontroller.maxUploadSize}")
 	private long maxUploadSize;
@@ -25,28 +26,29 @@ public class FileTransfertMultipartResolver extends CommonsMultipartResolver {
 
 	@PostConstruct
 	public void postConstruct() {
-		setMaxUploadSize(maxUploadSize);
+		this.setMaxUploadSize(this.maxUploadSize);
 	}
 
 	@Override
 	public void cleanupMultipart(MultipartHttpServletRequest request) {
-		fileTransfertController.completeUpload(getUploadId(request));
-		tlUploadId.remove();
+		this.fileTransfertController.completeUpload(this.getUploadId(request));
+		FileTransfertMultipartResolver.tlUploadId.remove();
 		super.cleanupMultipart(request);
 	}
 
 	@Override
 	protected FileUpload newFileUpload(FileItemFactory fileItemFactory) {
 		FileUpload fileUpload = super.newFileUpload(fileItemFactory);
-		fileUpload.setProgressListener(tlUploadId.get());
+		fileUpload.setProgressListener(FileTransfertMultipartResolver.tlUploadId.get());
 		return fileUpload;
 	}
 
 	@Override
 	public MultipartHttpServletRequest resolveMultipart(HttpServletRequest request) {
 		FileTransfertProgressListener progress = new FileTransfertProgressListener();
-		tlUploadId.set(progress);
-		fileTransfertController.startUpload(getUploadId(request), tlUploadId.get());
+		FileTransfertMultipartResolver.tlUploadId.set(progress);
+		this.fileTransfertController.startUpload(this.getUploadId(request),
+				FileTransfertMultipartResolver.tlUploadId.get());
 		return super.resolveMultipart(request);
 	}
 

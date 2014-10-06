@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.inject.rebind.delegate;
 
@@ -31,7 +29,8 @@ import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterPresent;
 import fr.putnami.pwt.core.mvp.client.Presenter;
 
-public class InjectPresenterCreator extends InjectorCreatorDelegate implements InjectorWritterInit, InjectorWritterPresent {
+public class InjectPresenterCreator extends InjectorCreatorDelegate implements InjectorWritterInit,
+InjectorWritterPresent {
 
 	private final Collection<JMethod> presenterMethods;
 
@@ -41,20 +40,20 @@ public class InjectPresenterCreator extends InjectorCreatorDelegate implements I
 
 	@Override
 	public int getOrder() {
-		return LOWEST_PRECEDENCE;
+		return InjectorCreatorDelegate.LOWEST_PRECEDENCE;
 	}
 
 	@Override
 	public void writePresent(SourceWriter srcWriter) {
-		for (JMethod presenterMethod : presenterMethods) {
+		for (JMethod presenterMethod : this.presenterMethods) {
 			if (presenterMethod.getParameters().length == 0) {
 				srcWriter.println("super.%s();", presenterMethod.getName());
-			}
-			else if (presenterMethod.getParameters().length > 0) {
+			} else if (presenterMethod.getParameters().length > 0) {
 				JType placeType = presenterMethod.getParameters()[0].getType();
 				srcWriter.println("if(place instanceof %s){", placeType.getSimpleSourceName());
 				srcWriter.indent();
-				srcWriter.println("super.%s((%s) place);", presenterMethod.getName(), placeType.getSimpleSourceName());
+				srcWriter.println("super.%s((%s) place);", presenterMethod.getName(), placeType
+						.getSimpleSourceName());
 				srcWriter.outdent();
 				srcWriter.println("}");
 			}
@@ -65,7 +64,7 @@ public class InjectPresenterCreator extends InjectorCreatorDelegate implements I
 	public void initComposer(ClassSourceFileComposerFactory composerFactory) {
 		composerFactory.addImport(Place.class.getName());
 		composerFactory.addImport(Presenter.class.getName());
-		for (JMethod presenterMethod : presenterMethods) {
+		for (JMethod presenterMethod : this.presenterMethods) {
 			if (presenterMethod.getParameters().length > 0) {
 				JType placeType = presenterMethod.getParameters()[0].getType();
 				composerFactory.addImport(placeType.getQualifiedSourceName());

@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.incubating;
 
@@ -31,6 +29,7 @@ import java.util.List;
 
 import fr.putnami.pwt.core.editor.client.Editor;
 import fr.putnami.pwt.core.editor.client.Path;
+import fr.putnami.pwt.core.editor.client.Visitor;
 import fr.putnami.pwt.core.editor.client.util.PathUtils;
 import fr.putnami.pwt.core.model.client.model.Model;
 import fr.putnami.pwt.core.model.client.util.ModelUtils;
@@ -57,23 +56,23 @@ public class TableFilter<T> extends AbstractTableColumnAspect<T> implements HasH
 	private HandlerRegistration valueChangeRegistration;
 
 	public TableFilter() {
-		endConstruct();
+		this.endConstruct();
 	}
 
 	protected TableFilter(TableFilter<T> source) {
 		super(source);
-		endConstruct();
+		this.endConstruct();
 	}
 
 	private void endConstruct() {
-		button.setIconType(IconFont.ICON_FILTER);
-		button.setType(Type.ICON);
-		button.setSize(Button.Size.SMALL);
+		this.button.setIconType(IconFont.ICON_FILTER);
+		this.button.setType(Type.ICON);
+		this.button.setSize(Button.Size.SMALL);
 
-		button.addButtonHandler(new ButtonEvent.Handler() {
+		this.button.addButtonHandler(new ButtonEvent.Handler() {
 			@Override
 			public void onButtonAction(ButtonEvent event) {
-				toggle();
+				TableFilter.this.toggle();
 			}
 		});
 	}
@@ -85,7 +84,7 @@ public class TableFilter<T> extends AbstractTableColumnAspect<T> implements HasH
 
 	@Override
 	public Widget asWidget() {
-		return button;
+		return this.button;
 	}
 
 	@Override
@@ -94,38 +93,38 @@ public class TableFilter<T> extends AbstractTableColumnAspect<T> implements HasH
 	}
 
 	private void toggle() {
-		this.activate = !activate;
-		redraw();
-		getDriver().resetDisplay();
+		this.activate = !this.activate;
+		this.redraw();
+		this.getDriver().resetDisplay();
 	}
 
 	public void redraw() {
-		button.setIconType(IconFont.ICON_FILTER);
-		button.setActive(activate);
+		this.button.setIconType(IconFont.ICON_FILTER);
+		this.button.setActive(this.activate);
 
-		Container row = (Container) ((Widget) headerCell).getParent();
+		Container row = (Container) ((Widget) this.headerCell).getParent();
 
-		headerCell.clear();
-		if (valueChangeRegistration != null) {
-			valueChangeRegistration.removeHandler();
-			valueChangeRegistration = null;
+		this.headerCell.clear();
+		if (this.valueChangeRegistration != null) {
+			this.valueChangeRegistration.removeHandler();
+			this.valueChangeRegistration = null;
 		}
 		boolean showFilterRow = false;
-		if (activate) {
-			headerCell.append(inputText);
-			valueChangeRegistration = inputText.addBlurHandler(new BlurHandler() {
+		if (this.activate) {
+			this.headerCell.append(this.inputText);
+			this.valueChangeRegistration = this.inputText.addBlurHandler(new BlurHandler() {
 				@Override
 				public void onBlur(BlurEvent event) {
-					String newValue = inputText.flush();
-					if (!Objects.equal(filterValue, newValue)) {
-						filterValue = newValue;
-						getDriver().resetDisplay();
+					String newValue = TableFilter.this.inputText.flush();
+					if (!Objects.equal(TableFilter.this.filterValue, newValue)) {
+						TableFilter.this.filterValue = newValue;
+						TableFilter.this.getDriver().resetDisplay();
 					}
 				}
 			});
 
-			Widget headerCell = button.getParent().getParent();
-			headerCell.getElement().getStyle().setWidth(headerCell.getOffsetWidth(), Unit.PX);
+			Widget hCell = this.button.getParent().getParent();
+			hCell.getElement().getStyle().setWidth(hCell.getOffsetWidth(), Unit.PX);
 
 			showFilterRow = true;
 		}
@@ -144,28 +143,28 @@ public class TableFilter<T> extends AbstractTableColumnAspect<T> implements HasH
 
 	@Override
 	public int getPrecedence() {
-		return PRECEDENCE_NORMAL + 3;
+		return Visitor.PRECEDENCE_NORMAL + 3;
 	}
 
 	@Override
 	public <A, B extends Editor> boolean beforeVisit() {
-		if (activate && filterValue != null) {
-			final Model<T> leafModel = getDriver().getModel().getLeafModel();
-			final Path path = PathUtils.evalPath(getColumnPath());
+		if (this.activate && this.filterValue != null) {
+			final Model<T> leafModel = this.getDriver().getModel().getLeafModel();
+			final Path path = PathUtils.evalPath(this.getColumnPath());
 
-			List<T> list = getDriver().getDisplayedValue();
+			List<T> list = this.getDriver().getDisplayedValue();
 			list = Lists.newArrayList(Iterables.filter(list, new Predicate<T>() {
 
 				@Override
 				public boolean apply(T input) {
 					Object p1 = ModelUtils.resolveValue(input, leafModel, path);
 					if (p1 instanceof String) {
-						return ((String) p1).toLowerCase().contains(filterValue.toLowerCase());
+						return ((String) p1).toLowerCase().contains(TableFilter.this.filterValue.toLowerCase());
 					}
 					return true;
 				}
 			}));
-			getDriver().setDisplayedValue(list);
+			this.getDriver().setDisplayedValue(list);
 		}
 		return true;
 	}

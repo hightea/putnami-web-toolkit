@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -31,12 +29,12 @@ public class GridRow extends AbstractPanel implements CloneableWidget {
 
 	public GridRow() {
 		super(DivElement.TAG);
-		StyleUtils.addStyle(this, STYLE_ROW);
+		StyleUtils.addStyle(this, GridRow.STYLE_ROW);
 	}
 
 	protected GridRow(GridRow source) {
 		super(source);
-		cloneSourceWidgets(source);
+		this.cloneSourceWidgets(source);
 	}
 
 	@Override
@@ -46,7 +44,7 @@ public class GridRow extends AbstractPanel implements CloneableWidget {
 
 	@Override
 	public void add(IsWidget child) {
-		append(child);
+		this.append(child);
 	}
 
 }

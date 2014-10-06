@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -36,13 +34,13 @@ public class TableHead extends AbstractPanel implements CloneableWidget {
 
 	public TableHead() {
 		super(TableSectionElement.TAG_THEAD);
-		append(headerRow);
+		this.append(this.headerRow);
 	}
 
 	protected TableHead(TableHead source) {
 		super(source);
-		append(headerRow);
-		headerRow.cloneSourceWidgets(source.headerRow);
+		this.append(this.headerRow);
+		this.headerRow.cloneSourceWidgets(source.headerRow);
 	}
 
 	@Override
@@ -55,9 +53,8 @@ public class TableHead extends AbstractPanel implements CloneableWidget {
 		if (w instanceof AbstractTableColumn) {
 			this.addColumn((AbstractTableColumn) w);
 		}
-		if (w instanceof TableTH
-				|| w instanceof TableTD) {
-			headerRow.append(w);
+		if (w instanceof TableTH || w instanceof TableTD) {
+			this.headerRow.append(w);
 		}
 	}
 
@@ -68,11 +65,11 @@ public class TableHead extends AbstractPanel implements CloneableWidget {
 	private <A> void addColumn(AbstractTableColumn<A> column) {
 		TableTH<A> cell = column.createHeaderCell();
 
-		headerRow.append(cell);
+		this.headerRow.append(cell);
 
 		for (AbstractTableColumnAspect<?> aspect : column.getAspects()) {
 			if (aspect instanceof HasHeaderCell) {
-				Container row = ensureAspectRow(aspect.getClass().getName());
+				Container row = this.ensureAspectRow(aspect.getClass().getName());
 				TableTH<?> aspectCell = new TableTH();
 				aspectCell.setColspan(column.getColspan());
 				row.append(aspectCell);
@@ -80,8 +77,8 @@ public class TableHead extends AbstractPanel implements CloneableWidget {
 			}
 		}
 
-		for (Container existingRow : aspectRows.values()) {
-			if (headerRow.getWidgetCount() > existingRow.getWidgetCount()) {
+		for (Container existingRow : this.aspectRows.values()) {
+			if (this.headerRow.getWidgetCount() > existingRow.getWidgetCount()) {
 				TableTH<?> newCell = new TableTH();
 				newCell.setColspan(column.getColspan());
 				existingRow.append(newCell);
@@ -90,15 +87,15 @@ public class TableHead extends AbstractPanel implements CloneableWidget {
 	}
 
 	private Container ensureAspectRow(String aspectClass) {
-		Container row = aspectRows.get(aspectClass);
+		Container row = this.aspectRows.get(aspectClass);
 		if (row == null) {
 			row = new Container(TableRowElement.TAG);
-			aspectRows.put(aspectClass, row);
+			this.aspectRows.put(aspectClass, row);
 			row.setVisible(false);
-			for (int i = 0; i < headerRow.getWidgetCount() - 1; i++) {
+			for (int i = 0; i < this.headerRow.getWidgetCount() - 1; i++) {
 				row.append(new TableTH());
 			}
-			append(row);
+			this.append(row);
 		}
 		return row;
 	}

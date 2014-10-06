@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -31,42 +29,42 @@ public class InputSelect<T> extends AbstractInputSelect<T, T> {
 
 		@Override
 		public void onItemClick(T item) {
-			setSelection(item, true);
+			this.setSelection(item, true);
 			InputSelect.this.getDropdown().close();
 		}
 
 		@Override
 		public void onHomeKeyDown() {
-			selectByIndex(0);
+			this.selectByIndex(0);
 		}
 
 		@Override
 		public void onEndKeyDown() {
-			selectByIndex(InputSelect.this.getOrderedItems().size() - 1);
+			this.selectByIndex(InputSelect.this.getOrderedItems().size() - 1);
 		}
 
 		@Override
 		public void onUpKeyDown() {
-			selectByIndex(InputSelect.this.getOrderedItems().indexOf(selectedItem) - 1);
+			this.selectByIndex(InputSelect.this.getOrderedItems().indexOf(this.selectedItem) - 1);
 		}
 
 		@Override
 		public void onDownKeyDown() {
-			selectByIndex(InputSelect.this.getOrderedItems().indexOf(selectedItem) + 1);
+			this.selectByIndex(InputSelect.this.getOrderedItems().indexOf(this.selectedItem) + 1);
 		}
 
 		@Override
 		public void onItemSearch(T searchResult) {
-			setSelection(searchResult, true);
+			this.setSelection(searchResult, true);
 		}
 
 		private void selectByIndex(int index) {
 			int newIndex = Math.min(InputSelect.this.getOrderedItems().size() - 1, Math.max(0, index));
-			setSelection(InputSelect.this.getOrderedItems().get(newIndex), true);
+			this.setSelection(InputSelect.this.getOrderedItems().get(newIndex), true);
 		}
 
 		private void scrollToSelected() {
-			NavLink currentSelection = InputSelect.this.getItemsLinks().get(selectedItem);
+			NavLink currentSelection = InputSelect.this.getItemsLinks().get(this.selectedItem);
 			if (InputSelect.this.getDropdown().isOpen() && currentSelection != null) {
 				currentSelection.getElement().scrollIntoView();
 			}
@@ -74,8 +72,8 @@ public class InputSelect<T> extends AbstractInputSelect<T, T> {
 
 		@Override
 		public void setSelection(T selection, boolean fireEvents) {
-			T oldValue = selectedItem;
-			NavLink currentSelection = InputSelect.this.getItemsLinks().get(selectedItem);
+			T oldValue = this.selectedItem;
+			NavLink currentSelection = InputSelect.this.getItemsLinks().get(this.selectedItem);
 			if (currentSelection != null) {
 				currentSelection.setActive(false);
 			}
@@ -83,8 +81,8 @@ public class InputSelect<T> extends AbstractInputSelect<T, T> {
 			if (newSelection != null) {
 				newSelection.setActive(true);
 			}
-			selectedItem = selection;
-			scrollToSelected();
+			this.selectedItem = selection;
+			this.scrollToSelected();
 			if (fireEvents) {
 				ValueChangeEvent.fireIfNotEqual(InputSelect.this, oldValue, selection);
 			}
@@ -98,12 +96,12 @@ public class InputSelect<T> extends AbstractInputSelect<T, T> {
 
 	public InputSelect() {
 		super();
-		setSelectionHandler(new SelectionHandler());
+		this.setSelectionHandler(new SelectionHandler());
 	}
 
 	protected InputSelect(InputSelect<T> source) {
 		super(source);
-		setSelectionHandler(new SelectionHandler());
+		this.setSelectionHandler(new SelectionHandler());
 	}
 
 	@Override
@@ -116,18 +114,18 @@ public class InputSelect<T> extends AbstractInputSelect<T, T> {
 		super.onBrowserEvent(event);
 		boolean mustKillEvent = false;
 		switch (DOM.eventGetType(event)) {
-		case Event.ONKEYDOWN:
-			switch (event.getKeyCode()) {
-			case KeyCodes.KEY_TAB:
-			case KeyCodes.KEY_ESCAPE:
-				getDropdown().close();
+			case Event.ONKEYDOWN:
+				switch (event.getKeyCode()) {
+					case KeyCodes.KEY_TAB:
+					case KeyCodes.KEY_ESCAPE:
+						this.getDropdown().close();
+						break;
+					default:
+						break;
+				}
 				break;
 			default:
 				break;
-			}
-			break;
-		default:
-			break;
 		}
 		if (mustKillEvent) {
 			event.preventDefault();

@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client.base;
 
@@ -41,7 +39,8 @@ import fr.putnami.pwt.core.widget.client.Nav;
 import fr.putnami.pwt.core.widget.client.helper.CompositeFocusHelper;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public abstract class AbstractDropdown extends AbstractPanel implements ClickHandler, KeyPressHandler, Focusable, HasAllFocusHandlers {
+public abstract class AbstractDropdown extends AbstractPanel implements ClickHandler,
+KeyPressHandler, Focusable, HasAllFocusHandlers {
 
 	private static final CssStyle STYLE_CARET = new SimpleStyle("caret");
 
@@ -57,35 +56,35 @@ public abstract class AbstractDropdown extends AbstractPanel implements ClickHan
 
 	public AbstractDropdown(String tagName) {
 		super(tagName);
-		anchor.addClickHandler(this);
-		anchor.addKeyPressHandler(this);
+		this.anchor.addClickHandler(this);
+		this.anchor.addKeyPressHandler(this);
 
-		anchor.getElement().appendChild(caret);
+		this.anchor.getElement().appendChild(this.caret);
 
-		StyleUtils.addStyle(caret, STYLE_CARET);
+		StyleUtils.addStyle(this.caret, AbstractDropdown.STYLE_CARET);
 
-		append(anchor);
-		append(menuContainer);
+		this.append(this.anchor);
+		this.append(this.menuContainer);
 
-		compositeFocusHelper = CompositeFocusHelper.createFocusHelper(this, anchor);
+		this.compositeFocusHelper = CompositeFocusHelper.createFocusHelper(this, this.anchor);
 	}
 
 	public AbstractDropdown(String tagName, String label) {
 		this(tagName);
-		setLabel(label);
+		this.setLabel(label);
 	}
 
 	public String getLabel() {
-		return label;
+		return this.label;
 	}
 
 	public void setLabel(String label) {
 		this.label = label;
-		resetInner();
+		this.resetInner();
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -93,83 +92,83 @@ public abstract class AbstractDropdown extends AbstractPanel implements ClickHan
 	}
 
 	public String getIconType() {
-		return iconType;
+		return this.iconType;
 	}
 
 	public void setIconType(String iconType) {
 		this.iconType = iconType;
-		resetInner();
+		this.resetInner();
 	}
 
 	public void addAnchorStyle(CssStyle style) {
-		StyleUtils.addStyle(anchor, style);
+		StyleUtils.addStyle(this.anchor, style);
 	}
 
 	@Override
 	public int getTabIndex() {
-		return anchor.getTabIndex();
+		return this.anchor.getTabIndex();
 	}
 
 	@Override
 	public void setAccessKey(char key) {
-		anchor.setAccessKey(key);
+		this.anchor.setAccessKey(key);
 	}
 
 	@Override
 	public void setFocus(boolean focused) {
-		anchor.setFocus(focused);
+		this.anchor.setFocus(focused);
 	}
 
 	@Override
 	public void setTabIndex(int index) {
-		anchor.setTabIndex(index);
+		this.anchor.setTabIndex(index);
 	}
 
 	@Override
 	public HandlerRegistration addFocusHandler(FocusHandler handler) {
-		return compositeFocusHelper.addFocusHandler(handler);
+		return this.compositeFocusHelper.addFocusHandler(handler);
 	}
 
 	@Override
 	public HandlerRegistration addBlurHandler(BlurHandler handler) {
-		return compositeFocusHelper.addBlurHandler(handler);
+		return this.compositeFocusHelper.addBlurHandler(handler);
 	}
 
 	private void resetInner() {
-		anchor.getElement().removeAllChildren();
-		if (iconType != null) {
+		this.anchor.getElement().removeAllChildren();
+		if (this.iconType != null) {
 			Icon icon = new Icon();
-			icon.setType(iconType);
+			icon.setType(this.iconType);
 
-			anchor.getElement().appendChild(icon.getElement());
+			this.anchor.getElement().appendChild(icon.getElement());
 		}
-		if (label != null) {
-			Text textElem = Document.get().createTextNode(label);
-			anchor.getElement().appendChild(textElem);
+		if (this.label != null) {
+			Text textElem = Document.get().createTextNode(this.label);
+			this.anchor.getElement().appendChild(textElem);
 		}
 		Text spaceElem = Document.get().createTextNode(" ");
-		anchor.getElement().appendChild(spaceElem);
-		anchor.getElement().appendChild(caret);
+		this.anchor.getElement().appendChild(spaceElem);
+		this.anchor.getElement().appendChild(this.caret);
 	}
 
 	protected Anchor getAnchor() {
-		return anchor;
+		return this.anchor;
 	}
 
 	@Override
 	public void add(IsWidget w) {
 		if (w instanceof Nav.IsNavContent || w instanceof DropdownHeader) {
-			addMenuContent(w);
+			this.addMenuContent(w);
 		}
 	}
 
 	public void addMenuContent(IsWidget w) {
-		menuContainer.append(w);
+		this.menuContainer.append(w);
 	}
 
 	@Override
 	public void clear() {
-		menuContainer.clear();
+		this.menuContainer.clear();
 	}
 
 	public abstract void close();
@@ -180,13 +179,13 @@ public abstract class AbstractDropdown extends AbstractPanel implements ClickHan
 
 	@Override
 	public void onClick(ClickEvent event) {
-		toggleOpen();
+		this.toggleOpen();
 	};
 
 	@Override
 	public void onKeyPress(KeyPressEvent event) {
 		if (event.getCharCode() == KeyCodes.KEY_ENTER) {
-			toggleOpen();
+			this.toggleOpen();
 			event.preventDefault();
 			event.stopPropagation();
 		}

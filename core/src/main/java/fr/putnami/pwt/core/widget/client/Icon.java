@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -29,12 +27,8 @@ public class Icon extends AbstractWidget {
 	private static final CssStyle STYLE_LIGHT = new SimpleStyle("light");
 
 	public enum Color implements CssStyle {
-		DEFAULT("text-default"),
-		MUTED("text-muted"),
-		INFO("text-info"),
-		SUCCESS("text-success"),
-		WARNING("text-warning"),
-		DANGER("text-danger");
+		DEFAULT("text-default"), MUTED("text-muted"), INFO("text-info"), SUCCESS("text-success"), WARNING(
+				"text-warning"), DANGER("text-danger");
 
 		private final String style;
 
@@ -44,9 +38,8 @@ public class Icon extends AbstractWidget {
 
 		@Override
 		public String get() {
-			return style;
+			return this.style;
 		}
-
 	}
 
 	private static final String ICON_TAG_NAME = "i";
@@ -62,9 +55,9 @@ public class Icon extends AbstractWidget {
 
 	protected Icon(Icon source) {
 		super(source);
-		setType(source.type);
-		setColor(source.color);
-		setLight(source.light);
+		this.setType(source.type);
+		this.setColor(source.color);
+		this.setLight(source.light);
 	}
 
 	@Override
@@ -78,11 +71,11 @@ public class Icon extends AbstractWidget {
 	}
 
 	public String getType() {
-		return type;
+		return this.type;
 	}
 
 	public Color getColor() {
-		return color;
+		return this.color;
 	}
 
 	public void setColor(Color color) {
@@ -91,11 +84,11 @@ public class Icon extends AbstractWidget {
 	}
 
 	public boolean isLight() {
-		return light;
+		return this.light;
 	}
 
 	public void setLight(boolean light) {
-		StyleUtils.toggleStyle(this, STYLE_LIGHT, light);
+		StyleUtils.toggleStyle(this, Icon.STYLE_LIGHT, light);
 		this.light = light;
 	}
 }

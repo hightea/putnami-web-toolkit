@@ -5,10 +5,10 @@ import fr.putnami.pwt.doc.client.social.base.AbstractSocialButton;
 public class GooglePlusButton extends AbstractSocialButton {
 
 	public GooglePlusButton() {
-		setIconType(CONSTANT.gplusIcon());
-		setTitle(CONSTANT.gplusPopover());
-		setSocialUtlTemplate(CONSTANT.gplusUrl());
-		//		setPopupHeight(500);
-		setPopupWith(500);
+		this.setIconType(AbstractSocialButton.CONSTANT.gplusIcon());
+		this.setTitle(AbstractSocialButton.CONSTANT.gplusPopover());
+		this.setSocialUtlTemplate(AbstractSocialButton.CONSTANT.gplusUrl());
+		// setPopupHeight(500);
+		this.setPopupWith(500);
 	}
 }

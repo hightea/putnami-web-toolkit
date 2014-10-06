@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.editor.client.validator;
 
@@ -39,14 +37,14 @@ public class PatternValidator<T> extends AbstracValidator<T> {
 			return true;
 		}
 		if (value instanceof String) {
-			return regExMatch((String) value);
+			return this.regExMatch((String) value);
 		}
 		if (value instanceof Collection) {
 			for (Object val : (Collection) value) {
 				if (!(val instanceof String)) {
 					return false;
 				}
-				if (!regExMatch((String) val)) {
+				if (!this.regExMatch((String) val)) {
 					return false;
 				}
 			}
@@ -56,7 +54,7 @@ public class PatternValidator<T> extends AbstracValidator<T> {
 	}
 
 	private boolean regExMatch(String value) {
-		MatchResult match = pattern.exec(value);
+		MatchResult match = this.pattern.exec(value);
 		if (match == null) {
 			return false;
 		}
@@ -65,9 +63,7 @@ public class PatternValidator<T> extends AbstracValidator<T> {
 
 	@Override
 	protected Object[] getParrameters() {
-		return new Object[] {
-			regexp
-		};
+		return new Object[] {this.regexp};
 	}
 
 }

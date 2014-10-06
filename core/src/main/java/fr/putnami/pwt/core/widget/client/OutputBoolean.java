@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -27,9 +25,7 @@ import fr.putnami.pwt.core.widget.client.base.AbstractOutput;
 public class OutputBoolean extends AbstractOutput<Boolean> {
 
 	public enum RenderType {
-		ICON_AND_TEXT,
-		ICON,
-		TEXT;
+		ICON_AND_TEXT, ICON, TEXT;
 	}
 
 	private String trueLabel = Boolean.TRUE.toString();
@@ -49,12 +45,11 @@ public class OutputBoolean extends AbstractOutput<Boolean> {
 		this.falseLabel = source.falseLabel;
 		this.outputType = source.outputType;
 		if (source.trueIcon != null) {
-			setTrueIcon((Icon) source.trueIcon.cloneWidget());
+			this.setTrueIcon((Icon) source.trueIcon.cloneWidget());
 		}
 		if (source.falseIcon != null) {
-			setFalseIcon((Icon) source.falseIcon.cloneWidget());
+			this.setFalseIcon((Icon) source.falseIcon.cloneWidget());
 		}
-
 	}
 
 	@Override
@@ -64,77 +59,78 @@ public class OutputBoolean extends AbstractOutput<Boolean> {
 
 	@Override
 	protected void ensureElement(Element element) {
-		resetInner();
+		this.resetInner();
 	}
 
 	@Override
 	protected void renderValue(Boolean value) {
-		resetInner();
+		this.resetInner();
 	}
 
 	private void resetInner() {
-		if (elementExists()) {
-			Element element = getElement();
+		if (this.elementExists()) {
+			Element element = this.getElement();
 			element.removeAllChildren();
-			boolean rendervalue = Boolean.TRUE.equals(getValue());
-			if (outputType != RenderType.TEXT) {
-				Icon icon = rendervalue ? trueIcon : falseIcon;
+			boolean rendervalue = Boolean.TRUE.equals(this.getValue());
+			if (this.outputType != RenderType.TEXT) {
+				Icon icon = rendervalue ? this.trueIcon : this.falseIcon;
 				if (icon != null) {
 					element.appendChild(icon.getElement());
 				}
 			}
-			if (outputType != RenderType.ICON) {
-				Text textElem = Document.get().createTextNode(rendervalue ? trueLabel : falseLabel);
+			if (this.outputType != RenderType.ICON) {
+				Text textElem =
+						Document.get().createTextNode(rendervalue ? this.trueLabel : this.falseLabel);
 				element.appendChild(textElem);
 			}
 		}
 	}
 
 	public String getTrueLabel() {
-		return trueLabel;
+		return this.trueLabel;
 	}
 
 	public void setTrueLabel(String trueLabel) {
 		this.trueLabel = trueLabel;
-		resetInner();
+		this.resetInner();
 	}
 
 	public String getFalseLabel() {
-		return falseLabel;
+		return this.falseLabel;
 	}
 
 	public void setFalseLabel(String falseLabel) {
 		this.falseLabel = falseLabel;
-		resetInner();
+		this.resetInner();
 	}
 
 	@UiChild(tagname = "iconTrue", limit = 1)
 	public void setTrueIcon(Icon icon) {
-		trueIcon = icon;
-		resetInner();
+		this.trueIcon = icon;
+		this.resetInner();
 	}
 
 	public void setTrueIconType(String iconType) {
-		trueIcon = new Icon();
-		trueIcon.setType(iconType);
-		resetInner();
+		this.trueIcon = new Icon();
+		this.trueIcon.setType(iconType);
+		this.resetInner();
 	}
 
 	@UiChild(tagname = "iconFalse", limit = 1)
 	public void setFalseIcon(Icon icon) {
-		falseIcon = icon;
-		resetInner();
+		this.falseIcon = icon;
+		this.resetInner();
 	}
 
 	public void setFalseIconType(String iconType) {
-		falseIcon = new Icon();
-		falseIcon.setType(iconType);
-		resetInner();
+		this.falseIcon = new Icon();
+		this.falseIcon.setType(iconType);
+		this.resetInner();
 	}
 
 	public void setOutputType(RenderType outputType) {
 		this.outputType = outputType;
-		resetInner();
+		this.resetInner();
 	}
 
 }

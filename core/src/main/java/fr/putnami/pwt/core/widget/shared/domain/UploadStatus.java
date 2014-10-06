@@ -4,12 +4,15 @@ import java.io.Serializable;
 
 public class UploadStatus implements Serializable {
 
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 2110831890820359599L;
 	private String uploadId;
 	private long bytesRead;
 	private long contentLength;
 
 	public UploadStatus() {
-
 	}
 
 	public UploadStatus(String uploadId, long bytesRead, long contentLength) {
@@ -20,7 +23,7 @@ public class UploadStatus implements Serializable {
 	}
 
 	public String getUploadId() {
-		return uploadId;
+		return this.uploadId;
 	}
 
 	public void setUploadId(String uploadId) {
@@ -28,7 +31,7 @@ public class UploadStatus implements Serializable {
 	}
 
 	public long getBytesRead() {
-		return bytesRead;
+		return this.bytesRead;
 	}
 
 	public void setBytesRead(long bytesRead) {
@@ -36,7 +39,7 @@ public class UploadStatus implements Serializable {
 	}
 
 	public long getContentLength() {
-		return contentLength;
+		return this.contentLength;
 	}
 
 	public void setContentLength(long contentLength) {

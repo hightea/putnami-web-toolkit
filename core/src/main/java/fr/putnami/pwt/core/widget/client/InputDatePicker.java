@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -71,13 +69,8 @@ import fr.putnami.pwt.core.widget.client.event.AskFocusEvent;
 import fr.putnami.pwt.core.widget.client.util.KeyEventUtils;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public class InputDatePicker extends FocusWidget implements
-EditorLeaf,
-EditorInput<Date>,
-HasHtmlId,
-HasDrawable,
-HasValue<Date>,
-HasValueChangeHandlers<Date> {
+public class InputDatePicker extends FocusWidget implements EditorLeaf, EditorInput<Date>,
+HasHtmlId, HasDrawable, HasValue<Date>, HasValueChangeHandlers<Date> {
 
 	private static final CssStyle STYLE_DATEPICKER = new SimpleStyle("datepicker");
 	private static final CssStyle STYLE_POPUP = new SimpleStyle("datepicker-popup");
@@ -110,13 +103,18 @@ HasValueChangeHandlers<Date> {
 
 	private static final int YEAR_OFFSET = 1900;
 
-	private static final DateTimeFormatInfo DATE_TIME_FORMAT_INFO = LocaleInfo.getCurrentLocale().getDateTimeFormatInfo();
-	private static final String[] DAYS = DATE_TIME_FORMAT_INFO.weekdaysShortStandalone();
+	private static final DateTimeFormatInfo DATE_TIME_FORMAT_INFO = LocaleInfo.getCurrentLocale()
+			.getDateTimeFormatInfo();
+	private static final String[] DAYS = InputDatePicker.DATE_TIME_FORMAT_INFO
+			.weekdaysShortStandalone();
 
-	private static final DateTimeFormat MONTH_YEAR_FORMAT = DateTimeFormat.getFormat(WIDGET_PARAMS.inputDatePickerMonthYearFormat());
-	private static final DateTimeFormat MONTH_ABBR_FORMAT = DateTimeFormat.getFormat(WIDGET_PARAMS.inputDatePickerMonthFormat());
+	private static final DateTimeFormat MONTH_YEAR_FORMAT = DateTimeFormat
+			.getFormat(InputDatePicker.WIDGET_PARAMS.inputDatePickerMonthYearFormat());
+	private static final DateTimeFormat MONTH_ABBR_FORMAT = DateTimeFormat
+			.getFormat(InputDatePicker.WIDGET_PARAMS.inputDatePickerMonthFormat());
 
-	private static final DateTimeFormat ATTRIBUTE_DATE_FORMAT = DateTimeFormat.getFormat("yyyy-MM-dd");
+	private static final DateTimeFormat ATTRIBUTE_DATE_FORMAT = DateTimeFormat
+			.getFormat("yyyy-MM-dd");
 
 	private final DivElement datepickerHeader = Document.get().createDivElement();
 
@@ -152,67 +150,71 @@ HasValueChangeHandlers<Date> {
 	public InputDatePicker() {
 		super(Document.get().createDivElement());
 
-		StyleUtils.addStyle(this, STYLE_DATEPICKER);
+		StyleUtils.addStyle(this, InputDatePicker.STYLE_DATEPICKER);
 
-		getElement().appendChild(datepickerHeader);
-		StyleUtils.addStyle(datepickerHeader, STYLE_HEADER);
+		this.getElement().appendChild(this.datepickerHeader);
+		StyleUtils.addStyle(this.datepickerHeader, InputDatePicker.STYLE_HEADER);
 
 		/* month selecter */
-		datepickerHeader.appendChild(monthPickerButton);
-		StyleUtils.addStyle(monthPickerButton, STYLE_MONTH_PICKER_BUTTON);
+		this.datepickerHeader.appendChild(this.monthPickerButton);
+		StyleUtils.addStyle(this.monthPickerButton, InputDatePicker.STYLE_MONTH_PICKER_BUTTON);
 
 		/* pagination */
-		datepickerHeader.appendChild(monthPagerUl);
-		StyleUtils.addStyle(monthPagerUl, STYLE_MONTH_PAGER);
-		createLi(pagePreviusMonthLi, STYLE_MONTH_PREVIOUS, "&#9668;");
-		createLi(pageTodayLi, STYLE_TODAY, "&#9673;");
-		createLi(pageNextMonthLi, STYLE_MONTH_NEXT, "&#9658;");
+		this.datepickerHeader.appendChild(this.monthPagerUl);
+		StyleUtils.addStyle(this.monthPagerUl, InputDatePicker.STYLE_MONTH_PAGER);
+		this.createLi(this.pagePreviusMonthLi, InputDatePicker.STYLE_MONTH_PREVIOUS, "&#9668;");
+		this.createLi(this.pageTodayLi, InputDatePicker.STYLE_TODAY, "&#9673;");
+		this.createLi(this.pageNextMonthLi, InputDatePicker.STYLE_MONTH_NEXT, "&#9658;");
 
-		monthPagerUl.appendChild(pagePreviusMonthLi);
-		monthPagerUl.appendChild(pageTodayLi);
-		monthPagerUl.appendChild(pageNextMonthLi);
-
-		/* Calendar Picker */
-		getElement().appendChild(monthPicker);
-		monthPicker.appendChild(monthPickerInner);
-		StyleUtils.addStyle(monthPicker, STYLE_MONTH_PICKER);
+		this.monthPagerUl.appendChild(this.pagePreviusMonthLi);
+		this.monthPagerUl.appendChild(this.pageTodayLi);
+		this.monthPagerUl.appendChild(this.pageNextMonthLi);
 
 		/* Calendar Picker */
-		getElement().appendChild(calendarTable);
-		StyleUtils.addStyle(calendarTable, STYLE_CALENDAR_PICKER);
+		this.getElement().appendChild(this.monthPicker);
+		this.monthPicker.appendChild(this.monthPickerInner);
+		StyleUtils.addStyle(this.monthPicker, InputDatePicker.STYLE_MONTH_PICKER);
+
+		/* Calendar Picker */
+		this.getElement().appendChild(this.calendarTable);
+		StyleUtils.addStyle(this.calendarTable, InputDatePicker.STYLE_CALENDAR_PICKER);
 
 		/* DayPicker Header */
 		TableSectionElement head = Document.get().createTHeadElement();
 		TableRowElement headRow = Document.get().createTRElement();
-		calendarTable.appendChild(head);
+		this.calendarTable.appendChild(head);
 		head.appendChild(headRow);
 		for (int i = 0; i < 7; i++) {
 			TableCellElement th = Document.get().createTHElement();
 			headRow.appendChild(th);
-			int dayToDisplay = (i + DATE_TIME_FORMAT_INFO.firstDayOfTheWeek()) % DAYS.length;
-			th.setInnerText(DAYS[dayToDisplay]);
+			int dayToDisplay =
+					(i + InputDatePicker.DATE_TIME_FORMAT_INFO.firstDayOfTheWeek())
+					% InputDatePicker.DAYS.length;
+			th.setInnerText(InputDatePicker.DAYS[dayToDisplay]);
 		}
 		/* DayPicker Body */
-		calendarTable.appendChild(calendatBody);
+		this.calendarTable.appendChild(this.calendatBody);
 
-		today = ATTRIBUTE_DATE_FORMAT.parse(ATTRIBUTE_DATE_FORMAT.format(new Date()));
-		setValue(today);
+		this.today =
+				InputDatePicker.ATTRIBUTE_DATE_FORMAT.parse(InputDatePicker.ATTRIBUTE_DATE_FORMAT
+						.format(new Date()));
+		this.setValue(this.today);
 
-		Event.sinkEvents(getElement(), Event.ONKEYDOWN);
-		Event.sinkEvents(monthPickerButton, Event.ONCLICK);
-		Event.sinkEvents(pagePreviusMonthLi, Event.ONCLICK);
-		Event.sinkEvents(pageTodayLi, Event.ONCLICK);
-		Event.sinkEvents(pageNextMonthLi, Event.ONCLICK);
+		Event.sinkEvents(this.getElement(), Event.ONKEYDOWN);
+		Event.sinkEvents(this.monthPickerButton, Event.ONCLICK);
+		Event.sinkEvents(this.pagePreviusMonthLi, Event.ONCLICK);
+		Event.sinkEvents(this.pageTodayLi, Event.ONCLICK);
+		Event.sinkEvents(this.pageNextMonthLi, Event.ONCLICK);
 
-		redraw();
+		this.redraw();
 	}
 
 	public InputDatePicker(InputDatePicker source) {
 		this();
-		today = source.today;
-		cursor = source.cursor;
-		path = source.path;
-		validators = source.validators;
+		this.today = source.today;
+		this.cursor = source.cursor;
+		this.path = source.path;
+		this.validators = source.validators;
 	}
 
 	@Override
@@ -222,34 +224,33 @@ HasValueChangeHandlers<Date> {
 
 	@Override
 	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<Date> handler) {
-		return addHandler(handler, ValueChangeEvent.getType());
+		return this.addHandler(handler, ValueChangeEvent.getType());
 	}
 
 	@Override
 	public Date getValue() {
-		return value == null ? null : new Date(value.getTime());
+		return this.value == null ? null : new Date(this.value.getTime());
 	}
 
 	@Override
 	public void setValue(Date value) {
-		setValue(value, false);
+		this.setValue(value, false);
 	}
 
 	@Override
 	public void setValue(Date value, boolean fireEvents) {
 		if (fireEvents) {
 			ValueChangeEvent.fireIfNotEqual(this, this.value, value);
-			setFocus(true);
+			this.setFocus(true);
 		}
 		if (value == null) {
 			this.value = null;
-			this.cursor = new Date(today.getTime());
-		}
-		else {
+			this.cursor = new Date(this.today.getTime());
+		} else {
 			this.value = new Date(value.getTime());
 			this.cursor = new Date(value.getTime());
 		}
-		redraw();
+		this.redraw();
 	}
 
 	@Override
@@ -257,133 +258,128 @@ HasValueChangeHandlers<Date> {
 		int type = event.getTypeInt();
 		Element target = event.getCurrentTarget();
 		if (type == Event.ONCLICK) {
-			String dataDate = target.getAttribute(ATTRIBUTE_DATA_DATE);
-			String dataCursor = target.getAttribute(ATTRIBUTE_DATA_CURSOR);
-			String dataYear = target.getAttribute(ATTRIBUTE_DATA_YEAR);
+			String dataDate = target.getAttribute(InputDatePicker.ATTRIBUTE_DATA_DATE);
+			String dataCursor = target.getAttribute(InputDatePicker.ATTRIBUTE_DATA_CURSOR);
+			String dataYear = target.getAttribute(InputDatePicker.ATTRIBUTE_DATA_YEAR);
 			if (dataDate != null && dataDate.length() > 0) {
-				mode = Mode.CALENDAR;
-				setValue(ATTRIBUTE_DATE_FORMAT.parse(dataDate), true);
-			}
-			else if (dataCursor != null && dataCursor.length() > 0) {
-				mode = Mode.CALENDAR;
-				cursor = ATTRIBUTE_DATE_FORMAT.parse(dataCursor);
-				redraw();
-			}
-			else if (dataYear != null && dataYear.length() > 0) {
-				openMonthOfYear(Integer.valueOf(dataYear));
-			}
-			else if (target == monthPickerButton) {
-				if (mode != Mode.MONTH) {
-					mode = Mode.MONTH;
+				this.mode = Mode.CALENDAR;
+				this.setValue(InputDatePicker.ATTRIBUTE_DATE_FORMAT.parse(dataDate), true);
+			} else if (dataCursor != null && dataCursor.length() > 0) {
+				this.mode = Mode.CALENDAR;
+				this.cursor = InputDatePicker.ATTRIBUTE_DATE_FORMAT.parse(dataCursor);
+				this.redraw();
+			} else if (dataYear != null && dataYear.length() > 0) {
+				this.openMonthOfYear(Integer.valueOf(dataYear));
+			} else if (target == this.monthPickerButton) {
+				if (this.mode != Mode.MONTH) {
+					this.mode = Mode.MONTH;
+				} else {
+					this.mode = Mode.CALENDAR;
 				}
-				else {
-					mode = Mode.CALENDAR;
-				}
-				redraw();
+				this.redraw();
 			}
 			event.stopPropagation();
 			event.preventDefault();
-		}
-		else if (type == Event.ONKEYDOWN) {
-			handleKeyPress(event.getKeyCode());
+		} else if (type == Event.ONKEYDOWN) {
+			this.handleKeyPress(event.getKeyCode());
 			event.stopPropagation();
 			event.preventDefault();
-		}
-		else {
+		} else {
 			super.onBrowserEvent(event);
 		}
 	}
 
 	@Override
 	public void redraw() {
-		if (mode == Mode.CALENDAR) {
-			redrawCalendarPicker();
+		if (this.mode == Mode.CALENDAR) {
+			this.redrawCalendarPicker();
+		} else if (this.mode == Mode.MONTH) {
+			this.redrawMonthPicker();
 		}
-		else if (mode == Mode.MONTH) {
-			redrawMonthPicker();
-		}
-
 	}
 
 	private void redrawMonthPicker() {
-		monthPicker.getStyle().setWidth(calendarTable.getClientWidth(), Unit.PX);
-		calendarTable.getStyle().setDisplay(Display.NONE);
-		monthPicker.getStyle().clearDisplay();
+		this.monthPicker.getStyle().setWidth(this.calendarTable.getClientWidth(), Unit.PX);
+		this.calendarTable.getStyle().setDisplay(Display.NONE);
+		this.monthPicker.getStyle().clearDisplay();
 
-		int currentYear = cursor.getYear() + YEAR_OFFSET;
-		if (monthPickerInner.getChildCount() == 0) {
-
+		int currentYear = this.cursor.getYear() + InputDatePicker.YEAR_OFFSET;
+		if (this.monthPickerInner.getChildCount() == 0) {
 			for (int year = currentYear - 100; year < currentYear + 100; year++) {
 				DivElement yearDiv = Document.get().createDivElement();
 				yearDiv.setInnerText("" + year);
-				StyleUtils.addStyle(yearDiv, STYLE_YEAR_BUTTON);
+				StyleUtils.addStyle(yearDiv, InputDatePicker.STYLE_YEAR_BUTTON);
 				Event.sinkEvents(yearDiv, Event.ONCLICK);
-				monthPickerInner.appendChild(yearDiv);
-				yearDiv.setAttribute(ATTRIBUTE_DATA_YEAR, "" + year);
+				this.monthPickerInner.appendChild(yearDiv);
+				yearDiv.setAttribute(InputDatePicker.ATTRIBUTE_DATA_YEAR, "" + year);
 			}
 		}
-		openMonthOfYear(cursor.getYear() + YEAR_OFFSET);
+		this.openMonthOfYear(this.cursor.getYear() + InputDatePicker.YEAR_OFFSET);
 	}
 
 	private void openMonthOfYear(int year) {
 		String yearString = "" + year;
-		monthPickerUlMonthElement.removeFromParent();
-		for (int i = 0; i < monthPickerInner.getChildCount(); i++) {
-			Element child = (Element) monthPickerInner.getChild(i);
-			if (yearString.equals(child.getAttribute(ATTRIBUTE_DATA_YEAR))) {
-				monthPickerInner.insertAfter(monthPickerUlMonthElement, child);
-				Date monthButtonDate = new Date(cursor.getTime());
-				monthButtonDate.setYear(year - YEAR_OFFSET);
-				if (monthPickerUlMonthElement.getChildCount() == 0) {
+		this.monthPickerUlMonthElement.removeFromParent();
+		for (int i = 0; i < this.monthPickerInner.getChildCount(); i++) {
+			Element child = (Element) this.monthPickerInner.getChild(i);
+			if (yearString.equals(child.getAttribute(InputDatePicker.ATTRIBUTE_DATA_YEAR))) {
+				this.monthPickerInner.insertAfter(this.monthPickerUlMonthElement, child);
+				Date monthButtonDate = new Date(this.cursor.getTime());
+				monthButtonDate.setYear(year - InputDatePicker.YEAR_OFFSET);
+				if (this.monthPickerUlMonthElement.getChildCount() == 0) {
 					for (int month = 0; month < 12; month++) {
 						LIElement monthElement = Document.get().createLIElement();
-						monthPickerUlMonthElement.appendChild(monthElement);
+						this.monthPickerUlMonthElement.appendChild(monthElement);
 						Event.sinkEvents(monthElement, Event.ONCLICK);
 						monthButtonDate.setMonth(month);
-						monthElement.setInnerText(MONTH_ABBR_FORMAT.format(monthButtonDate));
+						monthElement.setInnerText(InputDatePicker.MONTH_ABBR_FORMAT.format(monthButtonDate));
 					}
 				}
 				for (int month = 0; month < 12; month++) {
-					LIElement monthElement = (LIElement) monthPickerUlMonthElement.getChild(month);
+					LIElement monthElement = (LIElement) this.monthPickerUlMonthElement.getChild(month);
 					monthButtonDate.setMonth(month);
-					monthElement.setAttribute(ATTRIBUTE_DATA_CURSOR, ATTRIBUTE_DATE_FORMAT.format(monthButtonDate));
+					monthElement.setAttribute(InputDatePicker.ATTRIBUTE_DATA_CURSOR,
+							InputDatePicker.ATTRIBUTE_DATE_FORMAT.format(monthButtonDate));
 				}
-				monthPicker.setScrollTop(child.getOffsetTop());
+				this.monthPicker.setScrollTop(child.getOffsetTop());
 				break;
 			}
-
 		}
 	}
 
 	private void redrawCalendarPicker() {
-		monthPicker.getStyle().setDisplay(Display.NONE);
-		calendarTable.getStyle().clearDisplay();
+		this.monthPicker.getStyle().setDisplay(Display.NONE);
+		this.calendarTable.getStyle().clearDisplay();
 
-		calendatBody.removeAllChildren();
+		this.calendatBody.removeAllChildren();
 
-		int firstDayOfWeek = DATE_TIME_FORMAT_INFO.firstDayOfTheWeek();
-		int lastDayOfWeek = (firstDayOfWeek + DAYS_IN_WEEK) % DAYS_IN_WEEK;
+		int firstDayOfWeek = InputDatePicker.DATE_TIME_FORMAT_INFO.firstDayOfTheWeek();
+		int lastDayOfWeek =
+				(firstDayOfWeek + InputDatePicker.DAYS_IN_WEEK) % InputDatePicker.DAYS_IN_WEEK;
 
 		/* Display month */
-		monthPickerButton.setInnerHTML(MONTH_YEAR_FORMAT.format(cursor) + "<span class=\"caret\"></span>");
+		this.monthPickerButton.setInnerHTML(InputDatePicker.MONTH_YEAR_FORMAT.format(this.cursor)
+				+ "<span class=\"caret\"></span>");
 
-		Date lastMonth = new Date(cursor.getTime());
+		Date lastMonth = new Date(this.cursor.getTime());
 		CalendarUtil.addMonthsToDate(lastMonth, -1);
-		pagePreviusMonthLi.setAttribute(ATTRIBUTE_DATA_CURSOR, ATTRIBUTE_DATE_FORMAT.format(lastMonth));
-		pageTodayLi.setAttribute(ATTRIBUTE_DATA_CURSOR, ATTRIBUTE_DATE_FORMAT.format(today));
-		Date nextMonth = new Date(cursor.getTime());
+		this.pagePreviusMonthLi.setAttribute(InputDatePicker.ATTRIBUTE_DATA_CURSOR,
+				InputDatePicker.ATTRIBUTE_DATE_FORMAT.format(lastMonth));
+		this.pageTodayLi.setAttribute(InputDatePicker.ATTRIBUTE_DATA_CURSOR,
+				InputDatePicker.ATTRIBUTE_DATE_FORMAT.format(this.today));
+		Date nextMonth = new Date(this.cursor.getTime());
 		CalendarUtil.addMonthsToDate(nextMonth, 1);
-		pageNextMonthLi.setAttribute(ATTRIBUTE_DATA_CURSOR, ATTRIBUTE_DATE_FORMAT.format(nextMonth));
+		this.pageNextMonthLi.setAttribute(InputDatePicker.ATTRIBUTE_DATA_CURSOR,
+				InputDatePicker.ATTRIBUTE_DATE_FORMAT.format(nextMonth));
 
 		/* Draw daypicker */
-		Date dateToDrow = new Date(cursor.getTime());
+		Date dateToDrow = new Date(this.cursor.getTime());
 		int selectedMonth = dateToDrow.getMonth();
 		int firstMonthToDisplay = (selectedMonth + 11) % 12;
 		int lastMonthToDisplay = (selectedMonth + 13) % 12;
 		do {
 			CalendarUtil.addDaysToDate(dateToDrow, -1);
-		}
-		while (firstMonthToDisplay != dateToDrow.getMonth() || dateToDrow.getDay() != firstDayOfWeek);
+		} while (firstMonthToDisplay != dateToDrow.getMonth() || dateToDrow.getDay() != firstDayOfWeek);
 
 		// drow calendarTable
 		TableRowElement headRow = null;
@@ -391,22 +387,23 @@ HasValueChangeHandlers<Date> {
 				|| dateToDrow.getDate() == 1 && dateToDrow.getDay() == firstDayOfWeek) {
 			if (headRow == null || dateToDrow.getDay() == firstDayOfWeek) {
 				headRow = Document.get().createTRElement();
-				calendatBody.appendChild(headRow);
+				this.calendatBody.appendChild(headRow);
 			}
 			TableCellElement td = Document.get().createTDElement();
 			headRow.appendChild(td);
 			DivElement div = Document.get().createDivElement();
 			td.appendChild(div);
 			div.setInnerText("" + dateToDrow.getDate());
-			div.setAttribute(ATTRIBUTE_DATA_DATE, ATTRIBUTE_DATE_FORMAT.format(dateToDrow));
+			div.setAttribute(InputDatePicker.ATTRIBUTE_DATA_DATE, InputDatePicker.ATTRIBUTE_DATE_FORMAT
+					.format(dateToDrow));
 			if (dateToDrow.getMonth() != selectedMonth) {
-				StyleUtils.addStyle(td, STYLE_MUTED);
+				StyleUtils.addStyle(td, InputDatePicker.STYLE_MUTED);
 			}
-			if (dateToDrow.equals(cursor)) {
-				StyleUtils.addStyle(td, STYLE_SELECTED);
+			if (dateToDrow.equals(this.cursor)) {
+				StyleUtils.addStyle(td, InputDatePicker.STYLE_SELECTED);
 			}
-			if (today.equals(dateToDrow)) {
-				StyleUtils.addStyle(td, STYLE_TODAY);
+			if (this.today.equals(dateToDrow)) {
+				StyleUtils.addStyle(td, InputDatePicker.STYLE_TODAY);
 			}
 			Event.sinkEvents(div, Event.ONCLICK);
 
@@ -420,44 +417,44 @@ HasValueChangeHandlers<Date> {
 		}
 		boolean handleKey = false;
 		switch (keyCode) {
-		case KeyCodes.KEY_LEFT:
-			CalendarUtil.addDaysToDate(cursor, -1);
-			handleKey = true;
-			break;
-		case KeyCodes.KEY_RIGHT:
-			CalendarUtil.addDaysToDate(cursor, 1);
-			handleKey = true;
-			break;
-		case KeyCodes.KEY_UP:
-			CalendarUtil.addDaysToDate(cursor, -7);
-			handleKey = true;
-			break;
-		case KeyCodes.KEY_DOWN:
-			CalendarUtil.addDaysToDate(cursor, 7);
-			handleKey = true;
-			break;
-		case KeyCodes.KEY_PAGEUP:
-			CalendarUtil.addMonthsToDate(cursor, -1);
-			handleKey = true;
-			break;
-		case KeyCodes.KEY_PAGEDOWN:
-			CalendarUtil.addMonthsToDate(cursor, 1);
-			handleKey = true;
-			break;
-		case KeyCodes.KEY_ENTER:
-			setValue(cursor, true);
-			handleKey = true;
-			break;
-		case KeyCodes.KEY_ESCAPE:
-			setValue(value);
-			setFocus(false);
-			handleKey = true;
-			break;
-		default:
-			break;
+			case KeyCodes.KEY_LEFT:
+				CalendarUtil.addDaysToDate(this.cursor, -1);
+				handleKey = true;
+				break;
+			case KeyCodes.KEY_RIGHT:
+				CalendarUtil.addDaysToDate(this.cursor, 1);
+				handleKey = true;
+				break;
+			case KeyCodes.KEY_UP:
+				CalendarUtil.addDaysToDate(this.cursor, -7);
+				handleKey = true;
+				break;
+			case KeyCodes.KEY_DOWN:
+				CalendarUtil.addDaysToDate(this.cursor, 7);
+				handleKey = true;
+				break;
+			case KeyCodes.KEY_PAGEUP:
+				CalendarUtil.addMonthsToDate(this.cursor, -1);
+				handleKey = true;
+				break;
+			case KeyCodes.KEY_PAGEDOWN:
+				CalendarUtil.addMonthsToDate(this.cursor, 1);
+				handleKey = true;
+				break;
+			case KeyCodes.KEY_ENTER:
+				this.setValue(this.cursor, true);
+				handleKey = true;
+				break;
+			case KeyCodes.KEY_ESCAPE:
+				this.setValue(this.value);
+				this.setFocus(false);
+				handleKey = true;
+				break;
+			default:
+				break;
 		}
 		if (handleKey) {
-			redraw();
+			this.redraw();
 		}
 
 		return handleKey;
@@ -469,11 +466,11 @@ HasValueChangeHandlers<Date> {
 	}
 
 	public void popup(Widget container, Widget relativeTo) {
-		setVisible(true);
-		StyleUtils.addStyle(this, STYLE_POPUP);
+		this.setVisible(true);
+		StyleUtils.addStyle(this, InputDatePicker.STYLE_POPUP);
 		RootPanel.get().add(this);
 
-		Element positioningElement = getElement();
+		Element positioningElement = this.getElement();
 		Element relativeElement = relativeTo.getElement();
 
 		int targetHeight = relativeElement.getOffsetHeight();
@@ -487,29 +484,29 @@ HasValueChangeHandlers<Date> {
 		elementStyle.setLeft(targetRight - positioningWidth, Unit.PX);
 		elementStyle.setTop(targetTop + targetHeight, Unit.PX);
 
-		StyleUtils.addStyle(this, STYLE_FADE);
-		StyleUtils.addStyle(this, STYLE_SHOW);
+		StyleUtils.addStyle(this, InputDatePicker.STYLE_FADE);
+		StyleUtils.addStyle(this, InputDatePicker.STYLE_SHOW);
 
-		setFocus(true);
+		this.setFocus(true);
 
-		if (popupBlurHandler == null) {
-			popupBlurHandler = addBlurHandler(new BlurHandler() {
+		if (this.popupBlurHandler == null) {
+			this.popupBlurHandler = this.addBlurHandler(new BlurHandler() {
 
 				@Override
 				public void onBlur(BlurEvent event) {
-					hide();
+					InputDatePicker.this.hide();
 				}
 			});
 		}
 	}
 
 	public void hide() {
-		StyleUtils.removeStyle(getElement(), STYLE_SHOW);
+		StyleUtils.removeStyle(this.getElement(), InputDatePicker.STYLE_SHOW);
 		Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
 
 			@Override
 			public boolean execute() {
-				setVisible(false);
+				InputDatePicker.this.setVisible(false);
 				RootPanel.get().remove(InputDatePicker.this);
 				return false;
 			}
@@ -517,47 +514,46 @@ HasValueChangeHandlers<Date> {
 	}
 
 	public void togglePopup(Widget container, Widget relativeTo) {
-		if (!isVisible() || !isAttached()) {
-			popup(container, relativeTo);
-		}
-		else {
-			hide();
+		if (!this.isVisible() || !this.isAttached()) {
+			this.popup(container, relativeTo);
+		} else {
+			this.hide();
 		}
 	}
 
 	@Override
 	public String getPath() {
-		return path;
+		return this.path;
 	}
 
 	@Override
 	public Date flush() {
-		errors.clear();
-		this.errors.addAll(ValidationUtils.validate(validators, this, this.value));
-		return getValue();
+		this.errors.clear();
+		this.errors.addAll(ValidationUtils.validate(this.validators, this, this.value));
+		return this.getValue();
 	}
 
 	@Override
 	public void edit(Date value) {
-		setValue(value);
+		this.setValue(value);
 	}
 
 	@Override
 	public boolean hasErrors() {
-		return !errors.isEmpty();
+		return !this.errors.isEmpty();
 	}
 
 	@Override
 	public Iterable<Error> getErrors() {
-		return Iterables.unmodifiableIterable(errors);
+		return Iterables.unmodifiableIterable(this.errors);
 	}
 
 	@Override
 	public void addValidator(Validator<Date> validator) {
-		if (validators == null) {
-			validators = Lists.newArrayList();
+		if (this.validators == null) {
+			this.validators = Lists.newArrayList();
 		}
-		validators.add(validator);
+		this.validators.add(validator);
 	}
 
 	@Override
@@ -568,8 +564,8 @@ HasValueChangeHandlers<Date> {
 	@Override
 	public void setHtmlId(String htmlId) {
 		this.htmlId = htmlId;
-		if (askFocusRegistration != null) {
-			askFocusRegistration.removeHandler();
+		if (this.askFocusRegistration != null) {
+			this.askFocusRegistration.removeHandler();
 		}
 		if (htmlId != null) {
 			AskFocusEvent.Handler handler = new AskFocusEvent.Handler() {
@@ -577,11 +573,11 @@ HasValueChangeHandlers<Date> {
 				@Override
 				public void onAskFocus(AskFocusEvent event) {
 					if (Objects.equal(event.getHtmlId(), InputDatePicker.this.htmlId)) {
-						setFocus(true);
+						InputDatePicker.this.setFocus(true);
 					}
 				}
 			};
-			askFocusRegistration = EventBus.get().addHandler(AskFocusEvent.TYPE, handler);
+			this.askFocusRegistration = EventBus.get().addHandler(AskFocusEvent.TYPE, handler);
 		}
 	}
 

@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client.util;
 
@@ -29,7 +27,7 @@ public final class StyleUtils {
 			return;
 		}
 		if (style instanceof Enum) {
-			cleanEnumStyle(e, style.getClass());
+			StyleUtils.cleanEnumStyle(e, style.getClass());
 		}
 		String styleName = StyleUtils.getStyle(style);
 		String currentClassName = e.getClassName();
@@ -57,9 +55,8 @@ public final class StyleUtils {
 			return;
 		}
 		if (style instanceof Enum) {
-			cleanEnumStyle(e, style.getClass());
-		}
-		else if (style instanceof Iterable) {
+			StyleUtils.cleanEnumStyle(e, style.getClass());
+		} else if (style instanceof Iterable) {
 			for (Object toRemove : (Iterable) style) {
 				if (toRemove instanceof CssStyle) {
 					CssStyle styleToRemove = (CssStyle) toRemove;
@@ -81,10 +78,9 @@ public final class StyleUtils {
 			return;
 		}
 		if (value) {
-			addStyle(e, style);
-		}
-		else {
-			removeStyle(e, style);
+			StyleUtils.addStyle(e, style);
+		} else {
+			StyleUtils.removeStyle(e, style);
 		}
 	}
 
@@ -108,12 +104,12 @@ public final class StyleUtils {
 				}
 			}
 		}
-
 	}
 
 	public static void initStyle(Widget w) {
 		if (w != null && w.getElement() != null) {
-			String widgetClassName = "p-" + CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_HYPHEN, w.getClass().getSimpleName());
+			String widgetClassName =
+					"p-" + CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_HYPHEN, w.getClass().getSimpleName());
 			w.getElement().addClassName(widgetClassName);
 		}
 	}

@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.error.client.widget;
 
@@ -65,13 +63,13 @@ public class ErrorAlert implements CollapseEvent.Handler {
 
 	public ErrorAlert(String title, String message, String errorDetails, Severity severity) {
 		Binder.BINDER.createAndBindUi(this);
-		StyleUtils.addStyle(detailButton, Alert.STYLE_ALERT_LINK);
-		titleOutput.setInnerSafeHtml(SafeHtmlUtils.fromString(title));
-		messageOutput.setText(message);
-		detailOutput.setInnerSafeHtml(SafeHtmlUtils.fromString(errorDetails));
-		alert.setType(getAlertTypeFromSeverity(severity));
-		collapseHelper = CollapseHelper.apply(detailButton, detailOutput, true);
-		collapseHelper.addCollapseHandler(this);
+		StyleUtils.addStyle(this.detailButton, Alert.STYLE_ALERT_LINK);
+		this.titleOutput.setInnerSafeHtml(SafeHtmlUtils.fromString(title));
+		this.messageOutput.setText(message);
+		this.detailOutput.setInnerSafeHtml(SafeHtmlUtils.fromString(errorDetails));
+		this.alert.setType(this.getAlertTypeFromSeverity(severity));
+		this.collapseHelper = CollapseHelper.apply(this.detailButton, this.detailOutput, true);
+		this.collapseHelper.addCollapseHandler(this);
 	}
 
 	private Type getAlertTypeFromSeverity(Severity severity) {
@@ -85,14 +83,13 @@ public class ErrorAlert implements CollapseEvent.Handler {
 	@Override
 	public void onCollapse(CollapseEvent event) {
 		if (event.isCollapsed()) {
-			detailButton.setIconType(IconFont.ICON_ANGLE_DOUBLE_RIGHT);
-		}
-		else {
-			detailButton.setIconType(IconFont.ICON_ANGLE_DOUBLE_DOWN);
+			this.detailButton.setIconType(IconFont.ICON_ANGLE_DOUBLE_RIGHT);
+		} else {
+			this.detailButton.setIconType(IconFont.ICON_ANGLE_DOUBLE_DOWN);
 		}
 	}
 
 	public Alert getAlert() {
-		return alert;
+		return this.alert;
 	}
 }

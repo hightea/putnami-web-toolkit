@@ -5,10 +5,10 @@ import fr.putnami.pwt.doc.client.social.base.AbstractSocialButton;
 public class FacebookButton extends AbstractSocialButton {
 
 	public FacebookButton() {
-		setIconType(CONSTANT.facebookIcon());
-		setTitle(CONSTANT.facebookPopover());
-		setSocialUtlTemplate(CONSTANT.facebookUrl());
-		setPopupHeight(500);
-		setPopupWith(700);
+		this.setIconType(AbstractSocialButton.CONSTANT.facebookIcon());
+		this.setTitle(AbstractSocialButton.CONSTANT.facebookPopover());
+		this.setSocialUtlTemplate(AbstractSocialButton.CONSTANT.facebookUrl());
+		this.setPopupHeight(500);
+		this.setPopupWith(700);
 	}
 }

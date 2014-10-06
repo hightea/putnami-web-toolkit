@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -37,8 +35,7 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 public class InputCheckBox<T> extends AbstractInputChoice<T, List<T>> {
 
 	public enum Type implements CssStyle {
-		DEFAULT("checkbox"),
-		INLINE("checkbox-inline");
+		DEFAULT("checkbox"), INLINE("checkbox-inline");
 
 		private final String style;
 
@@ -48,7 +45,7 @@ public class InputCheckBox<T> extends AbstractInputChoice<T, List<T>> {
 
 		@Override
 		public String get() {
-			return style;
+			return this.style;
 		}
 	}
 
@@ -57,35 +54,34 @@ public class InputCheckBox<T> extends AbstractInputChoice<T, List<T>> {
 
 		@Override
 		public void onItemClick(T item) {
-			if (selectedItems == null) {
-				selectedItems = new ArrayList<T>();
+			if (this.selectedItems == null) {
+				this.selectedItems = new ArrayList<T>();
 			}
-			boolean selectItem = !selectedItems.contains(item);
+			boolean selectItem = !this.selectedItems.contains(item);
 			if (selectItem) {
-				selectedItems.add(item);
-			}
-			else {
-				selectedItems.remove(item);
-				if (selectedItems.isEmpty()) {
-					selectedItems = null;
+				this.selectedItems.add(item);
+			} else {
+				this.selectedItems.remove(item);
+				if (this.selectedItems.isEmpty()) {
+					this.selectedItems = null;
 				}
 			}
-			ValueChangeEvent.fire(InputCheckBox.this, selectedItems);
+			ValueChangeEvent.fire(InputCheckBox.this, this.selectedItems);
 		}
 
 		@Override
 		public void setSelection(List<T> selection, boolean fireEvents) {
-			List<T> oldSelection = selectedItems;
+			List<T> oldSelection = this.selectedItems;
 			if (oldSelection != null) {
 				for (T item : oldSelection) {
-					selectItem(item, false);
+					this.selectItem(item, false);
 				}
 			}
 
-			selectedItems = selection;
+			this.selectedItems = selection;
 			if (selection != null) {
 				for (T item : selection) {
-					selectItem(item, true);
+					this.selectItem(item, true);
 				}
 			}
 			if (fireEvents) {
@@ -102,46 +98,48 @@ public class InputCheckBox<T> extends AbstractInputChoice<T, List<T>> {
 
 		@Override
 		public List<T> getSelection() {
-			return selectedItems;
+			return this.selectedItems;
 		}
 	}
 
 	private class CheckboxContainer extends Composite implements ClickHandler {
 
-		private final InputElement checkboxElement = InputElement.as(Document.get().createCheckInputElement());
+		private final InputElement checkboxElement = InputElement.as(Document.get()
+				.createCheckInputElement());
 
 		private T value;
 
 		public CheckboxContainer(T value) {
 			this.value = value;
-			Container container = null;
+			Container newContainer = null;
 			Container label = new Container(LabelElement.TAG);
 			switch (InputCheckBox.this.type) {
-			case INLINE:
-				container = label;
-				break;
-			default:
-				container = new Container();
-				container.append(label);
-				break;
+				case INLINE:
+					newContainer = label;
+					break;
+				default:
+					newContainer = new Container();
+					InputCheckBox.this.container.append(label);
+					break;
 			}
-			initWidget(container);
-			label.getElement().appendChild(checkboxElement);
-			label.getElement().appendChild(Document.get().createTextNode(" " + getChoiceRenderer().renderItem(value)));
-			StyleUtils.addStyle(container, InputCheckBox.this.type);
-			container.addDomHandler(this, ClickEvent.getType());
+			this.initWidget(newContainer);
+			label.getElement().appendChild(this.checkboxElement);
+			label.getElement().appendChild(
+					Document.get().createTextNode(
+							" " + InputCheckBox.this.getChoiceRenderer().renderItem(value)));
+			StyleUtils.addStyle(newContainer, InputCheckBox.this.type);
+			newContainer.addDomHandler(this, ClickEvent.getType());
 			InputCheckBox.this.itemsContainer.put(value, this);
 		}
 
 		@Override
 		public void onClick(ClickEvent event) {
-			InputCheckBox.this.getSelectionHandler().onItemClick(value);
+			InputCheckBox.this.getSelectionHandler().onItemClick(this.value);
 		}
 
 		public void setChecked(boolean checked) {
-			checkboxElement.setChecked(checked);
+			this.checkboxElement.setChecked(checked);
 		}
-
 	}
 
 	private ChoiceSelectionHandler<T, List<T>> selectionHandler = new MultiChoiceHandler();
@@ -153,15 +151,15 @@ public class InputCheckBox<T> extends AbstractInputChoice<T, List<T>> {
 
 	public InputCheckBox() {
 		super(new Container());
-		container = (Container) getWidget();
-		setMultiple(true);
-		endConstruct();
+		this.container = (Container) this.getWidget();
+		this.setMultiple(true);
+		this.endConstruct();
 	}
 
 	protected InputCheckBox(InputCheckBox<T> source) {
 		super(new Container(), source);
-		container = (Container) getWidget();
-		endConstruct();
+		this.container = (Container) this.getWidget();
+		this.endConstruct();
 	}
 
 	@Override
@@ -171,10 +169,10 @@ public class InputCheckBox<T> extends AbstractInputChoice<T, List<T>> {
 
 	@Override
 	protected void redrawInternal() {
-		container.clear();
-		itemsContainer.clear();
-		for (T item : getOrderedItems()) {
-			container.add(new CheckboxContainer(item));
+		this.container.clear();
+		this.itemsContainer.clear();
+		for (T item : this.getOrderedItems()) {
+			this.container.add(new CheckboxContainer(item));
 		}
 	}
 
@@ -184,7 +182,7 @@ public class InputCheckBox<T> extends AbstractInputChoice<T, List<T>> {
 
 	@Override
 	protected ChoiceRenderer<T> getChoiceRenderer() {
-		return choiceRenderer;
+		return this.choiceRenderer;
 	}
 
 	@Override
@@ -194,7 +192,7 @@ public class InputCheckBox<T> extends AbstractInputChoice<T, List<T>> {
 
 	@Override
 	protected ChoiceSelectionHandler<T, List<T>> getSelectionHandler() {
-		return selectionHandler;
+		return this.selectionHandler;
 	}
 
 	@Override

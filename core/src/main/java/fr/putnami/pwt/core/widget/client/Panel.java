@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -41,10 +39,7 @@ import fr.putnami.pwt.core.widget.client.helper.CollapseHelper;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
-public class Panel extends AbstractPanel implements
-CloneableWidget,
-HasOneWidget,
-HasDrawable,
+public class Panel extends AbstractPanel implements CloneableWidget, HasOneWidget, HasDrawable,
 HasCollapseHandlers {
 
 	private static final CssStyle STYLE_PANEL = new SimpleStyle("panel");
@@ -54,12 +49,8 @@ HasCollapseHandlers {
 	private static final CssStyle STYLE_FOOTER = new SimpleStyle("panel-footer");
 
 	public enum Color implements CssStyle {
-		DEFAULT("panel-default"),
-		PRIMARY("panel-primary"),
-		SUCCESS("panel-success"),
-		INFO("panel-info"),
-		WARNING("panel-warning"),
-		DANGER("panel-danger");
+		DEFAULT("panel-default"), PRIMARY("panel-primary"), SUCCESS("panel-success"), INFO("panel-info"), WARNING(
+				"panel-warning"), DANGER("panel-danger");
 
 		private final String style;
 
@@ -69,7 +60,7 @@ HasCollapseHandlers {
 
 		@Override
 		public String get() {
-			return style;
+			return this.style;
 		}
 	}
 
@@ -91,7 +82,7 @@ HasCollapseHandlers {
 
 	public Panel() {
 		super(DivElement.TAG);
-		endConstruct();
+		this.endConstruct();
 	}
 
 	protected Panel(Panel source) {
@@ -101,9 +92,9 @@ HasCollapseHandlers {
 		this.collapse = source.collapse;
 		this.color = source.color;
 
-		setHeader(WidgetUtils.cloneWidget(source.header));
-		setFooter(WidgetUtils.cloneWidget(source.footer));
-		setWidget(WidgetUtils.cloneWidget(source.getWidget()));
+		this.setHeader(WidgetUtils.cloneWidget(source.header));
+		this.setFooter(WidgetUtils.cloneWidget(source.footer));
+		this.setWidget(WidgetUtils.cloneWidget(source.getWidget()));
 
 		for (IsWidget command : source.commands) {
 			if (command instanceof CloneableWidget) {
@@ -111,14 +102,14 @@ HasCollapseHandlers {
 			}
 		}
 
-		endConstruct();
+		this.endConstruct();
 	}
 
 	private void endConstruct() {
-		StyleUtils.addStyle(this, STYLE_PANEL);
-		StyleUtils.addStyle(this, color);
+		StyleUtils.addStyle(this, Panel.STYLE_PANEL);
+		StyleUtils.addStyle(this, this.color);
 
-		redraw();
+		this.redraw();
 	}
 
 	@Override
@@ -129,58 +120,55 @@ HasCollapseHandlers {
 	@Override
 	public void add(IsWidget w) {
 		if (w instanceof Header) {
-			setHeader((Header) w);
-		}
-		else if (w instanceof Footer) {
-			setFooter((Footer) w);
-		}
-		else {
+			this.setHeader((Header) w);
+		} else if (w instanceof Footer) {
+			this.setFooter((Footer) w);
+		} else {
 			if (w instanceof HasHeader) {
-				setHeader(((HasHeader) w).getHeader());
+				this.setHeader(((HasHeader) w).getHeader());
 			}
 			if (w instanceof HasFooter) {
-				setFooter(((HasFooter) w).getFooter());
+				this.setFooter(((HasFooter) w).getFooter());
 			}
-			setWidget(w);
+			this.setWidget(w);
 		}
 	}
 
 	@UiChild(tagname = "command")
 	public void addCommand(IsWidget w) {
-		commands.add(w);
+		this.commands.add(w);
 	}
 
 	@Override
 	public Widget getWidget() {
-		if (bodyPanel == null) {
+		if (this.bodyPanel == null) {
 			return null;
 		}
-		return bodyPanel.getWidget();
+		return this.bodyPanel.getWidget();
 	}
 
 	@Override
 	public void setWidget(Widget w) {
-		setWidget((IsWidget) w);
+		this.setWidget((IsWidget) w);
 	}
 
 	@Override
 	public void setWidget(IsWidget w) {
 		if (w instanceof Table) {
-			table = (Table) w;
-			redraw();
-		}
-		else {
-			if (bodyPanel == null) {
-				bodyPanel = new OneWidgetPanel();
-				StyleUtils.addStyle(bodyPanel, STYLE_BODY);
-				redraw();
+			this.table = (Table) w;
+			this.redraw();
+		} else {
+			if (this.bodyPanel == null) {
+				this.bodyPanel = new OneWidgetPanel();
+				StyleUtils.addStyle(this.bodyPanel, Panel.STYLE_BODY);
+				this.redraw();
 			}
-			bodyPanel.setWidget(w);
+			this.bodyPanel.setWidget(w);
 		}
 	}
 
 	public Header getHeader() {
-		return header;
+		return this.header;
 	}
 
 	public void setHeader(Header header) {
@@ -189,12 +177,12 @@ HasCollapseHandlers {
 		}
 		assert this.header == null : "heading may only be set once";
 		this.header = header;
-		StyleUtils.addStyle(header, STYLE_HEADING);
-		redraw();
+		StyleUtils.addStyle(header, Panel.STYLE_HEADING);
+		this.redraw();
 	}
 
 	public Footer getFooter() {
-		return footer;
+		return this.footer;
 	}
 
 	public void setFooter(Footer footer) {
@@ -203,45 +191,44 @@ HasCollapseHandlers {
 		}
 		assert this.footer == null : "footer may only be set once";
 		this.footer = footer;
-		StyleUtils.addStyle(footer, STYLE_FOOTER);
-		redraw();
+		StyleUtils.addStyle(footer, Panel.STYLE_FOOTER);
+		this.redraw();
 	}
 
 	public Color getColor() {
-		return color;
+		return this.color;
 	}
 
 	public void setColor(Color color) {
 		this.color = color;
-		StyleUtils.addStyle(getElement(), this.color);
+		StyleUtils.addStyle(this.getElement(), this.color);
 	}
 
 	public void setCollapsible(boolean collapsible) {
 		this.collapsible = collapsible;
-		if (collapseHelper != null) {
+		if (this.collapseHelper != null) {
 			if (collapsible) {
 				this.collapseHelper.enable();
-			}
-			else {
+			} else {
 				this.collapseHelper.disable();
 			}
 		}
 	}
 
 	public Boolean getCollapse() {
-		return collapse;
+		return this.collapse;
 	}
 
 	public void setCollapse(boolean collapse) {
 		this.collapse = collapse;
-		if (collapseHelper != null && collapseHelper.isEnabled()) {
-			collapseHelper.doCollapse(collapse);
+		if (this.collapseHelper != null && this.collapseHelper.isEnabled()) {
+			this.collapseHelper.doCollapse(collapse);
 		}
 	}
 
 	public void toggleCollapse() {
-		if (collapseHelper != null && collapseHelper.isEnabled()) {
-			collapseHelper.toggleCollapse();
+		if (this.collapseHelper != null && this.collapseHelper.isEnabled()) {
+			this.collapseHelper.toggleCollapse();
 		}
 	}
 
@@ -252,39 +239,39 @@ HasCollapseHandlers {
 
 	@Override
 	public void redraw() {
-		clear();
+		this.clear();
 
-		append(header);
-		append(collapsePanel);
+		this.append(this.header);
+		this.append(this.collapsePanel);
 
-		collapsePanel.clear();
-		collapsePanel.append(bodyPanel);
-		collapsePanel.append(table);
-		collapsePanel.append(footer);
+		this.collapsePanel.clear();
+		this.collapsePanel.append(this.bodyPanel);
+		this.collapsePanel.append(this.table);
+		this.collapsePanel.append(this.footer);
 
-		if (header != null && commands.size() > 0) {
-			if (commandsContainer == null) {
-				commandsContainer = new Container();
-				StyleUtils
-				.addStyle(commandsContainer, STYLE_COMMANDS);
-				header.add(commandsContainer);
+		if (this.header != null && this.commands.size() > 0) {
+			if (this.commandsContainer == null) {
+				this.commandsContainer = new Container();
+				StyleUtils.addStyle(this.commandsContainer, Panel.STYLE_COMMANDS);
+				this.header.add(this.commandsContainer);
 			}
-			for (IsWidget command : commands) {
-				commandsContainer.add(command);
+			for (IsWidget command : this.commands) {
+				this.commandsContainer.add(command);
 			}
 		}
-		ensureCollapseHelper();
+		this.ensureCollapseHelper();
 	}
 
 	public CollapseHelper ensureCollapseHelper() {
-		if (header != null && collapseHelper == null) {
-			boolean initialCollapse = collapse != null ? collapse : false;
-			collapseHelper = CollapseHelper.apply(header, collapsePanel.getElement(), initialCollapse);
-			setCollapsible(collapsible);
-			if (collapse != null) {
-				setCollapse(collapse);
+		if (this.header != null && this.collapseHelper == null) {
+			boolean initialCollapse = this.collapse != null ? this.collapse : false;
+			this.collapseHelper =
+					CollapseHelper.apply(this.header, this.collapsePanel.getElement(), initialCollapse);
+			this.setCollapsible(this.collapsible);
+			if (this.collapse != null) {
+				this.setCollapse(this.collapse);
 			}
 		}
-		return collapseHelper;
+		return this.collapseHelper;
 	}
 }

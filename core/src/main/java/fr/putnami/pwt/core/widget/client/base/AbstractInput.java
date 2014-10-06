@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client.base;
 
@@ -102,21 +100,10 @@ import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public abstract class AbstractInput<I> extends AbstractComposite implements
-DirtyEvent.HasDirtyHandlers,
-EditorInput<I>,
-EditorLeaf,
-HasHtmlId,
-Focusable,
-HasValueChangeHandlers<I>,
-HasAllFocusHandlers,
-HasClickHandlers,
-HasDoubleClickHandlers,
-HasAllDragAndDropHandlers,
-HasAllGestureHandlers,
-HasAllKeyHandlers,
-HasAllMouseHandlers,
-HasAllTouchHandlers
-{
+DirtyEvent.HasDirtyHandlers, EditorInput<I>, EditorLeaf, HasHtmlId, Focusable,
+HasValueChangeHandlers<I>, HasAllFocusHandlers, HasClickHandlers, HasDoubleClickHandlers,
+HasAllDragAndDropHandlers, HasAllGestureHandlers, HasAllKeyHandlers, HasAllMouseHandlers,
+HasAllTouchHandlers {
 
 	public static final CssStyle STYLE_CONTROL = new SimpleStyle("form-control");
 
@@ -138,7 +125,7 @@ HasAllTouchHandlers
 	}
 
 	public AbstractInput(Widget widget) {
-		initWidget(widget);
+		this.initWidget(widget);
 	}
 
 	protected AbstractInput(Widget widget, AbstractInput<I> source) {
@@ -146,34 +133,34 @@ HasAllTouchHandlers
 		this.path = source.path;
 		this.htmlId = source.htmlId;
 		if (widget != null) {
-			initWidget(widget);
-			endCopy(source);
+			this.initWidget(widget);
+			this.endCopy(source);
 		}
 	}
 
 	protected void endCopy(AbstractInput<I> source) {
 		if (source.tabIndex != null) {
-			setTabIndex(source.tabIndex);
+			this.setTabIndex(source.tabIndex);
 		}
 		if (source.accessKey != null) {
-			setAccessKey(source.accessKey);
+			this.setAccessKey(source.accessKey);
 		}
 
 		if (source.validators != null) {
 			for (Validator<I> validator : source.validators) {
-				addValidator(validator);
+				this.addValidator(validator);
 			}
 		}
 	}
 
 	protected void endConstruct() {
-		setHtmlId(htmlId);
+		this.setHtmlId(this.htmlId);
 	}
 
 	@Override
 	protected void initWidget(Widget widget) {
 		super.initWidget(widget);
-		StyleUtils.addStyle(this, STYLE_CONTROL);
+		StyleUtils.addStyle(this, AbstractInput.STYLE_CONTROL);
 	}
 
 	@Override
@@ -190,14 +177,13 @@ HasAllTouchHandlers
 	public void setHtmlId(String htmlId) {
 		this.htmlId = htmlId;
 		if (htmlId != null) {
-			getElement().setId(htmlId);
+			this.getElement().setId(htmlId);
 		}
 	}
 
 	@Override
 	public String getHtmlId() {
 		return this.htmlId;
-
 	}
 
 	@Override
@@ -216,18 +202,19 @@ HasAllTouchHandlers
 
 	@Override
 	public boolean hasErrors() {
-		return errors != null && !errors.isEmpty();
+		return this.errors != null && !this.errors.isEmpty();
 	}
 
 	@Override
 	public Iterable<Error> getErrors() {
-		return errors == null ? Collections.<Error> emptyList() : Iterables.unmodifiableIterable(errors);
+		return this.errors == null ? Collections.<Error> emptyList() : Iterables
+				.unmodifiableIterable(this.errors);
 	}
 
 	protected void clearErrors() {
-		if (errors != null) {
-			errors.clear();
-			errors = null;
+		if (this.errors != null) {
+			this.errors.clear();
+			this.errors = null;
 		}
 	}
 
@@ -236,188 +223,200 @@ HasAllTouchHandlers
 			this.errors = Lists.newArrayList();
 		}
 		this.errors.add(error);
-
 	}
 
 	@Override
 	public void addValidator(Validator<I> validator) {
-		if (validators == null) {
-			validators = Lists.newArrayList();
+		if (this.validators == null) {
+			this.validators = Lists.newArrayList();
 		}
-		validators.add(validator);
+		this.validators.add(validator);
 	}
 
 	protected void validate(I value) {
-		Collection<Error> errors = ValidationUtils.validate(validators, this, value);
-		for (Error error : errors) {
-			addError(error);
+		Collection<Error> currentErrors = ValidationUtils.validate(this.validators, this, value);
+		for (Error error : currentErrors) {
+			this.addError(error);
 		}
 	}
 
 	@Override
 	public void setFocus(boolean focused) {
 		if (focused) {
-			FOCUS_IMPL.focus(getElement());
-		}
-		else {
-			FOCUS_IMPL.blur(getElement());
+			AbstractInput.FOCUS_IMPL.focus(this.getElement());
+		} else {
+			AbstractInput.FOCUS_IMPL.blur(this.getElement());
 		}
 	}
 
 	@Override
 	public void setTabIndex(int index) {
 		this.tabIndex = index;
-		FOCUS_IMPL.setTabIndex(getElement(), index);
+		AbstractInput.FOCUS_IMPL.setTabIndex(this.getElement(), index);
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addBlurHandler(BlurHandler handler) {
-		return addDomHandler(handler, BlurEvent.getType());
+		return this.addDomHandler(handler, BlurEvent.getType());
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addClickHandler(ClickHandler handler) {
-		return addDomHandler(handler, ClickEvent.getType());
+		return this.addDomHandler(handler, ClickEvent.getType());
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addDoubleClickHandler(DoubleClickHandler handler) {
-		return addDomHandler(handler, DoubleClickEvent.getType());
+	public com.google.gwt.event.shared.HandlerRegistration addDoubleClickHandler(
+			DoubleClickHandler handler) {
+		return this.addDomHandler(handler, DoubleClickEvent.getType());
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addDragEndHandler(DragEndHandler handler) {
-		return addBitlessDomHandler(handler, DragEndEvent.getType());
+		return this.addBitlessDomHandler(handler, DragEndEvent.getType());
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addDragEnterHandler(DragEnterHandler handler) {
-		return addBitlessDomHandler(handler, DragEnterEvent.getType());
+	public com.google.gwt.event.shared.HandlerRegistration addDragEnterHandler(
+			DragEnterHandler handler) {
+		return this.addBitlessDomHandler(handler, DragEnterEvent.getType());
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addDragHandler(DragHandler handler) {
-		return addBitlessDomHandler(handler, DragEvent.getType());
+		return this.addBitlessDomHandler(handler, DragEvent.getType());
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addDragLeaveHandler(DragLeaveHandler handler) {
-		return addBitlessDomHandler(handler, DragLeaveEvent.getType());
+	public com.google.gwt.event.shared.HandlerRegistration addDragLeaveHandler(
+			DragLeaveHandler handler) {
+		return this.addBitlessDomHandler(handler, DragLeaveEvent.getType());
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addDragOverHandler(DragOverHandler handler) {
-		return addBitlessDomHandler(handler, DragOverEvent.getType());
+		return this.addBitlessDomHandler(handler, DragOverEvent.getType());
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addDragStartHandler(DragStartHandler handler) {
-		return addBitlessDomHandler(handler, DragStartEvent.getType());
+	public com.google.gwt.event.shared.HandlerRegistration addDragStartHandler(
+			DragStartHandler handler) {
+		return this.addBitlessDomHandler(handler, DragStartEvent.getType());
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addDropHandler(DropHandler handler) {
-		return addBitlessDomHandler(handler, DropEvent.getType());
+		return this.addBitlessDomHandler(handler, DropEvent.getType());
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addFocusHandler(FocusHandler handler) {
-		return addDomHandler(handler, FocusEvent.getType());
+		return this.addDomHandler(handler, FocusEvent.getType());
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addGestureChangeHandler(GestureChangeHandler handler) {
-		return addDomHandler(handler, GestureChangeEvent.getType());
+	public com.google.gwt.event.shared.HandlerRegistration addGestureChangeHandler(
+			GestureChangeHandler handler) {
+		return this.addDomHandler(handler, GestureChangeEvent.getType());
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addGestureEndHandler(GestureEndHandler handler) {
-		return addDomHandler(handler, GestureEndEvent.getType());
+	public com.google.gwt.event.shared.HandlerRegistration addGestureEndHandler(
+			GestureEndHandler handler) {
+		return this.addDomHandler(handler, GestureEndEvent.getType());
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addGestureStartHandler(GestureStartHandler handler) {
-		return addDomHandler(handler, GestureStartEvent.getType());
+	public com.google.gwt.event.shared.HandlerRegistration addGestureStartHandler(
+			GestureStartHandler handler) {
+		return this.addDomHandler(handler, GestureStartEvent.getType());
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addKeyDownHandler(KeyDownHandler handler) {
-		return addDomHandler(handler, KeyDownEvent.getType());
+		return this.addDomHandler(handler, KeyDownEvent.getType());
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addKeyPressHandler(KeyPressHandler handler) {
-		return addDomHandler(handler, KeyPressEvent.getType());
+		return this.addDomHandler(handler, KeyPressEvent.getType());
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addKeyUpHandler(KeyUpHandler handler) {
-		return addDomHandler(handler, KeyUpEvent.getType());
+		return this.addDomHandler(handler, KeyUpEvent.getType());
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addMouseDownHandler(MouseDownHandler handler) {
-		return addDomHandler(handler, MouseDownEvent.getType());
+	public com.google.gwt.event.shared.HandlerRegistration addMouseDownHandler(
+			MouseDownHandler handler) {
+		return this.addDomHandler(handler, MouseDownEvent.getType());
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addMouseMoveHandler(MouseMoveHandler handler) {
-		return addDomHandler(handler, MouseMoveEvent.getType());
+	public com.google.gwt.event.shared.HandlerRegistration addMouseMoveHandler(
+			MouseMoveHandler handler) {
+		return this.addDomHandler(handler, MouseMoveEvent.getType());
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addMouseOutHandler(MouseOutHandler handler) {
-		return addDomHandler(handler, MouseOutEvent.getType());
+		return this.addDomHandler(handler, MouseOutEvent.getType());
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addMouseOverHandler(MouseOverHandler handler) {
-		return addDomHandler(handler, MouseOverEvent.getType());
+	public com.google.gwt.event.shared.HandlerRegistration addMouseOverHandler(
+			MouseOverHandler handler) {
+		return this.addDomHandler(handler, MouseOverEvent.getType());
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addMouseUpHandler(MouseUpHandler handler) {
-		return addDomHandler(handler, MouseUpEvent.getType());
+		return this.addDomHandler(handler, MouseUpEvent.getType());
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addMouseWheelHandler(MouseWheelHandler handler) {
-		return addDomHandler(handler, MouseWheelEvent.getType());
+	public com.google.gwt.event.shared.HandlerRegistration addMouseWheelHandler(
+			MouseWheelHandler handler) {
+		return this.addDomHandler(handler, MouseWheelEvent.getType());
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addTouchCancelHandler(TouchCancelHandler handler) {
-		return addDomHandler(handler, TouchCancelEvent.getType());
+	public com.google.gwt.event.shared.HandlerRegistration addTouchCancelHandler(
+			TouchCancelHandler handler) {
+		return this.addDomHandler(handler, TouchCancelEvent.getType());
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addTouchEndHandler(TouchEndHandler handler) {
-		return addDomHandler(handler, TouchEndEvent.getType());
+		return this.addDomHandler(handler, TouchEndEvent.getType());
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addTouchMoveHandler(TouchMoveHandler handler) {
-		return addDomHandler(handler, TouchMoveEvent.getType());
+	public com.google.gwt.event.shared.HandlerRegistration addTouchMoveHandler(
+			TouchMoveHandler handler) {
+		return this.addDomHandler(handler, TouchMoveEvent.getType());
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addTouchStartHandler(TouchStartHandler handler) {
-		return addDomHandler(handler, TouchStartEvent.getType());
+	public com.google.gwt.event.shared.HandlerRegistration addTouchStartHandler(
+			TouchStartHandler handler) {
+		return this.addDomHandler(handler, TouchStartEvent.getType());
 	}
 
 	@Override
 	public int getTabIndex() {
-		return FOCUS_IMPL.getTabIndex(getElement());
+		return AbstractInput.FOCUS_IMPL.getTabIndex(this.getElement());
 	}
 
 	@Override
 	public void setAccessKey(char key) {
 		this.accessKey = key;
-		FOCUS_IMPL.setAccessKey(getElement(), key);
+		AbstractInput.FOCUS_IMPL.setAccessKey(this.getElement(), key);
 	}
 
 	public char getAccessKey() {
-		return accessKey;
+		return this.accessKey;
 	}
 
 }

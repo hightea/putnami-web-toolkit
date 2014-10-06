@@ -19,9 +19,9 @@ public abstract class ViewDecorator implements AcceptsOneWidget, View {
 
 	@Override
 	public Widget asWidget() {
-		if (decoratorWidget == null) {
+		if (this.decoratorWidget == null) {
 			throw new IllegalStateException("ViewDecorator.initWidget() need to be called");
 		}
-		return decoratorWidget.asWidget();
+		return this.decoratorWidget.asWidget();
 	}
 }

@@ -1,19 +1,21 @@
 package fr.putnami.pwt.core.widget.client.util;
+
 public class UUID {
-	private static final char[] CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".toCharArray();
+	private static final char[] CHARS =
+			"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".toCharArray();
 
 	public static String uuid(int len) {
-		return uuid(len, CHARS.length);
+		return UUID.uuid(len, UUID.CHARS.length);
 	}
 
 	public static String uuid(int len, int radix) {
-		if (radix > CHARS.length) {
+		if (radix > UUID.CHARS.length) {
 			throw new IllegalArgumentException();
 		}
 		char[] uuid = new char[len];
 		// Compact form
 		for (int i = 0; i < len; i++) {
-			uuid[i] = CHARS[randomInt(radix)];
+			uuid[i] = UUID.CHARS[UUID.randomInt(radix)];
 		}
 		return new String(uuid);
 	}
@@ -27,8 +29,8 @@ public class UUID {
 
 		for (int i = 0; i < 36; i++) {
 			if (uuid[i] == 0) {
-				r = randomInt(16);
-				uuid[i] = CHARS[i == 19 ? r & 0x3 | 0x8 : r & 0xf];
+				r = UUID.randomInt(16);
+				uuid[i] = UUID.CHARS[i == 19 ? r & 0x3 | 0x8 : r & 0xf];
 			}
 		}
 		return new String(uuid);

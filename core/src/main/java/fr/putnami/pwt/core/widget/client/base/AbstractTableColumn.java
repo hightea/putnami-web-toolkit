@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client.base;
 
@@ -28,15 +26,11 @@ import fr.putnami.pwt.core.model.client.base.HasReadonly;
 import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.TableTH;
 
-public abstract class AbstractTableColumn<T> implements
-HasReadonly,
-IsWidget,
-HasResponsiveVisibility,
-CloneableWidget {
+public abstract class AbstractTableColumn<T> implements HasReadonly, IsWidget,
+HasResponsiveVisibility, CloneableWidget {
 
 	public enum Type implements CssStyle {
-		DEFAULT(null),
-		ACTION("table-action-column");
+		DEFAULT(null), ACTION("table-action-column");
 
 		private final String style;
 
@@ -46,15 +40,12 @@ CloneableWidget {
 
 		@Override
 		public String get() {
-			return style;
+			return this.style;
 		}
 	}
 
 	public static enum ColumnVisibility {
-		VISIBLE,
-		HIDE,
-		HIDE_READONLY,
-		VISIBLE_READONLY;
+		VISIBLE, HIDE, HIDE_READONLY, VISIBLE_READONLY;
 	}
 
 	private Collection<AbstractTableColumnAspect<T>> aspects;
@@ -73,7 +64,6 @@ CloneableWidget {
 	private ColumnVisibility columnVisibility = ColumnVisibility.VISIBLE;
 
 	public AbstractTableColumn() {
-
 	}
 
 	protected AbstractTableColumn(AbstractTableColumn<T> source) {
@@ -85,7 +75,7 @@ CloneableWidget {
 
 	@Override
 	public Boolean getReadonly() {
-		return readonly;
+		return this.readonly;
 	}
 
 	@Override
@@ -98,24 +88,25 @@ CloneableWidget {
 	}
 
 	public Integer getColspan() {
-		return colspan;
+		return this.colspan;
 	}
 
 	public ColumnVisibility getColumnVisibility() {
-		return columnVisibility;
+		return this.columnVisibility;
 	}
 
-	public void setColumnVisibility(ColumnVisibility ColumnVisibility) {
-		this.columnVisibility = ColumnVisibility;
+	public void setColumnVisibility(ColumnVisibility columnVisibility) {
+		this.columnVisibility = columnVisibility;
 	}
 
 	public Collection<AbstractTableColumnAspect<T>> getAspects() {
-		return aspects == null ? Collections.EMPTY_LIST : Collections.unmodifiableCollection(aspects);
+		return this.aspects == null ? Collections.EMPTY_LIST : Collections
+				.unmodifiableCollection(this.aspects);
 	}
 
 	public <A extends AbstractTableColumnAspect<T>> A getAspect(Class<A> aspectClass) {
-		if (aspects != null) {
-			for (AbstractTableColumnAspect<T> aspect : aspects) {
+		if (this.aspects != null) {
+			for (AbstractTableColumnAspect<T> aspect : this.aspects) {
 				if (aspectClass != null && aspectClass.equals(aspect.getClass())) {
 					return (A) aspect;
 				}
@@ -125,15 +116,16 @@ CloneableWidget {
 	}
 
 	public void addAspect(AbstractTableColumnAspect<T> aspect) {
-		if (aspects == null) {
-			aspects = Lists.newArrayList();
+		if (this.aspects == null) {
+			this.aspects = Lists.newArrayList();
 		}
-		aspects.add(aspect);
+		this.aspects.add(aspect);
 	}
 
 	@Override
 	public Widget asWidget() {
-		throw new UnsupportedOperationException("An AbstractTableColumn cannot be use as a widget. It exists for use in UiBinder Only");
+		throw new UnsupportedOperationException(
+				"An AbstractTableColumn cannot be use as a widget. It exists for use in UiBinder Only");
 	}
 
 	@Override
@@ -162,7 +154,7 @@ CloneableWidget {
 	}
 
 	public Type getType() {
-		return type;
+		return this.type;
 	}
 
 	public void setType(Type type) {
@@ -170,27 +162,27 @@ CloneableWidget {
 	}
 
 	public final AbstractTableCell<T> createBodyCell() {
-		AbstractTableCell<T> cell = doCreateBodyCell();
-		setResponsiveVisibility(cell);
-		cell.setReadonlyVisibility(columnVisibility);
-		cell.setType(type);
+		AbstractTableCell<T> cell = this.doCreateBodyCell();
+		this.setResponsiveVisibility(cell);
+		cell.setReadonlyVisibility(this.columnVisibility);
+		cell.setType(this.type);
 		return cell;
 	}
 
 	public final TableTH<T> createHeaderCell() {
-		TableTH<T> cell = doCreateHeaderCell();
-		setResponsiveVisibility(cell);
-		cell.setType(type);
-		cell.setReadonlyVisibility(columnVisibility);
+		TableTH<T> cell = this.doCreateHeaderCell();
+		this.setResponsiveVisibility(cell);
+		cell.setType(this.type);
+		cell.setReadonlyVisibility(this.columnVisibility);
 		return cell;
 	}
 
 	private void setResponsiveVisibility(HasResponsiveVisibility target) {
-		target.setXsVisibility(xsVisibility);
-		target.setSmVisibility(smVisibility);
-		target.setMdVisibility(mdVisibility);
-		target.setLgVisibility(lgVisibility);
-		target.setPrintVisibility(printVisibility);
+		target.setXsVisibility(this.xsVisibility);
+		target.setSmVisibility(this.smVisibility);
+		target.setMdVisibility(this.mdVisibility);
+		target.setLgVisibility(this.lgVisibility);
+		target.setPrintVisibility(this.printVisibility);
 	}
 
 	protected abstract AbstractTableCell<T> doCreateBodyCell();

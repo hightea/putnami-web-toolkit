@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.error.client.widget;
 
@@ -40,24 +38,26 @@ public class SimpleErrorDisplayer implements ErrorDisplayer {
 
 	@Override
 	public void display(Throwable error, Severity severity) {
-		String message = getMessage(error, MESSAGE_SUFFIX, error.getMessage());
-		display(message, error, severity);
+		String message =
+				this.getMessage(error, SimpleErrorDisplayer.MESSAGE_SUFFIX, error.getMessage());
+		this.display(message, error, severity);
 	}
 
 	@Override
 	public void display(String message, Throwable error, Severity severity) {
-		String title = getMessage(error, TITLE_SUFFIX, error.getClass().getSimpleName());
-		display(title, message, error, severity);
+		String title =
+				this.getMessage(error, SimpleErrorDisplayer.TITLE_SUFFIX, error.getClass().getSimpleName());
+		this.display(title, message, error, severity);
 	}
 
 	@Override
 	public void display(String title, String message, Throwable error, Severity severity) {
-		display(title, message, getDetailString(error), severity);
+		this.display(title, message, this.getDetailString(error), severity);
 	}
 
 	@Override
 	public void display(String title, String message, String details, Severity severity) {
-		display.addErrorAlert(new ErrorAlert(title, message, details, severity));
+		this.display.addErrorAlert(new ErrorAlert(title, message, details, severity));
 	}
 
 	private String getDetailString(Throwable error) {
@@ -65,8 +65,7 @@ public class SimpleErrorDisplayer implements ErrorDisplayer {
 		if (error instanceof CommandException) {
 			sb.append(((CommandException) error).getCauseMessage()).append(" : \n");
 			sb.append(((CommandException) error).getCauseStackTrace());
-		}
-		else {
+		} else {
 			sb.append(error.getMessage()).append(" : \n");
 			error.printStackTrace(new StackTracePrintStream(sb));
 		}
@@ -74,7 +73,7 @@ public class SimpleErrorDisplayer implements ErrorDisplayer {
 	}
 
 	private String getMessage(Throwable error, String suffix, String defaultMessage) {
-		if (constants == null) {
+		if (this.constants == null) {
 			return defaultMessage;
 		}
 		try {
@@ -83,9 +82,8 @@ public class SimpleErrorDisplayer implements ErrorDisplayer {
 				className = ((CommandException) error).getCauseSimpleClassName();
 			}
 			String methodName = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, className) + suffix;
-			return constants.getString(methodName);
-		}
-		catch (MissingResourceException exc) {
+			return this.constants.getString(methodName);
+		} catch (MissingResourceException exc) {
 			return defaultMessage;
 		}
 	}

@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.doc.client.page.sample.addressbook;
 
@@ -97,20 +95,20 @@ public class AddressBookPage extends Composite implements View, HasSources {
 	private final Multimap<String, String> sources = LinkedHashMultimap.create();
 
 	public AddressBookPage() {
-		sources.put(VIEW_PANEL, "addressbook/AddressBookPage.ui.xml");
-		sources.put(VIEW_PANEL, "addressbook/AddressBookPage.java");
-		sources.put(SERVICE_PANEL, "service/ContactService.java");
-		sources.put(DOMAIN_PANEL, "domain/Person.java");
-		sources.put(DOMAIN_PANEL, "domain/Contact.java");
-		sources.put(DOMAIN_PANEL, "domain/Address.java");
-		sources.put(DOMAIN_PANEL, "domain/Gender.java");
-		sources.put(DOMAIN_PANEL, "domain/Group.java");
-		sources.put(CONSTANTS_PANEL, "constants/SampleConstants.java");
+		this.sources.put(HasSources.VIEW_PANEL, "addressbook/AddressBookPage.ui.xml");
+		this.sources.put(HasSources.VIEW_PANEL, "addressbook/AddressBookPage.java");
+		this.sources.put(HasSources.SERVICE_PANEL, "service/ContactService.java");
+		this.sources.put(HasSources.DOMAIN_PANEL, "domain/Person.java");
+		this.sources.put(HasSources.DOMAIN_PANEL, "domain/Contact.java");
+		this.sources.put(HasSources.DOMAIN_PANEL, "domain/Address.java");
+		this.sources.put(HasSources.DOMAIN_PANEL, "domain/Gender.java");
+		this.sources.put(HasSources.DOMAIN_PANEL, "domain/Group.java");
+		this.sources.put(HasSources.CONSTANTS_PANEL, "constants/SampleConstants.java");
 	}
 
 	@Override
 	public Multimap<String, String> getSourcesMap() {
-		return sources;
+		return this.sources;
 	}
 
 	@PresentHandler
@@ -122,39 +120,39 @@ public class AddressBookPage extends Composite implements View, HasSources {
 		for (int i = 1; i < groups.size(); i++) {
 			groupsItems.add(groups.get(i).getName());
 		}
-		groupSelect.setItems(groupsItems);
-		groupsList.edit(groups);
-		displayGroup(groups.get(0));
+		this.groupSelect.setItems(groupsItems);
+		this.groupsList.edit(groups);
+		this.displayGroup(groups.get(0));
 	}
 
 	@UiHandler("newContactButton")
 	void onNewContact(ButtonEvent event) {
-		editContact(new Contact());
+		this.editContact(new Contact());
 	}
 
 	@UiHandler("editContactButton")
 	void onEditContact(ButtonEvent event) {
-		editContact(selected);
+		this.editContact(this.selected);
 	}
 
 	@UiHandler("saveContactButton")
 	void onSaveContact(ButtonEvent event) {
-		Contact contactToSave = contactDetails.flush();
-		if (!contactDetails.hasError()) {
+		Contact contactToSave = this.contactDetails.flush();
+		if (!this.contactDetails.hasError()) {
 			ContactService.get().savePerson(contactToSave);
-			presentAddressBook(null);
+			this.presentAddressBook(null);
 		}
 	}
 
 	@UiHandler("cancelContactButton")
 	void onCancelContact(ButtonEvent event) {
-		viewContact(selected);
+		this.viewContact(this.selected);
 	}
 
 	@UiHandler("searchResetButton")
 	void onResetSearch(ButtonEvent event) {
-		searchBox.edit(null);
-		displayList(displayedGroup.getMembers());
+		this.searchBox.edit(null);
+		this.displayList(this.displayedGroup.getMembers());
 	}
 
 	@UiHandler("searchBox")
@@ -166,18 +164,19 @@ public class AddressBookPage extends Composite implements View, HasSources {
 			public void execute() {
 				String query = source.flush();
 				if (query == null || query.length() == 0) {
-					displayList(displayedList);
-				}
-				else {
+					AddressBookPage.this.displayList(AddressBookPage.this.displayedList);
+				} else {
 					final String queryToCompare = query.toLowerCase().trim();
-					Iterable<Contact> filteredIteable = Iterables.filter(displayedList, new Predicate<Contact>() {
+					Iterable<Contact> filteredIteable =
+							Iterables.filter(AddressBookPage.this.displayedList, new Predicate<Contact>() {
 
-						@Override
-						public boolean apply(Contact contact) {
-							return contact.getName() != null && contact.getName().toLowerCase().contains(queryToCompare);
-						}
-					});
-					displayList(Lists.newArrayList(filteredIteable));
+								@Override
+								public boolean apply(Contact contact) {
+									return contact.getName() != null
+											&& contact.getName().toLowerCase().contains(queryToCompare);
+								}
+							});
+					AddressBookPage.this.displayList(Lists.newArrayList(filteredIteable));
 				}
 			}
 		});
@@ -186,63 +185,63 @@ public class AddressBookPage extends Composite implements View, HasSources {
 	@UiHandler("selectGroupAnchor")
 	void onClickGroupAnchor(ClickEvent event) {
 		Anchor<Group> anchor = (Anchor<Group>) event.getSource();
-		displayGroup(anchor.getValue());
+		this.displayGroup(anchor.getValue());
 	}
 
 	@UiHandler("openContactAnchor")
 	void onClickContactAnchor(ClickEvent event) {
 		Anchor<Contact> anchor = (Anchor<Contact>) event.getSource();
-		selectContact(anchor.getValue());
+		this.selectContact(anchor.getValue());
 	}
 
 	@UiHandler("contactDetails")
 	void onSaveContact(DirtyEvent event) {
-		saveContactButton.setDisabled(false);
+		this.saveContactButton.setDisabled(false);
 	}
 
 	private void displayGroup(Group group) {
 		this.displayedGroup = group;
-		displayList(group.getMembers());
+		this.displayList(group.getMembers());
 	}
 
 	private void displayList(List<Contact> contact) {
 		this.displayedList = contact;
-		contactsList.edit(Lists.<Contact> newArrayList(contact));
-		if (displayedList.size() > 0) {
-			viewContact(displayedList.get(0));
+		this.contactsList.edit(Lists.<Contact> newArrayList(contact));
+		if (this.displayedList.size() > 0) {
+			this.viewContact(this.displayedList.get(0));
 		}
 	}
 
 	private void selectContact(Contact contact) {
 		if (this.selected != contact) {
-			viewContact(contact);
+			this.viewContact(contact);
 		}
 	}
 
 	private void viewContact(Contact collaborator) {
-		selected = collaborator;
-		contactDetails.setReadonly(true);
-		contactDetails.edit(collaborator);
+		this.selected = collaborator;
+		this.contactDetails.setReadonly(true);
+		this.contactDetails.edit(collaborator);
 
-		editContactButton.setDisabled(false);
+		this.editContactButton.setDisabled(false);
 
-		saveContactButton.setDisabled(true);
-		cancelContactButton.setDisabled(true);
+		this.saveContactButton.setDisabled(true);
+		this.cancelContactButton.setDisabled(true);
 
-		editNameRow.setVisible(false);
-		viewNameRow.setVisible(true);
+		this.editNameRow.setVisible(false);
+		this.viewNameRow.setVisible(true);
 	}
 
 	private void editContact(Contact collaborator) {
-		contactDetails.setReadonly(false);
-		contactDetails.edit(collaborator);
+		this.contactDetails.setReadonly(false);
+		this.contactDetails.edit(collaborator);
 
-		editContactButton.setDisabled(true);
+		this.editContactButton.setDisabled(true);
 
-		saveContactButton.setDisabled(false);
-		cancelContactButton.setDisabled(false);
+		this.saveContactButton.setDisabled(false);
+		this.cancelContactButton.setDisabled(false);
 
-		editNameRow.setVisible(true);
-		viewNameRow.setVisible(false);
+		this.editNameRow.setVisible(true);
+		this.viewNameRow.setVisible(false);
 	}
 }

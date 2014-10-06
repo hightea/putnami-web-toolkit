@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client.mask;
 
@@ -47,7 +45,7 @@ public class IntegerTokenHelper extends TokenHelper {
 		if (maxLenght != -1) {
 			this.maxLenght = maxLenght;
 		}
-		setFormater(format);
+		this.setFormater(format);
 	}
 
 	public void setDefaultValue(int defaultValue) {
@@ -63,7 +61,7 @@ public class IntegerTokenHelper extends TokenHelper {
 	}
 
 	public int getMaxLenght() {
-		return maxLenght;
+		return this.maxLenght;
 	}
 
 	public void setMaxLenght(int maxLenght) {
@@ -77,18 +75,17 @@ public class IntegerTokenHelper extends TokenHelper {
 	@Override
 	public void reset() {
 		super.reset();
-		characters.clear();
+		this.characters.clear();
 	}
 
 	@Override
 	public void setToken(String token) {
 		super.setToken(token);
-		value = defaultValue;
+		this.value = this.defaultValue;
 		if (token != null && token.length() > 0) {
 			try {
-				value = Integer.valueOf(token);
-			}
-			catch (NumberFormatException e) {
+				this.value = Integer.valueOf(token);
+			} catch (NumberFormatException e) {
 			}
 		}
 	}
@@ -96,79 +93,77 @@ public class IntegerTokenHelper extends TokenHelper {
 	@Override
 	protected String flush() {
 		if (this.token == null) {
-			return placeHolder;
+			return this.placeHolder;
 		}
-		return token;
+		return this.token;
 	}
 
 	private void setValue(int value) {
 		this.value = value;
-		if (this.value > max) {
-			this.value = max;
+		if (this.value > this.max) {
+			this.value = this.max;
+		} else if (this.value < this.min) {
+			this.value = this.min;
 		}
-		else if (this.value < min) {
-			this.value = min;
-		}
-		this.token = formater.format(this.value);
+		this.token = this.formater.format(this.value);
 	}
 
 	@Override
 	protected void focus(boolean forward) {
-		characters.clear();
+		this.characters.clear();
 	}
 
 	@Override
 	protected boolean handleKeyDown(int keyDown) {
 		switch (keyDown) {
-		case KeyCodes.KEY_DOWN:
-			if (value > 0) {
-				setValue(--value);
-			}
-			break;
-		case KeyCodes.KEY_UP:
-			setValue(++value);
-			break;
-		default:
-			break;
+			case KeyCodes.KEY_DOWN:
+				if (this.value > 0) {
+					this.setValue(--this.value);
+				}
+				break;
+			case KeyCodes.KEY_UP:
+				this.setValue(++this.value);
+				break;
+			default:
+				break;
 		}
 		return true;
 	}
 
 	@Override
 	protected boolean handleKeyPress(char charPressed) {
-		if (characters.size() >= maxLenght) {
+		if (this.characters.size() >= this.maxLenght) {
 			return false;
 		}
 		switch (charPressed) {
-		case '0':
-			if (characters.isEmpty()) {
+			case '0':
+				if (this.characters.isEmpty()) {
+					return true;
+				}
+			case '1':
+			case '2':
+			case '3':
+			case '4':
+			case '5':
+			case '6':
+			case '7':
+			case '8':
+			case '9':
+				this.characters.add(charPressed);
+				StringBuffer sb = new StringBuffer();
+				for (char c : this.characters) {
+					sb.append(c);
+				}
+				int val = Integer.valueOf(sb.toString());
+				if (val <= this.max && val >= this.min) {
+					this.setValue(val);
+				} else {
+					this.characters.remove(this.characters.size() - 1);
+					return false;
+				}
 				return true;
-			}
-		case '1':
-		case '2':
-		case '3':
-		case '4':
-		case '5':
-		case '6':
-		case '7':
-		case '8':
-		case '9':
-			characters.add(charPressed);
-			StringBuffer sb = new StringBuffer();
-			for (char c : characters) {
-				sb.append(c);
-			}
-			int value = Integer.valueOf(sb.toString());
-			if (value <= max && value >= min) {
-				setValue(value);
-			}
-			else {
-				characters.remove(characters.size() - 1);
+			default:
 				return false;
-			}
-			return true;
-		default:
-			return false;
 		}
 	}
 }

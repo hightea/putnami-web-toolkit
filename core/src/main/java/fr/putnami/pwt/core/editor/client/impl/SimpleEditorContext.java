@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.editor.client.impl;
 
@@ -37,8 +35,8 @@ public class SimpleEditorContext<E extends Editor> implements Context<E> {
 	private final Path path;
 	private final E editor;
 
-	public <A, B extends Editor> SimpleEditorContext(Driver<?> driver, Context<?> parentContext, E editor,
-			Path path) {
+	public <A, B extends Editor> SimpleEditorContext(Driver<?> driver, Context<?> parentContext,
+			E editor, Path path) {
 		this.driver = driver;
 		this.parentContext = parentContext;
 		this.path = path;
@@ -47,12 +45,12 @@ public class SimpleEditorContext<E extends Editor> implements Context<E> {
 
 	@Override
 	public boolean isRootContext() {
-		return driver.getRootEditor() == editor;
+		return this.driver.getRootEditor() == this.editor;
 	}
 
 	@Override
 	public <D extends Driver<?>> D getDriver() {
-		return (D) driver;
+		return (D) this.driver;
 	}
 
 	@Override
@@ -77,13 +75,13 @@ public class SimpleEditorContext<E extends Editor> implements Context<E> {
 
 	@Override
 	public int hashCode() {
-		return Objects.hashCode(editor);
+		return Objects.hashCode(this.editor);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof SimpleEditorContext) {
-			return Objects.equal(editor, ((SimpleEditorContext) obj).editor);
+			return Objects.equal(this.editor, ((SimpleEditorContext) obj).editor);
 		}
 		return false;
 	}

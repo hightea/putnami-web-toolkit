@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client.base;
 
@@ -23,18 +21,12 @@ import com.google.gwt.user.client.ui.HasText;
 import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public abstract class AbstractTextOutput<T> extends AbstractOutput<T> implements
-		HasText {
+public abstract class AbstractTextOutput<T> extends AbstractOutput<T> implements HasText {
 
 	public enum Style implements CssStyle {
-		DEFAULT(null),
-		LABEL("label label-default"),
-		LABEL_PRIMARY("label label-primary"),
-		LABEL_SUCCESS("label label-success"),
-		LABEL_INFO("label label-info"),
-		LABEL_WARNING("label label-warning"),
-		LABEL_DANGER("label label-danger"),
-		BADGE("badge");
+		DEFAULT(null), LABEL("label label-default"), LABEL_PRIMARY("label label-primary"), LABEL_SUCCESS(
+				"label label-success"), LABEL_INFO("label label-info"), LABEL_WARNING("label label-warning"), LABEL_DANGER(
+						"label label-danger"), BADGE("badge");
 
 		private final String style;
 
@@ -44,7 +36,7 @@ public abstract class AbstractTextOutput<T> extends AbstractOutput<T> implements
 
 		@Override
 		public String get() {
-			return style;
+			return this.style;
 		}
 	}
 
@@ -59,29 +51,29 @@ public abstract class AbstractTextOutput<T> extends AbstractOutput<T> implements
 
 	protected AbstractTextOutput(AbstractTextOutput<T> source) {
 		super(source);
-		renderer = source.renderer;
-		style = source.style;
-		text = source.text;
+		this.renderer = source.renderer;
+		this.style = source.style;
+		this.text = source.text;
 	}
 
 	@Override
 	protected void ensureElement(Element element) {
-		if (text != null) {
-			setText(text);
+		if (this.text != null) {
+			this.setText(this.text);
 		}
-		setStyle(style);
+		this.setStyle(this.style);
 	}
 
 	public void setRenderer(Renderer<T> renderer) {
 		this.renderer = renderer;
 		if (renderer != null) {
-			setText(renderer.render(getValue()));
+			this.setText(renderer.render(this.getValue()));
 		}
 	}
 
 	@Override
 	protected void renderValue(T value) {
-		setText(renderer.render(value));
+		this.setText(this.renderer.render(value));
 	}
 
 	@Override
@@ -92,19 +84,19 @@ public abstract class AbstractTextOutput<T> extends AbstractOutput<T> implements
 	@Override
 	public void setText(String text) {
 		this.text = text;
-		if (elementExists()) {
-			getElement().setInnerText(text);
+		if (this.elementExists()) {
+			this.getElement().setInnerText(text);
 		}
 	}
 
 	public Style getStyle() {
-		return style;
+		return this.style;
 	}
 
 	public void setStyle(Style style) {
 		this.style = style;
-		if (elementExists()) {
-			StyleUtils.addStyle(getElement(), style);
+		if (this.elementExists()) {
+			StyleUtils.addStyle(this.getElement(), style);
 		}
 	}
 

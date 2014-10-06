@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client.base;
 
@@ -52,27 +50,14 @@ import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
-public abstract class AbstractForm<T> extends AbstractHTMLPanel implements
-EditorLeaf,
-EditorModel<T>,
-EditorOutput<T>,
-EditorInput<T>,
-HasReadonly,
-HasDrawable,
-HasDriver<T, ModelDriver<T>>,
-HasFormType,
-HasDirtyHandlers,
-HasFlushSuccessHandlers,
-HasFlushErrorHandlers,
-HasResetDisplayHandlers,
-HasDataValidationHandlers
-{
+public abstract class AbstractForm<T> extends AbstractHTMLPanel implements EditorLeaf,
+EditorModel<T>, EditorOutput<T>, EditorInput<T>, HasReadonly, HasDrawable,
+HasDriver<T, ModelDriver<T>>, HasFormType, HasDirtyHandlers, HasFlushSuccessHandlers,
+HasFlushErrorHandlers, HasResetDisplayHandlers, HasDataValidationHandlers {
 
 	public enum Layout implements CssStyle {
 
-		BASIC("form"),
-		INLINE("form-inline"),
-		HORIZONTAL("form-horizontal");
+		BASIC("form"), INLINE("form-inline"), HORIZONTAL("form-horizontal");
 
 		private final String style;
 
@@ -82,9 +67,8 @@ HasDataValidationHandlers
 
 		@Override
 		public String get() {
-			return style;
+			return this.style;
 		}
-
 	}
 
 	private MessageHelper messageHelper;
@@ -108,13 +92,13 @@ HasDataValidationHandlers
 
 	@Override
 	public void addAndReplaceElement(Widget widget, com.google.gwt.user.client.Element toReplace) {
-		refreshType(widget);
+		this.refreshType(widget);
 		super.addAndReplaceElement(widget, toReplace);
 	}
 
 	@Override
 	public ModelDriver<T> getDriver() {
-		return driver;
+		return this.driver;
 	}
 
 	@Override
@@ -132,9 +116,9 @@ HasDataValidationHandlers
 		assert this.model == null : "model can not be set twice.";
 		this.model = model;
 		this.driver = new ModelDriver<T>(model);
-		this.driver.setMessageHelper(messageHelper);
+		this.driver.setMessageHelper(this.messageHelper);
 		this.driver.initialize(this, visitors);
-		this.driver.accept(new ReadonlyVisitor(this, readonly, false));
+		this.driver.accept(new ReadonlyVisitor(this, this.readonly, false));
 	}
 
 	@Override
@@ -155,7 +139,7 @@ HasDataValidationHandlers
 
 	@Override
 	public Boolean getReadonly() {
-		return readonly;
+		return this.readonly;
 	}
 
 	@Override
@@ -168,16 +152,16 @@ HasDataValidationHandlers
 
 	@Override
 	public T getValue() {
-		return driver.getValue();
+		return this.driver.getValue();
 	}
 
 	public boolean hasError() {
-		return driver.hasErrors();
+		return this.driver.hasErrors();
 	}
 
 	@Override
 	public Layout getLayout() {
-		return layout;
+		return this.layout;
 	}
 
 	@Override
@@ -186,18 +170,18 @@ HasDataValidationHandlers
 		StyleUtils.addStyle(this, layout);
 		Set<Widget> children = WidgetUtils.listChildren(this);
 		for (Widget w : children) {
-			refreshType(w);
+			this.refreshType(w);
 		}
 	}
 
 	@Override
 	public boolean hasErrors() {
-		return driver == null ? false : driver.hasErrors();
+		return this.driver == null ? false : this.driver.hasErrors();
 	}
 
 	@Override
 	public Iterable<Error> getErrors() {
-		return driver == null ? Collections.EMPTY_LIST : driver.getErrors();
+		return this.driver == null ? Collections.EMPTY_LIST : this.driver.getErrors();
 	}
 
 	@Override
@@ -209,14 +193,14 @@ HasDataValidationHandlers
 	}
 
 	private void refreshType(Widget w) {
-		if (layout != null && w instanceof HasFormType && ((HasFormType) w).getLayout() == null) {
-			((HasFormType) w).setLayout(layout);
+		if (this.layout != null && w instanceof HasFormType && ((HasFormType) w).getLayout() == null) {
+			((HasFormType) w).setLayout(this.layout);
 		}
 	}
 
 	@Override
 	public boolean isDirty() {
-		return driver != null && driver.isDirty();
+		return this.driver != null && this.driver.isDirty();
 	}
 
 	@Override

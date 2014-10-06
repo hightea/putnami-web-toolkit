@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -65,397 +63,389 @@ import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent.Handler;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public class InputList<T> extends List implements
-EditorCollection<T>,
-EditorInput<Collection<T>>,
-EditorModel<T>,
-HasDrawable,
-HasEditorProvider,
-HasInputEditorFactory<T>,
-HasOutputEditorFactory<T>
-{
+public class InputList<T> extends List implements EditorCollection<T>, EditorInput<Collection<T>>,
+EditorModel<T>, HasDrawable, HasEditorProvider, HasInputEditorFactory<T>,
+HasOutputEditorFactory<T> {
 
-  private static final CssStyle STYLE_ITEM_CONTAINER = new SimpleStyle("list-element-container");
-  private static final CssStyle STYLE_CLEAR = new SimpleStyle("clearfix");
-  private static final CssStyle STYLE_CLOSE = new SimpleStyle("close");
-  private static final CssStyle STYLE_ERROR = new SimpleStyle("has-error text-danger");
+	private static final CssStyle STYLE_ITEM_CONTAINER = new SimpleStyle("list-element-container");
+	private static final CssStyle STYLE_CLEAR = new SimpleStyle("clearfix");
+	private static final CssStyle STYLE_CLOSE = new SimpleStyle("close");
+	private static final CssStyle STYLE_ERROR = new SimpleStyle("has-error text-danger");
 
-  private class NewListItem extends ListItem implements HasDrawable, FocusHandler, Handler {
+	private class NewListItem extends ListItem implements HasDrawable, FocusHandler, Handler {
 
-    private final Button<T> addButton;
+		private final Button<T> addButton;
 
-    public NewListItem() {
-      super();
-      addButton = new Button<T>();
-      addButton.setType(Button.Type.LINK);
-      addButton.setSize(Button.Size.SMALL);
-      addButton.setIconType(IconFont.ICON_ADD);
-      add(addButton);
-      setTabIndex(0);
-      addButton.addButtonHandler(this);
-      addFocusHandler(this);
-    }
+		public NewListItem() {
+			super();
+			this.addButton = new Button<T>();
+			this.addButton.setType(Button.Type.LINK);
+			this.addButton.setSize(Button.Size.SMALL);
+			this.addButton.setIconType(IconFont.ICON_ADD);
+			this.add(this.addButton);
+			this.setTabIndex(0);
+			this.addButton.addButtonHandler(this);
+			this.addFocusHandler(this);
+		}
 
-    @Override
-    public void onFocus(FocusEvent event) {
-      InternalListItem next = getEditorForTraversal(items.size());
-      next.onFocus(null);
-    }
+		@Override
+		public void onFocus(FocusEvent event) {
+			InternalListItem next = InputList.this.getEditorForTraversal(InputList.this.items.size());
+			next.onFocus(null);
+		}
 
-    @Override
-    public void onButtonAction(ButtonEvent event) {
-      InternalListItem next = getEditorForTraversal(items.size());
-      next.onFocus(null);
-    }
+		@Override
+		public void onButtonAction(ButtonEvent event) {
+			InternalListItem next = InputList.this.getEditorForTraversal(InputList.this.items.size());
+			next.onFocus(null);
+		}
+	}
 
-  }
+	private class InternalListItem extends ListItem implements HasDrawable, EditorValue<T>,
+	BlurHandler, FocusHandler {
 
-  private class InternalListItem extends ListItem implements HasDrawable, EditorValue<T>, BlurHandler, FocusHandler {
+		private final HandlerRegistrationCollection registrationCollection =
+				new HandlerRegistrationCollection();
 
-    private final HandlerRegistrationCollection registrationCollection = new HandlerRegistrationCollection();
+		private final Anchor deleteButton = new Anchor("&times;");
+		private final SimplePanel container = new SimplePanel();
+		private final SimplePanel clear = new SimplePanel();
+		private EditorOutput<T> output;
+		private EditorInput<T> input;
 
-    private final Anchor deleteButton = new Anchor("&times;");
-    private final SimplePanel container = new SimplePanel();
-    private final SimplePanel clear = new SimplePanel();
-    private EditorOutput<T> output;
-    private EditorInput<T> input;
+		private T itemValue;
 
-    private T itemValue;
+		private boolean focused = false;
 
-    private boolean focused = false;
+		public InternalListItem() {
+			super();
+			this.resetFocusHandler();
+			StyleUtils.addStyle(this.container, InputList.STYLE_ITEM_CONTAINER);
+			StyleUtils.addStyle(this.deleteButton, InputList.STYLE_CLOSE);
+			StyleUtils.addStyle(this.clear, InputList.STYLE_CLEAR);
+			this.deleteButton.setTabIndex(-1);
+			this.deleteButton.addClickHandler(new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+					InputList.this.removeEditor(InternalListItem.this);
+				}
+			});
 
-    public InternalListItem() {
-      super();
-      resetFocusHandler();
-      StyleUtils.addStyle(container, STYLE_ITEM_CONTAINER);
-      StyleUtils.addStyle(deleteButton, STYLE_CLOSE);
-      StyleUtils.addStyle(clear, STYLE_CLEAR);
-      deleteButton.setTabIndex(-1);
-      deleteButton.addClickHandler(new ClickHandler() {
-        @Override
-        public void onClick(ClickEvent event) {
-          removeEditor(InternalListItem.this);
-        }
-      });
+			this.add(this.deleteButton);
+			this.add(this.container);
+			this.add(this.clear);
+		}
 
-      add(deleteButton);
-      add(container);
-      add(clear);
-    }
+		@Override
+		public String getPath() {
+			return "[" + InputList.this.items.indexOf(this) + "]";
+		}
 
-    @Override
-    public String getPath() {
-      return "[" + items.indexOf(this) + "]";
-    }
+		public T flush() {
+			if (this.input != null) {
+				this.itemValue = this.input.flush();
+			}
+			return this.itemValue;
+		}
 
-    public T flush() {
-      if (input != null) {
-        itemValue = input.flush();
-      }
-      return itemValue;
-    }
+		@Override
+		public T getValue() {
+			return this.itemValue;
+		}
 
-    @Override
-    public T getValue() {
-      return itemValue;
-    }
+		@Override
+		public void edit(T value) {
+			this.itemValue = value;
+			StyleUtils.toggleStyle(this.container, InputList.STYLE_ERROR, false);
+			this.redraw();
+		}
 
-    @Override
-    public void edit(T value) {
-      this.itemValue = value;
-      StyleUtils.toggleStyle(container, STYLE_ERROR, false);
-      redraw();
-    }
+		@Override
+		public void onBlur(BlurEvent event) {
+			this.focused = false;
+			if (this.input != null) {
+				T val = this.input.flush();
+				StyleUtils.toggleStyle(this.container, InputList.STYLE_ERROR, this.hasErrors());
+				if (val == null && !this.hasErrors()) {
+					InputList.this.removeEditor(this);
+				} else {
+					this.itemValue = val;
+					this.output.edit(val);
+				}
+			}
+			this.resetFocusHandler();
+			this.redraw();
+		}
 
-    @Override
-    public void onBlur(BlurEvent event) {
-      focused = false;
-      if (input != null) {
-        T value = input.flush();
-        StyleUtils.toggleStyle(container, STYLE_ERROR, hasErrors());
-        if (value == null && !hasErrors()) {
-          removeEditor(this);
-        }
-        else {
-          this.itemValue = value;
-          output.edit(value);
-        }
-      }
-      resetFocusHandler();
-      redraw();
-    }
+		@Override
+		public void onFocus(FocusEvent event) {
+			if (this.input == null) {
+				this.input =
+						InputList.this.editorProvider.getEditorForTraversal(false, InputList.this.items
+								.indexOf(this));
+			}
+			if (!this.hasErrors()) {
+				this.input.edit(this.itemValue);
+			}
+			this.focused = true;
+			this.resetFocusHandler();
+			this.redraw();
+		}
 
-    @Override
-    public void onFocus(FocusEvent event) {
-      if (input == null) {
-        input = editorProvider.getEditorForTraversal(false, items.indexOf(this));
-      }
-      if (!hasErrors()) {
-        input.edit(itemValue);
-      }
-      focused = true;
-      resetFocusHandler();
-      redraw();
-    }
+		private void resetFocusHandler() {
+			this.registrationCollection.removeHandler();
+			boolean hasError = this.hasErrors();
+			if (!hasError && !this.focused) {
+				this.setTabIndex(0);
+				this.registrationCollection.add(this.addFocusHandler(this));
+			} else if (hasError && !this.focused) {
+				this.setTabIndex(-1);
+				if (this.input instanceof HasFocusHandlers) {
+					this.registrationCollection.add(((HasFocusHandlers) this.input).addFocusHandler(this));
+				}
+			} else {
+				this.setTabIndex(-1);
+				if (this.input instanceof HasBlurHandlers) {
+					this.registrationCollection.add(((HasBlurHandlers) this.input).addBlurHandler(this));
+				}
+				Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 
-    private void resetFocusHandler() {
-      registrationCollection.removeHandler();
-      boolean hasError = hasErrors();
-      if (!hasError && !focused) {
-        setTabIndex(0);
-        registrationCollection.add(addFocusHandler(this));
-      }
-      else if (hasError && !focused) {
-        setTabIndex(-1);
-        if (input instanceof HasFocusHandlers) {
-          registrationCollection.add(((HasFocusHandlers) input).addFocusHandler(this));
-        }
-      }
-      else {
-        setTabIndex(-1);
-        if (input instanceof HasBlurHandlers) {
-          registrationCollection.add(((HasBlurHandlers) input).addBlurHandler(this));
-        }
-        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+					@Override
+					public void execute() {
+						if (InternalListItem.this.input instanceof Focusable) {
+							((Focusable) InternalListItem.this.input).setFocus(true);
+						}
+					}
+				});
+			}
+		}
 
-          @Override
-          public void execute() {
-            if (input instanceof Focusable) {
-              ((Focusable) input).setFocus(true);
-            }
-          }
-        });
-      }
-    }
+		@Override
+		public void redraw() {
+			if (this.output == null) {
+				this.output =
+						InputList.this.editorProvider.getEditorForTraversal(true, InputList.this.items
+								.indexOf(this));
+			}
+			this.output.edit(this.itemValue);
+			if (this.input != null && !this.hasErrors()) {
+				this.input.edit(this.itemValue);
+			}
 
-    @Override
-    public void redraw() {
-      if (output == null) {
-        output = editorProvider.getEditorForTraversal(true, items.indexOf(this));
-      }
-      output.edit(itemValue);
-      if (input != null && !hasErrors()) {
-        input.edit(itemValue);
-      }
+			if (this.focused || this.hasErrors()) {
+				this.container.setWidget(this.input);
+			} else {
+				this.container.setWidget(this.output);
+			}
+		}
 
-      if (focused || hasErrors()) {
-        container.setWidget(input);
-      }
-      else {
-        container.setWidget(output);
-      }
+		private Iterable<? extends Error> getErrors() {
+			return this.input.getErrors();
+		}
 
-    }
+		private boolean hasErrors() {
+			return this.input != null && this.input.hasErrors();
+		}
+	}
 
-    private Iterable<? extends Error> getErrors() {
-      return input.getErrors();
-    }
+	private final java.util.List<InternalListItem> items = Lists.newArrayList();
+	private final NewListItem nextItem = new NewListItem();
 
-    private boolean hasErrors() {
-      return input != null && input.hasErrors();
-    }
+	private String path;
+	private Model<T> model;
+	private ModelDriver<Collection<T>> driver;
+	private MessageHelper messageHelper;
 
-  }
+	private OutputFactory outputFactory;
+	private InputFactory inputFactory;
 
-  private final java.util.List<InternalListItem> items = Lists.newArrayList();
-  private final NewListItem nextItem = new NewListItem();
+	private EditorProvider editorProvider;
 
-  private String path;
-  private Model<T> model;
-  private ModelDriver<Collection<T>> driver;
-  private MessageHelper messageHelper;
+	private Collection<Error> errors;
+	private Collection<Validator<Collection<T>>> validators;
 
-  private OutputFactory outputFactory;
-  private InputFactory inputFactory;
+	private Collection<T> value;
 
-  private EditorProvider editorProvider;
+	public InputList() {
+		this.setType(Type.LIST);
+		this.append(this.nextItem);
+	}
 
-  private Collection<Error> errors;
-  private Collection<Validator<Collection<T>>> validators;
+	protected InputList(InputList<T> source) {
+		this();
+		this.path = source.path;
+		this.model = source.model;
+		this.messageHelper = source.messageHelper;
+		this.outputFactory = source.outputFactory;
+		this.inputFactory = source.inputFactory;
 
-  private Collection<T> value;
+		if (source.validators != null) {
+			for (Validator validator : source.validators) {
+				this.addValidator(validator);
+			}
+		}
+	}
 
-  public InputList() {
-    setType(Type.LIST);
-    append(nextItem);
-  }
+	@Override
+	public IsWidget cloneWidget() {
+		return new InputList<T>(this);
+	}
 
-  protected InputList(InputList<T> source) {
-    this();
-    this.path = source.path;
-    this.model = source.model;
-    this.messageHelper = source.messageHelper;
-    this.outputFactory = source.outputFactory;
-    this.inputFactory = source.inputFactory;
+	@Override
+	public void initialize(Model<T> model, Visitor... visitors) {
+		assert this.model == null : "model can not be set twice.";
+		this.model = model;
+		if (model instanceof ModelCollection) {
+			this.driver = new ModelDriver<Collection<T>>((ModelCollection<T>) model);
+		} else {
+			this.driver = new ModelDriver<Collection<T>>(new ModelCollection<T>(List.class, model));
+		}
+		this.driver.setMessageHelper(this.messageHelper);
+		this.driver.initialize(this, visitors);
+		this.driver.accept(new ReadonlyVisitor(this, true, true));
+	}
 
-    if (source.validators != null) {
-      for (Validator validator : source.validators) {
-        addValidator(validator);
-      }
-    }
-  }
+	@Override
+	public <A extends EditorValue<T>> A getEditorForTraversal(int index) {
+		InternalListItem editor = null;
+		if (this.items.size() > index) {
+			editor = this.items.get(index);
+		} else {
+			editor = new InternalListItem();
+			this.items.add(editor);
+			this.addListItem(editor);
+			this.getElement().insertBefore(editor.getElement(), this.nextItem.getElement());
+		}
+		return (A) editor;
+	}
 
-  @Override
-  public IsWidget cloneWidget() {
-    return new InputList<T>(this);
-  }
+	private void removeEditor(InternalListItem editor) {
+		this.items.remove(editor);
+		super.remove(editor);
+	}
 
-  @Override
-  public void initialize(Model<T> model, Visitor... visitors) {
-    assert this.model == null : "model can not be set twice.";
-    this.model = model;
-    if (model instanceof ModelCollection) {
-      this.driver = new ModelDriver<Collection<T>>((ModelCollection<T>) model);
-    }
-    else {
-      this.driver = new ModelDriver<Collection<T>>(new ModelCollection<T>(List.class, model));
-    }
-    this.driver.setMessageHelper(messageHelper);
-    this.driver.initialize(this, visitors);
-    this.driver.accept(new ReadonlyVisitor(this, true, true));
-  }
+	@Override
+	public void edit(Collection<T> value) {
+		this.value = value;
+		this.clear();
+		this.items.clear();
+		this.addListItem(this.nextItem);
+		this.driver.edit(value);
+	}
 
-  @Override
-  public <A extends EditorValue<T>> A getEditorForTraversal(int index) {
-    InternalListItem editor = null;
-    if (items.size() > index) {
-      editor = items.get(index);
-    }
-    else {
-      editor = new InternalListItem();
-      items.add(editor);
-      addListItem(editor);
-      getElement().insertBefore(editor.getElement(), nextItem.getElement());
-    }
-    return (A) editor;
-  }
+	@Override
+	public void add(IsWidget child) {
+		boolean mustAdd = true;
+		if (this.inputFactory == null && child instanceof InputFactory) {
+			this.inputFactory = (InputFactory) child;
+			mustAdd = false;
+		}
+		if (this.outputFactory == null && child instanceof OutputFactory) {
+			this.outputFactory = (OutputFactory) child;
+			mustAdd = false;
+		}
+		if (mustAdd) {
+			this.append(child);
+		}
+	}
 
-  private void removeEditor(InternalListItem editor) {
-    items.remove(editor);
-    super.remove(editor);
-  }
+	@UiChild(tagname = "input")
+	public void addInput(InputFactory inputFactory) {
+		this.inputFactory = inputFactory;
+	}
 
-  @Override
-  public void edit(Collection<T> value) {
-    this.value = value;
-    clear();
-    items.clear();
-    addListItem(nextItem);
-    this.driver.edit(value);
-  }
+	@UiChild(tagname = "output")
+	public void addOutput(OutputFactory outputFactory) {
+		this.outputFactory = outputFactory;
+	}
 
-  @Override
-  public void add(IsWidget child) {
-    boolean mustAdd = true;
-    if (inputFactory == null && child instanceof InputFactory) {
-      this.inputFactory = (InputFactory) child;
-      mustAdd = false;
-    }
-    if (outputFactory == null && child instanceof OutputFactory) {
-      this.outputFactory = (OutputFactory) child;
-      mustAdd = false;
-    }
-    if (mustAdd) {
-      append(child);
-    }
-  }
+	@Override
+	public String getPath() {
+		return this.path;
+	}
 
-  @UiChild(tagname = "input")
-  public void addInput(InputFactory inputFactory) {
-    this.inputFactory = inputFactory;
-  }
+	@Override
+	public Collection<T> flush() {
+		if (this.errors != null) {
+			this.errors.clear();
+			this.errors = null;
+		}
 
-  @UiChild(tagname = "output")
-  public void addOutput(OutputFactory outputFactory) {
-    this.outputFactory = outputFactory;
-  }
+		Collection<T> result = this.driver.getModel().newInstance();
+		for (InternalListItem itemEditor : this.items) {
+			result.add(itemEditor.flush());
+			if (itemEditor.hasErrors()) {
+				if (this.errors == null) {
+					this.errors = Lists.newArrayList();
+				}
+				Iterables.addAll(this.errors, itemEditor.getErrors());
+			}
+		}
+		if (this.errors == null && this.validators != null) {
+			this.errors = ValidationUtils.validate(this.validators, this, result);
+		}
+		if (this.errors != null) {
+			result = this.value;
+		}
+		return result;
+	}
 
-  @Override
-  public String getPath() {
-    return path;
-  }
+	@Override
+	public void setEditorProvider(EditorProvider provider) {
+		this.editorProvider = provider;
+	}
 
-  @Override
-  public Collection<T> flush() {
-    if (errors != null) {
-      errors.clear();
-      errors = null;
-    }
+	@Override
+	public void setMessageHelper(MessageHelper messageHelper) {
+		this.messageHelper = messageHelper;
+	}
 
-    Collection<T> result = this.driver.getModel().newInstance();
-    for (InternalListItem itemEditor : items) {
-      result.add(itemEditor.flush());
-      if (itemEditor.hasErrors()) {
-        if (errors == null) {
-          errors = Lists.newArrayList();
-        }
-        Iterables.addAll(errors, itemEditor.getErrors());
-      }
-    }
-    if (errors == null && validators != null) {
-      this.errors = ValidationUtils.validate(validators, this, result);
-    }
-    if (errors != null) {
-      result = this.value;
-    }
-    return result;
-  }
+	@Override
+	public Model<T> getModel() {
+		return this.model;
+	}
 
-  @Override
-  public void setEditorProvider(EditorProvider provider) {
-    this.editorProvider = provider;
-  }
+	@Override
+	public Collection<T> getValue() {
+		return this.driver.getValue();
+	}
 
-  @Override
-  public void setMessageHelper(MessageHelper messageHelper) {
-    this.messageHelper = messageHelper;
-  }
+	@Override
+	public void setPath(String path) {
+		this.path = path;
+	}
 
-  @Override
-  public Model<T> getModel() {
-    return model;
-  }
+	@Override
+	public OutputFactory getOutputFactory() {
+		return this.outputFactory;
+	}
 
-  @Override
-  public Collection<T> getValue() {
-    return this.driver.getValue();
-  }
+	@Override
+	public InputFactory getInputFactory() {
+		return this.inputFactory;
+	}
 
-  @Override
-  public void setPath(String path) {
-    this.path = path;
-  }
+	@Override
+	public boolean hasErrors() {
+		return this.errors != null && !this.errors.isEmpty();
+	}
 
-  @Override
-  public OutputFactory getOutputFactory() {
-    return outputFactory;
-  }
+	@Override
+	public Iterable<Error> getErrors() {
+		return this.errors == null ? Collections.<Error> emptyList() : Iterables
+				.unmodifiableIterable(this.errors);
+	}
 
-  @Override
-  public InputFactory getInputFactory() {
-    return inputFactory;
-  }
+	@Override
+	public void addValidator(Validator<Collection<T>> validator) {
+		if (this.validators == null) {
+			this.validators = Lists.newArrayList();
+		}
+		this.validators.add(validator);
+	}
 
-  @Override
-  public boolean hasErrors() {
-    return errors != null && !errors.isEmpty();
-  }
-
-  @Override
-  public Iterable<Error> getErrors() {
-    return errors == null ? Collections.<Error> emptyList() : Iterables.unmodifiableIterable(errors);
-  }
-
-  @Override
-  public void addValidator(Validator<Collection<T>> validator) {
-    if (validators == null) {
-      validators = Lists.newArrayList();
-    }
-    validators.add(validator);
-  }
-
-  @Override
-  public void redraw() {
-  }
+	@Override
+	public void redraw() {
+	}
 
 }

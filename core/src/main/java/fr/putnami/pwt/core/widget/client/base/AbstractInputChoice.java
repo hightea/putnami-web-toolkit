@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client.base;
 
@@ -37,9 +35,7 @@ import fr.putnami.pwt.core.widget.client.event.ChangeEvent;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public abstract class AbstractInputChoice<T, U> extends AbstractInput<U> implements
-HasValueChangeHandlers<U>,
-ValueChangeHandler<U>,
-HasMessageHelper {
+HasValueChangeHandlers<U>, ValueChangeHandler<U>, HasMessageHelper {
 
 	public interface ChoiceSelectionHandler<T, U> {
 
@@ -61,7 +57,6 @@ HasMessageHelper {
 		String getNullRender();
 
 		void setNullRender(String nullRender);
-
 	}
 
 	public class ChoiceRendererImpl implements ChoiceRenderer<T> {
@@ -73,7 +68,7 @@ HasMessageHelper {
 
 		@Override
 		public Renderer<T> getItemRenderer() {
-			return itemRenderer;
+			return this.itemRenderer;
 		}
 
 		@Override
@@ -83,12 +78,12 @@ HasMessageHelper {
 
 		@Override
 		public String renderItem(T item) {
-			return render(item, itemRenderer);
+			return this.render(item, this.itemRenderer);
 		}
 
 		@Override
 		public String getNullRender() {
-			return nullRender;
+			return this.nullRender;
 		}
 
 		@Override
@@ -98,7 +93,7 @@ HasMessageHelper {
 
 		protected <V> String render(V value, Renderer<V> renderer) {
 			if (value == null) {
-				return renderNull();
+				return this.renderNull();
 			}
 			if (renderer != null) {
 				return renderer.render(value);
@@ -108,9 +103,9 @@ HasMessageHelper {
 
 		protected String renderNull() {
 			if (AbstractInputChoice.this.nullValueAllowed) {
-				return this.nullRender != null ? this.nullRender : DEFAULT_NULL_RENDER;
+				return this.nullRender != null ? this.nullRender : ChoiceRendererImpl.DEFAULT_NULL_RENDER;
 			}
-			return DEFAULT_NULL_RENDER;
+			return ChoiceRendererImpl.DEFAULT_NULL_RENDER;
 		}
 	}
 
@@ -130,35 +125,35 @@ HasMessageHelper {
 
 	protected AbstractInputChoice(Widget content, AbstractInputChoice<T, U> source) {
 		super(content, source);
-		messageHelper = source.messageHelper;
-		multiple = source.multiple;
-		nullValueAllowed = source.nullValueAllowed;
-		orderedItems = source.orderedItems;
+		this.messageHelper = source.messageHelper;
+		this.multiple = source.multiple;
+		this.nullValueAllowed = source.nullValueAllowed;
+		this.orderedItems = source.orderedItems;
 
-		setSelectionHandler(source.getSelectionHandler());
-		setChoiceRenderer(source.getChoiceRenderer());
+		this.setSelectionHandler(source.getSelectionHandler());
+		this.setChoiceRenderer(source.getChoiceRenderer());
 	}
 
 	@Override
 	protected void endConstruct() {
-		StyleUtils.removeStyle(this, STYLE_CONTROL);
-		addValueChangeHandler(this);
+		StyleUtils.removeStyle(this, AbstractInput.STYLE_CONTROL);
+		this.addValueChangeHandler(this);
 		super.endConstruct();
-		redrawInternal();
+		this.redrawInternal();
 	}
 
 	public void setItems(Collection<T> items) {
-		orderedItems.clear();
-		orderedItems.addAll(items);
-		redrawInternal();
+		this.orderedItems.clear();
+		this.orderedItems.addAll(items);
+		this.redrawInternal();
 	}
 
 	public void setNullRender(String nullRender) {
-		getChoiceRenderer().setNullRender(nullRender);
+		this.getChoiceRenderer().setNullRender(nullRender);
 	}
 
 	public void setItemRenderer(Renderer<T> renderer) {
-		getChoiceRenderer().setItemRenderer(renderer);
+		this.getChoiceRenderer().setItemRenderer(renderer);
 	}
 
 	public void setNullValueAllowed(boolean nullValueAllowed) {
@@ -166,7 +161,7 @@ HasMessageHelper {
 	}
 
 	public boolean isNullValueAllowed() {
-		return nullValueAllowed;
+		return this.nullValueAllowed;
 	}
 
 	public void setMultiple(boolean multiple) {
@@ -174,15 +169,15 @@ HasMessageHelper {
 	}
 
 	public boolean isMultiple() {
-		return multiple;
+		return this.multiple;
 	}
 
 	@Override
 	public void setHtmlId(String htmlId) {
 		this.htmlId = htmlId;
 
-		if (askFocusRegistration != null) {
-			askFocusRegistration.removeHandler();
+		if (this.askFocusRegistration != null) {
+			this.askFocusRegistration.removeHandler();
 		}
 		if (htmlId != null) {
 			AskFocusEvent.Handler handler = new AskFocusEvent.Handler() {
@@ -190,22 +185,22 @@ HasMessageHelper {
 				@Override
 				public void onAskFocus(AskFocusEvent event) {
 					if (Objects.equal(event.getHtmlId(), AbstractInputChoice.this.htmlId)) {
-						setFocus(true);
+						AbstractInputChoice.this.setFocus(true);
 					}
 				}
 			};
-			askFocusRegistration = EventBus.get().addHandler(AskFocusEvent.TYPE, handler);
+			this.askFocusRegistration = EventBus.get().addHandler(AskFocusEvent.TYPE, handler);
 		}
 	}
 
 	@Override
 	public String getHtmlId() {
-		return htmlId;
+		return this.htmlId;
 	}
 
 	@Override
 	public MessageHelper getMessageHelper() {
-		return messageHelper;
+		return this.messageHelper;
 	}
 
 	@Override
@@ -220,37 +215,39 @@ HasMessageHelper {
 
 	@Override
 	public HandlerRegistration addDirtyHandler(Handler handler) {
-		if (valueChangeRegistration == null) {
-			valueChangeRegistration = addValueChangeHandler(new ChangeEvent<U>(AbstractInputChoice.this));
+		if (this.valueChangeRegistration == null) {
+			this.valueChangeRegistration =
+					this.addValueChangeHandler(new ChangeEvent<U>(AbstractInputChoice.this));
 		}
 		return super.addDirtyHandler(handler);
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addValueChangeHandler(ValueChangeHandler<U> handler) {
-		return addHandler(handler, ValueChangeEvent.getType());
+	public com.google.gwt.event.shared.HandlerRegistration addValueChangeHandler(
+			ValueChangeHandler<U> handler) {
+		return this.addHandler(handler, ValueChangeEvent.getType());
 	}
 
 	public U getSelectedValue() {
-		return getSelectionHandler().getSelection();
+		return this.getSelectionHandler().getSelection();
 	}
 
 	@Override
 	public U flush() {
-		clearErrors();
-		U value = getSelectedValue();
-		validate(value);
-		if (!hasErrors()) {
-			setValue(value);
+		this.clearErrors();
+		U value = this.getSelectedValue();
+		this.validate(value);
+		if (!this.hasErrors()) {
+			this.setValue(value);
 		}
-		return getValue();
+		return this.getValue();
 	}
 
 	@Override
 	public void edit(U value) {
-		redrawInternal();
-		setValue(value);
-		getSelectionHandler().setSelection(getValue(), false);
+		this.redrawInternal();
+		this.setValue(value);
+		this.getSelectionHandler().setSelection(this.getValue(), false);
 	}
 
 	@Override
@@ -269,7 +266,7 @@ HasMessageHelper {
 	protected abstract void setSelectionHandler(ChoiceSelectionHandler<T, U> selectionHandler);
 
 	protected List<T> getOrderedItems() {
-		return orderedItems;
+		return this.orderedItems;
 	}
 
 }

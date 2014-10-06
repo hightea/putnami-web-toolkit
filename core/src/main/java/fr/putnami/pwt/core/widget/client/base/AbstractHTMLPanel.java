@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client.base;
 
@@ -35,7 +33,8 @@ import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
-public abstract class AbstractHTMLPanel extends HTMLPanel implements EditorComposite, HasResponsiveVisibility, CloneableWidget {
+public abstract class AbstractHTMLPanel extends HTMLPanel implements EditorComposite,
+HasResponsiveVisibility, CloneableWidget {
 
 	protected static final String EMPTY_HTML = "";
 
@@ -60,36 +59,37 @@ public abstract class AbstractHTMLPanel extends HTMLPanel implements EditorCompo
 		this(source.tag, source.html);
 		this.path = source.path;
 		for (Map.Entry<Widget, String> widgetEntry : source.children.entrySet()) {
-			addAndReplaceElement(WidgetUtils.cloneWidget(widgetEntry.getKey()), widgetEntry.getValue());
+			this.addAndReplaceElement(WidgetUtils.cloneWidget(widgetEntry.getKey()), widgetEntry
+					.getValue());
 		}
-		handlerManager = new HandlerManager(source.handlerManager, this);
-		handlerManager.resetSinkEvents();
+		this.handlerManager = new HandlerManager(source.handlerManager, this);
+		this.handlerManager.resetSinkEvents();
 		StyleUtils.cloneStyle(this, source);
 	}
 
 	@Override
 	protected HandlerManager createHandlerManager() {
-		if (handlerManager == null) {
-			handlerManager = new HandlerManager(this);
+		if (this.handlerManager == null) {
+			this.handlerManager = new HandlerManager(this);
 		}
-		return handlerManager;
+		return this.handlerManager;
 	}
 
 	@Override
 	public void sinkEvents(int eventBitsToAdd) {
 		super.sinkEvents(eventBitsToAdd);
-		createHandlerManager().sinkEvents(eventBitsToAdd);
+		this.createHandlerManager().sinkEvents(eventBitsToAdd);
 	}
 
 	@Override
 	public void unsinkEvents(int eventBitsToRemove) {
 		super.sinkEvents(eventBitsToRemove);
-		createHandlerManager().unsinkEvents(eventBitsToRemove);
+		this.createHandlerManager().unsinkEvents(eventBitsToRemove);
 	}
 
 	@Override
 	public String getPath() {
-		return path == null ? Path.ROOT_PATH : path;
+		return this.path == null ? Path.ROOT_PATH : this.path;
 	}
 
 	@Override
@@ -99,14 +99,15 @@ public abstract class AbstractHTMLPanel extends HTMLPanel implements EditorCompo
 
 	@Override
 	public Iterable<Editor> getEditors() {
-		return editorChildren == null ? Collections.EMPTY_SET : Iterables.unmodifiableIterable(editorChildren);
+		return this.editorChildren == null ? Collections.EMPTY_SET : Iterables
+				.unmodifiableIterable(this.editorChildren);
 	}
 
 	@Override
 	public void addAndReplaceElement(Widget widget, com.google.gwt.user.client.Element toReplace) {
-		addEditor(widget);
+		this.addEditor(widget);
 		String elementId = toReplace.getId();
-		children.put(widget, elementId);
+		this.children.put(widget, elementId);
 		toReplace.removeAttribute("id");
 		super.addAndReplaceElement(widget, toReplace);
 	}
@@ -115,22 +116,22 @@ public abstract class AbstractHTMLPanel extends HTMLPanel implements EditorCompo
 	@Deprecated
 	protected void add(Widget child, com.google.gwt.user.client.Element container) {
 		super.add(child, container);
-		addEditor(child);
+		this.addEditor(child);
 	}
 
 	protected void insert(Widget child, int beforeIndex, boolean domInsert) {
-		insert(child, getElement(), beforeIndex, domInsert);
+		this.insert(child, this.getElement(), beforeIndex, domInsert);
 	}
 
 	protected void addEditor(IsWidget widget) {
 		if (widget instanceof Editor) {
-			if (editorChildren == null) {
-				editorChildren = Sets.newLinkedHashSet();
+			if (this.editorChildren == null) {
+				this.editorChildren = Sets.newLinkedHashSet();
 			}
 			this.editorChildren.add((Editor) widget);
 		}
-
 	}
+
 	@Override
 	public void setStyleName(String style) {
 		StyleUtils.addStyle(this, new SimpleStyle(style));

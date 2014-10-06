@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -45,13 +43,8 @@ import fr.putnami.pwt.core.widget.client.event.ButtonEvent.HasButtonHandlers;
 import fr.putnami.pwt.core.widget.client.util.AnchorUtils;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public class Button<T> extends AbstractWidget implements
-HasHTML,
-EditorValue<T>,
-EditorLabel,
-HasButtonHandlers,
-HasAllFocusHandlers,
-Focusable {
+public class Button<T> extends AbstractWidget implements HasHTML, EditorValue<T>, EditorLabel,
+HasButtonHandlers, HasAllFocusHandlers, Focusable {
 
 	private static final CssStyle STYLE_BUTTON = new SimpleStyle("btn");
 	private static final CssStyle STYLE_BLOCK = new SimpleStyle("btn-block");
@@ -59,14 +52,8 @@ Focusable {
 	private static final CssStyle STYLE_DISABLED = new SimpleStyle("disabled");
 
 	public enum Type implements CssStyle {
-		DEFAULT("btn-default"),
-		LINK("btn-link"),
-		SUCCESS("btn-success"),
-		PRIMARY("btn-primary"),
-		INFO("btn-info"),
-		WARNING("btn-warning"),
-		DANGER("btn-danger"),
-		ICON("btn-icon");
+		DEFAULT("btn-default"), LINK("btn-link"), SUCCESS("btn-success"), PRIMARY("btn-primary"), INFO(
+				"btn-info"), WARNING("btn-warning"), DANGER("btn-danger"), ICON("btn-icon");
 
 		private final String style;
 
@@ -76,15 +63,12 @@ Focusable {
 
 		@Override
 		public String get() {
-			return style;
+			return this.style;
 		}
 	}
 
 	public enum Size implements CssStyle {
-		X_SMALL("btn-xs"),
-		SMALL("btn-sm"),
-		DEFAULT(null),
-		LARGE("btn-lg");
+		X_SMALL("btn-xs"), SMALL("btn-sm"), DEFAULT(null), LARGE("btn-lg");
 
 		private final String style;
 
@@ -108,7 +92,6 @@ Focusable {
 				((Button) source).fireEvent(new ButtonEvent((Button) source));
 			}
 		}
-
 	}
 
 	private static final FocusImpl FOCUS_IMPL = FocusImpl.getFocusImplForPanel();
@@ -135,34 +118,34 @@ Focusable {
 	public Button() {
 		super(AnchorElement.TAG);
 
-		element = AnchorElement.as(getElement());
-		endConstruct();
-		setType(Type.DEFAULT);
+		this.element = AnchorElement.as(this.getElement());
+		this.endConstruct();
+		this.setType(Type.DEFAULT);
 	}
 
 	public Button(Button<T> source) {
 		super(source);
 
-		element = AnchorElement.as(getElement());
-		endConstruct();
+		this.element = AnchorElement.as(this.getElement());
+		this.endConstruct();
 
-		setName(source.name);
-		setText(source.text);
-		setType(source.type);
-		setIconType(source.iconType);
-		setSize(source.size);
-		setBlock(source.block);
-		setDisabled(source.disabled);
+		this.setName(source.name);
+		this.setText(source.text);
+		this.setType(source.type);
+		this.setIconType(source.iconType);
+		this.setSize(source.size);
+		this.setBlock(source.block);
+		this.setDisabled(source.disabled);
 
 		if (source.tabIndex != null) {
-			setTabIndex(source.tabIndex);
+			this.setTabIndex(source.tabIndex);
 		}
 	}
 
 	private void endConstruct() {
-		element.setHref(AnchorUtils.DUMMY_HREF);
+		this.element.setHref(AnchorUtils.DUMMY_HREF);
 
-		StyleUtils.addStyle(this, STYLE_BUTTON);
+		StyleUtils.addStyle(this, Button.STYLE_BUTTON);
 	}
 
 	@Override
@@ -171,7 +154,7 @@ Focusable {
 	}
 
 	public Type getType() {
-		return type;
+		return this.type;
 	}
 
 	public void setType(Type type) {
@@ -180,7 +163,7 @@ Focusable {
 	}
 
 	public Size getSize() {
-		return size;
+		return this.size;
 	}
 
 	public void setSize(Size size) {
@@ -189,41 +172,41 @@ Focusable {
 	}
 
 	public boolean isBlock() {
-		return block;
+		return this.block;
 	}
 
 	public void setBlock(boolean block) {
-		StyleUtils.toggleStyle(this, STYLE_BLOCK, block);
+		StyleUtils.toggleStyle(this, Button.STYLE_BLOCK, block);
 		this.block = block;
 	}
 
 	public boolean isDisabled() {
-		return disabled;
+		return this.disabled;
 	}
 
 	public void setDisabled(boolean disabled) {
-		StyleUtils.toggleStyle(this, STYLE_DISABLED, disabled);
+		StyleUtils.toggleStyle(this, Button.STYLE_DISABLED, disabled);
 		this.disabled = disabled;
 	}
 
 	@Override
 	public void onBrowserEvent(Event event) {
-		if (!disabled) {
+		if (!this.disabled) {
 			super.onBrowserEvent(event);
 		}
 	}
 
 	public String getIconType() {
-		return iconType;
+		return this.iconType;
 	}
 
 	public void setIconType(String iconType) {
 		this.iconType = iconType;
-		resetInner();
+		this.resetInner();
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -232,45 +215,43 @@ Focusable {
 
 	@Override
 	public String getText() {
-		return text;
+		return this.text;
 	}
 
 	@Override
 	public void setText(String text) {
 		this.text = text;
-		resetInner();
+		this.resetInner();
 	}
 
 	@Override
 	public void setHTML(String html) {
 		this.text = html;
-		resetInner();
+		this.resetInner();
 	}
 
 	@Override
 	public String getHTML() {
-		return text;
+		return this.text;
 	}
 
 	public boolean isActive() {
-		return active;
+		return this.active;
 	}
 
 	public void setActive(boolean active) {
-		StyleUtils.toggleStyle(this, STYLE_ACTIVE, active);
+		StyleUtils.toggleStyle(this, Button.STYLE_ACTIVE, active);
 		this.active = active;
 	}
 
 	@Override
 	public String getLabelKey() {
-		return name;
+		return this.name;
 	}
 
 	@Override
 	public String[] getSuffix() {
-		return new String[] {
-				EditorLabel.BUTTON_SUFFIX
-		};
+		return new String[] {EditorLabel.BUTTON_SUFFIX};
 	}
 
 	@Override
@@ -279,22 +260,22 @@ Focusable {
 	}
 
 	private void resetInner() {
-		element.removeAllChildren();
-		if (iconType != null) {
+		this.element.removeAllChildren();
+		if (this.iconType != null) {
 			Icon icon = new Icon();
-			icon.setType(iconType);
+			icon.setType(this.iconType);
 
-			element.appendChild(icon.getElement());
+			this.element.appendChild(icon.getElement());
 		}
-		if (type != Type.ICON && text != null) {
-			Text textElem = Document.get().createTextNode(text);
-			element.appendChild(textElem);
+		if (this.type != Type.ICON && this.text != null) {
+			Text textElem = Document.get().createTextNode(this.text);
+			this.element.appendChild(textElem);
 		}
 	}
 
 	@Override
 	public T getValue() {
-		return value;
+		return this.value;
 	}
 
 	@Override
@@ -304,55 +285,54 @@ Focusable {
 
 	@Override
 	public HandlerRegistration addButtonHandler(final Handler handler) {
-		registerClickHandler(this);
-		registrations.add(addHandler(handler, ButtonEvent.TYPE));
-		return registrations;
+		this.registerClickHandler(this);
+		this.registrations.add(this.addHandler(handler, ButtonEvent.TYPE));
+		return this.registrations;
 	}
 
 	private void registerClickHandler(Button<T> b) {
-		if (clickEventHandler == null) {
-			clickEventHandler = new ClickEventHandler();
+		if (this.clickEventHandler == null) {
+			this.clickEventHandler = new ClickEventHandler();
 		}
-		if (registrations == null) {
-			registrations = new HandlerRegistrationCollection();
+		if (this.registrations == null) {
+			this.registrations = new HandlerRegistrationCollection();
 		}
-		registrations.add(b.addDomHandler(clickEventHandler, ClickEvent.getType()));
+		this.registrations.add(b.addDomHandler(this.clickEventHandler, ClickEvent.getType()));
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addFocusHandler(FocusHandler handler) {
-		return addDomHandler(handler, FocusEvent.getType());
+		return this.addDomHandler(handler, FocusEvent.getType());
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addBlurHandler(BlurHandler handler) {
-		return addDomHandler(handler, BlurEvent.getType());
+		return this.addDomHandler(handler, BlurEvent.getType());
 	}
 
 	@Override
 	public int getTabIndex() {
-		return FOCUS_IMPL.getTabIndex(getElement());
+		return Button.FOCUS_IMPL.getTabIndex(this.getElement());
 	}
 
 	@Override
 	public void setAccessKey(char key) {
-		FOCUS_IMPL.setAccessKey(getElement(), key);
+		Button.FOCUS_IMPL.setAccessKey(this.getElement(), key);
 	}
 
 	@Override
 	public void setFocus(boolean focused) {
 		if (focused) {
-			FOCUS_IMPL.focus(getElement());
-		}
-		else {
-			FOCUS_IMPL.blur(getElement());
+			Button.FOCUS_IMPL.focus(this.getElement());
+		} else {
+			Button.FOCUS_IMPL.blur(this.getElement());
 		}
 	}
 
 	@Override
 	public void setTabIndex(int index) {
 		this.tabIndex = index;
-		FOCUS_IMPL.setTabIndex(getElement(), index);
+		Button.FOCUS_IMPL.setTabIndex(this.getElement(), index);
 	}
 
 }

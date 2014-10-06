@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -42,14 +40,14 @@ public class TabPanelContent extends AbstractPanel implements CloneableWidget {
 
 	public TabPanelContent() {
 		super(DivElement.TAG);
-		StyleUtils.addStyle(this, STYLE_TAB_PANE);
-		StyleUtils.addStyle(this, STYLE_FADE);
+		StyleUtils.addStyle(this, TabPanelContent.STYLE_TAB_PANE);
+		StyleUtils.addStyle(this, TabPanelContent.STYLE_FADE);
 	}
 
 	protected TabPanelContent(TabPanelContent source) {
 		super(source);
-		tabLink = WidgetUtils.cloneWidget(source.tabLink);
-		cloneSourceWidgets(source);
+		this.tabLink = WidgetUtils.cloneWidget(source.tabLink);
+		this.cloneSourceWidgets(source);
 	}
 
 	@Override
@@ -59,19 +57,18 @@ public class TabPanelContent extends AbstractPanel implements CloneableWidget {
 
 	public void setActive(final boolean active) {
 		this.active = active;
-		if (tabLink != null) {
-			tabLink.setActive(active);
+		if (this.tabLink != null) {
+			this.tabLink.setActive(active);
 		}
-		StyleUtils.toggleStyle(this, STYLE_IN, active);
+		StyleUtils.toggleStyle(this, TabPanelContent.STYLE_IN, active);
 		if (active) {
-			StyleUtils.addStyle(this, STYLE_ACTIVE);
-		}
-		else {
+			StyleUtils.addStyle(this, TabPanelContent.STYLE_ACTIVE);
+		} else {
 			Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
 
 				@Override
 				public boolean execute() {
-					StyleUtils.removeStyle(TabPanelContent.this, STYLE_ACTIVE);
+					StyleUtils.removeStyle(TabPanelContent.this, TabPanelContent.STYLE_ACTIVE);
 					return false;
 				}
 			}, 150);
@@ -79,11 +76,11 @@ public class TabPanelContent extends AbstractPanel implements CloneableWidget {
 	}
 
 	public boolean isActive() {
-		return active;
+		return this.active;
 	}
 
 	public NavLink getTabLink() {
-		return tabLink;
+		return this.tabLink;
 	}
 
 	@UiChild(limit = 1, tagname = "tabLink")
@@ -93,7 +90,7 @@ public class TabPanelContent extends AbstractPanel implements CloneableWidget {
 
 	@Override
 	public void add(IsWidget child) {
-		append(child);
+		this.append(child);
 	}
 
 }

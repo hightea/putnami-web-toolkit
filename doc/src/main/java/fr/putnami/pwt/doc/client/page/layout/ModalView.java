@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.doc.client.page.layout;
 
@@ -46,44 +44,43 @@ public class ModalView extends Composite implements View {
 	@UiField
 	Modal largeModal;
 
-
 	@UiHandler("openModalFormBtn")
 	public void onOpenModalForm(ButtonEvent event) {
-		modalForm.show();
+		this.modalForm.show();
 	}
 
 	@UiHandler("openModalTitleBtn")
 	public void onOpenModalTitle(ButtonEvent event) {
-		modalTitle.show();
+		this.modalTitle.show();
 	}
 
 	@UiHandler("closeModalTitleBtn")
 	public void onCloseModalTitle(ButtonEvent event) {
-		modalTitle.hide();
+		this.modalTitle.hide();
 	}
 
 	@UiHandler("openModalWidgetDismissableBtn")
 	public void onOpenModalWidgetDismissable(ButtonEvent event) {
-		modalWidgetDismissable.show();
+		this.modalWidgetDismissable.show();
 	}
 
 	@UiHandler("openModalWidgetBtn")
 	public void onOpenModalWidget(ButtonEvent event) {
-		modalWidget.show();
+		this.modalWidget.show();
 	}
 
 	@UiHandler("closeModalWidgetBtn")
 	public void onCloseModalWidget(ButtonEvent event) {
-		modalWidget.hide();
+		this.modalWidget.hide();
 	}
 
 	@UiHandler("openSmallModalBtn")
 	public void onOpenSmallModal(ButtonEvent event) {
-		smallModal.show();
+		this.smallModal.show();
 	}
 
 	@UiHandler("openLargeModalBtn")
 	public void onOpenLargeModal(ButtonEvent event) {
-		largeModal.show();
+		this.largeModal.show();
 	}
 }

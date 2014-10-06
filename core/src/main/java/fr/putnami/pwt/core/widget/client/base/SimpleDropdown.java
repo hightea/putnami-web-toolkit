@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client.base;
 
@@ -48,103 +46,106 @@ public class SimpleDropdown extends AbstractDropdown {
 	public SimpleDropdown(String tagName) {
 		super(tagName);
 
-		StyleUtils.addStyle(anchor, STYLE_TOGGLE);
-		StyleUtils.addStyle(menuContainer, STYLE_MENU);
+		StyleUtils.addStyle(this.anchor, SimpleDropdown.STYLE_TOGGLE);
+		StyleUtils.addStyle(this.menuContainer, SimpleDropdown.STYLE_MENU);
 
-		StyleUtils.addStyle(this, STYLE_DROPDOWN);
+		StyleUtils.addStyle(this, SimpleDropdown.STYLE_DROPDOWN);
 	}
 
 	public SimpleDropdown(String tagName, String label) {
 		this(tagName);
-		setLabel(label);
+		this.setLabel(label);
 	}
 
+	@Override
 	public void close() {
-		StyleUtils.removeStyle(this, STYLE_OPEN);
-		StyleUtils.removeStyle(this, STYLE_OPEN_UP);
-		StyleUtils.removeStyle(this, STYLE_OPEN_LEFT);
-		open = false;
-		updateHandlers();
+		StyleUtils.removeStyle(this, SimpleDropdown.STYLE_OPEN);
+		StyleUtils.removeStyle(this, SimpleDropdown.STYLE_OPEN_UP);
+		StyleUtils.removeStyle(this, SimpleDropdown.STYLE_OPEN_LEFT);
+		this.open = false;
+		this.updateHandlers();
 	}
 
+	@Override
 	public void open() {
-		StyleUtils.addStyle(this, STYLE_OPEN);
-		Element menuElt = menuContainer.getElement();
+		StyleUtils.addStyle(this, SimpleDropdown.STYLE_OPEN);
+		Element menuElt = this.menuContainer.getElement();
 		int topMenu = menuElt.getAbsoluteTop() - Window.getScrollTop();
 		int menuHeight = menuElt.getOffsetHeight();
-		int anchorHeight = anchor.getOffsetHeight();
+		int anchorHeight = this.anchor.getOffsetHeight();
 		int clientHeight = Window.getClientHeight();
 		if (topMenu + menuHeight > clientHeight && topMenu >= anchorHeight + menuHeight) {
-			StyleUtils.addStyle(this, STYLE_OPEN_UP);
+			StyleUtils.addStyle(this, SimpleDropdown.STYLE_OPEN_UP);
 		}
 		int leftMenu = menuElt.getAbsoluteLeft() - Window.getScrollLeft();
 		int menuWidth = menuElt.getOffsetWidth();
-		int anchorWidth = anchor.getOffsetWidth();
+		int anchorWidth = this.anchor.getOffsetWidth();
 		int clientWidth = Window.getClientWidth();
 		if (leftMenu + menuWidth > clientWidth && leftMenu >= anchorWidth + menuWidth) {
-			StyleUtils.addStyle(this, STYLE_OPEN_LEFT);
+			StyleUtils.addStyle(this, SimpleDropdown.STYLE_OPEN_LEFT);
 		}
-		open = true;
-		updateHandlers();
+		this.open = true;
+		this.updateHandlers();
 	}
 
 	@Override
 	public void toggleOpen() {
-		if (open) {
-			close();
+		if (this.open) {
+			this.close();
+		} else {
+			this.open();
 		}
-		else {
-			open();
-		}
-		anchor.setFocus(true);
+		this.anchor.setFocus(true);
 	}
 
 	public boolean isOpen() {
-		return open;
+		return this.open;
 	}
 
 	private boolean eventTargetsDropDown(NativePreviewEvent event) {
 		Event nativeEvent = Event.as(event.getNativeEvent());
 		EventTarget target = nativeEvent.getEventTarget();
 		if (Element.is(target)) {
-			return getElement().isOrHasChild(Element.as(target));
+			return this.getElement().isOrHasChild(Element.as(target));
 		}
 		return false;
 	}
 
 	private void updateHandlers() {
-		if (nativePreviewHandlerRegistration != null) {
-			nativePreviewHandlerRegistration.removeHandler();
-			nativePreviewHandlerRegistration = null;
+		if (this.nativePreviewHandlerRegistration != null) {
+			this.nativePreviewHandlerRegistration.removeHandler();
+			this.nativePreviewHandlerRegistration = null;
 		}
-		if (historyHandlerRegistration != null) {
-			historyHandlerRegistration.removeHandler();
-			historyHandlerRegistration = null;
+		if (this.historyHandlerRegistration != null) {
+			this.historyHandlerRegistration.removeHandler();
+			this.historyHandlerRegistration = null;
 		}
 
-		if (open) {
-			nativePreviewHandlerRegistration = Event.addNativePreviewHandler(new NativePreviewHandler() {
-				@Override
-				public void onPreviewNativeEvent(NativePreviewEvent event) {
-					if (!eventTargetsDropDown(event)) {
-						int type = event.getTypeInt();
-						switch (type) {
-						case Event.ONMOUSEDOWN:
-						case Event.ONTOUCHSTART:
-							close();
-							break;
-						default:
-							break;
+		if (this.open) {
+			this.nativePreviewHandlerRegistration =
+					Event.addNativePreviewHandler(new NativePreviewHandler() {
+						@Override
+						public void onPreviewNativeEvent(NativePreviewEvent event) {
+							if (!SimpleDropdown.this.eventTargetsDropDown(event)) {
+								int type = event.getTypeInt();
+								switch (type) {
+									case Event.ONMOUSEDOWN:
+									case Event.ONTOUCHSTART:
+										SimpleDropdown.this.close();
+										break;
+									default:
+										break;
+								}
+							}
 						}
-					}
-				}
-			});
-			historyHandlerRegistration = History.addValueChangeHandler(new ValueChangeHandler<String>() {
-				@Override
-				public void onValueChange(ValueChangeEvent<String> event) {
-					close();
-				}
-			});
+					});
+			this.historyHandlerRegistration =
+					History.addValueChangeHandler(new ValueChangeHandler<String>() {
+						@Override
+						public void onValueChange(ValueChangeEvent<String> event) {
+							SimpleDropdown.this.close();
+						}
+					});
 		}
 	}
 }

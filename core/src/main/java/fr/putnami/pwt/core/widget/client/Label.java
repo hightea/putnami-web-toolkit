@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -47,18 +45,18 @@ public class Label extends AbstractWidget implements EditorLabel, HasHtmlFor, Ha
 
 	public Label() {
 		super(LabelElement.TAG);
-		labelElement = LabelElement.as(getElement());
-		StyleUtils.addStyle(this, STYLE_CONTROL_LABEL);
+		this.labelElement = LabelElement.as(this.getElement());
+		StyleUtils.addStyle(this, Label.STYLE_CONTROL_LABEL);
 	}
 
 	private Label(Label source) {
 		super(source);
-		labelElement = LabelElement.as(getElement());
-		StyleUtils.addStyle(this, STYLE_CONTROL_LABEL);
+		this.labelElement = LabelElement.as(this.getElement());
+		StyleUtils.addStyle(this, Label.STYLE_CONTROL_LABEL);
 		this.path = source.path;
-		setText(source.text);
+		this.setText(source.text);
 		if (source.htmlFor != null) {
-			setHtmlFor(source.htmlFor);
+			this.setHtmlFor(source.htmlFor);
 		}
 	}
 
@@ -82,19 +80,19 @@ public class Label extends AbstractWidget implements EditorLabel, HasHtmlFor, Ha
 	public void setHtmlFor(String htmlFor) {
 		this.htmlFor = htmlFor;
 		this.labelElement.setHtmlFor(htmlFor);
-		ensureLabelEvent();
+		this.ensureLabelEvent();
 	}
 
 	private void ensureLabelEvent() {
-		if (clickRegistration != null) {
-			clickRegistration.removeHandler();
+		if (this.clickRegistration != null) {
+			this.clickRegistration.removeHandler();
 		}
-		if (htmlFor != null) {
-			clickRegistration = addDomHandler(new ClickHandler() {
+		if (this.htmlFor != null) {
+			this.clickRegistration = this.addDomHandler(new ClickHandler() {
 
 				@Override
 				public void onClick(ClickEvent event) {
-					EventBus.get().fireEvent(new AskFocusEvent(htmlFor));
+					EventBus.get().fireEvent(new AskFocusEvent(Label.this.htmlFor));
 				}
 			}, ClickEvent.getType());
 		}
@@ -127,8 +125,6 @@ public class Label extends AbstractWidget implements EditorLabel, HasHtmlFor, Ha
 
 	@Override
 	public String[] getSuffix() {
-		return new String[] {
-				EditorLabel.LABEL_SUFFIX, EditorLabel.EMPTY_SUFFIX
-		};
+		return new String[] {EditorLabel.LABEL_SUFFIX, EditorLabel.EMPTY_SUFFIX};
 	}
 }

@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client.base;
 
@@ -47,13 +45,12 @@ import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
-public abstract class AbstractHover implements IsWidget, HasWidgets, HasOneWidget, CloneableWidget, EditorComposite {
+public abstract class AbstractHover implements IsWidget, HasWidgets, HasOneWidget, CloneableWidget,
+EditorComposite {
 
 	public enum Visibility implements CssStyle {
 
-		SHOW("in"),
-		HIDE(null),
-		TOGGLE(null);
+		SHOW("in"), HIDE(null), TOGGLE(null);
 
 		private String name;
 
@@ -63,15 +60,12 @@ public abstract class AbstractHover implements IsWidget, HasWidgets, HasOneWidge
 
 		@Override
 		public String get() {
-			return name;
+			return this.name;
 		}
 	}
 
 	public enum Placement implements CssStyle {
-		TOP("top"),
-		BOTTOM("bottom"),
-		LEFT("left"),
-		RIGHT("right");
+		TOP("top"), BOTTOM("bottom"), LEFT("left"), RIGHT("right");
 
 		private String name;
 
@@ -86,41 +80,38 @@ public abstract class AbstractHover implements IsWidget, HasWidgets, HasOneWidge
 	}
 
 	public static enum Trigger {
-		HOVER,
-		FOCUS,
-		MANUAL;
+		HOVER, FOCUS, MANUAL;
 	}
 
 	protected class Handler implements FocusHandler, BlurHandler, MouseOverHandler, MouseOutHandler {
 
 		@Override
 		public void onMouseOver(MouseOverEvent event) {
-			if (visibilityChange == Visibility.HIDE) {
-				schedule(getShowDelay(), Visibility.SHOW);
+			if (AbstractHover.this.visibilityChange == Visibility.HIDE) {
+				AbstractHover.this.schedule(AbstractHover.this.getShowDelay(), Visibility.SHOW);
 			}
 		}
 
 		@Override
 		public void onMouseOut(MouseOutEvent event) {
-			if (visibilityChange == Visibility.SHOW) {
-				schedule(getHideDelay(), Visibility.HIDE);
+			if (AbstractHover.this.visibilityChange == Visibility.SHOW) {
+				AbstractHover.this.schedule(AbstractHover.this.getHideDelay(), Visibility.HIDE);
 			}
 		}
 
 		@Override
 		public void onFocus(FocusEvent event) {
-			if (visibilityChange == Visibility.HIDE) {
-				schedule(getShowDelay(), Visibility.SHOW);
+			if (AbstractHover.this.visibilityChange == Visibility.HIDE) {
+				AbstractHover.this.schedule(AbstractHover.this.getShowDelay(), Visibility.SHOW);
 			}
 		}
 
 		@Override
 		public void onBlur(BlurEvent event) {
-			if (visibilityChange == Visibility.SHOW) {
-				schedule(getHideDelay(), Visibility.HIDE);
+			if (AbstractHover.this.visibilityChange == Visibility.SHOW) {
+				AbstractHover.this.schedule(AbstractHover.this.getHideDelay(), Visibility.HIDE);
 			}
 		}
-
 	}
 
 	private String path;
@@ -142,17 +133,17 @@ public abstract class AbstractHover implements IsWidget, HasWidgets, HasOneWidge
 	}
 
 	protected AbstractHover(AbstractHover source) {
-		showDelayInMilliseconds = source.showDelayInMilliseconds;
-		hideDelayInMilliseconds = source.hideDelayInMilliseconds;
-		placement = source.placement;
+		this.showDelayInMilliseconds = source.showDelayInMilliseconds;
+		this.hideDelayInMilliseconds = source.hideDelayInMilliseconds;
+		this.placement = source.placement;
 
-		setWidget(WidgetUtils.cloneWidget(source.widget));
-		setTrigger(source.trigger);
+		this.setWidget(WidgetUtils.cloneWidget(source.widget));
+		this.setTrigger(source.trigger);
 	}
 
 	@Override
 	public String getPath() {
-		return path == null ? Path.ROOT_PATH : path;
+		return this.path == null ? Path.ROOT_PATH : this.path;
 	}
 
 	@Override
@@ -167,25 +158,24 @@ public abstract class AbstractHover implements IsWidget, HasWidgets, HasOneWidge
 
 	@Override
 	public Widget getWidget() {
-		return widget;
+		return this.widget;
 	}
 
 	@Override
 	public Widget asWidget() {
-		return getWidget();
-
+		return this.getWidget();
 	}
 
 	@Override
 	public void setWidget(Widget w) {
-		if (w == widget) {
+		if (w == this.widget) {
 			return;
 		}
-		widget = w;
-		if (widget == null) {
+		this.widget = w;
+		if (this.widget == null) {
 			return;
 		}
-		bindHandlers();
+		this.bindHandlers();
 	}
 
 	public void add(IsWidget w) {
@@ -194,7 +184,7 @@ public abstract class AbstractHover implements IsWidget, HasWidgets, HasOneWidge
 
 	@Override
 	public void add(Widget w) {
-		if (getWidget() != null) {
+		if (this.getWidget() != null) {
 			throw new IllegalStateException("can only contain one child widget");
 		}
 		this.setWidget(w);
@@ -202,20 +192,20 @@ public abstract class AbstractHover implements IsWidget, HasWidgets, HasOneWidge
 
 	@Override
 	public void clear() {
-		widget = null;
+		this.widget = null;
 	}
 
 	@Override
 	public Iterator<Widget> iterator() {
-		return Lists.newArrayList(widget).iterator();
+		return Lists.newArrayList(this.widget).iterator();
 	}
 
 	@Override
 	public boolean remove(Widget w) {
-		if (widget != w) {
+		if (this.widget != w) {
 			return false;
 		}
-		widget = null;
+		this.widget = null;
 		return true;
 	}
 
@@ -224,44 +214,44 @@ public abstract class AbstractHover implements IsWidget, HasWidgets, HasOneWidge
 	}
 
 	public Placement getPlacement() {
-		return placement;
+		return this.placement;
 	}
 
 	public void setTrigger(Trigger trigger) {
 		this.trigger = trigger;
-		bindHandlers();
+		this.bindHandlers();
 	}
 
 	public Trigger getTrigger() {
-		return trigger;
+		return this.trigger;
 	}
 
 	public void setShowDelay(int delayInMilliseconds) {
-		showDelayInMilliseconds = delayInMilliseconds;
+		this.showDelayInMilliseconds = delayInMilliseconds;
 	}
 
 	public int getShowDelay() {
-		return showDelayInMilliseconds;
+		return this.showDelayInMilliseconds;
 	}
 
 	public void setHideDelay(int delayInMilliseconds) {
-		hideDelayInMilliseconds = delayInMilliseconds;
+		this.hideDelayInMilliseconds = delayInMilliseconds;
 	}
 
 	public int getHideDelay() {
-		return hideDelayInMilliseconds;
+		return this.hideDelayInMilliseconds;
 	}
 
 	public void show() {
-		changeVisibility(Visibility.SHOW);
+		this.changeVisibility(Visibility.SHOW);
 	}
 
 	public void hide() {
-		changeVisibility(Visibility.HIDE);
+		this.changeVisibility(Visibility.HIDE);
 	}
 
 	public void toggleVisibility() {
-		changeVisibility(Visibility.TOGGLE);
+		this.changeVisibility(Visibility.TOGGLE);
 	}
 
 	public void changeVisibility(Visibility visibilityChange) {
@@ -269,57 +259,61 @@ public abstract class AbstractHover implements IsWidget, HasWidgets, HasOneWidge
 		if (order == Visibility.TOGGLE) {
 			order = this.visibilityChange == Visibility.HIDE ? Visibility.SHOW : Visibility.HIDE;
 		}
-		final Element toDisplayElement = getHoverWidget().getElement();
-		final Element target = getWidget().getElement();
+		final Element toDisplayElement = this.getHoverWidget().getElement();
+		final Element target = this.getWidget().getElement();
 		final Element parent = target.getParentElement();
-		if(parent == null){
+		if (parent == null) {
 			return;
 		}
 		switch (order) {
-		case SHOW:
-			parent.insertAfter(toDisplayElement, target);
-			toDisplayElement.getStyle().setDisplay(Display.BLOCK);
-			resetPosition(toDisplayElement, getWidget(), placement);
-			StyleUtils.addStyle(getHoverWidget(), placement);
-			StyleUtils.addStyle(toDisplayElement, Visibility.SHOW);
-			break;
-		case HIDE:
-			StyleUtils.removeStyle(toDisplayElement, Visibility.SHOW);
-			Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
+			case SHOW:
+				parent.insertAfter(toDisplayElement, target);
+				toDisplayElement.getStyle().setDisplay(Display.BLOCK);
+				this.resetPosition(toDisplayElement, this.getWidget(), this.placement);
+				StyleUtils.addStyle(this.getHoverWidget(), this.placement);
+				StyleUtils.addStyle(toDisplayElement, Visibility.SHOW);
+				break;
+			case HIDE:
+				StyleUtils.removeStyle(toDisplayElement, Visibility.SHOW);
+				Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
 
-				@Override
-				public boolean execute() {
-					toDisplayElement.getStyle().clearDisplay();
-					toDisplayElement.removeFromParent();
-					return false;
-				}
-			}, 200);
-			break;
-		default:
-			break;
+					@Override
+					public boolean execute() {
+						toDisplayElement.getStyle().clearDisplay();
+						toDisplayElement.removeFromParent();
+						return false;
+					}
+				}, 200);
+				break;
+			default:
+				break;
 		}
 		this.visibilityChange = order;
 	}
 
 	private void bindHandlers() {
-		if (widget == null) {
+		if (this.widget == null) {
 			return;
 		}
 
-		registrations.removeHandler();
-		switch (getTrigger()) {
-		case FOCUS:
-			registrations.add(widget.addDomHandler(triggerEventHandler, FocusEvent.getType()));
-			registrations.add(widget.addDomHandler(triggerEventHandler, BlurEvent.getType()));
-			break;
-		case HOVER:
-			registrations.add(widget.addDomHandler(triggerEventHandler, MouseOverEvent.getType()));
-			registrations.add(widget.addDomHandler(triggerEventHandler, MouseOutEvent.getType()));
-			break;
-		case MANUAL:
-			break;
-		default:
-			break;
+		this.registrations.removeHandler();
+		switch (this.getTrigger()) {
+			case FOCUS:
+				this.registrations.add(this.widget.addDomHandler(this.triggerEventHandler, FocusEvent
+						.getType()));
+				this.registrations.add(this.widget.addDomHandler(this.triggerEventHandler, BlurEvent
+						.getType()));
+				break;
+			case HOVER:
+				this.registrations.add(this.widget.addDomHandler(this.triggerEventHandler, MouseOverEvent
+						.getType()));
+				this.registrations.add(this.widget.addDomHandler(this.triggerEventHandler, MouseOutEvent
+						.getType()));
+				break;
+			case MANUAL:
+				break;
+			default:
+				break;
 		}
 	}
 
@@ -329,13 +323,12 @@ public abstract class AbstractHover implements IsWidget, HasWidgets, HasOneWidge
 
 				@Override
 				public boolean execute() {
-					changeVisibility(visibility);
+					AbstractHover.this.changeVisibility(visibility);
 					return false;
 				}
 			}, delay);
-		}
-		else {
-			changeVisibility(visibility);
+		} else {
+			this.changeVisibility(visibility);
 		}
 	}
 
@@ -353,29 +346,28 @@ public abstract class AbstractHover implements IsWidget, HasWidgets, HasOneWidge
 
 		elementStyle.setPosition(Position.ABSOLUTE);
 		switch (placement) {
-		case TOP:
-			elementStyle.setLeft(targetLeft + targetWidth / 2 - tooltipWidth / 2, Unit.PX);
-			elementStyle.setTop(targetTop - tooltipHeight, Unit.PX);
-			break;
-		case BOTTOM:
-			elementStyle.setLeft(targetLeft + targetWidth / 2 - tooltipWidth / 2, Unit.PX);
-			elementStyle.setTop(targetTop + targetHeight, Unit.PX);
-			break;
-		case LEFT:
-			elementStyle.setLeft(targetLeft - tooltipWidth, Unit.PX);
-			elementStyle.setTop(targetTop + targetHeight / 2 - tooltipHeight / 2, Unit.PX);
-			break;
-		case RIGHT:
-			elementStyle.setLeft(targetLeft + targetWidth, Unit.PX);
-			elementStyle.setTop(targetTop + targetHeight / 2 - tooltipHeight / 2, Unit.PX);
-			break;
-
+			case TOP:
+				elementStyle.setLeft(targetLeft + targetWidth / 2 - tooltipWidth / 2, Unit.PX);
+				elementStyle.setTop(targetTop - tooltipHeight, Unit.PX);
+				break;
+			case BOTTOM:
+				elementStyle.setLeft(targetLeft + targetWidth / 2 - tooltipWidth / 2, Unit.PX);
+				elementStyle.setTop(targetTop + targetHeight, Unit.PX);
+				break;
+			case LEFT:
+				elementStyle.setLeft(targetLeft - tooltipWidth, Unit.PX);
+				elementStyle.setTop(targetTop + targetHeight / 2 - tooltipHeight / 2, Unit.PX);
+				break;
+			case RIGHT:
+				elementStyle.setLeft(targetLeft + targetWidth, Unit.PX);
+				elementStyle.setTop(targetTop + targetHeight / 2 - tooltipHeight / 2, Unit.PX);
+				break;
 		}
 	}
 
 	@Override
 	public Iterable<Editor> getEditors() {
-		return Lists.newArrayList((Editor) getWidget());
+		return Lists.newArrayList((Editor) this.getWidget());
 	}
 
 	protected abstract Widget getHoverWidget();

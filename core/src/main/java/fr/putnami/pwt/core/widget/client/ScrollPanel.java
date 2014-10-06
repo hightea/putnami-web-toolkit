@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -36,7 +34,7 @@ public class ScrollPanel extends AbstractPanel implements CloneableWidget {
 
 		@Override
 		public void onResize(ResizeEvent event) {
-			reset();
+			ScrollPanel.this.reset();
 		}
 	};
 
@@ -56,7 +54,7 @@ public class ScrollPanel extends AbstractPanel implements CloneableWidget {
 		this.offsetBottom = source.offsetBottom;
 		this.offsetLeft = source.offsetLeft;
 		this.offsetRight = source.offsetRight;
-		cloneSourceWidgets(source);
+		this.cloneSourceWidgets(source);
 	}
 
 	@Override
@@ -71,52 +69,56 @@ public class ScrollPanel extends AbstractPanel implements CloneableWidget {
 
 			@Override
 			public void execute() {
-				Window.addResizeHandler(resizeHandler);
-				reset();
+				Window.addResizeHandler(ScrollPanel.this.resizeHandler);
+				ScrollPanel.this.reset();
 			}
 		});
 	}
 
 	@Override
 	public void add(IsWidget child) {
-		append(child);
+		this.append(child);
 	}
 
 	public void setOffsetTop(int offsetTop) {
 		this.offsetTop = offsetTop;
-		if (offsetBottom == null) {
-			offsetBottom = Integer.valueOf(0);
+		if (this.offsetBottom == null) {
+			this.offsetBottom = Integer.valueOf(0);
 		}
 	}
 
 	public void setOffsetBottom(int offsetBottom) {
 		this.offsetBottom = offsetBottom;
-		if (offsetTop == null) {
-			offsetTop = Integer.valueOf(0);
+		if (this.offsetTop == null) {
+			this.offsetTop = Integer.valueOf(0);
 		}
 	}
 
 	public void setOffsetLeft(int offsetLeft) {
 		this.offsetLeft = offsetLeft;
-		if (offsetRight == null) {
-			offsetRight = Integer.valueOf(0);
+		if (this.offsetRight == null) {
+			this.offsetRight = Integer.valueOf(0);
 		}
 	}
 
 	public void setOffsetRight(int offsetRight) {
 		this.offsetRight = offsetRight;
-		if (offsetLeft == null) {
-			offsetLeft = Integer.valueOf(0);
+		if (this.offsetLeft == null) {
+			this.offsetLeft = Integer.valueOf(0);
 		}
 	}
 
 	private void reset() {
-		getElement().getStyle().setOverflow(Overflow.AUTO);
-		if (offsetTop != null && offsetBottom != null) {
-			getElement().getStyle().setHeight(Document.get().getClientHeight() - offsetTop.intValue() - offsetBottom.intValue(), Unit.PX);
+		this.getElement().getStyle().setOverflow(Overflow.AUTO);
+		if (this.offsetTop != null && this.offsetBottom != null) {
+			this.getElement().getStyle().setHeight(
+					Document.get().getClientHeight() - this.offsetTop.intValue()
+					- this.offsetBottom.intValue(), Unit.PX);
 		}
-		if (offsetLeft != null && offsetRight != null) {
-			getElement().getStyle().setWidth(Document.get().getClientWidth() - offsetLeft.intValue() - offsetRight.intValue(), Unit.PX);
+		if (this.offsetLeft != null && this.offsetRight != null) {
+			this.getElement().getStyle().setWidth(
+					Document.get().getClientWidth() - this.offsetLeft.intValue()
+					- this.offsetRight.intValue(), Unit.PX);
 		}
 	}
 }

@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client.assist;
 
@@ -64,7 +62,9 @@ public class ContentAssistAspect {
 
 		@Override
 		public void onSuggestionsReady(Request request, Response response) {
-			suggestionDisplay.showSuggestions(ContentAssistAspect.this.textInput, response.getSuggestions(), suggestionCallback);
+			ContentAssistAspect.this.suggestionDisplay.showSuggestions(
+					ContentAssistAspect.this.textInput, response.getSuggestions(),
+					ContentAssistAspect.this.suggestionCallback);
 		}
 	};
 
@@ -87,28 +87,29 @@ public class ContentAssistAspect {
 
 	public void setInput(IsWidget input) {
 		this.textInput = input;
-		if (textInput != null) {
-			addEventsToTextInput();
+		if (this.textInput != null) {
+			this.addEventsToTextInput();
 		}
 	}
 
 	public IsWidget getInput() {
-		return textInput;
+		return this.textInput;
 	}
 
 	public Widget getSuggestionWidget() {
-		return suggestionDisplay.getSuggestionWidget();
+		return this.suggestionDisplay.getSuggestionWidget();
 	}
 
 	interface SuggestionCallback {
 		void onSuggestionSelected(Suggestion suggestion);
 	}
 
-	public static interface SuggestionDisplay {
+	public interface SuggestionDisplay {
 
 		boolean isSuggestionListShowing();
 
-		void showSuggestions(IsWidget textInput, Collection<? extends Suggestion> suggestions, SuggestionCallback suggestionCallback);
+		void showSuggestions(IsWidget textInput, Collection<? extends Suggestion> suggestions,
+				SuggestionCallback suggestionCallback);
 
 		void hideSuggestions();
 
@@ -119,7 +120,6 @@ public class ContentAssistAspect {
 		Suggestion getSelectedSelection();
 
 		Widget getSuggestionWidget();
-
 	}
 
 	static class SuggestionDisplayImpl implements SuggestionDisplay {
@@ -127,8 +127,8 @@ public class ContentAssistAspect {
 		private static class DropdownMenu extends AbstractPanel {
 			public DropdownMenu() {
 				super(UListElement.TAG);
-				StyleUtils.addStyle(this, STYLE_MENU);
-				StyleUtils.addStyle(this, STYLE_SCROLLABLE);
+				StyleUtils.addStyle(this, ContentAssistAspect.STYLE_MENU);
+				StyleUtils.addStyle(this, ContentAssistAspect.STYLE_SCROLLABLE);
 			}
 		}
 
@@ -142,78 +142,82 @@ public class ContentAssistAspect {
 		private boolean hideWhenEmpty = true;
 
 		public SuggestionDisplayImpl() {
-			suggestionPopup = new PopupPanel(true, false);
-			suggestionPopup.setPreviewingAllNativeEvents(true);
-			StyleUtils.addStyle(suggestionPopup, STYLE_POPUP);
+			this.suggestionPopup = new PopupPanel(true, false);
+			this.suggestionPopup.setPreviewingAllNativeEvents(true);
+			StyleUtils.addStyle(this.suggestionPopup, ContentAssistAspect.STYLE_POPUP);
 			FlowPanel dropdownContainer = new FlowPanel();
-			StyleUtils.addStyle(dropdownContainer, STYLE_DROPDOWN);
-			StyleUtils.addStyle(dropdownContainer, STYLE_OPEN);
-			dropdownContainer.add(suggestionsContainer);
-			suggestionPopup.setWidget(dropdownContainer);
+			StyleUtils.addStyle(dropdownContainer, ContentAssistAspect.STYLE_DROPDOWN);
+			StyleUtils.addStyle(dropdownContainer, ContentAssistAspect.STYLE_OPEN);
+			dropdownContainer.add(this.suggestionsContainer);
+			this.suggestionPopup.setWidget(dropdownContainer);
 		}
 
 		@Override
 		public void hideSuggestions() {
-			suggestionPopup.hide();
-			setSuggestionItemSelected(null);
+			this.suggestionPopup.hide();
+			this.setSuggestionItemSelected(null);
 		}
 
 		@Override
 		public boolean isSuggestionListShowing() {
-			return suggestionPopup.isShowing();
+			return this.suggestionPopup.isShowing();
 		}
 
 		@Override
 		public Suggestion getSelectedSelection() {
 			if (this.selectedItem != null) {
-				return selectedItem.suggestion;
+				return this.selectedItem.suggestion;
 			}
 			return null;
 		}
 
 		@Override
 		public void moveSelectionDown() {
-			if (isSuggestionListShowing() && selectedItem != null) {
-				int currentIndex = suggestionsContainer.getWidgetIndex(selectedItem);
-				if (suggestionsContainer.getWidgetCount() > currentIndex + 1) {
-					setSuggestionItemSelected((SuggestionItem) suggestionsContainer.getWidget(currentIndex + 1));
+			if (this.isSuggestionListShowing() && this.selectedItem != null) {
+				int currentIndex = this.suggestionsContainer.getWidgetIndex(this.selectedItem);
+				if (this.suggestionsContainer.getWidgetCount() > currentIndex + 1) {
+					this.setSuggestionItemSelected((SuggestionItem) this.suggestionsContainer
+							.getWidget(currentIndex + 1));
 				}
 			}
 		}
 
 		@Override
 		public void moveSelectionUp() {
-			if (isSuggestionListShowing() && selectedItem != null) {
-				int currentIndex = suggestionsContainer.getWidgetIndex(selectedItem);
+			if (this.isSuggestionListShowing() && this.selectedItem != null) {
+				int currentIndex = this.suggestionsContainer.getWidgetIndex(this.selectedItem);
 				if (currentIndex >= 1) {
-					setSuggestionItemSelected((SuggestionItem) suggestionsContainer.getWidget(currentIndex - 1));
+					this.setSuggestionItemSelected((SuggestionItem) this.suggestionsContainer
+							.getWidget(currentIndex - 1));
 				}
 			}
 		}
 
 		@Override
-		public void showSuggestions(final IsWidget textInput, Collection<? extends Suggestion> suggestions, final SuggestionCallback callback) {
+		public void showSuggestions(final IsWidget textInput,
+				Collection<? extends Suggestion> suggestions, final SuggestionCallback callback) {
 			boolean anySuggestions = suggestions != null && suggestions.size() > 0;
-			if (!anySuggestions && hideWhenEmpty) {
-				hideSuggestions();
+			if (!anySuggestions && this.hideWhenEmpty) {
+				this.hideSuggestions();
 				return;
 			}
 
-			if (suggestionPopup.isAttached()) {
-				suggestionPopup.hide();
+			if (this.suggestionPopup.isAttached()) {
+				this.suggestionPopup.hide();
 			}
 
-			suggestionsContainer.clear();
+			this.suggestionsContainer.clear();
 
-			SuggestionItem selectedItem = null;
+			SuggestionItem selected = null;
 			for (final Suggestion currentSuggestion : suggestions) {
 				final SuggestionItem suggestionItem = new SuggestionItem(currentSuggestion);
-				if (selectedItem == null) {
-					selectedItem = suggestionItem;
+				if (selected == null) {
+					selected = suggestionItem;
 				}
 				if (this.selectedItem != null) {
-					if (currentSuggestion.getReplacementString().equals(this.selectedItem.suggestion.getReplacementString())) {
-						selectedItem = suggestionItem;
+					if (currentSuggestion.getReplacementString().equals(
+							this.selectedItem.suggestion.getReplacementString())) {
+						selected = suggestionItem;
 					}
 				}
 
@@ -223,31 +227,31 @@ public class ContentAssistAspect {
 						if (textInput instanceof Focusable) {
 							((Focusable) textInput).setFocus(true);
 						}
-						setSuggestionItemSelected(suggestionItem);
+						SuggestionDisplayImpl.this.setSuggestionItemSelected(suggestionItem);
 						callback.onSuggestionSelected(suggestionItem.suggestion);
 					}
 				}, MouseUpEvent.getType());
 
-				suggestionsContainer.append(suggestionItem);
+				this.suggestionsContainer.append(suggestionItem);
 			}
 
-			setSuggestionItemSelected(selectedItem);
+			this.setSuggestionItemSelected(selected);
 
-			if (lastTextInput != textInput) {
-				if (lastTextInput != null) {
-					suggestionPopup.removeAutoHidePartner(lastTextInput.asWidget().getElement());
+			if (this.lastTextInput != textInput) {
+				if (this.lastTextInput != null) {
+					this.suggestionPopup.removeAutoHidePartner(this.lastTextInput.asWidget().getElement());
 				}
-				lastTextInput = textInput;
-				suggestionPopup.addAutoHidePartner(lastTextInput.asWidget().getElement());
+				this.lastTextInput = textInput;
+				this.suggestionPopup.addAutoHidePartner(this.lastTextInput.asWidget().getElement());
 			}
 
-			suggestionPopup.showRelativeTo(lastTextInput.asWidget());
-			scrollToSelected();
+			this.suggestionPopup.showRelativeTo(this.lastTextInput.asWidget());
+			this.scrollToSelected();
 		}
 
 		@Override
 		public Widget getSuggestionWidget() {
-			return suggestionPopup;
+			return this.suggestionPopup;
 		}
 
 		private void setSuggestionItemSelected(SuggestionItem newSelection) {
@@ -258,15 +262,14 @@ public class ContentAssistAspect {
 			if (newSelection != null) {
 				StyleUtils.addStyle(this.selectedItem, LinkStyle.ACTIVE);
 			}
-			scrollToSelected();
+			this.scrollToSelected();
 		}
 
 		private void scrollToSelected() {
-			if (isSuggestionListShowing() && this.selectedItem != null) {
+			if (this.isSuggestionListShowing() && this.selectedItem != null) {
 				this.selectedItem.getElement().scrollIntoView();
 			}
 		}
-
 	}
 
 	static class SuggestionItem extends Widget {
@@ -274,12 +277,12 @@ public class ContentAssistAspect {
 		private final Suggestion suggestion;
 
 		public SuggestionItem(Suggestion suggestion) {
-			setElement(Document.get().createLIElement());
+			this.setElement(Document.get().createLIElement());
 			this.suggestion = suggestion;
 			AnchorElement anchor = Document.get().createAnchorElement();
 			anchor.setHref(AnchorUtils.DUMMY_HREF);
 			anchor.setInnerHTML(suggestion.getDisplayString());
-			getElement().appendChild(anchor);
+			this.getElement().appendChild(anchor);
 		}
 	}
 
@@ -311,32 +314,32 @@ public class ContentAssistAspect {
 			@Override
 			public void onKeyDown(KeyDownEvent event) {
 				boolean mustKillEvent = false;
-				if (suggestionDisplay.isSuggestionListShowing()) {
+				if (ContentAssistAspect.this.suggestionDisplay.isSuggestionListShowing()) {
 					switch (event.getNativeKeyCode()) {
-					case KeyCodes.KEY_DOWN:
-						suggestionDisplay.moveSelectionDown();
-						mustKillEvent = true;
-						break;
-					case KeyCodes.KEY_UP:
-						suggestionDisplay.moveSelectionUp();
-						mustKillEvent = true;
-						break;
-					case KeyCodes.KEY_ENTER:
-					case KeyCodes.KEY_TAB:
-						Suggestion suggestion = suggestionDisplay.getSelectedSelection();
-						if (suggestion == null) {
-							suggestionDisplay.hideSuggestions();
-						}
-						else {
-							suggestionCallback.onSuggestionSelected(suggestion);
-						}
-						mustKillEvent = true;
-						break;
-					case KeyCodes.KEY_ESCAPE:
-						suggestionDisplay.hideSuggestions();
-						break;
-					default:
-						break;
+						case KeyCodes.KEY_DOWN:
+							ContentAssistAspect.this.suggestionDisplay.moveSelectionDown();
+							mustKillEvent = true;
+							break;
+						case KeyCodes.KEY_UP:
+							ContentAssistAspect.this.suggestionDisplay.moveSelectionUp();
+							mustKillEvent = true;
+							break;
+						case KeyCodes.KEY_ENTER:
+						case KeyCodes.KEY_TAB:
+							Suggestion suggestion =
+							ContentAssistAspect.this.suggestionDisplay.getSelectedSelection();
+							if (suggestion == null) {
+								ContentAssistAspect.this.suggestionDisplay.hideSuggestions();
+							} else {
+								ContentAssistAspect.this.suggestionCallback.onSuggestionSelected(suggestion);
+							}
+							mustKillEvent = true;
+							break;
+						case KeyCodes.KEY_ESCAPE:
+							ContentAssistAspect.this.suggestionDisplay.hideSuggestions();
+							break;
+						default:
+							break;
 					}
 				}
 				if (mustKillEvent) {
@@ -347,21 +350,20 @@ public class ContentAssistAspect {
 
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
-				if (suggestionDisplay.isSuggestionListShowing()) {
+				if (ContentAssistAspect.this.suggestionDisplay.isSuggestionListShowing()) {
 					switch (event.getNativeKeyCode()) {
-					case KeyCodes.KEY_DOWN:
-					case KeyCodes.KEY_UP:
-					case KeyCodes.KEY_ENTER:
-					case KeyCodes.KEY_TAB:
-					case KeyCodes.KEY_ESCAPE:
-						return;
-					default:
-						break;
+						case KeyCodes.KEY_DOWN:
+						case KeyCodes.KEY_UP:
+						case KeyCodes.KEY_ENTER:
+						case KeyCodes.KEY_TAB:
+						case KeyCodes.KEY_ESCAPE:
+							return;
+						default:
+							break;
 					}
 				}
-				refreshSuggestions();
+				ContentAssistAspect.this.refreshSuggestions();
 			}
-
 		}
 
 		TextInputEventsHandler handler = new TextInputEventsHandler();
@@ -375,26 +377,27 @@ public class ContentAssistAspect {
 	}
 
 	protected void showSuggestions(String query) {
-		if (assistHandler.getOracle() != null) {
+		if (this.assistHandler.getOracle() != null) {
 			if (query.length() == 0) {
-				assistHandler.getOracle().requestDefaultSuggestions(new Request(null, assistHandler.getLimit()), oracleCallback);
-			}
-			else {
-				assistHandler.getOracle().requestSuggestions(new Request(query, assistHandler.getLimit()), oracleCallback);
+				this.assistHandler.getOracle().requestDefaultSuggestions(
+						new Request(null, this.assistHandler.getLimit()), this.oracleCallback);
+			} else {
+				this.assistHandler.getOracle().requestSuggestions(
+						new Request(query, this.assistHandler.getLimit()), this.oracleCallback);
 			}
 		}
 	}
 
 	protected void refreshSuggestions() {
-		showSuggestions(assistHandler.getQueryText(textInput));
+		this.showSuggestions(this.assistHandler.getQueryText(this.textInput));
 	}
 
 	protected void setNewSelection(Suggestion curSuggestion) {
-		assistHandler.handleSuggestionSelected(this.textInput, curSuggestion);
-		suggestionDisplay.hideSuggestions();
+		this.assistHandler.handleSuggestionSelected(this.textInput, curSuggestion);
+		this.suggestionDisplay.hideSuggestions();
 	}
 
 	public ContentAssistHandler getContentAssistHandler() {
-		return assistHandler;
+		return this.assistHandler;
 	}
 }

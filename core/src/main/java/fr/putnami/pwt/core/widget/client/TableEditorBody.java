@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -43,12 +41,8 @@ import fr.putnami.pwt.core.widget.client.base.AbstractTableColumn;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class TableEditorBody<T> extends TableBody<T> implements
-HasDriver<Collection<T>,
-ModelDriver<Collection<T>>>,
-EditorOutput<Collection<T>>,
-EditorInput<Collection<T>>,
-EditorCollection<T>,
-EditorModel<T> {
+HasDriver<Collection<T>, ModelDriver<Collection<T>>>, EditorOutput<Collection<T>>,
+EditorInput<Collection<T>>, EditorCollection<T>, EditorModel<T> {
 
 	private final List<AbstractTableColumn<?>> columns = Lists.newArrayList();
 
@@ -64,7 +58,7 @@ EditorModel<T> {
 	protected TableEditorBody(TableEditorBody<T> source) {
 		super(source);
 		for (AbstractTableColumn<?> col : source.columns) {
-			addColumn(WidgetUtils.cloneWidget(col));
+			this.addColumn(WidgetUtils.cloneWidget(col));
 		}
 	}
 
@@ -88,13 +82,13 @@ EditorModel<T> {
 		assert this.model == null : "model can not be set twice.";
 		this.model = model;
 		this.driver = new ModelDriver<Collection<T>>(new ModelCollection<T>(List.class, model));
-		this.driver.setMessageHelper(messageHelper);
+		this.driver.setMessageHelper(this.messageHelper);
 		this.driver.initialize(this, visitors);
 	}
 
 	@Override
 	public ModelDriver<Collection<T>> getDriver() {
-		return driver;
+		return this.driver;
 	}
 
 	@Override
@@ -129,18 +123,18 @@ EditorModel<T> {
 	@Override
 	public Collection<T> flush() {
 		// FIXME flush is not called from the drivers, but from TableEditor
-		List<T> values = (List<T>) driver.getValue();
+		List<T> values = (List<T>) this.driver.getValue();
 		values.clear();
-		for (TableRow<T> row : getRowList()) {
+		for (TableRow<T> row : this.getRowList()) {
 			values.add(row.getValue());
 		}
 		return values;
-		//		return this.driver.flush();
+		// return this.driver.flush();
 	}
 
 	@Override
 	public void edit(Collection<T> value) {
-		for (TableRow<T> row : getRowList()) {
+		for (TableRow<T> row : this.getRowList()) {
 			row.setVisible(false);
 		}
 		this.driver.edit(value);
@@ -149,8 +143,8 @@ EditorModel<T> {
 	@Override
 	public <A extends EditorValue<T>> A getEditorForTraversal(int index) {
 		TableRow<T> row = null;
-		if (getRowList().size() > index) {
-			row = getRowList().get(index);
+		if (this.getRowList().size() > index) {
+			row = this.getRowList().get(index);
 		}
 		if (row == null) {
 			row = new TableRow<T>();
@@ -158,11 +152,11 @@ EditorModel<T> {
 			for (AbstractTableColumn<?> column : this.columns) {
 				row.append(column.createBodyCell());
 			}
-			row.setReadonly(getReadonly());
-			row.setMessageHelper(messageHelper);
-			row.setPath(Strings.nullToEmpty(getPath()) + "[" + index + "]");
+			row.setReadonly(this.getReadonly());
+			row.setMessageHelper(this.messageHelper);
+			row.setPath(Strings.nullToEmpty(this.getPath()) + "[" + index + "]");
 
-			addRow(row);
+			this.addRow(row);
 		}
 		row.setVisible(true);
 		return (A) row;
@@ -170,10 +164,10 @@ EditorModel<T> {
 
 	public void switchRows(TableRow<T> first, TableRow<T> second) {
 		List<T> values = null;
-		if (getValue() instanceof List) {
-			values = (List<T>) getValue();
+		if (this.getValue() instanceof List) {
+			values = (List<T>) this.getValue();
 		}
-		List<TableRow<T>> rows = getRowList();
+		List<TableRow<T>> rows = this.getRowList();
 		int firstIndex = rows.indexOf(first);
 		int secondIndex = rows.indexOf(second);
 		T firstVal = first.getValue();
@@ -181,8 +175,7 @@ EditorModel<T> {
 
 		if (firstIndex == secondIndex) {
 			return;
-		}
-		else if (firstIndex < secondIndex) {
+		} else if (firstIndex < secondIndex) {
 			rows.remove(firstIndex);
 			rows.add(firstIndex, second);
 			rows.remove(secondIndex);
@@ -198,9 +191,8 @@ EditorModel<T> {
 				values.add(secondIndex, firstVal);
 			}
 
-			insert(second, firstIndex, true);
-		}
-		else {
+			this.insert(second, firstIndex, true);
+		} else {
 			rows.remove(secondIndex);
 			rows.add(secondIndex, first);
 			rows.remove(firstIndex);
@@ -216,23 +208,23 @@ EditorModel<T> {
 				values.add(firstIndex, secondVal);
 			}
 
-			insert(first, secondIndex, true);
+			this.insert(first, secondIndex, true);
 		}
 	}
 
 	@Override
 	public Collection<T> getValue() {
-		return driver == null ? null : driver.getValue();
+		return this.driver == null ? null : this.driver.getValue();
 	}
 
 	@Override
 	public boolean hasErrors() {
-		return driver == null ? false : driver.hasErrors();
+		return this.driver == null ? false : this.driver.hasErrors();
 	}
 
 	@Override
 	public Iterable<Error> getErrors() {
-		return driver == null ? Collections.EMPTY_LIST : driver.getErrors();
+		return this.driver == null ? Collections.EMPTY_LIST : this.driver.getErrors();
 	}
 
 	@Override

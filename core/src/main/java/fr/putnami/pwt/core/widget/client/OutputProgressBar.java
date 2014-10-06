@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -32,7 +30,6 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class OutputProgressBar<T extends Number> extends AbstractWidget implements EditorOutput<T> {
 
-
 	private static final String ROLE_PROGRESSBAR = "progressbar";
 
 	private static final String ATT_ARIA_VALUE = "aria-valuenow";
@@ -45,11 +42,8 @@ public class OutputProgressBar<T extends Number> extends AbstractWidget implemen
 	private static final CssStyle STYLE_ANIMATED = new SimpleStyle("active");
 
 	public enum Color implements CssStyle {
-		DEFAULT(null),
-		SUCCESS("progress-bar-success"),
-		INFO("progress-bar-info"),
-		WARNING("progress-bar-warning"),
-		DANGER("progress-bar-danger");
+		DEFAULT(null), SUCCESS("progress-bar-success"), INFO("progress-bar-info"), WARNING(
+				"progress-bar-warning"), DANGER("progress-bar-danger");
 
 		private final String style;
 
@@ -59,7 +53,7 @@ public class OutputProgressBar<T extends Number> extends AbstractWidget implemen
 
 		@Override
 		public String get() {
-			return style;
+			return this.style;
 		}
 	}
 
@@ -79,8 +73,8 @@ public class OutputProgressBar<T extends Number> extends AbstractWidget implemen
 
 	public OutputProgressBar() {
 		super(DivElement.TAG);
-		StyleUtils.addStyle(this, STYLE_PROGRESS);
-		endConstruct();
+		StyleUtils.addStyle(this, OutputProgressBar.STYLE_PROGRESS);
+		this.endConstruct();
 	}
 
 	protected OutputProgressBar(OutputProgressBar source) {
@@ -90,18 +84,17 @@ public class OutputProgressBar<T extends Number> extends AbstractWidget implemen
 		this.min = source.min;
 		this.displayValue = source.displayValue;
 		this.format = source.format;
-		setColor(source.color);
-		setStriped(source.striped);
-		setAnimated(source.animated);
+		this.setColor(source.color);
+		this.setStriped(source.striped);
+		this.setAnimated(source.animated);
 
-		endConstruct();
+		this.endConstruct();
 	}
 
 	private void endConstruct() {
-		getElement().appendChild(progressBarElement);
-		progressBarElement.setAttribute("role", ROLE_PROGRESSBAR);
-		StyleUtils.addStyle(progressBarElement, STYLE_PROGRESSBAR);
-
+		this.getElement().appendChild(this.progressBarElement);
+		this.progressBarElement.setAttribute("role", OutputProgressBar.ROLE_PROGRESSBAR);
+		StyleUtils.addStyle(this.progressBarElement, OutputProgressBar.STYLE_PROGRESSBAR);
 	}
 
 	@Override
@@ -111,74 +104,73 @@ public class OutputProgressBar<T extends Number> extends AbstractWidget implemen
 
 	@Override
 	public T getValue() {
-		return value;
+		return this.value;
 	}
 
 	@Override
 	public void edit(T value) {
-		setValue(value);
+		this.setValue(value);
 	}
 
 	public void setValue(T value) {
 		this.value = value;
 		double val = 0;
-		if(value == null){
-			val = min;
-		}
-		else {
+		if (value == null) {
+			val = this.min;
+		} else {
 			val = value.doubleValue();
 		}
-		if(val>max){
-			val = max;
-		}
-		else if(val < min){
-			val = min;
+		if (val > this.max) {
+			val = this.max;
+		} else if (val < this.min) {
+			val = this.min;
 		}
 
-		progressBarElement.setAttribute(ATT_ARIA_VALUE, value + "");
-		double percent = 100 * (val - min) / (max - min);
-		progressBarElement.getStyle().setProperty("width", percent, Unit.PCT);
+		this.progressBarElement.setAttribute(OutputProgressBar.ATT_ARIA_VALUE, value + "");
+		double percent = 100 * (val - this.min) / (this.max - this.min);
+		this.progressBarElement.getStyle().setProperty("width", percent, Unit.PCT);
 
 		NumberFormat formatter = NumberFormat.getFormat("#.##");
 
-		String stringToDisplay = format;
+		String stringToDisplay = this.format;
 		stringToDisplay = RegExp.compile("\\{0\\}").replace(stringToDisplay, formatter.format(val));
 		stringToDisplay = RegExp.compile("\\{1\\}").replace(stringToDisplay, formatter.format(percent));
-		stringToDisplay = RegExp.compile("\\{2\\}").replace(stringToDisplay, formatter.format(min));
-		stringToDisplay = RegExp.compile("\\{3\\}").replace(stringToDisplay, formatter.format(max));
+		stringToDisplay =
+				RegExp.compile("\\{2\\}").replace(stringToDisplay, formatter.format(this.min));
+		stringToDisplay =
+				RegExp.compile("\\{3\\}").replace(stringToDisplay, formatter.format(this.max));
 
-		progressBarElement.removeAllChildren();
-		if (displayValue) {
-			progressBarElement.setInnerText(stringToDisplay);
-		}
-		else {
+		this.progressBarElement.removeAllChildren();
+		if (this.displayValue) {
+			this.progressBarElement.setInnerText(stringToDisplay);
+		} else {
 			SpanElement reader = Document.get().createSpanElement();
 			reader.setInnerText(stringToDisplay);
 			reader.addClassName("sr-only");
-			progressBarElement.appendChild(reader);
+			this.progressBarElement.appendChild(reader);
 		}
 	}
 
 	public int getMin() {
-		return min;
+		return this.min;
 	}
 
 	public void setMin(int min) {
 		this.min = min;
-		progressBarElement.setAttribute(ATT_ARIA_MIN, min + "");
+		this.progressBarElement.setAttribute(OutputProgressBar.ATT_ARIA_MIN, min + "");
 	}
 
 	public int getMax() {
-		return max;
+		return this.max;
 	}
 
 	public void setMax(int max) {
 		this.max = max;
-		progressBarElement.setAttribute(ATT_ARIA_MAX, max + "");
+		this.progressBarElement.setAttribute(OutputProgressBar.ATT_ARIA_MAX, max + "");
 	}
 
 	public String getFormat() {
-		return format;
+		return this.format;
 	}
 
 	public void setFormat(String format) {
@@ -186,7 +178,7 @@ public class OutputProgressBar<T extends Number> extends AbstractWidget implemen
 	}
 
 	public boolean isDisplayValue() {
-		return displayValue;
+		return this.displayValue;
 	}
 
 	public void setDisplayValue(boolean displayValue) {
@@ -194,33 +186,33 @@ public class OutputProgressBar<T extends Number> extends AbstractWidget implemen
 	}
 
 	public Color getColor() {
-		return color;
+		return this.color;
 	}
 
 	public void setColor(Color color) {
 		this.color = color;
-		StyleUtils.addStyle(progressBarElement, color);
+		StyleUtils.addStyle(this.progressBarElement, color);
 	}
 
 	public boolean isStriped() {
-		return striped;
+		return this.striped;
 	}
 
 	public void setStriped(boolean striped) {
 		this.striped = striped;
-		StyleUtils.toggleStyle(this, STYLE_STRIPED, striped);
+		StyleUtils.toggleStyle(this, OutputProgressBar.STYLE_STRIPED, striped);
 	}
 
 	public boolean isAnimated() {
-		return animated;
+		return this.animated;
 	}
 
 	public void setAnimated(boolean animated) {
 		this.animated = animated;
 		if (animated) {
-			setStriped(true);
+			this.setStriped(true);
 		}
-		StyleUtils.toggleStyle(this, STYLE_ANIMATED, animated);
+		StyleUtils.toggleStyle(this, OutputProgressBar.STYLE_ANIMATED, animated);
 	}
 
 }

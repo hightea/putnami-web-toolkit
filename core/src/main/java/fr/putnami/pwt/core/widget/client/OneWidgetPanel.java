@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -34,11 +32,8 @@ import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.widget.client.base.AbstractComposite;
 import fr.putnami.pwt.core.widget.client.base.BaseSimplePanel;
 
-public class OneWidgetPanel extends AbstractComposite implements
-		HasWidgets.ForIsWidget,
-		HasOneWidget,
-		CloneableWidget,
-		EditorComposite {
+public class OneWidgetPanel extends AbstractComposite implements HasWidgets.ForIsWidget,
+HasOneWidget, CloneableWidget, EditorComposite {
 
 	private final BaseSimplePanel container;
 
@@ -50,18 +45,18 @@ public class OneWidgetPanel extends AbstractComposite implements
 
 	@UiConstructor
 	public OneWidgetPanel(String tag) {
-		container = new BaseSimplePanel(tag);
-		endConstruct();
+		this.container = new BaseSimplePanel(tag);
+		this.endConstruct();
 	}
 
 	public OneWidgetPanel(OneWidgetPanel source) {
 		super(source);
-		container = (BaseSimplePanel) source.container.cloneWidget();
-		endConstruct();
+		this.container = (BaseSimplePanel) source.container.cloneWidget();
+		this.endConstruct();
 	}
 
 	private void endConstruct() {
-		initWidget(container);
+		this.initWidget(this.container);
 	}
 
 	@Override
@@ -71,17 +66,17 @@ public class OneWidgetPanel extends AbstractComposite implements
 
 	@Override
 	public Widget getWidget() {
-		return container.getWidget();
+		return this.container.getWidget();
 	}
 
 	@Override
 	public void setWidget(IsWidget w) {
-		container.setWidget(w);
+		this.container.setWidget(w);
 	}
 
 	@Override
 	public void setWidget(Widget w) {
-		setWidget((IsWidget) w);
+		this.setWidget((IsWidget) w);
 	}
 
 	/**
@@ -89,7 +84,7 @@ public class OneWidgetPanel extends AbstractComposite implements
 	 */
 	@Override
 	public void add(Widget w) {
-		add((IsWidget) w);
+		this.add((IsWidget) w);
 	}
 
 	/**
@@ -97,40 +92,40 @@ public class OneWidgetPanel extends AbstractComposite implements
 	 */
 	@Override
 	public void add(IsWidget w) {
-		container.add(w);
+		this.container.add(w);
 	}
 
 	@Override
 	public void clear() {
-		container.clear();
+		this.container.clear();
 	}
 
 	@Override
 	public Iterator<Widget> iterator() {
-		return container.iterator();
+		return this.container.iterator();
 	}
 
 	@Override
 	public boolean remove(Widget w) {
-		return remove((IsWidget) w);
+		return this.remove((IsWidget) w);
 	}
 
 	@Override
 	public boolean remove(IsWidget w) {
-		return container.remove(w);
+		return this.container.remove(w);
 	}
 
 	@Override
 	public Iterable<Editor> getEditors() {
-		if (container.getWidget() instanceof Editor) {
-			return Sets.newHashSet((Editor) container.getWidget());
+		if (this.container.getWidget() instanceof Editor) {
+			return Sets.newHashSet((Editor) this.container.getWidget());
 		}
 		return Collections.emptySet();
 	}
 
 	@Override
 	public String getPath() {
-		return path == null ? Path.ROOT_PATH : path;
+		return this.path == null ? Path.ROOT_PATH : this.path;
 	}
 
 	@Override

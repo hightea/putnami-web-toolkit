@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.inject.rebind.delegate;
 
@@ -32,16 +30,16 @@ import fr.putnami.pwt.core.theme.client.CssLink;
 import fr.putnami.pwt.core.theme.client.Theme;
 import fr.putnami.pwt.core.theme.client.ThemeController;
 
-public class InjectThemeCreator extends InjectorCreatorDelegate implements InjectorWritterInit, InjectorWritterEntryPoint {
+public class InjectThemeCreator extends InjectorCreatorDelegate implements InjectorWritterInit,
+InjectorWritterEntryPoint {
 
 	private final List<String> styles = Lists.newArrayList();
 
 	public InjectThemeCreator(JClassType injectableType, ThemeDescription themeDescritpion) {
 		if (themeDescritpion.styleSheets() != null) {
 			for (String style : themeDescritpion.styleSheets()) {
-				styles.add(style);
+				this.styles.add(style);
 			}
-
 		}
 	}
 
@@ -58,7 +56,7 @@ public class InjectThemeCreator extends InjectorCreatorDelegate implements Injec
 	@Override
 	public void writeEntryPoint(SourceWriter srcWriter) {
 		srcWriter.println("Theme theme = new Theme();");
-		for (String style : styles) {
+		for (String style : this.styles) {
 			srcWriter.println("theme.addLink(new CssLink(\"%s\", 0));", style);
 		}
 		srcWriter.println("ThemeController.get().installTheme(theme);");

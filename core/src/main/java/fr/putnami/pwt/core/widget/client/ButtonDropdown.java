@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -35,23 +33,23 @@ public class ButtonDropdown extends SimpleDropdown {
 
 	public ButtonDropdown() {
 		super(DivElement.TAG);
-		StyleUtils.addStyle(this, STYLE_BUTTON_GROUP);
-		StyleUtils.addStyle(getAnchor(), STYLE_BUTTON);
-		setType(type);
+		StyleUtils.addStyle(this, ButtonDropdown.STYLE_BUTTON_GROUP);
+		StyleUtils.addStyle(this.getAnchor(), ButtonDropdown.STYLE_BUTTON);
+		this.setType(this.type);
 	}
 
 	public ButtonDropdown(String label) {
 		this();
-		setLabel(label);
+		this.setLabel(label);
 	}
 
 	public void setType(Type type) {
 		this.type = type;
-		StyleUtils.addStyle(getAnchor(), this.type);
+		StyleUtils.addStyle(this.getAnchor(), this.type);
 	}
 
 	public void setSize(Size size) {
 		this.size = size;
-		StyleUtils.addStyle(getAnchor(), this.size);
+		StyleUtils.addStyle(this.getAnchor(), this.size);
 	}
 }

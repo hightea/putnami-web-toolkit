@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -39,11 +37,8 @@ import fr.putnami.pwt.core.widget.client.helper.PaginationHelper;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class TableEditor<T> extends Table<T> implements
-HasDriver<Collection<T>, ModelDriver<Collection<T>>>,
-EditorLeaf,
-EditorOutput<Collection<T>>,
-EditorInput<Collection<T>>,
-EditorModel<T> {
+HasDriver<Collection<T>, ModelDriver<Collection<T>>>, EditorLeaf, EditorOutput<Collection<T>>,
+EditorInput<Collection<T>>, EditorModel<T> {
 
 	private MessageHelper messageHelper;
 	private Model<T> model;
@@ -57,7 +52,7 @@ EditorModel<T> {
 
 	protected TableEditor(TableEditor<T> source) {
 		super(source);
-		setPaginationHelper(WidgetUtils.cloneWidget(source.pagination));
+		this.setPaginationHelper(WidgetUtils.cloneWidget(source.pagination));
 	}
 
 	@Override
@@ -68,7 +63,7 @@ EditorModel<T> {
 	@Override
 	protected TableBody<T> createBody(String bodyId) {
 		TableBody<T> body = new TableEditorBody<T>(bodyId);
-		body.setReadonly(getReadonly());
+		body.setReadonly(this.getReadonly());
 		return body;
 	}
 
@@ -106,17 +101,17 @@ EditorModel<T> {
 		assert this.model == null : "model can not be set twice.";
 		this.model = model;
 		this.driver = new ModelDriver<Collection<T>>(new ModelCollection<T>(List.class, model));
-		this.driver.setMessageHelper(messageHelper);
+		this.driver.setMessageHelper(this.messageHelper);
 		this.driver.initialize(this, visitors);
-		this.driver.accept(new ReadonlyVisitor(this, getReadonly(), true));
-		if (pagination != null) {
-			driver.registerVisitor(pagination);
+		this.driver.accept(new ReadonlyVisitor(this, this.getReadonly(), true));
+		if (this.pagination != null) {
+			this.driver.registerVisitor(this.pagination);
 		}
 	}
 
 	@Override
 	public ModelDriver<Collection<T>> getDriver() {
-		return driver;
+		return this.driver;
 	}
 
 	@Override
@@ -129,19 +124,19 @@ EditorModel<T> {
 		this.driver.flush();
 		// FIXME TableOrder doesn't sort result, so we ask to sort result via TableEditor
 		if (!this.driver.hasErrors()) {
-			return ((TableEditorBody) getDefaultBody()).flush();
+			return ((TableEditorBody) this.getDefaultBody()).flush();
 		}
 		return this.driver.getValue();
 	}
 
 	@Override
 	public void edit(Collection<T> value) {
-		driver.edit(value);
+		this.driver.edit(value);
 	}
 
 	public <A> boolean removeColumn(AbstractTableColumn<A> column) {
-		ensureTableHead().removeColumn(column);
-		TableBody<T> body = getDefaultBody();
+		this.ensureTableHead().removeColumn(column);
+		TableBody<T> body = this.getDefaultBody();
 		if (body instanceof TableEditorBody) {
 			((TableEditorBody) body).removeColumn(column);
 		}
@@ -149,35 +144,35 @@ EditorModel<T> {
 	}
 
 	private void setPagination(Pagination pagination) {
-		setPaginationHelper(new PaginationHelper<T>(pagination));
+		this.setPaginationHelper(new PaginationHelper<T>(pagination));
 	}
 
 	private void setPaginationHelper(PaginationHelper<T> paginationHelper) {
 		this.pagination = paginationHelper;
-		append(this.pagination);
-		if (driver != null) {
-			driver.registerVisitor(this.pagination);
+		this.append(this.pagination);
+		if (this.driver != null) {
+			this.driver.registerVisitor(this.pagination);
 		}
 	}
 
 	private <A> void addColumn(AbstractTableColumn<A> column) {
-		ensureTableHead().add(column);
-		getDefaultBody().add(column);
+		this.ensureTableHead().add(column);
+		this.getDefaultBody().add(column);
 	}
 
 	@Override
 	public Collection<T> getValue() {
-		return driver == null ? null : driver.getValue();
+		return this.driver == null ? null : this.driver.getValue();
 	}
 
 	@Override
 	public boolean hasErrors() {
-		return driver == null ? false : driver.hasErrors();
+		return this.driver == null ? false : this.driver.hasErrors();
 	}
 
 	@Override
 	public Iterable<Error> getErrors() {
-		return driver == null ? Collections.EMPTY_LIST : driver.getErrors();
+		return this.driver == null ? Collections.EMPTY_LIST : this.driver.getErrors();
 	}
 
 	@Override

@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -36,8 +34,7 @@ import fr.putnami.pwt.core.widget.client.util.AnchorUtils;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
-public class Navbar extends AbstractPanel implements
-CloneableWidget {
+public class Navbar extends AbstractPanel implements CloneableWidget {
 
 	private static final CssStyle STYLE_NAVBAR = new SimpleStyle("navbar");
 	private static final CssStyle STYLE_BRAND = new SimpleStyle("navbar-brand");
@@ -53,8 +50,7 @@ CloneableWidget {
 	private static final CssStyle STYLE_TEXT_MUTED = new SimpleStyle("text-muted");
 
 	public enum ContainerType implements CssStyle {
-		RESPONSIVE("container"),
-		FLUID("container-fluid");
+		RESPONSIVE("container"), FLUID("container-fluid");
 
 		private final String style;
 
@@ -70,8 +66,7 @@ CloneableWidget {
 
 	public enum Type implements CssStyle {
 
-		DEFAULT("navbar-default"),
-		INVERSE("navbar-inverse");
+		DEFAULT("navbar-default"), INVERSE("navbar-inverse");
 
 		private final String style;
 
@@ -83,14 +78,11 @@ CloneableWidget {
 		public String get() {
 			return this.style;
 		}
-
 	}
 
 	public enum Position implements CssStyle {
-		DEFAULT(null),
-		FIXED_TOP("navbar-fixed-top"),
-		FIXED_BOTTOM("navbar-fixed-bottom"),
-		STATIC_TOP("navbar-static-top");
+		DEFAULT(null), FIXED_TOP("navbar-fixed-top"), FIXED_BOTTOM("navbar-fixed-bottom"), STATIC_TOP(
+				"navbar-static-top");
 
 		private final String style;
 
@@ -107,11 +99,11 @@ CloneableWidget {
 	private class NavbarButton extends Widget implements CloneableWidget {
 
 		public NavbarButton() {
-			setElement(Document.get().createAnchorElement());
-			StyleUtils.addStyle(this, STYLE_TOGGLE);
-			StyleUtils.addStyle(this, STYLE_TEXT_MUTED);
-			AnchorElement.as(getElement()).setHref(AnchorUtils.DUMMY_HREF);
-			getElement().appendChild(createIcon());
+			this.setElement(Document.get().createAnchorElement());
+			StyleUtils.addStyle(this, Navbar.STYLE_TOGGLE);
+			StyleUtils.addStyle(this, Navbar.STYLE_TEXT_MUTED);
+			AnchorElement.as(this.getElement()).setHref(AnchorUtils.DUMMY_HREF);
+			this.getElement().appendChild(this.createIcon());
 		}
 
 		@Override
@@ -120,7 +112,7 @@ CloneableWidget {
 		}
 
 		public void setCollapseContainer(Container collapseContainer) {
-			collapseHelper = CollapseHelper.apply(this, collapseContainer.getElement(), true);
+			Navbar.this.collapseHelper = CollapseHelper.apply(this, collapseContainer.getElement(), true);
 		}
 
 		private Element createIcon() {
@@ -143,15 +135,15 @@ CloneableWidget {
 
 		@Override
 		public void onStartActivity(StartActivityEvent event) {
-			if (collapseHelper != null) {
-				collapseHelper.collapse();
+			if (Navbar.this.collapseHelper != null) {
+				Navbar.this.collapseHelper.collapse();
 			}
 		}
 	};
 
 	public Navbar() {
 		super(DivElement.TAG);
-		endConstruct();
+		this.endConstruct();
 	}
 
 	protected Navbar(Navbar source) {
@@ -160,29 +152,29 @@ CloneableWidget {
 		this.position = source.position;
 		this.containerType = source.containerType;
 		for (Widget collapseWidget : source.collapseContainer) {
-			collapseContainer.append(WidgetUtils.cloneWidget(collapseWidget));
+			this.collapseContainer.append(WidgetUtils.cloneWidget(collapseWidget));
 		}
-		endConstruct();
+		this.endConstruct();
 	}
 
 	private void endConstruct() {
-		append(contentContainer);
-		contentContainer.append(headerContainer);
-		contentContainer.append(collapseContainer);
+		this.append(this.contentContainer);
+		this.contentContainer.append(this.headerContainer);
+		this.contentContainer.append(this.collapseContainer);
 
 		NavbarButton button = new NavbarButton();
-		button.setCollapseContainer(collapseContainer);
-		headerContainer.append(button);
+		button.setCollapseContainer(this.collapseContainer);
+		this.headerContainer.append(button);
 
-		StyleUtils.addStyle(this, STYLE_NAVBAR);
-		StyleUtils.addStyle(headerContainer, STYLE_HEADER);
-		StyleUtils.addStyle(collapseContainer, STYLE_COLLAPSE);
+		StyleUtils.addStyle(this, Navbar.STYLE_NAVBAR);
+		StyleUtils.addStyle(this.headerContainer, Navbar.STYLE_HEADER);
+		StyleUtils.addStyle(this.collapseContainer, Navbar.STYLE_COLLAPSE);
 
-		setContainerType(containerType);
-		setType(type);
-		setPosition(position);
+		this.setContainerType(this.containerType);
+		this.setType(this.type);
+		this.setPosition(this.position);
 
-		MvpController.get().addStartActivityHandler(collapseHandler);
+		MvpController.get().addStartActivityHandler(this.collapseHandler);
 	}
 
 	@Override
@@ -192,50 +184,50 @@ CloneableWidget {
 
 	@UiChild(tagname = "Brand")
 	public void addBrand(Widget w) {
-		StyleUtils.addStyle(asWidgetOrNull(w), STYLE_BRAND);
-		headerContainer.add(w);
+		StyleUtils.addStyle(Widget.asWidgetOrNull(w), Navbar.STYLE_BRAND);
+		this.headerContainer.add(w);
 	}
 
 	@UiChild(tagname = "left")
 	public void addLeft(IsWidget w) {
-		StyleUtils.addStyle(asWidgetOrNull(w), STYLE_NAVBAR_LEFT);
-		add(w);
+		StyleUtils.addStyle(Widget.asWidgetOrNull(w), Navbar.STYLE_NAVBAR_LEFT);
+		this.add(w);
 	}
 
 	@UiChild(tagname = "right")
 	public void addRight(IsWidget w) {
-		StyleUtils.addStyle(asWidgetOrNull(w), STYLE_NAVBAR_RIGHT);
-		add(w);
+		StyleUtils.addStyle(Widget.asWidgetOrNull(w), Navbar.STYLE_NAVBAR_RIGHT);
+		this.add(w);
 	}
 
 	@Override
 	public void add(IsWidget w) {
 		if (w instanceof Nav) {
-			updateNavStyle((Nav) w);
+			this.updateNavStyle((Nav) w);
 		}
 		if (w instanceof Button || w instanceof ButtonGroup) {
-			StyleUtils.addStyle((Widget) w, STYLE_NAV_BUTTON);
+			StyleUtils.addStyle((Widget) w, Navbar.STYLE_NAV_BUTTON);
 		}
-		collapseContainer.append(w);
+		this.collapseContainer.append(w);
 	}
 
 	public void setType(Type type) {
 		this.type = type;
-		StyleUtils.addStyle(getElement(), this.type);
+		StyleUtils.addStyle(this.getElement(), this.type);
 	}
 
 	public void setPosition(Position position) {
 		this.position = position;
-		StyleUtils.addStyle(getElement(), this.position);
+		StyleUtils.addStyle(this.getElement(), this.position);
 	}
 
 	public void setContainerType(ContainerType containerType) {
 		this.containerType = containerType;
-		StyleUtils.addStyle(contentContainer, containerType);
+		StyleUtils.addStyle(this.contentContainer, containerType);
 	}
 
 	private void updateNavStyle(Nav nav) {
-		StyleUtils.addStyle(nav, STYLE_NAV);
+		StyleUtils.addStyle(nav, Navbar.STYLE_NAV);
 		nav.setStyle(null);
 	}
 }

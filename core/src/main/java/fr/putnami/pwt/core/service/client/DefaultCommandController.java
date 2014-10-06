@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.service.client;
 
@@ -71,26 +69,24 @@ public final class DefaultCommandController extends CommandController {
 				for (Request request : this.requests) {
 					if (request.requestId == response.getRequestId()) {
 						if (!request.param.isQuiet()) {
-							fireEvent(new CommandResponseEvent(request.requestId, request.command, response));
+							DefaultCommandController.this.fireEvent(new CommandResponseEvent(request.requestId,
+									request.command, response));
 						}
 						if (response.getThrown() == null) {
-							for (AsyncCallback callback : request.param.getCallbacks()) {
+							for (AsyncCallback requestCallback : request.param.getCallbacks()) {
 								if (response.getResult().size() == 1) {
-									callback.onSuccess(response.getResult().get(0));
-								}
-								else {
-									callback.onSuccess(null);
+									requestCallback.onSuccess(response.getResult().get(0));
+								} else {
+									requestCallback.onSuccess(null);
 								}
 							}
-						}
-						else {
+						} else {
 							boolean caught = false;
-							for (AsyncCallback callback : request.param.getCallbacks()) {
+							for (AsyncCallback requestCallback : request.param.getCallbacks()) {
 								try {
-									callback.onFailure(response.getThrown());
+									requestCallback.onFailure(response.getThrown());
 									caught = true;
-								}
-								catch (RuntimeException e) {
+								} catch (RuntimeException e) {
 									// Exception not handled.
 								}
 							}
@@ -110,14 +106,13 @@ public final class DefaultCommandController extends CommandController {
 		public void onFailure(Throwable caught) {
 			if (caught instanceof StatusCodeException) {
 				GWT.reportUncaughtException(caught);
-			}
-			else {
+			} else {
 				for (Request request : this.requests) {
 					if (request.param.getCallbacks().isEmpty()) {
 						GWT.reportUncaughtException(caught);
 					}
-					for (AsyncCallback callback : request.param.getCallbacks()) {
-						callback.onFailure(caught);
+					for (AsyncCallback requestCallback : request.param.getCallbacks()) {
+						requestCallback.onFailure(caught);
 					}
 				}
 				if (this.callback != null) {
@@ -156,7 +151,8 @@ public final class DefaultCommandController extends CommandController {
 	private DefaultCommandController() {
 		this.moduleBaseURL = GWT.getHostPageBaseURL();
 		this.remoteServiceURL = this.moduleBaseURL + "commandService";
-		ErrorManager.get().registerErrorHandlers(new ClientErrorHandler(), new ServerErrorHandler(), new DefaultCommandExceptionErrorHandler());
+		ErrorManager.get().registerErrorHandlers(new ClientErrorHandler(), new ServerErrorHandler(),
+				new DefaultCommandExceptionErrorHandler());
 	}
 
 	@Override
@@ -175,10 +171,8 @@ public final class DefaultCommandController extends CommandController {
 
 		if (this.suspended || request.param.isLazy()) {
 			this.stack.push(request);
-		}
-		else {
+		} else {
 			this.sendRequest(Lists.newArrayList(request), null);
-
 		}
 
 		return command;
@@ -197,8 +191,7 @@ public final class DefaultCommandController extends CommandController {
 				callback.onSuccess(Collections.EMPTY_LIST);
 			}
 			return result;
-		}
-		finally {
+		} finally {
 			this.stack.clear();
 		}
 	}
@@ -233,18 +226,20 @@ public final class DefaultCommandController extends CommandController {
 				serializers.add(request.param.getSerializer());
 				commands.add(request.command);
 				if (!request.param.isQuiet()) {
-					fireEvent(new CommandRequestEvent(request.requestId, request.command));
+					this.fireEvent(new CommandRequestEvent(request.requestId, request.command));
 				}
 			}
 
 			ServiceCallback serviceCallback = new ServiceCallback(requests, callback);
-			CommandServiceCompositeSerializer compositeSerializer = new CommandServiceCompositeSerializer(serializers);
+			CommandServiceCompositeSerializer compositeSerializer =
+					new CommandServiceCompositeSerializer(serializers);
 
-			SerializationStreamFactory streamFactory = new CommandSerializationStreamFactory(compositeSerializer, this.moduleBaseURL);
+			SerializationStreamFactory streamFactory =
+					new CommandSerializationStreamFactory(compositeSerializer, this.moduleBaseURL);
 			SerializationStreamWriter streamWriter = streamFactory.createStreamWriter();
 
-			streamWriter.writeString(REMOTE_SERVICE_INTERFACE_NAME);
-			streamWriter.writeString(METHOD_NAME);
+			streamWriter.writeString(DefaultCommandController.REMOTE_SERVICE_INTERFACE_NAME);
+			streamWriter.writeString(DefaultCommandController.METHOD_NAME);
 			streamWriter.writeInt(1);
 			streamWriter.writeString(List.class.getName());
 			streamWriter.writeObject(commands);
@@ -253,15 +248,14 @@ public final class DefaultCommandController extends CommandController {
 
 			RpcStatsContext statsContext = new RpcStatsContext();
 
-			RequestCallback responseHandler = new RequestCallbackAdapter<List<CommandResponse>>(
-					streamFactory,
-					METHOD_NAME,
-					statsContext,
-					serviceCallback, null, ResponseReader.OBJECT);
+			RequestCallback responseHandler =
+					new RequestCallbackAdapter<List<CommandResponse>>(streamFactory,
+							DefaultCommandController.METHOD_NAME, statsContext, serviceCallback, null,
+							ResponseReader.OBJECT);
 
 			this.rpcRequestBuilder.create(this.remoteServiceURL);
 			this.rpcRequestBuilder.setCallback(responseHandler);
-			this.rpcRequestBuilder.setContentType(RPC_CONTENT_TYPE);
+			this.rpcRequestBuilder.setContentType(DefaultCommandController.RPC_CONTENT_TYPE);
 			this.rpcRequestBuilder.setRequestData(payload);
 			this.rpcRequestBuilder.setRequestId(statsContext.getRequestId());
 
@@ -269,11 +263,9 @@ public final class DefaultCommandController extends CommandController {
 			rb.send();
 
 			return requests.size();
-		}
-		catch (SerializationException e) {
+		} catch (SerializationException e) {
 			throw new CommandException(e.getMessage());
-		}
-		catch (RequestException e) {
+		} catch (RequestException e) {
 			throw new CommandException(e.getMessage());
 		}
 	}

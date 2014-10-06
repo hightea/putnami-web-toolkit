@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -34,7 +32,8 @@ import fr.putnami.pwt.core.widget.client.Nav.LinkStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public class NavLink extends AbstractPanel implements Nav.IsNavContent, CloneableWidget, ClickHandler, ValueChangeHandler<String>, HasDrawable {
+public class NavLink extends AbstractPanel implements Nav.IsNavContent, CloneableWidget,
+ClickHandler, ValueChangeHandler<String>, HasDrawable {
 
 	private final Anchor<?> anchor = new Anchor();
 
@@ -52,37 +51,37 @@ public class NavLink extends AbstractPanel implements Nav.IsNavContent, Cloneabl
 
 	public NavLink() {
 		super(LIElement.TAG);
-		endConstruct();
+		this.endConstruct();
 	}
 
 	public NavLink(String label, ScheduledCommand command) {
 		this();
 		this.command = command;
-		setLabel(label);
+		this.setLabel(label);
 	}
 
 	public NavLink(String label, String link) {
 		this();
-		setLabel(label);
-		setLink(link);
+		this.setLabel(label);
+		this.setLink(link);
 	}
 
 	protected NavLink(NavLink source) {
 		super(source);
-		endConstruct();
+		this.endConstruct();
 
-		setActive(source.active);
-		preventClickWhenActive = source.preventClickWhenActive;
-		setLink(source.link);
-		command = source.command;
-		iconType = source.iconType;
-		name = source.name;
-		setLabel(source.label);
+		this.setActive(source.active);
+		this.preventClickWhenActive = source.preventClickWhenActive;
+		this.setLink(source.link);
+		this.command = source.command;
+		this.iconType = source.iconType;
+		this.name = source.name;
+		this.setLabel(source.label);
 	}
 
 	private void endConstruct() {
-		anchor.addDomHandler(this, ClickEvent.getType());
-		append(anchor);
+		this.anchor.addDomHandler(this, ClickEvent.getType());
+		this.append(this.anchor);
 	}
 
 	@Override
@@ -91,16 +90,16 @@ public class NavLink extends AbstractPanel implements Nav.IsNavContent, Cloneabl
 	}
 
 	public String getLabel() {
-		return label;
+		return this.label;
 	}
 
 	public void setLabel(String label) {
 		this.label = label;
-		resetInner();
+		this.resetInner();
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -108,31 +107,31 @@ public class NavLink extends AbstractPanel implements Nav.IsNavContent, Cloneabl
 	}
 
 	public String getIconType() {
-		return iconType;
+		return this.iconType;
 	}
 
 	public void setIconType(String iconType) {
 		this.iconType = iconType;
-		resetInner();
+		this.resetInner();
 	}
 
 	public void addAnchorStyle(CssStyle style) {
-		StyleUtils.addStyle(anchor, style);
+		StyleUtils.addStyle(this.anchor, style);
 	}
 
 	@Override
 	public void setActive(boolean active) {
 		this.active = active;
-		redraw();
+		this.redraw();
 	}
 
 	@Override
 	public boolean isActive() {
-		return active;
+		return this.active;
 	}
 
 	public ScheduledCommand getCommand() {
-		return command;
+		return this.command;
 	}
 
 	public void setCommand(ScheduledCommand command) {
@@ -141,7 +140,7 @@ public class NavLink extends AbstractPanel implements Nav.IsNavContent, Cloneabl
 
 	public void setPreventClickWhenActive(boolean preventClickWhenActive) {
 		this.preventClickWhenActive = preventClickWhenActive;
-		redraw();
+		this.redraw();
 	}
 
 	public String getLink() {
@@ -150,20 +149,20 @@ public class NavLink extends AbstractPanel implements Nav.IsNavContent, Cloneabl
 
 	public void setLink(String link) {
 		this.link = link;
-		anchor.setLink(link);
-		ensureHistoryChangeHandler();
-		redraw();
+		this.anchor.setLink(link);
+		this.ensureHistoryChangeHandler();
+		this.redraw();
 	}
 
 	private void ensureHistoryChangeHandler() {
-		if (historyChangeHandlerRegistration == null) {
-			historyChangeHandlerRegistration = History.addValueChangeHandler(this);
+		if (this.historyChangeHandlerRegistration == null) {
+			this.historyChangeHandlerRegistration = History.addValueChangeHandler(this);
 		}
 	}
 
 	@Override
 	public void onClick(ClickEvent event) {
-		if (active && preventClickWhenActive) {
+		if (this.active && this.preventClickWhenActive) {
 			return;
 		}
 		if (this.command != null) {
@@ -173,7 +172,7 @@ public class NavLink extends AbstractPanel implements Nav.IsNavContent, Cloneabl
 
 	@Override
 	public void onValueChange(ValueChangeEvent<String> event) {
-		redraw();
+		this.redraw();
 	}
 
 	@Override
@@ -182,41 +181,38 @@ public class NavLink extends AbstractPanel implements Nav.IsNavContent, Cloneabl
 			String tokenLink = this.link.replaceAll("^#", "");
 			if (tokenLink.equals(History.getToken())) {
 				this.active = true;
-			}
-			else {
+			} else {
 				this.active = false;
 			}
-			if (active && getParent() != null && getParent().getParent() instanceof Nav.IsNavContent) {
+			if (this.active && this.getParent() != null
+					&& this.getParent().getParent() instanceof Nav.IsNavContent) {
 				// if link is in dropdown => parent is container and parent.parent is dropdown
-				((Nav.IsNavContent) getParent().getParent()).setActive(true);
+				((Nav.IsNavContent) this.getParent().getParent()).setActive(true);
 			}
 		}
-		StyleUtils.toggleStyle(this, LinkStyle.ACTIVE, active);
-		resetInner();
-		if (active && preventClickWhenActive) {
-			anchor.setLink(null);
-		}
-		else if (this.link != null) {
-			anchor.setLink(this.link);
-		}
-		else {
-			anchor.setLinkAsDummy();
+		StyleUtils.toggleStyle(this, LinkStyle.ACTIVE, this.active);
+		this.resetInner();
+		if (this.active && this.preventClickWhenActive) {
+			this.anchor.setLink(null);
+		} else if (this.link != null) {
+			this.anchor.setLink(this.link);
+		} else {
+			this.anchor.setLinkAsDummy();
 		}
 	}
 
 	private void resetInner() {
-		anchor.clear();
-		anchor.getElement().removeAllChildren();
-		if (label != null) {
-			anchor.getElement().setInnerHTML(label);
+		this.anchor.clear();
+		this.anchor.getElement().removeAllChildren();
+		if (this.label != null) {
+			this.anchor.getElement().setInnerHTML(this.label);
 		}
-		if (iconType != null) {
+		if (this.iconType != null) {
 			Icon icon = new Icon();
-			icon.setType(iconType);
+			icon.setType(this.iconType);
 
-			anchor.getElement().insertFirst(icon.getElement());
+			this.anchor.getElement().insertFirst(icon.getElement());
 		}
-
 	}
 
 }

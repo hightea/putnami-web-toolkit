@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.theme.client;
 
@@ -36,56 +34,55 @@ public class DefaultThemeController extends ThemeController {
 
 	@Override
 	public Theme getDefaultTheme() {
-		return defaultTheme;
+		return this.defaultTheme;
 	}
 
 	@Override
 	public void installTheme(Theme theme) {
-		removeCssLinks();
-		if (currentTheme != null) {
-			for (CssLink link : currentTheme.getLinks()) {
+		this.removeCssLinks();
+		if (this.currentTheme != null) {
+			for (CssLink link : this.currentTheme.getLinks()) {
 				link.getLink().removeFromParent();
 			}
 		}
 		this.currentTheme = theme;
-		resetTheme();
+		this.resetTheme();
 	}
 
 	@Override
 	public void installDefaultTheme() {
-		installTheme(null);
+		this.installTheme(null);
 	}
 
 	@Override
 	public void resetTheme() {
-		if (currentTheme != null && currentTheme.getIconFont() != null) {
-			icons = currentTheme.getIconFont();
+		if (this.currentTheme != null && this.currentTheme.getIconFont() != null) {
+			this.icons = this.currentTheme.getIconFont();
+		} else if (this.defaultTheme.getIconFont() != null) {
+			this.icons = this.defaultTheme.getIconFont();
 		}
-		else if (defaultTheme.getIconFont() != null) {
-			icons = defaultTheme.getIconFont();
+		if (this.icons != null) {
+			this.getHead().appendChild(this.icons.getLink());
 		}
-		if (icons != null) {
-			getHead().appendChild(icons.getLink());
-		}
-		insertLinks(this.defaultTheme);
-		insertLinks(this.currentTheme);
+		this.insertLinks(this.defaultTheme);
+		this.insertLinks(this.currentTheme);
 	}
 
 	private void insertLinks(Theme theme) {
 		if (theme != null) {
 			for (CssLink link : theme.getLinks()) {
-				getHead().appendChild(link.getLink());
+				this.getHead().appendChild(link.getLink());
 			}
 		}
 	}
 
 	private void removeCssLinks() {
-		if (isInit) {
+		if (this.isInit) {
 			return;
 		}
-		isInit = true;
+		this.isInit = true;
 		// Remove all existing link element
-		NodeList<Element> links = getHead().getElementsByTagName(LinkElement.TAG);
+		NodeList<Element> links = this.getHead().getElementsByTagName(LinkElement.TAG);
 		int size = links.getLength();
 		for (int i = 0; i < size; i++) {
 			LinkElement elem = LinkElement.as(links.getItem(0));
@@ -96,21 +93,21 @@ public class DefaultThemeController extends ThemeController {
 	}
 
 	protected HeadElement getHead() {
-		if (head == null) {
+		if (this.head == null) {
 			Element elt = Document.get().getElementsByTagName("head").getItem(0);
 			assert elt != null : "The host HTML page does not have a <head> element"
 					+ " which is required by this injector";
-			head = HeadElement.as(elt);
+			this.head = HeadElement.as(elt);
 		}
-		return head;
+		return this.head;
 	}
 
 	@Override
 	public CssStyle getIconStyle(String iconName) {
-		if (icons == null) {
+		if (this.icons == null) {
 			return SimpleStyle.EMPTY_STYLE;
 		}
-		return icons.getStyle(iconName);
+		return this.icons.getStyle(iconName);
 	}
 
 }

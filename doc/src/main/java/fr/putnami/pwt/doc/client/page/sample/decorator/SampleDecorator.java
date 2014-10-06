@@ -45,12 +45,12 @@ public class SampleDecorator extends ViewDecorator implements View {
 			}
 			Anchor<?> anchor = new Anchor(simpleFileName);
 			anchor.addClickHandler(this);
-			add(anchor);
+			this.add(anchor);
 		}
 
 		@Override
 		public void onClick(ClickEvent event) {
-			requestFile(fileName);
+			SampleDecorator.this.requestFile(this.fileName);
 		}
 	}
 
@@ -65,19 +65,18 @@ public class SampleDecorator extends ViewDecorator implements View {
 	@UiField
 	StaticCode sourceCode;
 
-
 	@Override
 	public void setWidget(IsWidget w) {
-		sampleContent.setWidget(w);
+		this.sampleContent.setWidget(w);
 		if (w instanceof HasSources) {
-			addSources(((HasSources) w).getSourcesMap());
+			this.addSources(((HasSources) w).getSourcesMap());
 		}
 	}
 
 	protected void addSources(Multimap<String, String> sources) {
 		Panel panelToOpen = null;
 		String sourceToOpen = null;
-		sourceAccordion.clear();
+		this.sourceAccordion.clear();
 		for (String panelName : sources.keySet()) {
 
 			List sourceList = new List();
@@ -94,9 +93,9 @@ public class SampleDecorator extends ViewDecorator implements View {
 			}
 			sourcePanel.add(new Header(panelName));
 			sourcePanel.add(sourceList);
-			sourceAccordion.add(sourcePanel);
+			this.sourceAccordion.add(sourcePanel);
 		}
-		requestFile(sourceToOpen);
+		this.requestFile(sourceToOpen);
 		final Panel toOpen = panelToOpen;
 
 		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
@@ -109,37 +108,35 @@ public class SampleDecorator extends ViewDecorator implements View {
 	}
 
 	private void requestFile(final String fileName) {
-		sourceCode.asWidget().setVisible(false);
-		sourceCode.setText("");
+		this.sourceCode.asWidget().setVisible(false);
+		this.sourceCode.setText("");
 
 		RequestCallback callBack = new RequestCallback() {
 
 			@Override
 			public void onResponseReceived(Request request, Response response) {
 				if (fileName.endsWith("xml")) {
-					sourceCode.setConfiguration(XmlConfiguration.XML_CONFIGURATION);
+					SampleDecorator.this.sourceCode.setConfiguration(XmlConfiguration.XML_CONFIGURATION);
+				} else if (fileName.endsWith("java")) {
+					SampleDecorator.this.sourceCode.setConfiguration(JavaConfiguration.JAVA_CONFIGURATION);
+				} else {
+					SampleDecorator.this.displayError(new RuntimeException("Unknow file type"));
 				}
-				else if (fileName.endsWith("java")) {
-					sourceCode.setConfiguration(JavaConfiguration.JAVA_CONFIGURATION);
-				}
-				else {
-					displayError(new RuntimeException("Unknow file type"));
-				}
-				sourceCode.setText(response.getText());
-				sourceCode.asWidget().setVisible(true);
+				SampleDecorator.this.sourceCode.setText(response.getText());
+				SampleDecorator.this.sourceCode.asWidget().setVisible(true);
 			}
 
 			@Override
 			public void onError(Request request, Throwable exception) {
-				displayError(exception);
+				SampleDecorator.this.displayError(exception);
 			}
 		};
-		RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, GWT.getModuleBaseURL() + "sample/" + fileName);
+		RequestBuilder builder =
+				new RequestBuilder(RequestBuilder.GET, GWT.getModuleBaseURL() + "sample/" + fileName);
 		builder.setCallback(callBack);
 		try {
 			builder.send();
-		}
-		catch (RequestException e) {
+		} catch (RequestException e) {
 			callBack.onError(null, e);
 		}
 	}

@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.doc.client.application;
 
@@ -51,13 +49,13 @@ public class DocumentationDisplay extends Composite implements AcceptsOneWidget 
 	OneWidgetPanel container;
 
 	public DocumentationDisplay() {
-		initWidget(Binder.BINDER.createAndBindUi(this));
+		this.initWidget(Binder.BINDER.createAndBindUi(this));
 
 		Window.addResizeHandler(new ResizeHandler() {
 
 			@Override
 			public void onResize(ResizeEvent event) {
-				redraw(false);
+				DocumentationDisplay.this.redraw(false);
 			}
 		});
 
@@ -65,7 +63,7 @@ public class DocumentationDisplay extends Composite implements AcceptsOneWidget 
 
 			@Override
 			public void execute() {
-				redraw(true);
+				DocumentationDisplay.this.redraw(true);
 			}
 		});
 	}
@@ -73,25 +71,25 @@ public class DocumentationDisplay extends Composite implements AcceptsOneWidget 
 	@Override
 	public void setWidget(IsWidget w) {
 		if (w != null) {
-			container.setWidget(w);
-			redraw(true);
+			this.container.setWidget(w);
+			this.redraw(true);
 		}
 	}
 
 	private void redraw(boolean autoScroll) {
-		viewContainer.getElement().getStyle().clearHeight();
-		int height = getWidget().getElement().getClientHeight();
+		this.viewContainer.getElement().getStyle().clearHeight();
+		int height = this.getWidget().getElement().getClientHeight();
 
 		if (height < Window.getClientHeight()) {
-			viewContainer.getElement().getStyle().setHeight(Window.getClientHeight() - height, Unit.PX);
+			this.viewContainer.getElement().getStyle().setHeight(Window.getClientHeight() - height,
+					Unit.PX);
 		}
 		if (autoScroll) {
 			String historyToken = History.getToken();
 			if (!Strings.isNullOrEmpty(historyToken)) {
-				int top = affixMenu.getPinnedOffset();
+				int top = this.affixMenu.getPinnedOffset();
 				Window.scrollTo(Window.getScrollLeft(), top);
-			}
-			else {
+			} else {
 				Window.scrollTo(Window.getScrollLeft(), 0);
 			}
 		}

@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.inject.rebind.delegate;
 
@@ -33,8 +31,8 @@ import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterSubGenerate;
 import fr.putnami.pwt.core.model.client.model.Model;
 import fr.putnami.pwt.core.model.rebind.ModelCreator;
 
-public class InjectModelCreator extends InjectorCreatorDelegate implements InjectorWritterSubGenerate, InjectorWritterConstructor,
-		InjectorWritterInit {
+public class InjectModelCreator extends InjectorCreatorDelegate implements
+InjectorWritterSubGenerate, InjectorWritterConstructor, InjectorWritterInit {
 
 	private final JField modelField;
 	private final JType fieldType;
@@ -47,31 +45,28 @@ public class InjectModelCreator extends InjectorCreatorDelegate implements Injec
 		this.fieldType = modelField.getType();
 
 		if (this.fieldType instanceof JParameterizedType) {
-			JParameterizedType paramType = (JParameterizedType) fieldType;
-			beanType = paramType.getTypeArgs()[0];
-		}
-		else {
+			JParameterizedType paramType = (JParameterizedType) this.fieldType;
+			this.beanType = paramType.getTypeArgs()[0];
+		} else {
 			throw new RuntimeException("modelField can not be injected as Model");
 		}
-
 	}
 
 	@Override
 	public void subGenerate(TreeLogger logger, GeneratorContext context) {
-		ModelCreator modelCreator = new ModelCreator(beanType);
-		modelImplClass = modelCreator.create(logger, context);
+		ModelCreator modelCreator = new ModelCreator(this.beanType);
+		this.modelImplClass = modelCreator.create(logger, context);
 	}
 
 	@Override
 	public void initComposer(ClassSourceFileComposerFactory composerFactory) {
 		composerFactory.addImport(GWT.class.getName());
 		composerFactory.addImport(Model.class.getName());
-		composerFactory.addImport(beanType.getQualifiedSourceName());
-
+		composerFactory.addImport(this.beanType.getQualifiedSourceName());
 	}
 
 	@Override
 	public void writeConstructor(SourceWriter srcWriter) {
-		srcWriter.println("%s = new %s();", modelField.getName(), modelImplClass);
+		srcWriter.println("%s = new %s();", this.modelField.getName(), this.modelImplClass);
 	}
 }

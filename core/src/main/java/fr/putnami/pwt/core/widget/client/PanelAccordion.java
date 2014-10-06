@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -40,7 +38,7 @@ public class PanelAccordion extends AbstractPanel implements CloneableWidget {
 		@Override
 		public void onCollapse(CollapseEvent event) {
 			if (!event.isCollapsed()) {
-				for (CollapseHelper helper : collapseHelpers) {
+				for (CollapseHelper helper : PanelAccordion.this.collapseHelpers) {
 					if (helper != event.getSource()) {
 						helper.collapse();
 					}
@@ -54,15 +52,15 @@ public class PanelAccordion extends AbstractPanel implements CloneableWidget {
 
 	public PanelAccordion() {
 		super(DivElement.TAG);
-		StyleUtils.addStyle(this, STYLE_PANEL_GROUP);
+		StyleUtils.addStyle(this, PanelAccordion.STYLE_PANEL_GROUP);
 	}
 
 	protected PanelAccordion(PanelAccordion source) {
 		super(source);
-		cloneSourceWidgets(source);
-		for (Widget child : getChildren()) {
+		this.cloneSourceWidgets(source);
+		for (Widget child : this.getChildren()) {
 			if (child instanceof Panel) {
-				registerCollapseHelper((Panel) child);
+				this.registerCollapseHelper((Panel) child);
 			}
 		}
 	}
@@ -75,25 +73,25 @@ public class PanelAccordion extends AbstractPanel implements CloneableWidget {
 	private void registerCollapseHelper(Panel panel) {
 		CollapseHelper helper = panel.ensureCollapseHelper();
 		if (helper != null) {
-			collapseHelpers.add(helper);
+			this.collapseHelpers.add(helper);
 			panel.setCollapsible(true);
 			if (panel.getCollapse() == null) {
 				panel.setCollapse(true);
 			}
-			registrations.add(helper.addCollapseHandler(openPanelHandler));
+			this.registrations.add(helper.addCollapseHandler(this.openPanelHandler));
 		}
 	}
 
 	public void addPanel(Panel childPanel) {
 		assert childPanel.getHeader() != null : "Only Panel with Header can be append to a PanelAccordion";
-		registerCollapseHelper(childPanel);
-		append(childPanel);
+		this.registerCollapseHelper(childPanel);
+		this.append(childPanel);
 	}
 
 	@Override
 	public void add(IsWidget child) {
 		if (child instanceof Panel) {
-			addPanel((Panel) child);
+			this.addPanel((Panel) child);
 		}
 	}
 }

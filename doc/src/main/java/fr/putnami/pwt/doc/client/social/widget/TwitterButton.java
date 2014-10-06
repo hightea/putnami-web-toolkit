@@ -5,11 +5,11 @@ import fr.putnami.pwt.doc.client.social.base.AbstractSocialButton;
 public class TwitterButton extends AbstractSocialButton {
 
 	public TwitterButton() {
-		setIconType(CONSTANT.twitterIcon());
-		setTitle(CONSTANT.twitterPopover());
-		setSocialUtlTemplate(CONSTANT.twitterUrl());
-		setPopupHeight(250);
-		setPopupWith(500);
+		this.setIconType(AbstractSocialButton.CONSTANT.twitterIcon());
+		this.setTitle(AbstractSocialButton.CONSTANT.twitterPopover());
+		this.setSocialUtlTemplate(AbstractSocialButton.CONSTANT.twitterUrl());
+		this.setPopupHeight(250);
+		this.setPopupWith(500);
 	}
 
 }

@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -26,6 +24,7 @@ import java.util.List;
 
 import fr.putnami.pwt.core.editor.client.Editor;
 import fr.putnami.pwt.core.editor.client.Path;
+import fr.putnami.pwt.core.editor.client.Visitor;
 import fr.putnami.pwt.core.editor.client.util.PathUtils;
 import fr.putnami.pwt.core.model.client.ModelDriver;
 import fr.putnami.pwt.core.model.client.base.HasDrawable;
@@ -38,25 +37,24 @@ import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 
 public class TableSort<T> extends AbstractTableColumnAspect<T> implements HasDrawable {
 
-
 	private final Button<T> button = new Button<T>();
 
 	private Boolean asc;
 	private HandlerRegistration buttonRegistration;
 
 	public TableSort() {
-		endConstruct();
+		this.endConstruct();
 	}
 
 	protected TableSort(TableSort<T> source) {
 		super(source);
-		endConstruct();
+		this.endConstruct();
 	}
 
 	private void endConstruct() {
-		button.setIconType(IconFont.ICON_SORT);
-		button.setType(Type.ICON);
-		button.setSize(Button.Size.SMALL);
+		this.button.setIconType(IconFont.ICON_SORT);
+		this.button.setType(Type.ICON);
+		this.button.setSize(Button.Size.SMALL);
 	}
 
 	@Override
@@ -66,54 +64,50 @@ public class TableSort<T> extends AbstractTableColumnAspect<T> implements HasDra
 
 	@Override
 	public Widget asWidget() {
-		if (buttonRegistration == null) {
-			buttonRegistration = button.addButtonHandler(new ButtonEvent.Handler() {
+		if (this.buttonRegistration == null) {
+			this.buttonRegistration = this.button.addButtonHandler(new ButtonEvent.Handler() {
 
 				@Override
 				public void onButtonAction(ButtonEvent event) {
-					toggleSort();
+					TableSort.this.toggleSort();
 				}
 			});
 		}
-		return button;
+		return this.button;
 	}
 
 	@Override
 	public void redraw() {
-		if (Boolean.TRUE.equals(asc)) {
-			button.setIconType(IconFont.ICON_SORT_DOWN);
+		if (Boolean.TRUE.equals(this.asc)) {
+			this.button.setIconType(IconFont.ICON_SORT_DOWN);
+		} else if (Boolean.FALSE.equals(this.asc)) {
+			this.button.setIconType(IconFont.ICON_SORT_UP);
+		} else {
+			this.button.setIconType(IconFont.ICON_SORT);
 		}
-		else if (Boolean.FALSE.equals(asc)) {
-			button.setIconType(IconFont.ICON_SORT_UP);
-		}
-		else {
-			button.setIconType(IconFont.ICON_SORT);
-		}
-		button.setActive(asc != null);
+		this.button.setActive(this.asc != null);
 	}
 
 	private void toggleSort() {
-		if (asc == null) {
-			asc = Boolean.TRUE;
+		if (this.asc == null) {
+			this.asc = Boolean.TRUE;
+		} else if (Boolean.TRUE.equals(this.asc)) {
+			this.asc = Boolean.FALSE;
+		} else {
+			this.asc = null;
 		}
-		else if (Boolean.TRUE.equals(asc)) {
-			asc = Boolean.FALSE;
-		}
-		else {
-			asc = null;
-		}
-		getDriver().resetDisplay();
-		redraw();
+		this.getDriver().resetDisplay();
+		this.redraw();
 	}
 
 	@Override
 	public <A, B extends Editor> boolean beforeVisit() {
-		if (asc != null) {
-			ModelDriver<List<T>> localDriver = getDriver();
+		if (this.asc != null) {
+			ModelDriver<List<T>> localDriver = this.getDriver();
 			final Model<T> leafModel = localDriver.getModel().getLeafModel();
 			List<T> list = localDriver.getDisplayedValue();
 			list = Lists.newArrayList(list);
-			final Path path = PathUtils.evalPath(getColumnPath());
+			final Path path = PathUtils.evalPath(this.getColumnPath());
 			Comparator<? super T> comparator = new Comparator<T>() {
 				@Override
 				public int compare(T o1, T o2) {
@@ -123,11 +117,10 @@ public class TableSort<T> extends AbstractTableColumnAspect<T> implements HasDra
 					int result = 0;
 					if (p1 instanceof Comparable) {
 						result = ((Comparable) p1).compareTo(p2);
-					}
-					else if (p2 instanceof Comparable) {
+					} else if (p2 instanceof Comparable) {
 						result = ((Comparable) p2).compareTo(p1);
 					}
-					if (asc == false) {
+					if (TableSort.this.asc == false) {
 						result = 0 - result;
 					}
 					return result;
@@ -141,7 +134,7 @@ public class TableSort<T> extends AbstractTableColumnAspect<T> implements HasDra
 
 	@Override
 	public int getPrecedence() {
-		return PRECEDENCE_NORMAL + 2;
+		return Visitor.PRECEDENCE_NORMAL + 2;
 	}
 
 }

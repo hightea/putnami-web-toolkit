@@ -1,23 +1,18 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.doc.client;
-
-import static fr.putnami.pwt.doc.client.application.ApplicationConfig.ANALYTICS_TRACKER_ID;
-import static fr.putnami.pwt.doc.client.application.ApplicationConfig.DOMAIN;
 
 import fr.putnami.pwt.core.error.client.widget.SimpleErrorDisplayer;
 import fr.putnami.pwt.core.inject.client.Module;
@@ -26,6 +21,7 @@ import fr.putnami.pwt.core.inject.client.annotation.ErrorHandler;
 import fr.putnami.pwt.core.inject.client.annotation.ErrorManagmentDescription;
 import fr.putnami.pwt.core.inject.client.annotation.MvpDescription;
 import fr.putnami.pwt.core.inject.client.annotation.ThemeDescription;
+import fr.putnami.pwt.doc.client.application.ApplicationConfig;
 import fr.putnami.pwt.doc.client.application.DocumentationDisplay;
 import fr.putnami.pwt.doc.client.application.error.ApplicationUnreachableExceptionHandler;
 import fr.putnami.pwt.doc.client.application.error.UmbrellaExceptionHandler;
@@ -64,59 +60,37 @@ import fr.putnami.pwt.doc.client.page.welcome.WelcomePage;
 import fr.putnami.pwt.doc.client.page.welcome.WelcomePage.WelcomePlace;
 import fr.putnami.pwt.plugin.ga.client.GoogleAnalytics;
 
-@MvpDescription(
-		display = DocumentationDisplay.class,
-		defaultPlace = WelcomePlace.class,
-		activities = {
-				WelcomePage.WelcomePlace.class,
-				GettingStartedPage.GettingStartedPlace.class,
-				BootstrapPage.BootstrapPlace.class,
-				LayoutPage.LayoutsPlace.class,
-				ComponentsPage.ComponentsPlace.class,
-				InjectionPage.InjectionPlace.class,
-				DataBindingPage.DataBindingPlace.class,
-				InternationalizationPage.InternationalizationPlace.class,
-				NavigationPage.NavigationPlace.class,
-				ServerCallsPage.ServerCallsPlace.class,
-				SecurityPage.SecurityPlace.class,
-				ErrorsPage.ErrorsPlace.class,
-				CodeEditorPage.CodeEditorPlace.class,
-				AjaxBotIndexingPage.AjaxBotIndexingPlace.class,
-				GoogleAnalyticsPage.GoogleAnalyticsPlace.class,
-				SpringPage.SpringPlace.class,
-				SamplesPage.SamplesPlace.class,
-				ContactsTablePage.ContactsTablePlace.class,
-				AddressBookPage.AddressBookPlace.class,
-				ComingSoonPage.ComingSoonPlace.class,
-				DownloadPage.DownloadPlace.class,
-				Tuto1InitGradlePage.Tuto1InitGradlePlace.class,
-				Tuto1InitMavenPage.Tuto1InitMavenPlace.class,
-				Tuto2FirstPagePage.Tuto2FirstPagePlace.class,
-				Tuto3MorePagesPage.Tuto3MorePagesPlace.class,
-				Tuto4BindAFormPage.Tuto4BindAFormPlace.class,
-				Tuto5IssueTrackerPage.Tuto5IssueTrackerPlace.class,
-				Tuto6ThemePage.Tuto6ThemePlace.class,
-				Tuto7GoogleAnalyticsPage.Tuto7GoogleAnalyticsPlace.class,
-				Tuto8AjaxBotPage.Tuto8AjaxBotPlace.class,
-				Tuto9SpringPage.Tuto9SpringPlace.class,
-				Tuto10Security.Tuto10SecurityPlace.class
-		})
-@ErrorManagmentDescription(
-		errorDisplay = SimpleErrorDisplayer.class,
-		errorHandlers = {
-				UmbrellaExceptionHandler.class, ApplicationUnreachableExceptionHandler.class
-		})
-@ThemeDescription(
-		styleSheets = "theme/doc/style/pwt-doc.css")
+@MvpDescription(display = DocumentationDisplay.class, defaultPlace = WelcomePlace.class, activities = {
+		WelcomePage.WelcomePlace.class, GettingStartedPage.GettingStartedPlace.class,
+		BootstrapPage.BootstrapPlace.class, LayoutPage.LayoutsPlace.class,
+		ComponentsPage.ComponentsPlace.class, InjectionPage.InjectionPlace.class,
+		DataBindingPage.DataBindingPlace.class,
+		InternationalizationPage.InternationalizationPlace.class, NavigationPage.NavigationPlace.class,
+		ServerCallsPage.ServerCallsPlace.class, SecurityPage.SecurityPlace.class,
+		ErrorsPage.ErrorsPlace.class, CodeEditorPage.CodeEditorPlace.class,
+		AjaxBotIndexingPage.AjaxBotIndexingPlace.class, GoogleAnalyticsPage.GoogleAnalyticsPlace.class,
+		SpringPage.SpringPlace.class, SamplesPage.SamplesPlace.class,
+		ContactsTablePage.ContactsTablePlace.class, AddressBookPage.AddressBookPlace.class,
+		ComingSoonPage.ComingSoonPlace.class, DownloadPage.DownloadPlace.class,
+		Tuto1InitGradlePage.Tuto1InitGradlePlace.class, Tuto1InitMavenPage.Tuto1InitMavenPlace.class,
+		Tuto2FirstPagePage.Tuto2FirstPagePlace.class, Tuto3MorePagesPage.Tuto3MorePagesPlace.class,
+		Tuto4BindAFormPage.Tuto4BindAFormPlace.class,
+		Tuto5IssueTrackerPage.Tuto5IssueTrackerPlace.class, Tuto6ThemePage.Tuto6ThemePlace.class,
+		Tuto7GoogleAnalyticsPage.Tuto7GoogleAnalyticsPlace.class,
+		Tuto8AjaxBotPage.Tuto8AjaxBotPlace.class, Tuto9SpringPage.Tuto9SpringPlace.class,
+		Tuto10Security.Tuto10SecurityPlace.class})
+@ErrorManagmentDescription(errorDisplay = SimpleErrorDisplayer.class, errorHandlers = {
+		UmbrellaExceptionHandler.class, ApplicationUnreachableExceptionHandler.class})
+@ThemeDescription(styleSheets = "theme/doc/style/pwt-doc.css")
 public class DocumentationApp implements Module {
 
 	@EntryPointHandler
 	void onModuleStart() {
-		GoogleAnalytics analytics = GoogleAnalytics.init(ANALYTICS_TRACKER_ID, DOMAIN);
+		GoogleAnalytics analytics =
+				GoogleAnalytics.init(ApplicationConfig.ANALYTICS_TRACKER_ID, ApplicationConfig.DOMAIN);
 		analytics.forceSSL(true);
 		analytics.displayfeatures();
 		analytics.handleUncaughtException(true);
-
 	}
 
 	@ErrorHandler

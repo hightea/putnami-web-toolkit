@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.model.client.model;
 
@@ -56,7 +54,7 @@ public abstract class AbstractModel<T> implements Model<T> {
 
 	@Override
 	public Class<?> getLeafType() {
-		return leafType;
+		return this.leafType;
 	}
 
 	@Override
@@ -105,7 +103,6 @@ public abstract class AbstractModel<T> implements Model<T> {
 			result |= this.parentModel.set(bean, fieldName, value);
 		}
 		return result;
-
 	}
 
 	@Override
@@ -125,8 +122,7 @@ public abstract class AbstractModel<T> implements Model<T> {
 		Set<String> propertyNames = Sets.newLinkedHashSet();
 		if (this.parentModel != null) {
 			propertyNames = Sets.newLinkedHashSet(this.parentModel.getPropertyNames());
-		}
-		else {
+		} else {
 			propertyNames = Sets.newLinkedHashSet();
 		}
 		propertyNames.addAll(this.getProperties().keySet());
@@ -135,7 +131,7 @@ public abstract class AbstractModel<T> implements Model<T> {
 
 	@Override
 	public T cloneBean(T beanToClone) {
-		return cloneBean(beanToClone, Maps.newHashMap());
+		return this.cloneBean(beanToClone, Maps.newHashMap());
 	}
 
 	@Override
@@ -151,9 +147,9 @@ public abstract class AbstractModel<T> implements Model<T> {
 		alreadyClonedValues.put(beanToClone, newInstance);
 		for (String prop : this.getPropertyNames()) {
 			Object newValue = this.get(beanToClone, prop);
-			PropertyDescription propDescription = getProperty(prop);
+			PropertyDescription propDescription = this.getProperty(prop);
 			if (propDescription != null && propDescription.getModel() != null) {
-				Model<Object> subModel = (Model<Object>) propDescription.getModel();
+				Model<Object> subModel = propDescription.getModel();
 				newValue = subModel.cloneBean(this.get(beanToClone, prop), alreadyClonedValues);
 			}
 			this.set(newInstance, prop, newValue);
@@ -167,8 +163,8 @@ public abstract class AbstractModel<T> implements Model<T> {
 
 	protected abstract <P> P internalGet(T bean, String fieldName);
 
-	protected static PropertyDescription newPropertyDescription(String name, Class<?> clazz, Model<?> model,
-			boolean hasGetter, boolean hasSetter, Validator<?>... validators) {
+	protected static PropertyDescription newPropertyDescription(String name, Class<?> clazz,
+			Model<?> model, boolean hasGetter, boolean hasSetter, Validator<?>... validators) {
 		PropertyDescription prop = new PropertyDescription();
 		prop.setName(name);
 		prop.setClazz(clazz);

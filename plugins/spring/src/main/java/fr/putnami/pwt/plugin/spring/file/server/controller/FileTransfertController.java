@@ -36,17 +36,16 @@ public class FileTransfertController {
 
 	@RequestMapping(value = "/file/upload/{uploadId}", method = RequestMethod.POST)
 	@ResponseBody
-	public FileDto upload(
-			@PathVariable String uploadId,
-			@RequestParam("data") CommonsMultipartFile multipart,
-			HttpServletRequest request, HttpServletResponse response) {
+	public FileDto upload(@PathVariable String uploadId,
+			@RequestParam("data") CommonsMultipartFile multipart, HttpServletRequest request,
+			HttpServletResponse response) {
 		InputStream in = null;
 		OutputStream out = null;
 		try {
 			in = multipart.getInputStream();
-			out = store.write(uploadId, multipart.getOriginalFilename(), multipart.getContentType());
+			out = this.store.write(uploadId, multipart.getOriginalFilename(), multipart.getContentType());
 			IOUtils.copy(in, out);
-			return store.getFileBean(uploadId);
+			return this.store.getFileBean(uploadId);
 		} catch (IOException e) {
 			throw new RuntimeException(e.getMessage(), e);
 		} finally {
@@ -58,7 +57,7 @@ public class FileTransfertController {
 	@RequestMapping(value = "/file/status/{uploadId}", method = RequestMethod.GET)
 	@ResponseBody
 	public UploadStatus getUploadStatus(@PathVariable String uploadId) {
-		FileTransfertProgressListener progress = progresses.get(uploadId);
+		FileTransfertProgressListener progress = this.progresses.get(uploadId);
 		if (progress != null) {
 			return new UploadStatus(uploadId, progress.getBytesRead(), progress.getContentLength());
 		}
@@ -66,34 +65,31 @@ public class FileTransfertController {
 	}
 
 	@RequestMapping(value = "/file/download/{fileId}", method = RequestMethod.GET)
-	public void downloadFile(
-			@PathVariable String fileId,
-			HttpServletRequest request,
+	public void downloadFile(@PathVariable String fileId, HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
-			FileDto fileBean = store.getFileBean(fileId);
+			FileDto fileBean = this.store.getFileBean(fileId);
 			if (fileBean == null) {
 				throw new RuntimeException("Aucun fichier trouver " + fileId);
 			}
-			InputStream is = store.read(fileId);
+			InputStream is = this.store.read(fileId);
 			response.setContentType(fileBean.getMime());
-			response.setHeader("Content-Disposition", "attachment; filename=\"" + fileBean.getName() + "\"");
+			response.setHeader("Content-Disposition", "attachment; filename=\"" + fileBean.getName()
+					+ "\"");
 			response.setContentLength((int) fileBean.getContentLength());
 			IOUtils.copy(is, response.getOutputStream());
 			response.flushBuffer();
 		} catch (IOException ex) {
 			throw new RuntimeException("IOError writing file to output stream", ex);
 		}
-
 	}
 
-
 	public void startUpload(String uploadId, FileTransfertProgressListener progress) {
-		progresses.put(uploadId, progress);
+		this.progresses.put(uploadId, progress);
 	}
 
 	public void completeUpload(String uploadId) {
-		progresses.remove(uploadId);
+		this.progresses.remove(uploadId);
 	}
 
 }

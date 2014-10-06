@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.doc.shared.page.sample.domain;
 
@@ -24,6 +22,10 @@ import java.util.List;
 
 public class Group implements Serializable {
 
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 6962973768949381789L;
 	private String name;
 	private int memberSize;
 	private List<Contact> members = Lists.newArrayList();
@@ -37,7 +39,7 @@ public class Group implements Serializable {
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -45,7 +47,7 @@ public class Group implements Serializable {
 	}
 
 	public List<Contact> getMembers() {
-		return members;
+		return this.members;
 	}
 
 	public void setMembers(List<Contact> members) {
@@ -53,7 +55,7 @@ public class Group implements Serializable {
 	}
 
 	public int getMemberSize() {
-		return members == null ? 0 : members.size();
+		return this.members == null ? 0 : this.members.size();
 	}
 
 	public void setMemberSize(int memberSize) {
@@ -62,13 +64,13 @@ public class Group implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hashCode(name);
+		return Objects.hashCode(this.name);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Group) {
-			return Objects.equal(name, ((Group) obj).name);
+			return Objects.equal(this.name, ((Group) obj).name);
 		}
 		return false;
 	}

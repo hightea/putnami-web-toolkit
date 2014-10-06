@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public class FileDto implements Serializable {
 
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = -8731024091131752897L;
 	private String name;
 	private String extension;
 	private String mime;
@@ -11,7 +15,7 @@ public class FileDto implements Serializable {
 	private long contentLength;
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -19,7 +23,7 @@ public class FileDto implements Serializable {
 	}
 
 	public String getExtension() {
-		return extension;
+		return this.extension;
 	}
 
 	public void setExtension(String extension) {
@@ -27,7 +31,7 @@ public class FileDto implements Serializable {
 	}
 
 	public String getMime() {
-		return mime;
+		return this.mime;
 	}
 
 	public void setMime(String mime) {
@@ -35,7 +39,7 @@ public class FileDto implements Serializable {
 	}
 
 	public String getToken() {
-		return token;
+		return this.token;
 	}
 
 	public void setToken(String token) {
@@ -43,7 +47,7 @@ public class FileDto implements Serializable {
 	}
 
 	public long getContentLength() {
-		return contentLength;
+		return this.contentLength;
 	}
 
 	public void setContentLength(long contentLength) {

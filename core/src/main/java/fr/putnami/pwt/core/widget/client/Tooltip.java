@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -40,23 +38,23 @@ public class Tooltip extends AbstractHover implements EditorLabel {
 		private DivElement inner;
 
 		public TooltipWidget() {
-			container = Document.get().createDivElement();
-			StyleUtils.addStyle(container, STYLE_TOOLTIP);
-			StyleUtils.addStyle(container, STYLE_FADE);
+			this.container = Document.get().createDivElement();
+			StyleUtils.addStyle(this.container, Tooltip.STYLE_TOOLTIP);
+			StyleUtils.addStyle(this.container, Tooltip.STYLE_FADE);
 
 			DivElement arrow = Document.get().createDivElement();
-			StyleUtils.addStyle(arrow, STYLE_ARROW);
-			container.appendChild(arrow);
+			StyleUtils.addStyle(arrow, Tooltip.STYLE_ARROW);
+			this.container.appendChild(arrow);
 
-			inner = Document.get().createDivElement();
-			StyleUtils.addStyle(inner, STYLE_INNER);
-			container.appendChild(inner);
+			this.inner = Document.get().createDivElement();
+			StyleUtils.addStyle(this.inner, Tooltip.STYLE_INNER);
+			this.container.appendChild(this.inner);
 
-			this.setElement(container);
+			this.setElement(this.container);
 		}
 
 		public void setTooltip(String tooltip) {
-			inner.setInnerText(tooltip);
+			this.inner.setInnerText(tooltip);
 		}
 	}
 
@@ -79,30 +77,28 @@ public class Tooltip extends AbstractHover implements EditorLabel {
 
 	@Override
 	protected Widget getHoverWidget() {
-		if (tooltipWidget == null) {
-			tooltipWidget = new TooltipWidget();
+		if (this.tooltipWidget == null) {
+			this.tooltipWidget = new TooltipWidget();
 		}
-		tooltipWidget.setTooltip(text);
-		return tooltipWidget;
+		this.tooltipWidget.setTooltip(this.text);
+		return this.tooltipWidget;
 	}
 
 	@Override
 	public String[] getSuffix() {
-		return new String[] {
-				LABEL_SUFFIX
-		};
+		return new String[] {EditorLabel.LABEL_SUFFIX};
 	}
 
 	@Override
 	public String getText() {
-		return text;
+		return this.text;
 	}
 
 	@Override
 	public void setText(String text) {
 		this.text = text;
-		getHoverWidget();
-		tooltipWidget.setTooltip(text);
+		this.getHoverWidget();
+		this.tooltipWidget.setTooltip(text);
 	}
 
 	@Override

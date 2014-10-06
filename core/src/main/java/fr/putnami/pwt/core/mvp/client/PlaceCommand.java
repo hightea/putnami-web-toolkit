@@ -14,7 +14,7 @@ public class PlaceCommand implements ScheduledCommand {
 
 	@Override
 	public void execute() {
-		MvpController.get().goTo(place);
+		MvpController.get().goTo(this.place);
 	}
 
 }

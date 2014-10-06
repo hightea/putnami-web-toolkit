@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.doc.client.guide;
 
@@ -26,7 +24,6 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import fr.putnami.pwt.core.error.client.ErrorManager;
 import fr.putnami.pwt.core.error.client.widget.SimpleErrorDisplayer;
@@ -56,8 +53,6 @@ import fr.putnami.pwt.doc.client.page.welcome.WelcomePage;
 import fr.putnami.pwt.plugin.ga.client.GoogleAnalytics;
 
 public class ReferenceGuide extends Composite implements EntryPoint {
-	private final Logger LOGGER = Logger.getLogger(ReferenceGuide.class.getSimpleName());
-
 	interface Binder extends UiBinderLocalized<Widget, ReferenceGuide> {
 		Binder BINDER = GWT.create(Binder.class);
 	}
@@ -72,57 +67,56 @@ public class ReferenceGuide extends Composite implements EntryPoint {
 			super();
 			this.level = offset;
 			if (heading != null) {
-				level += heading.getLevel();
+				this.level += heading.getLevel();
 			}
 			this.heading = heading;
 		}
 
 		void addChildren(Chapter child) {
-			if (children == null) {
-				children = Lists.newArrayList();
+			if (this.children == null) {
+				this.children = Lists.newArrayList();
 			}
 			child.parent = this;
-			children.add(child);
+			this.children.add(child);
 		}
 
 		boolean isDeeper(Chapter other) {
-			return other.level > level;
+			return other.level > this.level;
 		}
 
 		boolean isBrother(Chapter other) {
-			return other.level == level;
+			return other.level == this.level;
 		}
 
 		void draw(StringBuffer sb) {
-			if (heading != null) {
+			if (this.heading != null) {
 				String name = "";
 				Chapter cursor = this;
-				Chapter parent = this.parent;
+				Chapter parentChapter = this.parent;
 				int deep = 0;
-				while (parent != null) {
+				while (parentChapter != null) {
 					deep++;
-					int index = parent.children.indexOf(cursor) + 1;
+					int index = parentChapter.children.indexOf(cursor) + 1;
 					name = index + "." + name;
-					cursor = parent;
-					parent = cursor.parent;
+					cursor = parentChapter;
+					parentChapter = cursor.parent;
 				}
-				name += " " + heading.getText();
-				heading.setHTML("<a name=\"" + name + "\" ></a>" + name);
+				name += " " + this.heading.getText();
+				this.heading.setHTML("<a name=\"" + name + "\" ></a>" + name);
 
-				if (deep > MAX_TABLE_LEVEL) {
+				if (deep > ReferenceGuide.MAX_TABLE_LEVEL) {
 					return;
 				}
 				sb.append("<li><a href=\"#").append(name).append("\">").append(name).append("</a>\n");
 			}
-			if (children != null) {
+			if (this.children != null) {
 				sb.append("<ul>\n");
-				for (Chapter chapter : children) {
+				for (Chapter chapter : this.children) {
 					chapter.draw(sb);
 				}
 				sb.append("</ul>\n");
-
 			}
-			if (heading != null) {
+			if (this.heading != null) {
 				sb.append("</li>\n");
 			}
 		}
@@ -131,7 +125,7 @@ public class ReferenceGuide extends Composite implements EntryPoint {
 	private static final int MAX_TABLE_LEVEL = 3;
 
 	Chapter root = new Chapter(0, null);
-	Chapter current = root;
+	Chapter current = this.root;
 
 	@UiField
 	GridColumn tableOfContent;
@@ -139,7 +133,7 @@ public class ReferenceGuide extends Composite implements EntryPoint {
 	GridColumn contentContainer;
 
 	public ReferenceGuide() {
-		initWidget(Binder.BINDER.createAndBindUi(this));
+		this.initWidget(Binder.BINDER.createAndBindUi(this));
 
 		Theme theme = new Theme();
 		theme.addLink(new CssLink("theme/doc/style/pwt.css", 0));
@@ -150,54 +144,54 @@ public class ReferenceGuide extends Composite implements EntryPoint {
 		ErrorManager.get().setErrorDisplayer(errorDisplayer);
 		ErrorManager.get().registerErrorHandler(new UmbrellaExceptionHandler());
 
-		GoogleAnalytics.init(ApplicationConfig.ANALYTICS_TRACKER_ID, ApplicationConfig.DOMAIN).trackPage();
+		GoogleAnalytics.init(ApplicationConfig.ANALYTICS_TRACKER_ID, ApplicationConfig.DOMAIN)
+				.trackPage();
 
-		addHeading("Putnami Web Toolkit", 1);
-		addContent(new WelcomePage(), 0);
-		addContent(new GettingStartedPage(), 0);
-		addHeading("Look and feel", 1);
-		addContent(new BootstrapPage(), 1);
-		addContent(new LayoutPage(), 1);
-		addContent(new ComponentsPage(), 1);
-		addHeading("Framework", 1);
-		addContent(new NavigationPage(), 1);
-		addContent(new DataBindingPage(), 1);
-		addContent(new InternationalizationPage(), 1);
-		addContent(new ServerCallsPage(), 1);
-		addContent(new ErrorsPage(), 1);
-		addHeading("Plugins", 1);
-		addContent(new CodeEditorPage(), 1);
-		addContent(new ComingSoonPage(), 0);
+		this.addHeading("Putnami Web Toolkit", 1);
+		this.addContent(new WelcomePage(), 0);
+		this.addContent(new GettingStartedPage(), 0);
+		this.addHeading("Look and feel", 1);
+		this.addContent(new BootstrapPage(), 1);
+		this.addContent(new LayoutPage(), 1);
+		this.addContent(new ComponentsPage(), 1);
+		this.addHeading("Framework", 1);
+		this.addContent(new NavigationPage(), 1);
+		this.addContent(new DataBindingPage(), 1);
+		this.addContent(new InternationalizationPage(), 1);
+		this.addContent(new ServerCallsPage(), 1);
+		this.addContent(new ErrorsPage(), 1);
+		this.addHeading("Plugins", 1);
+		this.addContent(new CodeEditorPage(), 1);
+		this.addContent(new ComingSoonPage(), 0);
 
 		StringBuffer tableContentBuffer = new StringBuffer();
-		root.draw(tableContentBuffer);
-		tableOfContent.getElement().setInnerHTML(tableContentBuffer.toString());
+		this.root.draw(tableContentBuffer);
+		this.tableOfContent.getElement().setInnerHTML(tableContentBuffer.toString());
 	}
 
 	private void addHeading(String title, int level) {
 		Heading heading = new Heading(level);
 		heading.setText(title);
-		contentContainer.add(heading);
-		addChapter(heading, 0);
+		this.contentContainer.add(heading);
+		this.addChapter(heading, 0);
 	}
 
 	private void addContent(Widget content, int offset) {
 
 		NavSpy subNav = null;
-		//		if (content instanceof Page) {
-		//			subNav = ((Page) content).tableOfContent;
-		//		}
-		//		if (subNav != null) {
-		//			for (Heading heading : subNav.getHeadings()) {
-		//				addChapter(heading, offset);
-		//			}
-		//		}
+		// if (content instanceof Page) {
+		// subNav = ((Page) content).tableOfContent;
+		// }
+		// if (subNav != null) {
+		// for (Heading heading : subNav.getHeadings()) {
+		// addChapter(heading, offset);
+		// }
+		// }
 		if (content instanceof Page) {
-			contentContainer.add(((Page) content).header);
-			contentContainer.add(((Page) content).content);
-		}
-		else {
-			contentContainer.add(content);
+			this.contentContainer.add(((Page) content).header);
+			this.contentContainer.add(((Page) content).content);
+		} else {
+			this.contentContainer.add(content);
 		}
 	}
 
@@ -205,29 +199,25 @@ public class ReferenceGuide extends Composite implements EntryPoint {
 		int level = offset + heading.getLevel();
 		Chapter chapter = new Chapter(offset, heading);
 
-		if (current.isBrother(chapter)) {
-			current.parent.addChildren(chapter);
-			current = chapter;
-		}
-		else if (current.isDeeper(chapter)) {
-			current.addChildren(chapter);
-			current = chapter;
-		}
-		else {
-			while (!current.isBrother(chapter)) {
-				current = current.parent;
+		if (this.current.isBrother(chapter)) {
+			this.current.parent.addChildren(chapter);
+			this.current = chapter;
+		} else if (this.current.isDeeper(chapter)) {
+			this.current.addChildren(chapter);
+			this.current = chapter;
+		} else {
+			while (!this.current.isBrother(chapter)) {
+				this.current = this.current.parent;
 			}
-			if (current.isBrother(chapter)) {
-				current.parent.addChildren(chapter);
-				current = chapter;
+			if (this.current.isBrother(chapter)) {
+				this.current.parent.addChildren(chapter);
+				this.current = chapter;
 			}
 		}
-
 	}
 
 	@Override
 	public void onModuleLoad() {
 		RootPanel.get().add(this);
-
 	}
 }

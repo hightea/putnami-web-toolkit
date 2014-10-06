@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -45,17 +43,17 @@ public class InputSuggest extends AbstractInputBox<TextBox, String> {
 	public InputSuggest() {
 		super(new TextBox());
 
-		setParser(StringParser.get());
-		setRenderer(StringRenderer.get());
+		this.setParser(StringParser.get());
+		this.setRenderer(StringRenderer.get());
 
-		oracle = new MultiWordSuggestOracle();
-		init();
+		this.oracle = new MultiWordSuggestOracle();
+		this.init();
 	}
 
 	protected InputSuggest(InputSuggest source) {
 		super(new TextBox(), source);
-		oracle = source.oracle;
-		init();
+		this.oracle = source.oracle;
+		this.init();
 	}
 
 	@Override
@@ -64,32 +62,32 @@ public class InputSuggest extends AbstractInputBox<TextBox, String> {
 	}
 
 	private void init() {
-		assistHandler = new TextBoxContentAssistHandler(oracle);
-		assistAspect = new ContentAssistAspect(assistHandler);
-		assistAspect.setInput(getInput());
+		this.assistHandler = new TextBoxContentAssistHandler(this.oracle);
+		this.assistAspect = new ContentAssistAspect(this.assistHandler);
+		this.assistAspect.setInput(this.getInput());
 
-		compositeFocus = CompositeFocusHelper.createFocusHelper(this, getInput());
-		compositeFocus.addFocusPartner(assistAspect.getSuggestionWidget().getElement());
+		this.compositeFocus = CompositeFocusHelper.createFocusHelper(this, this.getInput());
+		this.compositeFocus.addFocusPartner(this.assistAspect.getSuggestionWidget().getElement());
 	}
 
 	public void setSuggestions(Collection<String> suggestions) {
-		oracle.clear();
-		oracle.setDefaultSuggestionsFromText(suggestions);
-		oracle.addAll(suggestions);
+		this.oracle.clear();
+		this.oracle.setDefaultSuggestionsFromText(suggestions);
+		this.oracle.addAll(suggestions);
 	}
 
 	public void setSuggestionsLimit(int limit) {
-		assistHandler.setLimit(limit);
+		this.assistHandler.setLimit(limit);
 	}
 
 	@Override
 	public HandlerRegistration addBlurHandler(BlurHandler handler) {
-		return compositeFocus.addBlurHandler(handler);
+		return this.compositeFocus.addBlurHandler(handler);
 	}
 
 	@Override
 	public HandlerRegistration addFocusHandler(FocusHandler handler) {
-		return compositeFocus.addFocusHandler(handler);
+		return this.compositeFocus.addFocusHandler(handler);
 	}
 
 	static class TextBoxContentAssistHandler extends AbstractContentAssistHandler {

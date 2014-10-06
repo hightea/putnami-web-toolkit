@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -41,32 +39,32 @@ public class Popover extends AbstractHover implements EditorLabel {
 		private DivElement container;
 
 		public PopoverContainer() {
-			container = Document.get().createDivElement();
-			StyleUtils.addStyle(container, STYLE_POPOVER);
-			StyleUtils.addStyle(container, STYLE_FADE);
+			this.container = Document.get().createDivElement();
+			StyleUtils.addStyle(this.container, Popover.STYLE_POPOVER);
+			StyleUtils.addStyle(this.container, Popover.STYLE_FADE);
 
-			this.setElement(container);
+			this.setElement(this.container);
 		}
 
 		private void reset() {
-			container.removeAllChildren();
+			this.container.removeAllChildren();
 			DivElement arrow = Document.get().createDivElement();
-			StyleUtils.addStyle(arrow, STYLE_ARROW);
-			container.appendChild(arrow);
+			StyleUtils.addStyle(arrow, Popover.STYLE_ARROW);
+			this.container.appendChild(arrow);
 		}
 
 		@Override
 		public void setTitle(String title) {
 			Element titleElement = Document.get().createElement("h3");
-			container.appendChild(titleElement);
-			StyleUtils.addStyle(titleElement, STYLE_TITLE);
+			this.container.appendChild(titleElement);
+			StyleUtils.addStyle(titleElement, Popover.STYLE_TITLE);
 			titleElement.setInnerText(title);
 		}
 
 		public void setContent(String content) {
 			DivElement contentElement = Document.get().createDivElement();
-			container.appendChild(contentElement);
-			StyleUtils.addStyle(contentElement, STYLE_INNER);
+			this.container.appendChild(contentElement);
+			StyleUtils.addStyle(contentElement, Popover.STYLE_INNER);
 			contentElement.setInnerText(content);
 		}
 	}
@@ -93,26 +91,24 @@ public class Popover extends AbstractHover implements EditorLabel {
 
 	@Override
 	protected Widget getHoverWidget() {
-		if (popoverWidget == null) {
-			popoverWidget = new PopoverContainer();
+		if (this.popoverWidget == null) {
+			this.popoverWidget = new PopoverContainer();
 		}
-		popoverWidget.reset();
-		if (title != null) {
-			popoverWidget.setTitle(title);
+		this.popoverWidget.reset();
+		if (this.title != null) {
+			this.popoverWidget.setTitle(this.title);
 		}
-		popoverWidget.setContent(text);
-		return popoverWidget;
+		this.popoverWidget.setContent(this.text);
+		return this.popoverWidget;
 	}
 
 	@Override
 	public String[] getSuffix() {
-		return new String[] {
-				LABEL_SUFFIX
-		};
+		return new String[] {EditorLabel.LABEL_SUFFIX};
 	}
 
 	public String getTitle() {
-		return title;
+		return this.title;
 	}
 
 	public void setTitle(String title) {
@@ -121,7 +117,7 @@ public class Popover extends AbstractHover implements EditorLabel {
 
 	@Override
 	public String getText() {
-		return text;
+		return this.text;
 	}
 
 	@Override

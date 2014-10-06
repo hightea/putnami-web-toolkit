@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.editor.client.helper;
 
@@ -32,13 +30,13 @@ public class MessageHelper {
 
 	public MessageHelper(ConstantsWithLookup defaultConstants) {
 		if (defaultConstants != null) {
-			registerConstants(defaultConstants, Object.class);
+			this.registerConstants(defaultConstants, Object.class);
 		}
 	}
 
 	public void registerConstants(ConstantsWithLookup constants, Class<?> propertyType) {
 		if (constants != null) {
-			constantRegistry.put(propertyType == null ? Object.class : propertyType, constants);
+			this.constantRegistry.put(propertyType == null ? Object.class : propertyType, constants);
 		}
 	}
 
@@ -47,8 +45,8 @@ public class MessageHelper {
 		int i = 0;
 		while (i < path.size() && label == null) {
 			Path keyPath = path.subPath(i);
-			String key = getMessageKey(keyPath, suffix);
-			label = findMessage(beanType, key);
+			String key = this.getMessageKey(keyPath, suffix);
+			label = this.findMessage(beanType, key);
 			if (label != null) {
 				return label;
 			}
@@ -72,12 +70,11 @@ public class MessageHelper {
 		String label = null;
 		while (typeToLookup != null && label == null) {
 			try {
-				ConstantsWithLookup constants = constantRegistry.get(typeToLookup);
+				ConstantsWithLookup constants = this.constantRegistry.get(typeToLookup);
 				if (constants != null) {
 					label = constants.getString(key);
 				}
-			}
-			catch (MissingResourceException e) {
+			} catch (MissingResourceException e) {
 				// Loop
 			}
 			typeToLookup = typeToLookup.getSuperclass();
@@ -91,10 +88,8 @@ public class MessageHelper {
 			return null;
 		}
 
-		String labelKey = path.toString()
-				.replaceAll("\\.", "_")
-				.replaceAll("\\[", "")
-				.replaceAll("]", "")
+		String labelKey =
+				path.toString().replaceAll("\\.", "_").replaceAll("\\[", "").replaceAll("]", "")
 				.toUpperCase();
 
 		labelKey = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, "" + labelKey);

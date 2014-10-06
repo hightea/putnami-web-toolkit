@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -29,8 +27,7 @@ public class Nav extends AbstractPanel implements CloneableWidget {
 
 	public enum LinkStyle implements CssStyle {
 
-		DISABLED("disabled"),
-		ACTIVE("active");
+		DISABLED("disabled"), ACTIVE("active");
 
 		private final String style;
 
@@ -42,16 +39,11 @@ public class Nav extends AbstractPanel implements CloneableWidget {
 		public String get() {
 			return this.style;
 		}
-
 	}
 
 	public enum Style implements CssStyle {
-		DEFAULT(null),
-		TABS("nav-tabs"),
-		PILLS("nav-pills"),
-		PILLS_STACKED("nav-pills nav-stacked"),
-		TABS_JUSTIFIED("nav-tabs nav-justified"),
-		PILLS_JUSTIFIED("nav-pills nav-justified");
+		DEFAULT(null), TABS("nav-tabs"), PILLS("nav-pills"), PILLS_STACKED("nav-pills nav-stacked"), TABS_JUSTIFIED(
+				"nav-tabs nav-justified"), PILLS_JUSTIFIED("nav-pills nav-justified");
 
 		private final String style;
 
@@ -63,7 +55,6 @@ public class Nav extends AbstractPanel implements CloneableWidget {
 		public String get() {
 			return this.style;
 		}
-
 	}
 
 	private static final CssStyle STYLE_NAV = new SimpleStyle("nav");
@@ -79,12 +70,12 @@ public class Nav extends AbstractPanel implements CloneableWidget {
 
 	public Nav() {
 		super(UListElement.TAG);
-		StyleUtils.addStyle(this, STYLE_NAV);
+		StyleUtils.addStyle(this, Nav.STYLE_NAV);
 	}
 
 	protected Nav(Nav source) {
 		super(source);
-		setStyle(source.style);
+		this.setStyle(source.style);
 	}
 
 	@Override
@@ -94,20 +85,20 @@ public class Nav extends AbstractPanel implements CloneableWidget {
 
 	@Override
 	public void add(IsWidget w) {
-		append(w);
+		this.append(w);
 	}
 
 	public void addNavContent(Nav.IsNavContent navContent) {
-		append(navContent);
+		this.append(navContent);
 	}
 
 	public void setStyle(Style style) {
 		this.style = style;
-		StyleUtils.addStyle(getElement(), this.style);
+		StyleUtils.addStyle(this.getElement(), this.style);
 	}
 
 	public Style getStyle() {
-		return style;
+		return this.style;
 	}
 
 }

@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.plugin.code.client.configuration.java;
 
@@ -29,17 +27,21 @@ public class JavaKeywordAssistHandler extends AbstractContentAssistHandler {
 
 	public JavaKeywordAssistHandler() {
 		super(new MultiWordSuggestOracle());
-		MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) getOracle();
-		oracle.addAll(Lists.newArrayList("abstract", "assert", "boolean", "break", "byte", "case", "catch",
-				"char", "class", "const", "continue", "default", "do", "double", "else", "enum", "extends", "false", "final", "finally", "float", "for",
-				"goto", "if", "implements", "import", "instanceof", "int", "interface", "long", "native", "new", "null", "package", "private",
-				"protected", "public", "return", "short", "static", "strictfp", "super", "switch", "synchronized", "this", "throw", "throws",
-				"transient", "true", "try", "void", "volatile", "while"));
-		oracle.setDefaultSuggestionsFromText(Lists.newArrayList("abstract", "assert", "boolean", "break", "byte", "case", "catch",
-				"char", "class", "const", "continue", "default", "do", "double", "else", "enum", "extends", "false", "final", "finally", "float", "for",
-				"goto", "if", "implements", "import", "instanceof", "int", "interface", "long", "native", "new", "null", "package", "private",
-				"protected", "public", "return", "short", "static", "strictfp", "super", "switch", "synchronized", "this", "throw", "throws",
-				"transient", "true", "try", "void", "volatile", "while"));
+		MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) this.getOracle();
+		oracle.addAll(Lists.newArrayList("abstract", "assert", "boolean", "break", "byte", "case",
+				"catch", "char", "class", "const", "continue", "default", "do", "double", "else", "enum",
+				"extends", "false", "final", "finally", "float", "for", "goto", "if", "implements",
+				"import", "instanceof", "int", "interface", "long", "native", "new", "null", "package",
+				"private", "protected", "public", "return", "short", "static", "strictfp", "super",
+				"switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "void",
+				"volatile", "while"));
+		oracle.setDefaultSuggestionsFromText(Lists.newArrayList("abstract", "assert", "boolean",
+				"break", "byte", "case", "catch", "char", "class", "const", "continue", "default", "do",
+				"double", "else", "enum", "extends", "false", "final", "finally", "float", "for", "goto",
+				"if", "implements", "import", "instanceof", "int", "interface", "long", "native", "new",
+				"null", "package", "private", "protected", "public", "return", "short", "static",
+				"strictfp", "super", "switch", "synchronized", "this", "throw", "throws", "transient",
+				"true", "try", "void", "volatile", "while"));
 	}
 
 	@Override
@@ -47,7 +49,8 @@ public class JavaKeywordAssistHandler extends AbstractContentAssistHandler {
 		CodeInput codeInput = (CodeInput) textInput;
 		String currentText = codeInput.getText();
 		int cursorPos = codeInput.getCursorPosition();
-		return currentText.substring(getCurrentTokenStartIndex(currentText, cursorPos), cursorPos).trim();
+		return currentText.substring(this.getCurrentTokenStartIndex(currentText, cursorPos), cursorPos)
+				.trim();
 	}
 
 	@Override
@@ -55,9 +58,10 @@ public class JavaKeywordAssistHandler extends AbstractContentAssistHandler {
 		CodeInput codeInput = (CodeInput) textInput;
 		String currentText = codeInput.getText();
 		int cursorPos = codeInput.getCursorPosition();
-		int tokenStartIndex = getCurrentTokenStartIndex(currentText, cursorPos);
-		String newText = currentText.substring(0, tokenStartIndex) + suggestion.getReplacementString()
-				+ currentText.substring(codeInput.getCursorPosition(), currentText.length());
+		int tokenStartIndex = this.getCurrentTokenStartIndex(currentText, cursorPos);
+		String newText =
+				currentText.substring(0, tokenStartIndex) + suggestion.getReplacementString()
+						+ currentText.substring(codeInput.getCursorPosition(), currentText.length());
 		int newCursorPos = tokenStartIndex + suggestion.getReplacementString().length();
 		codeInput.setText(newText);
 		codeInput.setCursorPosition(newCursorPos);

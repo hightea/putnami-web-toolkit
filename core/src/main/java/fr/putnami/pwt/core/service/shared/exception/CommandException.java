@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.service.shared.exception;
 
@@ -36,14 +34,14 @@ public class CommandException extends RuntimeException {
 	public CommandException(String message, Throwable cause) {
 		super(message, cause);
 		if (cause != null) {
-			causeClassName = cause.getClass().getName();
-			causeSimpleClassName = cause.getClass().getSimpleName();
-			causeMessage = cause.getMessage();
+			this.causeClassName = cause.getClass().getName();
+			this.causeSimpleClassName = cause.getClass().getSimpleName();
+			this.causeMessage = cause.getMessage();
 		}
 	}
 
 	public String getCauseClassName() {
-		return causeClassName;
+		return this.causeClassName;
 	}
 
 	public void setCauseClassName(String causeClassName) {
@@ -51,7 +49,7 @@ public class CommandException extends RuntimeException {
 	}
 
 	public String getCauseSimpleClassName() {
-		return causeSimpleClassName;
+		return this.causeSimpleClassName;
 	}
 
 	public void setCauseSimpleClassName(String causeSimpleClassName) {
@@ -59,7 +57,7 @@ public class CommandException extends RuntimeException {
 	}
 
 	public String getCauseMessage() {
-		return causeMessage;
+		return this.causeMessage;
 	}
 
 	public void setCauseMessage(String causeMessage) {
@@ -67,7 +65,7 @@ public class CommandException extends RuntimeException {
 	}
 
 	public String getCauseStackTrace() {
-		return causeStackTrace;
+		return this.causeStackTrace;
 	}
 
 	public void setCauseStackTrace(String causeStackTrace) {

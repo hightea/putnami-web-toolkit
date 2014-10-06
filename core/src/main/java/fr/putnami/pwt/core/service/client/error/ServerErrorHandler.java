@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.service.client.error;
 
@@ -28,7 +26,8 @@ public class ServerErrorHandler extends AbstractStatusCodeErrorHandler {
 	private static final String SERVER_ERROR_PREFIX = "serverError";
 
 	public ServerErrorHandler() {
-		super((ServerErrorConstants) GWT.create(ServerErrorConstants.class), SERVER_ERROR_PREFIX);
+		super((ServerErrorConstants) GWT.create(ServerErrorConstants.class),
+				ServerErrorHandler.SERVER_ERROR_PREFIX);
 	}
 
 	@Override
@@ -39,8 +38,9 @@ public class ServerErrorHandler extends AbstractStatusCodeErrorHandler {
 	@Override
 	protected boolean internalHandle(StatusCodeException error) {
 		if (ErrorManager.get().hasErrorDisplayer()) {
-			String title = ((ServerErrorConstants) getConstants()).serverErrorTitle();
-			ErrorManager.get().getErrorDisplayer().display(title, getErrorMessage(error), error, Severity.DANGER);
+			String title = ((ServerErrorConstants) this.getConstants()).serverErrorTitle();
+			ErrorManager.get().getErrorDisplayer().display(title, this.getErrorMessage(error), error,
+					Severity.DANGER);
 		}
 		return true;
 	}

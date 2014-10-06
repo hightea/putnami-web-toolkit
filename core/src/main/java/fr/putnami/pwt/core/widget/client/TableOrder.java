@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -58,13 +56,12 @@ public class TableOrder<T> extends AbstractTableColumn<T> {
 
 		public TDHandle() {
 			super(TableCellElement.TAG_TD);
-			dragIcon = new Icon();
-			dragIcon.setType(IconFont.ICON_DRAG);
-			dragIcon.addDomHandler(mouseHandler, MouseDownEvent.getType());
-			dragIcon.addDomHandler(mouseHandler, ClickEvent.getType());
-			append(dragIcon);
+			this.dragIcon = new Icon();
+			this.dragIcon.setType(IconFont.ICON_DRAG);
+			this.dragIcon.addDomHandler(TableOrder.this.mouseHandler, MouseDownEvent.getType());
+			this.dragIcon.addDomHandler(TableOrder.this.mouseHandler, ClickEvent.getType());
+			this.append(this.dragIcon);
 		}
-
 	}
 
 	private class Handler implements MouseDownHandler, MouseOverHandler, MouseUpHandler, ClickHandler {
@@ -84,42 +81,42 @@ public class TableOrder<T> extends AbstractTableColumn<T> {
 
 		@Override
 		public void onMouseDown(MouseDownEvent event) {
-			onMouseUp(null);
+			this.onMouseUp(null);
 
 			Icon dragIcon = (Icon) event.getSource();
-			selectedRow = (TableRow<T>) dragIcon.getParent().getParent();
-			body = (TableEditorBody<T>) selectedRow.getParent();
+			this.selectedRow = (TableRow<T>) dragIcon.getParent().getParent();
+			this.body = (TableEditorBody<T>) this.selectedRow.getParent();
 
 			int i = 0;
-			overRegistration = new HandlerRegistrationCollection();
-			upRegistration = RootPanel.get().addDomHandler(this, MouseUpEvent.getType());
-			for (TableRow row : body.getRows()) {
-				rows.put(row, i++);
-				overRegistration.add(row.addDomHandler(this, MouseOverEvent.getType()));
+			this.overRegistration = new HandlerRegistrationCollection();
+			this.upRegistration = RootPanel.get().addDomHandler(this, MouseUpEvent.getType());
+			for (TableRow row : this.body.getRows()) {
+				this.rows.put(row, i++);
+				this.overRegistration.add(row.addDomHandler(this, MouseOverEvent.getType()));
 			}
-			disableTextSelection(true);
+			TableOrder.this.disableTextSelection(true);
 			RootPanel.get().getElement().getStyle().setCursor(Style.Cursor.MOVE);
-			StyleUtils.addStyle(selectedRow, STYLE_ROW_DRAGING);
+			StyleUtils.addStyle(this.selectedRow, TableOrder.STYLE_ROW_DRAGING);
 		}
 
 		@Override
 		public void onMouseUp(MouseUpEvent event) {
-			if (upRegistration != null) {
-				upRegistration.removeHandler();
+			if (this.upRegistration != null) {
+				this.upRegistration.removeHandler();
 			}
-			if (overRegistration != null) {
-				overRegistration.removeHandler();
+			if (this.overRegistration != null) {
+				this.overRegistration.removeHandler();
 			}
-			if (selectedRow != null) {
-				StyleUtils.removeStyle(selectedRow, STYLE_ROW_DRAGING);
+			if (this.selectedRow != null) {
+				StyleUtils.removeStyle(this.selectedRow, TableOrder.STYLE_ROW_DRAGING);
 			}
-			upRegistration = null;
-			overRegistration = null;
+			this.upRegistration = null;
+			this.overRegistration = null;
 
-			body = null;
-			hoverRow = null;
-			selectedRow = null;
-			disableTextSelection(false);
+			this.body = null;
+			this.hoverRow = null;
+			this.selectedRow = null;
+			TableOrder.this.disableTextSelection(false);
 
 			RootPanel.get().getElement().getStyle().clearCursor();
 			if (event != null) {
@@ -130,8 +127,8 @@ public class TableOrder<T> extends AbstractTableColumn<T> {
 		@Override
 		public void onMouseOver(MouseOverEvent event) {
 			if (event.getNativeButton() == NativeEvent.BUTTON_LEFT) {
-				hoverRow = (TableRow) event.getSource();
-				body.switchRows(hoverRow, selectedRow);
+				this.hoverRow = (TableRow) event.getSource();
+				this.body.switchRows(this.hoverRow, this.selectedRow);
 			}
 			event.preventDefault();
 		}
@@ -141,8 +138,8 @@ public class TableOrder<T> extends AbstractTableColumn<T> {
 	private final List<TDHandle> cells = Lists.newArrayList();
 
 	public TableOrder() {
-		setColumnVisibility(ColumnVisibility.HIDE_READONLY);
-		setType(Type.ACTION);
+		this.setColumnVisibility(ColumnVisibility.HIDE_READONLY);
+		this.setType(Type.ACTION);
 	}
 
 	protected TableOrder(TableOrder<T> source) {
@@ -157,21 +154,21 @@ public class TableOrder<T> extends AbstractTableColumn<T> {
 	@Override
 	public TableTH<T> doCreateHeaderCell() {
 		TableTH<T> headerCell = new TableTH<T>();
-		StyleUtils.addStyle(headerCell, STYLE_TABLE_ORDER);
+		StyleUtils.addStyle(headerCell, TableOrder.STYLE_TABLE_ORDER);
 		return headerCell;
 	}
 
 	@Override
 	public AbstractTableCell<T> doCreateBodyCell() {
 		TDHandle cell = new TDHandle();
-		StyleUtils.addStyle(cell, STYLE_TABLE_ORDER);
-		cells.add(cell);
+		StyleUtils.addStyle(cell, TableOrder.STYLE_TABLE_ORDER);
+		this.cells.add(cell);
 		return cell;
 	}
 
 	public void disableTextSelection(boolean disable) {
 		Element rootPanelElement = RootPanel.get().getElement();
-		StyleUtils.toggleStyle(rootPanelElement, STYLE_NO_SELECTION, disable);
+		StyleUtils.toggleStyle(rootPanelElement, TableOrder.STYLE_NO_SELECTION, disable);
 		SelectionUtils.disableTextSelectInternal(rootPanelElement, disable);
 	}
 

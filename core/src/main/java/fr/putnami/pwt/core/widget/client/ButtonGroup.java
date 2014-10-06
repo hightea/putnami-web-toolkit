@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -30,9 +28,7 @@ public class ButtonGroup extends AbstractPanel implements CloneableWidget {
 	private static final CssStyle STYLE_JUSTIFIED = new SimpleStyle("btn-group-justified");
 
 	public enum Type implements CssStyle {
-		DEFAULT("btn-group"),
-		VERTICAL("btn-group-vertical"),
-		TOOLBAR("btn-toolbar");
+		DEFAULT("btn-group"), VERTICAL("btn-group-vertical"), TOOLBAR("btn-toolbar");
 
 		private final String style;
 
@@ -47,10 +43,7 @@ public class ButtonGroup extends AbstractPanel implements CloneableWidget {
 	}
 
 	public enum Size implements CssStyle {
-		X_SMALL("btn-group-xs"),
-		SMALL("btn-group-sm"),
-		DEFAULT(null),
-		LARGE("btn-group-lg");
+		X_SMALL("btn-group-xs"), SMALL("btn-group-sm"), DEFAULT(null), LARGE("btn-group-lg");
 
 		private final String style;
 
@@ -70,16 +63,16 @@ public class ButtonGroup extends AbstractPanel implements CloneableWidget {
 
 	public ButtonGroup() {
 		super(DivElement.TAG);
-		setSize(size);
-		setType(type);
+		this.setSize(this.size);
+		this.setType(this.type);
 	}
 
 	protected ButtonGroup(ButtonGroup source) {
 		super(source);
-		setSize(source.size);
-		setType(source.type);
-		setJustified(source.justified);
-		cloneSourceWidgets(source);
+		this.setSize(source.size);
+		this.setType(source.type);
+		this.setJustified(source.justified);
+		this.cloneSourceWidgets(source);
 	}
 
 	@Override
@@ -90,21 +83,21 @@ public class ButtonGroup extends AbstractPanel implements CloneableWidget {
 	@Override
 	public void add(IsWidget child) {
 		if (child instanceof Button) {
-			append(child);
+			this.append(child);
 			((Button) child).setSize(null);
 		}
 		if (child instanceof ButtonDropdown) {
-			append(child);
+			this.append(child);
 			((ButtonDropdown) child).setSize(null);
 		}
 		if (child instanceof ButtonGroup) {
-			append(child);
+			this.append(child);
 			((ButtonGroup) child).setSize(null);
 		}
 	}
 
 	public Type getType() {
-		return type;
+		return this.type;
 	}
 
 	public void setType(Type type) {
@@ -113,7 +106,7 @@ public class ButtonGroup extends AbstractPanel implements CloneableWidget {
 	}
 
 	public Size getSize() {
-		return size;
+		return this.size;
 	}
 
 	public void setSize(Size size) {
@@ -122,12 +115,12 @@ public class ButtonGroup extends AbstractPanel implements CloneableWidget {
 	}
 
 	public boolean isJustified() {
-		return justified;
+		return this.justified;
 	}
 
 	public void setJustified(boolean justified) {
 		this.justified = justified;
-		StyleUtils.toggleStyle(this, STYLE_JUSTIFIED, justified);
+		StyleUtils.toggleStyle(this, ButtonGroup.STYLE_JUSTIFIED, justified);
 	}
 
 }

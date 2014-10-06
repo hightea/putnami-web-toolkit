@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.inject.rebind.delegate;
 
@@ -30,7 +28,8 @@ import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterStatic;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 
-public class InjectTemplateCreator extends InjectorCreatorDelegate implements InjectorWritterStatic, InjectorWritterInit, InjectorWritterConstructor {
+public class InjectTemplateCreator extends InjectorCreatorDelegate implements
+InjectorWritterStatic, InjectorWritterInit, InjectorWritterConstructor {
 
 	private final JClassType viewType;
 	private final String templateInterfaceName;
@@ -41,12 +40,10 @@ public class InjectTemplateCreator extends InjectorCreatorDelegate implements In
 		this.templateInterfaceName = viewType.getSimpleSourceName() + "TemplateBinder";
 		Templated templateAnnotation = viewType.getAnnotation(Templated.class);
 		if (Templated.DEFAULT_VALUE.equals(templateAnnotation.value())) {
-			templateName = null;
+			this.templateName = null;
+		} else {
+			this.templateName = templateAnnotation.value();
 		}
-		else {
-			templateName = templateAnnotation.value();
-		}
-
 	}
 
 	@Override
@@ -59,15 +56,17 @@ public class InjectTemplateCreator extends InjectorCreatorDelegate implements In
 
 	@Override
 	public void writeStatic(SourceWriter srcWriter) {
-		if (templateName != null) {
-			srcWriter.println("@UiTemplate(%s)", templateName);
+		if (this.templateName != null) {
+			srcWriter.println("@UiTemplate(%s)", this.templateName);
 		}
-		srcWriter.println("interface %s extends UiBinderLocalized<Widget, %s> {}", templateInterfaceName, viewType.getSimpleSourceName());
+		srcWriter.println("interface %s extends UiBinderLocalized<Widget, %s> {}",
+				this.templateInterfaceName, this.viewType.getSimpleSourceName());
 	}
 
 	@Override
 	public void writeConstructor(SourceWriter srcWriter) {
-		srcWriter.println("initWidget(((%s)GWT.create(%s.class)).createAndBindUi(this));", templateInterfaceName, templateInterfaceName);
+		srcWriter.println("initWidget(((%s)GWT.create(%s.class)).createAndBindUi(this));",
+				this.templateInterfaceName, this.templateInterfaceName);
 	}
 
 	@Override

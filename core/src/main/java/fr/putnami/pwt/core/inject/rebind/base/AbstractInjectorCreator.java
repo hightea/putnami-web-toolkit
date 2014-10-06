@@ -28,15 +28,14 @@ public abstract class AbstractInjectorCreator {
 	public AbstractInjectorCreator(JClassType injectableType) {
 		this.injectableType = injectableType;
 		this.packageName = injectableType.getPackage().getName();
-		this.proxyName = injectableType.getSimpleSourceName() + PROXY_SUFFIX;
-		this.proxyQualifiedName = injectableType.getPackage().getName() + "." + proxyName;
-
+		this.proxyName = injectableType.getSimpleSourceName() + AbstractInjectorCreator.PROXY_SUFFIX;
+		this.proxyQualifiedName = injectableType.getPackage().getName() + "." + this.proxyName;
 	}
 
 	public boolean shallRebind() {
-		if (delegates.isEmpty()) {
-			for (InjectorDelegateFactorty factory : getFactories()) {
-				factory.createDelegates(injectableType, this.delegates);
+		if (this.delegates.isEmpty()) {
+			for (InjectorDelegateFactorty factory : this.getFactories()) {
+				factory.createDelegates(this.injectableType, this.delegates);
 			}
 
 			Collections.sort(this.delegates, new Comparator<InjectorCreatorDelegate>() {
@@ -46,20 +45,20 @@ public abstract class AbstractInjectorCreator {
 				}
 			});
 		}
-		return delegates.size() > 0;
+		return this.delegates.size() > 0;
 	}
 
 	protected abstract Collection<InjectorDelegateFactorty> getFactories();
 
 	protected void doCreate(TreeLogger logger, GeneratorContext context, SourceWriter srcWriter) {
-		doSubGeneration(logger, context);
-		writeStatics(logger, context, srcWriter);
-		writeConstructor(logger, context, srcWriter);
-		writeMethods(logger, context, srcWriter);
+		this.doSubGeneration(logger, context);
+		this.writeStatics(logger, context, srcWriter);
+		this.writeConstructor(logger, context, srcWriter);
+		this.writeMethods(logger, context, srcWriter);
 	}
 
 	public String create(TreeLogger logger, GeneratorContext context) {
-		PrintWriter writer = context.tryCreate(logger, packageName, proxyName);
+		PrintWriter writer = context.tryCreate(logger, this.packageName, this.proxyName);
 		if (writer == null) {
 			return this.proxyQualifiedName;
 		}
@@ -67,28 +66,29 @@ public abstract class AbstractInjectorCreator {
 		SourceWriter srcWriter = this.getSourceWriter(writer, context);
 		srcWriter.indent();
 
-		doCreate(logger, context, srcWriter);
+		this.doCreate(logger, context, srcWriter);
 
 		srcWriter.outdent();
 		srcWriter.commit(logger);
 
 		return this.proxyQualifiedName;
-
 	}
-
 
 	// methods
 	protected void writeMethods(TreeLogger logger, GeneratorContext context, SourceWriter srcWriter) {
-		for (InjectorWritterMethod delegate : Iterables.filter(delegates, InjectorWritterMethod.class)) {
+		for (InjectorWritterMethod delegate : Iterables.filter(this.delegates,
+				InjectorWritterMethod.class)) {
 			delegate.writeMethods(srcWriter);
 		}
 	}
 
 	// constructor
-	protected void writeConstructor(TreeLogger logger, GeneratorContext context, SourceWriter srcWriter) {
-		srcWriter.println("public %s() {", proxyName);
+	protected void writeConstructor(TreeLogger logger, GeneratorContext context,
+			SourceWriter srcWriter) {
+		srcWriter.println("public %s() {", this.proxyName);
 		srcWriter.indent();
-		for (InjectorWritterConstructor delegate : Iterables.filter(delegates, InjectorWritterConstructor.class)) {
+		for (InjectorWritterConstructor delegate : Iterables.filter(this.delegates,
+				InjectorWritterConstructor.class)) {
 			delegate.writeConstructor(srcWriter);
 		}
 		srcWriter.outdent();
@@ -97,27 +97,30 @@ public abstract class AbstractInjectorCreator {
 
 	// inner class
 	protected void writeStatics(TreeLogger logger, GeneratorContext context, SourceWriter srcWriter) {
-		for (InjectorWritterStatic delegate : Iterables.filter(delegates, InjectorWritterStatic.class)) {
+		for (InjectorWritterStatic delegate : Iterables.filter(this.delegates,
+				InjectorWritterStatic.class)) {
 			delegate.writeStatic(srcWriter);
 		}
 	}
 
 	// Sub generations
 	protected void doSubGeneration(TreeLogger logger, GeneratorContext context) {
-		for (InjectorWritterSubGenerate delegate : Iterables.filter(delegates, InjectorWritterSubGenerate.class)) {
+		for (InjectorWritterSubGenerate delegate : Iterables.filter(this.delegates,
+				InjectorWritterSubGenerate.class)) {
 			delegate.subGenerate(logger, context);
 		}
 	}
 
 	private SourceWriter getSourceWriter(PrintWriter printWriter, GeneratorContext ctx) {
-		ClassSourceFileComposerFactory composerFactory = new ClassSourceFileComposerFactory(packageName, proxyName);
+		ClassSourceFileComposerFactory composerFactory =
+				new ClassSourceFileComposerFactory(this.packageName, this.proxyName);
 
 		composerFactory.addImport(GWT.class.getName());
 		composerFactory.addImport(this.injectableType.getQualifiedSourceName());
 
 		composerFactory.setSuperclass(this.injectableType.getSimpleSourceName());
 
-		for (InjectorWritterInit delegate : Iterables.filter(delegates, InjectorWritterInit.class)) {
+		for (InjectorWritterInit delegate : Iterables.filter(this.delegates, InjectorWritterInit.class)) {
 			delegate.initComposer(composerFactory);
 		}
 

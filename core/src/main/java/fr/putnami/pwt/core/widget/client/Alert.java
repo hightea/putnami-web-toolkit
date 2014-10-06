@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -46,10 +44,7 @@ public class Alert<T> extends AbstractForm<T> implements HasDrawable, HasAlertDi
 	private static final CssStyle STYLE_CLOSE = new SimpleStyle("close");
 
 	public enum Type implements CssStyle {
-		SUCCESS("alert-success"),
-		INFO("alert-info"),
-		WARNING("alert-warning"),
-		DANGER("alert-danger");
+		SUCCESS("alert-success"), INFO("alert-info"), WARNING("alert-warning"), DANGER("alert-danger");
 
 		private final String style;
 
@@ -59,7 +54,7 @@ public class Alert<T> extends AbstractForm<T> implements HasDrawable, HasAlertDi
 
 		@Override
 		public String get() {
-			return style;
+			return this.style;
 		}
 	}
 
@@ -70,22 +65,22 @@ public class Alert<T> extends AbstractForm<T> implements HasDrawable, HasAlertDi
 
 	public Alert(String html) {
 		super(DivElement.TAG, html);
-		StyleUtils.addStyle(this, STYLE_ALERT);
-		StyleUtils.addStyle(this, STYLE_FADE);
-		StyleUtils.addStyle(this, STYLE_VISIBLE);
-		setType(Type.INFO);
+		StyleUtils.addStyle(this, Alert.STYLE_ALERT);
+		StyleUtils.addStyle(this, Alert.STYLE_FADE);
+		StyleUtils.addStyle(this, Alert.STYLE_VISIBLE);
+		this.setType(Type.INFO);
 	}
 
 	public Alert(Type type, String message) {
 		this("");
-		setType(type);
-		getElement().setInnerHTML(message);
+		this.setType(type);
+		this.getElement().setInnerHTML(message);
 	}
 
 	protected Alert(Alert<T> source) {
 		super(source);
 		this.dismissable = source.dismissable;
-		setType(source.type);
+		this.setType(source.type);
 	}
 
 	@Override
@@ -94,13 +89,13 @@ public class Alert<T> extends AbstractForm<T> implements HasDrawable, HasAlertDi
 	}
 
 	public void hide() {
-		StyleUtils.removeStyle(this, STYLE_VISIBLE);
+		StyleUtils.removeStyle(this, Alert.STYLE_VISIBLE);
 		Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
 
 			@Override
 			public boolean execute() {
 				Alert.this.removeFromParent();
-				fireEvent(new AlertDismissEvent(Alert.this));
+				Alert.this.fireEvent(new AlertDismissEvent(Alert.this));
 				return false;
 			}
 		}, 150);
@@ -109,11 +104,11 @@ public class Alert<T> extends AbstractForm<T> implements HasDrawable, HasAlertDi
 	@Override
 	public void edit(T object) {
 		super.edit(object);
-		StyleUtils.addStyle(this, STYLE_VISIBLE);
+		StyleUtils.addStyle(this, Alert.STYLE_VISIBLE);
 	}
 
 	public Type getType() {
-		return type;
+		return this.type;
 	}
 
 	public void setType(Type type) {
@@ -122,47 +117,46 @@ public class Alert<T> extends AbstractForm<T> implements HasDrawable, HasAlertDi
 	}
 
 	public boolean isDismissable() {
-		return dismissable;
+		return this.dismissable;
 	}
 
 	public void setDismissable(boolean dismissable) {
 		this.dismissable = dismissable;
-		redraw();
+		this.redraw();
 	}
 
 	@Override
 	public void redraw() {
-		StyleUtils.toggleStyle(this, STYLE_ALERT_DISMISSABLE, dismissable);
-		if (dismissable) {
-			if (dismissButton == null) {
-				insert(ensureDismissButton(), 0, true);
+		StyleUtils.toggleStyle(this, Alert.STYLE_ALERT_DISMISSABLE, this.dismissable);
+		if (this.dismissable) {
+			if (this.dismissButton == null) {
+				this.insert(this.ensureDismissButton(), 0, true);
 			}
-		}
-		else if (dismissButton != null) {
-			dismissButton.removeFromParent();
-			dismissButton = null;
+		} else if (this.dismissButton != null) {
+			this.dismissButton.removeFromParent();
+			this.dismissButton = null;
 		}
 	}
 
 	private Anchor<?> ensureDismissButton() {
-		if (dismissButton == null) {
-			dismissButton = new Anchor("&times;");
-			StyleUtils.addStyle(dismissButton, STYLE_CLOSE);
-			dismissButton.addClickHandler(new ClickHandler() {
+		if (this.dismissButton == null) {
+			this.dismissButton = new Anchor("&times;");
+			StyleUtils.addStyle(this.dismissButton, Alert.STYLE_CLOSE);
+			this.dismissButton.addClickHandler(new ClickHandler() {
 
 				@Override
 				public void onClick(ClickEvent event) {
-					hide();
+					Alert.this.hide();
 				}
 
 			});
 		}
-		return dismissButton;
+		return this.dismissButton;
 	}
 
 	@Override
 	public HandlerRegistration addAlertDismissHandler(AlertDismissEvent.Handler handler) {
-		return addHandler(handler, AlertDismissEvent.TYPE);
+		return this.addHandler(handler, AlertDismissEvent.TYPE);
 	}
 
 }

@@ -16,7 +16,6 @@ import fr.putnami.pwt.doc.client.social.widget.SocialBar;
 @Templated
 public class SummaryDecorator extends ViewDecorator implements View {
 
-
 	public static SummaryDecorator get() {
 		return GWT.create(SummaryDecorator.class);
 	}
@@ -39,10 +38,10 @@ public class SummaryDecorator extends ViewDecorator implements View {
 	public void setWidget(IsWidget w) {
 		if (w instanceof Page) {
 			Page page = (Page) w;
-			headerContainer.setWidget(page.header);
-			contentContainer.setWidget(page.content);
+			this.headerContainer.setWidget(page.header);
+			this.contentContainer.setWidget(page.content);
 		}
-		tableOfContent.redraw();
+		this.tableOfContent.redraw();
 	}
 
 }

@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.inject.rebind.delegate;
 
@@ -30,7 +28,8 @@ import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterPresent;
 import fr.putnami.pwt.core.mvp.client.event.MayStopActivityEvent;
 import fr.putnami.pwt.core.mvp.client.event.StopActivityEvent;
 
-public class InjectMayStopActivityCreator extends InjectorCreatorDelegate implements InjectorWritterInit, InjectorWritterPresent {
+public class InjectMayStopActivityCreator extends InjectorCreatorDelegate implements
+InjectorWritterInit, InjectorWritterPresent {
 
 	private final Collection<JMethod> presenterMethods;
 	private final String injectorName;
@@ -42,19 +41,22 @@ public class InjectMayStopActivityCreator extends InjectorCreatorDelegate implem
 
 	@Override
 	public int getOrder() {
-		return LOWEST_PRECEDENCE;
+		return InjectorCreatorDelegate.LOWEST_PRECEDENCE;
 	}
 
 	@Override
 	public void writePresent(SourceWriter srcWriter) {
-		srcWriter.println("final HandlerRegistrationCollection mayStopRegistrations = new HandlerRegistrationCollection();");
-		for (JMethod mayStopMethod : presenterMethods) {
-			srcWriter.println("mayStopRegistrations.add(EventBus.get()"
+		srcWriter
+		.println("final HandlerRegistrationCollection mayStopRegistrations = new HandlerRegistrationCollection();");
+		for (JMethod mayStopMethod : this.presenterMethods) {
+			srcWriter
+			.println("mayStopRegistrations.add(EventBus.get()"
 					+ ".addHandlerToSource(MayStopActivityEvent.TYPE, place, new MayStopActivityEvent.Handler() {");
 			srcWriter.indent();
 			srcWriter.println("@Override public void onMayStopActivity(MayStopActivityEvent event) {");
 			srcWriter.indent();
-			srcWriter.println("if (event.getMessage() == null) { event.setMessage(%s.this.%s()); }", injectorName, mayStopMethod.getName());
+			srcWriter.println("if (event.getMessage() == null) { event.setMessage(%s.this.%s()); }",
+					this.injectorName, mayStopMethod.getName());
 			srcWriter.outdent();
 			srcWriter.outdent();
 			srcWriter.println("}}));");

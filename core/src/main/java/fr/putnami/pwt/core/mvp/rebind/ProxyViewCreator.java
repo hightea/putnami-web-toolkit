@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.mvp.rebind;
 
@@ -58,34 +56,37 @@ public class ProxyViewCreator {
 	public ProxyViewCreator(JClassType placeType) {
 		this.placeType = placeType;
 		this.packageName = this.placeType.getPackage().getName();
-		String viewProxyQualifiedName = this.placeType.getQualifiedSourceName() + ProxyViewCreator.PROXY_SUFFIX;
-		this.viewProxyQualifiedName = viewProxyQualifiedName.replace(placeType.getName(), placeType.getName().replace('.', '_'));
+		String qualifiedName = this.placeType.getQualifiedSourceName() + ProxyViewCreator.PROXY_SUFFIX;
+		this.viewProxyQualifiedName =
+				qualifiedName.replace(placeType.getName(), placeType.getName().replace('.', '_'));
 		this.viewProxySimpleName = this.viewProxyQualifiedName.replace(this.packageName + ".", "");
 		this.activityDescrition = placeType.getAnnotation(ActivityDescription.class);
-		this.placeTokenizerClass = activityDescrition.placeTokenizer();
+		this.placeTokenizerClass = this.activityDescrition.placeTokenizer();
 
-		if (PlaceTokenizer.class.equals(placeTokenizerClass)) {
-			placeTokenizerClass = null;
+		if (PlaceTokenizer.class.equals(this.placeTokenizerClass)) {
+			this.placeTokenizerClass = null;
 			try {
-				Class<? extends ViewPlace> placeClass = (Class<? extends ViewPlace>) getClass().forName(this.placeType.getQualifiedSourceName());
+				this.getClass();
+				Class<? extends ViewPlace> placeClass =
+						(Class<? extends ViewPlace>) Class.forName(this.placeType.getQualifiedSourceName());
 				for (Class<?> inter : placeClass.getInterfaces()) {
 					if (inter.equals(PlaceTokenizer.class)) {
-						placeTokenizerClass = (Class<? extends PlaceTokenizer<?>>) placeClass;
+						this.placeTokenizerClass = (Class<? extends PlaceTokenizer<?>>) placeClass;
 					}
 				}
-			}
-			catch (ClassNotFoundException e) {
+			} catch (ClassNotFoundException e) {
 				// Nothing to do
 			}
 		}
-		this.viewDecoratorClass = activityDescrition.viewDecorator();
-		if (ViewDecorator.class.equals(viewDecoratorClass)) {
-			viewDecoratorClass = null;
+		this.viewDecoratorClass = this.activityDescrition.viewDecorator();
+		if (ViewDecorator.class.equals(this.viewDecoratorClass)) {
+			this.viewDecoratorClass = null;
 		}
 	}
 
-	public String create(TreeLogger logger, GeneratorContext context) throws UnableToCompleteException {
-		PrintWriter printWriter = context.tryCreate(logger, packageName, viewProxySimpleName);
+	public String create(TreeLogger logger, GeneratorContext context)
+			throws UnableToCompleteException {
+		PrintWriter printWriter = context.tryCreate(logger, this.packageName, this.viewProxySimpleName);
 		if (printWriter == null) {
 			return this.viewProxyQualifiedName;
 		}
@@ -97,13 +98,12 @@ public class ProxyViewCreator {
 		srcWriter.println();
 		this.generateTokenPrefixes(logger, srcWriter);
 		srcWriter.println();
-		if (placeTokenizerClass == null) {
-			generateInternalTokenizer(logger, srcWriter);
+		if (this.placeTokenizerClass == null) {
+			this.generateInternalTokenizer(logger, srcWriter);
+		} else {
+			this.generateDelegateTokenizer(logger, srcWriter);
 		}
-		else {
-			generateDelegateTokenizer(logger, srcWriter);
-		}
-		generateActivityFactory(logger, srcWriter);
+		this.generateActivityFactory(logger, srcWriter);
 		srcWriter.outdent();
 
 		srcWriter.commit(logger);
@@ -121,27 +121,28 @@ public class ProxyViewCreator {
 
 	private void generateInternalTokenizer(TreeLogger logger, SourceWriter srcWriter) {
 		boolean hasTokeConstructor = false;
-		for (JConstructor constructor : placeType.getConstructors()) {
+		for (JConstructor constructor : this.placeType.getConstructors()) {
 			if (constructor.getParameters().length == 1
-					&& constructor.getParameters()[0].getType().getSimpleSourceName().equals(String.class.getSimpleName())) {
+					&& constructor.getParameters()[0].getType().getSimpleSourceName().equals(
+							String.class.getSimpleName())) {
 				hasTokeConstructor = true;
 			}
 		}
 		srcWriter.println("@Override");
-		srcWriter.println("public %s getPlace(String token) {", placeType.getSimpleSourceName());
+		srcWriter.println("public %s getPlace(String token) {", this.placeType.getSimpleSourceName());
 		srcWriter.indent();
 		if (hasTokeConstructor) {
-			srcWriter.println("return new %s(token);", placeType.getSimpleSourceName());
-		}
-		else {
-			srcWriter.println("%s place = new %s();", placeType.getSimpleSourceName(), placeType.getSimpleSourceName());
+			srcWriter.println("return new %s(token);", this.placeType.getSimpleSourceName());
+		} else {
+			srcWriter.println("%s place = new %s();", this.placeType.getSimpleSourceName(),
+					this.placeType.getSimpleSourceName());
 			srcWriter.println("place.setToken(token);");
 			srcWriter.println("return place;");
 		}
 		srcWriter.outdent();
 		srcWriter.println("}");
 		srcWriter.println("@Override");
-		srcWriter.println("public String getToken(%s place) {", placeType.getSimpleSourceName());
+		srcWriter.println("public String getToken(%s place) {", this.placeType.getSimpleSourceName());
 		srcWriter.indent();
 		srcWriter.println("if(place instanceof ViewPlace){");
 		srcWriter.indent();
@@ -155,15 +156,15 @@ public class ProxyViewCreator {
 
 	private void generateDelegateTokenizer(TreeLogger logger, SourceWriter srcWriter) {
 		srcWriter.println("@Override");
-		srcWriter.println("public %s getPlace(String token) {", placeType.getSimpleSourceName());
+		srcWriter.println("public %s getPlace(String token) {", this.placeType.getSimpleSourceName());
 		srcWriter.indent();
-		srcWriter.println("return new %s().getPlace(token);", placeTokenizerClass.getSimpleName());
+		srcWriter.println("return new %s().getPlace(token);", this.placeTokenizerClass.getSimpleName());
 		srcWriter.outdent();
 		srcWriter.println("}");
 		srcWriter.println("@Override");
-		srcWriter.println("public String getToken(%s place) {", placeType.getSimpleSourceName());
+		srcWriter.println("public String getToken(%s place) {", this.placeType.getSimpleSourceName());
 		srcWriter.indent();
-		srcWriter.println("return new %s().getToken(place);", placeTokenizerClass.getSimpleName());
+		srcWriter.println("return new %s().getToken(place);", this.placeTokenizerClass.getSimpleName());
 		srcWriter.outdent();
 		srcWriter.println("}");
 	}
@@ -171,7 +172,7 @@ public class ProxyViewCreator {
 	private void generateTokenPrefixes(TreeLogger logger, SourceWriter srcWriter) {
 		List<String> tokens = Lists.newArrayList();
 		tokens.add("\"" + this.placeType.getSimpleSourceName().replaceAll("Place$", "") + "\"");
-		for (String alias : activityDescrition.aliases()) {
+		for (String alias : this.activityDescrition.aliases()) {
 			tokens.add("\"" + alias + "\"");
 		}
 
@@ -185,19 +186,20 @@ public class ProxyViewCreator {
 
 	private void generateProxy(TreeLogger logger, SourceWriter srcWriter) {
 
-		String viewName = activityDescrition.view().getSimpleName();
+		String viewName = this.activityDescrition.view().getSimpleName();
 		srcWriter.println();
 		srcWriter.println("private static %s view;", viewName);
 		srcWriter.println();
 		srcWriter.println("@Override");
 		srcWriter.println("public void loadView(final ViewProxy.Callback callback) {");
 		srcWriter.indent();
-		if (activityDescrition.asyncView()) {
+		if (this.activityDescrition.asyncView()) {
 			srcWriter.println("GWT.runAsync(%s.class, new RunAsyncCallback() {", viewName);
 			srcWriter.indent();
 			srcWriter.println("public void onFailure(Throwable reason) {");
 			srcWriter.indent();
-			srcWriter.println("if (ApplicationUnreachableException.HTTP_DOWNLOAD_FAILURE_EXCEPTION.equals(reason.getClass().getSimpleName())) {");
+			srcWriter
+			.println("if (ApplicationUnreachableException.HTTP_DOWNLOAD_FAILURE_EXCEPTION.equals(reason.getClass().getSimpleName())) {");
 			srcWriter.indent();
 			srcWriter.println("reason = new ApplicationUnreachableException(reason);");
 			srcWriter.outdent();
@@ -207,36 +209,35 @@ public class ProxyViewCreator {
 			srcWriter.println("}");
 			srcWriter.println("public void onSuccess() {");
 			srcWriter.indent();
-			srcWriter.println("if(view == null || %s){", activityDescrition.scope() == Scope.PROTOTYPE);
+			srcWriter.println("if(view == null || %s){",
+					this.activityDescrition.scope() == Scope.PROTOTYPE);
 			srcWriter.indent();
 			srcWriter.println("view = GWT.create(%s.class);", viewName);
 			srcWriter.outdent();
 			srcWriter.println("}");
-			generateProxyResult(logger, srcWriter);
+			this.generateProxyResult(logger, srcWriter);
 			srcWriter.outdent();
 			srcWriter.println("}");
 			srcWriter.outdent();
 			srcWriter.println("});");
-		}
-		else {
-			srcWriter.println("if(view == null || %s){", activityDescrition.scope() == Scope.PROTOTYPE);
+		} else {
+			srcWriter.println("if(view == null || %s){",
+					this.activityDescrition.scope() == Scope.PROTOTYPE);
 			srcWriter.indent();
 			srcWriter.println("view = GWT.create(%s.class);", viewName);
 			srcWriter.outdent();
 			srcWriter.println("}");
-			generateProxyResult(logger, srcWriter);
-
+			this.generateProxyResult(logger, srcWriter);
 		}
 		srcWriter.outdent();
 		srcWriter.println("}");
 	}
 
 	private void generateProxyResult(TreeLogger logger, SourceWriter srcWriter) {
-		if (viewDecoratorClass == null) {
+		if (this.viewDecoratorClass == null) {
 			srcWriter.println("callback.showView(view);");
-		}
-		else {
-			String decoratorName = viewDecoratorClass.getSimpleName();
+		} else {
+			String decoratorName = this.viewDecoratorClass.getSimpleName();
 			srcWriter.println("%s decorator = %s.get();", decoratorName, decoratorName);
 			srcWriter.println("decorator.setView(view);");
 			srcWriter.println("callback.showView(decorator);");
@@ -244,9 +245,10 @@ public class ProxyViewCreator {
 	}
 
 	private SourceWriter getSourceWriter(PrintWriter printWriter, GeneratorContext ctx) {
-		ClassSourceFileComposerFactory composerFactory = new ClassSourceFileComposerFactory(packageName, viewProxySimpleName);
+		ClassSourceFileComposerFactory composerFactory =
+				new ClassSourceFileComposerFactory(this.packageName, this.viewProxySimpleName);
 
-		composerFactory.setSuperclass(placeType.getSimpleSourceName());
+		composerFactory.setSuperclass(this.placeType.getSimpleSourceName());
 
 		composerFactory.addImport(GWT.class.getName());
 		composerFactory.addImport(RunAsyncCallback.class.getName());
@@ -256,16 +258,17 @@ public class ProxyViewCreator {
 		composerFactory.addImport(Activity.class.getName());
 		composerFactory.addImport(ViewActivity.class.getName());
 		composerFactory.addImport(ApplicationUnreachableException.class.getName());
-		composerFactory.addImport(placeType.getQualifiedSourceName());
-		composerFactory.addImport(activityDescrition.view().getCanonicalName());
-		if (placeTokenizerClass != null) {
-			composerFactory.addImport(placeTokenizerClass.getCanonicalName());
+		composerFactory.addImport(this.placeType.getQualifiedSourceName());
+		composerFactory.addImport(this.activityDescrition.view().getCanonicalName());
+		if (this.placeTokenizerClass != null) {
+			composerFactory.addImport(this.placeTokenizerClass.getCanonicalName());
 		}
-		if (viewDecoratorClass != null) {
-			composerFactory.addImport(viewDecoratorClass.getCanonicalName());
+		if (this.viewDecoratorClass != null) {
+			composerFactory.addImport(this.viewDecoratorClass.getCanonicalName());
 		}
 
-		composerFactory.addImplementedInterface(ViewProxy.class.getSimpleName() + "<" + placeType.getSimpleSourceName() + ">");
+		composerFactory.addImplementedInterface(ViewProxy.class.getSimpleName() + "<"
+				+ this.placeType.getSimpleSourceName() + ">");
 
 		return composerFactory.createSourceWriter(ctx, printWriter);
 	}

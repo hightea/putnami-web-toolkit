@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client.helper;
 
@@ -24,20 +22,19 @@ public final class NumberRenderer extends AbstractRenderer<Number> {
 	private static NumberRenderer instance;
 
 	public static NumberRenderer get() {
-		if (instance == null) {
-			instance = new NumberRenderer(null);
+		if (NumberRenderer.instance == null) {
+			NumberRenderer.instance = new NumberRenderer(null);
 		}
-		return instance;
+		return NumberRenderer.instance;
 	}
 
 	private final NumberFormat formater;
 
 	public NumberRenderer(String format) {
 		if (format == null) {
-			formater = NumberFormat.getDecimalFormat();
-		}
-		else {
-			formater = NumberFormat.getFormat(format);
+			this.formater = NumberFormat.getDecimalFormat();
+		} else {
+			this.formater = NumberFormat.getFormat(format);
 		}
 	}
 
@@ -47,6 +44,6 @@ public final class NumberRenderer extends AbstractRenderer<Number> {
 			return "";
 		}
 
-		return formater.format(object);
+		return this.formater.format(object);
 	}
 }

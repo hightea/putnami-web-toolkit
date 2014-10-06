@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.security.client.widget;
 
@@ -36,134 +34,135 @@ import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class Secure implements IsWidget, HasWidgets, HasOneWidget, CloneableWidget, EditorComposite {
 
-  private final SignInEvent.Handler signinHandler = new SignInEvent.Handler() {
+	private final SignInEvent.Handler signinHandler = new SignInEvent.Handler() {
 
-    @Override
-    public void onSignInEvent(SignInEvent event) {
-      eval();
-    }
-  };
-  private final SignOutEvent.Handler signoutHandler = new SignOutEvent.Handler() {
+		@Override
+		public void onSignInEvent(SignInEvent event) {
+			Secure.this.eval();
+		}
+	};
+	private final SignOutEvent.Handler signoutHandler = new SignOutEvent.Handler() {
 
-    @Override
-    public void onSignOutEvent(SignOutEvent event) {
-      eval();
-    }
-  };
+		@Override
+		public void onSignOutEvent(SignOutEvent event) {
+			Secure.this.eval();
+		}
+	};
 
-  private String path;
-  private Widget widget;
+	private String path;
+	private Widget widget;
 
-  private boolean negate = false;
-  private String hasRole;
+	private boolean negate = false;
+	private String hasRole;
 
-  public Secure() {
-    SessionController.get().addSignInHandler(signinHandler);
-    SessionController.get().addSignOutHandler(signoutHandler);
-  }
+	public Secure() {
+		SessionController.get().addSignInHandler(this.signinHandler);
+		SessionController.get().addSignOutHandler(this.signoutHandler);
+	}
 
-  public Secure(Secure source) {
-    setWidget(WidgetUtils.cloneWidget(source.widget));
-  }
-  @Override
-  public String getPath() {
-    return path == null ? Path.ROOT_PATH : path;
-  }
+	public Secure(Secure source) {
+		this.setWidget(WidgetUtils.cloneWidget(source.widget));
+	}
 
-  @Override
-  public void setPath(String path) {
-    this.path = path;
-  }
+	@Override
+	public String getPath() {
+		return this.path == null ? Path.ROOT_PATH : this.path;
+	}
 
-  @Override
-  public Iterable<Editor> getEditors() {
-    if (getWidget() instanceof Editor) {
-      return Lists.newArrayList((Editor) getWidget());
-    }
-    return Collections.EMPTY_LIST;
-  }
+	@Override
+	public void setPath(String path) {
+		this.path = path;
+	}
 
-  @Override
-  public IsWidget cloneWidget() {
-    return new Secure(this);
-  }
+	@Override
+	public Iterable<Editor> getEditors() {
+		if (this.getWidget() instanceof Editor) {
+			return Lists.newArrayList((Editor) this.getWidget());
+		}
+		return Collections.EMPTY_LIST;
+	}
 
-  @Override
-  public Widget getWidget() {
-    return widget;
-  }
+	@Override
+	public IsWidget cloneWidget() {
+		return new Secure(this);
+	}
 
-  @Override
-  public void setWidget(IsWidget w) {
-    this.setWidget(w == null ? null : w.asWidget());
-  }
+	@Override
+	public Widget getWidget() {
+		return this.widget;
+	}
 
-  @Override
-  public void setWidget(Widget w) {
-    if (w == widget) {
-      return;
-    }
-    widget = w;
-    if (widget == null) {
-      return;
-    }
-  }
+	@Override
+	public void setWidget(IsWidget w) {
+		this.setWidget(w == null ? null : w.asWidget());
+	}
 
-  @Override
-  public void add(Widget w) {
-    if (getWidget() != null) {
-      throw new IllegalStateException("can only contain one child widget");
-    }
-    this.setWidget(w);
-  }
+	@Override
+	public void setWidget(Widget w) {
+		if (w == this.widget) {
+			return;
+		}
+		this.widget = w;
+		if (this.widget == null) {
+			return;
+		}
+	}
 
-  @Override
-  public void clear() {
-    widget = null;
-  }
+	@Override
+	public void add(Widget w) {
+		if (this.getWidget() != null) {
+			throw new IllegalStateException("can only contain one child widget");
+		}
+		this.setWidget(w);
+	}
 
-  @Override
-  public Iterator<Widget> iterator() {
-    return Lists.newArrayList(widget).iterator();
-  }
+	@Override
+	public void clear() {
+		this.widget = null;
+	}
 
-  @Override
-  public boolean remove(Widget w) {
-    if (widget != w) {
-      return false;
-    }
-    widget = null;
-    return true;
-  }
+	@Override
+	public Iterator<Widget> iterator() {
+		return Lists.newArrayList(this.widget).iterator();
+	}
 
-  @Override
-  public Widget asWidget() {
-    eval();
-    return getWidget();
-  }
+	@Override
+	public boolean remove(Widget w) {
+		if (this.widget != w) {
+			return false;
+		}
+		this.widget = null;
+		return true;
+	}
 
-  public boolean isNegate() {
-    return negate;
-  }
+	@Override
+	public Widget asWidget() {
+		this.eval();
+		return this.getWidget();
+	}
 
-  public void setNegate(boolean negate) {
-    this.negate = negate;
-  }
+	public boolean isNegate() {
+		return this.negate;
+	}
 
-  public String getHasRole() {
-    return hasRole;
-  }
+	public void setNegate(boolean negate) {
+		this.negate = negate;
+	}
 
-  public void setHasRole(String hasRole) {
-    this.hasRole = hasRole;
-  }
+	public String getHasRole() {
+		return this.hasRole;
+	}
 
-  public void eval() {
-    SessionController controller = SessionController.get();
-    boolean display = true;
-    if (hasRole != null) {
-      display = !negate && controller.hasRole(hasRole);
-    }
-    getWidget().setVisible(display);
-  }
+	public void setHasRole(String hasRole) {
+		this.hasRole = hasRole;
+	}
+
+	public void eval() {
+		SessionController controller = SessionController.get();
+		boolean display = true;
+		if (this.hasRole != null) {
+			display = !this.negate && controller.hasRole(this.hasRole);
+		}
+		this.getWidget().setVisible(display);
+	}
 }

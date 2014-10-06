@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.inject.rebind.delegate;
 
@@ -32,7 +30,8 @@ import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterPresent;
 import fr.putnami.pwt.core.mvp.client.event.StopActivityEvent;
 
-public class InjectErrorHandlerCreator extends InjectorCreatorDelegate implements InjectorWritterInit, InjectorWritterPresent {
+public class InjectErrorHandlerCreator extends InjectorCreatorDelegate implements
+InjectorWritterInit, InjectorWritterPresent {
 
 	private final Collection<JMethod> presenterMethods;
 	private final String injectorName;
@@ -44,36 +43,40 @@ public class InjectErrorHandlerCreator extends InjectorCreatorDelegate implement
 
 	@Override
 	public int getOrder() {
-		return LOWEST_PRECEDENCE;
+		return InjectorCreatorDelegate.LOWEST_PRECEDENCE;
 	}
 
 	@Override
 	public void writePresent(SourceWriter srcWriter) {
 
-		srcWriter.println("final List<fr.putnami.pwt.core.error.client.ErrorHandler> errorHandlers = Lists.newArrayList();");
-		for (JMethod handlerMethod : presenterMethods) {
+		srcWriter
+		.println("final List<fr.putnami.pwt.core.error.client.ErrorHandler> errorHandlers = Lists.newArrayList();");
+		for (JMethod handlerMethod : this.presenterMethods) {
 			srcWriter.println("errorHandlers.add(new fr.putnami.pwt.core.error.client.ErrorHandler() {");
 			srcWriter.indent();
 			srcWriter.println("@Override public boolean handle(Throwable error) { "
-					+ "return %s.this.%s(error); "
-					+ "}", injectorName, handlerMethod.getName());
+					+ "return %s.this.%s(error); " + "}", this.injectorName, handlerMethod.getName());
 			srcWriter.println("@Override public int getPriority() { return HIGH_PRIORITY; }");
 			srcWriter.outdent();
 			srcWriter.println("});");
 		}
 
-		srcWriter.println("for (fr.putnami.pwt.core.error.client.ErrorHandler errorHandler : errorHandlers) {");
+		srcWriter
+		.println("for (fr.putnami.pwt.core.error.client.ErrorHandler errorHandler : errorHandlers) {");
 		srcWriter.indent();
 		srcWriter.println("ErrorManager.get().registerErrorHandler(errorHandler);");
 		srcWriter.outdent();
 		srcWriter.println("}");
 
-		srcWriter.println("final HandlerRegistrationCollection errorHandlerRegistrations = new HandlerRegistrationCollection();");
-		srcWriter.println("errorHandlerRegistrations.add(EventBus.get().addHandlerToSource(StopActivityEvent.TYPE, place, new StopActivityEvent.Handler() {");
+		srcWriter
+		.println("final HandlerRegistrationCollection errorHandlerRegistrations = new HandlerRegistrationCollection();");
+		srcWriter
+		.println("errorHandlerRegistrations.add(EventBus.get().addHandlerToSource(StopActivityEvent.TYPE, place, new StopActivityEvent.Handler() {");
 		srcWriter.indent();
 		srcWriter.println("@Override public void onStopActivity(StopActivityEvent event) {");
 		srcWriter.indent();
-		srcWriter.println("for (fr.putnami.pwt.core.error.client.ErrorHandler handler : errorHandlers) {");
+		srcWriter
+		.println("for (fr.putnami.pwt.core.error.client.ErrorHandler handler : errorHandlers) {");
 		srcWriter.indent();
 		srcWriter.println("ErrorManager.get().registerErrorHandler(handler);");
 		srcWriter.outdent();

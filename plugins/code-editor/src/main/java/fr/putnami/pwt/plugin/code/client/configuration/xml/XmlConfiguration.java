@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.plugin.code.client.configuration.xml;
 
@@ -32,7 +30,7 @@ import fr.putnami.pwt.plugin.code.client.token.evaluator.SingleLineTokenEvaluato
 import fr.putnami.pwt.plugin.code.client.token.evaluator.WordDetector;
 import fr.putnami.pwt.plugin.code.client.token.evaluator.WordsTokenEvaluator;
 
-public class XmlConfiguration implements CodeEditorConfiguration {
+public final class XmlConfiguration implements CodeEditorConfiguration {
 
 	public static final XmlConfiguration XML_CONFIGURATION = new XmlConfiguration();
 
@@ -75,31 +73,38 @@ public class XmlConfiguration implements CodeEditorConfiguration {
 	private XmlConfiguration() {
 		PartitionnedTextRendererAspect renderAspect = new PartitionnedTextRendererAspect(true);
 		// Detect and Render Xml Comment
-		renderAspect.registerPartitionner(new MultiLineTokenEvaluator("<!--", "-->", new CssRendererTokenContent("code-editor-xml-comment"), (char) 0,
-				true));
+		renderAspect.registerPartitionner(new MultiLineTokenEvaluator("<!--", "-->",
+				new CssRendererTokenContent("code-editor-xml-comment"), (char) 0, true));
 		// Detect and Render Xml Head or CDATA
-		renderAspect.registerPartitionner(new MultiLineTokenEvaluator("<!", ">", new CssRendererTokenContent("code-editor-xml-doctype"), '\\', true));
+		renderAspect.registerPartitionner(new MultiLineTokenEvaluator("<!", ">",
+				new CssRendererTokenContent("code-editor-xml-doctype"), '\\', true));
 		// Detect Xml tag
-		renderAspect.registerPartitionner(new MultiLineTokenEvaluator("<", ">", XmlPartitionTokenContent.INNER_TAG, (char) 0, true));
+		renderAspect.registerPartitionner(new MultiLineTokenEvaluator("<", ">",
+				XmlPartitionTokenContent.INNER_TAG, (char) 0, true));
 
 		// Detect and render start and end Xml tag
-		WordsTokenEvaluator tagTokenEvaluator = new WordsTokenEvaluator(XMLTagWordDetector.INSTANCE, null);
-		tagTokenEvaluator.addWordMatcher(new XMLStartTagDetector(new CssRendererTokenContent("code-editor-xml-tag")));
-		tagTokenEvaluator.addWordMatcher(new XMLEndTagDetector(new CssRendererTokenContent("code-editor-xml-tag")));
+		WordsTokenEvaluator tagTokenEvaluator =
+				new WordsTokenEvaluator(XMLTagWordDetector.INSTANCE, null);
+		tagTokenEvaluator.addWordMatcher(new XMLStartTagDetector(new CssRendererTokenContent(
+				"code-editor-xml-tag")));
+		tagTokenEvaluator.addWordMatcher(new XMLEndTagDetector(new CssRendererTokenContent(
+				"code-editor-xml-tag")));
 		// Detect and render inner Tag word token
-		WordsTokenEvaluator wordTokenEvaluator = new WordsTokenEvaluator(new CssRendererTokenContent("code-editor-xml-attribute"));
+		WordsTokenEvaluator wordTokenEvaluator =
+				new WordsTokenEvaluator(new CssRendererTokenContent("code-editor-xml-attribute"));
 		// Detect and render inner Tag Strings
-		SingleLineTokenEvaluator stringTokenEvaluator = new SingleLineTokenEvaluator("\"", "\"", new CssRendererTokenContent(
-				"code-editor-xml-attribute-value"), '\\');
+		SingleLineTokenEvaluator stringTokenEvaluator =
+				new SingleLineTokenEvaluator("\"", "\"", new CssRendererTokenContent(
+						"code-editor-xml-attribute-value"), '\\');
 
 		// Register inner tag detectors and renderers.
-		renderAspect.registerPartitionScanners(XmlPartitionTokenContent.INNER_TAG, stringTokenEvaluator, tagTokenEvaluator, wordTokenEvaluator);
-		aspects.add(renderAspect);
-
+		renderAspect.registerPartitionScanners(XmlPartitionTokenContent.INNER_TAG,
+				stringTokenEvaluator, tagTokenEvaluator, wordTokenEvaluator);
+		this.aspects.add(renderAspect);
 	}
 
 	@Override
 	public List<CodeEditorAspect> getAspects() {
-		return aspects;
+		return this.aspects;
 	}
 }

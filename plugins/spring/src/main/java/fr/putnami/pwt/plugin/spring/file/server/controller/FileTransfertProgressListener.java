@@ -12,7 +12,7 @@ public class FileTransfertProgressListener implements ProgressListener, Serializ
 	private long contentLength = 0;
 
 	public long getBytesRead() {
-		return bytesRead;
+		return this.bytesRead;
 	}
 
 	public void setBytesRead(long bytesRead) {
@@ -20,13 +20,12 @@ public class FileTransfertProgressListener implements ProgressListener, Serializ
 	}
 
 	public long getContentLength() {
-		return contentLength;
+		return this.contentLength;
 	}
 
 	public void setContentLength(long contentLength) {
 		this.contentLength = contentLength;
 	}
-
 
 	@Override
 	public void update(long bytesRead, long contentLength, int pItems) {

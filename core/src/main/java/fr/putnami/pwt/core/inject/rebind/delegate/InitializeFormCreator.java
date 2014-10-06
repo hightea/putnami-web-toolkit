@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.inject.rebind.delegate;
 
@@ -35,8 +33,8 @@ import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterSubGenerate;
 import fr.putnami.pwt.core.model.rebind.ModelCreator;
 
-public class InitializeFormCreator extends InjectorCreatorDelegate implements InjectorWritterSubGenerate, InjectorWritterConstructor,
-		InjectorWritterInit {
+public class InitializeFormCreator extends InjectorCreatorDelegate implements
+InjectorWritterSubGenerate, InjectorWritterConstructor, InjectorWritterInit {
 
 	private final JField modelField;
 	private final JType fieldType;
@@ -49,15 +47,14 @@ public class InitializeFormCreator extends InjectorCreatorDelegate implements In
 		this.fieldType = modelField.getType();
 
 		Initialize initializeAnnotation = modelField.getAnnotation(Initialize.class);
-		constantClassName = initializeAnnotation.constantsClass();
-		if(ConstantsWithLookup.class.equals(constantClassName)){
-			constantClassName = null;
+		this.constantClassName = initializeAnnotation.constantsClass();
+		if (ConstantsWithLookup.class.equals(this.constantClassName)) {
+			this.constantClassName = null;
 		}
 		if (this.fieldType instanceof JParameterizedType) {
-			JParameterizedType paramType = (JParameterizedType) fieldType;
-			beanType = paramType.getTypeArgs()[0];
-		}
-		else {
+			JParameterizedType paramType = (JParameterizedType) this.fieldType;
+			this.beanType = paramType.getTypeArgs()[0];
+		} else {
 			throw new RuntimeException("modelField can not be injected as Model");
 		}
 	}
@@ -69,8 +66,8 @@ public class InitializeFormCreator extends InjectorCreatorDelegate implements In
 
 	@Override
 	public void subGenerate(TreeLogger logger, GeneratorContext context) {
-		ModelCreator modelCreator = new ModelCreator(beanType);
-		modelImplClass = modelCreator.create(logger, context);
+		ModelCreator modelCreator = new ModelCreator(this.beanType);
+		this.modelImplClass = modelCreator.create(logger, context);
 	}
 
 	@Override
@@ -78,18 +75,19 @@ public class InitializeFormCreator extends InjectorCreatorDelegate implements In
 		composerFactory.addImport(GWT.class.getName());
 		composerFactory.addImport(MessageHelper.class.getName());
 		composerFactory.addImport(ConstantsWithLookup.class.getName());
-		composerFactory.addImport(beanType.getQualifiedSourceName());
+		composerFactory.addImport(this.beanType.getQualifiedSourceName());
 	}
 
 	@Override
 	public void writeConstructor(SourceWriter srcWriter) {
-		String fieldName = modelField.getName();
-		if (constantClassName != null) {
-			srcWriter.println("MessageHelper %sMessageHelper = new MessageHelper((ConstantsWithLookup) GWT.create(%s.class));"
-					, fieldName, constantClassName.getCanonicalName());
-			srcWriter.println("%s.setMessageHelper(%sMessageHelper);"
-					, fieldName, fieldName);
+		String fieldName = this.modelField.getName();
+		if (this.constantClassName != null) {
+			srcWriter
+			.println(
+					"MessageHelper %sMessageHelper = new MessageHelper((ConstantsWithLookup) GWT.create(%s.class));",
+					fieldName, this.constantClassName.getCanonicalName());
+			srcWriter.println("%s.setMessageHelper(%sMessageHelper);", fieldName, fieldName);
 		}
-		srcWriter.println("%s.initialize(new %s());", fieldName, modelImplClass);
+		srcWriter.println("%s.initialize(new %s());", fieldName, this.modelImplClass);
 	}
 }

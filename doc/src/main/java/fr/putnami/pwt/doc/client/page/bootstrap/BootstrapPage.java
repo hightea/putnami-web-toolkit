@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.doc.client.page.bootstrap;
 
@@ -42,28 +40,28 @@ public class BootstrapPage extends Page {
 
 	@PostConstruct
 	public void postConstructBootstrapView() {
-		yeti.addLink(new CssLink("theme/yeti/style/bootstrap-yeti.min.css", 0));
-		amelia.addLink(new CssLink("theme/amelia/style/bootstrap-amelia.min.css", 0));
-		doc.addLink(new CssLink("theme/doc/style/pwt-doc.css", 0));
+		this.yeti.addLink(new CssLink("theme/yeti/style/bootstrap-yeti.min.css", 0));
+		this.amelia.addLink(new CssLink("theme/amelia/style/bootstrap-amelia.min.css", 0));
+		this.doc.addLink(new CssLink("theme/doc/style/pwt-doc.css", 0));
 	}
 
 	@UiHandler("yetiBtn")
 	public void onYetiClick(ButtonEvent event) {
-		ThemeController.get().installTheme(yeti);
+		ThemeController.get().installTheme(this.yeti);
 	}
 
 	@UiHandler("amaliaBtn")
 	public void onAmaliaClick(ButtonEvent event) {
-		ThemeController.get().installTheme(amelia);
+		ThemeController.get().installTheme(this.amelia);
 	}
 
 	@UiHandler("bootstrapBtn")
 	public void onBootstrapClick(ButtonEvent event) {
-		ThemeController.get().installTheme(defaultTheme);
+		ThemeController.get().installTheme(this.defaultTheme);
 	}
 
 	@UiHandler("clearBtn")
 	public void onClearClick(ButtonEvent event) {
-		ThemeController.get().installTheme(doc);
+		ThemeController.get().installTheme(this.doc);
 	}
 }

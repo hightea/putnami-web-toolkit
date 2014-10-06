@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.theme.client;
 
@@ -29,28 +27,28 @@ public class CssLink implements Comparable<CssLink> {
 	public CssLink(String href, int precedence) {
 		super();
 		this.precedence = precedence;
-		link.setRel("stylesheet");
-		link.setHref(GWT.getModuleBaseForStaticFiles() + href);
+		this.link.setRel("stylesheet");
+		this.link.setHref(GWT.getModuleBaseForStaticFiles() + href);
 	}
 
 	public int getPrecedence() {
-		return precedence;
+		return this.precedence;
 	}
 
 	public LinkElement getLink() {
-		return link;
+		return this.link;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hashCode(link.getHref());
+		return Objects.hashCode(this.link.getHref());
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof CssLink) {
 			CssLink other = (CssLink) obj;
-			return Objects.equal(link.getHref(), other.link.getHref());
+			return Objects.equal(this.link.getHref(), other.link.getHref());
 		}
 		return false;
 	}
@@ -60,7 +58,6 @@ public class CssLink implements Comparable<CssLink> {
 		if (o == null) {
 			return 1;
 		}
-		return Integer.valueOf(precedence).compareTo(o.precedence);
-
+		return Integer.valueOf(this.precedence).compareTo(o.precedence);
 	}
 }

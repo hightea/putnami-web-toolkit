@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client.base;
 
@@ -41,16 +39,11 @@ import fr.putnami.pwt.core.widget.client.helper.ToStringRenderer;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public abstract class AbstractInputBox<T extends TextBoxBase, I> extends AbstractInput<I> implements
-HasPlaceholder,
-HasEnabled,
-HasChangeHandlers
-{
+HasPlaceholder, HasEnabled, HasChangeHandlers {
 
 	public enum Size implements CssStyle {
 
-		DEFAULT(null),
-		LARGE("input-lg"),
-		SMALL("input-sm");
+		DEFAULT(null), LARGE("input-lg"), SMALL("input-sm");
 
 		private final String style;
 
@@ -60,9 +53,8 @@ HasChangeHandlers
 
 		@Override
 		public String get() {
-			return style;
+			return this.style;
 		}
-
 	}
 
 	private static final String ERROR_PARSING = "inputParsing";
@@ -87,16 +79,16 @@ HasChangeHandlers
 	protected AbstractInputBox(T input, AbstractInputBox<T, I> source) {
 		super(input, source);
 		this.input = input;
-		setPlaceholder(source.placeholder);
+		this.setPlaceholder(source.placeholder);
 		this.parser = source.parser;
 		this.renderer = source.renderer;
 
-		setSize(source.size);
-		endConstruct();
+		this.setSize(source.size);
+		this.endConstruct();
 	}
 
 	public Parser<I> getParser() {
-		return parser;
+		return this.parser;
 	}
 
 	public void setParser(Parser<I> parser) {
@@ -104,7 +96,7 @@ HasChangeHandlers
 	}
 
 	public Renderer<I> getRenderer() {
-		return renderer;
+		return this.renderer;
 	}
 
 	public void setRenderer(Renderer<I> renderer) {
@@ -112,7 +104,7 @@ HasChangeHandlers
 	}
 
 	public Size getSize() {
-		return size;
+		return this.size;
 	}
 
 	public void setSize(Size size) {
@@ -121,70 +113,70 @@ HasChangeHandlers
 	}
 
 	public T getInput() {
-		return input;
+		return this.input;
 	}
 
 	public String getType() {
-		return inputType;
+		return this.inputType;
 	}
 
 	public void setInputType(String inputType) {
 		this.inputType = inputType;
-		getElement().setAttribute("type", inputType);
+		this.getElement().setAttribute("type", inputType);
 	}
 
 	@Override
 	public String getPlaceholder() {
-		return placeholder;
+		return this.placeholder;
 	}
 
 	@Override
 	public void setPlaceholder(String placeholder) {
 		this.placeholder = placeholder;
 		if (placeholder == null) {
-			getElement().removeAttribute(HasPlaceholder.PLACEHOLDER_ATTRIBUTE);
-		}
-		else {
-			getElement().setAttribute(HasPlaceholder.PLACEHOLDER_ATTRIBUTE, placeholder);
+			this.getElement().removeAttribute(HasPlaceholder.PLACEHOLDER_ATTRIBUTE);
+		} else {
+			this.getElement().setAttribute(HasPlaceholder.PLACEHOLDER_ATTRIBUTE, placeholder);
 		}
 	}
 
 	@Override
 	public boolean isDirty() {
-		return !Objects.equal(this.getValue(), input.getValue());
+		return !Objects.equal(this.getValue(), this.input.getValue());
 	}
 
 	@Override
 	public HandlerRegistration addDirtyHandler(Handler handler) {
-		if (valueChangeRegistration == null) {
-			valueChangeRegistration = input.addValueChangeHandler(new ChangeEvent<String>(this));
+		if (this.valueChangeRegistration == null) {
+			this.valueChangeRegistration =
+					this.input.addValueChangeHandler(new ChangeEvent<String>(this));
 		}
 		return super.addDirtyHandler(handler);
 	}
 
 	@Override
 	public I flush() {
-		clearErrors();
-		String strValue = getInput().getValue();
-		I value = getValue();
+		this.clearErrors();
+		String strValue = this.getInput().getValue();
+		I value = this.getValue();
 		try {
-			value = parser.parse(strValue);
-			validate(value);
-			if (!hasErrors()) {
-				setValue(value);
+			value = this.parser.parse(strValue);
+			this.validate(value);
+			if (!this.hasErrors()) {
+				this.setValue(value);
 			}
+		} catch (ParseException e) {
+			this.addError(ValidationUtils.createError(this, AbstractInputBox.ERROR_PARSING, this
+					.getValue(), strValue));
 		}
-		catch (ParseException e) {
-			addError(ValidationUtils.createError(this, ERROR_PARSING, getValue(), strValue));
-		}
-		return getValue();
+		return this.getValue();
 	}
 
 	@Override
 	public void edit(I value) {
-		setValue(value);
-		String rendered = renderer.render(value);
-		input.setValue(rendered);
+		this.setValue(value);
+		String rendered = this.renderer.render(value);
+		this.input.setValue(rendered);
 	}
 
 	@Override
@@ -193,37 +185,38 @@ HasChangeHandlers
 		if (validator instanceof SizeValidator) {
 			SizeValidator<String> sizeValidator = (SizeValidator<String>) validator;
 			if (sizeValidator.getMax() > 0) {
-				setMaxLength(sizeValidator.getMax());
+				this.setMaxLength(sizeValidator.getMax());
 			}
 		}
 	}
 
 	public void setMaxLength(int maxLength) {
-		InputElement.as(input.getElement()).setMaxLength(maxLength);
+		InputElement.as(this.input.getElement()).setMaxLength(maxLength);
 	}
 
 	public int getMaxLength() {
-		return InputElement.as(input.getElement()).getMaxLength();
+		return InputElement.as(this.input.getElement()).getMaxLength();
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return input.isEnabled();
+		return this.input.isEnabled();
 	}
 
 	@Override
 	public void setEnabled(boolean enabled) {
-		input.setEnabled(enabled);
+		this.input.setEnabled(enabled);
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addChangeHandler(ChangeHandler handler) {
-		return input.addChangeHandler(handler);
+		return this.input.addChangeHandler(handler);
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addValueChangeHandler(ValueChangeHandler<I> handler) {
-		return input.addHandler(handler, ValueChangeEvent.getType());
+	public com.google.gwt.event.shared.HandlerRegistration addValueChangeHandler(
+			ValueChangeHandler<I> handler) {
+		return this.input.addHandler(handler, ValueChangeEvent.getType());
 	}
 
 }

@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -27,11 +25,8 @@ import fr.putnami.pwt.core.model.client.base.HasInputEditorFactory;
 import fr.putnami.pwt.core.model.client.base.HasOutputEditorFactory;
 import fr.putnami.pwt.core.model.client.base.HasWidgetFactory;
 
-public class TableEditorTD<T> extends TableTD<T> implements
-		HasOutputEditorFactory<T>,
-		HasInputEditorFactory<T>,
-		HasWidgetFactory,
-		HasEditorProvider {
+public class TableEditorTD<T> extends TableTD<T> implements HasOutputEditorFactory<T>,
+HasInputEditorFactory<T>, HasWidgetFactory, HasEditorProvider {
 
 	private OutputFactory outputFactory;
 	private InputFactory inputFactory;
@@ -61,7 +56,7 @@ public class TableEditorTD<T> extends TableTD<T> implements
 
 	@Override
 	public InputFactory getInputFactory() {
-		return inputFactory;
+		return this.inputFactory;
 	}
 
 	public void setOutputFactory(OutputFactory outputFactory) {
@@ -70,7 +65,7 @@ public class TableEditorTD<T> extends TableTD<T> implements
 
 	@Override
 	public OutputFactory getOutputFactory() {
-		return outputFactory;
+		return this.outputFactory;
 	}
 
 	public void setWidgetFactory(CloneableWidget widgetFactory) {
@@ -79,7 +74,7 @@ public class TableEditorTD<T> extends TableTD<T> implements
 
 	@Override
 	public CloneableWidget getWidgetFactory() {
-		return widgetFactory;
+		return this.widgetFactory;
 	}
 
 	@Override
@@ -90,14 +85,15 @@ public class TableEditorTD<T> extends TableTD<T> implements
 	@Override
 	public void redraw() {
 		super.redraw();
-		clear();
-		if (editorProvider != null) {
-			append((IsWidget) editorProvider.getEditor(getReadonly()));
+		this.clear();
+		if (this.editorProvider != null) {
+			this.append((IsWidget) this.editorProvider.getEditor(this.getReadonly()));
 		}
 	}
 
 	@Override
 	public void add(IsWidget w) {
-		throw new java.lang.UnsupportedOperationException("TableEditorTD does not support add(IsWidget) method");
+		throw new java.lang.UnsupportedOperationException(
+				"TableEditorTD does not support add(IsWidget) method");
 	}
 }

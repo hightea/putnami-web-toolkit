@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -37,8 +35,7 @@ public class InputGroup<T> extends AbstractPanel implements EditorInput<T> {
 	private static final CssStyle STYLE_INPUT_GROUP_BUTTON = new SimpleStyle("input-group-btn");
 
 	public enum Style implements CssStyle {
-		UNSTYLED(null),
-		DEFAULT("input-group");
+		UNSTYLED(null), DEFAULT("input-group");
 
 		private final String style;
 
@@ -53,9 +50,7 @@ public class InputGroup<T> extends AbstractPanel implements EditorInput<T> {
 	}
 
 	public enum Size implements CssStyle {
-		SMALL("input-group-sm"),
-		DEFAULT(null),
-		LARGE("input-group-lg");
+		SMALL("input-group-sm"), DEFAULT(null), LARGE("input-group-lg");
 
 		private final String style;
 
@@ -75,16 +70,16 @@ public class InputGroup<T> extends AbstractPanel implements EditorInput<T> {
 
 	public InputGroup() {
 		super(DivElement.TAG);
-		setStyle(style);
-		setSize(size);
+		this.setStyle(this.style);
+		this.setSize(this.size);
 	}
 
 	protected InputGroup(InputGroup<T> source, boolean cloneSourceWidgets) {
 		super(source);
-		setStyle(source.style);
-		setSize(source.size);
+		this.setStyle(source.style);
+		this.setSize(source.size);
 		if (cloneSourceWidgets) {
-			cloneSourceWidgets(source);
+			this.cloneSourceWidgets(source);
 		}
 	}
 
@@ -95,12 +90,12 @@ public class InputGroup<T> extends AbstractPanel implements EditorInput<T> {
 
 	@Override
 	public T getValue() {
-		return value;
+		return this.value;
 	}
 
 	@Override
 	public T flush() {
-		return value;
+		return this.value;
 	}
 
 	@Override
@@ -119,7 +114,7 @@ public class InputGroup<T> extends AbstractPanel implements EditorInput<T> {
 	}
 
 	public Size getSize() {
-		return size;
+		return this.size;
 	}
 
 	public void setSize(Size size) {
@@ -128,7 +123,7 @@ public class InputGroup<T> extends AbstractPanel implements EditorInput<T> {
 	}
 
 	public Style getStyle() {
-		return style;
+		return this.style;
 	}
 
 	public void setStyle(Style style) {
@@ -142,32 +137,32 @@ public class InputGroup<T> extends AbstractPanel implements EditorInput<T> {
 
 	@Override
 	public void add(IsWidget child) {
-		addInput(child);
+		this.addInput(child);
 	}
 
 	@Override
 	public void add(Widget child) {
-		addInput(child);
+		this.addInput(child);
 	}
 
 	@UiChild(tagname = "input")
 	public void addInput(IsWidget child) {
-		append(child);
-		addEditor(child);
+		this.append(child);
+		this.addEditor(child);
 	}
 
 	@UiChild(tagname = "addon")
 	public void addAddon(Widget addon) {
-		append(addon);
-		addEditor(addon);
-		StyleUtils.addStyle(addon, STYLE_INPUT_GROUP_ADDON);
+		this.append(addon);
+		this.addEditor(addon);
+		StyleUtils.addStyle(addon, InputGroup.STYLE_INPUT_GROUP_ADDON);
 	}
 
 	@UiChild(tagname = "button")
 	public void addButton(Widget button) {
-		append(button);
-		addEditor(button);
-		StyleUtils.addStyle(button, STYLE_INPUT_GROUP_BUTTON);
+		this.append(button);
+		this.addEditor(button);
+		StyleUtils.addStyle(button, InputGroup.STYLE_INPUT_GROUP_BUTTON);
 	}
 
 }

@@ -10,12 +10,12 @@ public class SocialBar extends ButtonGroup {
 	private static final CssStyle STYLE_SOCIAL_BAR = new SimpleStyle("social-bar");
 
 	public SocialBar() {
-		StyleUtils.addStyle(this, STYLE_SOCIAL_BAR);
-		add(new TwitterButton());
-		add(new FacebookButton());
-		add(new GooglePlusButton());
-		add(new LinkedInButton());
-		add(new GitHubButton());
+		StyleUtils.addStyle(this, SocialBar.STYLE_SOCIAL_BAR);
+		this.add(new TwitterButton());
+		this.add(new FacebookButton());
+		this.add(new GooglePlusButton());
+		this.add(new LinkedInButton());
+		this.add(new GitHubButton());
 	}
 
 }

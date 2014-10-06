@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -34,9 +32,7 @@ import fr.putnami.pwt.core.widget.client.event.RowClickEvent.Handler;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
-public class Table<T> extends AbstractPanel implements
-HasReadonly,
-CloneableWidget,
+public class Table<T> extends AbstractPanel implements HasReadonly, CloneableWidget,
 RowClickEvent.HasRowClickHandlers {
 
 	private static final CssStyle STYLE_TABLE = new SimpleStyle("table");
@@ -62,28 +58,28 @@ RowClickEvent.HasRowClickHandlers {
 	public Table() {
 		super(DivElement.TAG);
 
-		endConstruct();
+		this.endConstruct();
 
-		setStriped(striped);
-		setHover(hover);
-		setCondensed(condensed);
+		this.setStriped(this.striped);
+		this.setHover(this.hover);
+		this.setCondensed(this.condensed);
 	}
 
 	protected Table(Table<T> source) {
 		super(source);
 
-		endConstruct();
+		this.endConstruct();
 
-		setStriped(source.striped);
-		setHover(source.hover);
-		setCondensed(source.condensed);
-		setBordered(source.bordered);
+		this.setStriped(source.striped);
+		this.setHover(source.hover);
+		this.setCondensed(source.condensed);
+		this.setBordered(source.bordered);
 
-		setReadonly(source.readonly);
+		this.setReadonly(source.readonly);
 
-		setHead(WidgetUtils.cloneWidget(source.head));
+		this.setHead(WidgetUtils.cloneWidget(source.head));
 		for (TableBody<T> body : source.bodies.values()) {
-			addBody(WidgetUtils.cloneWidget(body));
+			this.addBody(WidgetUtils.cloneWidget(body));
 		}
 	}
 
@@ -93,51 +89,51 @@ RowClickEvent.HasRowClickHandlers {
 	}
 
 	private void endConstruct() {
-		append(tableContainer);
+		this.append(this.tableContainer);
 
-		StyleUtils.addStyle(this, STYLE_RESPONSIVE);
-		StyleUtils.addStyle(tableContainer, STYLE_TABLE);
+		StyleUtils.addStyle(this, Table.STYLE_RESPONSIVE);
+		StyleUtils.addStyle(this.tableContainer, Table.STYLE_TABLE);
 	}
 
 	public boolean isStriped() {
-		return striped;
+		return this.striped;
 	}
 
 	public void setStriped(boolean striped) {
 		this.striped = striped;
-		StyleUtils.toggleStyle(tableContainer, STYLE_STRIPED, striped);
+		StyleUtils.toggleStyle(this.tableContainer, Table.STYLE_STRIPED, striped);
 	}
 
 	public boolean isCondensed() {
-		return condensed;
+		return this.condensed;
 	}
 
 	public void setCondensed(boolean condensed) {
 		this.condensed = condensed;
-		StyleUtils.toggleStyle(tableContainer, STYLE_CONDENSED, condensed);
+		StyleUtils.toggleStyle(this.tableContainer, Table.STYLE_CONDENSED, condensed);
 	}
 
 	public boolean isHover() {
-		return hover;
+		return this.hover;
 	}
 
 	public void setHover(boolean hover) {
 		this.hover = hover;
-		StyleUtils.toggleStyle(tableContainer, STYLE_HOVER, hover);
+		StyleUtils.toggleStyle(this.tableContainer, Table.STYLE_HOVER, hover);
 	}
 
 	public boolean isBordered() {
-		return bordered;
+		return this.bordered;
 	}
 
 	public void setBordered(boolean bordered) {
 		this.bordered = bordered;
-		StyleUtils.toggleStyle(tableContainer, STYLE_BORDERED, bordered);
+		StyleUtils.toggleStyle(this.tableContainer, Table.STYLE_BORDERED, bordered);
 	}
 
 	@Override
 	public Boolean getReadonly() {
-		return readonly;
+		return this.readonly;
 	}
 
 	@Override
@@ -160,13 +156,13 @@ RowClickEvent.HasRowClickHandlers {
 
 	@Override
 	public HandlerRegistration addRowClickHandler(Handler handler) {
-		return getDefaultBody().addRowClickHandler(handler);
+		return this.getDefaultBody().addRowClickHandler(handler);
 	}
 
 	public TableBody<T> getBody(String bodyId) {
 		TableBody<T> body = this.bodies.get(bodyId);
 		if (body == null) {
-			body = createBody(bodyId);
+			body = this.createBody(bodyId);
 			this.addBody(body);
 		}
 		return body;
@@ -174,38 +170,38 @@ RowClickEvent.HasRowClickHandlers {
 
 	private void setHead(TableHead head) {
 		this.head = head;
-		tableContainer.append(this.head);
+		this.tableContainer.append(this.head);
 	}
 
 	private void addRow(TableRow<T> row) {
-		getDefaultBody().addRow(row);
+		this.getDefaultBody().addRow(row);
 	}
 
 	protected TableBody<T> getDefaultBody() {
-		return getBody(Table.BODY_DEFAULT);
+		return this.getBody(Table.BODY_DEFAULT);
 	}
 
 	protected TableBody<T> createBody(String bodyId) {
 		TableBody<T> body = new TableBody<T>(bodyId);
-		body.setReadonly(readonly);
+		body.setReadonly(this.readonly);
 		return body;
 	}
 
 	protected void addBody(TableBody<T> body) {
-		bodies.put(body.getBodyId(), body);
-		tableContainer.append(body);
+		this.bodies.put(body.getBodyId(), body);
+		this.tableContainer.append(body);
 	}
 
 	protected TableHead ensureTableHead() {
 		if (this.head == null) {
-			TableHead head = new TableHead();
-			this.setHead(head);
+			TableHead tHead = new TableHead();
+			this.setHead(tHead);
 		}
 		return this.head;
 	}
 
 	public TableHead getTableHeader() {
-		return ensureTableHead();
+		return this.ensureTableHead();
 	}
 
 }

@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -37,18 +35,15 @@ import fr.putnami.pwt.core.widget.client.Button.Type;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.core.widget.client.helper.CompositeFocusHelper;
 
-public class InputDate extends InputGroup<Date> implements
-		DirtyEvent.HasDirtyHandlers,
-		HasAllFocusHandlers,
-		Focusable,
-		HasPlaceholder {
+public class InputDate extends InputGroup<Date> implements DirtyEvent.HasDirtyHandlers,
+HasAllFocusHandlers, Focusable, HasPlaceholder {
 
 	private final InputDateBox dateBox = new InputDateBox();
 	private final Button<Date> calendarButton = new Button<Date>();
 	private final ButtonEvent.Handler buttonHandler = new ButtonEvent.Handler() {
 		@Override
 		public void onButtonAction(ButtonEvent event) {
-			toggleDatePicker();
+			InputDate.this.toggleDatePicker();
 		}
 
 	};
@@ -58,24 +53,23 @@ public class InputDate extends InputGroup<Date> implements
 	private CompositeFocusHelper compositeFocusHelper;
 
 	public InputDate() {
-		endConstruct();
+		this.endConstruct();
 	}
 
 	protected InputDate(InputDate source) {
 		super(source, false);
-		endConstruct();
-		setFormat(source.getFormat());
-		setPlaceholder(source.getPlaceholder());
+		this.endConstruct();
+		this.setFormat(source.getFormat());
+		this.setPlaceholder(source.getPlaceholder());
 	}
 
 	protected void endConstruct() {
-		calendarButton.setType(Type.ICON);
-		calendarButton.setIconType(IconFont.ICON_CALENDAR);
-		calendarButton.addButtonHandler(buttonHandler);
-		append(dateBox);
-		addAddon(calendarButton);
-		compositeFocusHelper = CompositeFocusHelper.createFocusHelper(this, dateBox);
-
+		this.calendarButton.setType(Type.ICON);
+		this.calendarButton.setIconType(IconFont.ICON_CALENDAR);
+		this.calendarButton.addButtonHandler(this.buttonHandler);
+		this.append(this.dateBox);
+		this.addAddon(this.calendarButton);
+		this.compositeFocusHelper = CompositeFocusHelper.createFocusHelper(this, this.dateBox);
 	}
 
 	@Override
@@ -84,112 +78,112 @@ public class InputDate extends InputGroup<Date> implements
 	}
 
 	public String getFormat() {
-		return dateBox.getFormat();
+		return this.dateBox.getFormat();
 	}
 
 	public void setFormat(String format) {
-		dateBox.setFormat(format);
+		this.dateBox.setFormat(format);
 	}
 
 	@Override
 	public boolean isDirty() {
-		return dateBox.isDirty();
+		return this.dateBox.isDirty();
 	}
 
 	@Override
 	public Date flush() {
-		return dateBox.flush();
+		return this.dateBox.flush();
 	}
 
 	@Override
 	public void edit(Date value) {
-		dateBox.edit(value);
-		if (datePicker != null) {
-			datePicker.hide();
+		this.dateBox.edit(value);
+		if (this.datePicker != null) {
+			this.datePicker.hide();
 		}
 	}
 
 	@Override
 	public HandlerRegistration addDirtyHandler(Handler handler) {
-		return dateBox.addDirtyHandler(handler);
+		return this.dateBox.addDirtyHandler(handler);
 	}
 
 	@Override
 	public String getPlaceholder() {
-		return dateBox.getPlaceholder();
+		return this.dateBox.getPlaceholder();
 	}
 
 	@Override
 	public void setPlaceholder(String placeholder) {
-		dateBox.setPlaceholder(placeholder);
+		this.dateBox.setPlaceholder(placeholder);
 	}
 
 	@Override
 	public Date getValue() {
-		return dateBox.getValue();
+		return this.dateBox.getValue();
 	}
 
 	@Override
 	public boolean hasErrors() {
-		return dateBox.hasErrors();
+		return this.dateBox.hasErrors();
 	}
 
 	@Override
 	public Iterable<Error> getErrors() {
-		return dateBox.getErrors();
+		return this.dateBox.getErrors();
 	}
 
 	@Override
 	public void addValidator(Validator<Date> validator) {
-		dateBox.addValidator(validator);
+		this.dateBox.addValidator(validator);
 	}
 
 	private void toggleDatePicker() {
-		if (datePicker == null) {
-			datePicker = new InputDatePicker();
-			datePicker.addValueChangeHandler(new ValueChangeHandler<Date>() {
+		if (this.datePicker == null) {
+			this.datePicker = new InputDatePicker();
+			this.datePicker.addValueChangeHandler(new ValueChangeHandler<Date>() {
 
 				@Override
 				public void onValueChange(ValueChangeEvent<Date> event) {
-					edit(event.getValue());
-					datePicker.hide();
-					dateBox.setFocus(true);
+					InputDate.this.edit(event.getValue());
+					InputDate.this.datePicker.hide();
+					InputDate.this.dateBox.setFocus(true);
 				}
 			});
-			compositeFocusHelper.addFocusPartner(datePicker.getElement());
+			this.compositeFocusHelper.addFocusPartner(this.datePicker.getElement());
 		}
-		datePicker.setValue(flush());
-		datePicker.togglePopup(this, calendarButton);
+		this.datePicker.setValue(this.flush());
+		this.datePicker.togglePopup(this, this.calendarButton);
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addFocusHandler(FocusHandler handler) {
-		return compositeFocusHelper.addFocusHandler(handler);
+		return this.compositeFocusHelper.addFocusHandler(handler);
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addBlurHandler(BlurHandler handler) {
-		return compositeFocusHelper.addBlurHandler(handler);
+		return this.compositeFocusHelper.addBlurHandler(handler);
 	}
 
 	@Override
 	public int getTabIndex() {
-		return dateBox.getTabIndex();
+		return this.dateBox.getTabIndex();
 	}
 
 	@Override
 	public void setAccessKey(char key) {
-		dateBox.setAccessKey(key);
+		this.dateBox.setAccessKey(key);
 	}
 
 	@Override
 	public void setFocus(boolean focused) {
-		dateBox.setFocus(focused);
+		this.dateBox.setFocus(focused);
 	}
 
 	@Override
 	public void setTabIndex(int index) {
-		dateBox.setTabIndex(index);
+		this.dateBox.setTabIndex(index);
 	}
 
 }

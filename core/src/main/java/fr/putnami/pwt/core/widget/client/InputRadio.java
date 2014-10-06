@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -35,8 +33,7 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 public class InputRadio<T> extends AbstractInputChoice<T, T> {
 
 	public enum Type implements CssStyle {
-		DEFAULT("radio"),
-		INLINE("radio-inline");
+		DEFAULT("radio"), INLINE("radio-inline");
 
 		private final String style;
 
@@ -46,14 +43,14 @@ public class InputRadio<T> extends AbstractInputChoice<T, T> {
 
 		@Override
 		public String get() {
-			return style;
+			return this.style;
 		}
 	}
 
 	private static long seq = 0;
 
 	static long incrementeAndGetSeq() {
-		return ++seq;
+		return ++InputRadio.seq;
 	}
 
 	private class SingleChoiceHandler implements ChoiceSelectionHandler<T, T> {
@@ -61,18 +58,18 @@ public class InputRadio<T> extends AbstractInputChoice<T, T> {
 
 		@Override
 		public void onItemClick(T item) {
-			selectedItem = item;
-			ValueChangeEvent.fire(InputRadio.this, selectedItem);
+			this.selectedItem = item;
+			ValueChangeEvent.fire(InputRadio.this, this.selectedItem);
 		}
 
 		@Override
 		public void setSelection(T selection, boolean fireEvents) {
-			T oldValue = selectedItem;
+			T oldValue = this.selectedItem;
 			RadioContainer newSelection = InputRadio.this.itemsContainer.get(selection);
 			if (newSelection != null) {
 				newSelection.select();
 			}
-			selectedItem = selection;
+			this.selectedItem = selection;
 			if (fireEvents) {
 				ValueChangeEvent.fireIfNotEqual(InputRadio.this, oldValue, selection);
 			}
@@ -80,49 +77,51 @@ public class InputRadio<T> extends AbstractInputChoice<T, T> {
 
 		@Override
 		public T getSelection() {
-			return selectedItem;
+			return this.selectedItem;
 		}
 	}
 
 	private class RadioContainer extends Composite implements ClickHandler {
 
-		private final InputElement radioElement = InputElement.as(Document.get().createRadioInputElement("radio" + InputRadio.this.radioGroupNum));
+		private final InputElement radioElement = InputElement.as(Document.get()
+				.createRadioInputElement("radio" + InputRadio.this.radioGroupNum));
 
 		private T value;
 
 		public RadioContainer(T value) {
 			this.value = value;
-			Container container = null;
+			Container newContainer = null;
 			Container label = new Container(LabelElement.TAG);
 			switch (InputRadio.this.type) {
-			case INLINE:
-				container = label;
-				break;
-			default:
-				container = new Container();
-				container.append(label);
-				break;
+				case INLINE:
+					newContainer = label;
+					break;
+				default:
+					newContainer = new Container();
+					newContainer.append(label);
+					break;
 			}
-			initWidget(container);
-			label.getElement().appendChild(radioElement);
-			label.getElement().appendChild(Document.get().createTextNode(" " + getChoiceRenderer().renderItem(value)));
-			StyleUtils.addStyle(container, InputRadio.this.type);
-			container.addDomHandler(this, ClickEvent.getType());
+			this.initWidget(newContainer);
+			label.getElement().appendChild(this.radioElement);
+			label.getElement().appendChild(
+					Document.get()
+					.createTextNode(" " + InputRadio.this.getChoiceRenderer().renderItem(value)));
+			StyleUtils.addStyle(newContainer, InputRadio.this.type);
+			newContainer.addDomHandler(this, ClickEvent.getType());
 			InputRadio.this.itemsContainer.put(value, this);
 		}
 
 		@Override
 		public void onClick(ClickEvent event) {
-			InputRadio.this.getSelectionHandler().onItemClick(value);
+			InputRadio.this.getSelectionHandler().onItemClick(this.value);
 		}
 
 		public void select() {
-			radioElement.setChecked(true);
+			this.radioElement.setChecked(true);
 		}
-
 	}
 
-	private final long radioGroupNum = incrementeAndGetSeq();
+	private final long radioGroupNum = InputRadio.incrementeAndGetSeq();
 
 	private ChoiceSelectionHandler<T, T> selectionHandler = new SingleChoiceHandler();
 	private ChoiceRenderer<T> choiceRenderer = new ChoiceRendererImpl();
@@ -133,15 +132,15 @@ public class InputRadio<T> extends AbstractInputChoice<T, T> {
 
 	public InputRadio() {
 		super(new Container());
-		container = (Container) getWidget();
-		setMultiple(true);
-		endConstruct();
+		this.container = (Container) this.getWidget();
+		this.setMultiple(true);
+		this.endConstruct();
 	}
 
 	protected InputRadio(InputRadio<T> source) {
 		super(new Container(), source);
-		container = (Container) getWidget();
-		endConstruct();
+		this.container = (Container) this.getWidget();
+		this.endConstruct();
 	}
 
 	@Override
@@ -151,10 +150,10 @@ public class InputRadio<T> extends AbstractInputChoice<T, T> {
 
 	@Override
 	protected void redrawInternal() {
-		container.clear();
-		itemsContainer.clear();
-		for (T item : getOrderedItems()) {
-			container.add(new RadioContainer(item));
+		this.container.clear();
+		this.itemsContainer.clear();
+		for (T item : this.getOrderedItems()) {
+			this.container.add(new RadioContainer(item));
 		}
 	}
 
@@ -164,7 +163,7 @@ public class InputRadio<T> extends AbstractInputChoice<T, T> {
 
 	@Override
 	protected ChoiceRenderer<T> getChoiceRenderer() {
-		return choiceRenderer;
+		return this.choiceRenderer;
 	}
 
 	@Override
@@ -174,7 +173,7 @@ public class InputRadio<T> extends AbstractInputChoice<T, T> {
 
 	@Override
 	protected ChoiceSelectionHandler<T, T> getSelectionHandler() {
-		return selectionHandler;
+		return this.selectionHandler;
 	}
 
 	@Override

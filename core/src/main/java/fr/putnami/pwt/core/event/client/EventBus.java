@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.event.client;
 
@@ -22,9 +20,10 @@ import com.google.web.bindery.event.shared.SimpleEventBus;
 /**
  * The Class is basic implementation of {@link com.google.web.bindery.event.shared.EventBus}.
  * <p>
- * This instance has a static get method for providing one singleton which may be used within all the framework.
+ * This instance has a static get method for providing one singleton which may be used within all
+ * the framework.
  * </p>
- * 
+ *
  * @since 1.0
  */
 public final class EventBus extends SimpleEventBus {
@@ -33,7 +32,7 @@ public final class EventBus extends SimpleEventBus {
 
 	/**
 	 * Get the singleton.
-	 * 
+	 *
 	 * @return the event bus
 	 */
 	public static EventBus get() {
@@ -44,10 +43,11 @@ public final class EventBus extends SimpleEventBus {
 	}
 
 	private EventBus() {
-
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see SimpleEventBus#getHandler(com.google.web.bindery.event.shared.Event.Type, int)
 	 */
 	@Override
@@ -55,16 +55,24 @@ public final class EventBus extends SimpleEventBus {
 		return super.getHandler(type, index);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.web.bindery.event.shared.SimpleEventBus#getHandlerCount(com.google.web.bindery.event.shared.Event.Type)
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * com.google.web.bindery.event.shared.SimpleEventBus#getHandlerCount(com.google.web.bindery.event
+	 * .shared.Event.Type)
 	 */
 	@Override
 	protected int getHandlerCount(Event.Type<?> eventKey) {
 		return super.getHandlerCount(eventKey);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.web.bindery.event.shared.SimpleEventBus#isEventHandled(com.google.web.bindery.event.shared.Event.Type)
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * com.google.web.bindery.event.shared.SimpleEventBus#isEventHandled(com.google.web.bindery.event
+	 * .shared.Event.Type)
 	 */
 	@Override
 	protected boolean isEventHandled(Event.Type<?> eventKey) {

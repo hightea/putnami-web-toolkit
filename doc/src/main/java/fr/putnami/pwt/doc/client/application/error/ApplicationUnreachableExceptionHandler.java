@@ -4,6 +4,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
 
 import fr.putnami.pwt.core.error.client.AbstractErrorHandler;
+import fr.putnami.pwt.core.error.client.ErrorHandler;
 import fr.putnami.pwt.core.mvp.client.exception.ApplicationUnreachableException;
 
 public class ApplicationUnreachableExceptionHandler extends AbstractErrorHandler {
@@ -26,12 +27,13 @@ public class ApplicationUnreachableExceptionHandler extends AbstractErrorHandler
 		if (!(error instanceof ApplicationUnreachableException)) {
 			return false;
 		}
-		errorDisplay.show(constants.applicationUnreachableTitle(), constants.applicationUnreachableMessage());
+		this.errorDisplay.show(this.constants.applicationUnreachableTitle(), this.constants
+				.applicationUnreachableMessage());
 		return true;
 	}
 
 	@Override
 	public int getPriority() {
-		return HIGHER_PRIORITY;
+		return ErrorHandler.HIGHER_PRIORITY;
 	}
 }

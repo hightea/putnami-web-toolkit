@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -32,11 +30,9 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 public class List extends AbstractPanel implements CloneableWidget {
 
 	public enum Type {
-		DEFAULT(null, LIElement.TAG, null),
-		LIST("list-unstyled", LIElement.TAG, null),
-		LIST_GROUP("list-group", LIElement.TAG, "list-group-item"),
-		INLINE("list-inline", LIElement.TAG, null),
-		LABEL("list-inline", LIElement.TAG, "label label-default");
+		DEFAULT(null, LIElement.TAG, null), LIST("list-unstyled", LIElement.TAG, null), LIST_GROUP(
+				"list-group", LIElement.TAG, "list-group-item"), INLINE("list-inline", LIElement.TAG, null), LABEL(
+						"list-inline", LIElement.TAG, "label label-default");
 
 		final String itemTag;
 		final CssStyle listStyle;
@@ -58,12 +54,12 @@ public class List extends AbstractPanel implements CloneableWidget {
 	@UiConstructor
 	public List(String tag) {
 		super(OListElement.TAG.equals(tag) || UListElement.TAG.equals(tag) ? tag : UListElement.TAG);
-		setType(type);
+		this.setType(this.type);
 	}
 
 	protected List(List source) {
 		super(source);
-		setType(source.type);
+		this.setType(source.type);
 	}
 
 	@Override
@@ -72,7 +68,7 @@ public class List extends AbstractPanel implements CloneableWidget {
 	}
 
 	public Type getType() {
-		return type;
+		return this.type;
 	}
 
 	public void setType(Type type) {
@@ -80,14 +76,13 @@ public class List extends AbstractPanel implements CloneableWidget {
 		if (this.type == null) {
 			this.type = Type.DEFAULT;
 		}
-		if (getWidgetCount() > 0) {
+		if (this.getWidgetCount() > 0) {
 			StyleUtils.addStyle(this, this.type.listStyle);
-			for (Widget w : getChildren()) {
+			for (Widget w : this.getChildren()) {
 				if (w instanceof ListItem) {
 					ListItem item = (ListItem) w;
 					StyleUtils.addStyle(item, this.type.itemStyle);
 					item.redraw();
-
 				}
 			}
 		}
@@ -96,7 +91,7 @@ public class List extends AbstractPanel implements CloneableWidget {
 	@Override
 	public void add(IsWidget child) {
 		if (child instanceof ListItem) {
-			addListItem((ListItem) child);
+			this.addListItem((ListItem) child);
 		}
 	}
 
@@ -104,6 +99,6 @@ public class List extends AbstractPanel implements CloneableWidget {
 		StyleUtils.addStyle(this, this.type.listStyle);
 		StyleUtils.addStyle(child, this.type.itemStyle);
 		child.redraw();
-		append(child);
+		this.append(child);
 	}
 }

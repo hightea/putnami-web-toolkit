@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.mvp.client.event;
 
@@ -46,7 +44,8 @@ public final class StartActivityEvent extends GwtEvent<StartActivityEvent.Handle
 	private final AcceptsOneWidget container;
 	private final IsWidget view;
 
-	private StartActivityEvent(Activity activity, Place place, AcceptsOneWidget container, IsWidget view) {
+	private StartActivityEvent(Activity activity, Place place, AcceptsOneWidget container,
+			IsWidget view) {
 		this.setSource(place);
 		this.activity = activity;
 		this.place = place;
@@ -77,10 +76,11 @@ public final class StartActivityEvent extends GwtEvent<StartActivityEvent.Handle
 	}
 
 	public IsWidget getView() {
-		return view;
+		return this.view;
 	}
 
-	public static StartActivityEvent fire(Activity activity, Place place, AcceptsOneWidget container, IsWidget view) {
+	public static StartActivityEvent fire(Activity activity, Place place, AcceptsOneWidget container,
+			IsWidget view) {
 		StartActivityEvent event = new StartActivityEvent(activity, place, container, view);
 		EventBus.get().fireEventFromSource(event, place);
 		return event;

@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -32,8 +30,7 @@ import fr.putnami.pwt.core.widget.client.base.AbstractTableColumnAspect;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public class TableEditorTH<T> extends TableTH<T> implements
-		EditorLabel {
+public class TableEditorTH<T> extends TableTH<T> implements EditorLabel {
 
 	private static final CssStyle STYLE_FLOAT_RIGHT = new SimpleStyle("pull-right");
 	private Collection<AbstractTableColumnAspect<T>> aspects = Lists.newArrayList();
@@ -46,7 +43,7 @@ public class TableEditorTH<T> extends TableTH<T> implements
 	protected TableEditorTH(TableEditorTH<T> source) {
 		super(source);
 		for (AbstractTableColumnAspect<T> aspect : source.aspects) {
-			addAspect(aspect.cloneAspect());
+			this.addAspect(aspect.cloneAspect());
 		}
 	}
 
@@ -56,7 +53,7 @@ public class TableEditorTH<T> extends TableTH<T> implements
 	}
 
 	public void addAspect(AbstractTableColumnAspect<T> aspect) {
-		aspects.add(aspect);
+		this.aspects.add(aspect);
 	}
 
 	@Override
@@ -66,9 +63,7 @@ public class TableEditorTH<T> extends TableTH<T> implements
 
 	@Override
 	public String[] getSuffix() {
-		return new String[] {
-				EditorLabel.HEADER_SUFFIX, EditorLabel.EMPTY_SUFFIX
-		};
+		return new String[] {EditorLabel.HEADER_SUFFIX, EditorLabel.EMPTY_SUFFIX};
 	}
 
 	@Override
@@ -89,11 +84,11 @@ public class TableEditorTH<T> extends TableTH<T> implements
 	@Override
 	public void redraw() {
 		super.redraw();
-		clear();
-		if (aspects.size() > 0) {
+		this.clear();
+		if (this.aspects.size() > 0) {
 			FlowPanel flowPanel = new FlowPanel();
 			int countAspectWidget = 0;
-			for (AbstractTableColumnAspect aspect : aspects) {
+			for (AbstractTableColumnAspect aspect : this.aspects) {
 				Widget aspectWidget = aspect.asWidget();
 				if (aspectWidget != null) {
 					flowPanel.add(aspectWidget);
@@ -101,24 +96,25 @@ public class TableEditorTH<T> extends TableTH<T> implements
 				}
 			}
 			if (countAspectWidget > 0) {
-				StyleUtils.addStyle(flowPanel, STYLE_FLOAT_RIGHT);
-				append(flowPanel);
+				StyleUtils.addStyle(flowPanel, TableEditorTH.STYLE_FLOAT_RIGHT);
+				this.append(flowPanel);
 			}
 		}
-		if (text != null) {
+		if (this.text != null) {
 			Label label = new Label();
-			label.setText(text);
-			append(label);
+			label.setText(this.text);
+			this.append(label);
 		}
 	}
 
 	@Override
 	public Iterable<Editor> getEditors() {
-		return Iterables.unmodifiableIterable((Collection) aspects);
+		return Iterables.unmodifiableIterable((Collection) this.aspects);
 	}
 
 	@Override
 	public void add(IsWidget w) {
-		throw new java.lang.UnsupportedOperationException("TableEditorTH does not support add(IsWidget) method");
+		throw new java.lang.UnsupportedOperationException(
+				"TableEditorTH does not support add(IsWidget) method");
 	}
 }

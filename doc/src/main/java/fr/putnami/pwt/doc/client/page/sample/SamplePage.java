@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.doc.client.page.sample;
 
@@ -73,20 +71,20 @@ public abstract class SamplePage extends Composite implements View {
 			}
 			Anchor<?> anchor = new Anchor(simpleFileName);
 			anchor.addClickHandler(this);
-			add(anchor);
+			this.add(anchor);
 		}
 
 		@Override
 		public void onClick(ClickEvent event) {
-			requestFile(fileName);
+			SamplePage.this.requestFile(this.fileName);
 		}
 	}
 
 	private final SampleLayoutView samplePageLayout = new SampleLayoutView();
 
 	public SamplePage() {
-		initWidget(Binder.BINDER.createAndBindUi(samplePageLayout));
-		samplePageLayout.sourceCode.asWidget().setVisible(false);
+		this.initWidget(Binder.BINDER.createAndBindUi(this.samplePageLayout));
+		this.samplePageLayout.sourceCode.asWidget().setVisible(false);
 	}
 
 	protected void addSources(Multimap<String, String> sources) {
@@ -108,48 +106,48 @@ public abstract class SamplePage extends Composite implements View {
 			}
 			sourcePanel.add(new Header(panelName));
 			sourcePanel.add(sourceList);
-			samplePageLayout.sourceAccordion.add(sourcePanel);
+			this.samplePageLayout.sourceAccordion.add(sourcePanel);
 		}
-		requestFile(sourceToOpen);
+		this.requestFile(sourceToOpen);
 	}
 
 	@PresentHandler
 	public void present() {
-		samplePageLayout.sampleContent.add(getSampleWidget());
+		this.samplePageLayout.sampleContent.add(this.getSampleWidget());
 	}
 
 	private void requestFile(final String fileName) {
-		samplePageLayout.sourceCode.asWidget().setVisible(false);
-		samplePageLayout.sourceCode.setText("");
+		this.samplePageLayout.sourceCode.asWidget().setVisible(false);
+		this.samplePageLayout.sourceCode.setText("");
 
 		RequestCallback callBack = new RequestCallback() {
 
 			@Override
 			public void onResponseReceived(Request request, Response response) {
 				if (fileName.endsWith("xml")) {
-					samplePageLayout.sourceCode.setConfiguration(XmlConfiguration.XML_CONFIGURATION);
+					SamplePage.this.samplePageLayout.sourceCode
+							.setConfiguration(XmlConfiguration.XML_CONFIGURATION);
+				} else if (fileName.endsWith("java")) {
+					SamplePage.this.samplePageLayout.sourceCode
+							.setConfiguration(JavaConfiguration.JAVA_CONFIGURATION);
+				} else {
+					SamplePage.this.displayError(new RuntimeException("Unknow file type"));
 				}
-				else if (fileName.endsWith("java")) {
-					samplePageLayout.sourceCode.setConfiguration(JavaConfiguration.JAVA_CONFIGURATION);
-				}
-				else {
-					displayError(new RuntimeException("Unknow file type"));
-				}
-				samplePageLayout.sourceCode.setText(response.getText());
-				samplePageLayout.sourceCode.asWidget().setVisible(true);
+				SamplePage.this.samplePageLayout.sourceCode.setText(response.getText());
+				SamplePage.this.samplePageLayout.sourceCode.asWidget().setVisible(true);
 			}
 
 			@Override
 			public void onError(Request request, Throwable exception) {
-				displayError(exception);
+				SamplePage.this.displayError(exception);
 			}
 		};
-		RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, GWT.getModuleBaseURL() + "sample/" + fileName);
+		RequestBuilder builder =
+				new RequestBuilder(RequestBuilder.GET, GWT.getModuleBaseURL() + "sample/" + fileName);
 		builder.setCallback(callBack);
 		try {
 			builder.send();
-		}
-		catch (RequestException e) {
+		} catch (RequestException e) {
 			callBack.onError(null, e);
 		}
 	}

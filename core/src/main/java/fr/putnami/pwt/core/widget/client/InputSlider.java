@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -51,8 +49,7 @@ import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.event.ChangeEvent;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public class InputSlider<T> extends AbstractInput<T> implements
-HasValueChangeHandlers<T>,
+public class InputSlider<T> extends AbstractInput<T> implements HasValueChangeHandlers<T>,
 ValueChangeHandler<T> {
 
 	private static final CssStyle STYLE_BACKGROUNG = new SimpleStyle("input-slider-background");
@@ -70,25 +67,24 @@ ValueChangeHandler<T> {
 		}
 
 		public void onMouseMove(Event event) {
-			if (dragging) {
-				handleWidget.moveHandleToPosition(getRelativeX(event));
+			if (this.dragging) {
+				InputSlider.this.handleWidget.moveHandleToPosition(this.getRelativeX(event));
 			}
 		}
 
 		public void onMouseDown(Event event) {
 			this.dragging = true;
 			Event.setCapture(InputSlider.this.getElement());
-			killEvent(event);
-			handleWidget.moveHandleToPosition(getRelativeX(event));
+			this.killEvent(event);
+			InputSlider.this.handleWidget.moveHandleToPosition(this.getRelativeX(event));
 		}
 
 		public void onMouseWheel(Event event) {
-			killEvent(event);
+			this.killEvent(event);
 			int velocityY = event.getMouseWheelVelocityY();
 			if (velocityY > 0) {
 				InputSlider.this.handleWidget.moveRight(1);
-			}
-			else {
+			} else {
 				InputSlider.this.handleWidget.moveLeft(1);
 			}
 		}
@@ -98,22 +94,22 @@ ValueChangeHandler<T> {
 			if ((DOM.eventGetType(event) & Event.TOUCHEVENTS) != 0) {
 				clientX = event.getTouches().get(0).getClientX();
 			}
-			return clientX - InputSlider.this.backgroundBar.getAbsoluteLeft() + InputSlider.this.backgroundBar.getScrollLeft() +
-					InputSlider.this.backgroundBar.getOwnerDocument().getScrollLeft();
+			return clientX - InputSlider.this.backgroundBar.getAbsoluteLeft()
+					+ InputSlider.this.backgroundBar.getScrollLeft()
+					+ InputSlider.this.backgroundBar.getOwnerDocument().getScrollLeft();
 		}
 
 		private void killEvent(Event event) {
 			event.preventDefault();
 			event.stopPropagation();
 		}
-
 	}
 
 	private class KeyHandler implements KeyDownHandler {
 
 		@Override
 		public void onKeyDown(KeyDownEvent event) {
-			if (!isStateValid()) {
+			if (!InputSlider.this.isStateValid()) {
 				return;
 			}
 			int paddingValue = 1;
@@ -121,28 +117,28 @@ ValueChangeHandler<T> {
 				paddingValue = InputSlider.this.items.size() / 5;
 			}
 			switch (event.getNativeKeyCode()) {
-			case KeyCodes.KEY_HOME:
-				InputSlider.this.handleWidget.moveStart();
-				killEvent(event);
-				break;
-			case KeyCodes.KEY_END:
-				InputSlider.this.handleWidget.moveEnd();
-				killEvent(event);
-				break;
-			case KeyCodes.KEY_SPACE:
-				InputSlider.this.handleWidget.moveMiddle();
-				killEvent(event);
-				break;
-			case KeyCodes.KEY_LEFT:
-				InputSlider.this.handleWidget.moveLeft(paddingValue);
-				killEvent(event);
-				break;
-			case KeyCodes.KEY_RIGHT:
-				InputSlider.this.handleWidget.moveRight(paddingValue);
-				killEvent(event);
-				break;
-			default:
-				break;
+				case KeyCodes.KEY_HOME:
+					InputSlider.this.handleWidget.moveStart();
+					this.killEvent(event);
+					break;
+				case KeyCodes.KEY_END:
+					InputSlider.this.handleWidget.moveEnd();
+					this.killEvent(event);
+					break;
+				case KeyCodes.KEY_SPACE:
+					InputSlider.this.handleWidget.moveMiddle();
+					this.killEvent(event);
+					break;
+				case KeyCodes.KEY_LEFT:
+					InputSlider.this.handleWidget.moveLeft(paddingValue);
+					this.killEvent(event);
+					break;
+				case KeyCodes.KEY_RIGHT:
+					InputSlider.this.handleWidget.moveRight(paddingValue);
+					this.killEvent(event);
+					break;
+				default:
+					break;
 			}
 		}
 
@@ -150,7 +146,6 @@ ValueChangeHandler<T> {
 			event.preventDefault();
 			event.stopPropagation();
 		}
-
 	}
 
 	private class HandleWidget extends FocusWidget {
@@ -160,14 +155,14 @@ ValueChangeHandler<T> {
 
 		public HandleWidget() {
 			super(DOM.createDiv());
-			StyleUtils.addStyle(this, STYLE_CONTROL);
-			StyleUtils.addStyle(this, STYLE_HANDLE);
+			StyleUtils.addStyle(this, AbstractInput.STYLE_CONTROL);
+			StyleUtils.addStyle(this, InputSlider.STYLE_HANDLE);
 
 			super.addBlurHandler(new BlurHandler() {
 
 				@Override
 				public void onBlur(BlurEvent event) {
-					focused = false;
+					HandleWidget.this.focused = false;
 				}
 			});
 
@@ -175,45 +170,45 @@ ValueChangeHandler<T> {
 
 				@Override
 				public void onFocus(FocusEvent event) {
-					focused = true;
+					HandleWidget.this.focused = true;
 				}
 			});
 		}
 
 		public T getValue() {
-			if (valueIndex == -1) {
+			if (this.valueIndex == -1) {
 				return null;
 			}
-			return InputSlider.this.items.get(valueIndex);
+			return InputSlider.this.items.get(this.valueIndex);
 		}
 
 		public void setValue(T value, boolean fireEvent) {
-			moveHandleToIndex(InputSlider.this.items.indexOf(value), fireEvent);
+			this.moveHandleToIndex(InputSlider.this.items.indexOf(value), fireEvent);
 		}
 
 		public void moveRight(int padNumber) {
 			int newIndex = padNumber;
-			if (valueIndex > -1) {
-				newIndex += valueIndex;
+			if (this.valueIndex > -1) {
+				newIndex += this.valueIndex;
 			}
-			moveHandleToIndex(newIndex, true);
+			this.moveHandleToIndex(newIndex, true);
 		}
 
 		public void moveLeft(int padNumber) {
-			int newIndex = valueIndex - padNumber;
-			moveHandleToIndex(newIndex, true);
+			int newIndex = this.valueIndex - padNumber;
+			this.moveHandleToIndex(newIndex, true);
 		}
 
 		public void moveMiddle() {
-			moveHandleToIndex(InputSlider.this.items.size() / 2 - 1, true);
+			this.moveHandleToIndex(InputSlider.this.items.size() / 2 - 1, true);
 		}
 
 		public void moveEnd() {
-			moveHandleToIndex(InputSlider.this.items.size() - 1, true);
+			this.moveHandleToIndex(InputSlider.this.items.size() - 1, true);
 		}
 
 		public void moveStart() {
-			moveHandleToIndex(0, true);
+			this.moveHandleToIndex(0, true);
 		}
 
 		public void moveHandleToIndex(int index, boolean fireEvent) {
@@ -222,7 +217,7 @@ ValueChangeHandler<T> {
 			int newIndex = Math.min(InputSlider.this.items.size() - 1, Math.max(0, index));
 			this.valueIndex = newIndex;
 			double position = newIndex * 100d / (InputSlider.this.items.size() - 1d);
-			setLeftPct(position);
+			this.setLeftPct(position);
 
 			if (fireEvent) {
 				ValueChangeEvent.fireIfNotEqual(InputSlider.this, oldValue, this.getValue());
@@ -230,14 +225,15 @@ ValueChangeHandler<T> {
 		}
 
 		public void moveHandleToPosition(int relativeXPosition) {
-			double idx = (double) (InputSlider.this.items.size() - 1) * (double) relativeXPosition
+			double idx =
+					(double) (InputSlider.this.items.size() - 1) * (double) relativeXPosition
 					/ InputSlider.this.backgroundBar.getClientWidth();
-			moveHandleToIndex((int) Math.round(idx), true);
+			this.moveHandleToIndex((int) Math.round(idx), true);
 		}
 
 		private void setLeftPct(double left) {
 			left = Math.min(100, Math.max(0, left));
-			getElement().getStyle().setLeft(left, Unit.PCT);
+			this.getElement().getStyle().setLeft(left, Unit.PCT);
 		}
 	}
 
@@ -258,32 +254,32 @@ ValueChangeHandler<T> {
 
 	public InputSlider() {
 		super(new SimplePanel());
-		contentPanel = (SimplePanel) getWidget();
-		endConstruct();
+		this.contentPanel = (SimplePanel) this.getWidget();
+		this.endConstruct();
 	}
 
 	protected InputSlider(InputSlider<T> source) {
 		super(new SimplePanel(), source);
-		contentPanel = (SimplePanel) getWidget();
-		endConstruct();
-		labelRenderer = source.labelRenderer;
-		items.addAll(source.items);
+		this.contentPanel = (SimplePanel) this.getWidget();
+		this.endConstruct();
+		this.labelRenderer = source.labelRenderer;
+		this.items.addAll(source.items);
 	}
 
 	@Override
 	protected void endConstruct() {
-		getElement().appendChild(backgroundBar);
-		StyleUtils.addStyle(backgroundBar, STYLE_BACKGROUNG);
-		contentPanel.setWidget(handleWidget);
+		this.getElement().appendChild(this.backgroundBar);
+		StyleUtils.addStyle(this.backgroundBar, InputSlider.STYLE_BACKGROUNG);
+		this.contentPanel.setWidget(this.handleWidget);
 
-		popover.add(handleWidget);
-		popover.setTrigger(Trigger.FOCUS);
+		this.popover.add(this.handleWidget);
+		this.popover.setTrigger(Trigger.FOCUS);
 
-		handleWidget.addKeyDownHandler(keyHandler);
+		this.handleWidget.addKeyDownHandler(this.keyHandler);
 
-		addValueChangeHandler(this);
+		this.addValueChangeHandler(this);
 
-		sinkEvents(Event.MOUSEEVENTS | Event.ONMOUSEWHEEL | Event.TOUCHEVENTS);
+		this.sinkEvents(Event.MOUSEEVENTS | Event.ONMOUSEWHEEL | Event.TOUCHEVENTS);
 
 		super.endConstruct();
 	}
@@ -302,66 +298,67 @@ ValueChangeHandler<T> {
 
 	@Override
 	public boolean isDirty() {
-		return !Objects.equal(getValue(), handleWidget.getValue());
+		return !Objects.equal(this.getValue(), this.handleWidget.getValue());
 	}
 
 	@Override
 	public T flush() {
-		T value = handleWidget.getValue();
-		validate(value);
-		if (!hasErrors()) {
-			setValue(value);
+		T value = this.handleWidget.getValue();
+		this.validate(value);
+		if (!this.hasErrors()) {
+			this.setValue(value);
 		}
-		return getValue();
+		return this.getValue();
 	}
 
 	@Override
 	public void edit(T value) {
-		setValue(value);
-		if (isStateValid()) {
-			handleWidget.setValue(value, false);
-			popover.setText(render(value));
+		this.setValue(value);
+		if (this.isStateValid()) {
+			this.handleWidget.setValue(value, false);
+			this.popover.setText(this.render(value));
 		}
 	}
 
 	@Override
 	public HandlerRegistration addDirtyHandler(Handler handler) {
-		if (valueChangeRegistration == null) {
-			valueChangeRegistration = addValueChangeHandler(new ChangeEvent<T>(InputSlider.this));
+		if (this.valueChangeRegistration == null) {
+			this.valueChangeRegistration =
+					this.addValueChangeHandler(new ChangeEvent<T>(InputSlider.this));
 		}
 		return EventBus.get().addHandlerToSource(DirtyEvent.TYPE, this, handler);
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addValueChangeHandler(ValueChangeHandler<T> handler) {
-		return addHandler(handler, ValueChangeEvent.getType());
+	public com.google.gwt.event.shared.HandlerRegistration addValueChangeHandler(
+			ValueChangeHandler<T> handler) {
+		return this.addHandler(handler, ValueChangeEvent.getType());
 	}
 
 	@Override
 	public void onValueChange(ValueChangeEvent<T> event) {
-		popover.setText(render(event.getValue()));
-		popover.show();
+		this.popover.setText(this.render(event.getValue()));
+		this.popover.show();
 	}
 
 	private String render(T value) {
 		if (value == null) {
 			return null;
 		}
-		if (labelRenderer != null) {
-			return labelRenderer.render(value);
+		if (this.labelRenderer != null) {
+			return this.labelRenderer.render(value);
 		}
 		return value.toString();
 	}
 
 	@Override
 	public void setHtmlId(String htmlId) {
-		handleWidget.getElement().setId(htmlId);
+		this.handleWidget.getElement().setId(htmlId);
 	}
 
 	@Override
 	public String getHtmlId() {
-		return handleWidget.getElement().getId();
-
+		return this.handleWidget.getElement().getId();
 	}
 
 	public void setLabelRenderer(Renderer<T> labelRenderer) {
@@ -369,67 +366,67 @@ ValueChangeHandler<T> {
 	}
 
 	private boolean isStateValid() {
-		return items != null && items.size() > 1;
+		return this.items != null && this.items.size() > 1;
 	}
 
 	@Override
 	public void onBrowserEvent(Event event) {
 		super.onBrowserEvent(event);
-		if (!isStateValid()) {
+		if (!this.isStateValid()) {
 			return;
 		}
 		switch (DOM.eventGetType(event)) {
-		case Event.ONMOUSEDOWN:
-		case Event.ONTOUCHSTART:
-			handleWidget.setFocus(true);
-			dragHandler.onMouseDown(event);
-			break;
-		case Event.ONMOUSEUP:
-		case Event.ONTOUCHEND:
-			dragHandler.onMouseUp(event);
-			break;
-		case Event.ONMOUSEMOVE:
-		case Event.ONTOUCHMOVE:
-			dragHandler.onMouseMove(event);
-			break;
-		case Event.ONMOUSEWHEEL:
-			if (handleWidget.focused) {
-				dragHandler.onMouseWheel(event);
-			}
-			break;
-		default:
-			break;
+			case Event.ONMOUSEDOWN:
+			case Event.ONTOUCHSTART:
+				this.handleWidget.setFocus(true);
+				this.dragHandler.onMouseDown(event);
+				break;
+			case Event.ONMOUSEUP:
+			case Event.ONTOUCHEND:
+				this.dragHandler.onMouseUp(event);
+				break;
+			case Event.ONMOUSEMOVE:
+			case Event.ONTOUCHMOVE:
+				this.dragHandler.onMouseMove(event);
+				break;
+			case Event.ONMOUSEWHEEL:
+				if (this.handleWidget.focused) {
+					this.dragHandler.onMouseWheel(event);
+				}
+				break;
+			default:
+				break;
 		}
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addFocusHandler(FocusHandler handler) {
-		return handleWidget.addFocusHandler(handler);
+		return this.handleWidget.addFocusHandler(handler);
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addBlurHandler(BlurHandler handler) {
-		return handleWidget.addBlurHandler(handler);
+		return this.handleWidget.addBlurHandler(handler);
 	}
 
 	@Override
 	public int getTabIndex() {
-		return handleWidget.getTabIndex();
+		return this.handleWidget.getTabIndex();
 	}
 
 	@Override
 	public void setAccessKey(char key) {
-		handleWidget.setAccessKey(key);
+		this.handleWidget.setAccessKey(key);
 	}
 
 	@Override
 	public void setFocus(boolean focused) {
-		handleWidget.setFocus(focused);
+		this.handleWidget.setFocus(focused);
 	}
 
 	@Override
 	public void setTabIndex(int index) {
-		handleWidget.setTabIndex(index);
+		this.handleWidget.setTabIndex(index);
 	}
 
 }

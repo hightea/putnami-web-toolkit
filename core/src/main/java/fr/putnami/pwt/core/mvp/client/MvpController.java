@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.mvp.client;
 
@@ -45,13 +43,8 @@ import fr.putnami.pwt.core.mvp.client.event.StopActivityEvent.Handler;
 import fr.putnami.pwt.core.mvp.client.event.StopActivityEvent.HasStopActivityHandlers;
 import fr.putnami.pwt.core.mvp.client.util.MvpUtils;
 
-public class MvpController extends PlaceController implements
-PlaceHistoryMapper,
-ActivityMapper,
-HasStartActivityHandlers,
-HasStopActivityHandlers,
-HasMayStopActivityHandlers
-{
+public class MvpController extends PlaceController implements PlaceHistoryMapper, ActivityMapper,
+HasStartActivityHandlers, HasStopActivityHandlers, HasMayStopActivityHandlers {
 
 	private static MvpController instance;
 
@@ -66,7 +59,7 @@ HasMayStopActivityHandlers
 	private static final String PLACE_SEPARATOR = "/";
 	private static final char PLACE_TOKEN_SEPARATOR = '=';
 
-	private final Map<String, ActivityFactory> ACTIVITY_FACTORIES = Maps.newHashMap();
+	private final Map<String, ActivityFactory> activityFactories = Maps.newHashMap();
 
 	private final ActivityManager activityManager;
 	private final PlaceHistoryHandler historyHandler;
@@ -110,18 +103,16 @@ HasMayStopActivityHandlers
 		String warning = willChange.getWarning();
 		if (warning == null || Window.confirm(warning)) {
 			this.doGo(newPlace);
-		}
-		else {
-			goTo(this.getWhere());
+		} else {
+			this.goTo(this.getWhere());
 		}
 	}
 
 	public void goToDefaultPlace() {
-		if (defaultPlace != null) {
-			goTo(defaultPlace);
-		}
-		else {
-			handleCurrentHistory();
+		if (this.defaultPlace != null) {
+			this.goTo(this.defaultPlace);
+		} else {
+			this.handleCurrentHistory();
 		}
 	}
 
@@ -134,14 +125,14 @@ HasMayStopActivityHandlers
 			if (!preffix.startsWith("!")) {
 				preffix = "!" + preffix;
 			}
-			this.ACTIVITY_FACTORIES.put(preffix, placeViewMapper);
+			this.activityFactories.put(preffix, placeViewMapper);
 		}
 	}
 
 	@Override
 	public Activity getActivity(Place place) {
 		String key = MvpUtils.getPlacePrefix(place);
-		ActivityFactory activityFactory = ACTIVITY_FACTORIES.get(key);
+		ActivityFactory activityFactory = this.activityFactories.get(key);
 		if (activityFactory != null) {
 			return activityFactory.createActivity(place);
 		}
@@ -150,10 +141,10 @@ HasMayStopActivityHandlers
 
 	@Override
 	public Place getPlace(String token) {
-		String[] placesToken = token.split(PLACE_SEPARATOR);
+		String[] placesToken = token.split(MvpController.PLACE_SEPARATOR);
 		Place result = null;
 		for (String placeToken : placesToken) {
-			Place localPlace = getSimplePlace(placeToken);
+			Place localPlace = this.getSimplePlace(placeToken);
 			if (localPlace != null && localPlace instanceof ViewPlace && result instanceof ViewPlace) {
 				((ViewPlace) localPlace).setParent((ViewPlace) result);
 			}
@@ -163,17 +154,17 @@ HasMayStopActivityHandlers
 	}
 
 	private Place getSimplePlace(String token) {
-		int colonAt = token.indexOf(PLACE_TOKEN_SEPARATOR);
+		int colonAt = token.indexOf(MvpController.PLACE_TOKEN_SEPARATOR);
 		String prefix = token;
 		String rest = null;
 		if (colonAt > 0) {
 			prefix = token.substring(0, colonAt);
 			rest = token.substring(colonAt + 1);
 		}
-		if (!prefix.startsWith(PLACE_CROWLER_DELIMITER)) {
-			prefix = PLACE_CROWLER_DELIMITER + prefix;
+		if (!prefix.startsWith(MvpController.PLACE_CROWLER_DELIMITER)) {
+			prefix = MvpController.PLACE_CROWLER_DELIMITER + prefix;
 		}
-		ActivityFactory activityFactory = this.ACTIVITY_FACTORIES.get(prefix);
+		ActivityFactory activityFactory = this.activityFactories.get(prefix);
 		if (activityFactory instanceof PlaceTokenizer) {
 			return ((PlaceTokenizer) activityFactory).getPlace(rest);
 		}
@@ -187,26 +178,25 @@ HasMayStopActivityHandlers
 		}
 		String parentToken = null;
 		if (place instanceof ViewPlace && ((ViewPlace) place).getParent() != null) {
-			parentToken = getToken(((ViewPlace) place).getParent());
+			parentToken = this.getToken(((ViewPlace) place).getParent());
 		}
 		String prefix = MvpUtils.getPlacePrefix(place);
 		String token = null;
-		ActivityFactory activityFactory = this.ACTIVITY_FACTORIES.get(prefix);
+		ActivityFactory activityFactory = this.activityFactories.get(prefix);
 		if (activityFactory instanceof PlaceTokenizer) {
 			token = ((PlaceTokenizer) activityFactory).getToken(place);
 		}
 
 		String result = "";
 		if (parentToken != null) {
-			result = parentToken + PLACE_SEPARATOR;
+			result = parentToken + MvpController.PLACE_SEPARATOR;
 			if (prefix.startsWith("!")) {
 				prefix = prefix.substring(1);
 			}
 		}
 		if (token != null) {
-			result += prefix.length() == 0 ? token : prefix + PLACE_TOKEN_SEPARATOR + token;
-		}
-		else {
+			result += prefix.length() == 0 ? token : prefix + MvpController.PLACE_TOKEN_SEPARATOR + token;
+		} else {
 			result += prefix;
 		}
 		return result;
@@ -221,8 +211,8 @@ HasMayStopActivityHandlers
 		if (this.historyRegistration != null) {
 			this.historyRegistration.removeHandler();
 		}
-		this.historyRegistration = this.historyHandler.register(this, EventBus.get(), this.defaultPlace);
-
+		this.historyRegistration =
+				this.historyHandler.register(this, EventBus.get(), this.defaultPlace);
 	}
 
 	private void doGo(Place newPlace) {
@@ -241,12 +231,14 @@ HasMayStopActivityHandlers
 	}
 
 	@Override
-	public HandlerRegistration addStartActivityHandler(fr.putnami.pwt.core.mvp.client.event.StartActivityEvent.Handler handler) {
+	public HandlerRegistration addStartActivityHandler(
+			fr.putnami.pwt.core.mvp.client.event.StartActivityEvent.Handler handler) {
 		return EventBus.get().addHandler(StartActivityEvent.TYPE, handler);
 	}
 
 	@Override
-	public HandlerRegistration addMayStopActivityHandler(fr.putnami.pwt.core.mvp.client.event.MayStopActivityEvent.Handler handler) {
+	public HandlerRegistration addMayStopActivityHandler(
+			fr.putnami.pwt.core.mvp.client.event.MayStopActivityEvent.Handler handler) {
 		return EventBus.get().addHandler(MayStopActivityEvent.TYPE, handler);
 	}
 }

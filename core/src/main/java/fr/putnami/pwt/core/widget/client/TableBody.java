@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -36,9 +34,7 @@ import fr.putnami.pwt.core.widget.client.event.RowClickEvent;
 import fr.putnami.pwt.core.widget.client.event.RowClickEvent.Handler;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
-public class TableBody<T> extends AbstractPanel implements
-HasReadonly,
-CloneableWidget,
+public class TableBody<T> extends AbstractPanel implements HasReadonly, CloneableWidget,
 RowClickEvent.HasRowClickHandlers {
 
 	private class ClickEventHandler implements ClickHandler {
@@ -50,7 +46,6 @@ RowClickEvent.HasRowClickHandlers {
 				EventBus.get().fireEventFromSource(new RowClickEvent((TableRow) source), TableBody.this);
 			}
 		}
-
 	}
 
 	private final List<TableRow<T>> rows = Lists.newArrayList();
@@ -73,7 +68,7 @@ RowClickEvent.HasRowClickHandlers {
 		this.bodyId = source.bodyId;
 		this.clickEventHandler = source.clickEventHandler;
 		for (TableRow<T> row : source.rows) {
-			addRow(WidgetUtils.cloneWidget(row));
+			this.addRow(WidgetUtils.cloneWidget(row));
 		}
 	}
 
@@ -84,7 +79,7 @@ RowClickEvent.HasRowClickHandlers {
 
 	@Override
 	public Boolean getReadonly() {
-		return readonly;
+		return this.readonly;
 	}
 
 	@Override
@@ -93,15 +88,15 @@ RowClickEvent.HasRowClickHandlers {
 	}
 
 	public String getBodyId() {
-		return bodyId;
+		return this.bodyId;
 	}
 
 	public Iterable<TableRow<T>> getRows() {
-		return Iterables.unmodifiableIterable(rows);
+		return Iterables.unmodifiableIterable(this.rows);
 	}
 
 	protected List<TableRow<T>> getRowList() {
-		return rows;
+		return this.rows;
 	}
 
 	@Override
@@ -112,29 +107,29 @@ RowClickEvent.HasRowClickHandlers {
 	}
 
 	public void addRow(TableRow<T> row) {
-		rows.add(row);
-		append(row);
-		if (clickEventHandler != null) {
-			registrations.add(row.addClickHandler(clickEventHandler));
+		this.rows.add(row);
+		this.append(row);
+		if (this.clickEventHandler != null) {
+			this.registrations.add(row.addClickHandler(this.clickEventHandler));
 		}
 	}
 
 	@Override
 	public void clear() {
-		rows.clear();
+		this.rows.clear();
 		super.clear();
 	}
 
 	@Override
 	public HandlerRegistration addRowClickHandler(Handler handler) {
-		if (clickEventHandler == null) {
-			clickEventHandler = new ClickEventHandler();
+		if (this.clickEventHandler == null) {
+			this.clickEventHandler = new ClickEventHandler();
 		}
-		if (registrations == null) {
-			registrations = new HandlerRegistrationCollection();
+		if (this.registrations == null) {
+			this.registrations = new HandlerRegistrationCollection();
 		}
-		registrations.add(EventBus.get().addHandlerToSource(RowClickEvent.TYPE, this, handler));
-		return registrations;
+		this.registrations.add(EventBus.get().addHandlerToSource(RowClickEvent.TYPE, this, handler));
+		return this.registrations;
 	}
 
 }

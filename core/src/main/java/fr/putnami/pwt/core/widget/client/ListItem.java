@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -90,12 +88,9 @@ import fr.putnami.pwt.core.widget.client.base.AbstractHTMLPanel;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public class ListItem extends AbstractHTMLPanel implements HasDrawable,
-Focusable,
-HasAllDragAndDropHandlers, HasAllMouseHandlers, HasClickHandlers,
-HasDoubleClickHandlers, HasAllKeyHandlers, HasAllFocusHandlers,
-HasAllGestureHandlers, HasAllTouchHandlers
-{
+public class ListItem extends AbstractHTMLPanel implements HasDrawable, Focusable,
+HasAllDragAndDropHandlers, HasAllMouseHandlers, HasClickHandlers, HasDoubleClickHandlers,
+HasAllKeyHandlers, HasAllFocusHandlers, HasAllGestureHandlers, HasAllTouchHandlers {
 
 	private static final FocusImpl FOCUS_IMPL = FocusImpl.getFocusImplForPanel();
 
@@ -104,7 +99,7 @@ HasAllGestureHandlers, HasAllTouchHandlers
 	private boolean active = false;
 
 	public ListItem() {
-		super(LIElement.TAG, EMPTY_HTML);
+		super(LIElement.TAG, AbstractHTMLPanel.EMPTY_HTML);
 	}
 
 	public ListItem(String html) {
@@ -113,7 +108,7 @@ HasAllGestureHandlers, HasAllTouchHandlers
 
 	protected ListItem(ListItem source) {
 		super(source);
-		setActive(source.active);
+		this.setActive(source.active);
 	}
 
 	@Override
@@ -122,177 +117,176 @@ HasAllGestureHandlers, HasAllTouchHandlers
 	}
 
 	public boolean isActive() {
-		return active;
+		return this.active;
 	}
 
 	public void setActive(boolean active) {
 		this.active = active;
-		StyleUtils.toggleStyle(getElement(), STYLE_ACTIVE, active);
+		StyleUtils.toggleStyle(this.getElement(), ListItem.STYLE_ACTIVE, active);
 	}
 
 	@Override
 	public void redraw() {
-		setActive(active);
+		this.setActive(this.active);
 	}
 
 	@Override
 	public int getTabIndex() {
-		return FOCUS_IMPL.getTabIndex(getElement());
+		return ListItem.FOCUS_IMPL.getTabIndex(this.getElement());
 	}
 
 	@Override
 	public void setAccessKey(char key) {
-		FOCUS_IMPL.setAccessKey(getElement(), key);
+		ListItem.FOCUS_IMPL.setAccessKey(this.getElement(), key);
 	}
 
 	@Override
 	public void setFocus(boolean focused) {
 		if (focused) {
-			FOCUS_IMPL.focus(getElement());
-		}
-		else {
-			FOCUS_IMPL.blur(getElement());
+			ListItem.FOCUS_IMPL.focus(this.getElement());
+		} else {
+			ListItem.FOCUS_IMPL.blur(this.getElement());
 		}
 	}
 
 	@Override
 	public void setTabIndex(int index) {
-		FOCUS_IMPL.setTabIndex(getElement(), index);
+		ListItem.FOCUS_IMPL.setTabIndex(this.getElement(), index);
 	}
 
 	@Override
 	public HandlerRegistration addBlurHandler(BlurHandler handler) {
-		return addDomHandler(handler, BlurEvent.getType());
+		return this.addDomHandler(handler, BlurEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addClickHandler(ClickHandler handler) {
-		return addDomHandler(handler, ClickEvent.getType());
+		return this.addDomHandler(handler, ClickEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addDoubleClickHandler(DoubleClickHandler handler) {
-		return addDomHandler(handler, DoubleClickEvent.getType());
+		return this.addDomHandler(handler, DoubleClickEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addDragEndHandler(DragEndHandler handler) {
-		return addBitlessDomHandler(handler, DragEndEvent.getType());
+		return this.addBitlessDomHandler(handler, DragEndEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addDragEnterHandler(DragEnterHandler handler) {
-		return addBitlessDomHandler(handler, DragEnterEvent.getType());
+		return this.addBitlessDomHandler(handler, DragEnterEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addDragHandler(DragHandler handler) {
-		return addBitlessDomHandler(handler, DragEvent.getType());
+		return this.addBitlessDomHandler(handler, DragEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addDragLeaveHandler(DragLeaveHandler handler) {
-		return addBitlessDomHandler(handler, DragLeaveEvent.getType());
+		return this.addBitlessDomHandler(handler, DragLeaveEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addDragOverHandler(DragOverHandler handler) {
-		return addBitlessDomHandler(handler, DragOverEvent.getType());
+		return this.addBitlessDomHandler(handler, DragOverEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addDragStartHandler(DragStartHandler handler) {
-		return addBitlessDomHandler(handler, DragStartEvent.getType());
+		return this.addBitlessDomHandler(handler, DragStartEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addDropHandler(DropHandler handler) {
-		return addBitlessDomHandler(handler, DropEvent.getType());
+		return this.addBitlessDomHandler(handler, DropEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addFocusHandler(FocusHandler handler) {
-		return addDomHandler(handler, FocusEvent.getType());
+		return this.addDomHandler(handler, FocusEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addGestureChangeHandler(GestureChangeHandler handler) {
-		return addDomHandler(handler, GestureChangeEvent.getType());
+		return this.addDomHandler(handler, GestureChangeEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addGestureEndHandler(GestureEndHandler handler) {
-		return addDomHandler(handler, GestureEndEvent.getType());
+		return this.addDomHandler(handler, GestureEndEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addGestureStartHandler(GestureStartHandler handler) {
-		return addDomHandler(handler, GestureStartEvent.getType());
+		return this.addDomHandler(handler, GestureStartEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addKeyDownHandler(KeyDownHandler handler) {
-		return addDomHandler(handler, KeyDownEvent.getType());
+		return this.addDomHandler(handler, KeyDownEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addKeyPressHandler(KeyPressHandler handler) {
-		return addDomHandler(handler, KeyPressEvent.getType());
+		return this.addDomHandler(handler, KeyPressEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addKeyUpHandler(KeyUpHandler handler) {
-		return addDomHandler(handler, KeyUpEvent.getType());
+		return this.addDomHandler(handler, KeyUpEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addMouseDownHandler(MouseDownHandler handler) {
-		return addDomHandler(handler, MouseDownEvent.getType());
+		return this.addDomHandler(handler, MouseDownEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addMouseMoveHandler(MouseMoveHandler handler) {
-		return addDomHandler(handler, MouseMoveEvent.getType());
+		return this.addDomHandler(handler, MouseMoveEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addMouseOutHandler(MouseOutHandler handler) {
-		return addDomHandler(handler, MouseOutEvent.getType());
+		return this.addDomHandler(handler, MouseOutEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addMouseOverHandler(MouseOverHandler handler) {
-		return addDomHandler(handler, MouseOverEvent.getType());
+		return this.addDomHandler(handler, MouseOverEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addMouseUpHandler(MouseUpHandler handler) {
-		return addDomHandler(handler, MouseUpEvent.getType());
+		return this.addDomHandler(handler, MouseUpEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addMouseWheelHandler(MouseWheelHandler handler) {
-		return addDomHandler(handler, MouseWheelEvent.getType());
+		return this.addDomHandler(handler, MouseWheelEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addTouchCancelHandler(TouchCancelHandler handler) {
-		return addDomHandler(handler, TouchCancelEvent.getType());
+		return this.addDomHandler(handler, TouchCancelEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addTouchEndHandler(TouchEndHandler handler) {
-		return addDomHandler(handler, TouchEndEvent.getType());
+		return this.addDomHandler(handler, TouchEndEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addTouchMoveHandler(TouchMoveHandler handler) {
-		return addDomHandler(handler, TouchMoveEvent.getType());
+		return this.addDomHandler(handler, TouchMoveEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addTouchStartHandler(TouchStartHandler handler) {
-		return addDomHandler(handler, TouchStartEvent.getType());
+		return this.addDomHandler(handler, TouchStartEvent.getType());
 	}
 
 }

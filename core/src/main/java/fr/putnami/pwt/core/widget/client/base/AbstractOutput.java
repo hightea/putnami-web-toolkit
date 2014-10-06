@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client.base;
 
@@ -27,11 +25,8 @@ import fr.putnami.pwt.core.editor.client.EditorOutput;
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public abstract class AbstractOutput<T> extends Widget implements
-		CloneableWidget,
-		EditorLeaf,
-		EditorOutput<T>,
-		HasResponsiveVisibility {
+public abstract class AbstractOutput<T> extends Widget implements CloneableWidget, EditorLeaf,
+EditorOutput<T>, HasResponsiveVisibility {
 
 	private HandlerManager handlerManager;
 
@@ -46,51 +41,51 @@ public abstract class AbstractOutput<T> extends Widget implements
 	}
 
 	protected AbstractOutput(AbstractOutput<T> source) {
-		tag = source.tag;
-		path = source.path;
-		handlerManager = new HandlerManager(source.handlerManager, this);
-		handlerManager.resetSinkEvents();
+		this.tag = source.tag;
+		this.path = source.path;
+		this.handlerManager = new HandlerManager(source.handlerManager, this);
+		this.handlerManager.resetSinkEvents();
 		StyleUtils.cloneStyle(this, source);
 	}
 
 	@Override
 	protected HandlerManager createHandlerManager() {
-		if (handlerManager == null) {
-			handlerManager = new HandlerManager(this);
+		if (this.handlerManager == null) {
+			this.handlerManager = new HandlerManager(this);
 		}
-		return handlerManager;
+		return this.handlerManager;
 	}
 
 	@Override
 	public void sinkEvents(int eventBitsToAdd) {
 		super.sinkEvents(eventBitsToAdd);
-		createHandlerManager().sinkEvents(eventBitsToAdd);
+		this.createHandlerManager().sinkEvents(eventBitsToAdd);
 	}
 
 	@Override
 	public void unsinkEvents(int eventBitsToRemove) {
 		super.sinkEvents(eventBitsToRemove);
-		createHandlerManager().unsinkEvents(eventBitsToRemove);
+		this.createHandlerManager().unsinkEvents(eventBitsToRemove);
 	}
 
 	@Override
 	public Element getElement() {
-		return ensureElement();
+		return this.ensureElement();
 	}
 
 	public boolean elementExists() {
-		return element != null;
+		return this.element != null;
 	}
 
 	private Element ensureElement() {
-		if (element == null) {
-			element = (Element) Document.get().createElement(tag);
-			setElement(element);
+		if (this.element == null) {
+			this.element = (Element) Document.get().createElement(this.tag);
+			this.setElement(this.element);
 			StyleUtils.initStyle(this);
-			StyleUtils.addStyle(element, STYLE_CONTROL_STATIC);
-			ensureElement(element);
+			StyleUtils.addStyle(this.element, EditorOutput.STYLE_CONTROL_STATIC);
+			this.ensureElement(this.element);
 		}
-		return element;
+		return this.element;
 	}
 
 	protected abstract void ensureElement(Element element);
@@ -101,7 +96,7 @@ public abstract class AbstractOutput<T> extends Widget implements
 
 	@Override
 	public String getPath() {
-		return path;
+		return this.path;
 	}
 
 	@Override
@@ -117,7 +112,7 @@ public abstract class AbstractOutput<T> extends Widget implements
 	@Override
 	public void edit(T value) {
 		this.value = value;
-		renderValue(value);
+		this.renderValue(value);
 	}
 
 	protected abstract void renderValue(T value);

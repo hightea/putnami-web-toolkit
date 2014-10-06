@@ -1,18 +1,16 @@
 /**
  * This file is part of pwt.
  *
- * pwt is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * pwt is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- * pwt is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * pwt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 package fr.putnami.pwt.core.widget.client;
 
@@ -34,10 +32,7 @@ public class Image extends AbstractWidget implements EditorOutput<String> {
 	private static final String PROP_HEIGHT = "height";
 
 	public enum Type implements CssStyle {
-		DEFAULT(null),
-		ROUNDED("img-rounded"),
-		CIRCLE("img-circle"),
-		THUMBNAIL("img-thumbnail");
+		DEFAULT(null), ROUNDED("img-rounded"), CIRCLE("img-circle"), THUMBNAIL("img-thumbnail");
 
 		private final String style;
 
@@ -47,10 +42,9 @@ public class Image extends AbstractWidget implements EditorOutput<String> {
 
 		@Override
 		public String get() {
-			return style;
+			return this.style;
 		}
 	}
-
 
 	private final ImageElement imgElement;
 
@@ -65,20 +59,20 @@ public class Image extends AbstractWidget implements EditorOutput<String> {
 
 	public Image() {
 		super(ImageElement.TAG);
-		imgElement = ImageElement.as(getElement());
+		this.imgElement = ImageElement.as(this.getElement());
 	}
 
 	protected Image(Image source) {
 		super(source);
-		imgElement = ImageElement.as(getElement());
+		this.imgElement = ImageElement.as(this.getElement());
 
-		setSrc(source.src);
-		setAlt(source.alt);
+		this.setSrc(source.src);
+		this.setAlt(source.alt);
 		this.widthPx = source.widthPx;
 		this.heightPx = source.heightPx;
 		this.keepPropertions = source.keepPropertions;
 
-		resetSize();
+		this.resetSize();
 	}
 
 	@Override
@@ -87,7 +81,7 @@ public class Image extends AbstractWidget implements EditorOutput<String> {
 	}
 
 	public String getSrc() {
-		return src;
+		return this.src;
 	}
 
 	public void setSrc(String src) {
@@ -95,31 +89,30 @@ public class Image extends AbstractWidget implements EditorOutput<String> {
 		if (this.src.startsWith("/")) {
 			this.src = GWT.getModuleName() + this.src;
 		}
-		imgElement.setSrc(this.src);
-
+		this.imgElement.setSrc(this.src);
 	}
 
 	public String getAlt() {
-		return alt;
+		return this.alt;
 	}
 
 	public void setAlt(String alt) {
 		this.alt = alt;
-		imgElement.setAlt(alt);
+		this.imgElement.setAlt(alt);
 	}
 
 	@Override
 	public String getValue() {
-		return src;
+		return this.src;
 	}
 
 	@Override
 	public void edit(String value) {
-		setSrc(value);
+		this.setSrc(value);
 	}
 
 	public Type getType() {
-		return type;
+		return this.type;
 	}
 
 	public void setType(Type type) {
@@ -128,44 +121,46 @@ public class Image extends AbstractWidget implements EditorOutput<String> {
 	}
 
 	public boolean isKeepPropertions() {
-		return keepPropertions;
+		return this.keepPropertions;
 	}
 
 	public void setKeepPropertions(boolean keepPropertions) {
 		this.keepPropertions = keepPropertions;
-		resetSize();
+		this.resetSize();
 	}
 
 	public Integer getWidthPx() {
-		return widthPx;
+		return this.widthPx;
 	}
 
 	public void setWidthPx(Integer widthPx) {
 		this.widthPx = widthPx;
-		resetSize();
+		this.resetSize();
 	}
 
 	public Integer getHeightPx() {
-		return heightPx;
+		return this.heightPx;
 	}
 
 	public void setHeightPx(Integer heightPx) {
 		this.heightPx = heightPx;
-		resetSize();
+		this.resetSize();
 	}
 
 	private void resetSize() {
-		Style imgStyle = imgElement.getStyle();
-		imgStyle.clearProperty(PROP_WIDTH);
-		imgStyle.clearProperty(PROP_HEIGHT);
-		imgStyle.clearProperty(PROP_MAX_WIDTH);
-		imgStyle.clearProperty(PROP_MAX_HEIGHT);
+		Style imgStyle = this.imgElement.getStyle();
+		imgStyle.clearProperty(Image.PROP_WIDTH);
+		imgStyle.clearProperty(Image.PROP_HEIGHT);
+		imgStyle.clearProperty(Image.PROP_MAX_WIDTH);
+		imgStyle.clearProperty(Image.PROP_MAX_HEIGHT);
 
-		if (widthPx > 0) {
-			imgStyle.setPropertyPx(keepPropertions ? PROP_MAX_WIDTH : PROP_WIDTH, widthPx);
+		if (this.widthPx > 0) {
+			imgStyle.setPropertyPx(this.keepPropertions ? Image.PROP_MAX_WIDTH : Image.PROP_WIDTH,
+					this.widthPx);
 		}
-		if (heightPx > 0) {
-			imgStyle.setPropertyPx(keepPropertions ? PROP_MAX_HEIGHT : PROP_HEIGHT, heightPx);
+		if (this.heightPx > 0) {
+			imgStyle.setPropertyPx(this.keepPropertions ? Image.PROP_MAX_HEIGHT : Image.PROP_HEIGHT,
+					this.heightPx);
 		}
 	}
 
