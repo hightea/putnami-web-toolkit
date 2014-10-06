@@ -20,137 +20,137 @@ import com.google.common.base.Objects;
 
 public class SimpleToken<T extends TokenContent> implements Token<T> {
 
-	public static final SimpleToken<?> UNDEFINED = createUndefinedToken();
+  public static final SimpleToken<?> UNDEFINED_TOKEN = createUndefinedToken();
 
-	public static <U extends TokenContent> SimpleToken<U> createEOFToken(int tokenStart) {
-		return new SimpleToken<U>(TokenType.EOF, tokenStart);
-	}
+  public static <U extends TokenContent> SimpleToken<U> createEOFToken(int tokenStart) {
+    return new SimpleToken<U>(TokenType.EOF, tokenStart);
+  }
 
-	public static <U extends TokenContent> SimpleToken<U> createUndefinedToken() {
-		return new SimpleToken<U>(TokenType.UNDEFINED);
-	}
+  public static <U extends TokenContent> SimpleToken<U> createUndefinedToken() {
+    return new SimpleToken<U>(TokenType.UNDEFINED);
+  }
 
-	public static <U extends TokenContent> SimpleToken<U> createWhitespaceToken(int tokenStart, String strValue) {
-		return new SimpleToken<U>(TokenType.WHITESPACE, tokenStart, strValue);
-	}
+  public static <U extends TokenContent> SimpleToken<U> createWhitespaceToken(int tokenStart, String strValue) {
+    return new SimpleToken<U>(TokenType.WHITESPACE, tokenStart, strValue);
+  }
 
-	public static <U extends TokenContent> SimpleToken<U> createWhitespaceToken(int tokenStart, String strValue, U content) {
-		return new SimpleToken<U>(TokenType.WHITESPACE, tokenStart, strValue, content);
-	}
+  public static <U extends TokenContent> SimpleToken<U> createWhitespaceToken(int tokenStart, String strValue, U content) {
+    return new SimpleToken<U>(TokenType.WHITESPACE, tokenStart, strValue, content);
+  }
 
-	public static <U extends TokenContent> SimpleToken<U> createNewlineToken(int tokenStart, String strValue) {
-		return new SimpleToken<U>(TokenType.NEWLINE, tokenStart, strValue);
-	}
+  public static <U extends TokenContent> SimpleToken<U> createNewlineToken(int tokenStart, String strValue) {
+    return new SimpleToken<U>(TokenType.NEWLINE, tokenStart, strValue);
+  }
 
-	private enum TokenType {
-		UNDEFINED,
-		EOF,
-		WHITESPACE,
-		NEWLINE,
-		OTHER;
-	}
+  private enum TokenType {
+    UNDEFINED,
+    EOF,
+    WHITESPACE,
+    NEWLINE,
+    OTHER;
+  }
 
-	private final TokenType type;
-	private int tokenStart = -1;
-	private String text;
-	private T content;
+  private final TokenType type;
+  private int tokenStart = -1;
+  private String text;
+  private T content;
 
-	public SimpleToken(int tokenStart, String text) {
-		this(TokenType.OTHER, tokenStart, text, null);
-	}
+  public SimpleToken(int tokenStart, String text) {
+    this(TokenType.OTHER, tokenStart, text, null);
+  }
 
-	public SimpleToken(int tokenStart, String text, T content) {
-		this(TokenType.OTHER, tokenStart, text, content);
-	}
+  public SimpleToken(int tokenStart, String text, T content) {
+    this(TokenType.OTHER, tokenStart, text, content);
+  }
 
-	private SimpleToken(TokenType type) {
-		this.type = type;
-		this.text = null;
-	}
+  private SimpleToken(TokenType type) {
+    this.type = type;
+    this.text = null;
+  }
 
-	private SimpleToken(TokenType type, int tokenStart) {
-		this(type);
-		this.tokenStart = tokenStart;
-	}
+  private SimpleToken(TokenType type, int tokenStart) {
+    this(type);
+    this.tokenStart = tokenStart;
+  }
 
-	private SimpleToken(TokenType type, int tokenStart, String text) {
-		this(type, tokenStart);
-		this.text = text;
-	}
+  private SimpleToken(TokenType type, int tokenStart, String text) {
+    this(type, tokenStart);
+    this.text = text;
+  }
 
-	private SimpleToken(TokenType type, int tokenStart, String text, T content) {
-		this(type, tokenStart, text);
-		this.content = content;
-	}
+  private SimpleToken(TokenType type, int tokenStart, String text, T content) {
+    this(type, tokenStart, text);
+    this.content = content;
+  }
 
-	@Override
-	public boolean isEOF() {
-		return this.type == TokenType.EOF;
-	}
+  @Override
+  public boolean isEOF() {
+    return this.type == TokenType.EOF;
+  }
 
-	@Override
-	public boolean isNewLine() {
-		return this.type == TokenType.NEWLINE;
-	}
+  @Override
+  public boolean isNewLine() {
+    return this.type == TokenType.NEWLINE;
+  }
 
-	@Override
-	public boolean isUndefined() {
-		return this.type == TokenType.UNDEFINED;
-	}
+  @Override
+  public boolean isUndefined() {
+    return this.type == TokenType.UNDEFINED;
+  }
 
-	@Override
-	public boolean isWhiteSpace() {
-		return this.type == TokenType.WHITESPACE;
-	}
+  @Override
+  public boolean isWhiteSpace() {
+    return this.type == TokenType.WHITESPACE;
+  }
 
-	@Override
-	public T getContent() {
-		return content;
-	}
+  @Override
+  public T getContent() {
+    return content;
+  }
 
-	public void setContent(T content) {
-		this.content = content;
-	}
+  public void setContent(T content) {
+    this.content = content;
+  }
 
-	@Override
-	public String getText() {
-		return text;
-	}
+  @Override
+  public String getText() {
+    return text;
+  }
 
-	@Override
-	public int getTokenLength() {
-		if (text != null) {
-			return text.length();
-		}
-		return 0;
-	}
+  @Override
+  public int getTokenLength() {
+    if (text != null) {
+      return text.length();
+    }
+    return 0;
+  }
 
-	@Override
-	public int getTokenStart() {
-		return tokenStart;
-	}
+  @Override
+  public int getTokenStart() {
+    return tokenStart;
+  }
 
-	@Override
-	public boolean equals(Object other) {
-		if (other instanceof SimpleToken) {
-			return Objects.equal(this.type, ((SimpleToken) other).type)
-					&& Objects.equal(this.getTokenStart(), ((SimpleToken) other).getTokenStart())
-					&& Objects.equal(this.getText(), ((SimpleToken) other).getText())
-					&& Objects.equal(this.getContent(), ((SimpleToken) other).getContent());
-		}
-		return false;
-	}
+  @Override
+  public boolean equals(Object other) {
+    if (other instanceof SimpleToken) {
+      return Objects.equal(this.type, ((SimpleToken) other).type)
+          && Objects.equal(this.getTokenStart(), ((SimpleToken) other).getTokenStart())
+          && Objects.equal(this.getText(), ((SimpleToken) other).getText())
+          && Objects.equal(this.getContent(), ((SimpleToken) other).getContent());
+    }
+    return false;
+  }
 
-	@Override
-	public int hashCode() {
-		return Objects.hashCode(this.type, this.tokenStart, this.text, this.content);
-	}
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(this.type, this.tokenStart, this.text, this.content);
+  }
 
-	@Override
-	public String toString() {
-		return Objects.toStringHelper(this)
-				.add("type", type)
-				.add("text", text)
-				.toString();
-	}
+  @Override
+  public String toString() {
+    return Objects.toStringHelper(this)
+        .add("type", type)
+        .add("text", text)
+        .toString();
+  }
 }

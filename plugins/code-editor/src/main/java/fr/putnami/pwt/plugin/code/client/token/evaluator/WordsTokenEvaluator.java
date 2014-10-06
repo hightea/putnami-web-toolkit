@@ -93,7 +93,7 @@ public class WordsTokenEvaluator implements TokenEvaluator {
       }
     }
     charScanner.unread();
-    return SimpleToken.UNDEFINED;
+    return SimpleToken.UNDEFINED_TOKEN;
   }
 
   private boolean isWordPart(int charScanned) {

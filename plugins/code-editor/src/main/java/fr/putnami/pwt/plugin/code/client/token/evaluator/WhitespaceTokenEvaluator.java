@@ -25,29 +25,29 @@ import fr.putnami.pwt.plugin.code.client.token.TokenEvaluator;
 
 public class WhitespaceTokenEvaluator implements TokenEvaluator {
 
-	@Override
-	public Token<?> evaluate(CharacterScanner charScanner) {
-		int charScanned = charScanner.read();
-		if (matches(CharMatcher.WHITESPACE, charScanned)) {
-			StringBuilder resultText = new StringBuilder();
-			do {
-				resultText.append((char) charScanned);
-				charScanned = charScanner.read();
-			}
-			while (matches(CharMatcher.WHITESPACE, charScanned));
-			charScanner.unread();
-			return SimpleToken.createWhitespaceToken(charScanner.getMark(), resultText.toString());
-		}
-		charScanner.unread();
-		return SimpleToken.UNDEFINED;
-	}
+  @Override
+  public Token<?> evaluate(CharacterScanner charScanner) {
+    int charScanned = charScanner.read();
+    if (matches(CharMatcher.WHITESPACE, charScanned)) {
+      StringBuilder resultText = new StringBuilder();
+      do {
+        resultText.append((char) charScanned);
+        charScanned = charScanner.read();
+      }
+      while (matches(CharMatcher.WHITESPACE, charScanned));
+      charScanner.unread();
+      return SimpleToken.createWhitespaceToken(charScanner.getMark(), resultText.toString());
+    }
+    charScanner.unread();
+    return SimpleToken.UNDEFINED_TOKEN;
+  }
 
-	private boolean matches(CharMatcher charMatcher, int charOrEof) {
-		if (charOrEof == CharacterScanner.EOF) {
-			return false;
-		}
+  private boolean matches(CharMatcher charMatcher, int charOrEof) {
+    if (charOrEof == CharacterScanner.EOF) {
+      return false;
+    }
 
-		return charMatcher.matches((char) charOrEof);
-	}
+    return charMatcher.matches((char) charOrEof);
+  }
 
 }

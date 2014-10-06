@@ -68,367 +68,367 @@ import fr.putnami.pwt.core.widget.shared.domain.UploadStatus;
 public class InputFile extends InputGroup<FileDto>
 implements HasDrawable, EditorInput<FileDto> {
 
-	private static final String MULTIPART_BOUNDARY = "x-x-x-x-x";
-	private static final String EOL = "\r\n";
+  private static final String MULTIPART_BOUNDARY = "x-x-x-x-x";
+  private static final String EOL = "\r\n";
 
-	private static final String URL_UPLOAD = GWT.getHostPageBaseURL() + "file/upload/";
-	private static final String URL_STATUS = GWT.getHostPageBaseURL() + "file/status/";
-	private static final String URL_DOWNLOAD = GWT.getHostPageBaseURL() + "file/download/";
+  private static final String URL_UPLOAD = GWT.getHostPageBaseURL() + "file/upload/";
+  private static final String URL_STATUS = GWT.getHostPageBaseURL() + "file/status/";
+  private static final String URL_DOWNLOAD = GWT.getHostPageBaseURL() + "file/download/";
 
-	private static final CssStyle STYLE_DRAGOVER = new SimpleStyle("file-dragover");
-	private static final CssStyle STYLE_MUTTED = new SimpleStyle("text-muted");
+  private static final CssStyle STYLE_DRAGOVER = new SimpleStyle("file-dragover");
+  private static final CssStyle STYLE_MUTTED = new SimpleStyle("text-muted");
 
-	final Timer timer = new Timer() {
-		@Override
-		public void run() {
-			statusSendRequest();
-		}
-	};
+  final Timer timer = new Timer() {
+    @Override
+    public void run() {
+      statusSendRequest();
+    }
+  };
 
-	private class UploadForm {
+  private class UploadForm {
 
-		private final FormPanel uploadForm = new FormPanel();
-		private final FileUpload fileUpload = new FileUpload();
+    private final FormPanel formPanel = new FormPanel();
+    private final FileUpload fileUpload = new FileUpload();
 
-		private final HandlerRegistrationCollection handlerRegistrations = new HandlerRegistrationCollection();
+    private final HandlerRegistrationCollection handlerRegistrations = new HandlerRegistrationCollection();
 
-		public UploadForm() {
-			uploadForm.setMethod("post");
-			uploadForm.setEncoding("multipart/form-data");
-			uploadForm.getElement().getStyle().setHeight(0, Unit.PX);
-			uploadForm.getElement().getStyle().setWidth(0, Unit.PX);
-			uploadForm.getElement().getStyle().setOverflow(Overflow.HIDDEN);
-			uploadForm.add(fileUpload);
+    public UploadForm() {
+      formPanel.setMethod("post");
+      formPanel.setEncoding("multipart/form-data");
+      formPanel.getElement().getStyle().setHeight(0, Unit.PX);
+      formPanel.getElement().getStyle().setWidth(0, Unit.PX);
+      formPanel.getElement().getStyle().setOverflow(Overflow.HIDDEN);
+      formPanel.add(fileUpload);
 
-			fileUpload.setName("data");
+      fileUpload.setName("data");
 
-			handlerRegistrations.add(fileUpload.addChangeHandler(new ChangeHandler() {
-				@Override
-				public void onChange(ChangeEvent event) {
-					handlerRegistrations.add(uploadForm.addSubmitCompleteHandler(new SubmitCompleteHandler() {
+      handlerRegistrations.add(fileUpload.addChangeHandler(new ChangeHandler() {
+        @Override
+        public void onChange(ChangeEvent event) {
+          handlerRegistrations.add(formPanel.addSubmitCompleteHandler(new SubmitCompleteHandler() {
 
-						@Override
-						public void onSubmitComplete(SubmitCompleteEvent event) {
-							// Hook to strip <pre> on some brothers
-							Element label = DOM.createLabel();
-							label.setInnerHTML(event.getResults());
-							handleCompleteJson(label.getInnerText());
-						}
-					}));
+            @Override
+            public void onSubmitComplete(SubmitCompleteEvent event) {
+              // Hook to strip <pre> on some brothers
+              Element label = DOM.createLabel();
+              label.setInnerHTML(event.getResults());
+              handleCompleteJson(label.getInnerText());
+            }
+          }));
 
-					fileId = UUID.uuid();
-					uploadForm.setAction(URL_UPLOAD + fileId);
-					uploadForm.submit();
-					int fileSize = getFileSize(fileUpload.getElement());
-					initProgressBar(fileSize);
-				}
-			}));
-		}
+          fileId = UUID.uuid();
+          formPanel.setAction(URL_UPLOAD + fileId);
+          formPanel.submit();
+          int fileSize = getFileSize(fileUpload.getElement());
+          initProgressBar(fileSize);
+        }
+      }));
+    }
 
-		public UploadForm destroy() {
-			InputElement.as(fileUpload.getElement()).setValue(null);
-			handlerRegistrations.removeHandler();
-			uploadForm.removeFromParent();
+    public UploadForm destroy() {
+      InputElement.as(fileUpload.getElement()).setValue(null);
+      handlerRegistrations.removeHandler();
+      formPanel.removeFromParent();
 
-			return null;
-		}
+      return null;
+    }
 
-		public void openFilePicker() {
-			RootPanel.get().add(uploadForm);
-			nativeClick(fileUpload.getElement());
-		}
-	}
+    public void openFilePicker() {
+      RootPanel.get().add(formPanel);
+      nativeClick(fileUpload.getElement());
+    }
+  }
 
-	private final WidgetParams params = WidgetParams.Util.get();
+  private final WidgetParams params = WidgetParams.Util.get();
 
-	private final OutputProgressBar<Integer> progressBar = new OutputProgressBar<Integer>();
-	private final OneWidgetPanel progressBarWrapper = new OneWidgetPanel();
-	private final Anchor<?> fileNameAnchor = new Anchor();
-	private final Text placeholderText = new Text();
+  private final OutputProgressBar<Integer> progressBar = new OutputProgressBar<Integer>();
+  private final OneWidgetPanel progressBarWrapper = new OneWidgetPanel();
+  private final Anchor<?> fileNameAnchor = new Anchor();
+  private final Text placeholderText = new Text();
 
-	private final Button<?> cancelBtn = new Button();
-	private final Button<?> uploadBtn = new Button();
+  private final Button<?> cancelBtn = new Button();
+  private final Button<?> uploadBtn = new Button();
 
-	private String placeholder = null;
+  private String placeholder = null;
 
-	private String fileId;
-	private UploadForm uploadForm;
-	private Request sendRequest;
+  private String fileId;
+  private UploadForm uploadForm;
+  private Request sendRequest;
 
-	public InputFile() {
-		endConstruct();
-	}
+  public InputFile() {
+    endConstruct();
+  }
 
-	protected InputFile(InputFile source) {
-		super(source, false);
-		endConstruct();
-	}
+  protected InputFile(InputFile source) {
+    super(source, false);
+    endConstruct();
+  }
 
-	private void endConstruct() {
+  private void endConstruct() {
 
-		progressBar.setDisplayValue(true);
-		progressBar.setAnimated(true);
-		progressBarWrapper.add(progressBar);
+    progressBar.setDisplayValue(true);
+    progressBar.setAnimated(true);
+    progressBarWrapper.add(progressBar);
 
-		StyleUtils.addStyle(progressBarWrapper, AbstractInput.STYLE_CONTROL);
-		StyleUtils.addStyle(fileNameAnchor, AbstractInput.STYLE_CONTROL);
-		StyleUtils.addStyle(placeholderText, AbstractInput.STYLE_CONTROL);
-		StyleUtils.addStyle(placeholderText, STYLE_MUTTED);
+    StyleUtils.addStyle(progressBarWrapper, AbstractInput.STYLE_CONTROL);
+    StyleUtils.addStyle(fileNameAnchor, AbstractInput.STYLE_CONTROL);
+    StyleUtils.addStyle(placeholderText, AbstractInput.STYLE_CONTROL);
+    StyleUtils.addStyle(placeholderText, STYLE_MUTTED);
 
-		cancelBtn.setType(Type.ICON);
-		cancelBtn.setIconType(IconFont.ICON_CANCEL);
-		cancelBtn.addButtonHandler(new ButtonEvent.Handler() {
-			@Override
-			public void onButtonAction(ButtonEvent event) {
-				if (sendRequest != null) {
-					sendRequest.cancel();
-				}
-				edit(null);
-			}
-		});
-		uploadBtn.setType(Type.ICON);
-		uploadBtn.setIconType(IconFont.ICON_UPLOAD);
-		uploadBtn.addButtonHandler(new ButtonEvent.Handler() {
-			@Override
-			public void onButtonAction(ButtonEvent event) {
-				if (uploadForm == null) {
-					uploadForm = new UploadForm();
-				}
-				uploadForm.openFilePicker();
-			}
-		});
+    cancelBtn.setType(Type.ICON);
+    cancelBtn.setIconType(IconFont.ICON_CANCEL);
+    cancelBtn.addButtonHandler(new ButtonEvent.Handler() {
+      @Override
+      public void onButtonAction(ButtonEvent event) {
+        if (sendRequest != null) {
+          sendRequest.cancel();
+        }
+        edit(null);
+      }
+    });
+    uploadBtn.setType(Type.ICON);
+    uploadBtn.setIconType(IconFont.ICON_UPLOAD);
+    uploadBtn.addButtonHandler(new ButtonEvent.Handler() {
+      @Override
+      public void onButtonAction(ButtonEvent event) {
+        if (uploadForm == null) {
+          uploadForm = new UploadForm();
+        }
+        uploadForm.openFilePicker();
+      }
+    });
 
-		this.addDomHandler(new DragLeaveHandler() {
-			@Override
-			public void onDragLeave(DragLeaveEvent event) {
-				StyleUtils.removeStyle(InputFile.this, STYLE_DRAGOVER);
-			}
-		}, DragLeaveEvent.getType());
-		this.addDomHandler(new DragOverHandler() {
-			@Override
-			public void onDragOver(DragOverEvent event) {
-				StyleUtils.addStyle(InputFile.this, STYLE_DRAGOVER);
-			}
-		}, DragOverEvent.getType());
-		this.addDomHandler(new DropHandler() {
-			@Override
-			public void onDrop(DropEvent event) {
-				event.preventDefault();
-				event.stopPropagation();
+    this.addDomHandler(new DragLeaveHandler() {
+      @Override
+      public void onDragLeave(DragLeaveEvent event) {
+        StyleUtils.removeStyle(InputFile.this, STYLE_DRAGOVER);
+      }
+    }, DragLeaveEvent.getType());
+    this.addDomHandler(new DragOverHandler() {
+      @Override
+      public void onDragOver(DragOverEvent event) {
+        StyleUtils.addStyle(InputFile.this, STYLE_DRAGOVER);
+      }
+    }, DragOverEvent.getType());
+    this.addDomHandler(new DropHandler() {
+      @Override
+      public void onDrop(DropEvent event) {
+        event.preventDefault();
+        event.stopPropagation();
 
-				DataTransfer data = event.getNativeEvent().getDataTransfer();
-				nativeUploadData(data, InputFile.this);
-			}
-		}, DropEvent.getType());
+        DataTransfer data = event.getNativeEvent().getDataTransfer();
+        nativeUploadData(data, InputFile.this);
+      }
+    }, DropEvent.getType());
 
-		redraw();
-	}
+    redraw();
+  }
 
-	@Override
-	public IsWidget cloneWidget() {
-		return new InputFile(this);
-	}
+  @Override
+  public IsWidget cloneWidget() {
+    return new InputFile(this);
+  }
 
-	@Override
-	public void redraw() {
-		cancelBtn.removeFromParent();
-		uploadBtn.removeFromParent();
-		fileNameAnchor.removeFromParent();
-		placeholderText.removeFromParent();
-		progressBarWrapper.removeFromParent();
-		if (fileId != null) {
-			append(progressBarWrapper);
-			addAddon(cancelBtn);
-		}
-		else {
-			FileDto value = getValue();
-			if (value != null) {
-				NumberFormat nf = NumberFormat.getFormat("#.##");
+  @Override
+  public void redraw() {
+    cancelBtn.removeFromParent();
+    uploadBtn.removeFromParent();
+    fileNameAnchor.removeFromParent();
+    placeholderText.removeFromParent();
+    progressBarWrapper.removeFromParent();
+    if (fileId != null) {
+      append(progressBarWrapper);
+      addAddon(cancelBtn);
+    }
+    else {
+      FileDto value = getValue();
+      if (value != null) {
+        NumberFormat nf = NumberFormat.getFormat("#.##");
 
-				long size = value.getContentLength();
-				String displaySize = "";
-				if (size > 1024 * 1024) {
-					displaySize = nf.format(size / (1024 * 1024D)) + " MB";
-				}
-				else if (size > 1024) {
-					displaySize = nf.format(size / 1024D) + " KB";
-				}
-				else {
-					displaySize = nf.format(size) + " B";
-				}
+        long size = value.getContentLength();
+        String displaySize = "";
+        if (size > 1024 * 1024) {
+          displaySize = nf.format(size / (1024 * 1024D)) + " MB";
+        }
+        else if (size > 1024) {
+          displaySize = nf.format(size / 1024D) + " KB";
+        }
+        else {
+          displaySize = nf.format(size) + " B";
+        }
 
-				fileNameAnchor.setLink(URL_DOWNLOAD + value.getToken());
-				fileNameAnchor.setText(value.getName() + " - (" + displaySize + ")");
-				placeholderText.setText(null);
-				append(fileNameAnchor);
-				addAddon(cancelBtn);
-			}
-			else {
-				fileNameAnchor.setLink(null);
-				fileNameAnchor.setText(null);
-				placeholderText.setText(placeholder);
-				append(placeholderText);
-			}
-			addAddon(uploadBtn);
-		}
-	}
+        fileNameAnchor.setLink(URL_DOWNLOAD + value.getToken());
+        fileNameAnchor.setText(value.getName() + " - (" + displaySize + ")");
+        placeholderText.setText(null);
+        append(fileNameAnchor);
+        addAddon(cancelBtn);
+      }
+      else {
+        fileNameAnchor.setLink(null);
+        fileNameAnchor.setText(null);
+        placeholderText.setText(placeholder);
+        append(placeholderText);
+      }
+      addAddon(uploadBtn);
+    }
+  }
 
-	public String getPlaceholder() {
-		return placeholder;
-	}
+  public String getPlaceholder() {
+    return placeholder;
+  }
 
-	public void setPlaceholder(String placeholder) {
-		this.placeholder = placeholder;
-		placeholderText.setText(placeholder);
-	}
+  public void setPlaceholder(String placeholder) {
+    this.placeholder = placeholder;
+    placeholderText.setText(placeholder);
+  }
 
-	@Override
-	public void edit(FileDto object) {
-		super.edit(object);
-		timer.cancel();
-		redraw();
-	}
+  @Override
+  public void edit(FileDto object) {
+    super.edit(object);
+    timer.cancel();
+    redraw();
+  }
 
-	private void initProgressBar(int size) {
-		progressBar.edit(0);
-		redraw();
-		if (params.inputFileProgressEnable()) {
-			progressBar.setMax(size);
-			progressBar.edit(0);
-			timer.schedule(10);
-		}
-		else {
-			progressBar.setDisplayValue(false);
-			progressBar.setMax(100);
-			progressBar.edit(40);
-		}
-	}
+  private void initProgressBar(int size) {
+    progressBar.edit(0);
+    redraw();
+    if (params.inputFileProgressEnable()) {
+      progressBar.setMax(size);
+      progressBar.edit(0);
+      timer.schedule(10);
+    }
+    else {
+      progressBar.setDisplayValue(false);
+      progressBar.setMax(100);
+      progressBar.edit(40);
+    }
+  }
 
-	private void statusSendRequest() {
-		if (fileId == null) {
-			return;
-		}
+  private void statusSendRequest() {
+    if (fileId == null) {
+      return;
+    }
 
-		RequestCallback callback = new RequestCallback() {
-			@Override
-			public void onResponseReceived(Request request, Response response) {
-				if (200 == response.getStatusCode()) {
-					handleStatusJson(response.getText());
-				}
-			}
+    RequestCallback callback = new RequestCallback() {
+      @Override
+      public void onResponseReceived(Request request, Response response) {
+        if (200 == response.getStatusCode()) {
+          handleStatusJson(response.getText());
+        }
+      }
 
-			@Override
-			public void onError(Request request, Throwable exception) {
-			}
-		};
+      @Override
+      public void onError(Request request, Throwable exception) {
+      }
+    };
 
-		try {
-			RequestBuilder requestBuilder = new RequestBuilder(RequestBuilder.GET, URL_STATUS + fileId);
-			requestBuilder.setHeader("Cache-Control", "max-age=0");
-			requestBuilder.sendRequest("", callback);
-		}
-		catch (RequestException e) {
-			throw new RuntimeException("Couldn't send request", e);
-		}
-	}
+    try {
+      RequestBuilder requestBuilder = new RequestBuilder(RequestBuilder.GET, URL_STATUS + fileId);
+      requestBuilder.setHeader("Cache-Control", "max-age=0");
+      requestBuilder.sendRequest("", callback);
+    }
+    catch (RequestException e) {
+      throw new RuntimeException("Couldn't send request", e);
+    }
+  }
 
-	private void uploadSendRequest(String base64data, String fileName, String type, int size) {
-		RequestCallback callback = new RequestCallback() {
-			@Override
-			public void onResponseReceived(Request request, Response response) {
-				if (200 == response.getStatusCode()) {
-					handleCompleteJson(response.getText());
-				}
-				else {
-					displayError("Couldn't retrieve JSON (" + response.getStatusText() + ")");
-				}
-			}
+  private void uploadSendRequest(String base64data, String fileName, String type, int size) {
+    RequestCallback callback = new RequestCallback() {
+      @Override
+      public void onResponseReceived(Request request, Response response) {
+        if (200 == response.getStatusCode()) {
+          handleCompleteJson(response.getText());
+        }
+        else {
+          displayError("Couldn't retrieve JSON (" + response.getStatusText() + ")");
+        }
+      }
 
-			@Override
-			public void onError(Request request, Throwable exception) {
-				displayError("Couldn't retrieve JSON");
-			}
+      @Override
+      public void onError(Request request, Throwable exception) {
+        displayError("Couldn't retrieve JSON");
+      }
 
-		};
+    };
 
-		fileId = UUID.uuid();
-		initProgressBar(size);
+    fileId = UUID.uuid();
+    initProgressBar(size);
 
-		StringBuffer requestBody = new StringBuffer();
-		requestBody.append("--").append(MULTIPART_BOUNDARY).append(EOL)
-		.append("Content-Disposition: form-data; name=\"data\"; filename=\"").append(fileName).append("\"").append(EOL)
-		.append("Content-Type: ").append(type).append(EOL).append(EOL)
-		.append(base64data).append(EOL)
-		.append("--").append(MULTIPART_BOUNDARY).append("--");
+    StringBuffer requestBody = new StringBuffer();
+    requestBody.append("--").append(MULTIPART_BOUNDARY).append(EOL)
+    .append("Content-Disposition: form-data; name=\"data\"; filename=\"").append(fileName).append("\"").append(EOL)
+    .append("Content-Type: ").append(type).append(EOL).append(EOL)
+    .append(base64data).append(EOL)
+    .append("--").append(MULTIPART_BOUNDARY).append("--");
 
-		try {
-			RequestBuilder requestBuilder = new RequestBuilder(RequestBuilder.POST, URL_UPLOAD + fileId);
-			requestBuilder.setHeader("content-type", "multipart/form-data; boundary=" + MULTIPART_BOUNDARY);
-			requestBuilder.setHeader("Cache-Control", "max-age=0");
-			this.sendRequest = requestBuilder.sendRequest(requestBody.toString(), callback);
+    try {
+      RequestBuilder requestBuilder = new RequestBuilder(RequestBuilder.POST, URL_UPLOAD + fileId);
+      requestBuilder.setHeader("content-type", "multipart/form-data; boundary=" + MULTIPART_BOUNDARY);
+      requestBuilder.setHeader("Cache-Control", "max-age=0");
+      this.sendRequest = requestBuilder.sendRequest(requestBody.toString(), callback);
 
-		}
-		catch (RequestException e) {
-			throw new RuntimeException("Couldn't send request", e);
-		}
+    }
+    catch (RequestException e) {
+      throw new RuntimeException("Couldn't send request", e);
+    }
 
-	}
+  }
 
-	private void handleStatusJson(String reponseData) {
+  private void handleStatusJson(String reponseData) {
 
-		if (!Strings.isNullOrEmpty(reponseData)) {
-			JSONObject jsObject = JSONParser.parseLenient(reponseData).isObject();
-			UploadStatus status = new UploadStatus();
-			status.setBytesRead((long) jsObject.get("bytesRead").isNumber().doubleValue());
-			status.setContentLength((long) jsObject.get("contentLength").isNumber().doubleValue());
-			status.setUploadId(jsObject.get("uploadId").isString().stringValue());
+    if (!Strings.isNullOrEmpty(reponseData)) {
+      JSONObject jsObject = JSONParser.parseLenient(reponseData).isObject();
+      UploadStatus status = new UploadStatus();
+      status.setBytesRead((long) jsObject.get("bytesRead").isNumber().doubleValue());
+      status.setContentLength((long) jsObject.get("contentLength").isNumber().doubleValue());
+      status.setUploadId(jsObject.get("uploadId").isString().stringValue());
 
-			progressBar.setMax(Long.valueOf(status.getContentLength()).intValue());
-			progressBar.edit((int) status.getBytesRead());
-		}
-		else {
-			progressBar.setValue(progressBar.getMax());
-		}
-		if (fileId != null) {
-			timer.schedule(100);
-		}
+      progressBar.setMax(Long.valueOf(status.getContentLength()).intValue());
+      progressBar.edit((int) status.getBytesRead());
+    }
+    else {
+      progressBar.setValue(progressBar.getMax());
+    }
+    if (fileId != null) {
+      timer.schedule(100);
+    }
 
-	}
+  }
 
-	private void handleCompleteJson(String reponseData) {
-		JSONObject jsObject = JSONParser.parseLenient(reponseData).isObject();
+  private void handleCompleteJson(String reponseData) {
+    JSONObject jsObject = JSONParser.parseLenient(reponseData).isObject();
 
-		final FileDto file = new FileDto();
-		file.setName(jsObject.get("name").isString().stringValue());
-		file.setExtension(jsObject.get("extension").isString().stringValue());
-		file.setMime(jsObject.get("mime").isString().stringValue());
-		file.setToken(jsObject.get("token").isString().stringValue());
-		file.setContentLength((long) jsObject.get("contentLength").isNumber().doubleValue());
+    final FileDto file = new FileDto();
+    file.setName(jsObject.get("name").isString().stringValue());
+    file.setExtension(jsObject.get("extension").isString().stringValue());
+    file.setMime(jsObject.get("mime").isString().stringValue());
+    file.setToken(jsObject.get("token").isString().stringValue());
+    file.setContentLength((long) jsObject.get("contentLength").isNumber().doubleValue());
 
-		if (uploadForm != null) {
-			uploadForm = uploadForm.destroy();
-		}
-		sendRequest = null;
-		fileId = null;
+    if (uploadForm != null) {
+      uploadForm = uploadForm.destroy();
+    }
+    sendRequest = null;
+    fileId = null;
 
-		progressBar.edit(progressBar.getMax());
+    progressBar.edit(progressBar.getMax());
 
-		Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
+    Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
 
-			@Override
-			public boolean execute() {
-				edit(file);
-				return false;
-			}
-		}, params.inputFileProgressHideDelay());
-	}
+      @Override
+      public boolean execute() {
+        edit(file);
+        return false;
+      }
+    }, params.inputFileProgressHideDelay());
+  }
 
-	private void displayError(String string) {
+  private void displayError(String string) {
 
-	}
+  }
 
-	private static native void nativeUploadData(DataTransfer dataTransfer, InputFile inputFile)
-	/*-{
+  private static native void nativeUploadData(DataTransfer dataTransfer, InputFile inputFile)
+  /*-{
 		var files = dataTransfer.files;
 		for (var i = 0; i < files.length; i++ ) {
 			var file = files[i];
@@ -444,8 +444,8 @@ implements HasDrawable, EditorInput<FileDto> {
 	   }
 	}-*/;
 
-	private static native int getFileSize(Element fileElement)
-	/*-{
+  private static native int getFileSize(Element fileElement)
+  /*-{
 		var files = fileElement.files;
 		for (var i = 0; i < files.length; i++ ) {
 			return files[i].size;
@@ -453,8 +453,8 @@ implements HasDrawable, EditorInput<FileDto> {
 		return 0;
 	}-*/;
 
-	private static native void nativeClick(Element elem)
-	/*-{
+  private static native void nativeClick(Element elem)
+  /*-{
 		elem.click();
 	}-*/;
 
