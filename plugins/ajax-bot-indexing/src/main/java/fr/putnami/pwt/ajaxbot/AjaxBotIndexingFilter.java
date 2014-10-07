@@ -14,10 +14,6 @@
  */
 package fr.putnami.pwt.ajaxbot;
 
-import com.google.common.base.Strings;
-import com.google.common.collect.Lists;
-import com.google.gwt.thirdparty.guava.common.io.ByteStreams;
-
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -30,6 +26,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlMeta;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.util.FalsifyingWebConnection;
+import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.io.ByteStreams;
 
 import org.apache.tools.ant.filters.StringInputStream;
 
