@@ -7,11 +7,12 @@ tasks.withType(FindBugs) {
         html.enabled = true
     }
  }
- 
+
 findbugs {
     ignoreFailures = true
+    excludeFilter = file("$rootProject.projectDir/settings/findbugs/excludeFilter.xml")
 }
 
 pmd{
     ignoreFailures = true
-} 
+}
