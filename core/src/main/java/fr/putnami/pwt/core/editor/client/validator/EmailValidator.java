@@ -17,7 +17,7 @@ package fr.putnami.pwt.core.editor.client.validator;
 import com.google.gwt.regexp.shared.MatchResult;
 import com.google.gwt.regexp.shared.RegExp;
 
-public class EmailValidator extends AbstracValidator<String> {
+public class EmailValidator extends AbstractValidator<String> {
 
 	private static final String EMAIL_VIOLATION_MESSAGE = "constraintsEmail";
 	private static final RegExp EMAIL_PATTERN = RegExp.compile(

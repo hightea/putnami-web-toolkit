@@ -17,7 +17,7 @@ package fr.putnami.pwt.core.editor.client.validator;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-public class MaxValidator extends AbstracValidator<Number> {
+public class MaxValidator extends AbstractValidator<Number> {
 
 	private long max;
 

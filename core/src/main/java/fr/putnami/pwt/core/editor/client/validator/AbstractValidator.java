@@ -18,13 +18,13 @@ import fr.putnami.pwt.core.editor.client.Editor;
 import fr.putnami.pwt.core.editor.client.Error;
 import fr.putnami.pwt.core.editor.client.impl.SimpleError;
 
-public abstract class AbstracValidator<T> implements Validator<T> {
+public abstract class AbstractValidator<T> implements Validator<T> {
 
 	private static final Object[] EMPTY_PARAMETERS = new Object[] {};
 
 	private String message;
 
-	public AbstracValidator(String message) {
+	public AbstractValidator(String message) {
 		super();
 		this.message = message;
 	}
@@ -51,7 +51,7 @@ public abstract class AbstracValidator<T> implements Validator<T> {
 	}
 
 	protected Object[] getParrameters() {
-		return AbstracValidator.EMPTY_PARAMETERS;
+		return AbstractValidator.EMPTY_PARAMETERS;
 	}
 
 	protected abstract boolean isValid(T value);

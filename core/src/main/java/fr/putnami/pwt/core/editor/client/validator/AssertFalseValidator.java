@@ -14,7 +14,7 @@
  */
 package fr.putnami.pwt.core.editor.client.validator;
 
-public class AssertFalseValidator extends AbstracValidator<Boolean> {
+public class AssertFalseValidator extends AbstractValidator<Boolean> {
 
 	public AssertFalseValidator(String message) {
 		super(message);

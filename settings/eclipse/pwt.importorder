@@ -1,18 +1,18 @@
 #Organize Import Order
-#Tue Mar 30 18:34:33 EDT 2010
-0=\#com.google
-1=com.google
-2=\#com
-3=com
-4=\#junit
-5=junit
-6=\#net
-7=net
-8=\#org
-9=org
-10=\#java
-11=java
-12=\#javax
-13=javax
-14=\#
+#Tue Oct 07 12:21:55 CEST 2014
+9=java
+8=\#java
+7=org
 15=
+6=\#org
+14=\#
+5=net
+13=fr.putnami
+4=\#net
+12=\#fr.putnami
+3=junit
+11=javax
+2=\#junit
+10=\#javax
+1=com
+0=\#com

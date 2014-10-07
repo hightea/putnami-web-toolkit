@@ -16,7 +16,7 @@ package fr.putnami.pwt.core.editor.client.validator;
 
 import java.util.Date;
 
-public class PastValidator extends AbstracValidator<Date> {
+public class PastValidator extends AbstractValidator<Date> {
 
 	public PastValidator(String message) {
 		super(message);

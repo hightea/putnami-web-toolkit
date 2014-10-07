@@ -17,7 +17,7 @@ package fr.putnami.pwt.core.editor.client.validator;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-public class MinValidator extends AbstracValidator<Number> {
+public class MinValidator extends AbstractValidator<Number> {
 
 	private final long min;
 

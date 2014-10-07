@@ -19,7 +19,7 @@ import com.google.gwt.regexp.shared.RegExp;
 
 import java.util.Collection;
 
-public class PatternValidator<T> extends AbstracValidator<T> {
+public class PatternValidator<T> extends AbstractValidator<T> {
 
 	private RegExp pattern;
 	private String regexp;

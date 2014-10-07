@@ -18,7 +18,7 @@ import com.google.gwt.i18n.client.DateTimeFormat;
 
 import java.util.Date;
 
-public class FutureValidator extends AbstracValidator<Date> {
+public class FutureValidator extends AbstractValidator<Date> {
 
 	private static final DateTimeFormat DF = DateTimeFormat.getFormat("yyyy-MM-dd");
 

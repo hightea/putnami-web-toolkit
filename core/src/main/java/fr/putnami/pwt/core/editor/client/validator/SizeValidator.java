@@ -17,7 +17,7 @@ package fr.putnami.pwt.core.editor.client.validator;
 import java.util.Collection;
 import java.util.Map;
 
-public class SizeValidator<T> extends AbstracValidator<T> {
+public class SizeValidator<T> extends AbstractValidator<T> {
 
 	private final int min;
 	private final int max;

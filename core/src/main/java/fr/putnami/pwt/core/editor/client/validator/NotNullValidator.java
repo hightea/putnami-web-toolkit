@@ -14,7 +14,7 @@
  */
 package fr.putnami.pwt.core.editor.client.validator;
 
-public class NotNullValidator<T> extends AbstracValidator<T> {
+public class NotNullValidator<T> extends AbstractValidator<T> {
 
 	public NotNullValidator(String message) {
 		super(message);
