@@ -21,7 +21,7 @@ public final class FocusUtils {
 	public static native Element getActiveElement()
 	/*-{
 		return $doc.activeElement;
-	}*/;
+	}-*/;
 
 	private FocusUtils() {
 	}
