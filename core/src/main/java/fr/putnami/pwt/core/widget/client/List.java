@@ -30,9 +30,11 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 public class List extends AbstractPanel implements CloneableWidget {
 
 	public enum Type {
-		DEFAULT(null, LIElement.TAG, null), LIST("list-unstyled", LIElement.TAG, null), LIST_GROUP(
-				"list-group", LIElement.TAG, "list-group-item"), INLINE("list-inline", LIElement.TAG, null), LABEL(
-						"list-inline", LIElement.TAG, "label label-default");
+			DEFAULT(null, LIElement.TAG, null),
+			LIST("list-unstyled", LIElement.TAG, null),
+			LIST_GROUP("list-group", LIElement.TAG, "list-group-item"),
+			INLINE("list-inline", LIElement.TAG, null),
+			LABEL("list-inline", LIElement.TAG, "label label-default");
 
 		final String itemTag;
 		final CssStyle listStyle;

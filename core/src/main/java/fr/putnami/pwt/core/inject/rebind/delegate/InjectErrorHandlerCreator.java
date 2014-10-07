@@ -30,8 +30,8 @@ import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterPresent;
 import fr.putnami.pwt.core.mvp.client.event.StopActivityEvent;
 
-public class InjectErrorHandlerCreator extends InjectorCreatorDelegate implements
-InjectorWritterInit, InjectorWritterPresent {
+public class InjectErrorHandlerCreator extends InjectorCreatorDelegate
+	implements InjectorWritterInit, InjectorWritterPresent {
 
 	private final Collection<JMethod> presenterMethods;
 	private final String injectorName;
@@ -50,33 +50,33 @@ InjectorWritterInit, InjectorWritterPresent {
 	public void writePresent(SourceWriter srcWriter) {
 
 		srcWriter
-		.println("final List<fr.putnami.pwt.core.error.client.ErrorHandler> errorHandlers = Lists.newArrayList();");
+			.println("final List<fr.putnami.pwt.core.error.client.ErrorHandler> errorHandlers = Lists.newArrayList();");
 		for (JMethod handlerMethod : this.presenterMethods) {
 			srcWriter.println("errorHandlers.add(new fr.putnami.pwt.core.error.client.ErrorHandler() {");
 			srcWriter.indent();
 			srcWriter.println("@Override public boolean handle(Throwable error) { "
-					+ "return %s.this.%s(error); " + "}", this.injectorName, handlerMethod.getName());
+				+ "return %s.this.%s(error); " + "}", this.injectorName, handlerMethod.getName());
 			srcWriter.println("@Override public int getPriority() { return HIGH_PRIORITY; }");
 			srcWriter.outdent();
 			srcWriter.println("});");
 		}
 
 		srcWriter
-		.println("for (fr.putnami.pwt.core.error.client.ErrorHandler errorHandler : errorHandlers) {");
+			.println("for (fr.putnami.pwt.core.error.client.ErrorHandler errorHandler : errorHandlers) {");
 		srcWriter.indent();
 		srcWriter.println("ErrorManager.get().registerErrorHandler(errorHandler);");
 		srcWriter.outdent();
 		srcWriter.println("}");
 
 		srcWriter
-		.println("final HandlerRegistrationCollection errorHandlerRegistrations = new HandlerRegistrationCollection();");
+			.println("final HandlerRegistrationCollection errorHandlerRegistrations = new HandlerRegistrationCollection();");
 		srcWriter
-		.println("errorHandlerRegistrations.add(EventBus.get().addHandlerToSource(StopActivityEvent.TYPE, place, new StopActivityEvent.Handler() {");
+			.println("errorHandlerRegistrations.add(EventBus.get().addHandlerToSource(StopActivityEvent.TYPE, place, new StopActivityEvent.Handler() {");
 		srcWriter.indent();
 		srcWriter.println("@Override public void onStopActivity(StopActivityEvent event) {");
 		srcWriter.indent();
 		srcWriter
-		.println("for (fr.putnami.pwt.core.error.client.ErrorHandler handler : errorHandlers) {");
+			.println("for (fr.putnami.pwt.core.error.client.ErrorHandler handler : errorHandlers) {");
 		srcWriter.indent();
 		srcWriter.println("ErrorManager.get().registerErrorHandler(handler);");
 		srcWriter.outdent();

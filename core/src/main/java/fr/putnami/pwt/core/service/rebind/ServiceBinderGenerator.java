@@ -29,14 +29,14 @@ public class ServiceBinderGenerator extends Generator {
 
 	@Override
 	public String generate(TreeLogger logger, GeneratorContext context, String remoteServiceClassName)
-			throws UnableToCompleteException {
+		throws UnableToCompleteException {
 		TypeOracle typeOracle = context.getTypeOracle();
 		assert (typeOracle != null);
 
 		JClassType remoteServiceType = typeOracle.findType(remoteServiceClassName);
 		if (remoteServiceType == null) {
 			logger.log(TreeLogger.ERROR, "Unable to find metadata for type '" + remoteServiceClassName
-					+ "'", null);
+				+ "'", null);
 			throw new UnableToCompleteException();
 		}
 
@@ -44,7 +44,7 @@ public class ServiceBinderGenerator extends Generator {
 		JClassType serviceType = null;
 		for (JClassType interfaceType : remoteServiceType.getImplementedInterfaces()) {
 			if (interfaceType.getQualifiedSourceName().equals(ServiceProxy.class.getCanonicalName())
-					&& interfaceType instanceof JParameterizedType) {
+				&& interfaceType instanceof JParameterizedType) {
 				JParameterizedType paramType = (JParameterizedType) interfaceType;
 				handlerType = paramType.getTypeArgs()[0];
 				serviceType = paramType.getTypeArgs()[1];
@@ -52,12 +52,12 @@ public class ServiceBinderGenerator extends Generator {
 		}
 		if (serviceType == null) {
 			logger.log(TreeLogger.ERROR, remoteServiceType.getQualifiedSourceName() + " must implement "
-					+ ServiceProxy.class.getCanonicalName(), null);
+				+ ServiceProxy.class.getCanonicalName(), null);
 			throw new UnableToCompleteException();
 		}
 
 		ServiceBinderCreator serviceBinderCreator =
-				new ServiceBinderCreator(remoteServiceType, serviceType, handlerType);
+			new ServiceBinderCreator(remoteServiceType, serviceType, handlerType);
 		try {
 			return serviceBinderCreator.create(logger, context);
 		} catch (NotFoundException e) {

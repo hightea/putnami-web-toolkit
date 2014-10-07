@@ -25,8 +25,9 @@ import fr.putnami.pwt.core.model.client.base.HasInputEditorFactory;
 import fr.putnami.pwt.core.model.client.base.HasOutputEditorFactory;
 import fr.putnami.pwt.core.model.client.base.HasWidgetFactory;
 
-public class TableEditorTD<T> extends TableTD<T> implements HasOutputEditorFactory<T>,
-HasInputEditorFactory<T>, HasWidgetFactory, HasEditorProvider {
+public class TableEditorTD<T> extends TableTD<T>
+	implements HasOutputEditorFactory<T>, HasInputEditorFactory<T>, HasWidgetFactory,
+	HasEditorProvider {
 
 	private OutputFactory outputFactory;
 	private InputFactory inputFactory;
@@ -93,7 +94,6 @@ HasInputEditorFactory<T>, HasWidgetFactory, HasEditorProvider {
 
 	@Override
 	public void add(IsWidget w) {
-		throw new UnsupportedOperationException(
-				"TableEditorTD does not support add(IsWidget) method");
+		throw new UnsupportedOperationException("TableEditorTD does not support add(IsWidget) method");
 	}
 }

@@ -31,22 +31,22 @@ import java.util.logging.Logger;
 public final class DefaultErrorManager extends ErrorManager {
 
 	private static final Comparator<ErrorHandler> PRIORITY_COMPARATOR =
-			new Comparator<ErrorHandler>() {
+		new Comparator<ErrorHandler>() {
 
-		@Override
-		public int compare(ErrorHandler o1, ErrorHandler o2) {
-			if (o1 == o2) {
-				return 0;
+			@Override
+			public int compare(ErrorHandler o1, ErrorHandler o2) {
+				if (o1 == o2) {
+					return 0;
+				}
+				if (o1 == null) {
+					return -1;
+				}
+				if (o2 == null) {
+					return 1;
+				}
+				return Integer.compare(o2.getPriority(), o1.getPriority());// Reverse order
 			}
-			if (o1 == null) {
-				return -1;
-			}
-			if (o2 == null) {
-				return 1;
-			}
-			return Integer.compare(o2.getPriority(), o1.getPriority());// Reverse order
-		}
-	};
+		};
 
 	/**
 	 * Default error handler. It logs the error in the console without handle it for making possible

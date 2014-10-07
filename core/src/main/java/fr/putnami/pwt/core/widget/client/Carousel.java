@@ -36,8 +36,8 @@ import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public class Carousel extends AbstractPanel implements ClickHandler, MouseOverHandler,
-MouseOutHandler {
+public class Carousel extends AbstractPanel
+	implements ClickHandler, MouseOverHandler, MouseOutHandler {
 
 	private static final CssStyle STYLE_CAROUSEL = new SimpleStyle("carousel");
 	private static final CssStyle STYLE_CAROUSEL_INDICATORS = new SimpleStyle("carousel-indicators");
@@ -47,7 +47,10 @@ MouseOutHandler {
 	private static final CssStyle STYLE_CAROUSEL_CONTROL = new SimpleStyle("carousel-control");
 
 	private enum ItemType implements CssStyle {
-		DEFAULT(null), ACTIVE("active"), NEXT("next"), PREVIOUS("prev");
+			DEFAULT(null),
+			ACTIVE("active"),
+			NEXT("next"),
+			PREVIOUS("prev");
 
 		private final String style;
 
@@ -62,7 +65,8 @@ MouseOutHandler {
 	}
 
 	private enum LeftRightType implements CssStyle {
-		LEFT("left"), RIGHT("right");
+			LEFT("left"),
+			RIGHT("right");
 
 		private final String style;
 
@@ -92,7 +96,7 @@ MouseOutHandler {
 
 	private final Container carouselInner = new Container();
 	private final fr.putnami.pwt.core.widget.client.List carouselIndicators =
-			new fr.putnami.pwt.core.widget.client.List(OListElement.TAG);
+		new fr.putnami.pwt.core.widget.client.List(OListElement.TAG);
 	private final Anchor<?> leftButton = new Anchor();
 	private final Anchor<?> rightButton = new Anchor();
 
@@ -190,7 +194,7 @@ MouseOutHandler {
 				StyleUtils.cleanEnumStyle(curentItem.getElement(), LeftRightType.class);
 				StyleUtils.cleanEnumStyle(newItem.getElement(), LeftRightType.class);
 				StyleUtils.addStyle(Carousel.this.carouselItemsIndicators.get(newItemIndex),
-						ItemType.ACTIVE);
+					ItemType.ACTIVE);
 				Carousel.this.currentIndex = newItemIndex;
 				Carousel.this.sliding = false;
 				return false;

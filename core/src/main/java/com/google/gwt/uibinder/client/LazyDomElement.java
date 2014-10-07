@@ -31,7 +31,7 @@ public class LazyDomElement<T extends Element> {
 			this.element = Document.get().getElementById(this.domId).<T> cast();
 			if (this.element == null) {
 				throw new RuntimeException("Cannot find element with id \"" + this.domId
-						+ "\". Perhaps it is not attached to the document body.");
+					+ "\". Perhaps it is not attached to the document body.");
 			}
 		}
 		return this.element;

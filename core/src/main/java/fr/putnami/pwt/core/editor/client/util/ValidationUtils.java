@@ -26,7 +26,7 @@ import fr.putnami.pwt.core.editor.client.validator.Validator;
 public final class ValidationUtils {
 
 	public static <A> Collection<Error> validate(Collection<Validator<A>> validators,
-			EditorInput<A> editor, A value) {
+		EditorInput<A> editor, A value) {
 		Collection<Error> errors = Lists.newArrayList();
 		if (validators != null) {
 			for (Validator<A> validator : validators) {
@@ -43,7 +43,7 @@ public final class ValidationUtils {
 	}
 
 	public static <A> Error createError(EditorInput<A> editor, String message, A value,
-			Object... paramerters) {
+		Object... paramerters) {
 		return new SimpleError(editor, message, value, paramerters);
 	}
 }

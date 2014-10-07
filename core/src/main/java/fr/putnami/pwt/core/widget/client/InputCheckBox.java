@@ -35,7 +35,8 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 public class InputCheckBox<T> extends AbstractInputChoice<T, List<T>> {
 
 	public enum Type implements CssStyle {
-		DEFAULT("checkbox"), INLINE("checkbox-inline");
+			DEFAULT("checkbox"),
+			INLINE("checkbox-inline");
 
 		private final String style;
 
@@ -105,7 +106,7 @@ public class InputCheckBox<T> extends AbstractInputChoice<T, List<T>> {
 	private class CheckboxContainer extends Composite implements ClickHandler {
 
 		private final InputElement checkboxElement = InputElement.as(Document.get()
-				.createCheckInputElement());
+			.createCheckInputElement());
 
 		private T value;
 
@@ -125,8 +126,8 @@ public class InputCheckBox<T> extends AbstractInputChoice<T, List<T>> {
 			this.initWidget(newContainer);
 			label.getElement().appendChild(this.checkboxElement);
 			label.getElement().appendChild(
-					Document.get().createTextNode(
-							" " + InputCheckBox.this.getChoiceRenderer().renderItem(value)));
+				Document.get().createTextNode(
+					" " + InputCheckBox.this.getChoiceRenderer().renderItem(value)));
 			StyleUtils.addStyle(newContainer, InputCheckBox.this.type);
 			newContainer.addDomHandler(this, ClickEvent.getType());
 			InputCheckBox.this.itemsContainer.put(value, this);

@@ -25,7 +25,9 @@ import fr.putnami.pwt.core.widget.client.base.AbstractOutput;
 public class OutputBoolean extends AbstractOutput<Boolean> {
 
 	public enum RenderType {
-		ICON_AND_TEXT, ICON, TEXT;
+			ICON_AND_TEXT,
+			ICON,
+			TEXT;
 	}
 
 	private String trueLabel = Boolean.TRUE.toString();
@@ -80,7 +82,7 @@ public class OutputBoolean extends AbstractOutput<Boolean> {
 			}
 			if (this.outputType != RenderType.ICON) {
 				Text textElem =
-						Document.get().createTextNode(rendervalue ? this.trueLabel : this.falseLabel);
+					Document.get().createTextNode(rendervalue ? this.trueLabel : this.falseLabel);
 				element.appendChild(textElem);
 			}
 		}

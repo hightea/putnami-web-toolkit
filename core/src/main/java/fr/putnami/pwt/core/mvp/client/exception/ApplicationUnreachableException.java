@@ -17,7 +17,7 @@ package fr.putnami.pwt.core.mvp.client.exception;
 public class ApplicationUnreachableException extends RuntimeException {
 
 	public static final String HTTP_DOWNLOAD_FAILURE_EXCEPTION =
-			"AsyncFragmentLoader$HttpDownloadFailure";
+		"AsyncFragmentLoader$HttpDownloadFailure";
 
 	public ApplicationUnreachableException() {
 	}

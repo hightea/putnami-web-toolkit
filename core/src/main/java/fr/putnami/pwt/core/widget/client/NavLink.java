@@ -32,8 +32,9 @@ import fr.putnami.pwt.core.widget.client.Nav.LinkStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public class NavLink extends AbstractPanel implements Nav.IsNavContent, CloneableWidget,
-ClickHandler, ValueChangeHandler<String>, HasDrawable {
+public class NavLink extends AbstractPanel
+	implements Nav.IsNavContent, CloneableWidget, ClickHandler, ValueChangeHandler<String>,
+	HasDrawable {
 
 	private final Anchor<?> anchor = new Anchor();
 
@@ -185,7 +186,7 @@ ClickHandler, ValueChangeHandler<String>, HasDrawable {
 				this.active = false;
 			}
 			if (this.active && this.getParent() != null
-					&& this.getParent().getParent() instanceof Nav.IsNavContent) {
+				&& this.getParent().getParent() instanceof Nav.IsNavContent) {
 				// if link is in dropdown => parent is container and parent.parent is dropdown
 				((Nav.IsNavContent) this.getParent().getParent()).setActive(true);
 			}

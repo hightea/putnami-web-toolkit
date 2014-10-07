@@ -30,11 +30,12 @@ public class StopActivityCreatorFactory implements InjectorDelegateFactorty {
 
 	@Override
 	public void createDelegates(JClassType injectableType,
-			Collection<InjectorCreatorDelegate> delegates) {
+		Collection<InjectorCreatorDelegate> delegates) {
 		Collection<JMethod> methods =
-				InjectCreatorUtil.listMethod(injectableType, StopActivityHandler.class);
+			InjectCreatorUtil.listMethod(injectableType, StopActivityHandler.class);
 		if (!methods.isEmpty()) {
-			String injectorName = injectableType.getSimpleSourceName() + AbstractInjectorCreator.PROXY_SUFFIX;
+			String injectorName =
+				injectableType.getSimpleSourceName() + AbstractInjectorCreator.PROXY_SUFFIX;
 			delegates.add(new InjectStopActivityCreator(methods, injectorName));
 		}
 	}

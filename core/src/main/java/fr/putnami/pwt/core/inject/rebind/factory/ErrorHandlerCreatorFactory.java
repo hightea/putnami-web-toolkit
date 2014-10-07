@@ -30,10 +30,11 @@ public class ErrorHandlerCreatorFactory implements InjectorDelegateFactorty {
 
 	@Override
 	public void createDelegates(JClassType injectableType,
-			Collection<InjectorCreatorDelegate> delegates) {
+		Collection<InjectorCreatorDelegate> delegates) {
 		Collection<JMethod> methods = InjectCreatorUtil.listMethod(injectableType, ErrorHandler.class);
 		if (!methods.isEmpty()) {
-			String injectorName = injectableType.getSimpleSourceName() + AbstractInjectorCreator.PROXY_SUFFIX;
+			String injectorName =
+				injectableType.getSimpleSourceName() + AbstractInjectorCreator.PROXY_SUFFIX;
 			delegates.add(new InjectErrorHandlerCreator(methods, injectorName));
 		}
 	}

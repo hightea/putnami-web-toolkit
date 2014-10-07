@@ -37,7 +37,9 @@ import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 public class Affix extends OneWidgetPanel {
 
 	public enum Affixed implements CssStyle {
-		AFFIX("affix"), TOP("affix-top"), BOTTOM("affix-bottom");
+			AFFIX("affix"),
+			TOP("affix-top"),
+			BOTTOM("affix-bottom");
 
 		private final String style;
 
@@ -52,7 +54,7 @@ public class Affix extends OneWidgetPanel {
 	}
 
 	private final HandlerRegistrationCollection handlerRegistrationCollection =
-			new HandlerRegistrationCollection();
+		new HandlerRegistrationCollection();
 	private final ScrollHandler scrollHandler = new ScrollHandler() {
 
 		@Override
@@ -111,9 +113,9 @@ public class Affix extends OneWidgetPanel {
 			public void execute() {
 				Affix.this.reset();
 				Affix.this.handlerRegistrationCollection.add(Window
-						.addWindowScrollHandler(Affix.this.scrollHandler));
+					.addWindowScrollHandler(Affix.this.scrollHandler));
 				Affix.this.handlerRegistrationCollection.add(Window
-						.addResizeHandler(Affix.this.resizeHandler));
+					.addResizeHandler(Affix.this.resizeHandler));
 			}
 		});
 	}

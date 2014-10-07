@@ -31,8 +31,8 @@ import fr.putnami.pwt.core.security.shared.constant.SecurityConstants;
 import fr.putnami.pwt.core.security.shared.domain.SessionDto;
 import fr.putnami.pwt.core.security.shared.exception.SecurityException;
 
-public abstract class SessionController implements HasSignInHandlers, HasSignOutHandlers,
-HasSignFailledHandlers {
+public abstract class SessionController
+	implements HasSignInHandlers, HasSignOutHandlers, HasSignFailledHandlers {
 
 	private static SessionController instance;
 
@@ -54,7 +54,7 @@ HasSignFailledHandlers {
 
 	public boolean isAuthenticated() {
 		return this.session != null
-				&& !SecurityConstants.USER_ANONYMOUS.equals(this.session.getUsername());
+			&& !SecurityConstants.USER_ANONYMOUS.equals(this.session.getUsername());
 	}
 
 	public boolean hasRole(String role) {

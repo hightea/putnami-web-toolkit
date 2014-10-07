@@ -70,7 +70,7 @@ public final class DefaultCommandController extends CommandController {
 					if (request.requestId == response.getRequestId()) {
 						if (!request.param.isQuiet()) {
 							DefaultCommandController.this.fireEvent(new CommandResponseEvent(request.requestId,
-									request.command, response));
+								request.command, response));
 						}
 						if (response.getThrown() == null) {
 							for (AsyncCallback requestCallback : request.param.getCallbacks()) {
@@ -152,7 +152,7 @@ public final class DefaultCommandController extends CommandController {
 		this.moduleBaseURL = GWT.getHostPageBaseURL();
 		this.remoteServiceURL = this.moduleBaseURL + "commandService";
 		ErrorManager.get().registerErrorHandlers(new ClientErrorHandler(), new ServerErrorHandler(),
-				new DefaultCommandExceptionErrorHandler());
+			new DefaultCommandExceptionErrorHandler());
 	}
 
 	@Override
@@ -232,10 +232,10 @@ public final class DefaultCommandController extends CommandController {
 
 			ServiceCallback serviceCallback = new ServiceCallback(requests, callback);
 			CommandServiceCompositeSerializer compositeSerializer =
-					new CommandServiceCompositeSerializer(serializers);
+				new CommandServiceCompositeSerializer(serializers);
 
 			SerializationStreamFactory streamFactory =
-					new CommandSerializationStreamFactory(compositeSerializer, this.moduleBaseURL);
+				new CommandSerializationStreamFactory(compositeSerializer, this.moduleBaseURL);
 			SerializationStreamWriter streamWriter = streamFactory.createStreamWriter();
 
 			streamWriter.writeString(DefaultCommandController.REMOTE_SERVICE_INTERFACE_NAME);
@@ -249,9 +249,9 @@ public final class DefaultCommandController extends CommandController {
 			RpcStatsContext statsContext = new RpcStatsContext();
 
 			RequestCallback responseHandler =
-					new RequestCallbackAdapter<List<CommandResponse>>(streamFactory,
-							DefaultCommandController.METHOD_NAME, statsContext, serviceCallback, null,
-							ResponseReader.OBJECT);
+				new RequestCallbackAdapter<List<CommandResponse>>(streamFactory,
+					DefaultCommandController.METHOD_NAME, statsContext, serviceCallback, null,
+					ResponseReader.OBJECT);
 
 			this.rpcRequestBuilder.create(this.remoteServiceURL);
 			this.rpcRequestBuilder.setCallback(responseHandler);

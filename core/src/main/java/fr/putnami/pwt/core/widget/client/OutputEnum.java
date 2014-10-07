@@ -21,8 +21,8 @@ import fr.putnami.pwt.core.model.client.base.HasMessageHelper;
 import fr.putnami.pwt.core.widget.client.base.AbstractTextOutput;
 import fr.putnami.pwt.core.widget.client.helper.EnumRenderer;
 
-public class OutputEnum<E extends Enum<E>> extends AbstractTextOutput<E> implements
-HasMessageHelper {
+public class OutputEnum<E extends Enum<E>> extends AbstractTextOutput<E>
+	implements HasMessageHelper {
 
 	private MessageHelper messageHelper;
 

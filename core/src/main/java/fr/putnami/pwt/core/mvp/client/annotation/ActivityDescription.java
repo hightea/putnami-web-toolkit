@@ -41,6 +41,7 @@ public @interface ActivityDescription {
 	Scope scope() default Scope.SINGLETON;
 
 	enum Scope {
-		SINGLETON, PROTOTYPE
+			SINGLETON,
+			PROTOTYPE
 	}
 }

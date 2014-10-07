@@ -27,8 +27,8 @@ import fr.putnami.pwt.core.service.client.CallbackAdapter;
 import fr.putnami.pwt.core.service.client.CommandController;
 import fr.putnami.pwt.core.service.shared.domain.CommandResponse;
 
-public class SuspendServiceOnPresentCreator extends InjectorCreatorDelegate implements
-InjectorWritterAfterPresent, InjectorWritterBeforePresent, InjectorWritterInit {
+public class SuspendServiceOnPresentCreator extends InjectorCreatorDelegate
+	implements InjectorWritterAfterPresent, InjectorWritterBeforePresent, InjectorWritterInit {
 
 	private final String injectorName;
 	private boolean hasService;

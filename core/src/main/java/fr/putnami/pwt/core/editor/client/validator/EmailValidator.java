@@ -21,7 +21,7 @@ public class EmailValidator extends AbstracValidator<String> {
 
 	private static final String EMAIL_VIOLATION_MESSAGE = "constraintsEmail";
 	private static final RegExp EMAIL_PATTERN = RegExp.compile(
-			"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$", "");
+		"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$", "");
 
 	public EmailValidator() {
 		super(EmailValidator.EMAIL_VIOLATION_MESSAGE);

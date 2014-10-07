@@ -31,8 +31,8 @@ import fr.putnami.pwt.core.editor.client.Path;
 import fr.putnami.pwt.core.widget.client.base.AbstractComposite;
 import fr.putnami.pwt.core.widget.client.base.BaseSimplePanel;
 
-public class OneWidgetPanel extends AbstractComposite implements HasWidgets.ForIsWidget,
-		HasOneWidget, EditorComposite {
+public class OneWidgetPanel extends AbstractComposite
+	implements HasWidgets.ForIsWidget, HasOneWidget, EditorComposite {
 
 	private final BaseSimplePanel container;
 

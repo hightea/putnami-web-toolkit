@@ -20,8 +20,8 @@ import com.google.gwt.user.rebind.SourceWriter;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterConstructor;
 
-public class InjectPostconstructCreator extends InjectorCreatorDelegate implements
-InjectorWritterConstructor {
+public class InjectPostconstructCreator extends InjectorCreatorDelegate
+	implements InjectorWritterConstructor {
 
 	private final JMethod postConstructMethod;
 

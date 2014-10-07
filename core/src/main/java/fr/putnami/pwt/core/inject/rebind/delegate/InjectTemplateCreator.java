@@ -28,8 +28,8 @@ import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterStatic;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 
-public class InjectTemplateCreator extends InjectorCreatorDelegate implements
-InjectorWritterStatic, InjectorWritterInit, InjectorWritterConstructor {
+public class InjectTemplateCreator extends InjectorCreatorDelegate
+	implements InjectorWritterStatic, InjectorWritterInit, InjectorWritterConstructor {
 
 	private final JClassType viewType;
 	private final String templateInterfaceName;
@@ -60,13 +60,13 @@ InjectorWritterStatic, InjectorWritterInit, InjectorWritterConstructor {
 			srcWriter.println("@UiTemplate(%s)", this.templateName);
 		}
 		srcWriter.println("interface %s extends UiBinderLocalized<Widget, %s> {}",
-				this.templateInterfaceName, this.viewType.getSimpleSourceName());
+			this.templateInterfaceName, this.viewType.getSimpleSourceName());
 	}
 
 	@Override
 	public void writeConstructor(SourceWriter srcWriter) {
 		srcWriter.println("initWidget(((%s)GWT.create(%s.class)).createAndBindUi(this));",
-				this.templateInterfaceName, this.templateInterfaceName);
+			this.templateInterfaceName, this.templateInterfaceName);
 	}
 
 	@Override

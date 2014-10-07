@@ -33,8 +33,8 @@ import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
-public abstract class AbstractHTMLPanel extends HTMLPanel implements EditorComposite,
-HasResponsiveVisibility, CloneableWidget {
+public abstract class AbstractHTMLPanel extends HTMLPanel
+	implements EditorComposite, HasResponsiveVisibility, CloneableWidget {
 
 	protected static final String EMPTY_HTML = "";
 
@@ -60,7 +60,7 @@ HasResponsiveVisibility, CloneableWidget {
 		this.path = source.path;
 		for (Map.Entry<Widget, String> widgetEntry : source.children.entrySet()) {
 			this.addAndReplaceElement(WidgetUtils.cloneWidget(widgetEntry.getKey()), widgetEntry
-					.getValue());
+				.getValue());
 		}
 		this.handlerManager = new HandlerManager(source.handlerManager, this);
 		this.handlerManager.resetSinkEvents();
@@ -100,7 +100,7 @@ HasResponsiveVisibility, CloneableWidget {
 	@Override
 	public Iterable<Editor> getEditors() {
 		return this.editorChildren == null ? Collections.EMPTY_SET : Iterables
-				.unmodifiableIterable(this.editorChildren);
+			.unmodifiableIterable(this.editorChildren);
 	}
 
 	@Override

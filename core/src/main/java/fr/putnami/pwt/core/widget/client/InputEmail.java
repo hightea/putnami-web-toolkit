@@ -33,8 +33,8 @@ public class InputEmail extends AbstractInputBox<TextBox, String> {
 			boolean valid = false;
 			char pressed = event.getCharCode();
 			if (pressed >= 'a' && pressed <= 'z' || pressed >= 'A' && pressed <= 'Z' || pressed >= '0'
-					&& pressed <= '9' || pressed == '@' || pressed == '.' || pressed == '+' || pressed == '-'
-					|| pressed == '_' || pressed == '%') {
+				&& pressed <= '9' || pressed == '@' || pressed == '.' || pressed == '+' || pressed == '-'
+				|| pressed == '_' || pressed == '%') {
 				valid = true;
 			}
 			if (!valid) {

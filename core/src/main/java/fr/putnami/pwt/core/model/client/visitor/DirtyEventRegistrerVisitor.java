@@ -39,7 +39,7 @@ public class DirtyEventRegistrerVisitor extends AbstractVisitor {
 		B editor = context.getEditor();
 		if (editor instanceof DirtyEvent.HasDirtyHandlers) {
 			this.handlerRegistration.add(((DirtyEvent.HasDirtyHandlers) editor)
-					.addDirtyHandler(this.handler));
+				.addDirtyHandler(this.handler));
 		}
 		return true;
 	}

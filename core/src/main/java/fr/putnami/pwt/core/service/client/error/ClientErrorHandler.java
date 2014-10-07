@@ -27,7 +27,7 @@ public class ClientErrorHandler extends AbstractStatusCodeErrorHandler {
 
 	public ClientErrorHandler() {
 		super((ClientErrorConstants) GWT.create(ClientErrorConstants.class),
-				ClientErrorHandler.CLIENT_ERROR_PREFIX);
+			ClientErrorHandler.CLIENT_ERROR_PREFIX);
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class ClientErrorHandler extends AbstractStatusCodeErrorHandler {
 		if (ErrorManager.get().hasErrorDisplayer()) {
 			String title = ((ClientErrorConstants) this.getConstants()).clientErrorTitle();
 			ErrorManager.get().getErrorDisplayer().display(title, this.getErrorMessage(error), error,
-					Severity.DANGER);
+				Severity.DANGER);
 		}
 		return true;
 	}

@@ -27,7 +27,8 @@ public class Nav extends AbstractPanel implements CloneableWidget {
 
 	public enum LinkStyle implements CssStyle {
 
-		DISABLED("disabled"), ACTIVE("active");
+			DISABLED("disabled"),
+			ACTIVE("active");
 
 		private final String style;
 
@@ -42,8 +43,12 @@ public class Nav extends AbstractPanel implements CloneableWidget {
 	}
 
 	public enum Style implements CssStyle {
-		DEFAULT(null), TABS("nav-tabs"), PILLS("nav-pills"), PILLS_STACKED("nav-pills nav-stacked"), TABS_JUSTIFIED(
-				"nav-tabs nav-justified"), PILLS_JUSTIFIED("nav-pills nav-justified");
+			DEFAULT(null),
+			TABS("nav-tabs"),
+			PILLS("nav-pills"),
+			PILLS_STACKED("nav-pills nav-stacked"),
+			TABS_JUSTIFIED("nav-tabs nav-justified"),
+			PILLS_JUSTIFIED("nav-pills nav-justified");
 
 		private final String style;
 

@@ -27,7 +27,7 @@ public class TemplatedCreatorFactory implements InjectorDelegateFactorty {
 
 	@Override
 	public void createDelegates(JClassType injectableType,
-			Collection<InjectorCreatorDelegate> delegates) {
+		Collection<InjectorCreatorDelegate> delegates) {
 		if (injectableType.getAnnotation(Templated.class) != null) {
 			delegates.add(new InjectTemplateCreator(injectableType));
 		}

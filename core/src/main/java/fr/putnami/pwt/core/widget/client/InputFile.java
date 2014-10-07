@@ -87,7 +87,7 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 		private final FileUpload fileUpload = new FileUpload();
 
 		private final HandlerRegistrationCollection handlerRegistrations =
-				new HandlerRegistrationCollection();
+			new HandlerRegistrationCollection();
 
 		public UploadForm() {
 			this.formPanel.setMethod("post");
@@ -103,16 +103,16 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 				@Override
 				public void onChange(ChangeEvent event) {
 					UploadForm.this.handlerRegistrations.add(UploadForm.this.formPanel
-							.addSubmitCompleteHandler(new SubmitCompleteHandler() {
+						.addSubmitCompleteHandler(new SubmitCompleteHandler() {
 
-								@Override
-								public void onSubmitComplete(SubmitCompleteEvent event) {
-									// Hook to strip <pre> on some brothers
-									Element label = DOM.createLabel();
-									label.setInnerHTML(event.getResults());
-									InputFile.this.handleCompleteJson(label.getInnerText());
-								}
-							}));
+							@Override
+							public void onSubmitComplete(SubmitCompleteEvent event) {
+								// Hook to strip <pre> on some brothers
+								Element label = DOM.createLabel();
+								label.setInnerHTML(event.getResults());
+								InputFile.this.handleCompleteJson(label.getInnerText());
+							}
+						}));
 
 					InputFile.this.fileId = UUID.uuid();
 					UploadForm.this.formPanel.setAction(InputFile.URL_UPLOAD + InputFile.this.fileId);
@@ -317,7 +317,7 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 
 		try {
 			RequestBuilder requestBuilder =
-					new RequestBuilder(RequestBuilder.GET, InputFile.URL_STATUS + this.fileId);
+				new RequestBuilder(RequestBuilder.GET, InputFile.URL_STATUS + this.fileId);
 			requestBuilder.setHeader("Cache-Control", "max-age=0");
 			requestBuilder.sendRequest("", callback);
 		} catch (RequestException e) {
@@ -348,16 +348,16 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 
 		StringBuffer requestBody = new StringBuffer();
 		requestBody.append("--").append(InputFile.MULTIPART_BOUNDARY).append(InputFile.EOL).append(
-				"Content-Disposition: form-data; name=\"data\"; filename=\"").append(fileName).append("\"")
-				.append(InputFile.EOL).append("Content-Type: ").append(type).append(InputFile.EOL).append(
-						InputFile.EOL).append(base64data).append(InputFile.EOL).append("--").append(
-								InputFile.MULTIPART_BOUNDARY).append("--");
+			"Content-Disposition: form-data; name=\"data\"; filename=\"").append(fileName).append("\"")
+			.append(InputFile.EOL).append("Content-Type: ").append(type).append(InputFile.EOL).append(
+				InputFile.EOL).append(base64data).append(InputFile.EOL).append("--").append(
+				InputFile.MULTIPART_BOUNDARY).append("--");
 
 		try {
 			RequestBuilder requestBuilder =
-					new RequestBuilder(RequestBuilder.POST, InputFile.URL_UPLOAD + this.fileId);
+				new RequestBuilder(RequestBuilder.POST, InputFile.URL_UPLOAD + this.fileId);
 			requestBuilder.setHeader("content-type", "multipart/form-data; boundary="
-					+ InputFile.MULTIPART_BOUNDARY);
+				+ InputFile.MULTIPART_BOUNDARY);
 			requestBuilder.setHeader("Cache-Control", "max-age=0");
 			this.sendRequest = requestBuilder.sendRequest(requestBody.toString(), callback);
 		} catch (RequestException e) {

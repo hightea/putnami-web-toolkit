@@ -27,8 +27,12 @@ public class Icon extends AbstractWidget {
 	private static final CssStyle STYLE_LIGHT = new SimpleStyle("light");
 
 	public enum Color implements CssStyle {
-		DEFAULT("text-default"), MUTED("text-muted"), INFO("text-info"), SUCCESS("text-success"), WARNING(
-				"text-warning"), DANGER("text-danger");
+			DEFAULT("text-default"),
+			MUTED("text-muted"),
+			INFO("text-info"),
+			SUCCESS("text-success"),
+			WARNING("text-warning"),
+			DANGER("text-danger");
 
 		private final String style;
 

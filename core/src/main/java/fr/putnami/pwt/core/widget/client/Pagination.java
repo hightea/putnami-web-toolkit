@@ -43,7 +43,9 @@ public class Pagination extends AbstractComposite implements HasPageChangeHandle
 
 	public enum Size implements CssStyle {
 
-		SMALL("pagination-sm"), DEFAULT(null), LARGE("pagination-lg");
+			SMALL("pagination-sm"),
+			DEFAULT(null),
+			LARGE("pagination-lg");
 
 		private final String style;
 
@@ -58,7 +60,8 @@ public class Pagination extends AbstractComposite implements HasPageChangeHandle
 	}
 
 	public enum Style implements CssStyle {
-		PAGER("pager"), PAGINATION("pagination");
+			PAGER("pager"),
+			PAGINATION("pagination");
 
 		private final String style;
 
@@ -118,10 +121,10 @@ public class Pagination extends AbstractComposite implements HasPageChangeHandle
 		public void onClick(ClickEvent event) {
 			if (this.previous) {
 				Pagination.this.currentStartPage -=
-						Math.min(Pagination.this.nbPageMax, Pagination.this.nbPage);
+					Math.min(Pagination.this.nbPageMax, Pagination.this.nbPage);
 			} else {
 				Pagination.this.currentStartPage +=
-						Math.min(Pagination.this.nbPageMax, Pagination.this.nbPage);
+					Math.min(Pagination.this.nbPageMax, Pagination.this.nbPage);
 			}
 			Pagination.this.redrawFromCurrentStart();
 		}
@@ -237,7 +240,7 @@ public class Pagination extends AbstractComposite implements HasPageChangeHandle
 		}
 		for (int i = 0; i < nbPageToDraw; i++) {
 			this.content
-			.append(new Page("" + (this.currentStartPage + i + 1), this.currentStartPage + i));
+				.append(new Page("" + (this.currentStartPage + i + 1), this.currentStartPage + i));
 		}
 		if (this.currentStartPage + nbPageToDraw < this.nbPage) {
 			this.content.append(new NavigationPage(false));

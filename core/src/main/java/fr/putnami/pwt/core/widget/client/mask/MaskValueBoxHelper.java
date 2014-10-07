@@ -34,8 +34,9 @@ import com.google.gwt.user.client.ui.ValueBoxBase;
 import java.util.Iterator;
 import java.util.List;
 
-public class MaskValueBoxHelper implements KeyUpHandler, KeyDownHandler, KeyPressHandler,
-FocusHandler, BlurHandler, MouseUpHandler {
+public class MaskValueBoxHelper
+	implements KeyUpHandler, KeyDownHandler, KeyPressHandler, FocusHandler, BlurHandler,
+	MouseUpHandler {
 
 	public abstract static class TokenHelper extends Timer implements KeyPressHandler, KeyDownHandler {
 

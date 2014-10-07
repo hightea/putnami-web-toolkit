@@ -40,7 +40,7 @@ public class CollapseHelper implements ClickHandler, HasCollapseHandlers {
 	}
 
 	public static CollapseHelper apply(Widget toggleWidget, Element collapsableElement,
-			boolean initialCollapse) {
+		boolean initialCollapse) {
 		CollapseHelper helper = CollapseHelper.apply(toggleWidget, collapsableElement);
 		helper.setInitialCollapse(initialCollapse);
 		return helper;
@@ -103,10 +103,10 @@ public class CollapseHelper implements ClickHandler, HasCollapseHandlers {
 	public void doCollapse(final boolean collapse) {
 		if (collapse != this.collapsed) {
 			EventBus.get().fireEventFromSource(new CollapseEvent(CollapseHelper.this, collapse),
-					CollapseHelper.this);
+				CollapseHelper.this);
 
 			this.collapsableElement.getStyle().setHeight(this.collapsableElement.getOffsetHeight(),
-					Unit.PX);
+				Unit.PX);
 
 			StyleUtils.removeStyle(this.collapsableElement, CollapseHelper.STYLE_COLLAPSE);
 			StyleUtils.removeStyle(this.collapsableElement, CollapseHelper.STYLE_VISIBLE);
@@ -128,11 +128,11 @@ public class CollapseHelper implements ClickHandler, HasCollapseHandlers {
 				public boolean execute() {
 					CollapseHelper.this.collapsableElement.getStyle().clearHeight();
 					StyleUtils.removeStyle(CollapseHelper.this.collapsableElement,
-							CollapseHelper.STYLE_COLLAPSING);
+						CollapseHelper.STYLE_COLLAPSING);
 					StyleUtils
-					.addStyle(CollapseHelper.this.collapsableElement, CollapseHelper.STYLE_COLLAPSE);
+						.addStyle(CollapseHelper.this.collapsableElement, CollapseHelper.STYLE_COLLAPSE);
 					StyleUtils.toggleStyle(CollapseHelper.this.collapsableElement,
-							CollapseHelper.STYLE_VISIBLE, !collapse);
+						CollapseHelper.STYLE_VISIBLE, !collapse);
 					return false;
 				}
 			}, 350);

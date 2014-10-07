@@ -99,11 +99,11 @@ import fr.putnami.pwt.core.model.client.base.HasHtmlId;
 import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public abstract class AbstractInput<I> extends AbstractComposite implements
-DirtyEvent.HasDirtyHandlers, EditorInput<I>, EditorLeaf, HasHtmlId, Focusable,
-HasValueChangeHandlers<I>, HasAllFocusHandlers, HasClickHandlers, HasDoubleClickHandlers,
-HasAllDragAndDropHandlers, HasAllGestureHandlers, HasAllKeyHandlers, HasAllMouseHandlers,
-HasAllTouchHandlers {
+public abstract class AbstractInput<I> extends AbstractComposite
+	implements DirtyEvent.HasDirtyHandlers, EditorInput<I>, EditorLeaf, HasHtmlId, Focusable,
+	HasValueChangeHandlers<I>, HasAllFocusHandlers, HasClickHandlers, HasDoubleClickHandlers,
+	HasAllDragAndDropHandlers, HasAllGestureHandlers, HasAllKeyHandlers, HasAllMouseHandlers,
+	HasAllTouchHandlers {
 
 	public static final CssStyle STYLE_CONTROL = new SimpleStyle("form-control");
 
@@ -208,7 +208,7 @@ HasAllTouchHandlers {
 	@Override
 	public Iterable<Error> getErrors() {
 		return this.errors == null ? Collections.<Error> emptyList() : Iterables
-				.unmodifiableIterable(this.errors);
+			.unmodifiableIterable(this.errors);
 	}
 
 	protected void clearErrors() {
@@ -267,7 +267,7 @@ HasAllTouchHandlers {
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addDoubleClickHandler(
-			DoubleClickHandler handler) {
+		DoubleClickHandler handler) {
 		return this.addDomHandler(handler, DoubleClickEvent.getType());
 	}
 
@@ -278,7 +278,7 @@ HasAllTouchHandlers {
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addDragEnterHandler(
-			DragEnterHandler handler) {
+		DragEnterHandler handler) {
 		return this.addBitlessDomHandler(handler, DragEnterEvent.getType());
 	}
 
@@ -289,7 +289,7 @@ HasAllTouchHandlers {
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addDragLeaveHandler(
-			DragLeaveHandler handler) {
+		DragLeaveHandler handler) {
 		return this.addBitlessDomHandler(handler, DragLeaveEvent.getType());
 	}
 
@@ -300,7 +300,7 @@ HasAllTouchHandlers {
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addDragStartHandler(
-			DragStartHandler handler) {
+		DragStartHandler handler) {
 		return this.addBitlessDomHandler(handler, DragStartEvent.getType());
 	}
 
@@ -316,19 +316,19 @@ HasAllTouchHandlers {
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addGestureChangeHandler(
-			GestureChangeHandler handler) {
+		GestureChangeHandler handler) {
 		return this.addDomHandler(handler, GestureChangeEvent.getType());
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addGestureEndHandler(
-			GestureEndHandler handler) {
+		GestureEndHandler handler) {
 		return this.addDomHandler(handler, GestureEndEvent.getType());
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addGestureStartHandler(
-			GestureStartHandler handler) {
+		GestureStartHandler handler) {
 		return this.addDomHandler(handler, GestureStartEvent.getType());
 	}
 
@@ -349,13 +349,13 @@ HasAllTouchHandlers {
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addMouseDownHandler(
-			MouseDownHandler handler) {
+		MouseDownHandler handler) {
 		return this.addDomHandler(handler, MouseDownEvent.getType());
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addMouseMoveHandler(
-			MouseMoveHandler handler) {
+		MouseMoveHandler handler) {
 		return this.addDomHandler(handler, MouseMoveEvent.getType());
 	}
 
@@ -366,7 +366,7 @@ HasAllTouchHandlers {
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addMouseOverHandler(
-			MouseOverHandler handler) {
+		MouseOverHandler handler) {
 		return this.addDomHandler(handler, MouseOverEvent.getType());
 	}
 
@@ -377,13 +377,13 @@ HasAllTouchHandlers {
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addMouseWheelHandler(
-			MouseWheelHandler handler) {
+		MouseWheelHandler handler) {
 		return this.addDomHandler(handler, MouseWheelEvent.getType());
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addTouchCancelHandler(
-			TouchCancelHandler handler) {
+		TouchCancelHandler handler) {
 		return this.addDomHandler(handler, TouchCancelEvent.getType());
 	}
 
@@ -394,13 +394,13 @@ HasAllTouchHandlers {
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addTouchMoveHandler(
-			TouchMoveHandler handler) {
+		TouchMoveHandler handler) {
 		return this.addDomHandler(handler, TouchMoveEvent.getType());
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addTouchStartHandler(
-			TouchStartHandler handler) {
+		TouchStartHandler handler) {
 		return this.addDomHandler(handler, TouchStartEvent.getType());
 	}
 

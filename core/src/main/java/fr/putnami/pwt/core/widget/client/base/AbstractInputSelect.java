@@ -40,8 +40,8 @@ import fr.putnami.pwt.core.widget.client.NavLink;
 import fr.putnami.pwt.core.widget.client.helper.CompositeFocusHelper;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public abstract class AbstractInputSelect<T, U> extends AbstractInputChoice<T, U> implements
-HasPlaceholder {
+public abstract class AbstractInputSelect<T, U> extends AbstractInputChoice<T, U>
+	implements HasPlaceholder {
 
 	private static final CssStyle STYLE_INPUT_SELECT = new SimpleStyle("input-select");
 
@@ -140,17 +140,17 @@ HasPlaceholder {
 			}
 			this.lastSearchTime = currentTime;
 			NavLink matchingLink =
-					Iterables.find(AbstractInputSelect.this.itemsLinks.values(), this, null);
+				Iterables.find(AbstractInputSelect.this.itemsLinks.values(), this, null);
 			if (matchingLink != null) {
 				AbstractInputSelect.this.selectionHandler.onItemSearch(AbstractInputSelect.this.itemsLinks
-						.inverse().get(matchingLink));
+					.inverse().get(matchingLink));
 			}
 		}
 
 		@Override
 		public boolean apply(NavLink input) {
 			return input.getLabel() != null
-					&& input.getLabel().toLowerCase().startsWith(this.currentString);
+				&& input.getLabel().toLowerCase().startsWith(this.currentString);
 		}
 	}
 
@@ -233,7 +233,7 @@ HasPlaceholder {
 
 	public void addItem(T item) {
 		NavLink link =
-				new NavLink(this.getChoiceRenderer().renderItem(item), new ItemClickCommand(item));
+			new NavLink(this.getChoiceRenderer().renderItem(item), new ItemClickCommand(item));
 		this.dropdown.addMenuContent(link);
 		this.itemsLinks.put(item, link);
 		this.getOrderedItems().add(item);

@@ -24,8 +24,8 @@ import fr.putnami.pwt.core.editor.client.Visitor;
 import fr.putnami.pwt.core.model.client.ModelDriver;
 import fr.putnami.pwt.core.model.client.base.HasDriver;
 
-public abstract class AbstractTableColumnAspect<T> implements IsWidget, Editor,
-HasDriver<List<T>, ModelDriver<List<T>>>, Visitor {
+public abstract class AbstractTableColumnAspect<T>
+	implements IsWidget, Editor, HasDriver<List<T>, ModelDriver<List<T>>>, Visitor {
 
 	private String columnPath;
 	private ModelDriver<List<T>> driver;

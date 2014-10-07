@@ -34,8 +34,8 @@ import fr.putnami.pwt.core.widget.client.event.RowClickEvent;
 import fr.putnami.pwt.core.widget.client.event.RowClickEvent.Handler;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
-public class TableBody<T> extends AbstractPanel implements HasReadonly, CloneableWidget,
-RowClickEvent.HasRowClickHandlers {
+public class TableBody<T> extends AbstractPanel
+	implements HasReadonly, CloneableWidget, RowClickEvent.HasRowClickHandlers {
 
 	private class ClickEventHandler implements ClickHandler {
 

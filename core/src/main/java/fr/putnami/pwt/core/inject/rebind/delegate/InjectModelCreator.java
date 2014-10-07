@@ -31,8 +31,8 @@ import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterSubGenerate;
 import fr.putnami.pwt.core.model.client.model.Model;
 import fr.putnami.pwt.core.model.rebind.ModelCreator;
 
-public class InjectModelCreator extends InjectorCreatorDelegate implements
-InjectorWritterSubGenerate, InjectorWritterConstructor, InjectorWritterInit {
+public class InjectModelCreator extends InjectorCreatorDelegate
+	implements InjectorWritterSubGenerate, InjectorWritterConstructor, InjectorWritterInit {
 
 	private final JField modelField;
 	private final JType fieldType;

@@ -30,8 +30,9 @@ import fr.putnami.pwt.core.widget.client.base.AbstractComposite;
 import fr.putnami.pwt.core.widget.client.event.PageChangeEvent;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
-public class PaginationHelper<T> extends AbstractComposite implements PageChangeEvent.Handler,
-Editor, HasDriver<Collection<T>, ModelDriver<Collection<T>>>, Visitor {
+public class PaginationHelper<T> extends AbstractComposite
+	implements PageChangeEvent.Handler, Editor, HasDriver<Collection<T>, ModelDriver<Collection<T>>>,
+	Visitor {
 
 	private final Pagination pagination;
 

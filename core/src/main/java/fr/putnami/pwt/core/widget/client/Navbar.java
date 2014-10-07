@@ -48,7 +48,8 @@ public class Navbar extends AbstractPanel implements CloneableWidget {
 	private static final CssStyle STYLE_TEXT_MUTED = new SimpleStyle("text-muted");
 
 	public enum ContainerType implements CssStyle {
-		RESPONSIVE("container"), FLUID("container-fluid");
+			RESPONSIVE("container"),
+			FLUID("container-fluid");
 
 		private final String style;
 
@@ -64,7 +65,8 @@ public class Navbar extends AbstractPanel implements CloneableWidget {
 
 	public enum Type implements CssStyle {
 
-		DEFAULT("navbar-default"), INVERSE("navbar-inverse");
+			DEFAULT("navbar-default"),
+			INVERSE("navbar-inverse");
 
 		private final String style;
 
@@ -79,8 +81,10 @@ public class Navbar extends AbstractPanel implements CloneableWidget {
 	}
 
 	public enum Position implements CssStyle {
-		DEFAULT(null), FIXED_TOP("navbar-fixed-top"), FIXED_BOTTOM("navbar-fixed-bottom"), STATIC_TOP(
-				"navbar-static-top");
+			DEFAULT(null),
+			FIXED_TOP("navbar-fixed-top"),
+			FIXED_BOTTOM("navbar-fixed-bottom"),
+			STATIC_TOP("navbar-static-top");
 
 		private final String style;
 

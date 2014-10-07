@@ -23,8 +23,8 @@ import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterMethod;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterPresent;
 
-public class InjectDecoratorPresenterCreator extends InjectorCreatorDelegate implements
-InjectorWritterMethod, InjectorWritterPresent, InjectorWritterInit {
+public class InjectDecoratorPresenterCreator extends InjectorCreatorDelegate
+	implements InjectorWritterMethod, InjectorWritterPresent, InjectorWritterInit {
 
 	public InjectDecoratorPresenterCreator() {
 	}

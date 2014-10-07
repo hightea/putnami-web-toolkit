@@ -24,9 +24,14 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 public abstract class AbstractTextOutput<T> extends AbstractOutput<T> implements HasText {
 
 	public enum Style implements CssStyle {
-		DEFAULT(null), LABEL("label label-default"), LABEL_PRIMARY("label label-primary"), LABEL_SUCCESS(
-				"label label-success"), LABEL_INFO("label label-info"), LABEL_WARNING("label label-warning"), LABEL_DANGER(
-						"label label-danger"), BADGE("badge");
+			DEFAULT(null),
+			LABEL("label label-default"),
+			LABEL_PRIMARY("label label-primary"),
+			LABEL_SUCCESS("label label-success"),
+			LABEL_INFO("label label-info"),
+			LABEL_WARNING("label label-warning"),
+			LABEL_DANGER("label label-danger"),
+			BADGE("badge");
 
 		private final String style;
 

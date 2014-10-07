@@ -24,7 +24,11 @@ import fr.putnami.pwt.core.theme.client.CssStyle;
 public interface HasResponsiveVisibility {
 
 	enum TargetSize {
-		XS("xs"), SM("sm"), MD("md"), LG("lg"), PRINT("print");
+			XS("xs"),
+			SM("sm"),
+			MD("md"),
+			LG("lg"),
+			PRINT("print");
 
 		private final String value;
 
@@ -38,8 +42,11 @@ public interface HasResponsiveVisibility {
 	}
 
 	enum Visibility {
-		DEFAULT(null, null), HIDDEN("hidden-", null), VISIBLE_BLOCK("visible-", "-block"), VISIBLE_INLINE(
-				"visible-", "-inline"), VISIBLE_INLINE_BLOCK("visible-", "-inline-block");
+			DEFAULT(null, null),
+			HIDDEN("hidden-", null),
+			VISIBLE_BLOCK("visible-", "-block"),
+			VISIBLE_INLINE("visible-", "-inline"),
+			VISIBLE_INLINE_BLOCK("visible-", "-inline-block");
 
 		private final String prefix;
 		private final String suffix;

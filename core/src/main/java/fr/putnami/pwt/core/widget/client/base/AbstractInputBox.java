@@ -38,12 +38,14 @@ import fr.putnami.pwt.core.widget.client.event.ChangeEvent;
 import fr.putnami.pwt.core.widget.client.helper.ToStringRenderer;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public abstract class AbstractInputBox<T extends TextBoxBase, I> extends AbstractInput<I> implements
-HasPlaceholder, HasEnabled, HasChangeHandlers {
+public abstract class AbstractInputBox<T extends TextBoxBase, I> extends AbstractInput<I>
+	implements HasPlaceholder, HasEnabled, HasChangeHandlers {
 
 	public enum Size implements CssStyle {
 
-		DEFAULT(null), LARGE("input-lg"), SMALL("input-sm");
+			DEFAULT(null),
+			LARGE("input-lg"),
+			SMALL("input-sm");
 
 		private final String style;
 
@@ -149,7 +151,7 @@ HasPlaceholder, HasEnabled, HasChangeHandlers {
 	public HandlerRegistration addDirtyHandler(Handler handler) {
 		if (this.valueChangeRegistration == null) {
 			this.valueChangeRegistration =
-					this.input.addValueChangeHandler(new ChangeEvent<String>(this));
+				this.input.addValueChangeHandler(new ChangeEvent<String>(this));
 		}
 		return super.addDirtyHandler(handler);
 	}
@@ -167,7 +169,7 @@ HasPlaceholder, HasEnabled, HasChangeHandlers {
 			}
 		} catch (ParseException e) {
 			this.addError(ValidationUtils.createError(this, AbstractInputBox.ERROR_PARSING, this
-					.getValue(), strValue));
+				.getValue(), strValue));
 		}
 		return this.getValue();
 	}
@@ -215,7 +217,7 @@ HasPlaceholder, HasEnabled, HasChangeHandlers {
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addValueChangeHandler(
-			ValueChangeHandler<I> handler) {
+		ValueChangeHandler<I> handler) {
 		return this.input.addHandler(handler, ValueChangeEvent.getType());
 	}
 

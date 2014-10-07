@@ -25,7 +25,7 @@ import java.util.Collection;
 public final class InjectCreatorUtil {
 
 	public static Collection<JMethod> listMethod(JClassType type,
-			Class<? extends Annotation> annotationClass) {
+		Class<? extends Annotation> annotationClass) {
 		Collection<JMethod> methodAnnoted = Lists.newArrayList();
 		JMethod[] methods = type.getOverridableMethods();
 		for (JMethod method : methods) {
@@ -39,7 +39,7 @@ public final class InjectCreatorUtil {
 	}
 
 	public static Collection<JField> listFields(JClassType type,
-			Class<? extends Annotation> annotationClass) {
+		Class<? extends Annotation> annotationClass) {
 		Collection<JField> methodAnnoted = Lists.newArrayList();
 		JField[] fields = type.getFields();
 		for (JField field : fields) {

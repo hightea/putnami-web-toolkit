@@ -40,9 +40,9 @@ import fr.putnami.pwt.core.model.client.visitor.ReadonlyVisitor;
 import fr.putnami.pwt.core.widget.client.base.AbstractTableColumn;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
-public class TableEditorBody<T> extends TableBody<T> implements
-HasDriver<Collection<T>, ModelDriver<Collection<T>>>, EditorOutput<Collection<T>>,
-EditorInput<Collection<T>>, EditorCollection<T>, EditorModel<T> {
+public class TableEditorBody<T> extends TableBody<T>
+	implements HasDriver<Collection<T>, ModelDriver<Collection<T>>>, EditorOutput<Collection<T>>,
+	EditorInput<Collection<T>>, EditorCollection<T>, EditorModel<T> {
 
 	private final List<AbstractTableColumn<?>> columns = Lists.newArrayList();
 

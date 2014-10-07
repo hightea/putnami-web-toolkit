@@ -42,7 +42,7 @@ public class CommandServiceCompositeSerializer implements Serializer {
 
 	@Override
 	public Object instantiate(SerializationStreamReader stream, String typeSignature)
-			throws SerializationException {
+		throws SerializationException {
 		for (Serializer serializer : this.serializers) {
 			try {
 				Object o = serializer.instantiate(stream, typeSignature);
@@ -58,7 +58,7 @@ public class CommandServiceCompositeSerializer implements Serializer {
 
 	@Override
 	public void serialize(SerializationStreamWriter stream, Object instance, String typeSignature)
-			throws SerializationException {
+		throws SerializationException {
 		for (Serializer serializer : this.serializers) {
 			try {
 				serializer.serialize(stream, instance, typeSignature);
@@ -72,7 +72,7 @@ public class CommandServiceCompositeSerializer implements Serializer {
 
 	@Override
 	public void deserialize(SerializationStreamReader stream, Object instance, String typeSignature)
-			throws SerializationException {
+		throws SerializationException {
 		for (Serializer serializer : this.serializers) {
 			try {
 				serializer.deserialize(stream, instance, typeSignature);

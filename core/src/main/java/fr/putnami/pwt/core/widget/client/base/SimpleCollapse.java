@@ -27,7 +27,7 @@ public class SimpleCollapse extends AbstractDropdown {
 	private static final CssStyle STYLE_MENU = new SimpleStyle("list-group");
 	private static final CssStyle STYLE_MENU_ITEM = new SimpleStyle("list-group-item");
 	private static final CssStyle STYLE_MENU_ITEM_HEADING =
-			new SimpleStyle("list-group-item-heading");
+		new SimpleStyle("list-group-item-heading");
 	private static final CssStyle STYLE_PANEL = new SimpleStyle("panel");
 	private static final CssStyle STYLE_PANEL_DEFAULT = new SimpleStyle("panel-default");
 	private static final CssStyle STYLE_PANEL_HEADING = new SimpleStyle("panel-heading");

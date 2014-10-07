@@ -34,8 +34,8 @@ import fr.putnami.pwt.core.inject.rebind.util.InjectCreatorUtil;
 import fr.putnami.pwt.core.mvp.client.ActivityFactory;
 import fr.putnami.pwt.core.mvp.client.MvpController;
 
-public class InjectMvpDescriptionCreator extends InjectorCreatorDelegate implements
-InjectorWritterInit, InjectorWritterEntryPoint {
+public class InjectMvpDescriptionCreator extends InjectorCreatorDelegate
+	implements InjectorWritterInit, InjectorWritterEntryPoint {
 
 	private final Class<? extends AcceptsOneWidget> display;
 	private final Class<? extends Place> defaultPlace;
@@ -70,7 +70,7 @@ InjectorWritterInit, InjectorWritterEntryPoint {
 		srcWriter.println("AcceptsOneWidget mvpDisplay = null;");
 		if (this.display != null && !AcceptsOneWidget.class.equals(this.display)) {
 			srcWriter.println("mvpDisplay = GWT.create(%s.class);", InjectCreatorUtil
-					.toClassName(this.display));
+				.toClassName(this.display));
 		}
 		srcWriter.println("if(mvpDisplay != null){");
 		srcWriter.indent();
@@ -85,11 +85,11 @@ InjectorWritterInit, InjectorWritterEntryPoint {
 
 		if (this.defaultPlace != null && !Place.class.equals(this.defaultPlace)) {
 			srcWriter.println("mvpController.setDefaultPlace(new %s());", InjectCreatorUtil
-					.toClassName(this.defaultPlace));
+				.toClassName(this.defaultPlace));
 		}
 		for (Class<?> activity : this.activities) {
 			srcWriter.println("mvpController.registerActivity(GWT.<ActivityFactory> create(%s.class));",
-					InjectCreatorUtil.toClassName(activity));
+				InjectCreatorUtil.toClassName(activity));
 		}
 	}
 

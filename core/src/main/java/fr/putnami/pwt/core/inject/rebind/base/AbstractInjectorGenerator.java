@@ -21,12 +21,12 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 
-public abstract class AbstractInjectorGenerator<C extends AbstractInjectorCreator> extends
-Generator {
+public abstract class AbstractInjectorGenerator<C extends AbstractInjectorCreator>
+	extends Generator {
 
 	@Override
 	public String generate(TreeLogger logger, GeneratorContext context, String typeName)
-			throws UnableToCompleteException {
+		throws UnableToCompleteException {
 		TypeOracle typeOracle = context.getTypeOracle();
 		assert typeOracle != null;
 

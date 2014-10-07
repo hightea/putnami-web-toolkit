@@ -24,8 +24,8 @@ import fr.putnami.pwt.core.editor.client.EditorLeaf;
 import fr.putnami.pwt.core.editor.client.EditorOutput;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public abstract class AbstractOutput<T> extends Widget implements EditorLeaf,
-EditorOutput<T>, HasResponsiveVisibility {
+public abstract class AbstractOutput<T> extends Widget
+	implements EditorLeaf, EditorOutput<T>, HasResponsiveVisibility {
 
 	private HandlerManager handlerManager;
 

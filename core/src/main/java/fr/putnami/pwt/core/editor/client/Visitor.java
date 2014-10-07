@@ -36,7 +36,11 @@ public interface Visitor {
 	}
 
 	enum VisitorTrigger implements Predicate<Visitor> {
-		INITALIZE, BEFORE_EDIT, AFTER_EDIT, FLUSH, MANUAL;
+			INITALIZE,
+			BEFORE_EDIT,
+			AFTER_EDIT,
+			FLUSH,
+			MANUAL;
 
 		@Override
 		public boolean apply(Visitor input) {

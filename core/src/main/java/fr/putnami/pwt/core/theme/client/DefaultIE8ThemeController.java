@@ -31,7 +31,9 @@ public class DefaultIE8ThemeController extends DefaultThemeController {
 
 	private ScriptElement respondJsScript;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see fr.putnami.pwt.core.theme.client.DefaultThemeController#resetTheme()
 	 */
 	@Override
@@ -49,7 +51,7 @@ public class DefaultIE8ThemeController extends DefaultThemeController {
 		if (this.respondJsScript == null) {
 			this.respondJsScript = Document.get().createScriptElement();
 			this.respondJsScript.setSrc(GWT.getModuleBaseForStaticFiles()
-					+ DefaultIE8ThemeController.RESPOND_JS_LOCATION);
+				+ DefaultIE8ThemeController.RESPOND_JS_LOCATION);
 			this.respondJsScript.setType("text/javascript");
 		}
 	}

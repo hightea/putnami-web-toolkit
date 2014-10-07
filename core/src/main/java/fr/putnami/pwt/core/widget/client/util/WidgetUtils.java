@@ -32,7 +32,7 @@ public final class WidgetUtils {
 			return null;
 		}
 		assert widget instanceof CloneableWidget : widget.getClass()
-		+ " does not implement CloneableWidget";
+			+ " does not implement CloneableWidget";
 		CloneableWidget cloneableWidget = (CloneableWidget) widget;
 		return (W) cloneableWidget.cloneWidget();
 	}

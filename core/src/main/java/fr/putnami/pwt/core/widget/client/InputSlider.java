@@ -93,8 +93,8 @@ public class InputSlider<T> extends AbstractInput<T> implements ValueChangeHandl
 				clientX = event.getTouches().get(0).getClientX();
 			}
 			return clientX - InputSlider.this.backgroundBar.getAbsoluteLeft()
-					+ InputSlider.this.backgroundBar.getScrollLeft()
-					+ InputSlider.this.backgroundBar.getOwnerDocument().getScrollLeft();
+				+ InputSlider.this.backgroundBar.getScrollLeft()
+				+ InputSlider.this.backgroundBar.getOwnerDocument().getScrollLeft();
 		}
 
 		private void killEvent(Event event) {
@@ -224,7 +224,7 @@ public class InputSlider<T> extends AbstractInput<T> implements ValueChangeHandl
 
 		public void moveHandleToPosition(int relativeXPosition) {
 			double idx =
-					(double) (InputSlider.this.items.size() - 1) * (double) relativeXPosition
+				(double) (InputSlider.this.items.size() - 1) * (double) relativeXPosition
 					/ InputSlider.this.backgroundBar.getClientWidth();
 			this.moveHandleToIndex((int) Math.round(idx), true);
 		}
@@ -322,14 +322,14 @@ public class InputSlider<T> extends AbstractInput<T> implements ValueChangeHandl
 	public HandlerRegistration addDirtyHandler(Handler handler) {
 		if (this.valueChangeRegistration == null) {
 			this.valueChangeRegistration =
-					this.addValueChangeHandler(new ChangeEvent<T>(InputSlider.this));
+				this.addValueChangeHandler(new ChangeEvent<T>(InputSlider.this));
 		}
 		return EventBus.get().addHandlerToSource(DirtyEvent.TYPE, this, handler);
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addValueChangeHandler(
-			ValueChangeHandler<T> handler) {
+		ValueChangeHandler<T> handler) {
 		return this.addHandler(handler, ValueChangeEvent.getType());
 	}
 

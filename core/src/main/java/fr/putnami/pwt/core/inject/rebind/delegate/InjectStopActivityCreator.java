@@ -27,8 +27,8 @@ import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterPresent;
 import fr.putnami.pwt.core.mvp.client.event.StopActivityEvent;
 
-public class InjectStopActivityCreator extends InjectorCreatorDelegate implements
-InjectorWritterInit, InjectorWritterPresent {
+public class InjectStopActivityCreator extends InjectorCreatorDelegate
+	implements InjectorWritterInit, InjectorWritterPresent {
 
 	private final Collection<JMethod> presenterMethods;
 	private final String injectorName;
@@ -46,10 +46,10 @@ InjectorWritterInit, InjectorWritterPresent {
 	@Override
 	public void writePresent(SourceWriter srcWriter) {
 		srcWriter
-		.println("final HandlerRegistrationCollection stopRegistrations = new HandlerRegistrationCollection();");
+			.println("final HandlerRegistrationCollection stopRegistrations = new HandlerRegistrationCollection();");
 		for (JMethod mayStopMethod : this.presenterMethods) {
 			srcWriter.println("stopRegistrations.add(EventBus.get()"
-					+ ".addHandlerToSource(StopActivityEvent.TYPE, place, new StopActivityEvent.Handler() {");
+				+ ".addHandlerToSource(StopActivityEvent.TYPE, place, new StopActivityEvent.Handler() {");
 			srcWriter.indent();
 			srcWriter.println("@Override public void onStopActivity(StopActivityEvent event) {");
 			srcWriter.indent();
@@ -59,7 +59,7 @@ InjectorWritterInit, InjectorWritterPresent {
 			srcWriter.println("}}));");
 		}
 		srcWriter.println("stopRegistrations.add(EventBus.get()"
-				+ ".addHandlerToSource(StopActivityEvent.TYPE, place, new StopActivityEvent.Handler() {");
+			+ ".addHandlerToSource(StopActivityEvent.TYPE, place, new StopActivityEvent.Handler() {");
 		srcWriter.indent();
 		srcWriter.println("@Override public void onStopActivity(StopActivityEvent event) {");
 		srcWriter.indent();

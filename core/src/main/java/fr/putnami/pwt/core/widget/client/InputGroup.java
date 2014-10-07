@@ -35,7 +35,8 @@ public class InputGroup<T> extends AbstractPanel implements EditorInput<T> {
 	private static final CssStyle STYLE_INPUT_GROUP_BUTTON = new SimpleStyle("input-group-btn");
 
 	public enum Style implements CssStyle {
-		UNSTYLED(null), DEFAULT("input-group");
+			UNSTYLED(null),
+			DEFAULT("input-group");
 
 		private final String style;
 
@@ -50,7 +51,9 @@ public class InputGroup<T> extends AbstractPanel implements EditorInput<T> {
 	}
 
 	public enum Size implements CssStyle {
-		SMALL("input-group-sm"), DEFAULT(null), LARGE("input-group-lg");
+			SMALL("input-group-sm"),
+			DEFAULT(null),
+			LARGE("input-group-lg");
 
 		private final String style;
 

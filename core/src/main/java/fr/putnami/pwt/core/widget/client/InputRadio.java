@@ -33,7 +33,8 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 public class InputRadio<T> extends AbstractInputChoice<T, T> {
 
 	public enum Type implements CssStyle {
-		DEFAULT("radio"), INLINE("radio-inline");
+			DEFAULT("radio"),
+			INLINE("radio-inline");
 
 		private final String style;
 
@@ -84,7 +85,7 @@ public class InputRadio<T> extends AbstractInputChoice<T, T> {
 	private class RadioContainer extends Composite implements ClickHandler {
 
 		private final InputElement radioElement = InputElement.as(Document.get()
-				.createRadioInputElement("radio" + InputRadio.this.radioGroupNum));
+			.createRadioInputElement("radio" + InputRadio.this.radioGroupNum));
 
 		private T value;
 
@@ -104,8 +105,7 @@ public class InputRadio<T> extends AbstractInputChoice<T, T> {
 			this.initWidget(newContainer);
 			label.getElement().appendChild(this.radioElement);
 			label.getElement().appendChild(
-					Document.get()
-					.createTextNode(" " + InputRadio.this.getChoiceRenderer().renderItem(value)));
+				Document.get().createTextNode(" " + InputRadio.this.getChoiceRenderer().renderItem(value)));
 			StyleUtils.addStyle(newContainer, InputRadio.this.type);
 			newContainer.addDomHandler(this, ClickEvent.getType());
 			InputRadio.this.itemsContainer.put(value, this);

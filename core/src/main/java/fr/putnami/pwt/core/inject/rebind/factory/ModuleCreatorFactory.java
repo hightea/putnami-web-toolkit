@@ -31,18 +31,18 @@ public class ModuleCreatorFactory implements InjectorDelegateFactorty {
 
 	@Override
 	public void createDelegates(JClassType injectableType,
-			Collection<InjectorCreatorDelegate> delegates) {
+		Collection<InjectorCreatorDelegate> delegates) {
 		if (injectableType.getAnnotation(MvpDescription.class) != null) {
 			delegates.add(new InjectMvpDescriptionCreator(injectableType, injectableType
-					.getAnnotation(MvpDescription.class)));
+				.getAnnotation(MvpDescription.class)));
 		}
 		if (injectableType.getAnnotation(ThemeDescription.class) != null) {
 			delegates.add(new InjectThemeCreator(injectableType, injectableType
-					.getAnnotation(ThemeDescription.class)));
+				.getAnnotation(ThemeDescription.class)));
 		}
 		if (injectableType.getAnnotation(ErrorManagmentDescription.class) != null) {
 			delegates.add(new InjectErrorManagerCreator(injectableType, injectableType
-					.getAnnotation(ErrorManagmentDescription.class)));
+				.getAnnotation(ErrorManagmentDescription.class)));
 		}
 	}
 

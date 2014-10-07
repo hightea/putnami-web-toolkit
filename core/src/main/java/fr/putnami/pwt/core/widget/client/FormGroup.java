@@ -41,9 +41,10 @@ import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
-public class FormGroup<T> extends AbstractPanel implements HasFormType, CloneableWidget,
-EditorValue<T>, HasLabelEditor, HasEditorProvider, HasWidgetFactory, HasOutputEditorFactory<T>,
-HasInputEditorFactory<T>, HasReadonly, EditorLabel, EditorError {
+public class FormGroup<T> extends AbstractPanel
+	implements HasFormType, CloneableWidget, EditorValue<T>, HasLabelEditor, HasEditorProvider,
+	HasWidgetFactory, HasOutputEditorFactory<T>, HasInputEditorFactory<T>, HasReadonly, EditorLabel,
+	EditorError {
 
 	private static final CssStyle STYLE_FORM_GROUP = new SimpleStyle("form-group");
 	private static final CssStyle STYLE_ERROR = new SimpleStyle("has-error");
@@ -153,7 +154,7 @@ HasInputEditorFactory<T>, HasReadonly, EditorLabel, EditorError {
 		} else if (child instanceof Help) {
 			this.help = (Help) child;
 		} else if (this.inputFactory == null && this.outputFactory == null
-				&& child instanceof CloneableWidget) {
+			&& child instanceof CloneableWidget) {
 			this.widgetFactory = (CloneableWidget) child;
 		}
 	}
@@ -206,7 +207,7 @@ HasInputEditorFactory<T>, HasReadonly, EditorLabel, EditorError {
 		this.error.displayErrors(errors);
 		this.error.redraw();
 		StyleUtils.toggleStyle(this, FormGroup.STYLE_ERROR, !Boolean.TRUE.equals(this.readonly)
-				&& this.error != null && this.error.hasError());
+			&& this.error != null && this.error.hasError());
 	}
 
 	@Override
@@ -214,7 +215,7 @@ HasInputEditorFactory<T>, HasReadonly, EditorLabel, EditorError {
 		this.clear();
 
 		StyleUtils.toggleStyle(Widget.asWidgetOrNull(this.label), FormGroup.STYLE_SCREAN_READER,
-				this.type == Layout.INLINE);
+			this.type == Layout.INLINE);
 		this.addIfNotNull(this.label, 3, 0, false);
 		Editor editor = this.editorProvider.getEditor(this.readonly);
 		if (!Boolean.FALSE.equals(this.readonly)) {
@@ -245,7 +246,7 @@ HasInputEditorFactory<T>, HasReadonly, EditorLabel, EditorError {
 				}
 				if (offset > 0) {
 					StyleUtils.addStyle(toAdd,
-							new GridColumn.OffsetStyle(GridColumn.PREFIX_OFFSET_MD, offset));
+						new GridColumn.OffsetStyle(GridColumn.PREFIX_OFFSET_MD, offset));
 				}
 			}
 			this.append(toAdd);

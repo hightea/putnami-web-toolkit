@@ -45,12 +45,14 @@ import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
-public abstract class AbstractHover implements IsWidget, HasWidgets, HasOneWidget, CloneableWidget,
-EditorComposite {
+public abstract class AbstractHover
+	implements IsWidget, HasWidgets, HasOneWidget, CloneableWidget, EditorComposite {
 
 	public enum Visibility implements CssStyle {
 
-		SHOW("in"), HIDE(null), TOGGLE(null);
+			SHOW("in"),
+			HIDE(null),
+			TOGGLE(null);
 
 		private String name;
 
@@ -65,7 +67,10 @@ EditorComposite {
 	}
 
 	public enum Placement implements CssStyle {
-		TOP("top"), BOTTOM("bottom"), LEFT("left"), RIGHT("right");
+			TOP("top"),
+			BOTTOM("bottom"),
+			LEFT("left"),
+			RIGHT("right");
 
 		private String name;
 
@@ -80,7 +85,9 @@ EditorComposite {
 	}
 
 	public static enum Trigger {
-		HOVER, FOCUS, MANUAL;
+			HOVER,
+			FOCUS,
+			MANUAL;
 	}
 
 	protected class Handler implements FocusHandler, BlurHandler, MouseOverHandler, MouseOutHandler {
@@ -300,15 +307,15 @@ EditorComposite {
 		switch (this.getTrigger()) {
 			case FOCUS:
 				this.registrations.add(this.widget.addDomHandler(this.triggerEventHandler, FocusEvent
-						.getType()));
+					.getType()));
 				this.registrations.add(this.widget.addDomHandler(this.triggerEventHandler, BlurEvent
-						.getType()));
+					.getType()));
 				break;
 			case HOVER:
 				this.registrations.add(this.widget.addDomHandler(this.triggerEventHandler, MouseOverEvent
-						.getType()));
+					.getType()));
 				this.registrations.add(this.widget.addDomHandler(this.triggerEventHandler, MouseOutEvent
-						.getType()));
+					.getType()));
 				break;
 			case MANUAL:
 				break;

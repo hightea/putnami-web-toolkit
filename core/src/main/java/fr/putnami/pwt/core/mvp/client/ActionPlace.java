@@ -22,8 +22,8 @@ import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 import fr.putnami.pwt.core.mvp.client.util.MvpUtils;
 
-public class ActionPlace extends Place implements Activity, ActivityFactory,
-PlaceTokenizer<ActionPlace>, Runnable {
+public class ActionPlace extends Place
+	implements Activity, ActivityFactory, PlaceTokenizer<ActionPlace>, Runnable {
 
 	private final String prefix;
 

@@ -28,7 +28,7 @@ public class ModelGenerator extends Generator {
 
 	@Override
 	public String generate(TreeLogger logger, GeneratorContext context, String modelClass)
-			throws UnableToCompleteException {
+		throws UnableToCompleteException {
 		TypeOracle typeOracle = context.getTypeOracle();
 		assert (typeOracle != null);
 
@@ -41,14 +41,14 @@ public class ModelGenerator extends Generator {
 		JClassType beanType = null;
 		for (JClassType interfaceType : modelType.getImplementedInterfaces()) {
 			if (interfaceType.getQualifiedSourceName().equals(Model.class.getCanonicalName())
-					&& interfaceType instanceof JParameterizedType) {
+				&& interfaceType instanceof JParameterizedType) {
 				JParameterizedType paramType = (JParameterizedType) interfaceType;
 				beanType = paramType.getTypeArgs()[0];
 			}
 		}
 		if (beanType == null) {
 			logger.log(TreeLogger.ERROR, modelType.getQualifiedSourceName() + " must implement "
-					+ Model.class.getCanonicalName(), null);
+				+ Model.class.getCanonicalName(), null);
 			throw new UnableToCompleteException();
 		}
 

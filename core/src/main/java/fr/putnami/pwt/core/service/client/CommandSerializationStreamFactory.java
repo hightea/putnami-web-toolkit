@@ -38,8 +38,8 @@ public class CommandSerializationStreamFactory implements SerializationStreamFac
 	@Override
 	public SerializationStreamWriter createStreamWriter() {
 		ClientSerializationStreamWriter clientSerializationStreamWriter =
-				new ClientSerializationStreamWriter(this.serializer, this.moduleBaseURL,
-						CommandSerializationStreamFactory.SERIALIZATION_POLICY);
+			new ClientSerializationStreamWriter(this.serializer, this.moduleBaseURL,
+				CommandSerializationStreamFactory.SERIALIZATION_POLICY);
 		clientSerializationStreamWriter.prepareToWrite();
 
 		return clientSerializationStreamWriter;
@@ -48,7 +48,7 @@ public class CommandSerializationStreamFactory implements SerializationStreamFac
 	@Override
 	public SerializationStreamReader createStreamReader(String encoded) throws SerializationException {
 		ClientSerializationStreamReader clientSerializationStreamReader =
-				new ClientSerializationStreamReader(this.serializer);
+			new ClientSerializationStreamReader(this.serializer);
 		String encodedResponse = encoded;
 		if (encoded.startsWith("//OK") || encodedResponse.startsWith("//EX")) {
 			encodedResponse = encodedResponse.substring(4);

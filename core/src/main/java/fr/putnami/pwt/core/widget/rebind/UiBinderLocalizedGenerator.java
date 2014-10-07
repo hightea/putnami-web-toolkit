@@ -28,7 +28,7 @@ public class UiBinderLocalizedGenerator extends Generator {
 
 	@Override
 	public String generate(TreeLogger logger, GeneratorContext context, String typeName)
-			throws UnableToCompleteException {
+		throws UnableToCompleteException {
 		TypeOracle typeOracle = context.getTypeOracle();
 		assert (typeOracle != null);
 

@@ -47,7 +47,7 @@ public class PlaceholderRendererVisitor extends AbstractVisitor {
 			String defaulText = hasPlaceholder.getPlaceholder();
 			if (messageHelper != null && defaulText == null) {
 				String label =
-						messageHelper.getMessage(parentPropertyType, path, HasPlaceholder.PLACEHOLDER_SUFFIX);
+					messageHelper.getMessage(parentPropertyType, path, HasPlaceholder.PLACEHOLDER_SUFFIX);
 				if (label != null) {
 					hasPlaceholder.setPlaceholder(label);
 				}

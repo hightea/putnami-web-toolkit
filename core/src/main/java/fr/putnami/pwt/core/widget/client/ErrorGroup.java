@@ -33,8 +33,11 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 public class ErrorGroup extends AbstractWidget implements EditorError, HasDrawable {
 	public enum Color implements CssStyle {
 
-		PRIMARY("bg-primary"), SUCCESS("bg-success"), INFO("bg-info"), WARNING("bg-warning"), DANGER(
-				"bg-danger");
+			PRIMARY("bg-primary"),
+			SUCCESS("bg-success"),
+			INFO("bg-info"),
+			WARNING("bg-warning"),
+			DANGER("bg-danger");
 
 		private final String style;
 

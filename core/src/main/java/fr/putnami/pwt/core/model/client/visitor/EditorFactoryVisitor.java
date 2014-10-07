@@ -53,7 +53,7 @@ public class EditorFactoryVisitor extends AbstractVisitor {
 		private Map<Integer, Editor> outputEditors;
 
 		private InternalEditorProvider(Context<?> parentContext, Class propertyType,
-				CloneableWidget inputFactory, CloneableWidget outputFactory) {
+			CloneableWidget inputFactory, CloneableWidget outputFactory) {
 			super();
 			this.parentContext = parentContext;
 			this.propertyType = propertyType;
@@ -99,20 +99,20 @@ public class EditorFactoryVisitor extends AbstractVisitor {
 		private CloneableWidget getOutputFacoty() {
 			if (this.outputFactory == null) {
 				this.outputFactory =
-						EditorFactoryManager.get().createOutputForType(this.propertyType, this.parentContext);
+					EditorFactoryManager.get().createOutputForType(this.propertyType, this.parentContext);
 			}
 			assert this.outputFactory != null : "output factory is null, can not create an output editor for "
-					+ this.propertyType;
+				+ this.propertyType;
 			return this.outputFactory;
 		}
 
 		private CloneableWidget getInputFacoty() {
 			if (this.inputFactory == null) {
 				this.inputFactory =
-						EditorFactoryManager.get().createInputForType(this.propertyType, this.parentContext);
+					EditorFactoryManager.get().createInputForType(this.propertyType, this.parentContext);
 			}
 			assert this.inputFactory != null : "intput factory is null, can not create an input editor for "
-					+ this.propertyType;
+				+ this.propertyType;
 			return this.inputFactory;
 		}
 
@@ -123,7 +123,7 @@ public class EditorFactoryVisitor extends AbstractVisitor {
 			}
 			ModelDriver<?> driver = this.parentContext.getDriver();
 			Context<?> context =
-					ContextFactory.Util.get().createContext(driver, this.parentContext, editor);
+				ContextFactory.Util.get().createContext(driver, this.parentContext, editor);
 			driver.accept(new BinderVisitor(driver, driver.getValue()), context);
 		}
 	}
@@ -144,7 +144,7 @@ public class EditorFactoryVisitor extends AbstractVisitor {
 			ModelDriver<?> driver = context.getDriver();
 			Model<?> model = ModelUtils.resolveModel(driver.getModel(), path);
 			if (model instanceof ModelCollection
-					&& (editor instanceof EditorCollection || path.get(path.size() - 1).getIndexKey() != null)) {
+				&& (editor instanceof EditorCollection || path.get(path.size() - 1).getIndexKey() != null)) {
 				propertyType = (Class<A>) model.getLeafType();
 			} else {
 				propertyType = ModelUtils.resolveType(driver.getModel(), path);
@@ -167,8 +167,8 @@ public class EditorFactoryVisitor extends AbstractVisitor {
 			}
 
 			EditorProvider provider =
-					new InternalEditorProvider(context, propertyType, inputFactory == null ? widgetFactory
-							: inputFactory, outputFactory == null ? widgetFactory : outputFactory);
+				new InternalEditorProvider(context, propertyType, inputFactory == null ? widgetFactory
+					: inputFactory, outputFactory == null ? widgetFactory : outputFactory);
 
 			((HasEditorProvider) editor).setEditorProvider(provider);
 		}

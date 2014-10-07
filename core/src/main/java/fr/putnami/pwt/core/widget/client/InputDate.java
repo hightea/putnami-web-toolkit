@@ -35,8 +35,8 @@ import fr.putnami.pwt.core.widget.client.Button.Type;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.core.widget.client.helper.CompositeFocusHelper;
 
-public class InputDate extends InputGroup<Date> implements DirtyEvent.HasDirtyHandlers,
-HasAllFocusHandlers, Focusable, HasPlaceholder {
+public class InputDate extends InputGroup<Date>
+	implements DirtyEvent.HasDirtyHandlers, HasAllFocusHandlers, Focusable, HasPlaceholder {
 
 	private final InputDateBox dateBox = new InputDateBox();
 	private final Button<Date> calendarButton = new Button<Date>();

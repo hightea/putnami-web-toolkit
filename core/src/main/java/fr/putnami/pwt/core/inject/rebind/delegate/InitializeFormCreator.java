@@ -33,8 +33,8 @@ import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterSubGenerate;
 import fr.putnami.pwt.core.model.rebind.ModelCreator;
 
-public class InitializeFormCreator extends InjectorCreatorDelegate implements
-InjectorWritterSubGenerate, InjectorWritterConstructor, InjectorWritterInit {
+public class InitializeFormCreator extends InjectorCreatorDelegate
+	implements InjectorWritterSubGenerate, InjectorWritterConstructor, InjectorWritterInit {
 
 	private final JField modelField;
 	private final JType fieldType;
@@ -83,7 +83,7 @@ InjectorWritterSubGenerate, InjectorWritterConstructor, InjectorWritterInit {
 		String fieldName = this.modelField.getName();
 		if (this.constantClassName != null) {
 			srcWriter
-			.println(
+				.println(
 					"MessageHelper %sMessageHelper = new MessageHelper((ConstantsWithLookup) GWT.create(%s.class));",
 					fieldName, this.constantClassName.getCanonicalName());
 			srcWriter.println("%s.setMessageHelper(%sMessageHelper);", fieldName, fieldName);

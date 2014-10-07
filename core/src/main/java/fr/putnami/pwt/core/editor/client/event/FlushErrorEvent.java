@@ -80,6 +80,6 @@ public final class FlushErrorEvent extends GwtEvent<FlushErrorEvent.Handler> {
 
 	public static void fire(Editor editor, Object valueEdited, Object valueFlushed, List<Error> errors) {
 		EventBus.get().fireEventFromSource(
-				new FlushErrorEvent(editor, valueEdited, valueFlushed, errors), editor);
+			new FlushErrorEvent(editor, valueEdited, valueFlushed, errors), editor);
 	}
 }

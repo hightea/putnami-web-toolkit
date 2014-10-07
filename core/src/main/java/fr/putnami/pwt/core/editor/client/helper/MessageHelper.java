@@ -89,7 +89,7 @@ public class MessageHelper {
 		}
 
 		String labelKey =
-				path.toString().replaceAll("\\.", "_").replaceAll("\\[", "").replaceAll("]", "")
+			path.toString().replaceAll("\\.", "_").replaceAll("\\[", "").replaceAll("]", "")
 				.toUpperCase();
 
 		labelKey = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, "" + labelKey);

@@ -52,7 +52,7 @@ public class UiBinderLocalizedCreator {
 
 		for (JClassType interfaceType : binderType.getImplementedInterfaces()) {
 			if (interfaceType.getQualifiedSourceName().equals(UiBinderLocalized.class.getCanonicalName())
-					&& interfaceType instanceof JParameterizedType) {
+				&& interfaceType instanceof JParameterizedType) {
 				JParameterizedType paramType = (JParameterizedType) interfaceType;
 				this.widgetType = paramType.getTypeArgs()[0];
 				this.targetType = paramType.getTypeArgs()[1];
@@ -61,7 +61,7 @@ public class UiBinderLocalizedCreator {
 		UiTemplate templateAnnotation = binderType.getAnnotation(UiTemplate.class);
 		if (templateAnnotation != null) {
 			this.templateName =
-					templateAnnotation.value().replace(UiBinderLocalizedCreator.TEMPLATE_SUFFIX, "");
+				templateAnnotation.value().replace(UiBinderLocalizedCreator.TEMPLATE_SUFFIX, "");
 		}
 		if (this.templateName == null) {
 			this.templateName = this.targetType.getSimpleSourceName();
@@ -74,13 +74,13 @@ public class UiBinderLocalizedCreator {
 			throw new NullPointerException("no template found");
 		}
 		this.binderProxySimpleName =
-				this.targetType.getSimpleSourceName() + "_" + this.binderType.getSimpleSourceName()
+			this.targetType.getSimpleSourceName() + "_" + this.binderType.getSimpleSourceName()
 				+ UiBinderLocalizedCreator.PROXY_SUFFIX;
 		if (this.locale != null) {
 			this.binderProxySimpleName += "_" + this.locale.toString();
 		}
 		this.binderProxyQualifiedName =
-				this.targetType.getPackage().getName() + "." + this.binderProxySimpleName;
+			this.targetType.getPackage().getName() + "." + this.binderProxySimpleName;
 
 		PrintWriter printWriter = this.getPrintWriter(logger, context, this.binderProxyQualifiedName);
 		if (printWriter == null) {
@@ -105,13 +105,13 @@ public class UiBinderLocalizedCreator {
 		ResourceOracle resourceOracle = context.getResourcesOracle();
 		Map<String, Resource> reourceMap = resourceOracle.getResourceMap();
 		String templatePath =
-				packageResourcePath + this.templateName + "_" + this.locale
+			packageResourcePath + this.templateName + "_" + this.locale
 				+ UiBinderLocalizedCreator.TEMPLATE_SUFFIX;
 		Resource templateResource = reourceMap.get(templatePath);
 		if (templateResource == null) {
 			this.locale = null;
 			templatePath =
-					packageResourcePath + this.templateName + UiBinderLocalizedCreator.TEMPLATE_SUFFIX;
+				packageResourcePath + this.templateName + UiBinderLocalizedCreator.TEMPLATE_SUFFIX;
 			templateResource = reourceMap.get(templatePath);
 		}
 		if (templateResource != null) {
@@ -124,16 +124,16 @@ public class UiBinderLocalizedCreator {
 
 		srcWriter.println("@UiTemplate(\"%s\")", this.templateName);
 		srcWriter.println("interface Binder extends UiBinder<%s, %s> {", this.widgetType
-				.getSimpleSourceName(), this.targetType.getSimpleSourceName());
+			.getSimpleSourceName(), this.targetType.getSimpleSourceName());
 		srcWriter.indent();
 		srcWriter.println("UiBinder<%s, %s> BINDER = GWT.create(Binder.class);", this.widgetType
-				.getSimpleSourceName(), this.targetType.getSimpleSourceName());
+			.getSimpleSourceName(), this.targetType.getSimpleSourceName());
 		srcWriter.outdent();
 		srcWriter.println("}");
 		srcWriter.println();
 		srcWriter.println("@Override");
 		srcWriter.println("public %s createAndBindUi(%s owner) {", this.widgetType
-				.getSimpleSourceName(), this.targetType.getSimpleSourceName());
+			.getSimpleSourceName(), this.targetType.getSimpleSourceName());
 		srcWriter.indent();
 		srcWriter.println("return Binder.BINDER.createAndBindUi(owner);");
 		srcWriter.outdent();
@@ -146,7 +146,7 @@ public class UiBinderLocalizedCreator {
 		String className = this.binderProxySimpleName;
 
 		ClassSourceFileComposerFactory composerFactory =
-				new ClassSourceFileComposerFactory(packageName, className);
+			new ClassSourceFileComposerFactory(packageName, className);
 
 		composerFactory.addImport(GWT.class.getName());
 		composerFactory.addImport(UiBinder.class.getName());
@@ -157,21 +157,17 @@ public class UiBinderLocalizedCreator {
 		composerFactory.addImport(this.widgetType.getQualifiedSourceName());
 		composerFactory.addImport(this.targetType.getQualifiedSourceName());
 
-		composerFactory
-		.addImplementedInterface(UiBinderLocalized.class.getSimpleName() + "<"
-				+ this.widgetType.getSimpleSourceName() + "," + this.targetType.getSimpleSourceName()
-				+ ">");
-		composerFactory
-		.addImplementedInterface(UiBinder.class.getSimpleName() + "<"
-				+ this.widgetType.getSimpleSourceName() + "," + this.targetType.getSimpleSourceName()
-				+ ">");
+		composerFactory.addImplementedInterface(UiBinderLocalized.class.getSimpleName() + "<"
+			+ this.widgetType.getSimpleSourceName() + "," + this.targetType.getSimpleSourceName() + ">");
+		composerFactory.addImplementedInterface(UiBinder.class.getSimpleName() + "<"
+			+ this.widgetType.getSimpleSourceName() + "," + this.targetType.getSimpleSourceName() + ">");
 		composerFactory.addImplementedInterface(this.binderType.getSimpleSourceName());
 
 		return composerFactory.createSourceWriter(ctx, printWriter);
 	}
 
 	private PrintWriter getPrintWriter(TreeLogger logger, GeneratorContext ctx,
-			String targetQualifiedName) {
+		String targetQualifiedName) {
 		String packageName = this.binderType.getPackage().getName();
 		String className = this.binderProxySimpleName;
 		return ctx.tryCreate(logger, packageName, className);

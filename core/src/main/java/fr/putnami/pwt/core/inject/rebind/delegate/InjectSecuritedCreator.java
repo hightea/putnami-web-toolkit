@@ -23,8 +23,8 @@ import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterBeforePresent;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
 import fr.putnami.pwt.core.security.client.controller.SessionController;
 
-public class InjectSecuritedCreator extends InjectorCreatorDelegate implements
-InjectorWritterBeforePresent, InjectorWritterInit {
+public class InjectSecuritedCreator extends InjectorCreatorDelegate
+	implements InjectorWritterBeforePresent, InjectorWritterInit {
 
 	private final Secured securedAnnotation;
 

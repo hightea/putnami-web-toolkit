@@ -29,8 +29,8 @@ import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterPresent;
 import fr.putnami.pwt.core.mvp.client.Presenter;
 
-public class InjectPresenterCreator extends InjectorCreatorDelegate implements InjectorWritterInit,
-InjectorWritterPresent {
+public class InjectPresenterCreator extends InjectorCreatorDelegate
+	implements InjectorWritterInit, InjectorWritterPresent {
 
 	private final Collection<JMethod> presenterMethods;
 
@@ -53,7 +53,7 @@ InjectorWritterPresent {
 				srcWriter.println("if(place instanceof %s){", placeType.getSimpleSourceName());
 				srcWriter.indent();
 				srcWriter.println("super.%s((%s) place);", presenterMethod.getName(), placeType
-						.getSimpleSourceName());
+					.getSimpleSourceName());
 				srcWriter.outdent();
 				srcWriter.println("}");
 			}

@@ -37,7 +37,7 @@ public class ModelInitializerVisitor extends AbstractVisitor {
 
 			editorModel.setMessageHelper(driver.getMessageHelper());
 			editorModel.initialize(toInitialize, driver.getVisitors().toArray(
-					new Visitor[driver.getVisitors().size()]));
+				new Visitor[driver.getVisitors().size()]));
 		}
 		return true;
 	}

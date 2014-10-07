@@ -27,7 +27,7 @@ public class CommandParam {
 	private final List callbacks;
 
 	public CommandParam(boolean lazy, boolean quiet, Serializer serializer, List params,
-			List callbacks) {
+		List callbacks) {
 		super();
 		this.lazy = lazy;
 		this.quiet = quiet;

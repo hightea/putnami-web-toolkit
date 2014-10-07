@@ -111,14 +111,15 @@ public class ScrollPanel extends AbstractPanel implements CloneableWidget {
 	private void reset() {
 		this.getElement().getStyle().setOverflow(Overflow.AUTO);
 		if (this.offsetTop != null && this.offsetBottom != null) {
-			this.getElement().getStyle().setHeight(
+			this.getElement().getStyle()
+				.setHeight(
 					Document.get().getClientHeight() - this.offsetTop.intValue()
-					- this.offsetBottom.intValue(), Unit.PX);
+						- this.offsetBottom.intValue(), Unit.PX);
 		}
 		if (this.offsetLeft != null && this.offsetRight != null) {
 			this.getElement().getStyle().setWidth(
-					Document.get().getClientWidth() - this.offsetLeft.intValue()
-					- this.offsetRight.intValue(), Unit.PX);
+				Document.get().getClientWidth() - this.offsetLeft.intValue() - this.offsetRight.intValue(),
+				Unit.PX);
 		}
 	}
 }

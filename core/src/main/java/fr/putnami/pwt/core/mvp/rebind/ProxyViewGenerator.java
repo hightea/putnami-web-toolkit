@@ -25,7 +25,7 @@ public class ProxyViewGenerator extends Generator {
 
 	@Override
 	public String generate(TreeLogger logger, GeneratorContext context, String typeName)
-			throws UnableToCompleteException {
+		throws UnableToCompleteException {
 		TypeOracle typeOracle = context.getTypeOracle();
 		assert typeOracle != null;
 
@@ -35,8 +35,8 @@ public class ProxyViewGenerator extends Generator {
 			throw new UnableToCompleteException();
 		}
 
-			ProxyViewCreator proxyCreator = new ProxyViewCreator(placeType);
-			return proxyCreator.create(logger, context);
+		ProxyViewCreator proxyCreator = new ProxyViewCreator(placeType);
+		return proxyCreator.create(logger, context);
 	}
 
 }

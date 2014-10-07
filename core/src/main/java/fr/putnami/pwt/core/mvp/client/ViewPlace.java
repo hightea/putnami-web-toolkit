@@ -70,7 +70,7 @@ public abstract class ViewPlace extends Place {
 		if (obj instanceof ViewPlace) {
 			ViewPlace other = (ViewPlace) obj;
 			return Objects.equal(this.token, other.token) && Objects.equal(this.parent, other.parent)
-					&& Objects.equal(this.getClass().getSimpleName(), other.getClass().getSimpleName());
+				&& Objects.equal(this.getClass().getSimpleName(), other.getClass().getSimpleName());
 		}
 		return false;
 	}

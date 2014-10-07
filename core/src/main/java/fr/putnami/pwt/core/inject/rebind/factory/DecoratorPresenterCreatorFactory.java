@@ -27,7 +27,7 @@ public class DecoratorPresenterCreatorFactory implements InjectorDelegateFactort
 
 	@Override
 	public void createDelegates(JClassType injectableType,
-			Collection<InjectorCreatorDelegate> delegates) {
+		Collection<InjectorCreatorDelegate> delegates) {
 		if (this.isAssignableFrom(injectableType, ViewDecorator.class)) {
 			delegates.add(new InjectDecoratorPresenterCreator());
 		}

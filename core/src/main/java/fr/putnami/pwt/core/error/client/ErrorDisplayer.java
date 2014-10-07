@@ -25,7 +25,9 @@ public interface ErrorDisplayer {
 	 * Error Severity.
 	 */
 	public static enum Severity {
-		INFO, WARNING, DANGER;
+			INFO,
+			WARNING,
+			DANGER;
 	}
 
 	/**

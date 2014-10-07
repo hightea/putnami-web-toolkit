@@ -28,8 +28,8 @@ import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterPresent;
 import fr.putnami.pwt.core.mvp.client.event.MayStopActivityEvent;
 import fr.putnami.pwt.core.mvp.client.event.StopActivityEvent;
 
-public class InjectMayStopActivityCreator extends InjectorCreatorDelegate implements
-InjectorWritterInit, InjectorWritterPresent {
+public class InjectMayStopActivityCreator extends InjectorCreatorDelegate
+	implements InjectorWritterInit, InjectorWritterPresent {
 
 	private final Collection<JMethod> presenterMethods;
 	private final String injectorName;
@@ -47,22 +47,22 @@ InjectorWritterInit, InjectorWritterPresent {
 	@Override
 	public void writePresent(SourceWriter srcWriter) {
 		srcWriter
-		.println("final HandlerRegistrationCollection mayStopRegistrations = new HandlerRegistrationCollection();");
+			.println("final HandlerRegistrationCollection mayStopRegistrations = new HandlerRegistrationCollection();");
 		for (JMethod mayStopMethod : this.presenterMethods) {
 			srcWriter
-			.println("mayStopRegistrations.add(EventBus.get()"
+				.println("mayStopRegistrations.add(EventBus.get()"
 					+ ".addHandlerToSource(MayStopActivityEvent.TYPE, place, new MayStopActivityEvent.Handler() {");
 			srcWriter.indent();
 			srcWriter.println("@Override public void onMayStopActivity(MayStopActivityEvent event) {");
 			srcWriter.indent();
 			srcWriter.println("if (event.getMessage() == null) { event.setMessage(%s.this.%s()); }",
-					this.injectorName, mayStopMethod.getName());
+				this.injectorName, mayStopMethod.getName());
 			srcWriter.outdent();
 			srcWriter.outdent();
 			srcWriter.println("}}));");
 		}
 		srcWriter.println("mayStopRegistrations.add(EventBus.get()"
-				+ ".addHandlerToSource(StopActivityEvent.TYPE, place, new StopActivityEvent.Handler() {");
+			+ ".addHandlerToSource(StopActivityEvent.TYPE, place, new StopActivityEvent.Handler() {");
 		srcWriter.indent();
 		srcWriter.println("@Override public void onStopActivity(StopActivityEvent event) {");
 		srcWriter.indent();

@@ -30,8 +30,8 @@ import fr.putnami.pwt.core.theme.client.CssLink;
 import fr.putnami.pwt.core.theme.client.Theme;
 import fr.putnami.pwt.core.theme.client.ThemeController;
 
-public class InjectThemeCreator extends InjectorCreatorDelegate implements InjectorWritterInit,
-InjectorWritterEntryPoint {
+public class InjectThemeCreator extends InjectorCreatorDelegate
+	implements InjectorWritterInit, InjectorWritterEntryPoint {
 
 	private final List<String> styles = Lists.newArrayList();
 

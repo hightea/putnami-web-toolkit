@@ -28,7 +28,9 @@ public class ButtonGroup extends AbstractPanel implements CloneableWidget {
 	private static final CssStyle STYLE_JUSTIFIED = new SimpleStyle("btn-group-justified");
 
 	public enum Type implements CssStyle {
-		DEFAULT("btn-group"), VERTICAL("btn-group-vertical"), TOOLBAR("btn-toolbar");
+			DEFAULT("btn-group"),
+			VERTICAL("btn-group-vertical"),
+			TOOLBAR("btn-toolbar");
 
 		private final String style;
 
@@ -43,7 +45,10 @@ public class ButtonGroup extends AbstractPanel implements CloneableWidget {
 	}
 
 	public enum Size implements CssStyle {
-		X_SMALL("btn-group-xs"), SMALL("btn-group-sm"), DEFAULT(null), LARGE("btn-group-lg");
+			X_SMALL("btn-group-xs"),
+			SMALL("btn-group-sm"),
+			DEFAULT(null),
+			LARGE("btn-group-lg");
 
 		private final String style;
 

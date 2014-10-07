@@ -123,29 +123,29 @@ public class SimpleDropdown extends AbstractDropdown {
 
 		if (this.open) {
 			this.nativePreviewHandlerRegistration =
-					Event.addNativePreviewHandler(new NativePreviewHandler() {
-						@Override
-						public void onPreviewNativeEvent(NativePreviewEvent event) {
-							if (!SimpleDropdown.this.eventTargetsDropDown(event)) {
-								int type = event.getTypeInt();
-								switch (type) {
-									case Event.ONMOUSEDOWN:
-									case Event.ONTOUCHSTART:
-										SimpleDropdown.this.close();
-										break;
-									default:
-										break;
-								}
+				Event.addNativePreviewHandler(new NativePreviewHandler() {
+					@Override
+					public void onPreviewNativeEvent(NativePreviewEvent event) {
+						if (!SimpleDropdown.this.eventTargetsDropDown(event)) {
+							int type = event.getTypeInt();
+							switch (type) {
+								case Event.ONMOUSEDOWN:
+								case Event.ONTOUCHSTART:
+									SimpleDropdown.this.close();
+									break;
+								default:
+									break;
 							}
 						}
-					});
+					}
+				});
 			this.historyHandlerRegistration =
-					History.addValueChangeHandler(new ValueChangeHandler<String>() {
-						@Override
-						public void onValueChange(ValueChangeEvent<String> event) {
-							SimpleDropdown.this.close();
-						}
-					});
+				History.addValueChangeHandler(new ValueChangeHandler<String>() {
+					@Override
+					public void onValueChange(ValueChangeEvent<String> event) {
+						SimpleDropdown.this.close();
+					}
+				});
 		}
 	}
 }

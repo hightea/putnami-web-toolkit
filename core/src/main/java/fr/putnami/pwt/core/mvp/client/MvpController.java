@@ -43,8 +43,9 @@ import fr.putnami.pwt.core.mvp.client.event.StopActivityEvent.Handler;
 import fr.putnami.pwt.core.mvp.client.event.StopActivityEvent.HasStopActivityHandlers;
 import fr.putnami.pwt.core.mvp.client.util.MvpUtils;
 
-public class MvpController extends PlaceController implements PlaceHistoryMapper, ActivityMapper,
-HasStartActivityHandlers, HasStopActivityHandlers, HasMayStopActivityHandlers {
+public class MvpController extends PlaceController
+	implements PlaceHistoryMapper, ActivityMapper, HasStartActivityHandlers, HasStopActivityHandlers,
+	HasMayStopActivityHandlers {
 
 	private static MvpController instance;
 
@@ -212,7 +213,7 @@ HasStartActivityHandlers, HasStopActivityHandlers, HasMayStopActivityHandlers {
 			this.historyRegistration.removeHandler();
 		}
 		this.historyRegistration =
-				this.historyHandler.register(this, EventBus.get(), this.defaultPlace);
+			this.historyHandler.register(this, EventBus.get(), this.defaultPlace);
 	}
 
 	private void doGo(Place newPlace) {
@@ -232,13 +233,13 @@ HasStartActivityHandlers, HasStopActivityHandlers, HasMayStopActivityHandlers {
 
 	@Override
 	public HandlerRegistration addStartActivityHandler(
-			fr.putnami.pwt.core.mvp.client.event.StartActivityEvent.Handler handler) {
+		fr.putnami.pwt.core.mvp.client.event.StartActivityEvent.Handler handler) {
 		return EventBus.get().addHandler(StartActivityEvent.TYPE, handler);
 	}
 
 	@Override
 	public HandlerRegistration addMayStopActivityHandler(
-			fr.putnami.pwt.core.mvp.client.event.MayStopActivityEvent.Handler handler) {
+		fr.putnami.pwt.core.mvp.client.event.MayStopActivityEvent.Handler handler) {
 		return EventBus.get().addHandler(MayStopActivityEvent.TYPE, handler);
 	}
 }

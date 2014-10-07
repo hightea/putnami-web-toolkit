@@ -71,7 +71,7 @@ public class ErrorBinderVisitor extends AbstractVisitor {
 						message = messageKey;
 					}
 					SimpleError errorToDisplay =
-							new SimpleError(editorError, message, error.getValue(), error.getParameters());
+						new SimpleError(editorError, message, error.getValue(), error.getParameters());
 					toDisplay.add(errorToDisplay);
 					error.consume();
 				}
@@ -94,13 +94,13 @@ public class ErrorBinderVisitor extends AbstractVisitor {
 		}
 		if (fixed.startsWith(ErrorBinderVisitor.JAVAX_VALIDATION_START)) {
 			fixed =
-					fixed.replaceFirst(ErrorBinderVisitor.JAVAX_VALIDATION_START,
-							ErrorBinderVisitor.JAVAX_VALIDATION_START_SUBSTITUTE);
+				fixed.replaceFirst(ErrorBinderVisitor.JAVAX_VALIDATION_START,
+					ErrorBinderVisitor.JAVAX_VALIDATION_START_SUBSTITUTE);
 		}
 		if (fixed.endsWith(ErrorBinderVisitor.JAVAX_VALIDATION_END)) {
 			fixed =
-					fixed.replace(ErrorBinderVisitor.JAVAX_VALIDATION_END,
-							ErrorBinderVisitor.JAVAX_VALIDATION_END_SUBSTITUTE);
+				fixed.replace(ErrorBinderVisitor.JAVAX_VALIDATION_END,
+					ErrorBinderVisitor.JAVAX_VALIDATION_END_SUBSTITUTE);
 		}
 		return fixed;
 	}

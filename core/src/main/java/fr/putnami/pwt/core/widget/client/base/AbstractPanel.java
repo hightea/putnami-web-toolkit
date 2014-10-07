@@ -33,8 +33,8 @@ import fr.putnami.pwt.core.editor.client.Path;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
-public abstract class AbstractPanel extends ComplexPanel implements EditorComposite,
-HasResponsiveVisibility {
+public abstract class AbstractPanel extends ComplexPanel
+	implements EditorComposite, HasResponsiveVisibility {
 	private final Logger logger = Logger.getLogger(this.getClass().getSimpleName());
 
 	private final String tagName;
@@ -101,10 +101,10 @@ HasResponsiveVisibility {
 
 	@Override
 	protected void insert(Widget child, com.google.gwt.user.client.Element container,
-			int beforeIndex, boolean domInsert) {
+		int beforeIndex, boolean domInsert) {
 		if (container != this.element) {
 			this.logger
-			.warning("insert(Widget child, com.google.gwt.user.client.Element container, int beforeIndex, boolean domInsert) should not be used, use insert(Widget child, int beforeIndex, boolean domInsert) instead.");
+				.warning("insert(Widget child, com.google.gwt.user.client.Element container, int beforeIndex, boolean domInsert) should not be used, use insert(Widget child, int beforeIndex, boolean domInsert) instead.");
 		}
 		super.insert(child, container, beforeIndex, domInsert);
 	}
@@ -120,7 +120,7 @@ HasResponsiveVisibility {
 	protected void add(Widget child, com.google.gwt.user.client.Element container) {
 		if (container != this.element) {
 			this.logger
-			.warning("void add(Widget child, com.google.gwt.user.client.Element container) should not be used");
+				.warning("void add(Widget child, com.google.gwt.user.client.Element container) should not be used");
 		}
 		this.addEditor(child);
 		if (child != null) {
@@ -135,7 +135,7 @@ HasResponsiveVisibility {
 	@Override
 	public void add(IsWidget child) {
 		throw new UnsupportedOperationException(
-				"To add a widget to the panel use the append(IsWidget) method");
+			"To add a widget to the panel use the append(IsWidget) method");
 	}
 
 	/**
@@ -163,7 +163,7 @@ HasResponsiveVisibility {
 	@Override
 	public Iterable<Editor> getEditors() {
 		return this.editorChildren == null ? Collections.EMPTY_SET : Iterables
-				.unmodifiableIterable(this.editorChildren);
+			.unmodifiableIterable(this.editorChildren);
 	}
 
 	@Override

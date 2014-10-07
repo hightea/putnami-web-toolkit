@@ -29,7 +29,7 @@ public class ModelCreatorFactory implements InjectorDelegateFactorty {
 
 	@Override
 	public void createDelegates(JClassType injectableType,
-			Collection<InjectorCreatorDelegate> delegates) {
+		Collection<InjectorCreatorDelegate> delegates) {
 		Collection<JField> fields = InjectCreatorUtil.listFields(injectableType, InjectModel.class);
 		for (JField field : fields) {
 			delegates.add(new InjectModelCreator(field));

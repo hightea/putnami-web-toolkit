@@ -32,7 +32,10 @@ public class Image extends AbstractWidget implements EditorOutput<String> {
 	private static final String PROP_HEIGHT = "height";
 
 	public enum Type implements CssStyle {
-		DEFAULT(null), ROUNDED("img-rounded"), CIRCLE("img-circle"), THUMBNAIL("img-thumbnail");
+			DEFAULT(null),
+			ROUNDED("img-rounded"),
+			CIRCLE("img-circle"),
+			THUMBNAIL("img-thumbnail");
 
 		private final String style;
 
@@ -156,11 +159,11 @@ public class Image extends AbstractWidget implements EditorOutput<String> {
 
 		if (this.widthPx > 0) {
 			imgStyle.setPropertyPx(this.keepPropertions ? Image.PROP_MAX_WIDTH : Image.PROP_WIDTH,
-					this.widthPx);
+				this.widthPx);
 		}
 		if (this.heightPx > 0) {
 			imgStyle.setPropertyPx(this.keepPropertions ? Image.PROP_MAX_HEIGHT : Image.PROP_HEIGHT,
-					this.heightPx);
+				this.heightPx);
 		}
 	}
 

@@ -39,8 +39,8 @@ import fr.putnami.pwt.core.widget.client.Nav;
 import fr.putnami.pwt.core.widget.client.helper.CompositeFocusHelper;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public abstract class AbstractDropdown extends AbstractPanel implements ClickHandler,
-KeyPressHandler, Focusable, HasAllFocusHandlers {
+public abstract class AbstractDropdown extends AbstractPanel
+	implements ClickHandler, KeyPressHandler, Focusable, HasAllFocusHandlers {
 
 	private static final CssStyle STYLE_CARET = new SimpleStyle("caret");
 

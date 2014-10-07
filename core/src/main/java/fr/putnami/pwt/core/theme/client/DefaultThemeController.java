@@ -47,7 +47,9 @@ public class DefaultThemeController extends ThemeController {
 
 	private boolean isInit = false;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see fr.putnami.pwt.core.theme.client.ThemeController#getDefaultTheme()
 	 */
 	@Override
@@ -55,8 +57,12 @@ public class DefaultThemeController extends ThemeController {
 		return this.defaultTheme;
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.putnami.pwt.core.theme.client.ThemeController#installTheme(fr.putnami.pwt.core.theme.client.Theme)
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * fr.putnami.pwt.core.theme.client.ThemeController#installTheme(fr.putnami.pwt.core.theme.client
+	 * .Theme)
 	 */
 	@Override
 	public void installTheme(Theme theme) {
@@ -70,7 +76,9 @@ public class DefaultThemeController extends ThemeController {
 		this.resetTheme();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see fr.putnami.pwt.core.theme.client.ThemeController#installDefaultTheme()
 	 */
 	@Override
@@ -78,7 +86,9 @@ public class DefaultThemeController extends ThemeController {
 		this.installTheme(null);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see fr.putnami.pwt.core.theme.client.ThemeController#resetTheme()
 	 */
 	@Override
@@ -136,13 +146,15 @@ public class DefaultThemeController extends ThemeController {
 		if (this.head == null) {
 			Element elt = Document.get().getElementsByTagName("head").getItem(0);
 			assert elt != null : "The host HTML page does not have a <head> element"
-					+ " which is required by this injector";
+				+ " which is required by this injector";
 			this.head = HeadElement.as(elt);
 		}
 		return this.head;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see fr.putnami.pwt.core.theme.client.ThemeController#getIconStyle(java.lang.String)
 	 */
 	@Override

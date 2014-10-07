@@ -23,8 +23,8 @@ import fr.putnami.pwt.core.inject.rebind.base.InjectorCreatorDelegate;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterConstructor;
 import fr.putnami.pwt.core.inject.rebind.base.InjectorWritterInit;
 
-public class InjectResourceCreator extends InjectorCreatorDelegate implements InjectorWritterInit,
-InjectorWritterConstructor {
+public class InjectResourceCreator extends InjectorCreatorDelegate
+	implements InjectorWritterInit, InjectorWritterConstructor {
 
 	private final JField resourceField;
 
@@ -40,6 +40,6 @@ InjectorWritterConstructor {
 	@Override
 	public void writeConstructor(SourceWriter srcWriter) {
 		srcWriter.println("%s = GWT.create(%s.class);", this.resourceField.getName(),
-				this.resourceField.getType().getQualifiedSourceName());
+			this.resourceField.getType().getQualifiedSourceName());
 	}
 }

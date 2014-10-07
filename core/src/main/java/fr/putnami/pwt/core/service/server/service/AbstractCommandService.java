@@ -35,8 +35,8 @@ import fr.putnami.pwt.core.service.shared.domain.CommandRequest;
 import fr.putnami.pwt.core.service.shared.domain.CommandResponse;
 import fr.putnami.pwt.core.service.shared.service.CommandService;
 
-public abstract class AbstractCommandService extends AbstractRemoteServiceServlet implements
-CommandService, SerializationPolicyProvider {
+public abstract class AbstractCommandService extends AbstractRemoteServiceServlet
+	implements CommandService, SerializationPolicyProvider {
 
 	private final Log logger = LogFactory.getLog(this.getClass());
 
@@ -52,7 +52,7 @@ CommandService, SerializationPolicyProvider {
 
 		for (CommandRequest request : commands) {
 			CommandExecutor executor =
-					this.executorRegistry.resolveCommandExecutor(request.getCommandDefinition());
+				this.executorRegistry.resolveCommandExecutor(request.getCommandDefinition());
 			result.add(executor.executeCommand(request));
 		}
 
@@ -61,23 +61,23 @@ CommandService, SerializationPolicyProvider {
 
 	@Override
 	public SerializationPolicy getSerializationPolicy(String moduleBaseURL,
-			String serializationPolicyStrongName) {
+		String serializationPolicyStrongName) {
 		return CommandSerializationPolicy.get();
 	}
 
 	@Override
 	protected void processPost(HttpServletRequest request, HttpServletResponse response)
-			throws Throwable {
+		throws Throwable {
 		try {
 			String requestPayload = this.readContent(request);
 			RPCRequest rpcRequest = RPC.decodeRequest(requestPayload, this.getClass(), this);
 
 			String responsePayload =
-					RPC.invokeAndEncodeResponse(this, rpcRequest.getMethod(), rpcRequest.getParameters(),
-							rpcRequest.getSerializationPolicy(), rpcRequest.getFlags());
+				RPC.invokeAndEncodeResponse(this, rpcRequest.getMethod(), rpcRequest.getParameters(),
+					rpcRequest.getSerializationPolicy(), rpcRequest.getFlags());
 
 			boolean gzipEncode =
-					RPCServletUtils.acceptsGzipEncoding(request)
+				RPCServletUtils.acceptsGzipEncoding(request)
 					&& RPCServletUtils.exceedsUncompressedContentLengthLimit(responsePayload);
 
 			RPCServletUtils.writeResponse(null, response, responsePayload, gzipEncode);

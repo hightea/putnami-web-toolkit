@@ -32,7 +32,7 @@ public class CommandDefinition implements Serializable {
 	}
 
 	public CommandDefinition(String serviceName, String methodName, String returnType,
-			String... paramTypes) {
+		String... paramTypes) {
 		super();
 		this.serviceName = serviceName;
 		this.methodName = methodName;
@@ -92,9 +92,9 @@ public class CommandDefinition implements Serializable {
 		if (obj instanceof CommandDefinition) {
 			CommandDefinition other = (CommandDefinition) obj;
 			return Objects.equal(this.serviceName, other.serviceName)
-					&& Objects.equal(this.methodName, other.methodName)
-					&& Objects.equal(this.returnType, other.returnType)
-					&& Objects.equal(this.paramTypes, other.paramTypes);
+				&& Objects.equal(this.methodName, other.methodName)
+				&& Objects.equal(this.returnType, other.returnType)
+				&& Objects.equal(this.paramTypes, other.paramTypes);
 		}
 		return false;
 	}

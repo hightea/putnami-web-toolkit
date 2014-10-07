@@ -65,7 +65,7 @@ public class EditorFactoryManager {
 	}
 
 	public <A, B extends Editor> EditorInput<A> createInputForType(Class<?> propertyType,
-			Context<B> context) {
+		Context<B> context) {
 		InputFactory factory = this.inputFactories.get(propertyType);
 		if (factory == null) {
 			for (Class<?> parentClass : ModelUtils.getTypeHierachy(propertyType)) {
@@ -83,7 +83,7 @@ public class EditorFactoryManager {
 	}
 
 	public <A, B extends Editor> EditorOutput<A> createOutputForType(Class<?> propertyType,
-			Context<B> context) {
+		Context<B> context) {
 		OutputFactory factory = this.outputFactories.get(propertyType);
 		if (factory == null) {
 			for (Class<?> parentClass : ModelUtils.getTypeHierachy(propertyType)) {

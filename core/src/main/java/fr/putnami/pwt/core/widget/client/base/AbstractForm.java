@@ -50,14 +50,16 @@ import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
-public abstract class AbstractForm<T> extends AbstractHTMLPanel implements EditorLeaf,
-EditorModel<T>, EditorOutput<T>, EditorInput<T>, HasReadonly, HasDrawable,
-HasDriver<T, ModelDriver<T>>, HasFormType, HasDirtyHandlers, HasFlushSuccessHandlers,
-HasFlushErrorHandlers, HasResetDisplayHandlers, HasDataValidationHandlers {
+public abstract class AbstractForm<T> extends AbstractHTMLPanel
+	implements EditorLeaf, EditorModel<T>, EditorOutput<T>, EditorInput<T>, HasReadonly, HasDrawable,
+	HasDriver<T, ModelDriver<T>>, HasFormType, HasDirtyHandlers, HasFlushSuccessHandlers,
+	HasFlushErrorHandlers, HasResetDisplayHandlers, HasDataValidationHandlers {
 
 	public enum Layout implements CssStyle {
 
-		BASIC("form"), INLINE("form-inline"), HORIZONTAL("form-horizontal");
+			BASIC("form"),
+			INLINE("form-inline"),
+			HORIZONTAL("form-horizontal");
 
 		private final String style;
 

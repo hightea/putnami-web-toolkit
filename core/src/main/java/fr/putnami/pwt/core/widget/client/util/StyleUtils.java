@@ -109,7 +109,7 @@ public final class StyleUtils {
 	public static void initStyle(Widget w) {
 		if (w != null && w.getElement() != null) {
 			String widgetClassName =
-					"p-" + CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_HYPHEN, w.getClass().getSimpleName());
+				"p-" + CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_HYPHEN, w.getClass().getSimpleName());
 			w.getElement().addClassName(widgetClassName);
 		}
 	}

@@ -46,7 +46,7 @@ import fr.putnami.pwt.core.widget.client.util.FocusUtils;
 public final class CompositeFocusHelper implements HasAllFocusHandlers {
 
 	public static CompositeFocusHelper createFocusHelper(IsWidget containerWidget,
-			HasFocusHandlers... focusContents) {
+		HasFocusHandlers... focusContents) {
 		assert containerWidget != null : "containerWidget cannot be null";
 		assert containerWidget.asWidget() != null : "containerWidget.asWidget() cannot be null";
 		return new CompositeFocusHelper(containerWidget.asWidget(), focusContents);
@@ -62,7 +62,7 @@ public final class CompositeFocusHelper implements HasAllFocusHandlers {
 					public void execute() {
 						Element activeElement = FocusUtils.getActiveElement();
 						if (activeElement != null
-								&& !CompositeFocusHelper.this.isOrHasChildOfContainerOrPartner(activeElement)) {
+							&& !CompositeFocusHelper.this.isOrHasChildOfContainerOrPartner(activeElement)) {
 							CompositeFocusHelper.this.blur();
 						}
 					}

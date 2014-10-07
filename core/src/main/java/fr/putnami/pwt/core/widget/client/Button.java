@@ -43,8 +43,9 @@ import fr.putnami.pwt.core.widget.client.event.ButtonEvent.HasButtonHandlers;
 import fr.putnami.pwt.core.widget.client.util.AnchorUtils;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public class Button<T> extends AbstractWidget implements HasHTML, EditorValue<T>, EditorLabel,
-HasButtonHandlers, HasAllFocusHandlers, Focusable {
+public class Button<T> extends AbstractWidget
+	implements HasHTML, EditorValue<T>, EditorLabel, HasButtonHandlers, HasAllFocusHandlers,
+	Focusable {
 
 	private static final CssStyle STYLE_BUTTON = new SimpleStyle("btn");
 	private static final CssStyle STYLE_BLOCK = new SimpleStyle("btn-block");
@@ -52,8 +53,14 @@ HasButtonHandlers, HasAllFocusHandlers, Focusable {
 	private static final CssStyle STYLE_DISABLED = new SimpleStyle("disabled");
 
 	public enum Type implements CssStyle {
-		DEFAULT("btn-default"), LINK("btn-link"), SUCCESS("btn-success"), PRIMARY("btn-primary"), INFO(
-				"btn-info"), WARNING("btn-warning"), DANGER("btn-danger"), ICON("btn-icon");
+			DEFAULT("btn-default"),
+			LINK("btn-link"),
+			SUCCESS("btn-success"),
+			PRIMARY("btn-primary"),
+			INFO("btn-info"),
+			WARNING("btn-warning"),
+			DANGER("btn-danger"),
+			ICON("btn-icon");
 
 		private final String style;
 
@@ -68,7 +75,10 @@ HasButtonHandlers, HasAllFocusHandlers, Focusable {
 	}
 
 	public enum Size implements CssStyle {
-		X_SMALL("btn-xs"), SMALL("btn-sm"), DEFAULT(null), LARGE("btn-lg");
+			X_SMALL("btn-xs"),
+			SMALL("btn-sm"),
+			DEFAULT(null),
+			LARGE("btn-lg");
 
 		private final String style;
 

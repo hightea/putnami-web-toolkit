@@ -67,7 +67,7 @@ public class Path implements Iterable<PathElement> {
 			if (obj instanceof PathElement) {
 				PathElement other = (PathElement) obj;
 				return Objects.equal(this.elementName, other.elementName)
-						&& Objects.equal(this.indexKey, other.indexKey);
+					&& Objects.equal(this.indexKey, other.indexKey);
 			}
 			return false;
 		}

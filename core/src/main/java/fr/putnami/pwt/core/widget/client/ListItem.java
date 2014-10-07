@@ -88,9 +88,10 @@ import fr.putnami.pwt.core.widget.client.base.AbstractHTMLPanel;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public class ListItem extends AbstractHTMLPanel implements HasDrawable, Focusable,
-HasAllDragAndDropHandlers, HasAllMouseHandlers, HasClickHandlers, HasDoubleClickHandlers,
-HasAllKeyHandlers, HasAllFocusHandlers, HasAllGestureHandlers, HasAllTouchHandlers {
+public class ListItem extends AbstractHTMLPanel
+	implements HasDrawable, Focusable, HasAllDragAndDropHandlers, HasAllMouseHandlers,
+	HasClickHandlers, HasDoubleClickHandlers, HasAllKeyHandlers, HasAllFocusHandlers,
+	HasAllGestureHandlers, HasAllTouchHandlers {
 
 	private static final FocusImpl FOCUS_IMPL = FocusImpl.getFocusImplForPanel();
 

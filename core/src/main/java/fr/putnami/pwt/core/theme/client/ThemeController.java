@@ -16,7 +16,6 @@ package fr.putnami.pwt.core.theme.client;
 
 import com.google.gwt.core.client.GWT;
 
-
 /**
  * The ThemeController manages the webapp theming.
  *
@@ -37,7 +36,6 @@ import com.google.gwt.core.client.GWT;
  * @since 1.0
  */
 public abstract class ThemeController {
-
 
 	private static ThemeController instance;
 

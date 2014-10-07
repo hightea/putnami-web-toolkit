@@ -44,12 +44,12 @@ import fr.putnami.pwt.core.widget.client.mask.StaticStringTokenHelper;
 public class InputNumber<N extends Number> extends AbstractInputBox<TextBox, N> {
 
 	public static enum NumberType {
-		FLOAT(FloatRenderer.get(), FloatParser.get()),
-		DOUBLE(DoubleRenderer.instance(), DoubleParser.instance()),
-		BIG_DECIMAL(BigDecimalRenderer.get(), BigDecimalParser.get()),
-		INTEGER(IntegerRenderer.instance(), IntegerParser.instance()),
-		LONG(LongRenderer.instance(), LongParser.instance()),
-		BIG_INTEGER(BigIntegerRenderer.get(), BigIntegerParser.get());
+			FLOAT(FloatRenderer.get(), FloatParser.get()),
+			DOUBLE(DoubleRenderer.instance(), DoubleParser.instance()),
+			BIG_DECIMAL(BigDecimalRenderer.get(), BigDecimalParser.get()),
+			INTEGER(IntegerRenderer.instance(), IntegerParser.instance()),
+			LONG(LongRenderer.instance(), LongParser.instance()),
+			BIG_INTEGER(BigIntegerRenderer.get(), BigIntegerParser.get());
 
 		private final Renderer<? extends Number> renderer;
 		private final Parser<? extends Number> parser;
@@ -61,7 +61,7 @@ public class InputNumber<N extends Number> extends AbstractInputBox<TextBox, N> 
 	}
 
 	protected static final NumberConstants NUMBER_CONSTANTS = LocaleInfo.getCurrentLocale()
-			.getNumberConstants();
+		.getNumberConstants();
 
 	protected final MaskValueBoxHelper maskHelper;
 
@@ -130,19 +130,19 @@ public class InputNumber<N extends Number> extends AbstractInputBox<TextBox, N> 
 		this.maskHelper.reset();
 		if (this.signed) {
 			this.maskHelper.addTokenHelper(new StaticStringTokenHelper(InputNumber.NUMBER_CONSTANTS
-					.minusSign(), true));
+				.minusSign(), true));
 		}
 		this.maskHelper.addTokenHelper(new IntegerTokenHelper(0, Integer.MIN_VALUE, Integer.MAX_VALUE,
-				-1, "0"));
+			-1, "0"));
 
 		switch (this.type) {
 			case FLOAT:
 			case DOUBLE:
 			case BIG_DECIMAL:
 				this.maskHelper.addTokenHelper(new StaticStringTokenHelper(InputNumber.NUMBER_CONSTANTS
-						.decimalSeparator(), true, ',', '.'));
+					.decimalSeparator(), true, ',', '.'));
 				this.maskHelper.addTokenHelper(new IntegerTokenHelper(0, Integer.MIN_VALUE,
-						Integer.MAX_VALUE, -1, "0"));
+					Integer.MAX_VALUE, -1, "0"));
 				break;
 			default:
 				break;

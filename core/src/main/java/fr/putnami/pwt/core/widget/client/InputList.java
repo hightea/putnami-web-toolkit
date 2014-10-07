@@ -63,9 +63,9 @@ import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent.Handler;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public class InputList<T> extends List implements EditorCollection<T>, EditorInput<Collection<T>>,
-EditorModel<T>, HasDrawable, HasEditorProvider, HasInputEditorFactory<T>,
-HasOutputEditorFactory<T> {
+public class InputList<T> extends List
+	implements EditorCollection<T>, EditorInput<Collection<T>>, EditorModel<T>, HasDrawable,
+	HasEditorProvider, HasInputEditorFactory<T>, HasOutputEditorFactory<T> {
 
 	private static final CssStyle STYLE_ITEM_CONTAINER = new SimpleStyle("list-element-container");
 	private static final CssStyle STYLE_CLEAR = new SimpleStyle("clearfix");
@@ -101,11 +101,11 @@ HasOutputEditorFactory<T> {
 		}
 	}
 
-	private class InternalListItem extends ListItem implements EditorValue<T>,
-	BlurHandler, FocusHandler {
+	private class InternalListItem extends ListItem
+		implements EditorValue<T>, BlurHandler, FocusHandler {
 
 		private final HandlerRegistrationCollection registrationCollection =
-				new HandlerRegistrationCollection();
+			new HandlerRegistrationCollection();
 
 		private final Anchor deleteButton = new Anchor("&times;");
 		private final SimplePanel container = new SimplePanel();
@@ -181,8 +181,8 @@ HasOutputEditorFactory<T> {
 		public void onFocus(FocusEvent event) {
 			if (this.input == null) {
 				this.input =
-						InputList.this.editorProvider.getEditorForTraversal(false, InputList.this.items
-								.indexOf(this));
+					InputList.this.editorProvider.getEditorForTraversal(false, InputList.this.items
+						.indexOf(this));
 			}
 			if (!this.hasErrors()) {
 				this.input.edit(this.itemValue);
@@ -224,8 +224,8 @@ HasOutputEditorFactory<T> {
 		public void redraw() {
 			if (this.output == null) {
 				this.output =
-						InputList.this.editorProvider.getEditorForTraversal(true, InputList.this.items
-								.indexOf(this));
+					InputList.this.editorProvider.getEditorForTraversal(true, InputList.this.items
+						.indexOf(this));
 			}
 			this.output.edit(this.itemValue);
 			if (this.input != null && !this.hasErrors()) {
@@ -433,7 +433,7 @@ HasOutputEditorFactory<T> {
 	@Override
 	public Iterable<Error> getErrors() {
 		return this.errors == null ? Collections.<Error> emptyList() : Iterables
-				.unmodifiableIterable(this.errors);
+			.unmodifiableIterable(this.errors);
 	}
 
 	@Override
