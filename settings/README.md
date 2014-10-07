@@ -20,17 +20,19 @@ Use "UTF-8"
 
 Window->Preferences->General->Editors->Text Editors->Spelling
 Enable spell checking
-Use "settings/english.dictionary".
+Use "settings/eclipse/english.dictionary".
 
 ## Code style/formatting ##
 
 Window->Preferences->Java->Code Style->Formatter->Import...
-  settings/code-style/pwt-format.xml
+  settings/eclipse/pwt-format.xml
+Window->Preferences->Java->Code Style->Clean up->Import...
+  settings/eclipse/pwt-cleanup.xml
 
 ## Import organization ##
 
 Window->Preferences->Java->Code Style->Organize Imports->Import...
-  settings/code-style/pwt.importorder
+  settings/eclipse/pwt.importorder
 
 ## Member sort order ##
 
