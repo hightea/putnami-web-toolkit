@@ -217,14 +217,18 @@
       <property name="severity" value="error"/>
     </module>
     <module name="ForbidReturnInFinalBlockCheck">
-      <property name="severity" value="error"/>
+      <property name="severity" value="ignore"/>
+      <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="error"/>
     </module>
     <module name="MapIterationInForEachLoop">
+      <property name="severity" value="ignore"/>
       <property name="proposeKeySetUsage" value="true"/>
       <property name="proposeEntrySetUsage" value="true"/>
+      <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
     </module>
     <module name="RedundantReturn">
-      <property name="severity" value="error"/>
+      <property name="severity" value="ignore"/>
+      <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="error"/>
     </module>
     <module name="EmptyBlock">
       <property name="severity" value="error"/>

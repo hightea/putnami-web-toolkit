@@ -62,12 +62,15 @@ Window->Preferences->Java->Compiler->Errors/Warnings
 
 
 ### Code Style ###
+```
 WARNING - Non-staticaccess to static member
 ERROR - Parameter assignment
 ERROR - Method with a constructor name
+```
 
 ### Potential programming problems ###
-ERROR - Comparing indentical values
+```
+ERROR - Comparing identical values
 ERROR - Assignment has no effect
 ERROR - Possible accidental boolean assignment
 ERROR - Using a char array in string concatentation
@@ -82,6 +85,7 @@ WARNING - Resource leak
 IGNORE - Serializable class without serialVersionUID
 ERROR - Missing synchronized modifier on inherited method
 ERROR - Class overrides 'equals()' but not 'hashCode()'
+```
 
 ### Name shadowing and conflicts ###
 all except "Local variable" hiding
@@ -90,35 +94,42 @@ all except "Local variable" hiding
 all expect "Deprecated API"
 
 ### Unnecessary code ###
+```
 ERROR - Value of local variable is not used
-WARNING - Value of parameter is not used (checked Ingnore in ovveriding and ...)
+WARNING - Value of parameter is not used (checked Ignore in overriding and ...)
 WARNING - Unused type parameter (checked Ignore unsuded parameters documented with '@param' tag)
-ERROR - Unsuded import
+ERROR - Unused import
 ERROR - Unused private member
 ERROR - Unnecessary 'else' statement
 ERROR - Unnecessary cast or 'instanceof'
 ERROR - Unnecessary declaration of thrown exception (checked all sub items)
-ERROR - Unuser 'break' or 'continue' label
+ERROR - Unused 'break' or 'continue' label
 ERROR - Redundant super interface
+```
 
 ### Generic types ###
+```
 WARNING - Unchecked generic type operation
 WARNING - Usage of a raw type
 WARNING - Generic type parameter declared with a final type bound
 IGNORE - Redundant type arguments
+```
 
 ### Annotations ###
+```
 ERROR - Missing '@Override' annotation (Checked Include implementations of...)
 WARNING - Missing '@Deprecated' annotation
 ERROR - Annotation is used as super interface
 ERROR - Unhandled token in '@SuppressWarnings' (checked Enable '@SuppressWarnings' annontations)
 ERROR - Unused '@SuppressWarnings' token (unchecked Suppress optional error with '@SuppressWarnings')
+```
 
 ### Null analysis ###
+```
 ERROR - Null pointer access
-IGNORE - Potential null pointeter access
+IGNORE - Potential null pointer access
 IGNORE - Redundant null check
-
+```
 
 # Checkstyle #
 
@@ -126,7 +137,7 @@ Checkstyle is used to enforce good programming style. Its use in
 Eclipse is optional, since it is also run as part of the acceptance
 test suite.
 
-1. Install Checkstyle version 5.7.
+1. Install the Checkstyle plugin version 5.7.
 
 The Eclipse Checkstyle plugin can be found at:
   http://eclipse-cs.sourceforge.net/
@@ -138,4 +149,22 @@ Set the Type to "External Configuration File"
 Set the Name to "PWT Checks" (important)
 Set the location to "settings/checkstyle/pwt-checkstyle.xml".
 Suggested: Check "Protect Checkstyle configuration file".
+Click "Ok".
+
+# Findbugs #
+
+We also use Findbugs to enforce good programming style. Its use in
+Eclipse is optional, since it is also run as part of the acceptance
+test suite.
+
+1. Install the FindBugs plugin
+
+The Eclipse Findbugs plugin can be found at:
+  http://findbugs.sourceforge.net/manual/eclipse.html
+
+2. Add PWT exclude filter file:
+
+Window->Preferences->Java->FindBugs->Filter files
+Click on the "Add..." button to add an exclude filter file.
+Select the following file  "settings/findbugs/excludeFilter.xml".
 Click "Ok".
