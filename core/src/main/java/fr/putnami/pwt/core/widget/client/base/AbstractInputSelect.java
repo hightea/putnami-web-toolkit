@@ -154,7 +154,7 @@ HasPlaceholder {
 		}
 	}
 
-	private SelectRenderer<T, U> selectRenderer = new SelectRendererImpl();;
+	private SelectRenderer<T, U> selectRenderer = new SelectRendererImpl();
 	private SelectItemSelectionHandler<T, U> selectionHandler;
 
 	private final KeyPressHandler keyPressHandler = new KeyPressHandler();

@@ -14,11 +14,9 @@
  */
 package fr.putnami.pwt.doc.shared.page.sample.constants;
 
-import com.google.gwt.i18n.client.ConstantsWithLookup;
-
 import fr.putnami.pwt.core.editor.shared.constant.ValidationConstants;
 
-public interface SampleConstants extends ConstantsWithLookup, ValidationConstants {
+public interface SampleConstants extends ValidationConstants {
 
 	@DefaultStringValue("Save")
 	String saveButton();

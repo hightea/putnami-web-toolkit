@@ -44,8 +44,6 @@ public class Navbar extends AbstractPanel implements CloneableWidget {
 	private static final CssStyle STYLE_NAV_BUTTON = new SimpleStyle("navbar-btn");
 	private static final CssStyle STYLE_NAVBAR_LEFT = new SimpleStyle("navbar-left");
 	private static final CssStyle STYLE_NAVBAR_RIGHT = new SimpleStyle("navbar-right");
-	private static final CssStyle STYLE_NAVBAR_TEXT = new SimpleStyle("navbar-text");
-	private static final CssStyle STYLE_NAVBAR_LINK = new SimpleStyle("navbar-link");
 	private static final CssStyle STYLE_COLLAPSE = new SimpleStyle("navbar-collapse");
 	private static final CssStyle STYLE_TEXT_MUTED = new SimpleStyle("text-muted");
 

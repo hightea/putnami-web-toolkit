@@ -26,11 +26,6 @@ public interface Visitor {
 
 	class VisitorComparator implements Comparator<Visitor>, Serializable {
 
-		/**
-		 *
-		 */
-		private static final long serialVersionUID = 9143189503809619165L;
-
 		@Override
 		public int compare(Visitor o1, Visitor o2) {
 			if (o1 == null || o2 == null) {

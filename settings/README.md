@@ -2,7 +2,7 @@ Eclipse setup instructions
 ===================
 
 These instructions are intended for contributors to the PWT source
-code repository that want to run the Eclipse IDE. 
+code repository that want to run the Eclipse IDE.
 It describes how to configure Eclipse for the correct coding styles and how to setup a PWT project.
 
 
@@ -54,34 +54,69 @@ Second, members in the same category should be sorted by visibility.
 
 Third, within a category/visibility combination, members should be sorted
 alphabetically.
- 
+
 ## Compiler errors & warnings ##
 Window->Preferences->Java->Compiler->Errors/Warnings
 
-The following errors are suggested.
 
-Code Style:
-- Method with a constructor name
+### Code Style ###
+WARNING - Non-staticaccess to static member
+ERROR - Parameter assignment
+ERROR - Method with a constructor name
 
-Potential programming problems:
-- Assignment has no effect
-- Accidental boolean assignment
-- 'finally' does not complete normally
-- Using a char array in string concatentation
-- Hidden catch block
-- Inexact type match for vararg arguments
+### Potential programming problems ###
+ERROR - Comparing indentical values
+ERROR - Assignment has no effect
+ERROR - Possible accidental boolean assignment
+ERROR - Using a char array in string concatentation
+ERROR - Inexact type match for vararg arguments
+ERROR - Empty statement
+WARNING - Unused object allocation
+ERROR - Incomplete 'switch' cases on enum
+ERROR - Hidden catch block
+ERROR - 'finally' does not complete normally
+ERROR - Dead code
+WARNING - Resource leak
+IGNORE - Serializable class without serialVersionUID
+ERROR - Missing synchronized modifier on inherited method
+ERROR - Class overrides 'equals()' but not 'hashCode()'
 
-Name shadowing and conflicts: all except "Local variable" hiding
+### Name shadowing and conflicts ###
+all except "Local variable" hiding
 
-Deprecated and restricted API: all
+### Deprecated and restricted API: ###
+all expect "Deprecated API"
 
-Unnecessary code: all except "Unnecessary 'else' statement"
+### Unnecessary code ###
+ERROR - Value of local variable is not used
+WARNING - Value of parameter is not used (checked Ingnore in ovveriding and ...)
+WARNING - Unused type parameter (checked Ignore unsuded parameters documented with '@param' tag)
+ERROR - Unsuded import
+ERROR - Unused private member
+ERROR - Unnecessary 'else' statement
+ERROR - Unnecessary cast or 'instanceof'
+ERROR - Unnecessary declaration of thrown exception (checked all sub items)
+ERROR - Unuser 'break' or 'continue' label
+ERROR - Redundant super interface
 
-Generic types: all except "Generic type parameter declared with final type bound"
+### Generic types ###
+WARNING - Unchecked generic type operation
+WARNING - Usage of a raw type
+WARNING - Generic type parameter declared with a final type bound
+IGNORE - Redundant type arguments
 
-Annotations:
-- Annotation is used as super interface
-- Enable @SuppressWarnings annotations
+### Annotations ###
+ERROR - Missing '@Override' annotation (Checked Include implementations of...)
+WARNING - Missing '@Deprecated' annotation
+ERROR - Annotation is used as super interface
+ERROR - Unhandled token in '@SuppressWarnings' (checked Enable '@SuppressWarnings' annontations)
+ERROR - Unused '@SuppressWarnings' token (unchecked Suppress optional error with '@SuppressWarnings')
+
+### Null analysis ###
+ERROR - Null pointer access
+IGNORE - Potential null pointeter access
+IGNORE - Redundant null check
+
 
 # Checkstyle #
 
@@ -102,5 +137,3 @@ Set the Name to "PWT Checks" (important)
 Set the location to "settings/checkstyle/pwt-checkstyle.xml".
 Suggested: Check "Protect Checkstyle configuration file".
 Click "Ok".
-
-

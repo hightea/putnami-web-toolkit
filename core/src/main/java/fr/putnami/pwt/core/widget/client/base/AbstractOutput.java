@@ -22,10 +22,9 @@ import com.google.gwt.user.client.ui.Widget;
 
 import fr.putnami.pwt.core.editor.client.EditorLeaf;
 import fr.putnami.pwt.core.editor.client.EditorOutput;
-import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public abstract class AbstractOutput<T> extends Widget implements CloneableWidget, EditorLeaf,
+public abstract class AbstractOutput<T> extends Widget implements EditorLeaf,
 EditorOutput<T>, HasResponsiveVisibility {
 
 	private HandlerManager handlerManager;

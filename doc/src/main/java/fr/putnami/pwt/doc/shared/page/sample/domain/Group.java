@@ -22,10 +22,6 @@ import java.util.List;
 
 public class Group implements Serializable {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 6962973768949381789L;
 	private String name;
 	private int memberSize;
 	private List<Contact> members = Lists.newArrayList();
@@ -55,7 +51,8 @@ public class Group implements Serializable {
 	}
 
 	public int getMemberSize() {
-		return this.members == null ? 0 : this.members.size();
+		this.memberSize = this.members == null ? 0 : this.members.size();
+		return memberSize;
 	}
 
 	public void setMemberSize(int memberSize) {

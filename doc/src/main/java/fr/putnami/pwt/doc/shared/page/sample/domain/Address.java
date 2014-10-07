@@ -21,10 +21,6 @@ import java.io.Serializable;
 
 public class Address implements Serializable {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1390222256016912541L;
 	public String street;
 	public String postCode;
 	public String city;

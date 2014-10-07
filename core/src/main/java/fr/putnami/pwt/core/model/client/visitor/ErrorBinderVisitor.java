@@ -84,10 +84,6 @@ public class ErrorBinderVisitor extends AbstractVisitor {
 		return true;
 	}
 
-	private boolean looksLikeMessageKey(String messageKey) {
-		return messageKey != null && messageKey.startsWith("{") && messageKey.endsWith("}");
-	}
-
 	private String fixMessageKey(String messageKey) {
 		if (messageKey == null) {
 			return null;

@@ -18,11 +18,10 @@ import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.IsWidget;
 
-import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.widget.client.base.AbstractWidget;
 import fr.putnami.pwt.core.widget.client.util.HTMLUtils;
 
-public class Text extends AbstractWidget implements HasText, CloneableWidget {
+public class Text extends AbstractWidget implements HasText {
 
 	private final SpanElement span;
 	private String text;

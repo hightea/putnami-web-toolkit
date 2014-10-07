@@ -62,7 +62,7 @@ ValueChangeHandler<String> {
 	@Override
 	public void onValueChange(ValueChangeEvent<String> event) {
 		this.setActive(false);
-	};
+	}
 
 	@Override
 	public void add(IsWidget w) {

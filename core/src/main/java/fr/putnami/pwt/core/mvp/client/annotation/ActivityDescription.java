@@ -30,7 +30,7 @@ public @interface ActivityDescription {
 
 	Class<? extends IsWidget> view();
 
-	Class<? extends ViewDecorator> viewDecorator() default ViewDecorator.class;;
+	Class<? extends ViewDecorator> viewDecorator() default ViewDecorator.class;
 
 	Class<? extends PlaceTokenizer> placeTokenizer() default PlaceTokenizer.class;
 

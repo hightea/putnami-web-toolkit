@@ -15,7 +15,6 @@
 package fr.putnami.pwt.doc.client.page.components;
 
 import com.google.common.collect.Lists;
-import com.google.gwt.i18n.client.ConstantsWithLookup;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.ui.Composite;
@@ -61,7 +60,7 @@ public class InputControlsView extends Composite implements View {
 		public FileDto file;
 	}
 
-	interface Constants extends ConstantsWithLookup, ValidationConstants {
+	interface Constants extends ValidationConstants {
 		@DefaultStringValue("Name")
 		String nameLabel();
 

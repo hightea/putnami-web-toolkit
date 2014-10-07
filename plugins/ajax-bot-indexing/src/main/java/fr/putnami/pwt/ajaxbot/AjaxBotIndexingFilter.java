@@ -101,9 +101,8 @@ public class AjaxBotIndexingFilter implements Filter {
 		if (queryStringSb.indexOf("#!") != 0) {
 			queryStringSb.insert(0, '?');
 		}
-		queryString = queryStringSb.toString();
 
-		return queryString;
+		return queryStringSb.toString();
 	}
 
 	@Override

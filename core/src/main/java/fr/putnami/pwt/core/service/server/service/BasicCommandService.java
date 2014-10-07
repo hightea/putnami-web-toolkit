@@ -19,10 +19,6 @@ import javax.servlet.ServletException;
 
 public class BasicCommandService extends AbstractCommandService {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 9020376780559340667L;
 	private static final String PARAM_SERVICES = "services";
 
 	@Override

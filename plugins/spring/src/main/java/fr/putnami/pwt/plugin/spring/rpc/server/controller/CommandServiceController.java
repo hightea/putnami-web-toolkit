@@ -33,9 +33,8 @@ import fr.putnami.pwt.core.service.server.service.AbstractCommandService;
 import fr.putnami.pwt.plugin.spring.rpc.server.util.RequestThreadLocalUtils;
 
 @Controller
-public class CommandServiceController extends AbstractCommandService implements BeanPostProcessor {
-
-	private static final long serialVersionUID = 4383424486613678203L;
+public class CommandServiceController extends AbstractCommandService
+		implements BeanPostProcessor {
 
 	@Autowired
 	private ApplicationContext applicationContext;

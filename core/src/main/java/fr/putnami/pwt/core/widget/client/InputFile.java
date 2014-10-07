@@ -48,7 +48,6 @@ import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteHandler;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
 
-import fr.putnami.pwt.core.editor.client.EditorInput;
 import fr.putnami.pwt.core.event.client.HandlerRegistrationCollection;
 import fr.putnami.pwt.core.model.client.base.HasDrawable;
 import fr.putnami.pwt.core.theme.client.CssStyle;
@@ -63,7 +62,7 @@ import fr.putnami.pwt.core.widget.client.util.UUID;
 import fr.putnami.pwt.core.widget.shared.domain.FileDto;
 import fr.putnami.pwt.core.widget.shared.domain.UploadStatus;
 
-public class InputFile extends InputGroup<FileDto> implements HasDrawable, EditorInput<FileDto> {
+public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 
 	private static final String MULTIPART_BOUNDARY = "x-x-x-x-x";
 	private static final String EOL = "\r\n";

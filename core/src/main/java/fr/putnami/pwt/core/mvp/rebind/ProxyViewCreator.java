@@ -21,7 +21,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.RunAsyncCallback;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JConstructor;
 import com.google.gwt.place.shared.Place;
@@ -84,8 +83,7 @@ public class ProxyViewCreator {
 		}
 	}
 
-	public String create(TreeLogger logger, GeneratorContext context)
-			throws UnableToCompleteException {
+	public String create(TreeLogger logger, GeneratorContext context) {
 		PrintWriter printWriter = context.tryCreate(logger, this.packageName, this.viewProxySimpleName);
 		if (printWriter == null) {
 			return this.viewProxyQualifiedName;

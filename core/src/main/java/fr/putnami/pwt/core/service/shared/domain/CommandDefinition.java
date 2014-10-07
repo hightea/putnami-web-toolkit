@@ -23,8 +23,6 @@ import java.util.List;
 
 public class CommandDefinition implements Serializable {
 
-	private static final long serialVersionUID = 9018027201481093452L;
-
 	private String serviceName;
 	private String methodName;
 	private List<String> paramTypes;

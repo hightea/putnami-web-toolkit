@@ -139,7 +139,7 @@ public final class DefaultCommandController extends CommandController {
 		return DefaultCommandController.INSTANCE;
 	}
 
-	private final RpcRequestBuilder rpcRequestBuilder = new RpcRequestBuilder();;
+	private final RpcRequestBuilder rpcRequestBuilder = new RpcRequestBuilder();
 	private final String moduleBaseURL;
 	private final String remoteServiceURL;
 

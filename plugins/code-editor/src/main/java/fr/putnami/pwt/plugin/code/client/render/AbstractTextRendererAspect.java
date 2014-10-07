@@ -118,34 +118,35 @@ public abstract class AbstractTextRendererAspect implements CodeEditorAspect {
 			List<Token<?>> resultTokenizedValue, Iterator<Token<?>> tokenIterator, int lastMatchEndIndex,
 			MatchResult eolMatcher, Token<?> currToken) {
 
-		if (currToken.getTokenStart() == eolMatcher.getIndex()) {
+		Token<?> tonken = currToken;
+		if (tonken.getTokenStart() == eolMatcher.getIndex()) {
 			String eolStr = "";
 			// MultiChar EOL
-			while (this.getTokenEnd(currToken) < lastMatchEndIndex) {
-				eolStr += currToken.getText();
-				currToken = tokenIterator.next();
+			while (this.getTokenEnd(tonken) < lastMatchEndIndex) {
+				eolStr += tonken.getText();
+				tonken = tokenIterator.next();
 				tokenIterator.remove();
 			}
-			if (this.getTokenEnd(currToken) == lastMatchEndIndex) {
-				eolStr += currToken.getText();
+			if (this.getTokenEnd(tonken) == lastMatchEndIndex) {
+				eolStr += tonken.getText();
 			} else {
-				eolStr += currToken.getText().substring(0, lastMatchEndIndex - currToken.getTokenStart());
+				eolStr += tonken.getText().substring(0, lastMatchEndIndex - tonken.getTokenStart());
 				// Nead to go out of the iterator (in the call) after because of
 				// ConcurrentModificationException
-				tokenizedValue.add(0, new SimpleToken<TokenContent>(lastMatchEndIndex, currToken.getText()
-						.substring(lastMatchEndIndex - currToken.getTokenStart()), currToken.getContent()));
+				tokenizedValue.add(0, new SimpleToken<TokenContent>(lastMatchEndIndex, tonken.getText()
+						.substring(lastMatchEndIndex - tonken.getTokenStart()), tonken.getContent()));
 			}
 			resultTokenizedValue.add(SimpleToken.createNewlineToken(eolMatcher.getIndex(), eolStr));
 		} else {
 			// We extract the first part of token and recall the method to go on the first condition
-			resultTokenizedValue.add(new SimpleToken<TokenContent>(currToken.getTokenStart(), currToken
-					.getText().substring(0, lastMatchEndIndex - currToken.getTokenStart() - 1), currToken
+			resultTokenizedValue.add(new SimpleToken<TokenContent>(tonken.getTokenStart(), tonken
+					.getText().substring(0, lastMatchEndIndex - tonken.getTokenStart() - 1), tonken
 					.getContent()));
-			currToken =
-					new SimpleToken<TokenContent>(eolMatcher.getIndex(), currToken.getText().substring(
-							lastMatchEndIndex - currToken.getTokenStart() - 1), currToken.getContent());
+			tonken =
+					new SimpleToken<TokenContent>(eolMatcher.getIndex(), tonken.getText().substring(
+							lastMatchEndIndex - tonken.getTokenStart() - 1), tonken.getContent());
 			this.splitTokenAndAddEOL(tokenizedValue, resultTokenizedValue, tokenIterator,
-					lastMatchEndIndex, eolMatcher, currToken);
+					lastMatchEndIndex, eolMatcher, tonken);
 		}
 	}
 

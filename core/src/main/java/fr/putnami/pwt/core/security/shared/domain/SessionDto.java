@@ -21,10 +21,6 @@ import java.util.List;
 
 public class SessionDto implements Serializable {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = -3161027884685365080L;
 	private String username;
 	private String name;
 	private String firstname;

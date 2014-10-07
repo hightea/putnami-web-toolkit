@@ -28,7 +28,7 @@ import fr.putnami.pwt.core.service.shared.domain.CommandRequest;
 import fr.putnami.pwt.core.service.shared.domain.CommandResponse;
 import fr.putnami.pwt.core.service.shared.service.CommandService;
 
-public class CommandExecutorImpl extends AbstractCommandExecutor implements CommandExecutor {
+public class CommandExecutorImpl extends AbstractCommandExecutor {
 	protected final Log executorLogger;
 
 	private final Object service;

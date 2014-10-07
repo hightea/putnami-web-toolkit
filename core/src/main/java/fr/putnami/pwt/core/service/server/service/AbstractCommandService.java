@@ -38,11 +38,6 @@ import fr.putnami.pwt.core.service.shared.service.CommandService;
 public abstract class AbstractCommandService extends AbstractRemoteServiceServlet implements
 CommandService, SerializationPolicyProvider {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = -8305700807822432906L;
-
 	private final Log logger = LogFactory.getLog(this.getClass());
 
 	private final CommandExecutorRegistry executorRegistry = new CommandExecutorRegistryImpl();

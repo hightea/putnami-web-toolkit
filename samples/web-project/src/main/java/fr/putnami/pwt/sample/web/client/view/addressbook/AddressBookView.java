@@ -8,7 +8,6 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.KeyPressEvent;
-import com.google.gwt.i18n.client.ConstantsWithLookup;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -52,7 +51,8 @@ public class AddressBookView extends Composite implements View<AddressBookPlace>
 	interface ContactRemote extends ServiceProxy<AddressBookView, ContactService>, ContactService {
 	}
 
-	interface Constants extends ConstantsWithLookup, SampleCommonConstants, ContactConstants, AddressConstants, GenderConstants {
+	interface Constants extends SampleCommonConstants, ContactConstants, AddressConstants,
+			GenderConstants {
 	}
 
 	public interface GroupModel extends Model<Group> {

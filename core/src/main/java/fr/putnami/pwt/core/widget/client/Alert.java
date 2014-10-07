@@ -22,7 +22,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
-import fr.putnami.pwt.core.model.client.base.HasDrawable;
 import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractForm;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
@@ -30,7 +29,7 @@ import fr.putnami.pwt.core.widget.client.event.AlertDismissEvent;
 import fr.putnami.pwt.core.widget.client.event.AlertDismissEvent.HasAlertDismissHandlers;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public class Alert<T> extends AbstractForm<T> implements HasDrawable, HasAlertDismissHandlers {
+public class Alert<T> extends AbstractForm<T> implements HasAlertDismissHandlers {
 
 	private static final CssStyle STYLE_ALERT = new SimpleStyle("alert");
 	private static final CssStyle STYLE_ALERT_DISMISSABLE = new SimpleStyle("alert-dismissable");

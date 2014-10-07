@@ -15,7 +15,6 @@
 package fr.putnami.pwt.doc.client.page.components;
 
 import com.google.common.collect.Lists;
-import com.google.gwt.i18n.client.ConstantsWithLookup;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Random;
@@ -61,7 +60,7 @@ public class FormsView extends Composite implements View {
 		public List<String> emails = Lists.newArrayList("john.doe@gmail.com", "john.doe@aol.com");
 	}
 
-	interface Constants extends ConstantsWithLookup, ValidationConstants {
+	interface Constants extends ValidationConstants {
 		@DefaultStringValue("Name")
 		String nameLabel();
 

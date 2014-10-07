@@ -16,7 +16,6 @@ package fr.putnami.pwt.core.widget.client.base;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
-import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.text.shared.Renderer;
@@ -35,7 +34,7 @@ import fr.putnami.pwt.core.widget.client.event.ChangeEvent;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public abstract class AbstractInputChoice<T, U> extends AbstractInput<U> implements
-HasValueChangeHandlers<U>, ValueChangeHandler<U>, HasMessageHelper {
+		ValueChangeHandler<U>, HasMessageHelper {
 
 	public interface ChoiceSelectionHandler<T, U> {
 

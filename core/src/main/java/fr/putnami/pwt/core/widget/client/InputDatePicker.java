@@ -35,7 +35,6 @@ import com.google.gwt.dom.client.UListElement;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -70,7 +69,7 @@ import fr.putnami.pwt.core.widget.client.util.KeyEventUtils;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class InputDatePicker extends FocusWidget implements EditorLeaf, EditorInput<Date>,
-HasHtmlId, HasDrawable, HasValue<Date>, HasValueChangeHandlers<Date> {
+		HasHtmlId, HasDrawable, HasValue<Date> {
 
 	private static final CssStyle STYLE_DATEPICKER = new SimpleStyle("datepicker");
 	private static final CssStyle STYLE_POPUP = new SimpleStyle("datepicker-popup");

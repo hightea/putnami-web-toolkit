@@ -18,10 +18,6 @@ import java.io.Serializable;
 
 public class UploadStatus implements Serializable {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 2110831890820359599L;
 	private String uploadId;
 	private long bytesRead;
 	private long contentLength;

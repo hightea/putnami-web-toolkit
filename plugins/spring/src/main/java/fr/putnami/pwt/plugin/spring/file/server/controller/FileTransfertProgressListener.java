@@ -20,8 +20,6 @@ import java.io.Serializable;
 
 public class FileTransfertProgressListener implements ProgressListener, Serializable {
 
-	private static final long serialVersionUID = -4451939328529354450L;
-
 	private long bytesRead = 0;
 	private long contentLength = 0;
 

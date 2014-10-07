@@ -14,7 +14,7 @@
  */
 package fr.putnami.pwt.core.editor.client;
 
-public interface EditorCollection<T> extends Editor, EditorLeaf {
+public interface EditorCollection<T> extends EditorLeaf {
 
 	<A extends EditorValue<T>> A getEditorForTraversal(int index);
 

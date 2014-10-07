@@ -37,7 +37,6 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 public class Pagination extends AbstractComposite implements HasPageChangeHandlers, HasDrawable {
 
 	private static final CssStyle STYLE_ACTIVE = new SimpleStyle("active");
-	private static final CssStyle STYLE_DISABLED = new SimpleStyle("disabled");
 
 	private static final CssStyle PREVIOUS_STYLE = new SimpleStyle("previous");
 	private static final CssStyle NEXT_STYLE = new SimpleStyle("next");

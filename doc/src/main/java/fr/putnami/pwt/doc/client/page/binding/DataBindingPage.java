@@ -15,7 +15,6 @@
 package fr.putnami.pwt.doc.client.page.binding;
 
 import com.google.common.collect.Lists;
-import com.google.gwt.i18n.client.ConstantsWithLookup;
 import com.google.gwt.uibinder.client.UiField;
 
 import java.util.List;
@@ -64,7 +63,7 @@ public class DataBindingPage extends Page {
 		}
 	}
 
-	public interface Constants extends ConstantsWithLookup, ValidationConstants {
+	public interface Constants extends ValidationConstants {
 		@DefaultStringValue("Name")
 		String name();
 

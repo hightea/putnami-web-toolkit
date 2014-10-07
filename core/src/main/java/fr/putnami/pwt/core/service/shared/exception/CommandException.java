@@ -16,8 +16,6 @@ package fr.putnami.pwt.core.service.shared.exception;
 
 public class CommandException extends RuntimeException {
 
-	private static final long serialVersionUID = 9179960545785348143L;
-
 	private String causeClassName;
 	private String causeSimpleClassName;
 	private String causeMessage;

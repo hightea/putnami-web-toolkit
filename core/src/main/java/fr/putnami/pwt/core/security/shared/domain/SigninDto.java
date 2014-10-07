@@ -19,10 +19,7 @@ import java.io.Serializable;
 import javax.validation.constraints.NotNull;
 
 public class SigninDto implements Serializable {
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 3246701403479022966L;
+
 	@NotNull
 	private String username;
 	@NotNull

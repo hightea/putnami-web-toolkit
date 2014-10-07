@@ -44,7 +44,7 @@ public class InputMultiSelect<T> extends AbstractInputSelect<T, List<T>> {
 		public int compare(T o1, T o2) {
 			return Integer.compare(InputMultiSelect.this.getOrderedItems().indexOf(o1),
 					InputMultiSelect.this.getOrderedItems().indexOf(o2));
-		};
+		}
 	};
 
 	private class MultiSelectionRenderer extends AbstractRenderer<List<T>> {
@@ -62,7 +62,7 @@ public class InputMultiSelect<T> extends AbstractInputSelect<T, List<T>> {
 				}));
 			}
 			return result;
-		};
+		}
 	}
 
 	private class MultiSelectionHandler implements SelectItemSelectionHandler<T, List<T>> {

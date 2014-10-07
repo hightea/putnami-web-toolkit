@@ -19,8 +19,6 @@ import java.util.List;
 
 public class CommandResponse implements Serializable {
 
-	private static final long serialVersionUID = 1092441480918023081L;
-
 	private long requestId;
 	private List<?> result;
 	private Throwable thrown;

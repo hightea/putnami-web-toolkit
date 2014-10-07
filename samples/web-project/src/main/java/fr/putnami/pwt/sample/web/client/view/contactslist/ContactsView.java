@@ -2,7 +2,6 @@ package fr.putnami.pwt.sample.web.client.view.contactslist;
 
 import com.google.common.collect.Lists;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.i18n.client.ConstantsWithLookup;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -42,7 +41,8 @@ public class ContactsView extends Composite implements View<ContactsPlace> {
 		ContactRemote SERVICE = (ContactRemote) GWT.create(ContactRemote.class);
 	}
 
-	interface Constants extends ConstantsWithLookup, SampleCommonConstants, PersonConstants, AddressConstants, GenderConstants {
+	interface Constants extends SampleCommonConstants, PersonConstants, AddressConstants,
+			GenderConstants {
 
 		@DefaultStringValue("Edit a contact !")
 		String newPersonTitle();

@@ -26,8 +26,6 @@ import javax.validation.constraints.Size;
 
 public class Person implements Serializable, Comparable<Person> {
 
-	private static final long serialVersionUID = 5376592111642092970L;
-
 	private long id;
 	private Gender gender;
 	@Size(min = 4, max = 255)

@@ -21,7 +21,6 @@ import com.google.common.collect.Lists;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Logger;
 
 import fr.putnami.pwt.core.editor.client.Context;
 import fr.putnami.pwt.core.editor.client.Driver;
@@ -118,8 +117,6 @@ public class ModelDriver<T> implements Driver<T> {
 	}
 
 	private final HtmlForVisitor htmlForVisitor = new HtmlForVisitor();
-
-	private static final Logger LOGGER = Logger.getLogger(ModelDriver.class.getName());
 
 	private final Model<T> model;
 	private final List<Context<?>> contexts = Lists.newArrayList();

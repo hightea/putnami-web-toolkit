@@ -18,10 +18,6 @@ import java.io.Serializable;
 
 public class FileDto implements Serializable {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = -8731024091131752897L;
 	private String name;
 	private String extension;
 	private String mime;

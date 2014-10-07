@@ -28,12 +28,11 @@ import java.util.Iterator;
 import fr.putnami.pwt.core.editor.client.Editor;
 import fr.putnami.pwt.core.editor.client.EditorComposite;
 import fr.putnami.pwt.core.editor.client.Path;
-import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.widget.client.base.AbstractComposite;
 import fr.putnami.pwt.core.widget.client.base.BaseSimplePanel;
 
 public class OneWidgetPanel extends AbstractComposite implements HasWidgets.ForIsWidget,
-HasOneWidget, CloneableWidget, EditorComposite {
+		HasOneWidget, EditorComposite {
 
 	private final BaseSimplePanel container;
 

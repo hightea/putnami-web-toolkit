@@ -17,7 +17,6 @@ package fr.putnami.pwt.core.widget.client;
 import com.google.gwt.dom.client.TableCellElement;
 import com.google.gwt.user.client.ui.IsWidget;
 
-import fr.putnami.pwt.core.editor.client.Editor;
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.model.client.base.HasDrawable;
 import fr.putnami.pwt.core.model.client.base.HasReadonly;
@@ -25,8 +24,7 @@ import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
 import fr.putnami.pwt.core.widget.client.base.AbstractTableColumn.ColumnVisibility;
 import fr.putnami.pwt.core.widget.client.base.AbstractTableColumn.Type;
 
-public class TableTH<T> extends AbstractPanel implements CloneableWidget, HasReadonly, HasDrawable,
-Editor {
+public class TableTH<T> extends AbstractPanel implements CloneableWidget, HasReadonly, HasDrawable {
 
 	private Integer colspan;
 	private Boolean readonly;

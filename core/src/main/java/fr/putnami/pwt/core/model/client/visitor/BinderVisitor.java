@@ -81,8 +81,7 @@ public class BinderVisitor extends AbstractVisitor {
 				this.driver.removeContext(aspect.contexts.remove(collectionToBind.size()));
 			}
 
-			int i = 0;
-			for (Object o : collectionToBind) {
+			for (int i = 0; i < collectionToBind.size(); i++) {
 				EditorValue traversalEditor = editorList.getEditorForTraversal(i);
 				Context<EditorValue> contextCreated =
 						(Context<EditorValue>) this.driver.getContext(traversalEditor);
@@ -95,7 +94,6 @@ public class BinderVisitor extends AbstractVisitor {
 					}
 					aspect.contexts.add(contextCreated);
 				}
-				i++;
 			}
 		}
 		if (editor instanceof HasDrawable) {

@@ -180,7 +180,7 @@ KeyPressHandler, Focusable, HasAllFocusHandlers {
 	@Override
 	public void onClick(ClickEvent event) {
 		this.toggleOpen();
-	};
+	}
 
 	@Override
 	public void onKeyPress(KeyPressEvent event) {

@@ -37,7 +37,8 @@ public class Group implements Serializable {
 	}
 
 	public int getMemberSize() {
-		return members == null ? 0 : members.size();
+		this.memberSize = this.members == null ? 0 : this.members.size();
+		return memberSize;
 	}
 
 	public void setMemberSize(int memberSize) {

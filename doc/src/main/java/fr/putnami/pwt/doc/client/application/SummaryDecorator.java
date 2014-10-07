@@ -19,7 +19,6 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.IsWidget;
 
 import fr.putnami.pwt.core.inject.client.annotation.Templated;
-import fr.putnami.pwt.core.mvp.client.View;
 import fr.putnami.pwt.core.mvp.client.ViewDecorator;
 import fr.putnami.pwt.core.widget.client.Affix;
 import fr.putnami.pwt.core.widget.client.Container;
@@ -28,7 +27,7 @@ import fr.putnami.pwt.core.widget.client.OneWidgetPanel;
 import fr.putnami.pwt.doc.client.social.widget.SocialBar;
 
 @Templated
-public class SummaryDecorator extends ViewDecorator implements View {
+public class SummaryDecorator extends ViewDecorator {
 
 	public static SummaryDecorator get() {
 		return GWT.create(SummaryDecorator.class);

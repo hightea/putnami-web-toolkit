@@ -26,7 +26,6 @@ import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
-import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.text.shared.Renderer;
@@ -49,8 +48,7 @@ import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.event.ChangeEvent;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public class InputSlider<T> extends AbstractInput<T> implements HasValueChangeHandlers<T>,
-ValueChangeHandler<T> {
+public class InputSlider<T> extends AbstractInput<T> implements ValueChangeHandler<T> {
 
 	private static final CssStyle STYLE_BACKGROUNG = new SimpleStyle("input-slider-background");
 	private static final CssStyle STYLE_HANDLE = new SimpleStyle("input-slider-handle");
@@ -232,8 +230,8 @@ ValueChangeHandler<T> {
 		}
 
 		private void setLeftPct(double left) {
-			left = Math.min(100, Math.max(0, left));
-			this.getElement().getStyle().setLeft(left, Unit.PCT);
+			double leftPosition = Math.min(100, Math.max(0, left));
+			this.getElement().getStyle().setLeft(leftPosition, Unit.PCT);
 		}
 	}
 

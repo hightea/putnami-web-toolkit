@@ -16,8 +16,6 @@ package fr.putnami.pwt.doc.client.application.error;
 
 public class CustomRuntimeException extends RuntimeException {
 
-	private static final long serialVersionUID = -8605990435699129923L;
-
 	public CustomRuntimeException(String message) {
 		super(message);
 	}

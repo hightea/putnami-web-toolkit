@@ -20,10 +20,6 @@ import java.util.List;
 
 public class Contact extends Person {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = -2138842139226232771L;
 	private List<String> emails;
 	private List<String> phones;
 	private List<String> groups = Lists.newArrayList();

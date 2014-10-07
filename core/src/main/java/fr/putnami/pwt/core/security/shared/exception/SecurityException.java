@@ -18,10 +18,6 @@ import com.google.gwt.place.shared.Place;
 
 public class SecurityException extends RuntimeException {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = -3817870661062610109L;
 	private Place fallback;
 	private String message;
 

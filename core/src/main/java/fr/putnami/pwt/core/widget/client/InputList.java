@@ -72,7 +72,7 @@ HasOutputEditorFactory<T> {
 	private static final CssStyle STYLE_CLOSE = new SimpleStyle("close");
 	private static final CssStyle STYLE_ERROR = new SimpleStyle("has-error text-danger");
 
-	private class NewListItem extends ListItem implements HasDrawable, FocusHandler, Handler {
+	private class NewListItem extends ListItem implements FocusHandler, Handler {
 
 		private final Button<T> addButton;
 
@@ -101,7 +101,7 @@ HasOutputEditorFactory<T> {
 		}
 	}
 
-	private class InternalListItem extends ListItem implements HasDrawable, EditorValue<T>,
+	private class InternalListItem extends ListItem implements EditorValue<T>,
 	BlurHandler, FocusHandler {
 
 		private final HandlerRegistrationCollection registrationCollection =

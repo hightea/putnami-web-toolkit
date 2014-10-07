@@ -76,5 +76,5 @@ public class SimpleCollapse extends AbstractDropdown {
 	@Override
 	public void onClick(ClickEvent event) {
 		// Do Nothing
-	};
+	}
 }
