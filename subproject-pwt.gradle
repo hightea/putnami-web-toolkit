@@ -3,7 +3,7 @@ ext {
 	snapshotVersion = '1.1.0-SNAPSHOT'
 	gwtVersion = '2.6.1'
 	guavaVersion = '17.0'
-	
+
 	applyLicense = rootProject.file('LICENSE_LGPL_HEADER').exists()
 }
 
@@ -11,6 +11,7 @@ ext {
 apply plugin: 'java'
 apply plugin: 'maven-publish'
 apply plugin: 'maven'
+apply plugin: 'signing'
 apply plugin: 'eclipse'
 apply plugin: 'gwt-base'
 apply plugin: 'checkstyle'
@@ -41,14 +42,14 @@ repositories {
 	mavenCentral()
 }
 
-dependencies {	
+dependencies {
 	log4j 'org.slf4j:slf4j-api:1.6.1'
 	log4j 'org.slf4j:jcl-over-slf4j:1.6.1'
 	log4j 'org.slf4j:slf4j-log4j12:1.6.1'
 	log4j 'log4j:log4j:1.2.16'
-	
+
 	deployerSsh "org.apache.maven.wagon:wagon-ssh:2.2"
-	
+
 	compile "com.google.guava:guava:$guavaVersion"
 	compile "com.google.guava:guava-gwt:$guavaVersion"
 	runtime configurations.log4j
@@ -102,14 +103,29 @@ if (project.name != 'pwt-doc'){
 		from sourceSets.main.allJava
 	}
 
-	publishing {
-		publications {
-			mavenJava(MavenPublication) {
-			    from components.java
-			}
-		}
+	task javadocJar(type: Jar) {
+	    classifier = 'javadoc'
+	    from javadoc
 	}
-	
+
+	task sourcesJar(type: Jar) {
+	    classifier = 'sources'
+	    from sourceSets.main.allSource
+	}
+
+	artifacts {
+	    archives javadocJar, sourcesJar
+	}
+
+	javadoc  {
+		classpath += configurations.gwtSdk
+	    options.addStringOption("sourcepath", "")
+	}
+
+	signing {
+	    sign configurations.archives
+	}
+
 	if (rootProject.tasks.findByPath(':publishAllLibs') != null) {
 		rootProject.tasks.publishAllLibs.dependsOn project.tasks.uploadArchives
 	}
@@ -117,17 +133,45 @@ if (project.name != 'pwt-doc'){
 		rootProject.tasks.publishAllLibsToMavenLocal.dependsOn project.tasks.install
 	}
 }
- 
+
 
 uploadArchives {
     repositories {
         mavenDeployer {
-	        configuration = configurations.deployerSsh
+			beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+			//Local Repository
+			repository(url : new File(rootProject.buildDir, 'repoTest').toURI())
+
+			//Putnami Repository
+			/*
+			configuration = configurations.deployerSsh
 	        repository(url: "scp://repo.putnami.org/putnamiRepo") {
 	            authentication(userName: "putnami_repo")
 	        }
-            //repository(url : new File(rootProject.buildDir, 'repoTest').toURI())
+			*/
+
+			//OSS Repository
+			/*
+			repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+				authentication(userName: ossrhUsername, password: ossrhPassword)
+			}
+
+			snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+				authentication(userName: ossrhUsername, password: ossrhPassword)
+			}
+			*/
+
             pom.project {
+				url 'http://pwt.putnami.org'
+
+				scm {
+					connection 'scm:git:git@github.com:Putnami/putnami-web-toolkit.git'
+                    developerConnection 'scm:git:git@github.com:Putnami/putnami-web-toolkit.git'
+                    url 'git@github.com:Putnami/putnami-web-toolkit.git'
+                }
+
+
                 licenses {
                     license {
                         name 'GNU Lesser General Public License'
@@ -135,6 +179,19 @@ uploadArchives {
                         distribution 'repo'
                     }
                 }
+
+				 developers {
+					developer {
+						id 'fdumay'
+						name 'Fabien Dumay'
+						email 'fabien.dumay@putnami.com'
+					}
+					developer {
+						id 'tcharbonnier'
+						name 'Théophane Charbonnier'
+						email 'theophane.charbonnier@putnami.com'
+					}
+		        }
             }
         }
     }

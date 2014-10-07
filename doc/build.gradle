@@ -17,7 +17,7 @@ gwt {
 
 	modules = ['fr.putnami.pwt.doc.Documentation']
 	devModules = ['fr.putnami.pwt.doc.DocumentationDev']
-	
+
 	compiler {
 		localWorkers = 2
 	}
@@ -48,21 +48,21 @@ processResources {
 
 war {
 	from(webAppDirName) {
-		include '**/*.html' 
+		include '**/*.html'
 		filter(ReplaceTokens, tokens: project.ext.getProperties())
 	}
 	from(webAppDirName) {
-		exclude '**/*.html' 
+		exclude '**/*.html'
 	}
 }
 
 draftWar {
 	from(webAppDirName) {
-		include '**/*.html' 
+		include '**/*.html'
 		filter(ReplaceTokens, tokens: project.ext.getProperties())
 	}
 	from(webAppDirName) {
-		exclude '**/*.html' 
+		exclude '**/*.html'
 	}
 }
 
@@ -70,12 +70,4 @@ task jettyDraftWar(type: JettyRunWar) {
 	dependsOn draftWar
 	dependsOn.remove('war')
 	webApp=draftWar.archivePath
-}
-
-publishing {
-	publications {
-		mavenJava(MavenPublication) {
-		    from components.web
-		}
-	}
 }
