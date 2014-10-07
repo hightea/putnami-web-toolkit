@@ -5,6 +5,7 @@ ext {
 	guavaVersion = '17.0'
 
 	applyLicense = rootProject.file('LICENSE_LGPL_HEADER').exists()
+
 }
 
 
@@ -22,6 +23,7 @@ if (applyLicense) {
 
 group = 'fr.putnami.pwt'
 version = project.snapshotVersion
+ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
@@ -123,6 +125,7 @@ if (project.name != 'pwt-doc'){
 	}
 
 	signing {
+		required { isReleaseVersion && gradle.taskGraph.hasTask("uploadArchives") }
 	    sign configurations.archives
 	}
 
