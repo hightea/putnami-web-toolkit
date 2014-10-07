@@ -202,7 +202,8 @@ public class InputDateBox extends AbstractInputBox<TextBox, Date> {
 				TokenHelper helper = factory.newTokenHelper();
 				this.maskHelper.addTokenHelper(helper);
 				if (delimiter != null) {
-					this.maskHelper.addTokenHelper(new StaticStringTokenHelper("" + delimiter, false));
+					this.maskHelper.addTokenHelper(new StaticStringTokenHelper(String.valueOf(delimiter),
+						false));
 				}
 
 				this.parseFormat(nextStart);

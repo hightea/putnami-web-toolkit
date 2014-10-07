@@ -48,7 +48,7 @@ public class ErrorAlert implements CollapseEvent.Handler {
 	Constants constants = GWT.create(Constants.class);
 
 	@UiField
-	Alert alert;
+	Alert<?> alert;
 
 	@UiField
 	Element titleOutput;
@@ -89,7 +89,7 @@ public class ErrorAlert implements CollapseEvent.Handler {
 		}
 	}
 
-	public Alert getAlert() {
+	public Alert<?> getAlert() {
 		return this.alert;
 	}
 }

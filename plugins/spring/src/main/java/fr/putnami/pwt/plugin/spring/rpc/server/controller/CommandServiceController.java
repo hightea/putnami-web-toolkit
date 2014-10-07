@@ -33,8 +33,7 @@ import fr.putnami.pwt.core.service.server.service.AbstractCommandService;
 import fr.putnami.pwt.plugin.spring.rpc.server.util.RequestThreadLocalUtils;
 
 @Controller
-public class CommandServiceController extends AbstractCommandService
-		implements BeanPostProcessor {
+public class CommandServiceController extends AbstractCommandService implements BeanPostProcessor {
 
 	@Autowired
 	private ApplicationContext applicationContext;
@@ -74,7 +73,7 @@ public class CommandServiceController extends AbstractCommandService
 		}
 		Service serviceAnnotation = AnnotationUtils.findAnnotation(implClass, Service.class);
 		if (serviceAnnotation != null) {
-			for (Class inter : implClass.getInterfaces()) {
+			for (Class<?> inter : implClass.getInterfaces()) {
 				this.injectService(inter, bean);
 			}
 		}

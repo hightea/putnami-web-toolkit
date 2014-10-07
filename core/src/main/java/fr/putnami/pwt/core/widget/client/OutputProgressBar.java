@@ -42,11 +42,11 @@ public class OutputProgressBar<T extends Number> extends AbstractWidget implemen
 	private static final CssStyle STYLE_ANIMATED = new SimpleStyle("active");
 
 	public enum Color implements CssStyle {
-			DEFAULT(null),
-			SUCCESS("progress-bar-success"),
-			INFO("progress-bar-info"),
-			WARNING("progress-bar-warning"),
-			DANGER("progress-bar-danger");
+		DEFAULT(null),
+		SUCCESS("progress-bar-success"),
+		INFO("progress-bar-info"),
+		WARNING("progress-bar-warning"),
+		DANGER("progress-bar-danger");
 
 		private final String style;
 
@@ -80,7 +80,7 @@ public class OutputProgressBar<T extends Number> extends AbstractWidget implemen
 		this.endConstruct();
 	}
 
-	protected OutputProgressBar(OutputProgressBar source) {
+	protected OutputProgressBar(OutputProgressBar<T> source) {
 		super(source);
 
 		this.max = source.max;
@@ -102,7 +102,7 @@ public class OutputProgressBar<T extends Number> extends AbstractWidget implemen
 
 	@Override
 	public IsWidget cloneWidget() {
-		return new OutputProgressBar(this);
+		return new OutputProgressBar<T>(this);
 	}
 
 	@Override
@@ -139,9 +139,9 @@ public class OutputProgressBar<T extends Number> extends AbstractWidget implemen
 		stringToDisplay = RegExp.compile("\\{0\\}").replace(stringToDisplay, formatter.format(val));
 		stringToDisplay = RegExp.compile("\\{1\\}").replace(stringToDisplay, formatter.format(percent));
 		stringToDisplay =
-			RegExp.compile("\\{2\\}").replace(stringToDisplay, formatter.format(this.min));
+				RegExp.compile("\\{2\\}").replace(stringToDisplay, formatter.format(this.min));
 		stringToDisplay =
-			RegExp.compile("\\{3\\}").replace(stringToDisplay, formatter.format(this.max));
+				RegExp.compile("\\{3\\}").replace(stringToDisplay, formatter.format(this.max));
 
 		this.progressBarElement.removeAllChildren();
 		if (this.displayValue) {

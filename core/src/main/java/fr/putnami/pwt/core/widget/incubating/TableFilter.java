@@ -131,7 +131,7 @@ public class TableFilter<T> extends AbstractTableColumnAspect<T> implements HasH
 		if (!showFilterRow) {
 			for (Widget cell : row) {
 				if (cell instanceof TableTH) {
-					showFilterRow |= Iterators.size(((TableTH) cell).iterator()) > 0;
+					showFilterRow |= Iterators.size(((TableTH<?>) cell).iterator()) > 0;
 					if (showFilterRow) {
 						break;
 					}

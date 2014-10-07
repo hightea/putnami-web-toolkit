@@ -34,8 +34,8 @@ import fr.putnami.pwt.core.widget.client.event.RowClickEvent;
 import fr.putnami.pwt.core.widget.client.event.RowClickEvent.Handler;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
-public class TableBody<T> extends AbstractPanel
-	implements HasReadonly, CloneableWidget, RowClickEvent.HasRowClickHandlers {
+public class TableBody<T> extends AbstractPanel implements HasReadonly, CloneableWidget,
+		RowClickEvent.HasRowClickHandlers {
 
 	private class ClickEventHandler implements ClickHandler {
 
@@ -43,7 +43,7 @@ public class TableBody<T> extends AbstractPanel
 		public void onClick(ClickEvent event) {
 			Object source = event.getSource();
 			if (source instanceof TableRow) {
-				EventBus.get().fireEventFromSource(new RowClickEvent((TableRow) source), TableBody.this);
+				EventBus.get().fireEventFromSource(new RowClickEvent((TableRow<T>) source), TableBody.this);
 			}
 		}
 	}
@@ -102,7 +102,7 @@ public class TableBody<T> extends AbstractPanel
 	@Override
 	public void add(IsWidget w) {
 		if (w instanceof TableRow) {
-			this.addRow((TableRow) w);
+			this.addRow((TableRow<T>) w);
 		}
 	}
 

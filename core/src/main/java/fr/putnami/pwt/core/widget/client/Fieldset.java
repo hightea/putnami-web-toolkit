@@ -25,13 +25,13 @@ public class Fieldset<T> extends AbstractForm<T> {
 		super(FieldSetElement.TAG, html);
 	}
 
-	protected Fieldset(Fieldset source) {
+	protected Fieldset(Fieldset<T> source) {
 		super(source);
 	}
 
 	@Override
 	public IsWidget cloneWidget() {
-		return new Fieldset(this);
+		return new Fieldset<T>(this);
 	}
 
 }

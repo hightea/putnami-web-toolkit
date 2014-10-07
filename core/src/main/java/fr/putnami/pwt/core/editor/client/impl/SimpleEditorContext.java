@@ -81,7 +81,7 @@ public class SimpleEditorContext<E extends Editor> implements Context<E> {
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof SimpleEditorContext) {
-			return Objects.equal(this.editor, ((SimpleEditorContext) obj).editor);
+			return Objects.equal(this.editor, ((SimpleEditorContext<?>) obj).editor);
 		}
 		return false;
 	}

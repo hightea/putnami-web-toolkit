@@ -49,7 +49,7 @@ public class ErrorDisplay implements AlertDismissEvent.Handler {
 		String reloadButton();
 	}
 
-	private List<Alert> displayedErrors = Lists.newArrayList();
+	private List<Alert<?>> displayedErrors = Lists.newArrayList();
 
 	@UiField(provided = true)
 	Constants constants = GWT.create(Constants.class);
@@ -75,7 +75,7 @@ public class ErrorDisplay implements AlertDismissEvent.Handler {
 	}
 
 	public void addErrorAlert(ErrorAlert errorAlert) {
-		Alert alert = errorAlert.getAlert();
+		Alert<?> alert = errorAlert.getAlert();
 		alert.addAlertDismissHandler(this);
 		this.displayedErrors.add(alert);
 		this.modalContent.add(alert);

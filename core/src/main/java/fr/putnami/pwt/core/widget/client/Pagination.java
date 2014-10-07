@@ -239,8 +239,8 @@ public class Pagination extends AbstractComposite implements HasPageChangeHandle
 			this.content.append(new NavigationPage(true));
 		}
 		for (int i = 0; i < nbPageToDraw; i++) {
-			this.content
-				.append(new Page("" + (this.currentStartPage + i + 1), this.currentStartPage + i));
+			this.content.append(new Page(String.valueOf(this.currentStartPage + i + 1),
+				this.currentStartPage + i));
 		}
 		if (this.currentStartPage + nbPageToDraw < this.nbPage) {
 			this.content.append(new NavigationPage(false));

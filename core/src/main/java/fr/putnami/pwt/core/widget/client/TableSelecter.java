@@ -94,8 +94,7 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 			this.inputElem.setReadOnly(Boolean.TRUE.equals(this.getReadonly()));
 			this.inputElem.setDisabled(!TableSelecter.this.enable);
 			StyleUtils.toggleStyle(this.getParent(), TableSelecter.STYLE_ROW_SELECTED,
-				TableSelecter.this.selection
-					.contains(this.value));
+				TableSelecter.this.selection.contains(this.value));
 			switch (TableSelecter.this.selectionMode) {
 				case COLUMN:
 					StyleUtils.toggleStyle(this.getParent(), TableSelecter.STYLE_ROW_CLICKABLE, false);
@@ -137,8 +136,8 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 				fire = TableSelecter.this.setSelected(this.value, this.inputElem.isChecked());
 				event.stopPropagation();
 			} else if (event.getSource() instanceof TableRow) {
-				TableRow row = (TableRow) event.getSource();
-				T clickedValue = (T) row.getValue();
+				TableRow<T> row = (TableRow<T>) event.getSource();
+				T clickedValue = row.getValue();
 				fire =
 					TableSelecter.this
 						.setSelected(clickedValue, !TableSelecter.this.isSelected(clickedValue));

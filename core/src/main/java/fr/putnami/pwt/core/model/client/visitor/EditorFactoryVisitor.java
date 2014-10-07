@@ -21,8 +21,6 @@ import java.util.Map;
 import fr.putnami.pwt.core.editor.client.Context;
 import fr.putnami.pwt.core.editor.client.Editor;
 import fr.putnami.pwt.core.editor.client.EditorCollection;
-import fr.putnami.pwt.core.editor.client.EditorInput;
-import fr.putnami.pwt.core.editor.client.EditorOutput;
 import fr.putnami.pwt.core.editor.client.Path;
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.editor.client.factory.InputFactory;
@@ -44,7 +42,7 @@ public class EditorFactoryVisitor extends AbstractVisitor {
 
 	private static final class InternalEditorProvider implements EditorProvider {
 		final Context<?> parentContext;
-		final Class propertyType;
+		final Class<?> propertyType;
 
 		CloneableWidget inputFactory;
 		CloneableWidget outputFactory;
@@ -52,9 +50,8 @@ public class EditorFactoryVisitor extends AbstractVisitor {
 		private Map<Integer, Editor> inputEditors;
 		private Map<Integer, Editor> outputEditors;
 
-		private InternalEditorProvider(Context<?> parentContext, Class propertyType,
-			CloneableWidget inputFactory,
-			CloneableWidget outputFactory) {
+		private InternalEditorProvider(Context<?> parentContext, Class<?> propertyType,
+			CloneableWidget inputFactory, CloneableWidget outputFactory) {
 			super();
 			this.parentContext = parentContext;
 			this.propertyType = propertyType;
@@ -129,13 +126,6 @@ public class EditorFactoryVisitor extends AbstractVisitor {
 		}
 	}
 
-	public interface IndexedEditorFactory {
-
-		EditorInput newInput(Integer index);
-
-		EditorOutput newOutput(Integer index);
-	}
-
 	@Override
 	public <A, B extends Editor> boolean visit(Context<B> context) {
 		Editor editor = context.getEditor();
@@ -169,8 +159,7 @@ public class EditorFactoryVisitor extends AbstractVisitor {
 
 			EditorProvider provider =
 				new InternalEditorProvider(context, propertyType, inputFactory == null ? widgetFactory
-					: inputFactory,
-					outputFactory == null ? widgetFactory : outputFactory);
+					: inputFactory, outputFactory == null ? widgetFactory : outputFactory);
 
 			((HasEditorProvider) editor).setEditorProvider(provider);
 		}

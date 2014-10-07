@@ -88,7 +88,7 @@ public final class ModelUtils {
 		Object value = bean;
 		Model<?> leafModel = model;
 		if (leafModel instanceof ModelCollection) {
-			leafModel = ((ModelCollection) model).getLeafModel();
+			leafModel = ((ModelCollection<?>) model).getLeafModel();
 		}
 
 		if (leafModel != null && !Path.ROOT_PATH.equals(firstElementName)) {
@@ -96,7 +96,7 @@ public final class ModelUtils {
 		}
 
 		if (firstElementIndex != null && value instanceof Collection) {
-			Collection collection = (Collection) value;
+			Collection<?> collection = (Collection<?>) value;
 			if (collection.size() > firstElement.getIndexKey()) {
 				value = Iterables.get(collection, firstElementIndex);
 			} else {
@@ -207,7 +207,7 @@ public final class ModelUtils {
 	private ModelUtils() {
 	}
 
-	public static boolean isEnumType(Class propertyType) {
+	public static boolean isEnumType(Class<?> propertyType) {
 		for (Class<?> parentClass : ModelUtils.getTypeHierachy(propertyType)) {
 			if (Enum.class.equals(parentClass)) {
 				return true;

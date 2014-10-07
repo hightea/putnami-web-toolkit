@@ -88,7 +88,7 @@ public class TableEditorTH<T> extends TableTH<T> implements EditorLabel {
 		if (!this.aspects.isEmpty()) {
 			FlowPanel flowPanel = new FlowPanel();
 			int countAspectWidget = 0;
-			for (AbstractTableColumnAspect aspect : this.aspects) {
+			for (AbstractTableColumnAspect<T> aspect : this.aspects) {
 				Widget aspectWidget = aspect.asWidget();
 				if (aspectWidget != null) {
 					flowPanel.add(aspectWidget);

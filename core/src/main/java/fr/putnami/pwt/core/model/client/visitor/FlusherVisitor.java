@@ -58,7 +58,7 @@ public class FlusherVisitor<T> extends AbstractVisitor {
 				value = ((EditorInput<A>) editor).flush();
 			}
 			if (editor instanceof HasDriver && !context.isRootContext()) {
-				HasDriver hasDriverEditor = (HasDriver) editor;
+				HasDriver<?, ?> hasDriverEditor = (HasDriver<?, ?>) editor;
 				hasDriverEditor.getDriver().accept(this);
 			}
 

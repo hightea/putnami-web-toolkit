@@ -49,7 +49,7 @@ public class EnumValuesVisitor extends AbstractVisitor {
 
 			if (ModelUtils.isEnumType(propertyType)) {
 				AbstractInputChoice inputChoice = (AbstractInputChoice) editor;
-				Renderer<?> renderer = new EnumRenderer(messageHelper);
+				Renderer<?> renderer = new EnumRenderer<>(messageHelper);
 				inputChoice.setItemRenderer(renderer);
 				inputChoice.setItems(Lists.newArrayList(propertyType.getEnumConstants()));
 				if (inputChoice instanceof AbstractInputSelect) {

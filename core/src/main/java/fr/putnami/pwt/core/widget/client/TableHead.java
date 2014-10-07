@@ -51,14 +51,14 @@ public class TableHead extends AbstractPanel implements CloneableWidget {
 	@Override
 	public void add(IsWidget w) {
 		if (w instanceof AbstractTableColumn) {
-			this.addColumn((AbstractTableColumn) w);
+			this.addColumn((AbstractTableColumn<?>) w);
 		}
 		if (w instanceof TableTH || w instanceof TableTD) {
 			this.headerRow.append(w);
 		}
 	}
 
-	public void removeColumn(AbstractTableColumn column) {
+	public void removeColumn(AbstractTableColumn<?> column) {
 		column.createHeaderCell().removeFromParent();
 	}
 
@@ -70,7 +70,7 @@ public class TableHead extends AbstractPanel implements CloneableWidget {
 		for (AbstractTableColumnAspect<?> aspect : column.getAspects()) {
 			if (aspect instanceof HasHeaderCell) {
 				Container row = this.ensureAspectRow(aspect.getClass().getName());
-				TableTH<?> aspectCell = new TableTH();
+				TableTH<?> aspectCell = new TableTH<>();
 				aspectCell.setColspan(column.getColspan());
 				row.append(aspectCell);
 				((HasHeaderCell) aspect).setHeaderCell(aspectCell);
@@ -79,7 +79,7 @@ public class TableHead extends AbstractPanel implements CloneableWidget {
 
 		for (Container existingRow : this.aspectRows.values()) {
 			if (this.headerRow.getWidgetCount() > existingRow.getWidgetCount()) {
-				TableTH<?> newCell = new TableTH();
+				TableTH<?> newCell = new TableTH<>();
 				newCell.setColspan(column.getColspan());
 				existingRow.append(newCell);
 			}
@@ -93,7 +93,7 @@ public class TableHead extends AbstractPanel implements CloneableWidget {
 			this.aspectRows.put(aspectClass, row);
 			row.setVisible(false);
 			for (int i = 0; i < this.headerRow.getWidgetCount() - 1; i++) {
-				row.append(new TableTH());
+				row.append(new TableTH<>());
 			}
 			this.append(row);
 		}

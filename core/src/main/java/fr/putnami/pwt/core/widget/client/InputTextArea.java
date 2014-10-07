@@ -49,7 +49,7 @@ public class InputTextArea extends AbstractInputBox<TextArea, String> {
 	@Override
 	public void setMaxLength(int maxLength) {
 		if (maxLength != -1) {
-			this.getElement().setAttribute("maxLength", "" + maxLength);
+			this.getElement().setAttribute("maxLength", String.valueOf(maxLength));
 		}
 	}
 

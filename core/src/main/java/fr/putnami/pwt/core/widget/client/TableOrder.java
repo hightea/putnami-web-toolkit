@@ -90,7 +90,7 @@ public class TableOrder<T> extends AbstractTableColumn<T> {
 			int i = 0;
 			this.overRegistration = new HandlerRegistrationCollection();
 			this.upRegistration = RootPanel.get().addDomHandler(this, MouseUpEvent.getType());
-			for (TableRow row : this.body.getRows()) {
+			for (TableRow<T> row : this.body.getRows()) {
 				this.rows.put(row, i++);
 				this.overRegistration.add(row.addDomHandler(this, MouseOverEvent.getType()));
 			}
@@ -127,7 +127,7 @@ public class TableOrder<T> extends AbstractTableColumn<T> {
 		@Override
 		public void onMouseOver(MouseOverEvent event) {
 			if (event.getNativeButton() == NativeEvent.BUTTON_LEFT) {
-				this.hoverRow = (TableRow) event.getSource();
+				this.hoverRow = (TableRow<T>) event.getSource();
 				this.body.switchRows(this.hoverRow, this.selectedRow);
 			}
 			event.preventDefault();

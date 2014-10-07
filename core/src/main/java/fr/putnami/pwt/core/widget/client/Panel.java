@@ -39,8 +39,8 @@ import fr.putnami.pwt.core.widget.client.helper.CollapseHelper;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
-public class Panel extends AbstractPanel
-	implements CloneableWidget, HasOneWidget, HasDrawable, HasCollapseHandlers {
+public class Panel extends AbstractPanel implements CloneableWidget, HasOneWidget, HasDrawable,
+		HasCollapseHandlers {
 
 	private static final CssStyle STYLE_PANEL = new SimpleStyle("panel");
 	private static final CssStyle STYLE_BODY = new SimpleStyle("panel-body");
@@ -49,12 +49,12 @@ public class Panel extends AbstractPanel
 	private static final CssStyle STYLE_FOOTER = new SimpleStyle("panel-footer");
 
 	public enum Color implements CssStyle {
-			DEFAULT("panel-default"),
-			PRIMARY("panel-primary"),
-			SUCCESS("panel-success"),
-			INFO("panel-info"),
-			WARNING("panel-warning"),
-			DANGER("panel-danger");
+		DEFAULT("panel-default"),
+		PRIMARY("panel-primary"),
+		SUCCESS("panel-success"),
+		INFO("panel-info"),
+		WARNING("panel-warning"),
+		DANGER("panel-danger");
 
 		private final String style;
 
@@ -72,7 +72,7 @@ public class Panel extends AbstractPanel
 
 	private final Container collapsePanel = new Container();
 	private OneWidgetPanel bodyPanel;
-	private Table table;
+	private Table<?> table;
 
 	private Container commandsContainer;
 	private Header header;
@@ -159,7 +159,7 @@ public class Panel extends AbstractPanel
 	@Override
 	public void setWidget(IsWidget w) {
 		if (w instanceof Table) {
-			this.table = (Table) w;
+			this.table = (Table<?>) w;
 			this.redraw();
 		} else {
 			if (this.bodyPanel == null) {
@@ -270,7 +270,7 @@ public class Panel extends AbstractPanel
 		if (this.header != null && this.collapseHelper == null) {
 			boolean initialCollapse = this.collapse != null ? this.collapse : false;
 			this.collapseHelper =
-				CollapseHelper.apply(this.header, this.collapsePanel.getElement(), initialCollapse);
+					CollapseHelper.apply(this.header, this.collapsePanel.getElement(), initialCollapse);
 			this.setCollapsible(this.collapsible);
 			if (this.collapse != null) {
 				this.setCollapse(this.collapse);

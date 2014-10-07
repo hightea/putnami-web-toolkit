@@ -125,7 +125,7 @@ public class TableEditor<T> extends Table<T>
 		this.driver.flush();
 		// FIXME TableOrder doesn't sort result, so we ask to sort result via TableEditor
 		if (!this.driver.hasErrors()) {
-			return ((TableEditorBody) this.getDefaultBody()).flush();
+			return ((TableEditorBody<T>) this.getDefaultBody()).flush();
 		}
 		return this.driver.getValue();
 	}
@@ -139,7 +139,7 @@ public class TableEditor<T> extends Table<T>
 		this.ensureTableHead().removeColumn(column);
 		TableBody<T> body = this.getDefaultBody();
 		if (body instanceof TableEditorBody) {
-			((TableEditorBody) body).removeColumn(column);
+			((TableEditorBody<T>) body).removeColumn(column);
 		}
 		return true;
 	}

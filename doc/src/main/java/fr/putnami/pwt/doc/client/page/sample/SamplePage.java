@@ -69,7 +69,7 @@ public abstract class SamplePage extends Composite implements View {
 			if (simpleFileName.lastIndexOf("/") != -1) {
 				simpleFileName = simpleFileName.substring(simpleFileName.lastIndexOf("/") + 1);
 			}
-			Anchor<?> anchor = new Anchor(simpleFileName);
+			Anchor<?> anchor = new Anchor<>(simpleFileName);
 			anchor.addClickHandler(this);
 			this.add(anchor);
 		}

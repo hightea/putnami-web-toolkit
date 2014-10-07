@@ -74,8 +74,8 @@ public class MessageHelper {
 				if (constants != null) {
 					label = constants.getString(key);
 				}
-			} catch (MissingResourceException e) {
-				continue; // Loop
+			} catch (MissingResourceException exc) {
+				// Do Nothing
 			}
 			typeToLookup = typeToLookup.getSuperclass();
 		}
@@ -92,7 +92,7 @@ public class MessageHelper {
 			path.toString().replaceAll("\\.", "_").replaceAll("\\[", "").replaceAll("]", "")
 				.toUpperCase();
 
-		labelKey = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, "" + labelKey);
+		labelKey = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, String.valueOf(labelKey));
 		if (suffix != null) {
 			labelKey += suffix;
 		}

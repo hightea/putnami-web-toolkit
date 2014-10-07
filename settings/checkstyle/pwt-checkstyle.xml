@@ -23,8 +23,9 @@
       <property name="severity" value="error"/>
     </module>
     <module name="JavadocType">
-      <property name="severity" value="warning"/>
+      <property name="severity" value="ignore"/>
       <property name="scope" value="protected"/>
+      <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="warning"/>
     </module>
     <module name="PackageName">
       <property name="severity" value="error"/>
@@ -69,6 +70,7 @@
       <property name="checkHtml" value="false"/>
       <property name="tokens" value="CLASS_DEF,CTOR_DEF,INTERFACE_DEF,METHOD_DEF,VARIABLE_DEF"/>
       <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Well formed java docs"/>
+      <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="info"/>
     </module>
     <module name="NeedBraces">
       <property name="severity" value="error"/>
@@ -85,6 +87,7 @@
       <property name="allowMissingPropertyJavadoc" value="true"/>
       <property name="tokens" value="METHOD_DEF"/>
       <metadata name="com.atlassw.tools.eclipse.checkstyle.lastEnabledSeverity" value="info"/>
+      <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="info"/>
     </module>
     <module name="ImportOrder">
       <property name="severity" value="error"/>
@@ -232,6 +235,7 @@
     </module>
     <module name="EmptyBlock">
       <property name="severity" value="error"/>
+      <property name="option" value="text"/>
     </module>
     <module name="DeclarationOrder">
       <property name="severity" value="ignore"/>

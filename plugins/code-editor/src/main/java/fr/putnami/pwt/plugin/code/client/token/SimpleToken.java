@@ -29,22 +29,26 @@ public class SimpleToken<T extends TokenContent> implements Token<T> {
 	}
 
 	public static <U extends TokenContent> SimpleToken<U> createWhitespaceToken(int tokenStart,
-			String strValue) {
+		String strValue) {
 		return new SimpleToken<U>(TokenType.WHITESPACE, tokenStart, strValue);
 	}
 
 	public static <U extends TokenContent> SimpleToken<U> createWhitespaceToken(int tokenStart,
-			String strValue, U content) {
+		String strValue, U content) {
 		return new SimpleToken<U>(TokenType.WHITESPACE, tokenStart, strValue, content);
 	}
 
 	public static <U extends TokenContent> SimpleToken<U> createNewlineToken(int tokenStart,
-			String strValue) {
+		String strValue) {
 		return new SimpleToken<U>(TokenType.NEWLINE, tokenStart, strValue);
 	}
 
 	private enum TokenType {
-		UNDEFINED, EOF, WHITESPACE, NEWLINE, OTHER;
+			UNDEFINED,
+			EOF,
+			WHITESPACE,
+			NEWLINE,
+			OTHER;
 	}
 
 	private final TokenType type;
@@ -130,10 +134,10 @@ public class SimpleToken<T extends TokenContent> implements Token<T> {
 	@Override
 	public boolean equals(Object other) {
 		if (other instanceof SimpleToken) {
-			return Objects.equal(this.type, ((SimpleToken) other).type)
-					&& Objects.equal(this.getTokenStart(), ((SimpleToken) other).getTokenStart())
-					&& Objects.equal(this.getText(), ((SimpleToken) other).getText())
-					&& Objects.equal(this.getContent(), ((SimpleToken) other).getContent());
+			return Objects.equal(this.type, ((SimpleToken<?>) other).type)
+				&& Objects.equal(this.getTokenStart(), ((SimpleToken<?>) other).getTokenStart())
+				&& Objects.equal(this.getText(), ((SimpleToken<?>) other).getText())
+				&& Objects.equal(this.getContent(), ((SimpleToken<?>) other).getContent());
 		}
 		return false;
 	}

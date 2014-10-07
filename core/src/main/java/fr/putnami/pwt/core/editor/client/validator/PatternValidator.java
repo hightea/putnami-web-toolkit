@@ -40,7 +40,7 @@ public class PatternValidator<T> extends AbstractValidator<T> {
 			return this.regExMatch((String) value);
 		}
 		if (value instanceof Collection) {
-			for (Object val : (Collection) value) {
+			for (Object val : (Collection<?>) value) {
 				if (!(val instanceof String)) {
 					return false;
 				}

@@ -309,18 +309,18 @@ public class InputDatePicker extends FocusWidget
 		if (this.monthPickerInner.getChildCount() == 0) {
 			for (int year = currentYear - 100; year < currentYear + 100; year++) {
 				DivElement yearDiv = Document.get().createDivElement();
-				yearDiv.setInnerText("" + year);
+				yearDiv.setInnerText(String.valueOf(year));
 				StyleUtils.addStyle(yearDiv, InputDatePicker.STYLE_YEAR_BUTTON);
 				Event.sinkEvents(yearDiv, Event.ONCLICK);
 				this.monthPickerInner.appendChild(yearDiv);
-				yearDiv.setAttribute(InputDatePicker.ATTRIBUTE_DATA_YEAR, "" + year);
+				yearDiv.setAttribute(InputDatePicker.ATTRIBUTE_DATA_YEAR, String.valueOf(year));
 			}
 		}
 		this.openMonthOfYear(this.cursor.getYear() + InputDatePicker.YEAR_OFFSET);
 	}
 
 	private void openMonthOfYear(int year) {
-		String yearString = "" + year;
+		String yearString = String.valueOf(year);
 		this.monthPickerUlMonthElement.removeFromParent();
 		for (int i = 0; i < this.monthPickerInner.getChildCount(); i++) {
 			Element child = (Element) this.monthPickerInner.getChild(i);
@@ -399,7 +399,7 @@ public class InputDatePicker extends FocusWidget
 			headRow.appendChild(td);
 			DivElement div = Document.get().createDivElement();
 			td.appendChild(div);
-			div.setInnerText("" + dateToDrow.getDate());
+			div.setInnerText(String.valueOf(dateToDrow.getDate()));
 			div.setAttribute(InputDatePicker.ATTRIBUTE_DATA_DATE, InputDatePicker.ATTRIBUTE_DATE_FORMAT
 				.format(dateToDrow));
 			if (dateToDrow.getMonth() != selectedMonth) {

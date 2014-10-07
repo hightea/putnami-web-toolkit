@@ -36,8 +36,7 @@ import fr.putnami.pwt.core.model.client.visitor.ReadonlyVisitor;
 
 public class OutputList<T> extends List
 	implements EditorCollection<T>, EditorOutput<Collection<T>>, EditorModel<T>, HasDrawable,
-	HasEditorProvider,
-	HasOutputEditorFactory<T> {
+	HasEditorProvider, HasOutputEditorFactory {
 
 	private String path;
 	private Model<T> model;

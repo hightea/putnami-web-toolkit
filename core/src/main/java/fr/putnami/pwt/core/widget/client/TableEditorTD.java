@@ -26,8 +26,7 @@ import fr.putnami.pwt.core.model.client.base.HasOutputEditorFactory;
 import fr.putnami.pwt.core.model.client.base.HasWidgetFactory;
 
 public class TableEditorTD<T> extends TableTD<T>
-	implements HasOutputEditorFactory<T>, HasInputEditorFactory<T>, HasWidgetFactory,
-	HasEditorProvider {
+	implements HasOutputEditorFactory, HasInputEditorFactory, HasWidgetFactory, HasEditorProvider {
 
 	private OutputFactory outputFactory;
 	private InputFactory inputFactory;

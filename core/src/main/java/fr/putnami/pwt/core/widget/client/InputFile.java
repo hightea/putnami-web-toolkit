@@ -141,11 +141,11 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 
 	private final OutputProgressBar<Integer> progressBar = new OutputProgressBar<Integer>();
 	private final OneWidgetPanel progressBarWrapper = new OneWidgetPanel();
-	private final Anchor<?> fileNameAnchor = new Anchor();
+	private final Anchor<?> fileNameAnchor = new Anchor<>();
 	private final Text placeholderText = new Text();
 
-	private final Button<?> cancelBtn = new Button();
-	private final Button<?> uploadBtn = new Button();
+	private final Button<?> cancelBtn = new Button<>();
+	private final Button<?> uploadBtn = new Button<>();
 
 	private String placeholder = null;
 
@@ -349,10 +349,9 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 		StringBuilder requestBody = new StringBuilder();
 		requestBody.append("--").append(InputFile.MULTIPART_BOUNDARY).append(InputFile.EOL).append(
 			"Content-Disposition: form-data; name=\"data\"; filename=\"").append(fileName).append("\"")
-			.append(InputFile.EOL)
-			.append("Content-Type: ").append(type).append(InputFile.EOL).append(InputFile.EOL).append(
-				base64data).append(
-				InputFile.EOL).append("--").append(InputFile.MULTIPART_BOUNDARY).append("--");
+			.append(InputFile.EOL).append("Content-Type: ").append(type).append(InputFile.EOL).append(
+				InputFile.EOL).append(base64data).append(InputFile.EOL).append("--").append(
+				InputFile.MULTIPART_BOUNDARY).append("--");
 
 		try {
 			RequestBuilder requestBuilder =

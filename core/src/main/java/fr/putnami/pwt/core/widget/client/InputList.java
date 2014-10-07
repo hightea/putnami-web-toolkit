@@ -65,8 +65,7 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class InputList<T> extends List
 	implements EditorCollection<T>, EditorInput<Collection<T>>, EditorModel<T>, HasDrawable,
-	HasEditorProvider,
-	HasInputEditorFactory<T>, HasOutputEditorFactory<T> {
+	HasEditorProvider, HasInputEditorFactory, HasOutputEditorFactory {
 
 	private static final CssStyle STYLE_ITEM_CONTAINER = new SimpleStyle("list-element-container");
 	private static final CssStyle STYLE_CLEAR = new SimpleStyle("clearfix");
@@ -108,7 +107,7 @@ public class InputList<T> extends List
 		private final HandlerRegistrationCollection registrationCollection =
 			new HandlerRegistrationCollection();
 
-		private final Anchor deleteButton = new Anchor("&times;");
+		private final Anchor<?> deleteButton = new Anchor<>("&times;");
 		private final SimplePanel container = new SimplePanel();
 		private final SimplePanel clear = new SimplePanel();
 		private EditorOutput<T> output;
@@ -281,7 +280,7 @@ public class InputList<T> extends List
 		this.inputFactory = source.inputFactory;
 
 		if (source.validators != null) {
-			for (Validator validator : source.validators) {
+			for (Validator<Collection<T>> validator : source.validators) {
 				this.addValidator(validator);
 			}
 		}

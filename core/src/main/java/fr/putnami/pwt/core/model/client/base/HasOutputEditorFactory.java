@@ -16,7 +16,7 @@ package fr.putnami.pwt.core.model.client.base;
 
 import fr.putnami.pwt.core.editor.client.factory.OutputFactory;
 
-public interface HasOutputEditorFactory<T> {
+public interface HasOutputEditorFactory {
 
 	OutputFactory getOutputFactory();
 }

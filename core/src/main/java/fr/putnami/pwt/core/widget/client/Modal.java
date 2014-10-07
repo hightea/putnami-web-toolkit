@@ -84,9 +84,9 @@ public class Modal extends AbstractPanel implements HasOneWidget, CloneableWidge
 	}
 
 	public enum Size implements CssStyle {
-			SMALL("modal-sm"),
-			DEFAULT(null),
-			LARGE("modal-lg");
+		SMALL("modal-sm"),
+		DEFAULT(null),
+		LARGE("modal-lg");
 
 		private final String style;
 
@@ -300,7 +300,7 @@ public class Modal extends AbstractPanel implements HasOneWidget, CloneableWidge
 
 	private Anchor<?> ensureDismissButton() {
 		if (this.dismissable && this.dismissButton == null) {
-			this.dismissButton = new Anchor("&times;");
+			this.dismissButton = new Anchor<>("&times;");
 			StyleUtils.addStyle(this.dismissButton, Modal.STYLE_CLOSE);
 			this.dismissButton.addClickHandler(new ClickHandler() {
 

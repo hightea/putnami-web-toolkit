@@ -34,10 +34,10 @@ public class SizeValidator<T> extends AbstractValidator<T> {
 			return this.isLengthValid(((String) value).length());
 		}
 		if (value instanceof Collection) {
-			return this.isLengthValid(((Collection) value).size());
+			return this.isLengthValid(((Collection<?>) value).size());
 		}
 		if (value instanceof Map) {
-			return this.isLengthValid(((Map) value).size());
+			return this.isLengthValid(((Map<?, ?>) value).size());
 		}
 		return true;
 	}
