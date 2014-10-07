@@ -53,7 +53,8 @@ import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 public abstract class AbstractForm<T> extends AbstractHTMLPanel
 	implements EditorLeaf, EditorModel<T>, EditorOutput<T>, EditorInput<T>, HasReadonly, HasDrawable,
 	HasDriver<T, ModelDriver<T>>, HasFormType, HasDirtyHandlers, HasFlushSuccessHandlers,
-	HasFlushErrorHandlers, HasResetDisplayHandlers, HasDataValidationHandlers {
+	HasFlushErrorHandlers,
+	HasResetDisplayHandlers, HasDataValidationHandlers {
 
 	public enum Layout implements CssStyle {
 
@@ -125,8 +126,7 @@ public abstract class AbstractForm<T> extends AbstractHTMLPanel
 
 	@Override
 	public T flush() {
-		T value = this.driver.flush();
-		return value;
+		return this.driver.flush();
 	}
 
 	@Override
@@ -183,7 +183,7 @@ public abstract class AbstractForm<T> extends AbstractHTMLPanel
 
 	@Override
 	public Iterable<Error> getErrors() {
-		return this.driver == null ? Collections.EMPTY_LIST : this.driver.getErrors();
+		return this.driver == null ? Collections.<Error> emptyList() : this.driver.getErrors();
 	}
 
 	@Override

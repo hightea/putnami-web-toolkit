@@ -74,7 +74,8 @@ public abstract class AbstractCommandService extends AbstractRemoteServiceServle
 
 			String responsePayload =
 				RPC.invokeAndEncodeResponse(this, rpcRequest.getMethod(), rpcRequest.getParameters(),
-					rpcRequest.getSerializationPolicy(), rpcRequest.getFlags());
+					rpcRequest
+						.getSerializationPolicy(), rpcRequest.getFlags());
 
 			boolean gzipEncode =
 				RPCServletUtils.acceptsGzipEncoding(request)

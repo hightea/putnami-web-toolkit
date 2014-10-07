@@ -79,7 +79,7 @@ public class Secure implements IsWidget, HasWidgets, HasOneWidget, CloneableWidg
 		if (this.getWidget() instanceof Editor) {
 			return Lists.newArrayList((Editor) this.getWidget());
 		}
-		return Collections.EMPTY_LIST;
+		return Collections.<Editor> emptyList();
 	}
 
 	@Override

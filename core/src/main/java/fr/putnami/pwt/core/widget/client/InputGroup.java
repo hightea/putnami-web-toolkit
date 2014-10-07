@@ -113,7 +113,7 @@ public class InputGroup<T> extends AbstractPanel implements EditorInput<T> {
 
 	@Override
 	public Iterable<Error> getErrors() {
-		return Collections.EMPTY_LIST;
+		return Collections.<Error> emptyList();
 	}
 
 	public Size getSize() {

@@ -47,7 +47,7 @@ public class Path implements Iterable<PathElement> {
 
 		@Override
 		public String toString() {
-			StringBuffer sb = new StringBuffer();
+			StringBuilder sb = new StringBuilder();
 			sb.append(this.elementName);
 			if (this.indexKey != null) {
 				sb.append("[");
@@ -93,6 +93,10 @@ public class Path implements Iterable<PathElement> {
 		return this.elements.size();
 	}
 
+	public boolean isEmpty() {
+		return this.elements.isEmpty();
+	}
+
 	public PathElement get(int index) {
 		return this.elements.size() > index ? this.elements.get(index) : null;
 	}
@@ -112,7 +116,7 @@ public class Path implements Iterable<PathElement> {
 	}
 
 	public boolean isRoot() {
-		return this.size() == 0;
+		return isEmpty();
 	}
 
 	@Override

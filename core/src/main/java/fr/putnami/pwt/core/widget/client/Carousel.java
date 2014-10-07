@@ -96,7 +96,8 @@ public class Carousel extends AbstractPanel
 
 	private final Container carouselInner = new Container();
 	private final fr.putnami.pwt.core.widget.client.List carouselIndicators =
-		new fr.putnami.pwt.core.widget.client.List(OListElement.TAG);
+		new fr.putnami.pwt.core.widget.client.List(
+			OListElement.TAG);
 	private final Anchor<?> leftButton = new Anchor();
 	private final Anchor<?> rightButton = new Anchor();
 

@@ -31,7 +31,7 @@ import fr.putnami.pwt.core.model.client.model.PropertyDescription;
 public final class ModelUtils {
 
 	public static <A> PropertyDescription resolveProperty(Model<?> model, Path path) {
-		if (model == null || path.size() == 0) {
+		if (model == null || path.isEmpty()) {
 			return null;
 		}
 		String firstElementName = path.get(0).getElementName();
@@ -52,7 +52,8 @@ public final class ModelUtils {
 		if (propertyDescription != null) {
 			validators = propertyDescription.getValidators();
 		}
-		return validators == null ? Collections.EMPTY_LIST : validators;
+		return (Collection<Validator<A>>) (validators == null ? Collections.<Validator<A>> emptyList()
+			: validators);
 	}
 
 	public static <A, B> Model<A> resolveModel(Model<B> model, Path path) {
@@ -64,7 +65,7 @@ public final class ModelUtils {
 	}
 
 	public static <A, B> Class<A> resolveType(Model<B> model, Path path) {
-		if (path.size() == 0) {
+		if (path.isEmpty()) {
 			return (Class<A>) model.getLeafType();
 		}
 		PropertyDescription propertyDescription = ModelUtils.resolveProperty(model, path);
@@ -75,7 +76,7 @@ public final class ModelUtils {
 	}
 
 	public static <A, B> A resolveValue(Object bean, Model<B> model, Path path) {
-		if (model == null || path.size() == 0) {
+		if (model == null || path.isEmpty()) {
 			return (A) bean;
 		}
 
@@ -113,7 +114,7 @@ public final class ModelUtils {
 	}
 
 	public static <A, B> A bindValue(A bean, Model<A> model, Path path, B value) {
-		if (model == null || path.size() == 0) {
+		if (model == null || path.isEmpty()) {
 			return bean;
 		}
 		A targetBean = bean;

@@ -32,7 +32,7 @@ public class ClientErrorHandler extends AbstractStatusCodeErrorHandler {
 
 	@Override
 	protected boolean handlesCode(int statusCode) {
-		return (statusCode >= 400 && statusCode < 500);
+		return statusCode >= 400 && statusCode < 500;
 	}
 
 	@Override

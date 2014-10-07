@@ -30,7 +30,7 @@ public class ModelGenerator extends Generator {
 	public String generate(TreeLogger logger, GeneratorContext context, String modelClass)
 		throws UnableToCompleteException {
 		TypeOracle typeOracle = context.getTypeOracle();
-		assert (typeOracle != null);
+		assert typeOracle != null;
 
 		JClassType modelType = typeOracle.findType(modelClass);
 		if (modelType == null) {

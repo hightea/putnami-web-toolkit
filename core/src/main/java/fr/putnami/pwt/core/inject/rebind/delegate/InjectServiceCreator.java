@@ -66,16 +66,17 @@ public class InjectServiceCreator extends InjectorCreatorDelegate
 	@Override
 	public void writeStatic(SourceWriter srcWriter) {
 		if (this.declareProxy) {
-			srcWriter
-				.println("interface %s extends ServiceProxy<%s_Injector, %s>, %s {}", this.proxyTypeName,
-					this.viewType.getSimpleSourceName(), this.serviceName, this.serviceName);
+			srcWriter.println("interface %s extends ServiceProxy<%s_Injector, %s>, %s {}",
+				this.proxyTypeName, this.viewType
+					.getSimpleSourceName(), this.serviceName, this.serviceName);
 		}
 	}
 
 	@Override
 	public void writeConstructor(SourceWriter srcWriter) {
 		srcWriter.println("%s = (%s) GWT.create(%s.class);", this.serviceField.getName(),
-			this.proxyTypeName, this.proxyTypeName);
+			this.proxyTypeName,
+			this.proxyTypeName);
 		srcWriter.println("((%s)%s).bindService(this);", this.proxyTypeName, this.serviceField
 			.getName());
 	}

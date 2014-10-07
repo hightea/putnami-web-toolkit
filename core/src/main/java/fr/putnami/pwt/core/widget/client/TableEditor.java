@@ -38,7 +38,8 @@ import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class TableEditor<T> extends Table<T>
 	implements HasDriver<Collection<T>, ModelDriver<Collection<T>>>, EditorLeaf,
-	EditorOutput<Collection<T>>, EditorInput<Collection<T>>, EditorModel<T> {
+	EditorOutput<Collection<T>>,
+	EditorInput<Collection<T>>, EditorModel<T> {
 
 	private MessageHelper messageHelper;
 	private Model<T> model;
@@ -82,7 +83,7 @@ public class TableEditor<T> extends Table<T>
 
 	@Override
 	public void add(IsWidget w) {
-		super.add(w); // Table.add(IsWidget);
+		super.add(w);
 		if (w instanceof Pagination) {
 			this.setPagination((Pagination) w);
 		}
@@ -172,7 +173,7 @@ public class TableEditor<T> extends Table<T>
 
 	@Override
 	public Iterable<Error> getErrors() {
-		return this.driver == null ? Collections.EMPTY_LIST : this.driver.getErrors();
+		return this.driver == null ? Collections.<Error> emptyList() : this.driver.getErrors();
 	}
 
 	@Override

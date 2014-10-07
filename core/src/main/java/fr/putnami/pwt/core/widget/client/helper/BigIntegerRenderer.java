@@ -22,13 +22,6 @@ import java.math.BigInteger;
 public final class BigIntegerRenderer extends AbstractRenderer<BigInteger> {
 	private static BigIntegerRenderer instance;
 
-	public static BigIntegerRenderer get() {
-		if (BigIntegerRenderer.instance == null) {
-			BigIntegerRenderer.instance = new BigIntegerRenderer();
-		}
-		return BigIntegerRenderer.instance;
-	}
-
 	private BigIntegerRenderer() {
 	}
 
@@ -40,4 +33,12 @@ public final class BigIntegerRenderer extends AbstractRenderer<BigInteger> {
 
 		return NumberFormat.getDecimalFormat().format(object);
 	}
+
+	public static BigIntegerRenderer get() {
+		if (BigIntegerRenderer.instance == null) {
+			BigIntegerRenderer.instance = new BigIntegerRenderer();
+		}
+		return BigIntegerRenderer.instance;
+	}
+
 }

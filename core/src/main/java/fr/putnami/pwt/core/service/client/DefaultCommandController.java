@@ -70,7 +70,8 @@ public final class DefaultCommandController extends CommandController {
 					if (request.requestId == response.getRequestId()) {
 						if (!request.param.isQuiet()) {
 							DefaultCommandController.this.fireEvent(new CommandResponseEvent(request.requestId,
-								request.command, response));
+								request.command,
+								response));
 						}
 						if (response.getThrown() == null) {
 							for (AsyncCallback requestCallback : request.param.getCallbacks()) {
@@ -87,7 +88,8 @@ public final class DefaultCommandController extends CommandController {
 									requestCallback.onFailure(response.getThrown());
 									caught = true;
 								} catch (RuntimeException e) {
-									continue; // Exception not handled.
+									// Exception not handled.
+									continue;
 								}
 							}
 							if (!caught) {
@@ -188,7 +190,7 @@ public final class DefaultCommandController extends CommandController {
 		try {
 			int result = this.sendRequest(Lists.newArrayList(this.stack), callback);
 			if (result == 0 && callback != null) {
-				callback.onSuccess(Collections.EMPTY_LIST);
+				callback.onSuccess(Collections.<CommandResponse> emptyList());
 			}
 			return result;
 		} finally {
@@ -215,7 +217,7 @@ public final class DefaultCommandController extends CommandController {
 	}
 
 	private int sendRequest(List<Request> requests, AsyncCallback<List<CommandResponse>> callback) {
-		if (requests == null || requests.size() == 0) {
+		if (requests == null || requests.isEmpty()) {
 			return 0;
 		}
 		try {
@@ -250,8 +252,8 @@ public final class DefaultCommandController extends CommandController {
 
 			RequestCallback responseHandler =
 				new RequestCallbackAdapter<List<CommandResponse>>(streamFactory,
-					DefaultCommandController.METHOD_NAME, statsContext, serviceCallback, null,
-					ResponseReader.OBJECT);
+					DefaultCommandController.METHOD_NAME,
+					statsContext, serviceCallback, null, ResponseReader.OBJECT);
 
 			this.rpcRequestBuilder.create(this.remoteServiceURL);
 			this.rpcRequestBuilder.setCallback(responseHandler);

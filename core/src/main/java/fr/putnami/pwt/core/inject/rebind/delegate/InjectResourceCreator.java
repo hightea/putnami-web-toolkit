@@ -40,6 +40,7 @@ public class InjectResourceCreator extends InjectorCreatorDelegate
 	@Override
 	public void writeConstructor(SourceWriter srcWriter) {
 		srcWriter.println("%s = GWT.create(%s.class);", this.resourceField.getName(),
-			this.resourceField.getType().getQualifiedSourceName());
+			this.resourceField.getType()
+				.getQualifiedSourceName());
 	}
 }

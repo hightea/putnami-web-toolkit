@@ -20,14 +20,7 @@ public final class BooleanRenderer extends AbstractRenderer<Boolean> {
 
 	private static BooleanRenderer instance;
 
-	public static BooleanRenderer get() {
-		if (BooleanRenderer.instance == null) {
-			BooleanRenderer.instance = new BooleanRenderer();
-		}
-		return BooleanRenderer.instance;
-	}
-
-	public BooleanRenderer() {
+	private BooleanRenderer() {
 	}
 
 	@Override
@@ -38,4 +31,12 @@ public final class BooleanRenderer extends AbstractRenderer<Boolean> {
 
 		return object.toString();
 	}
+
+	public static BooleanRenderer get() {
+		if (BooleanRenderer.instance == null) {
+			BooleanRenderer.instance = new BooleanRenderer();
+		}
+		return BooleanRenderer.instance;
+	}
+
 }

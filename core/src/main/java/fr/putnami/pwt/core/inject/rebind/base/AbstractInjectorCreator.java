@@ -59,7 +59,7 @@ public abstract class AbstractInjectorCreator {
 				}
 			});
 		}
-		return this.delegates.size() > 0;
+		return !this.delegates.isEmpty();
 	}
 
 	protected abstract Collection<InjectorDelegateFactorty> getFactories();

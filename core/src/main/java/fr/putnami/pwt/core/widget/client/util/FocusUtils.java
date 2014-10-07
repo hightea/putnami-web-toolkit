@@ -18,9 +18,10 @@ import com.google.gwt.dom.client.Element;
 
 public final class FocusUtils {
 
-	public static native Element getActiveElement() /*-{
-																									return $doc.activeElement;
-																									}-*/;
+	public static native Element getActiveElement()
+	/*-{
+		return $doc.activeElement;
+	}*/;
 
 	private FocusUtils() {
 	}

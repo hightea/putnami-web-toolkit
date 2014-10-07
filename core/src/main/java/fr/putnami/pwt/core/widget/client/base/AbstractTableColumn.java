@@ -104,8 +104,8 @@ public abstract class AbstractTableColumn<T>
 	}
 
 	public Collection<AbstractTableColumnAspect<T>> getAspects() {
-		return this.aspects == null ? Collections.EMPTY_LIST : Collections
-			.unmodifiableCollection(this.aspects);
+		return this.aspects == null ? Collections.<AbstractTableColumnAspect<T>> emptyList()
+			: Collections.unmodifiableCollection(this.aspects);
 	}
 
 	public <A extends AbstractTableColumnAspect<T>> A getAspect(Class<A> aspectClass) {

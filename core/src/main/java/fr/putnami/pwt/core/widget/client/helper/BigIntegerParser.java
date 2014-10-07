@@ -23,13 +23,6 @@ import java.text.ParseException;
 public final class BigIntegerParser implements Parser<BigInteger> {
 	private static BigIntegerParser instance;
 
-	public static BigIntegerParser get() {
-		if (BigIntegerParser.instance == null) {
-			BigIntegerParser.instance = new BigIntegerParser();
-		}
-		return BigIntegerParser.instance;
-	}
-
 	private BigIntegerParser() {
 	}
 
@@ -44,5 +37,12 @@ public final class BigIntegerParser implements Parser<BigInteger> {
 		} catch (NumberFormatException e) {
 			throw new ParseException(e.getMessage(), 0);
 		}
+	}
+
+	public static BigIntegerParser get() {
+		if (BigIntegerParser.instance == null) {
+			BigIntegerParser.instance = new BigIntegerParser();
+		}
+		return BigIntegerParser.instance;
 	}
 }

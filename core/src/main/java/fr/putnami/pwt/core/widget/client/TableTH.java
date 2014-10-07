@@ -112,6 +112,8 @@ public class TableTH<T> extends AbstractPanel implements CloneableWidget, HasRea
 				case VISIBLE_READONLY:
 					this.setVisible(Boolean.TRUE.equals(this.readonly));
 					break;
+				default:
+					break;
 			}
 		}
 	}

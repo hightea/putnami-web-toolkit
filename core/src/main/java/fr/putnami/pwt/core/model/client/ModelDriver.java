@@ -190,13 +190,13 @@ public class ModelDriver<T> implements Driver<T> {
 
 	@Override
 	public Iterable<Error> getErrors() {
-		return this.errors == null ? Collections.EMPTY_LIST : Iterables
+		return this.errors == null ? Collections.<Error> emptyList() : Iterables
 			.unmodifiableIterable(this.errors);
 	}
 
 	@Override
 	public boolean hasErrors() {
-		return this.errors != null && this.errors.size() > 0;
+		return this.errors != null && !this.errors.isEmpty();
 	}
 
 	@Override

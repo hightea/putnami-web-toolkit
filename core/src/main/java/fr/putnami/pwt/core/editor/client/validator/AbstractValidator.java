@@ -44,8 +44,7 @@ public abstract class AbstractValidator<T> implements Validator<T> {
 	@Override
 	public Error validate(Editor editor, T value) {
 		if (!this.isValid(value)) {
-			SimpleError error = new SimpleError(editor, this.message, value, this.getParrameters());
-			return error;
+			return new SimpleError(editor, this.message, value, this.getParrameters());
 		}
 		return null;
 	}

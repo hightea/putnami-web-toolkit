@@ -143,7 +143,8 @@ public abstract class AbstractInputSelect<T, U> extends AbstractInputChoice<T, U
 				Iterables.find(AbstractInputSelect.this.itemsLinks.values(), this, null);
 			if (matchingLink != null) {
 				AbstractInputSelect.this.selectionHandler.onItemSearch(AbstractInputSelect.this.itemsLinks
-					.inverse().get(matchingLink));
+					.inverse().get(
+						matchingLink));
 			}
 		}
 

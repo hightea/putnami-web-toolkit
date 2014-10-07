@@ -15,10 +15,7 @@
 package fr.putnami.pwt.core.inject.rebind;
 
 import com.google.common.collect.Lists;
-import com.google.gwt.core.ext.GeneratorContext;
-import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.typeinfo.JClassType;
-import com.google.gwt.user.rebind.SourceWriter;
 
 import java.util.Collection;
 
@@ -51,8 +48,4 @@ public class InjectorBasicCreator extends AbstractInjectorCreator {
 		return factories;
 	}
 
-	@Override
-	protected void doCreate(TreeLogger logger, GeneratorContext context, SourceWriter srcWriter) {
-		super.doCreate(logger, context, srcWriter);
-	}
 }

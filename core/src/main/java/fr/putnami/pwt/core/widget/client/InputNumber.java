@@ -140,7 +140,8 @@ public class InputNumber<N extends Number> extends AbstractInputBox<TextBox, N> 
 			case DOUBLE:
 			case BIG_DECIMAL:
 				this.maskHelper.addTokenHelper(new StaticStringTokenHelper(InputNumber.NUMBER_CONSTANTS
-					.decimalSeparator(), true, ',', '.'));
+					.decimalSeparator(),
+					true, ',', '.'));
 				this.maskHelper.addTokenHelper(new IntegerTokenHelper(0, Integer.MIN_VALUE,
 					Integer.MAX_VALUE, -1, "0"));
 				break;

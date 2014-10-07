@@ -20,13 +20,6 @@ public final class StringRenderer extends AbstractRenderer<String> {
 
 	private static StringRenderer instance;
 
-	public static StringRenderer get() {
-		if (StringRenderer.instance == null) {
-			StringRenderer.instance = new StringRenderer();
-		}
-		return StringRenderer.instance;
-	}
-
 	public StringRenderer() {
 	}
 
@@ -37,5 +30,12 @@ public final class StringRenderer extends AbstractRenderer<String> {
 		}
 
 		return object;
+	}
+
+	public static StringRenderer get() {
+		if (StringRenderer.instance == null) {
+			StringRenderer.instance = new StringRenderer();
+		}
+		return StringRenderer.instance;
 	}
 }

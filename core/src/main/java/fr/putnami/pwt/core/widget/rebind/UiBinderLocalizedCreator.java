@@ -124,16 +124,19 @@ public class UiBinderLocalizedCreator {
 
 		srcWriter.println("@UiTemplate(\"%s\")", this.templateName);
 		srcWriter.println("interface Binder extends UiBinder<%s, %s> {", this.widgetType
-			.getSimpleSourceName(), this.targetType.getSimpleSourceName());
+			.getSimpleSourceName(),
+			this.targetType.getSimpleSourceName());
 		srcWriter.indent();
 		srcWriter.println("UiBinder<%s, %s> BINDER = GWT.create(Binder.class);", this.widgetType
-			.getSimpleSourceName(), this.targetType.getSimpleSourceName());
+			.getSimpleSourceName(),
+			this.targetType.getSimpleSourceName());
 		srcWriter.outdent();
 		srcWriter.println("}");
 		srcWriter.println();
 		srcWriter.println("@Override");
 		srcWriter.println("public %s createAndBindUi(%s owner) {", this.widgetType
-			.getSimpleSourceName(), this.targetType.getSimpleSourceName());
+			.getSimpleSourceName(), this.targetType
+			.getSimpleSourceName());
 		srcWriter.indent();
 		srcWriter.println("return Binder.BINDER.createAndBindUi(owner);");
 		srcWriter.outdent();

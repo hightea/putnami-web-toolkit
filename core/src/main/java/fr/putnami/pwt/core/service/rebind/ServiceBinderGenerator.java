@@ -31,7 +31,7 @@ public class ServiceBinderGenerator extends Generator {
 	public String generate(TreeLogger logger, GeneratorContext context, String remoteServiceClassName)
 		throws UnableToCompleteException {
 		TypeOracle typeOracle = context.getTypeOracle();
-		assert (typeOracle != null);
+		assert typeOracle != null;
 
 		JClassType remoteServiceType = typeOracle.findType(remoteServiceClassName);
 		if (remoteServiceType == null) {

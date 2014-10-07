@@ -129,7 +129,6 @@ public class TableEditorBody<T> extends TableBody<T>
 			values.add(row.getValue());
 		}
 		return values;
-		// return this.driver.flush();
 	}
 
 	@Override
@@ -224,7 +223,7 @@ public class TableEditorBody<T> extends TableBody<T>
 
 	@Override
 	public Iterable<Error> getErrors() {
-		return this.driver == null ? Collections.EMPTY_LIST : this.driver.getErrors();
+		return this.driver == null ? Collections.<Error> emptyList() : this.driver.getErrors();
 	}
 
 	@Override

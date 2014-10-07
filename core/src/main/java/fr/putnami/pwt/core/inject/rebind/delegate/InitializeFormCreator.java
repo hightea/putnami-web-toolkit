@@ -85,7 +85,8 @@ public class InitializeFormCreator extends InjectorCreatorDelegate
 			srcWriter
 				.println(
 					"MessageHelper %sMessageHelper = new MessageHelper((ConstantsWithLookup) GWT.create(%s.class));",
-					fieldName, this.constantClassName.getCanonicalName());
+					fieldName,
+					this.constantClassName.getCanonicalName());
 			srcWriter.println("%s.setMessageHelper(%sMessageHelper);", fieldName, fieldName);
 		}
 		srcWriter.println("%s.initialize(new %s());", fieldName, this.modelImplClass);

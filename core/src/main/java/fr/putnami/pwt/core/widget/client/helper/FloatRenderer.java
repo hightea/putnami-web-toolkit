@@ -20,13 +20,6 @@ import com.google.gwt.text.shared.AbstractRenderer;
 public final class FloatRenderer extends AbstractRenderer<Float> {
 	private static FloatRenderer instance;
 
-	public static FloatRenderer get() {
-		if (FloatRenderer.instance == null) {
-			FloatRenderer.instance = new FloatRenderer();
-		}
-		return FloatRenderer.instance;
-	}
-
 	private FloatRenderer() {
 	}
 
@@ -38,4 +31,12 @@ public final class FloatRenderer extends AbstractRenderer<Float> {
 
 		return NumberFormat.getDecimalFormat().format(object);
 	}
+
+	public static FloatRenderer get() {
+		if (FloatRenderer.instance == null) {
+			FloatRenderer.instance = new FloatRenderer();
+		}
+		return FloatRenderer.instance;
+	}
+
 }

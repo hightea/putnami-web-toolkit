@@ -33,8 +33,9 @@ public class ModuleCreatorFactory implements InjectorDelegateFactorty {
 	public void createDelegates(JClassType injectableType,
 		Collection<InjectorCreatorDelegate> delegates) {
 		if (injectableType.getAnnotation(MvpDescription.class) != null) {
-			delegates.add(new InjectMvpDescriptionCreator(injectableType, injectableType
-				.getAnnotation(MvpDescription.class)));
+			delegates
+				.add(new InjectMvpDescriptionCreator(injectableType, injectableType
+					.getAnnotation(MvpDescription.class)));
 		}
 		if (injectableType.getAnnotation(ThemeDescription.class) != null) {
 			delegates.add(new InjectThemeCreator(injectableType, injectableType

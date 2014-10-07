@@ -77,6 +77,8 @@ public abstract class AbstractTableCell<T> extends AbstractPanel implements HasR
 			case VISIBLE_READONLY:
 				this.setVisible(Boolean.TRUE.equals(this.readonly));
 				break;
+			default:
+				break;
 		}
 	}
 }

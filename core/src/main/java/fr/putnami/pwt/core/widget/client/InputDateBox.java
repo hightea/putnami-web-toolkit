@@ -91,39 +91,51 @@ public class InputDateBox extends AbstractInputBox<TextBox, Date> {
 	private static final Map<String, HelperFactory> TOKEN_HELPER_FACTORIES = Maps.newLinkedHashMap();
 
 	static {
+		// year
 		InputDateBox.TOKEN_HELPER_FACTORIES.put("yyyy", new NumericHelperFactory("aaaa", "0000",
-			new Date().getYear() + 1900, 0, 9999, 4)); // year
+			new Date().getYear() + 1900, 0, 9999, 4));
+		// month full
 		InputDateBox.TOKEN_HELPER_FACTORIES.put("MMMM", new StringHelperFactory("mm",
-			InputDateBox.DATE_TIME_FORMAT_INFO.monthsFull())); // month full
+			InputDateBox.DATE_TIME_FORMAT_INFO
+				.monthsFull()));
+		// day of week full (monday)
 		InputDateBox.TOKEN_HELPER_FACTORIES.put("EEEE", new StringHelperFactory("j",
-			InputDateBox.DATE_TIME_FORMAT_INFO.weekdaysFull())); // day of week full (monday)
+			InputDateBox.DATE_TIME_FORMAT_INFO
+				.weekdaysFull()));
+		// month abbr
 		InputDateBox.TOKEN_HELPER_FACTORIES.put("MMM", new StringHelperFactory("mm",
-			InputDateBox.DATE_TIME_FORMAT_INFO.monthsShort())); // month abbr
+			InputDateBox.DATE_TIME_FORMAT_INFO
+				.monthsShort()));
+		// month numeric
 		InputDateBox.TOKEN_HELPER_FACTORIES
-			.put("MM", new NumericHelperFactory("mm", "00", 1, 1, 12, 2)); // month numeric
+			.put("MM", new NumericHelperFactory("mm", "00", 1, 1, 12, 2));
+		// day
 		InputDateBox.TOKEN_HELPER_FACTORIES
-			.put("dd", new NumericHelperFactory("jj", "00", 1, 1, 31, 2)); // day
+			.put("dd", new NumericHelperFactory("jj", "00", 1, 1, 31, 2));
+		// day of week abbr (mond.)
 		InputDateBox.TOKEN_HELPER_FACTORIES.put("E", new StringHelperFactory("j",
-			InputDateBox.DATE_TIME_FORMAT_INFO.weekdaysShort())); // day of week abbr (mond.)
-		InputDateBox.TOKEN_HELPER_FACTORIES.put("c", new NumericHelperFactory("j", "00", 0, 0, 6, 2)); // day
-		// of
-		// week
-		// (monday
-		// :>
-		// 0)
+			InputDateBox.DATE_TIME_FORMAT_INFO
+				.weekdaysShort()));
+		// day of week (monday :> 0)
+		InputDateBox.TOKEN_HELPER_FACTORIES.put("c", new NumericHelperFactory("j", "00", 0, 0, 6, 2));
 
+		// hour 1 - 12
 		InputDateBox.TOKEN_HELPER_FACTORIES
-			.put("hh", new NumericHelperFactory("hh", "00", 0, 1, 12, 2)); // hour 1 - 12
+			.put("hh", new NumericHelperFactory("hh", "00", 0, 1, 12, 2));
+		// hour 0 - 23
 		InputDateBox.TOKEN_HELPER_FACTORIES
-			.put("HH", new NumericHelperFactory("hh", "00", 0, 0, 23, 2)); // hour 0 - 23
+			.put("HH", new NumericHelperFactory("hh", "00", 0, 0, 23, 2));
+		// minute
 		InputDateBox.TOKEN_HELPER_FACTORIES
-			.put("mm", new NumericHelperFactory("mm", "00", 0, 0, 59, 2)); // minute
+			.put("mm", new NumericHelperFactory("mm", "00", 0, 0, 59, 2));
+		// second
 		InputDateBox.TOKEN_HELPER_FACTORIES
-			.put("ss", new NumericHelperFactory("ss", "00", 0, 0, 59, 2)); // second
+			.put("ss", new NumericHelperFactory("ss", "00", 0, 0, 59, 2));
+		// fractional second
 		InputDateBox.TOKEN_HELPER_FACTORIES
-			.put("S", new NumericHelperFactory("S", "000", 0, 0, 999, 3)); // fractional second
-		InputDateBox.TOKEN_HELPER_FACTORIES.put("a", new StringHelperFactory("a", "am", "pm")); // am/pm
-		// marker
+			.put("S", new NumericHelperFactory("S", "000", 0, 0, 999, 3));
+		// am/pm marker
+		InputDateBox.TOKEN_HELPER_FACTORIES.put("a", new StringHelperFactory("a", "am", "pm"));
 	}
 
 	private final WidgetParams params = WidgetParams.Util.get();

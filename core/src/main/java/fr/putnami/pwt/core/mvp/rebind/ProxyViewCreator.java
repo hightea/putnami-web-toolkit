@@ -133,7 +133,8 @@ public class ProxyViewCreator {
 			srcWriter.println("return new %s(token);", this.placeType.getSimpleSourceName());
 		} else {
 			srcWriter.println("%s place = new %s();", this.placeType.getSimpleSourceName(),
-				this.placeType.getSimpleSourceName());
+				this.placeType
+					.getSimpleSourceName());
 			srcWriter.println("place.setToken(token);");
 			srcWriter.println("return place;");
 		}

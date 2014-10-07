@@ -25,7 +25,7 @@ import fr.putnami.pwt.core.widget.client.mask.MaskValueBoxHelper.TokenHelper;
 
 public class RestrictedStringTokenHelpler extends TokenHelper {
 
-	private StringBuffer sb = new StringBuffer();
+	private StringBuilder sb = new StringBuilder();
 
 	private final List<String> restrictedValues;
 
@@ -35,13 +35,13 @@ public class RestrictedStringTokenHelpler extends TokenHelper {
 
 	@Override
 	protected void focus(boolean forward) {
-		this.sb = new StringBuffer();
+		this.sb = new StringBuilder();
 	}
 
 	@Override
 	public void reset() {
 		super.reset();
-		this.sb = new StringBuffer();
+		this.sb = new StringBuilder();
 	}
 
 	@Override

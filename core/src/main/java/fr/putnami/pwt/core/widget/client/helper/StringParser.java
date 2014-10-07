@@ -21,13 +21,6 @@ import java.text.ParseException;
 public final class StringParser implements Parser<String> {
 	private static StringParser instance;
 
-	public static StringParser get() {
-		if (StringParser.instance == null) {
-			StringParser.instance = new StringParser();
-		}
-		return StringParser.instance;
-	}
-
 	private StringParser() {
 	}
 
@@ -38,4 +31,12 @@ public final class StringParser implements Parser<String> {
 		}
 		return object.toString();
 	}
+
+	public static StringParser get() {
+		if (StringParser.instance == null) {
+			StringParser.instance = new StringParser();
+		}
+		return StringParser.instance;
+	}
+
 }

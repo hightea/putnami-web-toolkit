@@ -22,13 +22,6 @@ import java.math.BigDecimal;
 public final class BigDecimalRenderer extends AbstractRenderer<BigDecimal> {
 	private static BigDecimalRenderer instance;
 
-	public static BigDecimalRenderer get() {
-		if (BigDecimalRenderer.instance == null) {
-			BigDecimalRenderer.instance = new BigDecimalRenderer();
-		}
-		return BigDecimalRenderer.instance;
-	}
-
 	private BigDecimalRenderer() {
 	}
 
@@ -40,4 +33,12 @@ public final class BigDecimalRenderer extends AbstractRenderer<BigDecimal> {
 
 		return NumberFormat.getDecimalFormat().format(object);
 	}
+
+	public static BigDecimalRenderer get() {
+		if (BigDecimalRenderer.instance == null) {
+			BigDecimalRenderer.instance = new BigDecimalRenderer();
+		}
+		return BigDecimalRenderer.instance;
+	}
+
 }

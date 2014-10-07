@@ -369,6 +369,8 @@ public abstract class AbstractHover
 				elementStyle.setLeft(targetLeft + targetWidth, Unit.PX);
 				elementStyle.setTop(targetTop + targetHeight / 2 - tooltipHeight / 2, Unit.PX);
 				break;
+			default:
+				break;
 		}
 	}
 

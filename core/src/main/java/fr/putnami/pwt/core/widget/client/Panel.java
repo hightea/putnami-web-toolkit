@@ -253,7 +253,7 @@ public class Panel extends AbstractPanel
 		this.collapsePanel.append(this.table);
 		this.collapsePanel.append(this.footer);
 
-		if (this.header != null && this.commands.size() > 0) {
+		if (this.header != null && !this.commands.isEmpty()) {
 			if (this.commandsContainer == null) {
 				this.commandsContainer = new Container();
 				StyleUtils.addStyle(this.commandsContainer, Panel.STYLE_COMMANDS);

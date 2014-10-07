@@ -36,13 +36,11 @@ public class HandlerManager implements HasHandlers {
 			super(fireInReverseOrder);
 		}
 
-		@Override
-		protected <H> void doRemove(Event.Type<H> type, Object source, H handler) {
+		private <H> void superDoRemove(Event.Type<H> type, Object source, H handler) {
 			super.doRemove(type, source, handler);
 		}
 
-		@Override
-		protected <H> H getHandler(Event.Type<H> type, int index) {
+		private <H> H superGetHandler(Event.Type<H> type, int index) {
 			return super.getHandler(type, index);
 		}
 
@@ -155,7 +153,7 @@ public class HandlerManager implements HasHandlers {
 	 * @return the given handler
 	 */
 	public <H extends EventHandler> H getHandler(GwtEvent.Type<H> type, int index) {
-		return this.eventBus.getHandler(type, index);
+		return this.eventBus.superGetHandler(type, index);
 	}
 
 	/**
@@ -186,7 +184,7 @@ public class HandlerManager implements HasHandlers {
 	 * @param handler the handler
 	 */
 	public <H extends EventHandler> void removeHandler(GwtEvent.Type<H> type, final H handler) {
-		this.eventBus.doRemove(type, null, handler);
+		this.eventBus.superDoRemove(type, null, handler);
 	}
 
 	public void sinkEvents(int eventBitsToAdd) {

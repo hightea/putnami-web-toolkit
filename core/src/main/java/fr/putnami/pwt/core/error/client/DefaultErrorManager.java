@@ -44,7 +44,8 @@ public final class DefaultErrorManager extends ErrorManager {
 				if (o2 == null) {
 					return 1;
 				}
-				return Integer.compare(o2.getPriority(), o1.getPriority());// Reverse order
+				// Reverse order
+				return Integer.compare(o2.getPriority(), o1.getPriority());
 			}
 		};
 
@@ -57,7 +58,7 @@ public final class DefaultErrorManager extends ErrorManager {
 
 		/*
 		 * (non-Javadoc)
-		 *
+		 * 
 		 * @see fr.putnami.pwt.core.error.client.AbstractErrorHandler#handle(Trowable error)
 		 */
 		@Override
@@ -78,7 +79,7 @@ public final class DefaultErrorManager extends ErrorManager {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * fr.putnami.pwt.core.error.client.ErrorManager#registerErrorHandlers(fr.putnami.pwt.core.error
 	 * .client.ErrorHandler[])
@@ -94,7 +95,7 @@ public final class DefaultErrorManager extends ErrorManager {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * fr.putnami.pwt.core.error.client.ErrorManager#registerErrorHandler(fr.putnami.pwt.core.error
 	 * .client.ErrorHandler)
@@ -109,7 +110,7 @@ public final class DefaultErrorManager extends ErrorManager {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * fr.putnami.pwt.core.error.client.ErrorManager#removeErrorHandler(fr.putnami.pwt.core.error.
 	 * client.ErrorHandler)
@@ -123,7 +124,7 @@ public final class DefaultErrorManager extends ErrorManager {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * fr.putnami.pwt.core.error.client.ErrorManager#setDefaultErrorHandler(fr.putnami.pwt.core.error
 	 * .client.ErrorHandler)
@@ -136,7 +137,7 @@ public final class DefaultErrorManager extends ErrorManager {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see fr.putnami.pwt.core.error.client.ErrorManager#getErrorHandlers()
 	 */
 	@Override
@@ -146,7 +147,7 @@ public final class DefaultErrorManager extends ErrorManager {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * com.google.gwt.core.client.GWT.UncaughtExceptionHandler#onUncaughtException(java.lang.Throwable
 	 * )
@@ -163,7 +164,7 @@ public final class DefaultErrorManager extends ErrorManager {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see fr.putnami.pwt.core.error.client.ErrorManager#hasErrorDisplayer()
 	 */
 	@Override
@@ -173,7 +174,7 @@ public final class DefaultErrorManager extends ErrorManager {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see fr.putnami.pwt.core.error.client.ErrorManager#getErrorDisplayer()
 	 */
 	@Override
@@ -183,7 +184,7 @@ public final class DefaultErrorManager extends ErrorManager {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * fr.putnami.pwt.core.error.client.ErrorManager#setErrorDisplayer(fr.putnami.pwt.core.error.client
 	 * .ErrorDisplayer)

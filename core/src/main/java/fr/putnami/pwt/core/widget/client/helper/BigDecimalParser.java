@@ -23,13 +23,6 @@ import java.text.ParseException;
 public final class BigDecimalParser implements Parser<BigDecimal> {
 	private static BigDecimalParser instance;
 
-	public static BigDecimalParser get() {
-		if (BigDecimalParser.instance == null) {
-			BigDecimalParser.instance = new BigDecimalParser();
-		}
-		return BigDecimalParser.instance;
-	}
-
 	private BigDecimalParser() {
 	}
 
@@ -44,5 +37,12 @@ public final class BigDecimalParser implements Parser<BigDecimal> {
 		} catch (NumberFormatException e) {
 			throw new ParseException(e.getMessage(), 0);
 		}
+	}
+
+	public static BigDecimalParser get() {
+		if (BigDecimalParser.instance == null) {
+			BigDecimalParser.instance = new BigDecimalParser();
+		}
+		return BigDecimalParser.instance;
 	}
 }

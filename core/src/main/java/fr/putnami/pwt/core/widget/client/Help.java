@@ -18,12 +18,13 @@ import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.user.client.ui.IsWidget;
 
 import fr.putnami.pwt.core.editor.client.EditorLabel;
+import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public class Help extends AbstractPanel implements EditorLabel {
+public class Help extends AbstractPanel implements EditorLabel, CloneableWidget {
 
 	private static final CssStyle STYLE_HELP = new SimpleStyle("help-block");
 
@@ -37,6 +38,11 @@ public class Help extends AbstractPanel implements EditorLabel {
 	private Help(Help source) {
 		super(source);
 		this.setText(source.text);
+	}
+
+	@Override
+	public IsWidget cloneWidget() {
+		return new Help(this);
 	}
 
 	@Override

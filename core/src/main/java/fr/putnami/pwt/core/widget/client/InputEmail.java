@@ -26,16 +26,20 @@ import fr.putnami.pwt.core.widget.client.helper.StringRenderer;
 
 public class InputEmail extends AbstractInputBox<TextBox, String> {
 
+	private static final char[] ALLOWED_CHARS =
+		"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@.+-_%".toCharArray();
+
 	private static final KeyPressHandler EMAIL_CHAR_VALIDATOR = new KeyPressHandler() {
 
 		@Override
 		public void onKeyPress(KeyPressEvent event) {
 			boolean valid = false;
 			char pressed = event.getCharCode();
-			if (pressed >= 'a' && pressed <= 'z' || pressed >= 'A' && pressed <= 'Z' || pressed >= '0'
-				&& pressed <= '9' || pressed == '@' || pressed == '.' || pressed == '+' || pressed == '-'
-				|| pressed == '_' || pressed == '%') {
-				valid = true;
+			for (char c : ALLOWED_CHARS) {
+				if (c == pressed) {
+					valid = true;
+					break;
+				}
 			}
 			if (!valid) {
 				event.preventDefault();

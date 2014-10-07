@@ -32,19 +32,23 @@ public final class CommandSerializationPolicy extends SerializationPolicy
 
 	private static final Set<Class<? extends Serializable>> JRE_BLACKLIST = Sets.newHashSet(
 		java.lang.ArrayStoreException.class, java.lang.AssertionError.class, java.lang.Boolean.class,
-		java.lang.Byte.class, java.lang.Character.class, java.lang.Class.class,
-		java.lang.ClassCastException.class, java.lang.Double.class, java.lang.Error.class,
-		java.lang.Float.class, java.lang.IllegalArgumentException.class,
+		java.lang.Byte.class,
+		java.lang.Character.class, java.lang.Class.class, java.lang.ClassCastException.class,
+		java.lang.Double.class,
+		java.lang.Error.class, java.lang.Float.class, java.lang.IllegalArgumentException.class,
 		java.lang.IllegalStateException.class, java.lang.IndexOutOfBoundsException.class,
-		java.lang.Integer.class, java.lang.Long.class, java.lang.NegativeArraySizeException.class,
-		java.lang.NullPointerException.class, java.lang.Number.class,
-		java.lang.NumberFormatException.class, java.lang.Short.class,
+		java.lang.Integer.class,
+		java.lang.Long.class, java.lang.NegativeArraySizeException.class,
+		java.lang.NullPointerException.class,
+		java.lang.Number.class, java.lang.NumberFormatException.class, java.lang.Short.class,
 		java.lang.StackTraceElement.class, java.lang.String.class, java.lang.StringBuffer.class,
 		java.lang.StringIndexOutOfBoundsException.class, java.lang.UnsupportedOperationException.class,
 		java.util.ArrayList.class, java.util.ConcurrentModificationException.class,
-		java.util.Date.class, java.util.EmptyStackException.class, java.util.EventObject.class,
-		java.util.HashMap.class, java.util.HashSet.class, java.util.MissingResourceException.class,
-		java.util.NoSuchElementException.class, java.util.Stack.class,
+		java.util.Date.class,
+		java.util.EmptyStackException.class, java.util.EventObject.class, java.util.HashMap.class,
+		java.util.HashSet.class,
+		java.util.MissingResourceException.class, java.util.NoSuchElementException.class,
+		java.util.Stack.class,
 		java.util.TooManyListenersException.class, java.util.Vector.class);
 
 	private static CommandSerializationPolicy instance;
@@ -83,8 +87,8 @@ public final class CommandSerializationPolicy extends SerializationPolicy
 	public void validateDeserialize(Class<?> clazz) throws SerializationException {
 		if (!this.isInstantiable(clazz)) {
 			throw new SerializationException("Type '" + clazz.getName()
-				+ "' was not assignableJRE_BLACKSET to '" + IsSerializable.class.getName()
-				+ "' and did not have a custom field serializer. "
+				+ "' was not assignableJRE_BLACKSET to '"
+				+ IsSerializable.class.getName() + "' and did not have a custom field serializer. "
 				+ "For security purposes, this type will not be deserialized.");
 		}
 	}

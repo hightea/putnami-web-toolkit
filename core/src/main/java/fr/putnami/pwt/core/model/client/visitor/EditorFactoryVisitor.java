@@ -53,7 +53,8 @@ public class EditorFactoryVisitor extends AbstractVisitor {
 		private Map<Integer, Editor> outputEditors;
 
 		private InternalEditorProvider(Context<?> parentContext, Class propertyType,
-			CloneableWidget inputFactory, CloneableWidget outputFactory) {
+			CloneableWidget inputFactory,
+			CloneableWidget outputFactory) {
 			super();
 			this.parentContext = parentContext;
 			this.propertyType = propertyType;
@@ -168,7 +169,8 @@ public class EditorFactoryVisitor extends AbstractVisitor {
 
 			EditorProvider provider =
 				new InternalEditorProvider(context, propertyType, inputFactory == null ? widgetFactory
-					: inputFactory, outputFactory == null ? widgetFactory : outputFactory);
+					: inputFactory,
+					outputFactory == null ? widgetFactory : outputFactory);
 
 			((HasEditorProvider) editor).setEditorProvider(provider);
 		}

@@ -153,7 +153,7 @@ public class IntegerTokenHelper extends TokenHelper {
 			case '8':
 			case '9':
 				this.characters.add(charPressed);
-				StringBuffer sb = new StringBuffer();
+				StringBuilder sb = new StringBuilder();
 				for (char c : this.characters) {
 					sb.append(c);
 				}

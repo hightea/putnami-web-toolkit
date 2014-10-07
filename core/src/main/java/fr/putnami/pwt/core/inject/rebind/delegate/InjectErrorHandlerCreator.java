@@ -55,7 +55,8 @@ public class InjectErrorHandlerCreator extends InjectorCreatorDelegate
 			srcWriter.println("errorHandlers.add(new fr.putnami.pwt.core.error.client.ErrorHandler() {");
 			srcWriter.indent();
 			srcWriter.println("@Override public boolean handle(Throwable error) { "
-				+ "return %s.this.%s(error); " + "}", this.injectorName, handlerMethod.getName());
+				+ "return %s.this.%s(error); " + "}",
+				this.injectorName, handlerMethod.getName());
 			srcWriter.println("@Override public int getPriority() { return HIGH_PRIORITY; }");
 			srcWriter.outdent();
 			srcWriter.println("});");

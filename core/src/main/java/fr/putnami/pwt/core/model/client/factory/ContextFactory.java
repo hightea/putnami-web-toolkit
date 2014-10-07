@@ -22,8 +22,11 @@ import fr.putnami.pwt.core.model.client.ModelDriver;
 
 public interface ContextFactory {
 
-	public static class Util {
+	final class Util {
 		private static ContextFactory instance;
+
+		private Util() {
+		}
 
 		public static ContextFactory get() {
 			if (Util.instance == null) {

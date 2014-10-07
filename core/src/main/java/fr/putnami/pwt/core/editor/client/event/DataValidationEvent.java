@@ -79,7 +79,7 @@ public final class DataValidationEvent extends GwtEvent<DataValidationEvent.Hand
 	}
 
 	public List<Error> getErrors() {
-		return this.errors == null ? Collections.EMPTY_LIST : this.errors;
+		return this.errors == null ? Collections.<Error> emptyList() : this.errors;
 	}
 
 	public static DataValidationEvent fire(Editor editor, Object value) {

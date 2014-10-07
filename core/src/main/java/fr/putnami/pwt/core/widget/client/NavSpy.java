@@ -251,7 +251,8 @@ public class NavSpy extends AbstractComposite implements HasDrawable {
 
 	private void refreshActive() {
 		if (this.navs.isEmpty()) {
-			return; // Not displayed NavSpy
+			// Not displayed NavSpy
+			return;
 		}
 		int scrollTop, scrollHeight, maxScroll;
 
@@ -266,7 +267,7 @@ public class NavSpy extends AbstractComposite implements HasDrawable {
 		}
 
 		Element activeHeading = null;
-		if (scrollTop >= maxScroll && this.headings.size() > 0) {
+		if (scrollTop >= maxScroll && !this.headings.isEmpty()) {
 			activeHeading = this.headings.get(this.headings.size() - 1);
 		} else {
 			for (Element heading : this.headings) {

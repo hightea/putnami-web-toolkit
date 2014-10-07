@@ -20,13 +20,6 @@ public final class ToStringRenderer extends AbstractRenderer<Object> {
 
 	private static ToStringRenderer instance;
 
-	public static ToStringRenderer get() {
-		if (ToStringRenderer.instance == null) {
-			ToStringRenderer.instance = new ToStringRenderer();
-		}
-		return ToStringRenderer.instance;
-	}
-
 	public ToStringRenderer() {
 	}
 
@@ -37,5 +30,12 @@ public final class ToStringRenderer extends AbstractRenderer<Object> {
 		}
 
 		return object.toString();
+	}
+
+	public static ToStringRenderer get() {
+		if (ToStringRenderer.instance == null) {
+			ToStringRenderer.instance = new ToStringRenderer();
+		}
+		return ToStringRenderer.instance;
 	}
 }

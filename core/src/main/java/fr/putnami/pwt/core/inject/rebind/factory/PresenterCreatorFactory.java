@@ -40,7 +40,7 @@ public class PresenterCreatorFactory implements InjectorDelegateFactorty {
 		Collection<JField> services = InjectCreatorUtil.listFields(injectableType, InjectService.class);
 		String injectorName =
 			injectableType.getSimpleSourceName() + AbstractInjectorCreator.PROXY_SUFFIX;
-		delegates.add(new SuspendServiceOnPresentCreator(injectorName, services.size() > 0));
+		delegates.add(new SuspendServiceOnPresentCreator(injectorName, !services.isEmpty()));
 	}
 
 }

@@ -101,9 +101,10 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public abstract class AbstractInput<I> extends AbstractComposite
 	implements DirtyEvent.HasDirtyHandlers, EditorInput<I>, EditorLeaf, HasHtmlId, Focusable,
-	HasValueChangeHandlers<I>, HasAllFocusHandlers, HasClickHandlers, HasDoubleClickHandlers,
-	HasAllDragAndDropHandlers, HasAllGestureHandlers, HasAllKeyHandlers, HasAllMouseHandlers,
-	HasAllTouchHandlers {
+	HasValueChangeHandlers<I>,
+	HasAllFocusHandlers, HasClickHandlers, HasDoubleClickHandlers, HasAllDragAndDropHandlers,
+	HasAllGestureHandlers,
+	HasAllKeyHandlers, HasAllMouseHandlers, HasAllTouchHandlers {
 
 	public static final CssStyle STYLE_CONTROL = new SimpleStyle("form-control");
 

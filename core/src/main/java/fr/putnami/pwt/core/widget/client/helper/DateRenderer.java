@@ -25,13 +25,6 @@ public final class DateRenderer extends AbstractRenderer<Date> {
 
 	private static DateRenderer instance;
 
-	public static DateRenderer get() {
-		if (DateRenderer.instance == null) {
-			DateRenderer.instance = new DateRenderer(null);
-		}
-		return DateRenderer.instance;
-	}
-
 	private final DateTimeFormat formater;
 
 	public DateRenderer(String format) {
@@ -50,4 +43,12 @@ public final class DateRenderer extends AbstractRenderer<Date> {
 
 		return this.formater.format(object);
 	}
+
+	public static DateRenderer get() {
+		if (DateRenderer.instance == null) {
+			DateRenderer.instance = new DateRenderer(null);
+		}
+		return DateRenderer.instance;
+	}
+
 }

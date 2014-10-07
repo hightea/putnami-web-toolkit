@@ -84,7 +84,7 @@ public class MessageHelper {
 	}
 
 	public String getMessageKey(Path path, String suffix) {
-		if (path == null || path.size() == 0) {
+		if (path == null || path.isEmpty()) {
 			return null;
 		}
 

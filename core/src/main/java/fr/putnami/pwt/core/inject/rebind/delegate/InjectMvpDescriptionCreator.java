@@ -89,7 +89,8 @@ public class InjectMvpDescriptionCreator extends InjectorCreatorDelegate
 		}
 		for (Class<?> activity : this.activities) {
 			srcWriter.println("mvpController.registerActivity(GWT.<ActivityFactory> create(%s.class));",
-				InjectCreatorUtil.toClassName(activity));
+				InjectCreatorUtil
+					.toClassName(activity));
 		}
 	}
 

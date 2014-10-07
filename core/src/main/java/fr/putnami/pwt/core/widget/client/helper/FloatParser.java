@@ -22,13 +22,6 @@ import java.text.ParseException;
 public final class FloatParser implements Parser<Float> {
 	private static FloatParser instance;
 
-	public static FloatParser get() {
-		if (FloatParser.instance == null) {
-			FloatParser.instance = new FloatParser();
-		}
-		return FloatParser.instance;
-	}
-
 	private FloatParser() {
 	}
 
@@ -44,4 +37,12 @@ public final class FloatParser implements Parser<Float> {
 			throw new ParseException(e.getMessage(), 0);
 		}
 	}
+
+	public static FloatParser get() {
+		if (FloatParser.instance == null) {
+			FloatParser.instance = new FloatParser();
+		}
+		return FloatParser.instance;
+	}
+
 }

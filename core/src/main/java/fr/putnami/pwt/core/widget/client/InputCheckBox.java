@@ -114,14 +114,11 @@ public class InputCheckBox<T> extends AbstractInputChoice<T, List<T>> {
 			this.value = value;
 			Container newContainer = null;
 			Container label = new Container(LabelElement.TAG);
-			switch (InputCheckBox.this.type) {
-				case INLINE:
-					newContainer = label;
-					break;
-				default:
-					newContainer = new Container();
-					InputCheckBox.this.container.append(label);
-					break;
+			if (Type.INLINE.equals(InputCheckBox.this.type)) {
+				newContainer = label;
+			} else {
+				newContainer = new Container();
+				InputCheckBox.this.container.append(label);
 			}
 			this.initWidget(newContainer);
 			label.getElement().appendChild(this.checkboxElement);

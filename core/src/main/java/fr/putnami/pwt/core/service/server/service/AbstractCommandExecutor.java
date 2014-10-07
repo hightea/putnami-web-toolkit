@@ -38,7 +38,7 @@ public abstract class AbstractCommandExecutor implements CommandExecutor {
 	protected Throwable toThrown(String message, Throwable source) {
 		CommandException thrown = new CommandException(message, source);
 		if (source != null) {
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			for (StackTraceElement element : source.getStackTrace()) {
 				buf.append(element.toString()).append("\n");
 			}

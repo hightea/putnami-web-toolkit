@@ -325,7 +325,7 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 		}
 	}
 
-	private void uploadSendRequest(String base64data, String fileName, String type, int size) {
+	protected void uploadSendRequest(String base64data, String fileName, String type, int size) {
 		RequestCallback callback = new RequestCallback() {
 			@Override
 			public void onResponseReceived(Request request, Response response) {
@@ -346,12 +346,13 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 		this.fileId = UUID.uuid();
 		this.initProgressBar(size);
 
-		StringBuffer requestBody = new StringBuffer();
+		StringBuilder requestBody = new StringBuilder();
 		requestBody.append("--").append(InputFile.MULTIPART_BOUNDARY).append(InputFile.EOL).append(
 			"Content-Disposition: form-data; name=\"data\"; filename=\"").append(fileName).append("\"")
-			.append(InputFile.EOL).append("Content-Type: ").append(type).append(InputFile.EOL).append(
-				InputFile.EOL).append(base64data).append(InputFile.EOL).append("--").append(
-				InputFile.MULTIPART_BOUNDARY).append("--");
+			.append(InputFile.EOL)
+			.append("Content-Type: ").append(type).append(InputFile.EOL).append(InputFile.EOL).append(
+				base64data).append(
+				InputFile.EOL).append("--").append(InputFile.MULTIPART_BOUNDARY).append("--");
 
 		try {
 			RequestBuilder requestBuilder =
@@ -412,7 +413,7 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 		}, this.params.inputFileProgressHideDelay());
 	}
 
-	private void displayError(String string) {
+	private void displayError(String error) {
 	}
 
 	private static native void nativeUploadData(DataTransfer dataTransfer, InputFile inputFile)

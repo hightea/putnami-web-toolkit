@@ -85,7 +85,8 @@ public class InputRadio<T> extends AbstractInputChoice<T, T> {
 	private class RadioContainer extends Composite implements ClickHandler {
 
 		private final InputElement radioElement = InputElement.as(Document.get()
-			.createRadioInputElement("radio" + InputRadio.this.radioGroupNum));
+			.createRadioInputElement(
+				"radio" + InputRadio.this.radioGroupNum));
 
 		private T value;
 
@@ -93,14 +94,11 @@ public class InputRadio<T> extends AbstractInputChoice<T, T> {
 			this.value = value;
 			Container newContainer = null;
 			Container label = new Container(LabelElement.TAG);
-			switch (InputRadio.this.type) {
-				case INLINE:
-					newContainer = label;
-					break;
-				default:
-					newContainer = new Container();
-					newContainer.append(label);
-					break;
+			if (Type.INLINE.equals(InputRadio.this.type)) {
+				newContainer = label;
+			} else {
+				newContainer = new Container();
+				newContainer.append(label);
 			}
 			this.initWidget(newContainer);
 			label.getElement().appendChild(this.radioElement);

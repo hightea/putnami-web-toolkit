@@ -120,7 +120,7 @@ public class TableSort<T> extends AbstractTableColumnAspect<T> implements HasDra
 					} else if (p2 instanceof Comparable) {
 						result = ((Comparable) p2).compareTo(p1);
 					}
-					if (TableSort.this.asc == false) {
+					if (Boolean.FALSE.equals(TableSort.this.asc)) {
 						result = 0 - result;
 					}
 					return result;

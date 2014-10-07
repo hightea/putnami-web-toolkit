@@ -63,8 +63,8 @@ public class ContentAssistAspect {
 		@Override
 		public void onSuggestionsReady(Request request, Response response) {
 			ContentAssistAspect.this.suggestionDisplay.showSuggestions(
-				ContentAssistAspect.this.textInput, response.getSuggestions(),
-				ContentAssistAspect.this.suggestionCallback);
+				ContentAssistAspect.this.textInput, response
+					.getSuggestions(), ContentAssistAspect.this.suggestionCallback);
 		}
 	};
 
@@ -195,8 +195,9 @@ public class ContentAssistAspect {
 
 		@Override
 		public void showSuggestions(final IsWidget textInput,
-			Collection<? extends Suggestion> suggestions, final SuggestionCallback callback) {
-			boolean anySuggestions = suggestions != null && suggestions.size() > 0;
+			Collection<? extends Suggestion> suggestions,
+			final SuggestionCallback callback) {
+			boolean anySuggestions = suggestions != null && !suggestions.isEmpty();
 			if (!anySuggestions && this.hideWhenEmpty) {
 				this.hideSuggestions();
 				return;
@@ -379,10 +380,12 @@ public class ContentAssistAspect {
 		if (this.assistHandler.getOracle() != null) {
 			if (query.length() == 0) {
 				this.assistHandler.getOracle().requestDefaultSuggestions(
-					new Request(null, this.assistHandler.getLimit()), this.oracleCallback);
+					new Request(null, this.assistHandler.getLimit()),
+					this.oracleCallback);
 			} else {
 				this.assistHandler.getOracle().requestSuggestions(
-					new Request(query, this.assistHandler.getLimit()), this.oracleCallback);
+					new Request(query, this.assistHandler.getLimit()),
+					this.oracleCallback);
 			}
 		}
 	}

@@ -26,13 +26,6 @@ public final class DateParser implements Parser<Date> {
 
 	private static DateParser instance;
 
-	public static DateParser get() {
-		if (DateParser.instance == null) {
-			DateParser.instance = new DateParser(null);
-		}
-		return DateParser.instance;
-	}
-
 	private final DateTimeFormat formater;
 
 	public DateParser(String format) {
@@ -57,6 +50,13 @@ public final class DateParser implements Parser<Date> {
 		} catch (ParseException e) {
 			return null;
 		}
+	}
+
+	public static DateParser get() {
+		if (DateParser.instance == null) {
+			DateParser.instance = new DateParser(null);
+		}
+		return DateParser.instance;
 	}
 
 }

@@ -113,19 +113,15 @@ public class InputSelect<T> extends AbstractInputSelect<T, T> {
 	public void onBrowserEvent(Event event) {
 		super.onBrowserEvent(event);
 		boolean mustKillEvent = false;
-		switch (DOM.eventGetType(event)) {
-			case Event.ONKEYDOWN:
-				switch (event.getKeyCode()) {
-					case KeyCodes.KEY_TAB:
-					case KeyCodes.KEY_ESCAPE:
-						this.getDropdown().close();
-						break;
-					default:
-						break;
-				}
-				break;
-			default:
-				break;
+		if (DOM.eventGetType(event) == Event.ONKEYDOWN) {
+			switch (event.getKeyCode()) {
+				case KeyCodes.KEY_TAB:
+				case KeyCodes.KEY_ESCAPE:
+					this.getDropdown().close();
+					break;
+				default:
+					break;
+			}
 		}
 		if (mustKillEvent) {
 			event.preventDefault();

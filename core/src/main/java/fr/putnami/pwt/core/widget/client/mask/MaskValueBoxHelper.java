@@ -308,7 +308,7 @@ public class MaskValueBoxHelper
 	}
 
 	private void refreshValueBox() {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (TokenHelper helper : this.helpers) {
 			sb.append(helper.flush());
 		}

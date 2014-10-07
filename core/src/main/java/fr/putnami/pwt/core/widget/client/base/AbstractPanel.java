@@ -90,15 +90,6 @@ public abstract class AbstractPanel extends ComplexPanel
 		this.insert(child, this.element, beforeIndex, domInsert);
 	}
 
-	/**
-	 * This method should not be called. Use
-	 * {@link AbstractEditablePanel#insert(Widget, int, boolean)} instead.
-	 */
-	@Override
-	protected void insert(Widget child, Element container, int beforeIndex, boolean domInsert) {
-		super.insert(child, container, beforeIndex, domInsert);
-	}
-
 	@Override
 	protected void insert(Widget child, com.google.gwt.user.client.Element container,
 		int beforeIndex, boolean domInsert) {
@@ -162,7 +153,7 @@ public abstract class AbstractPanel extends ComplexPanel
 
 	@Override
 	public Iterable<Editor> getEditors() {
-		return this.editorChildren == null ? Collections.EMPTY_SET : Iterables
+		return this.editorChildren == null ? Collections.<Editor> emptySet() : Iterables
 			.unmodifiableIterable(this.editorChildren);
 	}
 

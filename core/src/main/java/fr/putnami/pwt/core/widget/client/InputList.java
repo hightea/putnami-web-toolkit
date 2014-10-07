@@ -65,7 +65,8 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class InputList<T> extends List
 	implements EditorCollection<T>, EditorInput<Collection<T>>, EditorModel<T>, HasDrawable,
-	HasEditorProvider, HasInputEditorFactory<T>, HasOutputEditorFactory<T> {
+	HasEditorProvider,
+	HasInputEditorFactory<T>, HasOutputEditorFactory<T> {
 
 	private static final CssStyle STYLE_ITEM_CONTAINER = new SimpleStyle("list-element-container");
 	private static final CssStyle STYLE_CLEAR = new SimpleStyle("clearfix");

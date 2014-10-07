@@ -18,8 +18,11 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.i18n.client.Constants;
 
 public interface WidgetParams extends Constants {
-	class Util {
+	final class Util {
 		private static WidgetParams instance;
+
+		private Util() {
+		}
 
 		public static WidgetParams get() {
 			if (Util.instance == null) {

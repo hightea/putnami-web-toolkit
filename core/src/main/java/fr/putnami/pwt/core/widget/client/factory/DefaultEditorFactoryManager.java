@@ -43,52 +43,49 @@ public class DefaultEditorFactoryManager extends EditorFactoryManager {
 		this.setTooltipFactory(TooltipEditorFactory.INSTANCE);
 
 		// Register inputFactories
-		{
-			this.registerInputFactory(String.class, new InputText());
+		this.registerInputFactory(String.class, new InputText());
 
-			this.registerInputFactory(BigDecimal.class, new InputNumber<Double>(NumberType.DOUBLE));
-			this.registerInputFactory(Double.class, new InputNumber<Double>(NumberType.DOUBLE));
-			this.registerInputFactory(double.class, new InputNumber<Double>(NumberType.DOUBLE));
-			this.registerInputFactory(Float.class, new InputNumber<Float>(NumberType.FLOAT));
-			this.registerInputFactory(float.class, new InputNumber<Float>(NumberType.FLOAT));
-			this.registerInputFactory(Integer.class, new InputNumber<Integer>(NumberType.INTEGER));
-			this.registerInputFactory(int.class, new InputNumber<Integer>(NumberType.INTEGER));
-			this.registerInputFactory(Long.class, new InputNumber<Long>(NumberType.LONG));
-			this.registerInputFactory(long.class, new InputNumber<Long>(NumberType.LONG));
+		this.registerInputFactory(BigDecimal.class, new InputNumber<Double>(NumberType.DOUBLE));
+		this.registerInputFactory(Double.class, new InputNumber<Double>(NumberType.DOUBLE));
+		this.registerInputFactory(double.class, new InputNumber<Double>(NumberType.DOUBLE));
+		this.registerInputFactory(Float.class, new InputNumber<Float>(NumberType.FLOAT));
+		this.registerInputFactory(float.class, new InputNumber<Float>(NumberType.FLOAT));
+		this.registerInputFactory(Integer.class, new InputNumber<Integer>(NumberType.INTEGER));
+		this.registerInputFactory(int.class, new InputNumber<Integer>(NumberType.INTEGER));
+		this.registerInputFactory(Long.class, new InputNumber<Long>(NumberType.LONG));
+		this.registerInputFactory(long.class, new InputNumber<Long>(NumberType.LONG));
 
-			this.registerInputFactory(Date.class, new InputDate());
+		this.registerInputFactory(Date.class, new InputDate());
 
-			this.registerInputFactory(Boolean.class, new InputBoolean());
-			this.registerInputFactory(boolean.class, new InputBoolean());
+		this.registerInputFactory(Boolean.class, new InputBoolean());
+		this.registerInputFactory(boolean.class, new InputBoolean());
 
-			this.registerInputFactory(Enum.class, new InputSelect());
+		this.registerInputFactory(Enum.class, new InputSelect());
 
-			this.registerInputFactory(List.class, new InputList());
-			this.registerInputFactory(Collection.class, new InputList());
-		}
+		this.registerInputFactory(List.class, new InputList());
+		this.registerInputFactory(Collection.class, new InputList());
+
 		// Register outputFactories
-		{
-			this.registerOutputFactory(String.class, new OutputText());
+		this.registerOutputFactory(String.class, new OutputText());
 
-			this.registerOutputFactory(BigDecimal.class, new OutputNumber());
-			this.registerOutputFactory(Double.class, new OutputNumber());
-			this.registerOutputFactory(double.class, new OutputNumber());
-			this.registerOutputFactory(Float.class, new OutputNumber());
-			this.registerOutputFactory(float.class, new OutputNumber());
-			this.registerOutputFactory(Integer.class, new OutputNumber());
-			this.registerOutputFactory(int.class, new OutputNumber());
-			this.registerOutputFactory(Long.class, new OutputNumber());
-			this.registerOutputFactory(long.class, new OutputNumber());
+		this.registerOutputFactory(BigDecimal.class, new OutputNumber());
+		this.registerOutputFactory(Double.class, new OutputNumber());
+		this.registerOutputFactory(double.class, new OutputNumber());
+		this.registerOutputFactory(Float.class, new OutputNumber());
+		this.registerOutputFactory(float.class, new OutputNumber());
+		this.registerOutputFactory(Integer.class, new OutputNumber());
+		this.registerOutputFactory(int.class, new OutputNumber());
+		this.registerOutputFactory(Long.class, new OutputNumber());
+		this.registerOutputFactory(long.class, new OutputNumber());
 
-			this.registerOutputFactory(Date.class, new OutputDate());
+		this.registerOutputFactory(Date.class, new OutputDate());
 
-			this.registerOutputFactory(Boolean.class, new OutputBoolean());
-			this.registerOutputFactory(boolean.class, new OutputBoolean());
+		this.registerOutputFactory(Boolean.class, new OutputBoolean());
+		this.registerOutputFactory(boolean.class, new OutputBoolean());
 
-			this.registerOutputFactory(Enum.class, new OutputEnum());
+		this.registerOutputFactory(Enum.class, new OutputEnum());
 
-			this.registerOutputFactory(List.class, new OutputList());
-			this.registerOutputFactory(Collection.class, new OutputList());
-		}
+		this.registerOutputFactory(List.class, new OutputList());
+		this.registerOutputFactory(Collection.class, new OutputList());
 	}
 }

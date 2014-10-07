@@ -121,7 +121,8 @@ public class ServiceBinderCreator {
 				typesSentToBrowser.addRootType(logger, rteType);
 			} else {
 				logger.branch(TreeLogger.ERROR, "RPC token class " + tokenClassToUse.value()
-					+ " must implement " + RpcToken.class.getName(), null);
+					+ " must implement "
+					+ RpcToken.class.getName(), null);
 				throw new UnableToCompleteException();
 			}
 		} else {
@@ -162,7 +163,8 @@ public class ServiceBinderCreator {
 
 		TypeSerializerCreator tsc =
 			new TypeSerializerCreator(logger, typesSentFromBrowser.build(logger), typesSentToBrowser
-				.build(logger), context, serializeQualifiedName, serializerSimpleName);
+				.build(logger), context,
+				serializeQualifiedName, serializerSimpleName);
 
 		return tsc.realize(logger);
 	}
@@ -317,7 +319,8 @@ public class ServiceBinderCreator {
 	}
 
 	private void writeCommandParam(SourceWriter srcWriter, JMethod method,
-		Collection<CallbackMethod> callbackSuccess, String callbackParam) {
+		Collection<CallbackMethod> callbackSuccess,
+		String callbackParam) {
 		boolean lazy = method.getAnnotation(LazyCommand.class) != null;
 		boolean quiet = method.getAnnotation(QuietCommand.class) != null;
 
@@ -360,8 +363,9 @@ public class ServiceBinderCreator {
 					srcWriter.println("}");
 				}
 				if (callbackMethod.failureMethodName != null) {
-					srcWriter.println("public void onFailure(Throwable caught){", this.typeAsString(method
-						.getReturnType(), true));
+					srcWriter
+						.println("public void onFailure(Throwable caught){", this.typeAsString(method
+							.getReturnType(), true));
 					srcWriter.indent();
 					srcWriter.println("getHandler().%s(caught);", callbackMethod.failureMethodName);
 					srcWriter.outdent();
@@ -377,7 +381,7 @@ public class ServiceBinderCreator {
 	}
 
 	private String typeAsString(JType type, boolean translatePrimitives) {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		if (translatePrimitives && type instanceof JPrimitiveType) {
 			sb.append(((JPrimitiveType) type).getQualifiedBoxedSourceName());
 		} else {
@@ -423,8 +427,9 @@ public class ServiceBinderCreator {
 		String packageName = this.handlerType.getPackage().getName();
 		String className =
 			this.proxyModelQualifiedName.indexOf('.') == -1 ? this.proxyModelQualifiedName
-				: this.proxyModelQualifiedName.substring(this.proxyModelQualifiedName.lastIndexOf('.') + 1,
-					this.proxyModelQualifiedName.length());
+				: this.proxyModelQualifiedName
+					.substring(this.proxyModelQualifiedName.lastIndexOf('.') + 1,
+						this.proxyModelQualifiedName.length());
 
 		ClassSourceFileComposerFactory composerFactory =
 			new ClassSourceFileComposerFactory(packageName, className);
@@ -463,11 +468,13 @@ public class ServiceBinderCreator {
 		String targetQualifiedName) {
 		String packageName =
 			this.proxyModelQualifiedName.indexOf('.') == -1 ? "" : this.proxyModelQualifiedName
-				.substring(0, this.proxyModelQualifiedName.lastIndexOf('.'));
+				.substring(0,
+					this.proxyModelQualifiedName.lastIndexOf('.'));
 		String className =
 			this.proxyModelQualifiedName.indexOf('.') == -1 ? this.proxyModelQualifiedName
-				: this.proxyModelQualifiedName.substring(this.proxyModelQualifiedName.lastIndexOf('.') + 1,
-					this.proxyModelQualifiedName.length());
+				: this.proxyModelQualifiedName
+					.substring(this.proxyModelQualifiedName.lastIndexOf('.') + 1,
+						this.proxyModelQualifiedName.length());
 
 		return ctx.tryCreate(logger, packageName, className);
 	}

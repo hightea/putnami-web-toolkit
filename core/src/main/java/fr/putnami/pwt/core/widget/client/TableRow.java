@@ -138,7 +138,7 @@ public class TableRow<T> extends AbstractPanel
 
 	@Override
 	public Iterable<Error> getErrors() {
-		return this.driver == null ? Collections.EMPTY_LIST : this.driver.getErrors();
+		return this.driver == null ? Collections.<Error> emptyList() : this.driver.getErrors();
 	}
 
 	@Override

@@ -99,7 +99,7 @@ public abstract class AbstractHTMLPanel extends HTMLPanel
 
 	@Override
 	public Iterable<Editor> getEditors() {
-		return this.editorChildren == null ? Collections.EMPTY_SET : Iterables
+		return this.editorChildren == null ? Collections.<Editor> emptySet() : Iterables
 			.unmodifiableIterable(this.editorChildren);
 	}
 

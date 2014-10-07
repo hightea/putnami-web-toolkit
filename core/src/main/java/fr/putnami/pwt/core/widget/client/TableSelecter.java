@@ -94,7 +94,8 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 			this.inputElem.setReadOnly(Boolean.TRUE.equals(this.getReadonly()));
 			this.inputElem.setDisabled(!TableSelecter.this.enable);
 			StyleUtils.toggleStyle(this.getParent(), TableSelecter.STYLE_ROW_SELECTED,
-				TableSelecter.this.selection.contains(this.value));
+				TableSelecter.this.selection
+					.contains(this.value));
 			switch (TableSelecter.this.selectionMode) {
 				case COLUMN:
 					StyleUtils.toggleStyle(this.getParent(), TableSelecter.STYLE_ROW_CLICKABLE, false);
@@ -104,7 +105,7 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 					break;
 				case ROW_CLICK:
 					StyleUtils.toggleStyle(this.getParent(), TableSelecter.STYLE_ROW_CLICKABLE,
-						TableSelecter.this.enable && true);
+						TableSelecter.this.enable);
 					if (this.parentClickRegistration == null) {
 						this.parentClickRegistration =
 							this.getParent().addDomHandler(this, ClickEvent.getType());
@@ -112,7 +113,7 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 					break;
 				case BOTH:
 					StyleUtils.toggleStyle(this.getParent(), TableSelecter.STYLE_ROW_CLICKABLE,
-						TableSelecter.this.enable && true);
+						TableSelecter.this.enable);
 					if (this.clickRegistration == null) {
 						this.clickRegistration = this.addDomHandler(this, ClickEvent.getType());
 					}
@@ -120,6 +121,8 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 						this.parentClickRegistration =
 							this.getParent().addDomHandler(this, ClickEvent.getType());
 					}
+					break;
+				default:
 					break;
 			}
 		}

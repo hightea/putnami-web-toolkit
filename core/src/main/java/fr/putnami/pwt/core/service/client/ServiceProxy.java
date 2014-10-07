@@ -14,7 +14,7 @@
  */
 package fr.putnami.pwt.core.service.client;
 
-public interface ServiceProxy<HANDLER, SERVICE> {
+public interface ServiceProxy<H, S> {
 
-	void bindService(HANDLER handler);
+	void bindService(H handler);
 }

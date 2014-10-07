@@ -56,7 +56,8 @@ public class InjectMayStopActivityCreator extends InjectorCreatorDelegate
 			srcWriter.println("@Override public void onMayStopActivity(MayStopActivityEvent event) {");
 			srcWriter.indent();
 			srcWriter.println("if (event.getMessage() == null) { event.setMessage(%s.this.%s()); }",
-				this.injectorName, mayStopMethod.getName());
+				this.injectorName,
+				mayStopMethod.getName());
 			srcWriter.outdent();
 			srcWriter.outdent();
 			srcWriter.println("}}));");

@@ -14,6 +14,7 @@
  */
 package fr.putnami.pwt.core.theme.client;
 
+import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 
@@ -111,4 +112,30 @@ public class IconFont extends CssLink {
 	private String transformClassName(String iconName) {
 		return iconName.toLowerCase().replace('_', '-');
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.putnami.pwt.core.theme.client.CssLink#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(this.getLink().getHref(), preffix);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.putnami.pwt.core.theme.client.CssLink#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof IconFont) {
+			IconFont other = (IconFont) obj;
+			return super.equals(obj)
+				&& Objects.equal(this.preffix, other.preffix);
+		}
+		return false;
+	}
+
 }

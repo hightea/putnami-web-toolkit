@@ -44,7 +44,8 @@ public final class EnumRenderer<E extends Enum<E>> extends AbstractRenderer<E> {
 
 	private String getSimpleClassName(E value) {
 		String result = value.getClass().getSimpleName();
-		if (result.indexOf("$") != -1) { // In case of inner class
+		if (result.indexOf("$") != -1) {
+			// In case of inner class
 			result = result.substring(result.indexOf("$") + 1);
 		}
 		return result;

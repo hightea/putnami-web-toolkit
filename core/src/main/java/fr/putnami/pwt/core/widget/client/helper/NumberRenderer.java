@@ -21,13 +21,6 @@ public final class NumberRenderer extends AbstractRenderer<Number> {
 
 	private static NumberRenderer instance;
 
-	public static NumberRenderer get() {
-		if (NumberRenderer.instance == null) {
-			NumberRenderer.instance = new NumberRenderer(null);
-		}
-		return NumberRenderer.instance;
-	}
-
 	private final NumberFormat formater;
 
 	public NumberRenderer(String format) {
@@ -46,4 +39,12 @@ public final class NumberRenderer extends AbstractRenderer<Number> {
 
 		return this.formater.format(object);
 	}
+
+	public static NumberRenderer get() {
+		if (NumberRenderer.instance == null) {
+			NumberRenderer.instance = new NumberRenderer(null);
+		}
+		return NumberRenderer.instance;
+	}
+
 }

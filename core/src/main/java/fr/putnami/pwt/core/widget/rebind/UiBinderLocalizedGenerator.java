@@ -30,7 +30,7 @@ public class UiBinderLocalizedGenerator extends Generator {
 	public String generate(TreeLogger logger, GeneratorContext context, String typeName)
 		throws UnableToCompleteException {
 		TypeOracle typeOracle = context.getTypeOracle();
-		assert (typeOracle != null);
+		assert typeOracle != null;
 
 		JClassType viewType = typeOracle.findType(typeName);
 		if (viewType == null) {
@@ -43,8 +43,7 @@ public class UiBinderLocalizedGenerator extends Generator {
 		GwtLocale locale = localeUtils.getCompileLocale();
 
 		UiBinderLocalizedCreator creator = new UiBinderLocalizedCreator(viewType, locale);
-		String proxyClassName = creator.create(logger, context);
-		return proxyClassName;
+		return creator.create(logger, context);
 	}
 
 }

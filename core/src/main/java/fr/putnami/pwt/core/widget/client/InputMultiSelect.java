@@ -43,7 +43,8 @@ public class InputMultiSelect<T> extends AbstractInputSelect<T, List<T>> {
 		@Override
 		public int compare(T o1, T o2) {
 			return Integer.compare(InputMultiSelect.this.getOrderedItems().indexOf(o1),
-				InputMultiSelect.this.getOrderedItems().indexOf(o2));
+				InputMultiSelect.this
+					.getOrderedItems().indexOf(o2));
 		}
 	};
 
@@ -212,25 +213,21 @@ public class InputMultiSelect<T> extends AbstractInputSelect<T, List<T>> {
 	public void onBrowserEvent(Event event) {
 		super.onBrowserEvent(event);
 		boolean mustKillEvent = false;
-		switch (DOM.eventGetType(event)) {
-			case Event.ONKEYDOWN:
-				switch (event.getKeyCode()) {
-					case KeyCodes.KEY_ENTER:
-						if (this.getDropdown().isOpen()) {
-							((MultiSelectionHandler) this.getSelectionHandler()).onEnterKeyDown();
-							mustKillEvent = true;
-						}
-						break;
-					case KeyCodes.KEY_TAB:
-					case KeyCodes.KEY_ESCAPE:
-						this.getDropdown().close();
-						break;
-					default:
-						break;
-				}
-				break;
-			default:
-				break;
+		if (DOM.eventGetType(event) == Event.ONKEYDOWN) {
+			switch (event.getKeyCode()) {
+				case KeyCodes.KEY_ENTER:
+					if (this.getDropdown().isOpen()) {
+						((MultiSelectionHandler) this.getSelectionHandler()).onEnterKeyDown();
+						mustKillEvent = true;
+					}
+					break;
+				case KeyCodes.KEY_TAB:
+				case KeyCodes.KEY_ESCAPE:
+					this.getDropdown().close();
+					break;
+				default:
+					break;
+			}
 		}
 		if (mustKillEvent) {
 			event.preventDefault();

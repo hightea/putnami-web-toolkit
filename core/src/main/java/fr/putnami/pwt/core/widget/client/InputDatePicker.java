@@ -109,9 +109,11 @@ public class InputDatePicker extends FocusWidget
 		.weekdaysShortStandalone();
 
 	private static final DateTimeFormat MONTH_YEAR_FORMAT = DateTimeFormat
-		.getFormat(InputDatePicker.WIDGET_PARAMS.inputDatePickerMonthYearFormat());
+		.getFormat(InputDatePicker.WIDGET_PARAMS
+			.inputDatePickerMonthYearFormat());
 	private static final DateTimeFormat MONTH_ABBR_FORMAT = DateTimeFormat
-		.getFormat(InputDatePicker.WIDGET_PARAMS.inputDatePickerMonthFormat());
+		.getFormat(InputDatePicker.WIDGET_PARAMS
+			.inputDatePickerMonthFormat());
 
 	private static final DateTimeFormat ATTRIBUTE_DATE_FORMAT = DateTimeFormat
 		.getFormat("yyyy-MM-dd");
@@ -339,7 +341,8 @@ public class InputDatePicker extends FocusWidget
 					LIElement monthElement = (LIElement) this.monthPickerUlMonthElement.getChild(month);
 					monthButtonDate.setMonth(month);
 					monthElement.setAttribute(InputDatePicker.ATTRIBUTE_DATA_CURSOR,
-						InputDatePicker.ATTRIBUTE_DATE_FORMAT.format(monthButtonDate));
+						InputDatePicker.ATTRIBUTE_DATE_FORMAT
+							.format(monthButtonDate));
 				}
 				this.monthPicker.setScrollTop(child.getOffsetTop());
 				break;
@@ -364,13 +367,16 @@ public class InputDatePicker extends FocusWidget
 		Date lastMonth = new Date(this.cursor.getTime());
 		CalendarUtil.addMonthsToDate(lastMonth, -1);
 		this.pagePreviusMonthLi.setAttribute(InputDatePicker.ATTRIBUTE_DATA_CURSOR,
-			InputDatePicker.ATTRIBUTE_DATE_FORMAT.format(lastMonth));
+			InputDatePicker.ATTRIBUTE_DATE_FORMAT
+				.format(lastMonth));
 		this.pageTodayLi.setAttribute(InputDatePicker.ATTRIBUTE_DATA_CURSOR,
-			InputDatePicker.ATTRIBUTE_DATE_FORMAT.format(this.today));
+			InputDatePicker.ATTRIBUTE_DATE_FORMAT
+				.format(this.today));
 		Date nextMonth = new Date(this.cursor.getTime());
 		CalendarUtil.addMonthsToDate(nextMonth, 1);
 		this.pageNextMonthLi.setAttribute(InputDatePicker.ATTRIBUTE_DATA_CURSOR,
-			InputDatePicker.ATTRIBUTE_DATE_FORMAT.format(nextMonth));
+			InputDatePicker.ATTRIBUTE_DATE_FORMAT
+				.format(nextMonth));
 
 		/* Draw daypicker */
 		Date dateToDrow = new Date(this.cursor.getTime());
