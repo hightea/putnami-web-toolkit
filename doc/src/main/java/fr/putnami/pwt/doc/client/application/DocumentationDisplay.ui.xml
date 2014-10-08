@@ -45,6 +45,7 @@
 							<w:NavLink label="Injection" link="#!Injection"/>
 							<w:NavLink label="Navigation" link="#!Navigation"/>
 							<w:NavLink label="Data binding" link="#!DataBinding" />
+							<w:NavLink label="Data Validation" link="#!Validation" />
 							<w:NavLink label="Internationalization" link="#!Internationalization" />
 							<w:NavLink label="Server calls" link="#!ServerCalls" />
 							<w:NavLink label="Errors handling" link="#!Errors" />

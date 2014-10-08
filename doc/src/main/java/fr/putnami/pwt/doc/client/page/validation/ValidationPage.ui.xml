@@ -1,0 +1,98 @@
+<!--
+
+    This file is part of pwt.
+
+    pwt is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client"
+	>
+
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<w:HTMLPanel title="PWT - Bean validation">
+		<w:Header ui:field="header">
+			<w:Heading level="1">
+				Bean Validation
+			</w:Heading>
+			<p class="lead">
+				<strong title="Putnami Web Toolkit">PWT</strong>'s bean model is compliant with commons JSR303 bean validation annotations.
+			</p>
+		</w:Header>
+		<w:HTMLPanel ui:field="content">
+			<w:Heading level="2" summary="docSummary">How does it work?</w:Heading>
+			In the <a href="#DataBinding"><strong title="Putnami Web Toolkit">PWT</strong>'s data binding framework</a> we generate bean model.
+			This model can handle the commons JSR303 Bean Validation annotation on fields.
+			
+			<p>The supported annotations are:</p>
+			<ul>
+				<li><code>AssertTrue</code> on <code>Boolean</code> fields.</li>
+				<li><code>AssertFalse</code> on <code>Boolean</code> fields.</li>
+				<li><code>Future</code> on <code>Date</code> fields.</li>
+				<li><code>Past</code> on <code>Date</code> fields.</li>
+				<li><code>Min</code> on <code>Number</code> fields.</li>
+				<li><code>Max</code> on <code>Number</code> fields.</li>
+				<li><code>NotNull</code> on all fields.</li>
+				<li><code>Null</code> on all fields.</li>
+				<li><code>Size</code> on <code>String</code>, <code>Collection</code> or <code>Map</code> fields.</li>
+				<li><code>Pattern</code> on <code>String</code> fields.</li>
+			</ul>
+			<p>
+				When you use a Validation annotated bean in the data binding framework, the bean is automatically validated on editor flush.
+				If the bean isn't valid, the flush fails and the corresponding error message is displayed near the invalid fields.
+			</p>
+			
+			<w:Heading level="2" summary="docSummary">Example</w:Heading>
+			<p>You can see the result of the bean validation on flush on the following form.</p>
+			<p>We use the following bean definition :</p>
+			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+public class BeanToValidate implements Serializable {
+
+	@Past
+	@NotNull
+	private Date birthday;
+
+	@Max(12)
+	private Integer monthNumber;
+
+	@AssertTrue
+	private Boolean agree;
+
+	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$")
+	private String email;
+	
+	...
+}]]></pre>
+			</c:StaticCode>
+			
+			<div class="showcase-sample-block">
+				<div class="showcase-sample">
+					<w:Form ui:field="validationForm">
+						<w:FormGroup path="birthday" />
+						<w:FormGroup path="monthNumber" />
+						<w:FormGroup path="email" />
+						<w:FormGroup path="agree" />
+						<w:FormResetButton>Reset</w:FormResetButton>
+						<w:FormSubmitButton>Submit</w:FormSubmitButton>
+					</w:Form>
+				</div>
+			</div>
+		</w:HTMLPanel>
+	</w:HTMLPanel>
+</ui:UiBinder>

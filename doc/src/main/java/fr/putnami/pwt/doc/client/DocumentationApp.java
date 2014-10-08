@@ -56,6 +56,7 @@ import fr.putnami.pwt.doc.client.page.tutorial.Tuto6ThemePage;
 import fr.putnami.pwt.doc.client.page.tutorial.Tuto7GoogleAnalyticsPage;
 import fr.putnami.pwt.doc.client.page.tutorial.Tuto8AjaxBotPage;
 import fr.putnami.pwt.doc.client.page.tutorial.Tuto9SpringPage;
+import fr.putnami.pwt.doc.client.page.validation.ValidationPage;
 import fr.putnami.pwt.doc.client.page.welcome.WelcomePage;
 import fr.putnami.pwt.doc.client.page.welcome.WelcomePage.WelcomePlace;
 import fr.putnami.pwt.plugin.ga.client.GoogleAnalytics;
@@ -68,6 +69,7 @@ import fr.putnami.pwt.plugin.ga.client.GoogleAnalytics;
 	ComponentsPage.ComponentsPlace.class,
 	InjectionPage.InjectionPlace.class,
 	DataBindingPage.DataBindingPlace.class,
+	ValidationPage.ValidationPlace.class,
 	InternationalizationPage.InternationalizationPlace.class,
 	NavigationPage.NavigationPlace.class,
 	ServerCallsPage.ServerCallsPlace.class,
