@@ -25,8 +25,7 @@ import fr.putnami.pwt.core.widget.client.base.AbstractWidget;
 
 public class Heading extends AbstractWidget implements HasHTML {
 
-	public static final List<String> HEADING_TAGS = Lists.newArrayList("h1", "h2", "h3", "h4", "h5",
-		"h6");
+	public static final List<String> HEADING_TAGS = Lists.newArrayList("h1", "h2", "h3", "h4", "h5", "h6");
 	public static final String ATTRIBUTE_DATA_SUMMARY = "data-summary";
 
 	private static final int HEADER_MINIMUM = 1;

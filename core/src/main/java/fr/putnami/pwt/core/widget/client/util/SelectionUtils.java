@@ -18,6 +18,9 @@ import com.google.gwt.dom.client.Element;
 
 public final class SelectionUtils {
 
+	private SelectionUtils() {
+	}
+
 	public static native void disableTextSelectInternal(Element e, boolean disable)
 	/*-{
 	    if (disable) {
@@ -28,7 +31,4 @@ public final class SelectionUtils {
 	      e.onselectstart = null;
 	    }
 	  }-*/;
-
-	private SelectionUtils() {
-	}
 }

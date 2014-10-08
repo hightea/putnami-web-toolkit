@@ -76,14 +76,12 @@ public class InjectorModuleCreator extends AbstractInjectorCreator {
 			srcWriter.println("");
 		}
 
-		for (InjectorWritterEntryPoint delegate : Iterables.filter(this.delegates,
-			InjectorWritterEntryPoint.class)) {
+		for (InjectorWritterEntryPoint delegate : Iterables.filter(this.delegates, InjectorWritterEntryPoint.class)) {
 			delegate.writeEntryPoint(srcWriter);
 			srcWriter.println();
 		}
 
-		for (JMethod method : InjectCreatorUtil
-			.listMethod(this.injectableType, EntryPointHandler.class)) {
+		for (JMethod method : InjectCreatorUtil.listMethod(this.injectableType, EntryPointHandler.class)) {
 			srcWriter.println("super.%s();", method.getName());
 		}
 

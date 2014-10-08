@@ -20,6 +20,7 @@ public class CallbackAdapter<T> implements AsyncCallback<T> {
 
 	@Override
 	public void onSuccess(T result) {
+		// Shall be override
 	}
 
 	@Override

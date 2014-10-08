@@ -22,6 +22,9 @@ import fr.putnami.pwt.core.theme.client.CssStyle;
 
 public final class StyleUtils {
 
+	private StyleUtils() {
+	}
+
 	public static <S extends CssStyle> void removeStyle(Element e, S style) {
 		if (e == null) {
 			return;
@@ -108,8 +111,7 @@ public final class StyleUtils {
 
 	public static void initStyle(Widget w) {
 		if (w != null && w.getElement() != null) {
-			String widgetClassName =
-				"p-" + CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_HYPHEN, w.getClass().getSimpleName());
+			String widgetClassName = "p-" + CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_HYPHEN, w.getClass().getSimpleName());
 			w.getElement().addClassName(widgetClassName);
 		}
 	}
@@ -123,8 +125,5 @@ public final class StyleUtils {
 			return null;
 		}
 		return value.get();
-	}
-
-	private StyleUtils() {
 	}
 }

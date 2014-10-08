@@ -88,9 +88,7 @@ public class MessageHelper {
 			return null;
 		}
 
-		String labelKey =
-			path.toString().replaceAll("\\.", "_").replaceAll("\\[", "").replaceAll("]", "")
-				.toUpperCase();
+		String labelKey = path.toString().replaceAll("\\.", "_").replaceAll("\\[", "").replaceAll("]", "").toUpperCase();
 
 		labelKey = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, String.valueOf(labelKey));
 		if (suffix != null) {

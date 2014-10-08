@@ -48,12 +48,6 @@ public class InputRadio<T> extends AbstractInputChoice<T, T> {
 		}
 	}
 
-	private static long seq = 0;
-
-	static long incrementeAndGetSeq() {
-		return ++InputRadio.seq;
-	}
-
 	private class SingleChoiceHandler implements ChoiceSelectionHandler<T, T> {
 		private T selectedItem;
 
@@ -84,9 +78,8 @@ public class InputRadio<T> extends AbstractInputChoice<T, T> {
 
 	private class RadioContainer extends Composite implements ClickHandler {
 
-		private final InputElement radioElement = InputElement.as(Document.get()
-			.createRadioInputElement(
-				"radio" + InputRadio.this.radioGroupNum));
+		private final InputElement radioElement = InputElement.as(Document.get().createRadioInputElement(
+			"radio" + InputRadio.this.radioGroupNum));
 
 		private T value;
 
@@ -118,6 +111,8 @@ public class InputRadio<T> extends AbstractInputChoice<T, T> {
 			this.radioElement.setChecked(true);
 		}
 	}
+
+	private static long seq = 0;
 
 	private final long radioGroupNum = InputRadio.incrementeAndGetSeq();
 
@@ -177,6 +172,10 @@ public class InputRadio<T> extends AbstractInputChoice<T, T> {
 	@Override
 	protected void setSelectionHandler(ChoiceSelectionHandler<T, T> selectionHandler) {
 		this.selectionHandler = selectionHandler;
+	}
+
+	static long incrementeAndGetSeq() {
+		return ++InputRadio.seq;
 	}
 
 }

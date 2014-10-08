@@ -15,5 +15,6 @@
 package fr.putnami.pwt.doc.shared.page.sample.domain;
 
 public enum Gender {
-	MALE, FEMALE
+		MALE,
+		FEMALE
 }

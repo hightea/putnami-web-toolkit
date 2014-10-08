@@ -62,10 +62,12 @@ public final class FlushErrorEvent extends GwtEvent<FlushErrorEvent.Handler> {
 		return FlushErrorEvent.TYPE;
 	}
 
+	@SuppressWarnings("unchecked")
 	public <T> T getValueEdited() {
 		return (T) this.valueEdited;
 	}
 
+	@SuppressWarnings("unchecked")
 	public <T> T getValueFlushed() {
 		return (T) this.valueFlushed;
 	}
@@ -79,7 +81,6 @@ public final class FlushErrorEvent extends GwtEvent<FlushErrorEvent.Handler> {
 	}
 
 	public static void fire(Editor editor, Object valueEdited, Object valueFlushed, List<Error> errors) {
-		EventBus.get().fireEventFromSource(
-			new FlushErrorEvent(editor, valueEdited, valueFlushed, errors), editor);
+		EventBus.get().fireEventFromSource(new FlushErrorEvent(editor, valueEdited, valueFlushed, errors), editor);
 	}
 }

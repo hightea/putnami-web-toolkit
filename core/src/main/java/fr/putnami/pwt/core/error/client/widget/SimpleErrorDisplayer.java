@@ -38,15 +38,13 @@ public class SimpleErrorDisplayer implements ErrorDisplayer {
 
 	@Override
 	public void display(Throwable error, Severity severity) {
-		String message =
-			this.getMessage(error, SimpleErrorDisplayer.MESSAGE_SUFFIX, error.getMessage());
+		String message = this.getMessage(error, SimpleErrorDisplayer.MESSAGE_SUFFIX, error.getMessage());
 		this.display(message, error, severity);
 	}
 
 	@Override
 	public void display(String message, Throwable error, Severity severity) {
-		String title =
-			this.getMessage(error, SimpleErrorDisplayer.TITLE_SUFFIX, error.getClass().getSimpleName());
+		String title = this.getMessage(error, SimpleErrorDisplayer.TITLE_SUFFIX, error.getClass().getSimpleName());
 		this.display(title, message, error, severity);
 	}
 

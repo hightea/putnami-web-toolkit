@@ -66,7 +66,7 @@ public class CodeLineImpl extends Widget implements CodeLine {
 		this.getElement().removeAllChildren();
 		for (Token<?> token : this.tokenList) {
 			if (token.getContent() != null && token.getContent() instanceof CssRendererTokenContent
-					&& ((CssRendererTokenContent) token.getContent()).getCssStyle() != null) {
+				&& ((CssRendererTokenContent) token.getContent()).getCssStyle() != null) {
 				SpanElement spanElement = Document.get().createSpanElement();
 				spanElement.addClassName(((CssRendererTokenContent) token.getContent()).getCssStyle());
 				spanElement.setInnerText(token.getText());

@@ -23,7 +23,7 @@ public class EndOfLineTokenEvaluator extends SingleLineTokenEvaluator {
 	}
 
 	public EndOfLineTokenEvaluator(String startSequence, TokenContent tokenContent,
-			char escapeCharacter, boolean breaksOnEOF) {
+		char escapeCharacter, boolean breaksOnEOF) {
 		super(startSequence, null, tokenContent, escapeCharacter, breaksOnEOF);
 	}
 

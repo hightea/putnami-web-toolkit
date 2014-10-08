@@ -64,12 +64,12 @@ public class AjaxBotIndexingFilter implements Filter {
 	@Override
 	public void init(FilterConfig config) throws ServletException {
 		String paramCacheFolder =
-				config.getInitParameter(AjaxBotIndexingFilter.FILTER_PARAM_CACHE_FOLDER);
+			config.getInitParameter(AjaxBotIndexingFilter.FILTER_PARAM_CACHE_FOLDER);
 		if (!Strings.isNullOrEmpty(paramCacheFolder)) {
 			this.cacheFolder = new File(paramCacheFolder);
 		}
 		if (Boolean.valueOf(config
-				.getInitParameter(AjaxBotIndexingFilter.FILTER_PARAM_CACHE_RESET_ON_STARTUP))) {
+			.getInitParameter(AjaxBotIndexingFilter.FILTER_PARAM_CACHE_RESET_ON_STARTUP))) {
 			this.resetCache();
 		}
 	}
@@ -85,7 +85,7 @@ public class AjaxBotIndexingFilter implements Filter {
 			StringBuilder tmpSb = new StringBuilder(queryStringSb.substring(0, i));
 			tmpSb.append("#!");
 			tmpSb.append(URLDecoder.decode(queryStringSb.substring(i + 20, queryStringSb.length()),
-					"UTF-8"));
+				"UTF-8"));
 			queryStringSb = tmpSb;
 		}
 
@@ -94,7 +94,7 @@ public class AjaxBotIndexingFilter implements Filter {
 			StringBuilder tmpSb = new StringBuilder(queryStringSb.substring(0, i));
 			tmpSb.append("#!");
 			tmpSb.append(URLDecoder.decode(queryStringSb.substring(i + 19, queryStringSb.length()),
-					"UTF-8"));
+				"UTF-8"));
 			queryStringSb = tmpSb;
 		}
 		if (queryStringSb.indexOf("#!") != 0) {
@@ -106,18 +106,18 @@ public class AjaxBotIndexingFilter implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
-			throws IOException, ServletException {
+		throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
 		String queryString = request.getQueryString();
 		if (queryString == null) {
 			queryString = "";
 		}
 		if ("GET".equals(request.getMethod())
-				&& queryString.contains(AjaxBotIndexingFilter.QUERY_PARAM_RESET_FILTER)) {
+			&& queryString.contains(AjaxBotIndexingFilter.QUERY_PARAM_RESET_FILTER)) {
 			this.resetCache();
 		}
 		if ("GET".equals(request.getMethod())
-				&& queryString.contains(AjaxBotIndexingFilter.QUERY_PARAM_ESCAPED_FRAGMENT)) {
+			&& queryString.contains(AjaxBotIndexingFilter.QUERY_PARAM_ESCAPED_FRAGMENT)) {
 			ByteStreams.copy(this.getHtmlStream(request), resp.getOutputStream());
 		} else {
 			chain.doFilter(req, resp);
@@ -184,7 +184,7 @@ public class AjaxBotIndexingFilter implements Filter {
 
 		// Reset the html doctype
 		String pageData =
-				page.asXml().replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "<!DOCTYPE html>");
+			page.asXml().replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "<!DOCTYPE html>");
 
 		String cacheFileName = this.getCacheFileName(request);
 		if (cacheFileName != null) {
@@ -242,8 +242,7 @@ public class AjaxBotIndexingFilter implements Filter {
 		public WebResponse getResponse(WebRequest request) throws IOException {
 			WebResponse response = super.getResponse(request);
 			if (response.getWebRequest().getUrl().toString().contains("www.google-analytics.com")) {
-				return this.createWebResponse(response.getWebRequest(), "", "application/javascript", 200,
-						"Ok");
+				return this.createWebResponse(response.getWebRequest(), "", "application/javascript", 200, "Ok");
 			}
 			return super.getResponse(request);
 		}

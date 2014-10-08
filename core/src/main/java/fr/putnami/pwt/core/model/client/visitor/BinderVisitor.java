@@ -66,8 +66,7 @@ public class BinderVisitor extends AbstractVisitor {
 			editorValue.edit(value);
 		}
 
-		if (context == this.driver.getRootContext() && editor instanceof EditorCollection
-			&& value instanceof Collection) {
+		if (context == this.driver.getRootContext() && editor instanceof EditorCollection && value instanceof Collection) {
 			TraversalEditorsAspect aspect = context.getAspect(TraversalEditorsAspect.class);
 			if (aspect == null) {
 				aspect = new TraversalEditorsAspect();
@@ -83,14 +82,11 @@ public class BinderVisitor extends AbstractVisitor {
 
 			for (int i = 0; i < collectionToBind.size(); i++) {
 				EditorValue traversalEditor = editorList.getEditorForTraversal(i);
-				Context<EditorValue> contextCreated =
-					(Context<EditorValue>) this.driver.getContext(traversalEditor);
+				Context<EditorValue> contextCreated = (Context<EditorValue>) this.driver.getContext(traversalEditor);
 				if (contextCreated == null) {
-					contextCreated =
-						ContextFactory.Util.get().createContext(this.driver, null, traversalEditor);
+					contextCreated = ContextFactory.Util.get().createContext(this.driver, null, traversalEditor);
 					if (editor instanceof HasReadonly) {
-						this.driver.accept(new ReadonlyVisitor(editor, ((HasReadonly) editor).getReadonly(),
-							true), contextCreated);
+						this.driver.accept(new ReadonlyVisitor(editor, ((HasReadonly) editor).getReadonly(), true), contextCreated);
 					}
 					aspect.contexts.add(contextCreated);
 				}

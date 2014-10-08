@@ -60,8 +60,7 @@ public class UiBinderLocalizedCreator {
 		}
 		UiTemplate templateAnnotation = binderType.getAnnotation(UiTemplate.class);
 		if (templateAnnotation != null) {
-			this.templateName =
-				templateAnnotation.value().replace(UiBinderLocalizedCreator.TEMPLATE_SUFFIX, "");
+			this.templateName = templateAnnotation.value().replace(UiBinderLocalizedCreator.TEMPLATE_SUFFIX, "");
 		}
 		if (this.templateName == null) {
 			this.templateName = this.targetType.getSimpleSourceName();
@@ -79,8 +78,7 @@ public class UiBinderLocalizedCreator {
 		if (this.locale != null) {
 			this.binderProxySimpleName += "_" + this.locale.toString();
 		}
-		this.binderProxyQualifiedName =
-			this.targetType.getPackage().getName() + "." + this.binderProxySimpleName;
+		this.binderProxyQualifiedName = this.targetType.getPackage().getName() + "." + this.binderProxySimpleName;
 
 		PrintWriter printWriter = this.getPrintWriter(logger, context, this.binderProxyQualifiedName);
 		if (printWriter == null) {
@@ -105,13 +103,11 @@ public class UiBinderLocalizedCreator {
 		ResourceOracle resourceOracle = context.getResourcesOracle();
 		Map<String, Resource> reourceMap = resourceOracle.getResourceMap();
 		String templatePath =
-			packageResourcePath + this.templateName + "_" + this.locale
-				+ UiBinderLocalizedCreator.TEMPLATE_SUFFIX;
+			packageResourcePath + this.templateName + "_" + this.locale + UiBinderLocalizedCreator.TEMPLATE_SUFFIX;
 		Resource templateResource = reourceMap.get(templatePath);
 		if (templateResource == null) {
 			this.locale = null;
-			templatePath =
-				packageResourcePath + this.templateName + UiBinderLocalizedCreator.TEMPLATE_SUFFIX;
+			templatePath = packageResourcePath + this.templateName + UiBinderLocalizedCreator.TEMPLATE_SUFFIX;
 			templateResource = reourceMap.get(templatePath);
 		}
 		if (templateResource != null) {
@@ -123,19 +119,16 @@ public class UiBinderLocalizedCreator {
 	private void generateProxy(TreeLogger logger, SourceWriter srcWriter) {
 
 		srcWriter.println("@UiTemplate(\"%s\")", this.templateName);
-		srcWriter.println("interface Binder extends UiBinder<%s, %s> {", this.widgetType
-			.getSimpleSourceName(),
+		srcWriter.println("interface Binder extends UiBinder<%s, %s> {", this.widgetType.getSimpleSourceName(),
 			this.targetType.getSimpleSourceName());
 		srcWriter.indent();
-		srcWriter.println("UiBinder<%s, %s> BINDER = GWT.create(Binder.class);", this.widgetType
-			.getSimpleSourceName(),
+		srcWriter.println("UiBinder<%s, %s> BINDER = GWT.create(Binder.class);", this.widgetType.getSimpleSourceName(),
 			this.targetType.getSimpleSourceName());
 		srcWriter.outdent();
 		srcWriter.println("}");
 		srcWriter.println();
 		srcWriter.println("@Override");
-		srcWriter.println("public %s createAndBindUi(%s owner) {", this.widgetType
-			.getSimpleSourceName(), this.targetType
+		srcWriter.println("public %s createAndBindUi(%s owner) {", this.widgetType.getSimpleSourceName(), this.targetType
 			.getSimpleSourceName());
 		srcWriter.indent();
 		srcWriter.println("return Binder.BINDER.createAndBindUi(owner);");
@@ -148,8 +141,7 @@ public class UiBinderLocalizedCreator {
 		String packageName = this.binderType.getPackage().getName();
 		String className = this.binderProxySimpleName;
 
-		ClassSourceFileComposerFactory composerFactory =
-			new ClassSourceFileComposerFactory(packageName, className);
+		ClassSourceFileComposerFactory composerFactory = new ClassSourceFileComposerFactory(packageName, className);
 
 		composerFactory.addImport(GWT.class.getName());
 		composerFactory.addImport(UiBinder.class.getName());
@@ -169,8 +161,7 @@ public class UiBinderLocalizedCreator {
 		return composerFactory.createSourceWriter(ctx, printWriter);
 	}
 
-	private PrintWriter getPrintWriter(TreeLogger logger, GeneratorContext ctx,
-		String targetQualifiedName) {
+	private PrintWriter getPrintWriter(TreeLogger logger, GeneratorContext ctx, String targetQualifiedName) {
 		String packageName = this.binderType.getPackage().getName();
 		String className = this.binderProxySimpleName;
 		return ctx.tryCreate(logger, packageName, className);

@@ -51,25 +51,19 @@ public abstract class AbstractSocialButton extends Button<Void> {
 
 	protected String buildPopupFeature() {
 		if (this.asPopup) {
-			return "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=" + this.popupHeight
-					+ ",width=" + this.popupWith;
+			return "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height="
+				+ this.popupHeight + ",width=" + this.popupWith;
 		}
 		return null;
 	}
 
 	protected String getPageUrl() {
 		return AbstractSocialButton.CONSTANT.pwtUrl();
-		// String page = CONSTANT.pwtUrl();
-		// String historyToken = History.getToken();
-		// if (!Strings.isNullOrEmpty(historyToken)) {
-		// page += "#" + historyToken;
-		// }
-		// return URL.encode(page);
 	}
 
 	protected String buildSocialUrl() {
 		return MessageHelper.replaceParams(this.socialUtlTemplate, this.getPageUrl(), URL
-				.encode(Document.get().getTitle()));
+			.encode(Document.get().getTitle()));
 	}
 
 	public String getSocialUtlTemplate() {

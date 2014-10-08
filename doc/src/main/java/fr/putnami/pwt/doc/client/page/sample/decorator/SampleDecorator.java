@@ -145,7 +145,7 @@ public class SampleDecorator extends ViewDecorator {
 			}
 		};
 		RequestBuilder builder =
-				new RequestBuilder(RequestBuilder.GET, GWT.getModuleBaseURL() + "sample/" + fileName);
+			new RequestBuilder(RequestBuilder.GET, GWT.getModuleBaseURL() + "sample/" + fileName);
 		builder.setCallback(callBack);
 		try {
 			builder.send();

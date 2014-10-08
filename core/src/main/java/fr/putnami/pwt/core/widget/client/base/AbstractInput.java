@@ -100,10 +100,8 @@ import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public abstract class AbstractInput<I> extends AbstractComposite
-	implements DirtyEvent.HasDirtyHandlers, EditorInput<I>, EditorLeaf, HasHtmlId, Focusable,
-	HasValueChangeHandlers<I>,
-	HasAllFocusHandlers, HasClickHandlers, HasDoubleClickHandlers, HasAllDragAndDropHandlers,
-	HasAllGestureHandlers,
+	implements DirtyEvent.HasDirtyHandlers, EditorInput<I>, EditorLeaf, HasHtmlId, Focusable, HasValueChangeHandlers<I>,
+	HasAllFocusHandlers, HasClickHandlers, HasDoubleClickHandlers, HasAllDragAndDropHandlers, HasAllGestureHandlers,
 	HasAllKeyHandlers, HasAllMouseHandlers, HasAllTouchHandlers {
 
 	public static final CssStyle STYLE_CONTROL = new SimpleStyle("form-control");
@@ -208,8 +206,7 @@ public abstract class AbstractInput<I> extends AbstractComposite
 
 	@Override
 	public Iterable<Error> getErrors() {
-		return this.errors == null ? Collections.<Error> emptyList() : Iterables
-			.unmodifiableIterable(this.errors);
+		return this.errors == null ? Collections.<Error> emptyList() : Iterables.unmodifiableIterable(this.errors);
 	}
 
 	protected void clearErrors() {
@@ -267,8 +264,7 @@ public abstract class AbstractInput<I> extends AbstractComposite
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addDoubleClickHandler(
-		DoubleClickHandler handler) {
+	public com.google.gwt.event.shared.HandlerRegistration addDoubleClickHandler(DoubleClickHandler handler) {
 		return this.addDomHandler(handler, DoubleClickEvent.getType());
 	}
 
@@ -278,8 +274,7 @@ public abstract class AbstractInput<I> extends AbstractComposite
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addDragEnterHandler(
-		DragEnterHandler handler) {
+	public com.google.gwt.event.shared.HandlerRegistration addDragEnterHandler(DragEnterHandler handler) {
 		return this.addBitlessDomHandler(handler, DragEnterEvent.getType());
 	}
 
@@ -289,8 +284,7 @@ public abstract class AbstractInput<I> extends AbstractComposite
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addDragLeaveHandler(
-		DragLeaveHandler handler) {
+	public com.google.gwt.event.shared.HandlerRegistration addDragLeaveHandler(DragLeaveHandler handler) {
 		return this.addBitlessDomHandler(handler, DragLeaveEvent.getType());
 	}
 
@@ -300,8 +294,7 @@ public abstract class AbstractInput<I> extends AbstractComposite
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addDragStartHandler(
-		DragStartHandler handler) {
+	public com.google.gwt.event.shared.HandlerRegistration addDragStartHandler(DragStartHandler handler) {
 		return this.addBitlessDomHandler(handler, DragStartEvent.getType());
 	}
 
@@ -316,20 +309,17 @@ public abstract class AbstractInput<I> extends AbstractComposite
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addGestureChangeHandler(
-		GestureChangeHandler handler) {
+	public com.google.gwt.event.shared.HandlerRegistration addGestureChangeHandler(GestureChangeHandler handler) {
 		return this.addDomHandler(handler, GestureChangeEvent.getType());
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addGestureEndHandler(
-		GestureEndHandler handler) {
+	public com.google.gwt.event.shared.HandlerRegistration addGestureEndHandler(GestureEndHandler handler) {
 		return this.addDomHandler(handler, GestureEndEvent.getType());
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addGestureStartHandler(
-		GestureStartHandler handler) {
+	public com.google.gwt.event.shared.HandlerRegistration addGestureStartHandler(GestureStartHandler handler) {
 		return this.addDomHandler(handler, GestureStartEvent.getType());
 	}
 
@@ -349,14 +339,12 @@ public abstract class AbstractInput<I> extends AbstractComposite
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addMouseDownHandler(
-		MouseDownHandler handler) {
+	public com.google.gwt.event.shared.HandlerRegistration addMouseDownHandler(MouseDownHandler handler) {
 		return this.addDomHandler(handler, MouseDownEvent.getType());
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addMouseMoveHandler(
-		MouseMoveHandler handler) {
+	public com.google.gwt.event.shared.HandlerRegistration addMouseMoveHandler(MouseMoveHandler handler) {
 		return this.addDomHandler(handler, MouseMoveEvent.getType());
 	}
 
@@ -366,8 +354,7 @@ public abstract class AbstractInput<I> extends AbstractComposite
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addMouseOverHandler(
-		MouseOverHandler handler) {
+	public com.google.gwt.event.shared.HandlerRegistration addMouseOverHandler(MouseOverHandler handler) {
 		return this.addDomHandler(handler, MouseOverEvent.getType());
 	}
 
@@ -377,14 +364,12 @@ public abstract class AbstractInput<I> extends AbstractComposite
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addMouseWheelHandler(
-		MouseWheelHandler handler) {
+	public com.google.gwt.event.shared.HandlerRegistration addMouseWheelHandler(MouseWheelHandler handler) {
 		return this.addDomHandler(handler, MouseWheelEvent.getType());
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addTouchCancelHandler(
-		TouchCancelHandler handler) {
+	public com.google.gwt.event.shared.HandlerRegistration addTouchCancelHandler(TouchCancelHandler handler) {
 		return this.addDomHandler(handler, TouchCancelEvent.getType());
 	}
 
@@ -394,14 +379,12 @@ public abstract class AbstractInput<I> extends AbstractComposite
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addTouchMoveHandler(
-		TouchMoveHandler handler) {
+	public com.google.gwt.event.shared.HandlerRegistration addTouchMoveHandler(TouchMoveHandler handler) {
 		return this.addDomHandler(handler, TouchMoveEvent.getType());
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addTouchStartHandler(
-		TouchStartHandler handler) {
+	public com.google.gwt.event.shared.HandlerRegistration addTouchStartHandler(TouchStartHandler handler) {
 		return this.addDomHandler(handler, TouchStartEvent.getType());
 	}
 

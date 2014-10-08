@@ -23,7 +23,11 @@ import fr.putnami.pwt.plugin.code.client.base.CodeEditorDriver;
 public interface CodeEditorAspect {
 
 	enum AspectTrigger implements Predicate<CodeEditorAspect> {
-		INITALIZE, EDIT, FLUSH, MANUAL, CHANGE;
+			INITALIZE,
+			EDIT,
+			FLUSH,
+			MANUAL,
+			CHANGE;
 
 		@Override
 		public boolean apply(CodeEditorAspect input) {

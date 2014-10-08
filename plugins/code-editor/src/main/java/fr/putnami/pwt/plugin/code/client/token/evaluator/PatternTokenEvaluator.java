@@ -33,11 +33,11 @@ public class PatternTokenEvaluator implements TokenEvaluator {
 	protected final boolean breaksOnEOF;
 
 	public PatternTokenEvaluator(String startSequence, String endSequence, TokenContent tokenContent,
-			char escapeCharacter, boolean breaksOnEOL, boolean breaksOnEOF) {
+		char escapeCharacter, boolean breaksOnEOL, boolean breaksOnEOF) {
 		Preconditions.checkArgument(startSequence != null, "Start sequence can not be null.");
 		Preconditions.checkArgument(startSequence.length() > 0, "Start sequence can not be empty.");
 		Preconditions.checkArgument(endSequence != null || breaksOnEOL || breaksOnEOF,
-				"Either endOnEOF/EOL or end sequence must be defined");
+			"Either endOnEOF/EOL or end sequence must be defined");
 
 		this.startSequence = startSequence.toCharArray();
 		this.endSequence = endSequence == null ? new char[0] : endSequence.toCharArray();
@@ -56,7 +56,7 @@ public class PatternTokenEvaluator implements TokenEvaluator {
 			if (this.sequenceDetected(charScanner, this.startSequence, resultText, false)) {
 				if (this.endSequenceDetected(charScanner, resultText)) {
 					return new SimpleToken<TokenContent>(charScanner.getMark(), resultText.toString(),
-							this.tokenContent);
+						this.tokenContent);
 				}
 			}
 		} else {
@@ -83,7 +83,7 @@ public class PatternTokenEvaluator implements TokenEvaluator {
 				// Check for end of line since it can be used to terminate the pattern.
 				for (char[] element : CharacterUtil.END_OF_LINE_DELIMITERS) {
 					if (c == element[0]
-							&& this.sequenceDetected(scanner, element, matchingText, this.breaksOnEOF)) {
+						&& this.sequenceDetected(scanner, element, matchingText, this.breaksOnEOF)) {
 						return true;
 					}
 				}
@@ -100,7 +100,7 @@ public class PatternTokenEvaluator implements TokenEvaluator {
 	}
 
 	protected boolean sequenceDetected(CharacterScanner scanner, char[] sequence,
-			StringBuilder matchingText, boolean eofAllowed) {
+		StringBuilder matchingText, boolean eofAllowed) {
 		for (int i = 1; i < sequence.length; i++) {
 			int c = scanner.read();
 			if (c == CharacterScanner.EOF && eofAllowed) {

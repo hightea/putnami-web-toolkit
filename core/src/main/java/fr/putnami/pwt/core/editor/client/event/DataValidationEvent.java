@@ -65,6 +65,7 @@ public final class DataValidationEvent extends GwtEvent<DataValidationEvent.Hand
 		return this.editor;
 	}
 
+	@SuppressWarnings("unchecked")
 	public <T> T getValue() {
 		return (T) this.value;
 	}

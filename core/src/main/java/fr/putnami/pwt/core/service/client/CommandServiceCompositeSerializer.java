@@ -41,8 +41,7 @@ public class CommandServiceCompositeSerializer implements Serializer {
 	}
 
 	@Override
-	public Object instantiate(SerializationStreamReader stream, String typeSignature)
-		throws SerializationException {
+	public Object instantiate(SerializationStreamReader stream, String typeSignature) throws SerializationException {
 		for (Serializer serializer : this.serializers) {
 			try {
 				Object o = serializer.instantiate(stream, typeSignature);

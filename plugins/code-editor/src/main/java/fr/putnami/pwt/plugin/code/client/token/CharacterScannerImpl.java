@@ -44,10 +44,8 @@ public class CharacterScannerImpl implements CharacterScanner {
 	public void setStringToScan(String toScan, int rangeStart, int rangeEnd) {
 		Preconditions.checkArgument(toScan != null, "String to scan can not be null.");
 		Preconditions.checkArgument(rangeStart > -1, "Start range must be greater than -1.");
-		Preconditions.checkArgument(rangeEnd >= rangeStart,
-				"End range must be greater than start range.");
-		Preconditions.checkArgument(rangeEnd <= toScan.length(),
-				"End range must be lower than string to scan length.");
+		Preconditions.checkArgument(rangeEnd >= rangeStart, "End range must be greater than start range.");
+		Preconditions.checkArgument(rangeEnd <= toScan.length(), "End range must be lower than string to scan length.");
 		this.toScan = toScan;
 		this.offset = rangeStart;
 		this.mark = this.offset;

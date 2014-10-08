@@ -51,8 +51,7 @@ public abstract class AbstractCommandService extends AbstractRemoteServiceServle
 		List<CommandResponse> result = Lists.newArrayList();
 
 		for (CommandRequest request : commands) {
-			CommandExecutor executor =
-				this.executorRegistry.resolveCommandExecutor(request.getCommandDefinition());
+			CommandExecutor executor = this.executorRegistry.resolveCommandExecutor(request.getCommandDefinition());
 			result.add(executor.executeCommand(request));
 		}
 
@@ -60,22 +59,19 @@ public abstract class AbstractCommandService extends AbstractRemoteServiceServle
 	}
 
 	@Override
-	public SerializationPolicy getSerializationPolicy(String moduleBaseURL,
-		String serializationPolicyStrongName) {
+	public SerializationPolicy getSerializationPolicy(String moduleBaseURL, String serializationPolicyStrongName) {
 		return CommandSerializationPolicy.get();
 	}
 
 	@Override
-	protected void processPost(HttpServletRequest request, HttpServletResponse response)
-		throws Throwable {
+	protected void processPost(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		try {
 			String requestPayload = this.readContent(request);
 			RPCRequest rpcRequest = RPC.decodeRequest(requestPayload, this.getClass(), this);
 
 			String responsePayload =
 				RPC.invokeAndEncodeResponse(this, rpcRequest.getMethod(), rpcRequest.getParameters(),
-					rpcRequest
-						.getSerializationPolicy(), rpcRequest.getFlags());
+					rpcRequest.getSerializationPolicy(), rpcRequest.getFlags());
 
 			boolean gzipEncode =
 				RPCServletUtils.acceptsGzipEncoding(request)

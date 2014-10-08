@@ -35,8 +35,7 @@ public final class EnumRenderer<E extends Enum<E>> extends AbstractRenderer<E> {
 			return null;
 		}
 		StringBuilder result = new StringBuilder();
-		result
-			.append(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, this.getSimpleClassName(value)));
+		result.append(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, this.getSimpleClassName(value)));
 		result.append(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, value.toString()));
 		result.append(EnumRenderer.ENUM_SUFFIX);
 		return result.toString();

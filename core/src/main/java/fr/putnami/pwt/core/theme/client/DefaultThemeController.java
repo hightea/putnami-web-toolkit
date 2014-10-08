@@ -59,10 +59,9 @@ public class DefaultThemeController extends ThemeController {
 
 	/*
 	 * (non-Javadoc)
-	 *
-	 * @see
-	 * fr.putnami.pwt.core.theme.client.ThemeController#installTheme(fr.putnami.pwt.core.theme.client
-	 * .Theme)
+	 * 
+	 * @see fr.putnami.pwt.core.theme.client.ThemeController#installTheme(
+	 * fr.putnami.pwt.core.theme.client * .Theme)
 	 */
 	@Override
 	public void installTheme(Theme theme) {
@@ -145,8 +144,7 @@ public class DefaultThemeController extends ThemeController {
 	protected HeadElement getHead() {
 		if (this.head == null) {
 			Element elt = Document.get().getElementsByTagName("head").getItem(0);
-			assert elt != null : "The host HTML page does not have a <head> element"
-				+ " which is required by this injector";
+			assert elt != null : "The host HTML page does not have a <head> element" + " which is required by this injector";
 			this.head = HeadElement.as(elt);
 		}
 		return this.head;

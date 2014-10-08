@@ -47,7 +47,7 @@ public class CommandServiceController extends AbstractCommandService implements 
 
 	@RequestMapping(value = "/commandService", method = RequestMethod.POST)
 	public void processPostRpc(HttpServletRequest request, HttpServletResponse response)
-			throws Throwable {
+		throws Throwable {
 		try {
 			this.processPost(request, response);
 		} finally {

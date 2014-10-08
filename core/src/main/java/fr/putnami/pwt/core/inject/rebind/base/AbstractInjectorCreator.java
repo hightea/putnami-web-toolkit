@@ -90,19 +90,16 @@ public abstract class AbstractInjectorCreator {
 
 	// methods
 	protected void writeMethods(TreeLogger logger, GeneratorContext context, SourceWriter srcWriter) {
-		for (InjectorWritterMethod delegate : Iterables.filter(this.delegates,
-			InjectorWritterMethod.class)) {
+		for (InjectorWritterMethod delegate : Iterables.filter(this.delegates, InjectorWritterMethod.class)) {
 			delegate.writeMethods(srcWriter);
 		}
 	}
 
 	// constructor
-	protected void writeConstructor(TreeLogger logger, GeneratorContext context,
-		SourceWriter srcWriter) {
+	protected void writeConstructor(TreeLogger logger, GeneratorContext context, SourceWriter srcWriter) {
 		srcWriter.println("public %s() {", this.proxyName);
 		srcWriter.indent();
-		for (InjectorWritterConstructor delegate : Iterables.filter(this.delegates,
-			InjectorWritterConstructor.class)) {
+		for (InjectorWritterConstructor delegate : Iterables.filter(this.delegates, InjectorWritterConstructor.class)) {
 			delegate.writeConstructor(srcWriter);
 		}
 		srcWriter.outdent();
@@ -111,16 +108,14 @@ public abstract class AbstractInjectorCreator {
 
 	// inner class
 	protected void writeStatics(TreeLogger logger, GeneratorContext context, SourceWriter srcWriter) {
-		for (InjectorWritterStatic delegate : Iterables.filter(this.delegates,
-			InjectorWritterStatic.class)) {
+		for (InjectorWritterStatic delegate : Iterables.filter(this.delegates, InjectorWritterStatic.class)) {
 			delegate.writeStatic(srcWriter);
 		}
 	}
 
 	// Sub generations
 	protected void doSubGeneration(TreeLogger logger, GeneratorContext context) {
-		for (InjectorWritterSubGenerate delegate : Iterables.filter(this.delegates,
-			InjectorWritterSubGenerate.class)) {
+		for (InjectorWritterSubGenerate delegate : Iterables.filter(this.delegates, InjectorWritterSubGenerate.class)) {
 			delegate.subGenerate(logger, context);
 		}
 	}

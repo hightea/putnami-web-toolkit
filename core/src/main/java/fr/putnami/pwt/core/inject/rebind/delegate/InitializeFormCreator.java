@@ -82,11 +82,9 @@ public class InitializeFormCreator extends InjectorCreatorDelegate
 	public void writeConstructor(SourceWriter srcWriter) {
 		String fieldName = this.modelField.getName();
 		if (this.constantClassName != null) {
-			srcWriter
-				.println(
-					"MessageHelper %sMessageHelper = new MessageHelper((ConstantsWithLookup) GWT.create(%s.class));",
-					fieldName,
-					this.constantClassName.getCanonicalName());
+			srcWriter.println(
+				"MessageHelper %sMessageHelper = new MessageHelper((ConstantsWithLookup) GWT.create(%s.class));",
+				fieldName, this.constantClassName.getCanonicalName());
 			srcWriter.println("%s.setMessageHelper(%sMessageHelper);", fieldName, fieldName);
 		}
 		srcWriter.println("%s.initialize(new %s());", fieldName, this.modelImplClass);

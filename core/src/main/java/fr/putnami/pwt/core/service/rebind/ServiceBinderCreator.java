@@ -65,18 +65,15 @@ public class ServiceBinderCreator {
 
 	private Collection<JType> imports = Sets.newHashSet();
 
-	public ServiceBinderCreator(JClassType serviceBinderType, JClassType serviceType,
-		JClassType handlerType) {
+	public ServiceBinderCreator(JClassType serviceBinderType, JClassType serviceType, JClassType handlerType) {
 		this.serviceBinderType = serviceBinderType;
 		this.serviceType = serviceType;
 		this.handlerType = handlerType;
 		this.proxyModelQualifiedName =
-			this.handlerType.getQualifiedSourceName() + "_" + this.serviceType.getSimpleSourceName()
-				+ "_ServiceBinder";
+			this.handlerType.getQualifiedSourceName() + "_" + this.serviceType.getSimpleSourceName() + "_ServiceBinder";
 	}
 
-	public String create(TreeLogger logger, GeneratorContext context)
-		throws UnableToCompleteException, NotFoundException {
+	public String create(TreeLogger logger, GeneratorContext context) throws UnableToCompleteException, NotFoundException {
 		PrintWriter printWriter = this.getPrintWriter(logger, context, this.proxyModelQualifiedName);
 		if (printWriter == null) {
 			return this.proxyModelQualifiedName;
@@ -99,8 +96,8 @@ public class ServiceBinderCreator {
 		return this.proxyModelQualifiedName;
 	}
 
-	private String createSerializer(TreeLogger logger, GeneratorContext context)
-		throws UnableToCompleteException, NotFoundException {
+	private String createSerializer(TreeLogger logger, GeneratorContext context) throws UnableToCompleteException,
+		NotFoundException {
 
 		SerializableTypeOracleBuilder typesSentFromBrowser =
 			new SerializableTypeOracleBuilder(logger, context.getPropertyOracle(), context);
@@ -120,8 +117,7 @@ public class ServiceBinderCreator {
 				typesSentFromBrowser.addRootType(logger, rpcTokenType);
 				typesSentToBrowser.addRootType(logger, rteType);
 			} else {
-				logger.branch(TreeLogger.ERROR, "RPC token class " + tokenClassToUse.value()
-					+ " must implement "
+				logger.branch(TreeLogger.ERROR, "RPC token class " + tokenClassToUse.value() + " must implement "
 					+ RpcToken.class.getName(), null);
 				throw new UnableToCompleteException();
 			}
@@ -162,16 +158,14 @@ public class ServiceBinderCreator {
 		String serializeQualifiedName = this.serviceType.getQualifiedSourceName() + "_TypeSerializer";
 
 		TypeSerializerCreator tsc =
-			new TypeSerializerCreator(logger, typesSentFromBrowser.build(logger), typesSentToBrowser
-				.build(logger), context,
+			new TypeSerializerCreator(logger, typesSentFromBrowser.build(logger), typesSentToBrowser.build(logger), context,
 				serializeQualifiedName, serializerSimpleName);
 
 		return tsc.realize(logger);
 	}
 
 	private void generateSerializer(TreeLogger logger, SourceWriter srcWriter) {
-		srcWriter.println("private final %s serializer = new %s();", this.serializerTypeName,
-			this.serializerTypeName);
+		srcWriter.println("private final %s serializer = new %s();", this.serializerTypeName, this.serializerTypeName);
 	}
 
 	private static class CallbackMethod {
@@ -201,8 +195,7 @@ public class ServiceBinderCreator {
 			if (serviceHandlerAnnotation == null) {
 				continue;
 			}
-			if (handlerMethod.getParameterTypes() == null
-				|| handlerMethod.getParameterTypes().length != 1) {
+			if (handlerMethod.getParameterTypes() == null || handlerMethod.getParameterTypes().length != 1) {
 				logger.log(Type.WARN, "the service handler " + this.handlerType.getSimpleSourceName() + "."
 					+ handlerMethod.getName() + " skipped : shall have one parameter");
 				continue;
@@ -275,8 +268,7 @@ public class ServiceBinderCreator {
 	}
 
 	private void writeStartMethod(SourceWriter srcWriter, JMethod method) {
-		srcWriter.print("public %s %s(", this.typeAsString(method.getReturnType(), false), method
-			.getName());
+		srcWriter.print("public %s %s(", this.typeAsString(method.getReturnType(), false), method.getName());
 		int i = 0;
 		for (JParameter parameter : method.getParameters()) {
 			if (i++ > 0) {
@@ -292,12 +284,9 @@ public class ServiceBinderCreator {
 		srcWriter.println("CommandController.get().invokeCommand(commandDefinition, commandParam);");
 		if (method.getReturnType().equals(JPrimitiveType.BOOLEAN)) {
 			srcWriter.println("return false;");
-		} else if (method.getReturnType().equals(JPrimitiveType.BYTE)
-			|| method.getReturnType().equals(JPrimitiveType.CHAR)
-			|| method.getReturnType().equals(JPrimitiveType.DOUBLE)
-			|| method.getReturnType().equals(JPrimitiveType.FLOAT)
-			|| method.getReturnType().equals(JPrimitiveType.INT)
-			|| method.getReturnType().equals(JPrimitiveType.LONG)
+		} else if (method.getReturnType().equals(JPrimitiveType.BYTE) || method.getReturnType().equals(JPrimitiveType.CHAR)
+			|| method.getReturnType().equals(JPrimitiveType.DOUBLE) || method.getReturnType().equals(JPrimitiveType.FLOAT)
+			|| method.getReturnType().equals(JPrimitiveType.INT) || method.getReturnType().equals(JPrimitiveType.LONG)
 			|| method.getReturnType().equals(JPrimitiveType.SHORT)) {
 			srcWriter.println("return 0;");
 		} else if (!method.getReturnType().equals(JPrimitiveType.VOID)) {
@@ -318,8 +307,7 @@ public class ServiceBinderCreator {
 		srcWriter.println(");");
 	}
 
-	private void writeCommandParam(SourceWriter srcWriter, JMethod method,
-		Collection<CallbackMethod> callbackSuccess,
+	private void writeCommandParam(SourceWriter srcWriter, JMethod method, Collection<CallbackMethod> callbackSuccess,
 		String callbackParam) {
 		boolean lazy = method.getAnnotation(LazyCommand.class) != null;
 		boolean quiet = method.getAnnotation(QuietCommand.class) != null;
@@ -351,12 +339,10 @@ public class ServiceBinderCreator {
 				if (i++ > 0) {
 					srcWriter.print(", ");
 				}
-				srcWriter.println("new CallbackAdapter<%s>(){", this.typeAsString(method.getReturnType(),
-					true));
+				srcWriter.println("new CallbackAdapter<%s>(){", this.typeAsString(method.getReturnType(), true));
 				srcWriter.indent();
 				if (callbackMethod.successMethodName != null) {
-					srcWriter.println("public void onSuccess(%s result){", this.typeAsString(method
-						.getReturnType(), true));
+					srcWriter.println("public void onSuccess(%s result){", this.typeAsString(method.getReturnType(), true));
 					srcWriter.indent();
 					srcWriter.println("getHandler().%s(result);", callbackMethod.successMethodName);
 					srcWriter.outdent();
@@ -364,8 +350,7 @@ public class ServiceBinderCreator {
 				}
 				if (callbackMethod.failureMethodName != null) {
 					srcWriter
-						.println("public void onFailure(Throwable caught){", this.typeAsString(method
-							.getReturnType(), true));
+						.println("public void onFailure(Throwable caught){", this.typeAsString(method.getReturnType(), true));
 					srcWriter.indent();
 					srcWriter.println("getHandler().%s(caught);", callbackMethod.failureMethodName);
 					srcWriter.outdent();
@@ -426,13 +411,11 @@ public class ServiceBinderCreator {
 
 		String packageName = this.handlerType.getPackage().getName();
 		String className =
-			this.proxyModelQualifiedName.indexOf('.') == -1 ? this.proxyModelQualifiedName
-				: this.proxyModelQualifiedName
-					.substring(this.proxyModelQualifiedName.lastIndexOf('.') + 1,
-						this.proxyModelQualifiedName.length());
+			this.proxyModelQualifiedName.indexOf('.') == -1 ?
+				this.proxyModelQualifiedName : this.proxyModelQualifiedName.substring(
+					this.proxyModelQualifiedName.lastIndexOf('.') + 1, this.proxyModelQualifiedName.length());
 
-		ClassSourceFileComposerFactory composerFactory =
-			new ClassSourceFileComposerFactory(packageName, className);
+		ClassSourceFileComposerFactory composerFactory = new ClassSourceFileComposerFactory(packageName, className);
 
 		composerFactory.addImport(AsyncCallback.class.getName());
 
@@ -454,9 +437,8 @@ public class ServiceBinderCreator {
 			composerFactory.addImport(jType.getQualifiedSourceName());
 		}
 
-		composerFactory.setSuperclass(AbstractServiceBinder.class.getSimpleName() + "<"
-			+ this.handlerType.getSimpleSourceName() + ", " + this.serviceType.getSimpleSourceName()
-			+ ">");
+		composerFactory.setSuperclass(AbstractServiceBinder.class.getSimpleName()
+			+ "<" + this.handlerType.getSimpleSourceName() + ", " + this.serviceType.getSimpleSourceName() + ">");
 
 		composerFactory.addImplementedInterface(this.serviceType.getSimpleSourceName());
 		composerFactory.addImplementedInterface(this.serviceBinderType.getSimpleSourceName());
@@ -464,17 +446,13 @@ public class ServiceBinderCreator {
 		return composerFactory.createSourceWriter(ctx, printWriter);
 	}
 
-	private PrintWriter getPrintWriter(TreeLogger logger, GeneratorContext ctx,
-		String targetQualifiedName) {
+	private PrintWriter getPrintWriter(TreeLogger logger, GeneratorContext ctx, String targetQualifiedName) {
 		String packageName =
-			this.proxyModelQualifiedName.indexOf('.') == -1 ? "" : this.proxyModelQualifiedName
-				.substring(0,
-					this.proxyModelQualifiedName.lastIndexOf('.'));
-		String className =
-			this.proxyModelQualifiedName.indexOf('.') == -1 ? this.proxyModelQualifiedName
-				: this.proxyModelQualifiedName
-					.substring(this.proxyModelQualifiedName.lastIndexOf('.') + 1,
-						this.proxyModelQualifiedName.length());
+			this.proxyModelQualifiedName.indexOf('.') == -1 ? "" : this.proxyModelQualifiedName.substring(0,
+				this.proxyModelQualifiedName.lastIndexOf('.'));
+		String className = this.proxyModelQualifiedName.indexOf('.') == -1 ? this.proxyModelQualifiedName :
+			this.proxyModelQualifiedName.substring(
+				this.proxyModelQualifiedName.lastIndexOf('.') + 1, this.proxyModelQualifiedName.length());
 
 		return ctx.tryCreate(logger, packageName, className);
 	}

@@ -19,6 +19,9 @@ import fr.putnami.pwt.core.editor.client.Path.PathElement;
 
 public final class PathUtils {
 
+	private PathUtils() {
+	}
+
 	public static Path evalPath(String pathString) {
 		if (pathString == null || pathString.length() == 0) {
 			return new Path();
@@ -53,8 +56,5 @@ public final class PathUtils {
 
 	public static boolean isRoot(Path path) {
 		return path == null || path.isRoot();
-	}
-
-	private PathUtils() {
 	}
 }

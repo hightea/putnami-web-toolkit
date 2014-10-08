@@ -24,8 +24,10 @@ import java.util.Collection;
 
 public final class InjectCreatorUtil {
 
-	public static Collection<JMethod> listMethod(JClassType type,
-		Class<? extends Annotation> annotationClass) {
+	private InjectCreatorUtil() {
+	}
+
+	public static Collection<JMethod> listMethod(JClassType type, Class<? extends Annotation> annotationClass) {
 		Collection<JMethod> methodAnnoted = Lists.newArrayList();
 		JMethod[] methods = type.getOverridableMethods();
 		for (JMethod method : methods) {
@@ -38,8 +40,7 @@ public final class InjectCreatorUtil {
 		return methodAnnoted;
 	}
 
-	public static Collection<JField> listFields(JClassType type,
-		Class<? extends Annotation> annotationClass) {
+	public static Collection<JField> listFields(JClassType type, Class<? extends Annotation> annotationClass) {
 		Collection<JField> methodAnnoted = Lists.newArrayList();
 		JField[] fields = type.getFields();
 		for (JField field : fields) {
@@ -59,8 +60,5 @@ public final class InjectCreatorUtil {
 
 	public static String toClassName(Class<?> clazz) {
 		return clazz == null ? null : clazz.getName().replace('$', '.');
-	}
-
-	private InjectCreatorUtil() {
 	}
 }

@@ -81,8 +81,7 @@ public class OutputBoolean extends AbstractOutput<Boolean> {
 				}
 			}
 			if (this.outputType != RenderType.ICON) {
-				Text textElem =
-					Document.get().createTextNode(rendervalue ? this.trueLabel : this.falseLabel);
+				Text textElem = Document.get().createTextNode(rendervalue ? this.trueLabel : this.falseLabel);
 				element.appendChild(textElem);
 			}
 		}

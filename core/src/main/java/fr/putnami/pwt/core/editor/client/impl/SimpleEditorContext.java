@@ -35,8 +35,7 @@ public class SimpleEditorContext<E extends Editor> implements Context<E> {
 	private final Path path;
 	private final E editor;
 
-	public <A, B extends Editor> SimpleEditorContext(Driver<?> driver, Context<?> parentContext,
-		E editor, Path path) {
+	public <A, B extends Editor> SimpleEditorContext(Driver<?> driver, Context<?> parentContext, E editor, Path path) {
 		this.driver = driver;
 		this.parentContext = parentContext;
 		this.path = path;

@@ -69,8 +69,7 @@ public class InjectMvpDescriptionCreator extends InjectorCreatorDelegate
 		srcWriter.println("MvpController mvpController = MvpController.get();");
 		srcWriter.println("AcceptsOneWidget mvpDisplay = null;");
 		if (this.display != null && !AcceptsOneWidget.class.equals(this.display)) {
-			srcWriter.println("mvpDisplay = GWT.create(%s.class);", InjectCreatorUtil
-				.toClassName(this.display));
+			srcWriter.println("mvpDisplay = GWT.create(%s.class);", InjectCreatorUtil.toClassName(this.display));
 		}
 		srcWriter.println("if(mvpDisplay != null){");
 		srcWriter.indent();
@@ -84,13 +83,11 @@ public class InjectMvpDescriptionCreator extends InjectorCreatorDelegate
 		srcWriter.println("}");
 
 		if (this.defaultPlace != null && !Place.class.equals(this.defaultPlace)) {
-			srcWriter.println("mvpController.setDefaultPlace(new %s());", InjectCreatorUtil
-				.toClassName(this.defaultPlace));
+			srcWriter.println("mvpController.setDefaultPlace(new %s());", InjectCreatorUtil.toClassName(this.defaultPlace));
 		}
 		for (Class<?> activity : this.activities) {
 			srcWriter.println("mvpController.registerActivity(GWT.<ActivityFactory> create(%s.class));",
-				InjectCreatorUtil
-					.toClassName(activity));
+				InjectCreatorUtil.toClassName(activity));
 		}
 	}
 

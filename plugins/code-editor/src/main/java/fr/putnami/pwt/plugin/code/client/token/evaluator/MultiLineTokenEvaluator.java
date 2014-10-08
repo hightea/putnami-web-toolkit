@@ -23,12 +23,12 @@ public class MultiLineTokenEvaluator extends PatternTokenEvaluator {
 	}
 
 	public MultiLineTokenEvaluator(String startSequence, String endSequence,
-			TokenContent tokenContent, char escapeCharacter) {
+		TokenContent tokenContent, char escapeCharacter) {
 		this(startSequence, endSequence, tokenContent, escapeCharacter, false);
 	}
 
 	public MultiLineTokenEvaluator(String startSequence, String endSequence,
-			TokenContent tokenContent, char escapeCharacter, boolean breaksOnEOF) {
+		TokenContent tokenContent, char escapeCharacter, boolean breaksOnEOF) {
 		super(startSequence, endSequence, tokenContent, escapeCharacter, false, breaksOnEOF);
 	}
 

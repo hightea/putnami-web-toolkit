@@ -26,8 +26,7 @@ import fr.putnami.pwt.core.inject.rebind.delegate.InjectTemplateCreator;
 public class TemplatedCreatorFactory implements InjectorDelegateFactorty {
 
 	@Override
-	public void createDelegates(JClassType injectableType,
-		Collection<InjectorCreatorDelegate> delegates) {
+	public void createDelegates(JClassType injectableType, Collection<InjectorCreatorDelegate> delegates) {
 		if (injectableType.getAnnotation(Templated.class) != null) {
 			delegates.add(new InjectTemplateCreator(injectableType));
 		}

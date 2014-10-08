@@ -22,8 +22,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface Templated {
-	String value() default Templated.DEFAULT_VALUE;
-
 	String DEFAULT_VALUE = "__DEFAULT__";
 
+	String value() default Templated.DEFAULT_VALUE;
 }

@@ -18,6 +18,9 @@ import com.google.gwt.user.client.ui.HTML;
 
 public final class HTMLUtils {
 
+	private HTMLUtils() {
+	}
+
 	public static String unescapeHTML(String escapedHTML) {
 		if (escapedHTML == null) {
 			return null;
@@ -32,6 +35,4 @@ public final class HTMLUtils {
 		return new HTML(escapedHTML).getHTML();
 	}
 
-	private HTMLUtils() {
-	}
 }

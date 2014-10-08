@@ -31,17 +31,9 @@ import fr.putnami.pwt.core.security.shared.constant.SecurityConstants;
 import fr.putnami.pwt.core.security.shared.domain.SessionDto;
 import fr.putnami.pwt.core.security.shared.exception.SecurityException;
 
-public abstract class SessionController
-	implements HasSignInHandlers, HasSignOutHandlers, HasSignFailledHandlers {
+public abstract class SessionController implements HasSignInHandlers, HasSignOutHandlers, HasSignFailledHandlers {
 
 	private static SessionController instance;
-
-	public static SessionController get() {
-		if (SessionController.instance == null) {
-			SessionController.instance = GWT.create(SessionController.class);
-		}
-		return SessionController.instance;
-	}
 
 	private SessionDto session;
 
@@ -53,8 +45,7 @@ public abstract class SessionController
 	}
 
 	public boolean isAuthenticated() {
-		return this.session != null
-			&& !SecurityConstants.USER_ANONYMOUS.equals(this.session.getUsername());
+		return this.session != null && !SecurityConstants.USER_ANONYMOUS.equals(this.session.getUsername());
 	}
 
 	public boolean hasRole(String role) {
@@ -93,19 +84,6 @@ public abstract class SessionController
 		}
 	}
 
-	protected void fireSignIn() {
-		this.fireEvent(new SignInEvent(this.session));
-	}
-
-	protected void fireSignFailled() {
-		this.fireEvent(new SignFailledEvent(this.session));
-	}
-
-	protected void fireSignOut() {
-		this.fireEvent(new SignOutEvent(this.session));
-		this.fireSignIn();
-	}
-
 	@Override
 	public HandlerRegistration addSignInHandler(Handler handler) {
 		return EventBus.get().addHandlerToSource(SignInEvent.TYPE, this, handler);
@@ -129,5 +107,25 @@ public abstract class SessionController
 	public abstract void signOut();
 
 	public abstract void loadSession();
+
+	protected void fireSignIn() {
+		this.fireEvent(new SignInEvent(this.session));
+	}
+
+	protected void fireSignFailled() {
+		this.fireEvent(new SignFailledEvent(this.session));
+	}
+
+	protected void fireSignOut() {
+		this.fireEvent(new SignOutEvent(this.session));
+		this.fireSignIn();
+	}
+
+	public static SessionController get() {
+		if (SessionController.instance == null) {
+			SessionController.instance = GWT.create(SessionController.class);
+		}
+		return SessionController.instance;
+	}
 
 }

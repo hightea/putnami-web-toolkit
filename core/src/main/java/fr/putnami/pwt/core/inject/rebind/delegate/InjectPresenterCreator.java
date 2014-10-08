@@ -52,8 +52,7 @@ public class InjectPresenterCreator extends InjectorCreatorDelegate
 				JType placeType = presenterMethod.getParameters()[0].getType();
 				srcWriter.println("if(place instanceof %s){", placeType.getSimpleSourceName());
 				srcWriter.indent();
-				srcWriter.println("super.%s((%s) place);", presenterMethod.getName(), placeType
-					.getSimpleSourceName());
+				srcWriter.println("super.%s((%s) place);", presenterMethod.getName(), placeType.getSimpleSourceName());
 				srcWriter.outdent();
 				srcWriter.println("}");
 			}

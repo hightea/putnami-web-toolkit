@@ -63,8 +63,7 @@ public class ContentAssistAspect {
 		@Override
 		public void onSuggestionsReady(Request request, Response response) {
 			ContentAssistAspect.this.suggestionDisplay.showSuggestions(
-				ContentAssistAspect.this.textInput, response
-					.getSuggestions(), ContentAssistAspect.this.suggestionCallback);
+				ContentAssistAspect.this.textInput, response.getSuggestions(), ContentAssistAspect.this.suggestionCallback);
 		}
 	};
 
@@ -176,8 +175,7 @@ public class ContentAssistAspect {
 			if (this.isSuggestionListShowing() && this.selectedItem != null) {
 				int currentIndex = this.suggestionsContainer.getWidgetIndex(this.selectedItem);
 				if (this.suggestionsContainer.getWidgetCount() > currentIndex + 1) {
-					this.setSuggestionItemSelected((SuggestionItem) this.suggestionsContainer
-						.getWidget(currentIndex + 1));
+					this.setSuggestionItemSelected((SuggestionItem) this.suggestionsContainer.getWidget(currentIndex + 1));
 				}
 			}
 		}
@@ -187,15 +185,13 @@ public class ContentAssistAspect {
 			if (this.isSuggestionListShowing() && this.selectedItem != null) {
 				int currentIndex = this.suggestionsContainer.getWidgetIndex(this.selectedItem);
 				if (currentIndex >= 1) {
-					this.setSuggestionItemSelected((SuggestionItem) this.suggestionsContainer
-						.getWidget(currentIndex - 1));
+					this.setSuggestionItemSelected((SuggestionItem) this.suggestionsContainer.getWidget(currentIndex - 1));
 				}
 			}
 		}
 
 		@Override
-		public void showSuggestions(final IsWidget textInput,
-			Collection<? extends Suggestion> suggestions,
+		public void showSuggestions(final IsWidget textInput, Collection<? extends Suggestion> suggestions,
 			final SuggestionCallback callback) {
 			boolean anySuggestions = suggestions != null && !suggestions.isEmpty();
 			if (!anySuggestions && this.hideWhenEmpty) {
@@ -216,8 +212,7 @@ public class ContentAssistAspect {
 					selected = suggestionItem;
 				}
 				if (this.selectedItem != null
-					&& currentSuggestion.getReplacementString().equals(
-						this.selectedItem.suggestion.getReplacementString())) {
+					&& currentSuggestion.getReplacementString().equals(this.selectedItem.suggestion.getReplacementString())) {
 					selected = suggestionItem;
 				}
 
@@ -326,8 +321,7 @@ public class ContentAssistAspect {
 							break;
 						case KeyCodes.KEY_ENTER:
 						case KeyCodes.KEY_TAB:
-							Suggestion suggestion =
-								ContentAssistAspect.this.suggestionDisplay.getSelectedSelection();
+							Suggestion suggestion = ContentAssistAspect.this.suggestionDisplay.getSelectedSelection();
 							if (suggestion == null) {
 								ContentAssistAspect.this.suggestionDisplay.hideSuggestions();
 							} else {
@@ -379,12 +373,10 @@ public class ContentAssistAspect {
 	protected void showSuggestions(String query) {
 		if (this.assistHandler.getOracle() != null) {
 			if (query.length() == 0) {
-				this.assistHandler.getOracle().requestDefaultSuggestions(
-					new Request(null, this.assistHandler.getLimit()),
+				this.assistHandler.getOracle().requestDefaultSuggestions(new Request(null, this.assistHandler.getLimit()),
 					this.oracleCallback);
 			} else {
-				this.assistHandler.getOracle().requestSuggestions(
-					new Request(query, this.assistHandler.getLimit()),
+				this.assistHandler.getOracle().requestSuggestions(new Request(query, this.assistHandler.getLimit()),
 					this.oracleCallback);
 			}
 		}

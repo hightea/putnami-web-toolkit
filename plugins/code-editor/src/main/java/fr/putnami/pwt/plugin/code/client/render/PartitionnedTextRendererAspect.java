@@ -120,7 +120,7 @@ public class PartitionnedTextRendererAspect extends AbstractTextRendererAspect {
 	@Override
 	public CodeEditorAspect copy() {
 		PartitionnedTextRendererAspect copy =
-				new PartitionnedTextRendererAspect(this.tokenPartitionner.getEvaluators());
+			new PartitionnedTextRendererAspect(this.tokenPartitionner.getEvaluators());
 		for (Entry<TokenContent, TokenScanner> entry : this.partitionScanners.entrySet()) {
 			copy.registerPartitionScanners(entry.getKey(), entry.getValue().getEvaluators());
 		}

@@ -32,14 +32,11 @@ import fr.putnami.pwt.core.inject.rebind.util.InjectCreatorUtil;
 public class PresenterCreatorFactory implements InjectorDelegateFactorty {
 
 	@Override
-	public void createDelegates(JClassType injectableType,
-		Collection<InjectorCreatorDelegate> delegates) {
-		Collection<JMethod> methods =
-			InjectCreatorUtil.listMethod(injectableType, PresentHandler.class);
+	public void createDelegates(JClassType injectableType, Collection<InjectorCreatorDelegate> delegates) {
+		Collection<JMethod> methods = InjectCreatorUtil.listMethod(injectableType, PresentHandler.class);
 		delegates.add(new InjectPresenterCreator(methods));
 		Collection<JField> services = InjectCreatorUtil.listFields(injectableType, InjectService.class);
-		String injectorName =
-			injectableType.getSimpleSourceName() + AbstractInjectorCreator.PROXY_SUFFIX;
+		String injectorName = injectableType.getSimpleSourceName() + AbstractInjectorCreator.PROXY_SUFFIX;
 		delegates.add(new SuspendServiceOnPresentCreator(injectorName, !services.isEmpty()));
 	}
 

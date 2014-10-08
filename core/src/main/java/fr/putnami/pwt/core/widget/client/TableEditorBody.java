@@ -228,6 +228,7 @@ public class TableEditorBody<T> extends TableBody<T>
 
 	@Override
 	public void addValidator(Validator<Collection<T>> validator) {
+		// TODO check if the validator must not be added to the driver.
 	}
 
 }

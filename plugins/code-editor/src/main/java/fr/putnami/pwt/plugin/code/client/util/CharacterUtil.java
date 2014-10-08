@@ -25,7 +25,7 @@ public final class CharacterUtil {
 	public static final String END_OF_LINE_PATTERN = "\r?\n";
 
 	public static final RegExp END_OF_LINE_REG_EXP = RegExp
-			.compile(CharacterUtil.END_OF_LINE_PATTERN);
+		.compile(CharacterUtil.END_OF_LINE_PATTERN);
 
 	public static final char[][] END_OF_LINE_DELIMITERS = new char[][] {
 		new char[] {'\r', '\n'}, new char[] {'\r'}, new char[] {'\n'}};

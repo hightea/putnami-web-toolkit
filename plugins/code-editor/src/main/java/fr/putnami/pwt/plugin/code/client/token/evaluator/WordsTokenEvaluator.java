@@ -75,8 +75,7 @@ public class WordsTokenEvaluator implements TokenEvaluator {
 			} while (this.isWordPart(charScanned));
 			charScanner.unread();
 
-			WordMatcher matcher =
-					Iterables.find(this.wordMatchers, new WordMatcherSelector(resultText.toString()), null);
+			WordMatcher matcher = Iterables.find(this.wordMatchers, new WordMatcherSelector(resultText.toString()), null);
 
 			TokenContent content = null;
 			if (matcher != null) {

@@ -30,6 +30,9 @@ import fr.putnami.pwt.core.model.client.model.PropertyDescription;
 
 public final class ModelUtils {
 
+	private ModelUtils() {
+	}
+
 	public static <A> PropertyDescription resolveProperty(Model<?> model, Path path) {
 		if (model == null || path.isEmpty()) {
 			return null;
@@ -52,8 +55,7 @@ public final class ModelUtils {
 		if (propertyDescription != null) {
 			validators = propertyDescription.getValidators();
 		}
-		return (Collection<Validator<A>>) (validators == null ? Collections.<Validator<A>> emptyList()
-			: validators);
+		return (Collection<Validator<A>>) (validators == null ? Collections.<Validator<A>> emptyList() : validators);
 	}
 
 	public static <A, B> Model<A> resolveModel(Model<B> model, Path path) {
@@ -202,9 +204,6 @@ public final class ModelUtils {
 			}
 		}
 		return result;
-	}
-
-	private ModelUtils() {
 	}
 
 	public static boolean isEnumType(Class<?> propertyType) {

@@ -29,13 +29,10 @@ import fr.putnami.pwt.core.inject.rebind.util.InjectCreatorUtil;
 public class StopActivityCreatorFactory implements InjectorDelegateFactorty {
 
 	@Override
-	public void createDelegates(JClassType injectableType,
-		Collection<InjectorCreatorDelegate> delegates) {
-		Collection<JMethod> methods =
-			InjectCreatorUtil.listMethod(injectableType, StopActivityHandler.class);
+	public void createDelegates(JClassType injectableType, Collection<InjectorCreatorDelegate> delegates) {
+		Collection<JMethod> methods = InjectCreatorUtil.listMethod(injectableType, StopActivityHandler.class);
 		if (!methods.isEmpty()) {
-			String injectorName =
-				injectableType.getSimpleSourceName() + AbstractInjectorCreator.PROXY_SUFFIX;
+			String injectorName = injectableType.getSimpleSourceName() + AbstractInjectorCreator.PROXY_SUFFIX;
 			delegates.add(new InjectStopActivityCreator(methods, injectorName));
 		}
 	}

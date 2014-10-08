@@ -31,8 +31,7 @@ public class CommandDefinition implements Serializable {
 	public CommandDefinition() {
 	}
 
-	public CommandDefinition(String serviceName, String methodName, String returnType,
-		String... paramTypes) {
+	public CommandDefinition(String serviceName, String methodName, String returnType, String... paramTypes) {
 		super();
 		this.serviceName = serviceName;
 		this.methodName = methodName;

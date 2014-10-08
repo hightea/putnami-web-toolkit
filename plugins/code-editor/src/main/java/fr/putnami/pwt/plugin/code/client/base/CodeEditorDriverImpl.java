@@ -46,7 +46,7 @@ public class CodeEditorDriverImpl implements CodeEditorDriver, LiveValueChangeEv
 
 	public Iterable<Error> getErrors() {
 		return this.errors == null ? Collections.<Error> emptyList() : Iterables
-				.unmodifiableIterable(this.errors);
+			.unmodifiableIterable(this.errors);
 	}
 
 	public void addError(Error error) {
@@ -88,7 +88,7 @@ public class CodeEditorDriverImpl implements CodeEditorDriver, LiveValueChangeEv
 			this.codeInput.setText(this.value);
 		}
 		for (CodeEditorAspect strategy : Iterables.filter(this.aspects,
-				CodeEditorAspect.AspectTrigger.EDIT)) {
+			CodeEditorAspect.AspectTrigger.EDIT)) {
 			strategy.apply(this);
 		}
 	}
@@ -98,7 +98,7 @@ public class CodeEditorDriverImpl implements CodeEditorDriver, LiveValueChangeEv
 		this.errors.clear();
 		String result = this.value;
 		for (CodeEditorAspect strategy : Iterables.filter(this.aspects,
-				CodeEditorAspect.AspectTrigger.FLUSH)) {
+			CodeEditorAspect.AspectTrigger.FLUSH)) {
 			strategy.apply(this);
 		}
 
@@ -107,7 +107,7 @@ public class CodeEditorDriverImpl implements CodeEditorDriver, LiveValueChangeEv
 
 	public void change() {
 		for (CodeEditorAspect strategy : Iterables.filter(this.aspects,
-				CodeEditorAspect.AspectTrigger.CHANGE)) {
+			CodeEditorAspect.AspectTrigger.CHANGE)) {
 			strategy.apply(this);
 		}
 	}

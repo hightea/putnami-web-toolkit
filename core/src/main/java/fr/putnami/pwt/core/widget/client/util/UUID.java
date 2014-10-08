@@ -15,8 +15,7 @@
 package fr.putnami.pwt.core.widget.client.util;
 
 public final class UUID {
-	private static final char[] CHARS =
-		"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".toCharArray();
+	private static final char[] CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".toCharArray();
 
 	private UUID() {
 	}

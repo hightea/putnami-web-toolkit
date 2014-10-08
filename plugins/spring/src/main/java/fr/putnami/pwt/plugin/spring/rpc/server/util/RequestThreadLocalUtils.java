@@ -20,10 +20,8 @@ import javax.servlet.http.HttpSession;
 
 public final class RequestThreadLocalUtils {
 
-	public static final ThreadLocal<HttpServletRequest> TL_REQUEST =
-			new ThreadLocal<HttpServletRequest>();
-	public static final ThreadLocal<HttpServletResponse> TL_RESPONSE =
-			new ThreadLocal<HttpServletResponse>();
+	public static final ThreadLocal<HttpServletRequest> TL_REQUEST = new ThreadLocal<HttpServletRequest>();
+	public static final ThreadLocal<HttpServletResponse> TL_RESPONSE = new ThreadLocal<HttpServletResponse>();
 	public static final ThreadLocal<HttpSession> TL_SESSION = new ThreadLocal<HttpSession>();
 
 	private RequestThreadLocalUtils() {

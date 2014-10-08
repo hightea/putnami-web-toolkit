@@ -50,8 +50,7 @@ public class DefaultIE8ThemeController extends DefaultThemeController {
 	private void ensureRespondJsScriptElement() {
 		if (this.respondJsScript == null) {
 			this.respondJsScript = Document.get().createScriptElement();
-			this.respondJsScript.setSrc(GWT.getModuleBaseForStaticFiles()
-				+ DefaultIE8ThemeController.RESPOND_JS_LOCATION);
+			this.respondJsScript.setSrc(GWT.getModuleBaseForStaticFiles() + DefaultIE8ThemeController.RESPOND_JS_LOCATION);
 			this.respondJsScript.setType("text/javascript");
 		}
 	}

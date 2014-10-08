@@ -35,13 +35,6 @@ public class EditorFactoryManager {
 
 	private static EditorFactoryManager instance;
 
-	public static final EditorFactoryManager get() {
-		if (EditorFactoryManager.instance == null) {
-			EditorFactoryManager.instance = GWT.create(EditorFactoryManager.class);
-		}
-		return EditorFactoryManager.instance;
-	}
-
 	private final Map<Class<?>, InputFactory> inputFactories = Maps.newHashMap();
 	private final Map<Class<?>, OutputFactory> outputFactories = Maps.newHashMap();
 
@@ -64,8 +57,7 @@ public class EditorFactoryManager {
 		this.tooltipFactory = tooltipFactory;
 	}
 
-	public <A, B extends Editor> EditorInput<A> createInputForType(Class<?> propertyType,
-		Context<B> context) {
+	public <A, B extends Editor> EditorInput<A> createInputForType(Class<?> propertyType, Context<B> context) {
 		InputFactory factory = this.inputFactories.get(propertyType);
 		if (factory == null) {
 			for (Class<?> parentClass : ModelUtils.getTypeHierachy(propertyType)) {
@@ -82,8 +74,7 @@ public class EditorFactoryManager {
 		return (EditorInput<A>) factory.cloneWidget();
 	}
 
-	public <A, B extends Editor> EditorOutput<A> createOutputForType(Class<?> propertyType,
-		Context<B> context) {
+	public <A, B extends Editor> EditorOutput<A> createOutputForType(Class<?> propertyType, Context<B> context) {
 		OutputFactory factory = this.outputFactories.get(propertyType);
 		if (factory == null) {
 			for (Class<?> parentClass : ModelUtils.getTypeHierachy(propertyType)) {
@@ -115,4 +106,12 @@ public class EditorFactoryManager {
 		}
 		return tooltip;
 	}
+
+	public static final EditorFactoryManager get() {
+		if (EditorFactoryManager.instance == null) {
+			EditorFactoryManager.instance = GWT.create(EditorFactoryManager.class);
+		}
+		return EditorFactoryManager.instance;
+	}
+
 }

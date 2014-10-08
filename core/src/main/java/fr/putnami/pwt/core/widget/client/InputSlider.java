@@ -321,15 +321,13 @@ public class InputSlider<T> extends AbstractInput<T> implements ValueChangeHandl
 	@Override
 	public HandlerRegistration addDirtyHandler(Handler handler) {
 		if (this.valueChangeRegistration == null) {
-			this.valueChangeRegistration =
-				this.addValueChangeHandler(new ChangeEvent<T>(InputSlider.this));
+			this.valueChangeRegistration = this.addValueChangeHandler(new ChangeEvent<T>(InputSlider.this));
 		}
 		return EventBus.get().addHandlerToSource(DirtyEvent.TYPE, this, handler);
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addValueChangeHandler(
-		ValueChangeHandler<T> handler) {
+	public com.google.gwt.event.shared.HandlerRegistration addValueChangeHandler(ValueChangeHandler<T> handler) {
 		return this.addHandler(handler, ValueChangeEvent.getType());
 	}
 

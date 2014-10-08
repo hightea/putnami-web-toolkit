@@ -70,20 +70,16 @@ public class InjectorViewCreator extends AbstractInjectorCreator {
 		super.doCreate(logger, context, srcWriter);
 
 		// presenter
-		srcWriter
-			.println("public <P extends Place> void present(P place, final AcceptsOneWidget displayer){");
+		srcWriter.println("public <P extends Place> void present(P place, final AcceptsOneWidget displayer){");
 		srcWriter.indent();
 
-		for (InjectorWritterBeforePresent delegate : Iterables.filter(this.delegates,
-			InjectorWritterBeforePresent.class)) {
+		for (InjectorWritterBeforePresent delegate : Iterables.filter(this.delegates, InjectorWritterBeforePresent.class)) {
 			delegate.writeBeforePresent(srcWriter);
 		}
-		for (InjectorWritterPresent delegate : Iterables.filter(this.delegates,
-			InjectorWritterPresent.class)) {
+		for (InjectorWritterPresent delegate : Iterables.filter(this.delegates, InjectorWritterPresent.class)) {
 			delegate.writePresent(srcWriter);
 		}
-		for (InjectorWritterAfterPresent delegate : Iterables.filter(this.delegates,
-			InjectorWritterAfterPresent.class)) {
+		for (InjectorWritterAfterPresent delegate : Iterables.filter(this.delegates, InjectorWritterAfterPresent.class)) {
 			delegate.writeAfterPresent(srcWriter);
 		}
 		srcWriter.outdent();

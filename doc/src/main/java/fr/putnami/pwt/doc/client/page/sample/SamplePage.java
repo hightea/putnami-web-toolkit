@@ -125,11 +125,9 @@ public abstract class SamplePage extends Composite implements View {
 			@Override
 			public void onResponseReceived(Request request, Response response) {
 				if (fileName.endsWith("xml")) {
-					SamplePage.this.samplePageLayout.sourceCode
-							.setConfiguration(XmlConfiguration.XML_CONFIGURATION);
+					SamplePage.this.samplePageLayout.sourceCode.setConfiguration(XmlConfiguration.XML_CONFIGURATION);
 				} else if (fileName.endsWith("java")) {
-					SamplePage.this.samplePageLayout.sourceCode
-							.setConfiguration(JavaConfiguration.JAVA_CONFIGURATION);
+					SamplePage.this.samplePageLayout.sourceCode.setConfiguration(JavaConfiguration.JAVA_CONFIGURATION);
 				} else {
 					SamplePage.this.displayError(new RuntimeException("Unknow file type"));
 				}
@@ -143,7 +141,7 @@ public abstract class SamplePage extends Composite implements View {
 			}
 		};
 		RequestBuilder builder =
-				new RequestBuilder(RequestBuilder.GET, GWT.getModuleBaseURL() + "sample/" + fileName);
+			new RequestBuilder(RequestBuilder.GET, GWT.getModuleBaseURL() + "sample/" + fileName);
 		builder.setCallback(callBack);
 		try {
 			builder.send();

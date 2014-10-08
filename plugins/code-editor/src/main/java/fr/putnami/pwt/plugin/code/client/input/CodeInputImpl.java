@@ -33,7 +33,7 @@ import fr.putnami.pwt.plugin.code.client.event.LiveValueChangeEvent;
 import fr.putnami.pwt.plugin.code.client.event.LiveValueChangeEvent.Handler;
 
 public class CodeInputImpl extends Composite implements CodeInput, ValueChangeHandler<String>,
-		KeyUpHandler {
+	KeyUpHandler {
 
 	private static final CssStyle INPUT_STYLE = new SimpleStyle("code-editor-input");
 

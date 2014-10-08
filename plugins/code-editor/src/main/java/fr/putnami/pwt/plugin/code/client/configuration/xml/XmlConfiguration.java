@@ -74,32 +74,31 @@ public final class XmlConfiguration implements CodeEditorConfiguration {
 		PartitionnedTextRendererAspect renderAspect = new PartitionnedTextRendererAspect(true);
 		// Detect and Render Xml Comment
 		renderAspect.registerPartitionner(new MultiLineTokenEvaluator("<!--", "-->",
-				new CssRendererTokenContent("code-editor-xml-comment"), (char) 0, true));
+			new CssRendererTokenContent("code-editor-xml-comment"), (char) 0, true));
 		// Detect and Render Xml Head or CDATA
 		renderAspect.registerPartitionner(new MultiLineTokenEvaluator("<!", ">",
-				new CssRendererTokenContent("code-editor-xml-doctype"), '\\', true));
+			new CssRendererTokenContent("code-editor-xml-doctype"), '\\', true));
 		// Detect Xml tag
 		renderAspect.registerPartitionner(new MultiLineTokenEvaluator("<", ">",
-				XmlPartitionTokenContent.INNER_TAG, (char) 0, true));
+			XmlPartitionTokenContent.INNER_TAG, (char) 0, true));
 
 		// Detect and render start and end Xml tag
 		WordsTokenEvaluator tagTokenEvaluator =
-				new WordsTokenEvaluator(XMLTagWordDetector.INSTANCE, null);
-		tagTokenEvaluator.addWordMatcher(new XMLStartTagDetector(new CssRendererTokenContent(
-				"code-editor-xml-tag")));
-		tagTokenEvaluator.addWordMatcher(new XMLEndTagDetector(new CssRendererTokenContent(
-				"code-editor-xml-tag")));
+			new WordsTokenEvaluator(XMLTagWordDetector.INSTANCE, null);
+		tagTokenEvaluator.addWordMatcher(new XMLStartTagDetector(
+			new CssRendererTokenContent("code-editor-xml-tag")));
+		tagTokenEvaluator.addWordMatcher(
+			new XMLEndTagDetector(new CssRendererTokenContent("code-editor-xml-tag")));
 		// Detect and render inner Tag word token
 		WordsTokenEvaluator wordTokenEvaluator =
-				new WordsTokenEvaluator(new CssRendererTokenContent("code-editor-xml-attribute"));
+			new WordsTokenEvaluator(new CssRendererTokenContent("code-editor-xml-attribute"));
 		// Detect and render inner Tag Strings
 		SingleLineTokenEvaluator stringTokenEvaluator =
-				new SingleLineTokenEvaluator("\"", "\"", new CssRendererTokenContent(
-						"code-editor-xml-attribute-value"), '\\');
+			new SingleLineTokenEvaluator("\"", "\"", new CssRendererTokenContent("code-editor-xml-attribute-value"), '\\');
 
 		// Register inner tag detectors and renderers.
 		renderAspect.registerPartitionScanners(XmlPartitionTokenContent.INNER_TAG,
-				stringTokenEvaluator, tagTokenEvaluator, wordTokenEvaluator);
+			stringTokenEvaluator, tagTokenEvaluator, wordTokenEvaluator);
 		this.aspects.add(renderAspect);
 	}
 

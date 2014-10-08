@@ -42,7 +42,7 @@ public class ContactsView extends Composite implements View<ContactsPlace> {
 	}
 
 	interface Constants extends SampleCommonConstants, PersonConstants, AddressConstants,
-			GenderConstants {
+		GenderConstants {
 
 		@DefaultStringValue("Edit a contact !")
 		String newPersonTitle();

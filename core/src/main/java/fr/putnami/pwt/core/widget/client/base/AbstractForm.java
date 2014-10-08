@@ -52,8 +52,7 @@ import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public abstract class AbstractForm<T> extends AbstractHTMLPanel
 	implements EditorLeaf, EditorModel<T>, EditorOutput<T>, EditorInput<T>, HasReadonly, HasDrawable,
-	HasDriver<T, ModelDriver<T>>, HasFormType, HasDirtyHandlers, HasFlushSuccessHandlers,
-	HasFlushErrorHandlers,
+	HasDriver<T, ModelDriver<T>>, HasFormType, HasDirtyHandlers, HasFlushSuccessHandlers, HasFlushErrorHandlers,
 	HasResetDisplayHandlers, HasDataValidationHandlers {
 
 	public enum Layout implements CssStyle {
@@ -195,7 +194,9 @@ public abstract class AbstractForm<T> extends AbstractHTMLPanel
 	}
 
 	private void refreshType(Widget w) {
-		if (this.layout != null && w instanceof HasFormType && ((HasFormType) w).getLayout() == null) {
+		if (this.layout != null
+			&& w instanceof HasFormType
+			&& ((HasFormType) w).getLayout() == null) {
 			((HasFormType) w).setLayout(this.layout);
 		}
 	}

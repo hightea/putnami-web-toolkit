@@ -44,10 +44,8 @@ public class ReverseCharacterScannerImpl implements CharacterScanner {
 	public void setStringToScan(String toScan, int rangeStart, int rangeEnd) {
 		Preconditions.checkArgument(toScan != null, "String to scan can not be null.");
 		Preconditions.checkArgument(rangeEnd >= -1, "End range must be greater than -1.");
-		Preconditions.checkArgument(rangeStart >= rangeEnd,
-				"Start range must be greater than end range.");
-		Preconditions.checkArgument(rangeStart < toScan.length(),
-				"Start range must be lower than string to scan length.");
+		Preconditions.checkArgument(rangeStart >= rangeEnd, "Start range must be greater than end range.");
+		Preconditions.checkArgument(rangeStart < toScan.length(), "Start range must be lower than string to scan length.");
 		this.toScan = toScan;
 		this.offset = rangeStart;
 		this.mark = this.offset;

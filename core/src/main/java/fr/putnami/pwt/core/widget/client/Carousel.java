@@ -36,8 +36,7 @@ import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public class Carousel extends AbstractPanel
-	implements ClickHandler, MouseOverHandler, MouseOutHandler {
+public class Carousel extends AbstractPanel implements ClickHandler, MouseOverHandler, MouseOutHandler {
 
 	private static final CssStyle STYLE_CAROUSEL = new SimpleStyle("carousel");
 	private static final CssStyle STYLE_CAROUSEL_INDICATORS = new SimpleStyle("carousel-indicators");
@@ -95,8 +94,8 @@ public class Carousel extends AbstractPanel
 	}
 
 	private final Container carouselInner = new Container();
-	private final fr.putnami.pwt.core.widget.client.List carouselIndicators =
-		new fr.putnami.pwt.core.widget.client.List(OListElement.TAG);
+	private final fr.putnami.pwt.core.widget.client.List carouselIndicators = new fr.putnami.pwt.core.widget.client.List(
+		OListElement.TAG);
 	private final Anchor<?> leftButton = new Anchor<>();
 	private final Anchor<?> rightButton = new Anchor<>();
 	private Timer autoPlayTimer = new Timer() {
@@ -192,8 +191,7 @@ public class Carousel extends AbstractPanel
 				StyleUtils.addStyle(newItem, ItemType.ACTIVE);
 				StyleUtils.cleanEnumStyle(curentItem.getElement(), LeftRightType.class);
 				StyleUtils.cleanEnumStyle(newItem.getElement(), LeftRightType.class);
-				StyleUtils.addStyle(Carousel.this.carouselItemsIndicators.get(newItemIndex),
-					ItemType.ACTIVE);
+				StyleUtils.addStyle(Carousel.this.carouselItemsIndicators.get(newItemIndex), ItemType.ACTIVE);
 				Carousel.this.currentIndex = newItemIndex;
 				Carousel.this.sliding = false;
 				return false;

@@ -37,7 +37,9 @@ import fr.putnami.pwt.core.widget.client.helper.DateParser;
 public class FormsView extends Composite implements View {
 
 	public enum Gender {
-		MALE, FEMALE, UNKNOWN
+			MALE,
+			FEMALE,
+			UNKNOWN
 	}
 
 	public static class Bean {
@@ -53,7 +55,7 @@ public class FormsView extends Composite implements View {
 		public double height = Random.nextInt(1000000) / 100D;
 		public Date birthdate = new DateParser("dd/MM/yyyy").parseOrNull("02/03/1985");
 		public String remarks =
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lobortis elementum vestibulum. Aliquam luctus semper congue. Fusce placerat tempus lectus, et pulvinar elit aliquam eget. Suspendisse placerat vitae risus vitae sagittis. Suspendisse dignissim orci urna, in aliquam lectus pharetra eu. Donec velit elit, tincidunt semper mollis et, adipiscing vel dui. Morbi rhoncus dui sit amet libero gravida sagittis. Duis tincidunt luctus elit, ac cursus nisi tempus in. Fusce quis quam quam. Suspendisse hendrerit lobortis metus, non fermentum nibh tincidunt gravida.";
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lobortis elementum vestibulum. Aliquam luctus semper congue. Fusce placerat tempus lectus, et pulvinar elit aliquam eget. Suspendisse placerat vitae risus vitae sagittis. Suspendisse dignissim orci urna, in aliquam lectus pharetra eu. Donec velit elit, tincidunt semper mollis et, adipiscing vel dui. Morbi rhoncus dui sit amet libero gravida sagittis. Duis tincidunt luctus elit, ac cursus nisi tempus in. Fusce quis quam quam. Suspendisse hendrerit lobortis metus, non fermentum nibh tincidunt gravida.";
 
 		public String mainGroup = "Friends";
 		public List<String> groups = Lists.newArrayList("Friends", "Colleague");

@@ -45,8 +45,7 @@ public class InjectStopActivityCreator extends InjectorCreatorDelegate
 
 	@Override
 	public void writePresent(SourceWriter srcWriter) {
-		srcWriter
-			.println("final HandlerRegistrationCollection stopRegistrations = new HandlerRegistrationCollection();");
+		srcWriter.println("final HandlerRegistrationCollection stopRegistrations = new HandlerRegistrationCollection();");
 		for (JMethod mayStopMethod : this.presenterMethods) {
 			srcWriter.println("stopRegistrations.add(EventBus.get()"
 				+ ".addHandlerToSource(StopActivityEvent.TYPE, place, new StopActivityEvent.Handler() {");

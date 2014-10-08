@@ -23,7 +23,7 @@ import fr.putnami.pwt.plugin.code.client.util.CharacterUtil;
 public class BalancedPatternTokenEvaluator extends PatternTokenEvaluator {
 
 	public BalancedPatternTokenEvaluator(String startSequence, String endSequence,
-			TokenContent tokenContent, char escapeCharacter, boolean breaksOnEOL, boolean breaksOnEOF) {
+		TokenContent tokenContent, char escapeCharacter, boolean breaksOnEOL, boolean breaksOnEOF) {
 
 		super(startSequence, endSequence, tokenContent, escapeCharacter, breaksOnEOL, breaksOnEOF);
 		Preconditions.checkArgument(endSequence != null, "End sequence can not be null.");
@@ -55,7 +55,7 @@ public class BalancedPatternTokenEvaluator extends PatternTokenEvaluator {
 				// Check for end of line since it can be used to terminate the pattern.
 				for (char[] element : CharacterUtil.END_OF_LINE_DELIMITERS) {
 					if (c == element[0]
-							&& this.sequenceDetected(scanner, element, matchingText, this.breaksOnEOF)) {
+						&& this.sequenceDetected(scanner, element, matchingText, this.breaksOnEOF)) {
 						return true;
 					}
 				}

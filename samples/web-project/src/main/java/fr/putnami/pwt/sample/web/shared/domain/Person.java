@@ -108,8 +108,8 @@ public class Person implements Serializable, Comparable<Person> {
 	public int compareTo(Person o) {
 		if (o != null) {
 			return ComparisonChain.start()
-					.compare(name, o.name)
-					.result();
+				.compare(name, o.name)
+				.result();
 		}
 		return 1;
 	}

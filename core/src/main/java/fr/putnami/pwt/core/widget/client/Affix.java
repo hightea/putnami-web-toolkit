@@ -53,8 +53,7 @@ public class Affix extends OneWidgetPanel {
 		}
 	}
 
-	private final HandlerRegistrationCollection handlerRegistrationCollection =
-		new HandlerRegistrationCollection();
+	private final HandlerRegistrationCollection handlerRegistrationCollection = new HandlerRegistrationCollection();
 	private final ScrollHandler scrollHandler = new ScrollHandler() {
 
 		@Override
@@ -112,10 +111,8 @@ public class Affix extends OneWidgetPanel {
 			@Override
 			public void execute() {
 				Affix.this.reset();
-				Affix.this.handlerRegistrationCollection.add(Window
-					.addWindowScrollHandler(Affix.this.scrollHandler));
-				Affix.this.handlerRegistrationCollection.add(Window
-					.addResizeHandler(Affix.this.resizeHandler));
+				Affix.this.handlerRegistrationCollection.add(Window.addWindowScrollHandler(Affix.this.scrollHandler));
+				Affix.this.handlerRegistrationCollection.add(Window.addResizeHandler(Affix.this.resizeHandler));
 			}
 		});
 	}

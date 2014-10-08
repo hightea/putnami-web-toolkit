@@ -26,8 +26,7 @@ import fr.putnami.pwt.core.model.client.base.HasReadonly;
 import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.TableTH;
 
-public abstract class AbstractTableColumn<T>
-	implements HasReadonly, IsWidget, HasResponsiveVisibility, CloneableWidget {
+public abstract class AbstractTableColumn<T> implements HasReadonly, IsWidget, HasResponsiveVisibility, CloneableWidget {
 
 	public enum Type implements CssStyle {
 			DEFAULT(null),
@@ -104,8 +103,8 @@ public abstract class AbstractTableColumn<T>
 	}
 
 	public Collection<AbstractTableColumnAspect<T>> getAspects() {
-		return this.aspects == null ? Collections.<AbstractTableColumnAspect<T>> emptyList()
-			: Collections.unmodifiableCollection(this.aspects);
+		return this.aspects == null ? Collections.<AbstractTableColumnAspect<T>> emptyList() : Collections
+			.unmodifiableCollection(this.aspects);
 	}
 
 	public <A extends AbstractTableColumnAspect<T>> A getAspect(Class<A> aspectClass) {

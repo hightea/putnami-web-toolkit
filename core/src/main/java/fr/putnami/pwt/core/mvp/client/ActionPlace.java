@@ -22,8 +22,7 @@ import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 import fr.putnami.pwt.core.mvp.client.util.MvpUtils;
 
-public class ActionPlace extends Place
-	implements Activity, ActivityFactory, PlaceTokenizer<ActionPlace>, Runnable {
+public abstract class ActionPlace extends Place implements Activity, ActivityFactory, PlaceTokenizer<ActionPlace> {
 
 	private final String prefix;
 
@@ -52,10 +51,12 @@ public class ActionPlace extends Place
 
 	@Override
 	public void onCancel() {
+		// NoOp
 	}
 
 	@Override
 	public void onStop() {
+		// NoOp
 	}
 
 	@Override
@@ -73,8 +74,6 @@ public class ActionPlace extends Place
 		this.run();
 	}
 
-	@Override
-	public void run() {
-	}
+	public abstract void run();
 
 }

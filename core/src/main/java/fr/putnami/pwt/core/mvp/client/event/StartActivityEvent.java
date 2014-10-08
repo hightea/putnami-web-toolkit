@@ -44,8 +44,7 @@ public final class StartActivityEvent extends GwtEvent<StartActivityEvent.Handle
 	private final AcceptsOneWidget container;
 	private final IsWidget view;
 
-	private StartActivityEvent(Activity activity, Place place, AcceptsOneWidget container,
-		IsWidget view) {
+	private StartActivityEvent(Activity activity, Place place, AcceptsOneWidget container, IsWidget view) {
 		this.setSource(place);
 		this.activity = activity;
 		this.place = place;
@@ -79,8 +78,7 @@ public final class StartActivityEvent extends GwtEvent<StartActivityEvent.Handle
 		return this.view;
 	}
 
-	public static StartActivityEvent fire(Activity activity, Place place, AcceptsOneWidget container,
-		IsWidget view) {
+	public static StartActivityEvent fire(Activity activity, Place place, AcceptsOneWidget container, IsWidget view) {
 		StartActivityEvent event = new StartActivityEvent(activity, place, container, view);
 		EventBus.get().fireEventFromSource(event, place);
 		return event;

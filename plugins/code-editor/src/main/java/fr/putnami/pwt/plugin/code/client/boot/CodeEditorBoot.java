@@ -24,8 +24,7 @@ public class CodeEditorBoot implements EntryPoint {
 	@Override
 	public void onModuleLoad() {
 
-		ThemeController.get().getDefaultTheme().addLink(
-				new CssLink("theme/default/style/pwt-code-editor.css", 0));
+		ThemeController.get().getDefaultTheme().addLink(new CssLink("theme/default/style/pwt-code-editor.css", 0));
 	}
 
 }

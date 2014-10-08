@@ -26,8 +26,8 @@ import fr.putnami.pwt.core.widget.client.helper.StringRenderer;
 
 public class InputEmail extends AbstractInputBox<TextBox, String> {
 
-	private static final char[] ALLOWED_CHARS =
-		"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@.+-_%".toCharArray();
+	private static final char[] ALLOWED_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@.+-_%"
+		.toCharArray();
 
 	private static final KeyPressHandler EMAIL_CHAR_VALIDATOR = new KeyPressHandler() {
 

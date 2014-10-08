@@ -157,10 +157,8 @@ public class InputSwitch<T> extends AbstractInputChoice<T, T> {
 				@Override
 				public void execute() {
 					Element itemElement = item.getElement();
-					InputSwitch.this.slider.getElement().getStyle().setWidth(itemElement.getClientWidth(),
-						Unit.PX);
-					InputSwitch.this.slider.getElement().getStyle().setMarginLeft(
-						itemElement.getOffsetLeft() - 5, Unit.PX);
+					InputSwitch.this.slider.getElement().getStyle().setWidth(itemElement.getClientWidth(), Unit.PX);
+					InputSwitch.this.slider.getElement().getStyle().setMarginLeft(itemElement.getOffsetLeft() - 5, Unit.PX);
 				}
 			});
 		}

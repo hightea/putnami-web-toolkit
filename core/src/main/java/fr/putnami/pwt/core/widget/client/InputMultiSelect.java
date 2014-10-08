@@ -42,9 +42,8 @@ public class InputMultiSelect<T> extends AbstractInputSelect<T, List<T>> {
 	private Comparator<T> simpleComparator = new Comparator<T>() {
 		@Override
 		public int compare(T o1, T o2) {
-			return Integer.compare(InputMultiSelect.this.getOrderedItems().indexOf(o1),
-				InputMultiSelect.this
-					.getOrderedItems().indexOf(o2));
+			return Integer.compare(InputMultiSelect.this.getOrderedItems().indexOf(o1), InputMultiSelect.this
+				.getOrderedItems().indexOf(o2));
 		}
 	};
 
@@ -110,8 +109,7 @@ public class InputMultiSelect<T> extends AbstractInputSelect<T, List<T>> {
 		}
 
 		private void highlightByIndex(int index) {
-			int newIndex =
-				Math.min(InputMultiSelect.this.getOrderedItems().size() - 1, Math.max(0, index));
+			int newIndex = Math.min(InputMultiSelect.this.getOrderedItems().size() - 1, Math.max(0, index));
 			this.highlightItem(this.currentHighlightedIndex, false);
 			this.highlightItem(newIndex, true);
 			this.currentHighlightedIndex = newIndex;

@@ -35,7 +35,9 @@ import fr.putnami.pwt.core.widget.shared.domain.FileDto;
 public class InputControlsView extends Composite implements View {
 
 	public enum Gender {
-		MALE, FEMALE, UNKNOWN
+			MALE,
+			FEMALE,
+			UNKNOWN
 	}
 
 	public static class Bean {
@@ -51,7 +53,7 @@ public class InputControlsView extends Composite implements View {
 		public double height = Random.nextInt(1000000) / 100D;
 		public Date birthdate = new DateParser("dd/MM/yyyy").parseOrNull("02/03/1985");
 		public String remarks =
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lobortis elementum vestibulum. Aliquam luctus semper congue. Fusce placerat tempus lectus, et pulvinar elit aliquam eget. Suspendisse placerat vitae risus vitae sagittis. Suspendisse dignissim orci urna, in aliquam lectus pharetra eu. Donec velit elit, tincidunt semper mollis et, adipiscing vel dui. Morbi rhoncus dui sit amet libero gravida sagittis. Duis tincidunt luctus elit, ac cursus nisi tempus in. Fusce quis quam quam. Suspendisse hendrerit lobortis metus, non fermentum nibh tincidunt gravida.";
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lobortis elementum vestibulum. Aliquam luctus semper congue. Fusce placerat tempus lectus, et pulvinar elit aliquam eget. Suspendisse placerat vitae risus vitae sagittis. Suspendisse dignissim orci urna, in aliquam lectus pharetra eu. Donec velit elit, tincidunt semper mollis et, adipiscing vel dui. Morbi rhoncus dui sit amet libero gravida sagittis. Duis tincidunt luctus elit, ac cursus nisi tempus in. Fusce quis quam quam. Suspendisse hendrerit lobortis metus, non fermentum nibh tincidunt gravida.";
 
 		public String mainGroup = "Friends";
 		public List<String> groups = Lists.newArrayList("Friends", "Colleague");
@@ -79,13 +81,13 @@ public class InputControlsView extends Composite implements View {
 
 	@UiField(provided = true)
 	final List<String> stateSuggestions = Lists.newArrayList("Alabama", "Alaska", "Arizona",
-			"Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia",
-			"Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine",
-			"Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana",
-			"Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York",
-			"North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania",
-			"Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont",
-			"Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming");
+		"Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia",
+		"Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine",
+		"Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana",
+		"Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York",
+		"North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania",
+		"Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont",
+		"Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming");
 
 	@UiField(provided = true)
 	final List<Integer> ageList = this.generateAgeList();

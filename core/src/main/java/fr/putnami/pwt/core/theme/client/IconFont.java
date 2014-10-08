@@ -132,8 +132,7 @@ public class IconFont extends CssLink {
 	public boolean equals(Object obj) {
 		if (obj instanceof IconFont) {
 			IconFont other = (IconFont) obj;
-			return super.equals(obj)
-				&& Objects.equal(this.preffix, other.preffix);
+			return super.equals(obj) && Objects.equal(this.preffix, other.preffix);
 		}
 		return false;
 	}

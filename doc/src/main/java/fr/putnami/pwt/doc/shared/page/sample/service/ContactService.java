@@ -66,7 +66,7 @@ public final class ContactService {
 		"Riley", "Armstrong", "Carpenter", "Weaver", "Greene", "Lawrence", "Elliott", "Chavez",
 		"Sims", "Austin", "Peters", "Kelley", "Franklin", "Lawson"};
 	private static final String[] STREET_NAMES =
-		{
+	{
 		"Peachtree", "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Tenth",
 		"Fourteenth", "Spring", "Techwood", "West Peachtree", "Juniper", "Cypress", "Fowler",
 		"Piedmont", "Juniper", "Main", "Central", "Currier", "Courtland", "Williams",
@@ -76,10 +76,10 @@ public final class ContactService {
 		"St", "Rd", "Ln", "Blvd", "Way", "Pkwy", "Cir", "Ave"};
 	private static final String[] CITIES = {
 		"New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia", "San Antonio",
-	"San Diego"};
+		"San Diego"};
 	private static final String[] DOMAINS = {
 		"gmail.com", "google.com", "yahoo.com", "aol.com", "msn.com", "comcast.net", "cox.net",
-	"sbcgloval.net"};
+		"sbcgloval.net"};
 
 	private static long SEQUENCE = 0L;
 
@@ -141,11 +141,11 @@ public final class ContactService {
 		Contact contact = new Contact();
 		if (new Random().nextBoolean()) {
 			contact.setName(this.nextValue(ContactService.LAST_NAMES) + " "
-					+ this.nextValue(ContactService.MALE_FIRST_NAMES));
+				+ this.nextValue(ContactService.MALE_FIRST_NAMES));
 			contact.setGender(Gender.MALE);
 		} else {
 			contact.setName(this.nextValue(ContactService.LAST_NAMES) + " "
-					+ this.nextValue(ContactService.FEMALE_FIRST_NAMES));
+				+ this.nextValue(ContactService.FEMALE_FIRST_NAMES));
 			contact.setGender(Gender.FEMALE);
 		}
 
@@ -165,8 +165,8 @@ public final class ContactService {
 
 		contact.setEmails(Lists.<String> newArrayList());
 		contact.getEmails().add(
-				contact.getName().replace(" ", ".").toLowerCase() + "@"
-						+ this.nextValue(ContactService.DOMAINS));
+			contact.getName().replace(" ", ".").toLowerCase() + "@"
+				+ this.nextValue(ContactService.DOMAINS));
 
 		Group memberOf = this.groups.get(new Random().nextInt(this.groups.size()));
 		memberOf.getMembers().add(contact);

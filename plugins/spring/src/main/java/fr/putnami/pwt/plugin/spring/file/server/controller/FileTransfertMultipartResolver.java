@@ -30,7 +30,7 @@ import fr.putnami.pwt.core.inject.client.annotation.PostConstruct;
 public class FileTransfertMultipartResolver extends CommonsMultipartResolver {
 
 	private static ThreadLocal<FileTransfertProgressListener> tlUploadId =
-			new ThreadLocal<FileTransfertProgressListener>();
+		new ThreadLocal<FileTransfertProgressListener>();
 
 	@Value("${filetransfertcontroller.maxUploadSize}")
 	private long maxUploadSize;
@@ -62,7 +62,7 @@ public class FileTransfertMultipartResolver extends CommonsMultipartResolver {
 		FileTransfertProgressListener progress = new FileTransfertProgressListener();
 		FileTransfertMultipartResolver.tlUploadId.set(progress);
 		this.fileTransfertController.startUpload(this.getUploadId(request),
-				FileTransfertMultipartResolver.tlUploadId.get());
+			FileTransfertMultipartResolver.tlUploadId.get());
 		return super.resolveMultipart(request);
 	}
 

@@ -41,8 +41,7 @@ import fr.putnami.pwt.core.widget.client.base.AbstractInput;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public class InputBoolean extends AbstractInput<Boolean>
-	implements HasText, HasHtmlFor, EditorLabel {
+public class InputBoolean extends AbstractInput<Boolean> implements HasText, HasHtmlFor, EditorLabel {
 
 	private static final CssStyle STYLE_CHECKBOX = new SimpleStyle("checkbox");
 
@@ -214,8 +213,7 @@ public class InputBoolean extends AbstractInput<Boolean>
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addValueChangeHandler(
-		ValueChangeHandler<Boolean> handler) {
+	public com.google.gwt.event.shared.HandlerRegistration addValueChangeHandler(ValueChangeHandler<Boolean> handler) {
 		return this.addHandler(handler, ValueChangeEvent.getType());
 	}
 }

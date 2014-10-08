@@ -25,8 +25,7 @@ import fr.putnami.pwt.core.service.shared.domain.CommandDefinition;
 import fr.putnami.pwt.core.service.shared.domain.CommandRequest;
 import fr.putnami.pwt.core.service.shared.domain.CommandResponse;
 
-public abstract class CommandController
-	implements HasCommandRequestHandlers, HasCommandResponseHandlers {
+public abstract class CommandController implements HasCommandRequestHandlers, HasCommandResponseHandlers {
 
 	private static CommandController instance;
 
@@ -37,8 +36,7 @@ public abstract class CommandController
 		return CommandController.instance;
 	}
 
-	public abstract CommandRequest invokeCommand(CommandDefinition commandDefinition,
-		CommandParam commandParam);
+	public abstract CommandRequest invokeCommand(CommandDefinition commandDefinition, CommandParam commandParam);
 
 	public abstract int flush();
 

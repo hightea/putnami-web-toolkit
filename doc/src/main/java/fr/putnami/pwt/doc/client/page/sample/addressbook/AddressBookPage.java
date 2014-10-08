@@ -168,14 +168,14 @@ public class AddressBookPage extends Composite implements View, HasSources {
 				} else {
 					final String queryToCompare = query.toLowerCase().trim();
 					Iterable<Contact> filteredIteable =
-							Iterables.filter(AddressBookPage.this.displayedList, new Predicate<Contact>() {
+						Iterables.filter(AddressBookPage.this.displayedList, new Predicate<Contact>() {
 
-								@Override
-								public boolean apply(Contact contact) {
-									return contact.getName() != null
-											&& contact.getName().toLowerCase().contains(queryToCompare);
-								}
-							});
+							@Override
+							public boolean apply(Contact contact) {
+								return contact.getName() != null
+									&& contact.getName().toLowerCase().contains(queryToCompare);
+							}
+						});
 					AddressBookPage.this.displayList(Lists.newArrayList(filteredIteable));
 				}
 			}

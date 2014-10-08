@@ -35,17 +35,6 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class CollapseHelper implements ClickHandler, HasCollapseHandlers {
 
-	public static CollapseHelper apply(Widget toggleWidget, Element collapsableElement) {
-		return new CollapseHelper(toggleWidget, collapsableElement);
-	}
-
-	public static CollapseHelper apply(Widget toggleWidget, Element collapsableElement,
-		boolean initialCollapse) {
-		CollapseHelper helper = CollapseHelper.apply(toggleWidget, collapsableElement);
-		helper.setInitialCollapse(initialCollapse);
-		return helper;
-	}
-
 	private static final CssStyle STYLE_COLLAPSING = new SimpleStyle("collapsing");
 	private static final CssStyle STYLE_COLLAPSE = new SimpleStyle("collapse");
 	private static final CssStyle STYLE_VISIBLE = new SimpleStyle("in");
@@ -102,11 +91,9 @@ public class CollapseHelper implements ClickHandler, HasCollapseHandlers {
 
 	public void doCollapse(final boolean collapse) {
 		if (collapse != this.collapsed) {
-			EventBus.get().fireEventFromSource(new CollapseEvent(CollapseHelper.this, collapse),
-				CollapseHelper.this);
+			EventBus.get().fireEventFromSource(new CollapseEvent(CollapseHelper.this, collapse), CollapseHelper.this);
 
-			this.collapsableElement.getStyle().setHeight(this.collapsableElement.getOffsetHeight(),
-				Unit.PX);
+			this.collapsableElement.getStyle().setHeight(this.collapsableElement.getOffsetHeight(), Unit.PX);
 
 			StyleUtils.removeStyle(this.collapsableElement, CollapseHelper.STYLE_COLLAPSE);
 			StyleUtils.removeStyle(this.collapsableElement, CollapseHelper.STYLE_VISIBLE);
@@ -127,12 +114,9 @@ public class CollapseHelper implements ClickHandler, HasCollapseHandlers {
 				@Override
 				public boolean execute() {
 					CollapseHelper.this.collapsableElement.getStyle().clearHeight();
-					StyleUtils.removeStyle(CollapseHelper.this.collapsableElement,
-						CollapseHelper.STYLE_COLLAPSING);
-					StyleUtils
-						.addStyle(CollapseHelper.this.collapsableElement, CollapseHelper.STYLE_COLLAPSE);
-					StyleUtils.toggleStyle(CollapseHelper.this.collapsableElement,
-						CollapseHelper.STYLE_VISIBLE, !collapse);
+					StyleUtils.removeStyle(CollapseHelper.this.collapsableElement, CollapseHelper.STYLE_COLLAPSING);
+					StyleUtils.addStyle(CollapseHelper.this.collapsableElement, CollapseHelper.STYLE_COLLAPSE);
+					StyleUtils.toggleStyle(CollapseHelper.this.collapsableElement, CollapseHelper.STYLE_VISIBLE, !collapse);
 					return false;
 				}
 			}, 350);
@@ -149,4 +133,15 @@ public class CollapseHelper implements ClickHandler, HasCollapseHandlers {
 	public void fireEvent(GwtEvent<?> event) {
 		EventBus.get().fireEventFromSource(event, this);
 	}
+
+	public static CollapseHelper apply(Widget toggleWidget, Element collapsableElement) {
+		return new CollapseHelper(toggleWidget, collapsableElement);
+	}
+
+	public static CollapseHelper apply(Widget toggleWidget, Element collapsableElement, boolean initialCollapse) {
+		CollapseHelper helper = CollapseHelper.apply(toggleWidget, collapsableElement);
+		helper.setInitialCollapse(initialCollapse);
+		return helper;
+	}
+
 }

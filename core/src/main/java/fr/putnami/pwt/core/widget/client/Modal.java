@@ -84,9 +84,9 @@ public class Modal extends AbstractPanel implements HasOneWidget, CloneableWidge
 	}
 
 	public enum Size implements CssStyle {
-		SMALL("modal-sm"),
-		DEFAULT(null),
-		LARGE("modal-lg");
+			SMALL("modal-sm"),
+			DEFAULT(null),
+			LARGE("modal-lg");
 
 		private final String style;
 

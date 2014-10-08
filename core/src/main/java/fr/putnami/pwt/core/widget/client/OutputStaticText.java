@@ -38,5 +38,6 @@ public class OutputStaticText extends AbstractTextOutput<Object> {
 
 	@Override
 	public void edit(Object value) {
+		// NoOp the text is static
 	}
 }

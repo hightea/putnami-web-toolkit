@@ -215,15 +215,13 @@ public abstract class AbstractInputChoice<T, U> extends AbstractInput<U>
 	@Override
 	public HandlerRegistration addDirtyHandler(Handler handler) {
 		if (this.valueChangeRegistration == null) {
-			this.valueChangeRegistration =
-				this.addValueChangeHandler(new ChangeEvent<U>(AbstractInputChoice.this));
+			this.valueChangeRegistration = this.addValueChangeHandler(new ChangeEvent<U>(AbstractInputChoice.this));
 		}
 		return super.addDirtyHandler(handler);
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addValueChangeHandler(
-		ValueChangeHandler<U> handler) {
+	public com.google.gwt.event.shared.HandlerRegistration addValueChangeHandler(ValueChangeHandler<U> handler) {
 		return this.addHandler(handler, ValueChangeEvent.getType());
 	}
 

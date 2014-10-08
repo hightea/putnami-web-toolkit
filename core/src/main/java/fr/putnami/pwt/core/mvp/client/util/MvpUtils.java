@@ -21,6 +21,9 @@ import fr.putnami.pwt.core.mvp.client.ViewPlace;
 
 public final class MvpUtils {
 
+	private MvpUtils() {
+	}
+
 	public static boolean isParent(Place parent, Place place) {
 		if (place instanceof ViewPlace) {
 			ViewPlace viewPlace = (ViewPlace) place;
@@ -71,8 +74,5 @@ public final class MvpUtils {
 			prefix = prefix.substring(prefix.indexOf('$') + 1);
 		}
 		return "!" + prefix;
-	}
-
-	private MvpUtils() {
 	}
 }

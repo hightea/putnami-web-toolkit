@@ -60,8 +60,7 @@ public class InputNumber<N extends Number> extends AbstractInputBox<TextBox, N> 
 		}
 	}
 
-	protected static final NumberConstants NUMBER_CONSTANTS = LocaleInfo.getCurrentLocale()
-		.getNumberConstants();
+	protected static final NumberConstants NUMBER_CONSTANTS = LocaleInfo.getCurrentLocale().getNumberConstants();
 
 	protected final MaskValueBoxHelper maskHelper;
 
@@ -129,21 +128,17 @@ public class InputNumber<N extends Number> extends AbstractInputBox<TextBox, N> 
 
 		this.maskHelper.reset();
 		if (this.signed) {
-			this.maskHelper.addTokenHelper(new StaticStringTokenHelper(InputNumber.NUMBER_CONSTANTS
-				.minusSign(), true));
+			this.maskHelper.addTokenHelper(new StaticStringTokenHelper(InputNumber.NUMBER_CONSTANTS.minusSign(), true));
 		}
-		this.maskHelper.addTokenHelper(new IntegerTokenHelper(0, Integer.MIN_VALUE, Integer.MAX_VALUE,
-			-1, "0"));
+		this.maskHelper.addTokenHelper(new IntegerTokenHelper(0, Integer.MIN_VALUE, Integer.MAX_VALUE, -1, "0"));
 
 		switch (this.type) {
 			case FLOAT:
 			case DOUBLE:
 			case BIG_DECIMAL:
-				this.maskHelper.addTokenHelper(new StaticStringTokenHelper(InputNumber.NUMBER_CONSTANTS
-					.decimalSeparator(),
+				this.maskHelper.addTokenHelper(new StaticStringTokenHelper(InputNumber.NUMBER_CONSTANTS.decimalSeparator(),
 					true, ',', '.'));
-				this.maskHelper.addTokenHelper(new IntegerTokenHelper(0, Integer.MIN_VALUE,
-					Integer.MAX_VALUE, -1, "0"));
+				this.maskHelper.addTokenHelper(new IntegerTokenHelper(0, Integer.MIN_VALUE, Integer.MAX_VALUE, -1, "0"));
 				break;
 			default:
 				break;

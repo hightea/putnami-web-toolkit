@@ -26,8 +26,7 @@ import fr.putnami.pwt.core.mvp.client.ViewDecorator;
 public class DecoratorPresenterCreatorFactory implements InjectorDelegateFactorty {
 
 	@Override
-	public void createDelegates(JClassType injectableType,
-		Collection<InjectorCreatorDelegate> delegates) {
+	public void createDelegates(JClassType injectableType, Collection<InjectorCreatorDelegate> delegates) {
 		if (this.isAssignableFrom(injectableType, ViewDecorator.class)) {
 			delegates.add(new InjectDecoratorPresenterCreator());
 		}

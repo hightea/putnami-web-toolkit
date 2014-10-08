@@ -59,6 +59,7 @@ public final class FlushSuccessEvent extends GwtEvent<FlushSuccessEvent.Handler>
 		return this.editor;
 	}
 
+	@SuppressWarnings("unchecked")
 	public <T> T getValue() {
 		return (T) this.value;
 	}

@@ -31,10 +31,6 @@ public class HtmlForVisitor extends AbstractVisitor {
 
 	private static long seq = 0;
 
-	private static long incrementeAndGetSeq() {
-		return ++HtmlForVisitor.seq;
-	}
-
 	private final Map<Path, String> htmlForIds = Maps.newHashMap();
 	private final Set<Context> htmlIdContexts = Sets.newLinkedHashSet();
 
@@ -78,6 +74,10 @@ public class HtmlForVisitor extends AbstractVisitor {
 	@Override
 	public VisitorTrigger trigerOn() {
 		return VisitorTrigger.INITALIZE;
+	}
+
+	private static long incrementeAndGetSeq() {
+		return ++HtmlForVisitor.seq;
 	}
 
 }

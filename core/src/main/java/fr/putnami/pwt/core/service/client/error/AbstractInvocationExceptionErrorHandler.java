@@ -17,8 +17,7 @@ package fr.putnami.pwt.core.service.client.error;
 import fr.putnami.pwt.core.service.shared.exception.CommandException;
 import fr.putnami.pwt.core.service.shared.service.CommandService;
 
-public abstract class AbstractInvocationExceptionErrorHandler
-	extends AbstractCommandExceptionErrorHandler {
+public abstract class AbstractInvocationExceptionErrorHandler extends AbstractCommandExceptionErrorHandler {
 
 	@Override
 	protected boolean internalHandle(CommandException error) {

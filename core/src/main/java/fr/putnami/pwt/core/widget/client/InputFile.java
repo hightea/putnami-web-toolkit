@@ -86,8 +86,7 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 		private final FormPanel formPanel = new FormPanel();
 		private final FileUpload fileUpload = new FileUpload();
 
-		private final HandlerRegistrationCollection handlerRegistrations =
-			new HandlerRegistrationCollection();
+		private final HandlerRegistrationCollection handlerRegistrations = new HandlerRegistrationCollection();
 
 		public UploadForm() {
 			this.formPanel.setMethod("post");
@@ -312,12 +311,12 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 
 			@Override
 			public void onError(Request request, Throwable exception) {
+				// TODO to implement
 			}
 		};
 
 		try {
-			RequestBuilder requestBuilder =
-				new RequestBuilder(RequestBuilder.GET, InputFile.URL_STATUS + this.fileId);
+			RequestBuilder requestBuilder = new RequestBuilder(RequestBuilder.GET, InputFile.URL_STATUS + this.fileId);
 			requestBuilder.setHeader("Cache-Control", "max-age=0");
 			requestBuilder.sendRequest("", callback);
 		} catch (RequestException e) {
@@ -348,16 +347,13 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 
 		StringBuilder requestBody = new StringBuilder();
 		requestBody.append("--").append(InputFile.MULTIPART_BOUNDARY).append(InputFile.EOL).append(
-			"Content-Disposition: form-data; name=\"data\"; filename=\"").append(fileName).append("\"")
-			.append(InputFile.EOL).append("Content-Type: ").append(type).append(InputFile.EOL).append(
-				InputFile.EOL).append(base64data).append(InputFile.EOL).append("--").append(
-				InputFile.MULTIPART_BOUNDARY).append("--");
+			"Content-Disposition: form-data; name=\"data\"; filename=\"").append(fileName).append("\"").append(InputFile.EOL)
+			.append("Content-Type: ").append(type).append(InputFile.EOL).append(InputFile.EOL).append(base64data).append(
+				InputFile.EOL).append("--").append(InputFile.MULTIPART_BOUNDARY).append("--");
 
 		try {
-			RequestBuilder requestBuilder =
-				new RequestBuilder(RequestBuilder.POST, InputFile.URL_UPLOAD + this.fileId);
-			requestBuilder.setHeader("content-type", "multipart/form-data; boundary="
-				+ InputFile.MULTIPART_BOUNDARY);
+			RequestBuilder requestBuilder = new RequestBuilder(RequestBuilder.POST, InputFile.URL_UPLOAD + this.fileId);
+			requestBuilder.setHeader("content-type", "multipart/form-data; boundary=" + InputFile.MULTIPART_BOUNDARY);
 			requestBuilder.setHeader("Cache-Control", "max-age=0");
 			this.sendRequest = requestBuilder.sendRequest(requestBody.toString(), callback);
 		} catch (RequestException e) {
@@ -413,6 +409,7 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 	}
 
 	private void displayError(String error) {
+		// TODO to implement display error
 	}
 
 	private static native void nativeUploadData(DataTransfer dataTransfer, InputFile inputFile)

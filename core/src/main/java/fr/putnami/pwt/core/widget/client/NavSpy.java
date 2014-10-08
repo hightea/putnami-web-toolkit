@@ -86,6 +86,7 @@ public class NavSpy extends AbstractComposite implements HasDrawable {
 
 		@Override
 		public void execute() {
+			// NoOp
 		}
 	}
 
@@ -306,8 +307,7 @@ public class NavSpy extends AbstractComposite implements HasDrawable {
 				Element child = (Element) node;
 				String tagName = child.getTagName();
 				if (tagName != null && Heading.HEADING_TAGS.contains(tagName.toLowerCase())) {
-					if (this.spyName != null
-						&& this.spyName.equals(child.getAttribute(Heading.ATTRIBUTE_DATA_SUMMARY))) {
+					if (this.spyName != null && this.spyName.equals(child.getAttribute(Heading.ATTRIBUTE_DATA_SUMMARY))) {
 						headings.add(child);
 					}
 				} else {

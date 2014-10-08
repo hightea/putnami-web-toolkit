@@ -26,8 +26,8 @@ import fr.putnami.pwt.core.model.client.base.HasPlaceholder;
 import fr.putnami.pwt.plugin.code.client.event.LiveValueChangeEvent.HasLiveValueChangeHandlers;
 
 public interface CodeInput extends HasText, HasPlaceholder, IsWidget, HasLiveValueChangeHandlers,
-		HasKeyDownHandlers, HasKeyUpHandlers, HasValueChangeHandlers<String>, HasAllFocusHandlers,
-		Focusable {
+	HasKeyDownHandlers, HasKeyUpHandlers, HasValueChangeHandlers<String>, HasAllFocusHandlers,
+	Focusable {
 
 	int getCursorPosition();
 

@@ -61,33 +61,49 @@ import fr.putnami.pwt.doc.client.page.welcome.WelcomePage.WelcomePlace;
 import fr.putnami.pwt.plugin.ga.client.GoogleAnalytics;
 
 @MvpDescription(display = DocumentationDisplay.class, defaultPlace = WelcomePlace.class, activities = {
-		WelcomePage.WelcomePlace.class, GettingStartedPage.GettingStartedPlace.class,
-		BootstrapPage.BootstrapPlace.class, LayoutPage.LayoutsPlace.class,
-		ComponentsPage.ComponentsPlace.class, InjectionPage.InjectionPlace.class,
-		DataBindingPage.DataBindingPlace.class,
-		InternationalizationPage.InternationalizationPlace.class, NavigationPage.NavigationPlace.class,
-		ServerCallsPage.ServerCallsPlace.class, SecurityPage.SecurityPlace.class,
-		ErrorsPage.ErrorsPlace.class, CodeEditorPage.CodeEditorPlace.class,
-		AjaxBotIndexingPage.AjaxBotIndexingPlace.class, GoogleAnalyticsPage.GoogleAnalyticsPlace.class,
-		SpringPage.SpringPlace.class, SamplesPage.SamplesPlace.class,
-		ContactsTablePage.ContactsTablePlace.class, AddressBookPage.AddressBookPlace.class,
-		ComingSoonPage.ComingSoonPlace.class, DownloadPage.DownloadPlace.class,
-		Tuto1InitGradlePage.Tuto1InitGradlePlace.class, Tuto1InitMavenPage.Tuto1InitMavenPlace.class,
-		Tuto2FirstPagePage.Tuto2FirstPagePlace.class, Tuto3MorePagesPage.Tuto3MorePagesPlace.class,
-		Tuto4BindAFormPage.Tuto4BindAFormPlace.class,
-		Tuto5IssueTrackerPage.Tuto5IssueTrackerPlace.class, Tuto6ThemePage.Tuto6ThemePlace.class,
-		Tuto7GoogleAnalyticsPage.Tuto7GoogleAnalyticsPlace.class,
-		Tuto8AjaxBotPage.Tuto8AjaxBotPlace.class, Tuto9SpringPage.Tuto9SpringPlace.class,
-		Tuto10Security.Tuto10SecurityPlace.class})
+	WelcomePage.WelcomePlace.class,
+	GettingStartedPage.GettingStartedPlace.class,
+	BootstrapPage.BootstrapPlace.class,
+	LayoutPage.LayoutsPlace.class,
+	ComponentsPage.ComponentsPlace.class,
+	InjectionPage.InjectionPlace.class,
+	DataBindingPage.DataBindingPlace.class,
+	InternationalizationPage.InternationalizationPlace.class,
+	NavigationPage.NavigationPlace.class,
+	ServerCallsPage.ServerCallsPlace.class,
+	SecurityPage.SecurityPlace.class,
+	ErrorsPage.ErrorsPlace.class,
+	CodeEditorPage.CodeEditorPlace.class,
+	AjaxBotIndexingPage.AjaxBotIndexingPlace.class,
+	GoogleAnalyticsPage.GoogleAnalyticsPlace.class,
+	SpringPage.SpringPlace.class,
+	SamplesPage.SamplesPlace.class,
+	ContactsTablePage.ContactsTablePlace.class,
+	AddressBookPage.AddressBookPlace.class,
+	ComingSoonPage.ComingSoonPlace.class,
+	DownloadPage.DownloadPlace.class,
+	Tuto1InitGradlePage.Tuto1InitGradlePlace.class,
+	Tuto1InitMavenPage.Tuto1InitMavenPlace.class,
+	Tuto2FirstPagePage.Tuto2FirstPagePlace.class,
+	Tuto3MorePagesPage.Tuto3MorePagesPlace.class,
+	Tuto4BindAFormPage.Tuto4BindAFormPlace.class,
+	Tuto5IssueTrackerPage.Tuto5IssueTrackerPlace.class,
+	Tuto6ThemePage.Tuto6ThemePlace.class,
+	Tuto7GoogleAnalyticsPage.Tuto7GoogleAnalyticsPlace.class,
+	Tuto8AjaxBotPage.Tuto8AjaxBotPlace.class,
+	Tuto9SpringPage.Tuto9SpringPlace.class,
+	Tuto10Security.Tuto10SecurityPlace.class
+})
 @ErrorManagmentDescription(errorDisplay = SimpleErrorDisplayer.class, errorHandlers = {
-		UmbrellaExceptionHandler.class, ApplicationUnreachableExceptionHandler.class})
+	UmbrellaExceptionHandler.class,
+	ApplicationUnreachableExceptionHandler.class
+})
 @ThemeDescription(styleSheets = "theme/doc/style/pwt-doc.css")
 public class DocumentationApp implements Module {
 
 	@EntryPointHandler
 	void onModuleStart() {
-		GoogleAnalytics analytics =
-				GoogleAnalytics.init(ApplicationConfig.ANALYTICS_TRACKER_ID, ApplicationConfig.DOMAIN);
+		GoogleAnalytics analytics = GoogleAnalytics.init(ApplicationConfig.ANALYTICS_TRACKER_ID, ApplicationConfig.DOMAIN);
 		analytics.forceSSL(true);
 		analytics.displayfeatures();
 		analytics.handleUncaughtException(true);

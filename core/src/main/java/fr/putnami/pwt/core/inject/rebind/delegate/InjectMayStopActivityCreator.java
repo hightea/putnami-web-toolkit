@@ -49,14 +49,12 @@ public class InjectMayStopActivityCreator extends InjectorCreatorDelegate
 		srcWriter
 			.println("final HandlerRegistrationCollection mayStopRegistrations = new HandlerRegistrationCollection();");
 		for (JMethod mayStopMethod : this.presenterMethods) {
-			srcWriter
-				.println("mayStopRegistrations.add(EventBus.get()"
-					+ ".addHandlerToSource(MayStopActivityEvent.TYPE, place, new MayStopActivityEvent.Handler() {");
+			srcWriter.println("mayStopRegistrations.add(EventBus.get()"
+				+ ".addHandlerToSource(MayStopActivityEvent.TYPE, place, new MayStopActivityEvent.Handler() {");
 			srcWriter.indent();
 			srcWriter.println("@Override public void onMayStopActivity(MayStopActivityEvent event) {");
 			srcWriter.indent();
-			srcWriter.println("if (event.getMessage() == null) { event.setMessage(%s.this.%s()); }",
-				this.injectorName,
+			srcWriter.println("if (event.getMessage() == null) { event.setMessage(%s.this.%s()); }", this.injectorName,
 				mayStopMethod.getName());
 			srcWriter.outdent();
 			srcWriter.outdent();

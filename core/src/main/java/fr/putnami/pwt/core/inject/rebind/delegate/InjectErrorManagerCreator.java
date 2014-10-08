@@ -41,14 +41,12 @@ public class InjectErrorManagerCreator extends InjectorCreatorDelegate
 	private final Collection<JMethod> handlerMethods;
 	private final String injectorName;
 
-	public InjectErrorManagerCreator(JClassType injectableType,
-		ErrorManagmentDescription errorManagmentDescritpion) {
+	public InjectErrorManagerCreator(JClassType injectableType, ErrorManagmentDescription errorManagmentDescritpion) {
 		this.injectorName = injectableType.getSimpleSourceName() + AbstractInjectorCreator.PROXY_SUFFIX;
 		this.errorDisplay = errorManagmentDescritpion.errorDisplay();
 		this.errorHandlers = errorManagmentDescritpion.errorHandlers();
 		this.handlerMethods =
-			InjectCreatorUtil.listMethod(injectableType,
-				fr.putnami.pwt.core.inject.client.annotation.ErrorHandler.class);
+			InjectCreatorUtil.listMethod(injectableType, fr.putnami.pwt.core.inject.client.annotation.ErrorHandler.class);
 	}
 
 	@Override
@@ -64,23 +62,21 @@ public class InjectErrorManagerCreator extends InjectorCreatorDelegate
 	@Override
 	public void writeEntryPoint(SourceWriter srcWriter) {
 		if (this.errorDisplay != null) {
-			srcWriter.println(
-				"ErrorManager.get().setErrorDisplayer(GWT.<ErrorDisplayer> create(%s.class));",
+			srcWriter.println("ErrorManager.get().setErrorDisplayer(GWT.<ErrorDisplayer> create(%s.class));",
 				InjectCreatorUtil.toClassName(this.errorDisplay));
 		}
 		if (this.errorHandlers != null) {
 			for (Class<? extends ErrorHandler> handlerClass : this.errorHandlers) {
-				srcWriter.println("ErrorManager.get().registerErrorHandler(new %s());", InjectCreatorUtil
-					.toClassName(handlerClass));
+				srcWriter.println("ErrorManager.get().registerErrorHandler(new %s());",
+					InjectCreatorUtil.toClassName(handlerClass));
 			}
 		}
 		if (this.errorHandlers != null) {
 			for (JMethod handlerMethod : this.handlerMethods) {
-				srcWriter
-					.println("ErrorManager.get().registerErrorHandler(new fr.putnami.pwt.core.error.client.ErrorHandler() {");
+				srcWriter.println("ErrorManager.get().registerErrorHandler("
+					+ "new fr.putnami.pwt.core.error.client.ErrorHandler() {");
 				srcWriter.indent();
-				srcWriter.println("@Override public boolean handle(Throwable error) { "
-					+ "return %s.this.%s(error); " + "}",
+				srcWriter.println("@Override public boolean handle(Throwable error) { return %s.this.%s(error); }",
 					this.injectorName, handlerMethod.getName());
 				srcWriter.println("@Override public int getPriority() { return HIGH_PRIORITY; }");
 				srcWriter.outdent();

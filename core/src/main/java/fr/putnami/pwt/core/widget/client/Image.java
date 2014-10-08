@@ -158,12 +158,10 @@ public class Image extends AbstractWidget implements EditorOutput<String> {
 		imgStyle.clearProperty(Image.PROP_MAX_HEIGHT);
 
 		if (this.widthPx > 0) {
-			imgStyle.setPropertyPx(this.keepPropertions ? Image.PROP_MAX_WIDTH : Image.PROP_WIDTH,
-				this.widthPx);
+			imgStyle.setPropertyPx(this.keepPropertions ? Image.PROP_MAX_WIDTH : Image.PROP_WIDTH, this.widthPx);
 		}
 		if (this.heightPx > 0) {
-			imgStyle.setPropertyPx(this.keepPropertions ? Image.PROP_MAX_HEIGHT : Image.PROP_HEIGHT,
-				this.heightPx);
+			imgStyle.setPropertyPx(this.keepPropertions ? Image.PROP_MAX_HEIGHT : Image.PROP_HEIGHT, this.heightPx);
 		}
 	}
 

@@ -29,19 +29,19 @@ public class JavaKeywordAssistHandler extends AbstractContentAssistHandler {
 		super(new MultiWordSuggestOracle());
 		MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) this.getOracle();
 		oracle.addAll(Lists.newArrayList("abstract", "assert", "boolean", "break", "byte", "case",
-				"catch", "char", "class", "const", "continue", "default", "do", "double", "else", "enum",
-				"extends", "false", "final", "finally", "float", "for", "goto", "if", "implements",
-				"import", "instanceof", "int", "interface", "long", "native", "new", "null", "package",
-				"private", "protected", "public", "return", "short", "static", "strictfp", "super",
-				"switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "void",
-				"volatile", "while"));
+			"catch", "char", "class", "const", "continue", "default", "do", "double", "else", "enum",
+			"extends", "false", "final", "finally", "float", "for", "goto", "if", "implements",
+			"import", "instanceof", "int", "interface", "long", "native", "new", "null", "package",
+			"private", "protected", "public", "return", "short", "static", "strictfp", "super",
+			"switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "void",
+			"volatile", "while"));
 		oracle.setDefaultSuggestionsFromText(Lists.newArrayList("abstract", "assert", "boolean",
-				"break", "byte", "case", "catch", "char", "class", "const", "continue", "default", "do",
-				"double", "else", "enum", "extends", "false", "final", "finally", "float", "for", "goto",
-				"if", "implements", "import", "instanceof", "int", "interface", "long", "native", "new",
-				"null", "package", "private", "protected", "public", "return", "short", "static",
-				"strictfp", "super", "switch", "synchronized", "this", "throw", "throws", "transient",
-				"true", "try", "void", "volatile", "while"));
+			"break", "byte", "case", "catch", "char", "class", "const", "continue", "default", "do",
+			"double", "else", "enum", "extends", "false", "final", "finally", "float", "for", "goto",
+			"if", "implements", "import", "instanceof", "int", "interface", "long", "native", "new",
+			"null", "package", "private", "protected", "public", "return", "short", "static",
+			"strictfp", "super", "switch", "synchronized", "this", "throw", "throws", "transient",
+			"true", "try", "void", "volatile", "while"));
 	}
 
 	@Override
@@ -49,8 +49,8 @@ public class JavaKeywordAssistHandler extends AbstractContentAssistHandler {
 		CodeInput codeInput = (CodeInput) textInput;
 		String currentText = codeInput.getText();
 		int cursorPos = codeInput.getCursorPosition();
-		return currentText.substring(this.getCurrentTokenStartIndex(currentText, cursorPos), cursorPos)
-				.trim();
+		return currentText.substring(
+			this.getCurrentTokenStartIndex(currentText, cursorPos), cursorPos).trim();
 	}
 
 	@Override
@@ -60,8 +60,8 @@ public class JavaKeywordAssistHandler extends AbstractContentAssistHandler {
 		int cursorPos = codeInput.getCursorPosition();
 		int tokenStartIndex = this.getCurrentTokenStartIndex(currentText, cursorPos);
 		String newText =
-				currentText.substring(0, tokenStartIndex) + suggestion.getReplacementString()
-						+ currentText.substring(codeInput.getCursorPosition(), currentText.length());
+			currentText.substring(0, tokenStartIndex) + suggestion.getReplacementString()
+				+ currentText.substring(codeInput.getCursorPosition(), currentText.length());
 		int newCursorPos = tokenStartIndex + suggestion.getReplacementString().length();
 		codeInput.setText(newText);
 		codeInput.setCursorPosition(newCursorPos);

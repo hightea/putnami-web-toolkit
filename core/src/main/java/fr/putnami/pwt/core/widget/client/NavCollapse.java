@@ -24,8 +24,7 @@ import fr.putnami.pwt.core.widget.client.Nav.LinkStyle;
 import fr.putnami.pwt.core.widget.client.base.SimpleCollapse;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public class NavCollapse extends SimpleCollapse
-	implements Nav.IsNavContent, ValueChangeHandler<String> {
+public class NavCollapse extends SimpleCollapse implements Nav.IsNavContent, ValueChangeHandler<String> {
 
 	private boolean active = false;
 

@@ -41,8 +41,8 @@ public class ApplicationUnreachableExceptionHandler extends AbstractErrorHandler
 		if (!(error instanceof ApplicationUnreachableException)) {
 			return false;
 		}
-		this.errorDisplay.show(this.constants.applicationUnreachableTitle(), this.constants
-				.applicationUnreachableMessage());
+		this.errorDisplay.show(this.constants.applicationUnreachableTitle(),
+			this.constants.applicationUnreachableMessage());
 		return true;
 	}
 

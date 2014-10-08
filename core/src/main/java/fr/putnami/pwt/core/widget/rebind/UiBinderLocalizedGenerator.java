@@ -27,8 +27,7 @@ import com.google.gwt.i18n.shared.GwtLocale;
 public class UiBinderLocalizedGenerator extends Generator {
 
 	@Override
-	public String generate(TreeLogger logger, GeneratorContext context, String typeName)
-		throws UnableToCompleteException {
+	public String generate(TreeLogger logger, GeneratorContext context, String typeName) throws UnableToCompleteException {
 		TypeOracle typeOracle = context.getTypeOracle();
 		assert typeOracle != null;
 

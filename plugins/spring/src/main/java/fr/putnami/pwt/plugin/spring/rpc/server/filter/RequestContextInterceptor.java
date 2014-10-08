@@ -25,7 +25,7 @@ public class RequestContextInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
+		throws Exception {
 		RequestThreadLocalUtils.initContext(request, response);
 		return true;
 	}

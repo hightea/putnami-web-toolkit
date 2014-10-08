@@ -35,8 +35,8 @@ import fr.putnami.pwt.core.model.client.model.ModelCollection;
 import fr.putnami.pwt.core.model.client.visitor.ReadonlyVisitor;
 
 public class OutputList<T> extends List
-	implements EditorCollection<T>, EditorOutput<Collection<T>>, EditorModel<T>, HasDrawable,
-	HasEditorProvider, HasOutputEditorFactory {
+	implements EditorCollection<T>, EditorOutput<Collection<T>>, EditorModel<T>, HasDrawable, HasEditorProvider,
+	HasOutputEditorFactory {
 
 	private String path;
 	private Model<T> model;
@@ -145,6 +145,7 @@ public class OutputList<T> extends List
 
 	@Override
 	public void redraw() {
+		// NoOp
 	}
 
 }

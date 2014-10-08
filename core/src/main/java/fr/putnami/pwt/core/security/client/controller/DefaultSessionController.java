@@ -23,12 +23,10 @@ import fr.putnami.pwt.core.service.client.annotation.AsyncHandler;
 
 public class DefaultSessionController extends SessionController {
 
-	interface SessionServiceRemote
-		extends ServiceProxy<DefaultSessionController, SessionService>, SessionService {
+	interface SessionServiceRemote extends ServiceProxy<DefaultSessionController, SessionService>, SessionService {
 	}
 
-	private final SessionServiceRemote service = (SessionServiceRemote) GWT
-		.create(SessionServiceRemote.class);
+	private final SessionServiceRemote service = (SessionServiceRemote) GWT.create(SessionServiceRemote.class);
 
 	public DefaultSessionController() {
 		this.service.bindService(this);

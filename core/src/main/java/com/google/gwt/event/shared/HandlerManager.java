@@ -99,8 +99,7 @@ public class HandlerManager implements HasHandlers {
 	 * @param handler the handler
 	 * @return the handler registration, can be stored in order to remove the handler later
 	 */
-	public <H extends EventHandler> HandlerRegistration addHandler(GwtEvent.Type<H> type,
-		final H handler) {
+	public <H extends EventHandler> HandlerRegistration addHandler(GwtEvent.Type<H> type, final H handler) {
 		if (type != null && handler != null) {
 			return new LegacyHandlerWrapper(this.eventBus.addHandler(type, handler));
 		}

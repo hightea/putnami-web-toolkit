@@ -43,10 +43,8 @@ public class CommandExecutorImpl extends AbstractCommandExecutor {
 		for (int i = 0; i < method.getParameterTypes().length; i++) {
 			paramTypes[i] = method.getParameterTypes()[i].getName();
 		}
-		CommandDefinition definition =
-			new CommandDefinition(method.getDeclaringClass().getName(), method.getName(), method
-				.getReturnType().getName(),
-				paramTypes);
+		CommandDefinition definition = new CommandDefinition(
+			method.getDeclaringClass().getName(), method.getName(), method.getReturnType().getName(), paramTypes);
 		this.setCommandDefinition(definition);
 
 		this.executorLogger = LogFactory.getLog(method.getDeclaringClass().getCanonicalName());

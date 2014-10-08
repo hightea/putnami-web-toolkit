@@ -39,8 +39,7 @@ import fr.putnami.pwt.core.widget.client.helper.CollapseHelper;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
-public class Panel extends AbstractPanel implements CloneableWidget, HasOneWidget, HasDrawable,
-		HasCollapseHandlers {
+public class Panel extends AbstractPanel implements CloneableWidget, HasOneWidget, HasDrawable, HasCollapseHandlers {
 
 	private static final CssStyle STYLE_PANEL = new SimpleStyle("panel");
 	private static final CssStyle STYLE_BODY = new SimpleStyle("panel-body");
@@ -49,12 +48,12 @@ public class Panel extends AbstractPanel implements CloneableWidget, HasOneWidge
 	private static final CssStyle STYLE_FOOTER = new SimpleStyle("panel-footer");
 
 	public enum Color implements CssStyle {
-		DEFAULT("panel-default"),
-		PRIMARY("panel-primary"),
-		SUCCESS("panel-success"),
-		INFO("panel-info"),
-		WARNING("panel-warning"),
-		DANGER("panel-danger");
+			DEFAULT("panel-default"),
+			PRIMARY("panel-primary"),
+			SUCCESS("panel-success"),
+			INFO("panel-info"),
+			WARNING("panel-warning"),
+			DANGER("panel-danger");
 
 		private final String style;
 
@@ -269,8 +268,7 @@ public class Panel extends AbstractPanel implements CloneableWidget, HasOneWidge
 	public CollapseHelper ensureCollapseHelper() {
 		if (this.header != null && this.collapseHelper == null) {
 			boolean initialCollapse = this.collapse != null ? this.collapse : false;
-			this.collapseHelper =
-					CollapseHelper.apply(this.header, this.collapsePanel.getElement(), initialCollapse);
+			this.collapseHelper = CollapseHelper.apply(this.header, this.collapsePanel.getElement(), initialCollapse);
 			this.setCollapsible(this.collapsible);
 			if (this.collapse != null) {
 				this.setCollapse(this.collapse);

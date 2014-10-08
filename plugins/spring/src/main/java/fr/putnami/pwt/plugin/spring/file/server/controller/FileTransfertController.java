@@ -51,8 +51,8 @@ public class FileTransfertController {
 	@RequestMapping(value = "/file/upload/{uploadId}", method = RequestMethod.POST)
 	@ResponseBody
 	public FileDto upload(@PathVariable String uploadId,
-			@RequestParam("data") CommonsMultipartFile multipart, HttpServletRequest request,
-			HttpServletResponse response) {
+		@RequestParam("data") CommonsMultipartFile multipart, HttpServletRequest request,
+		HttpServletResponse response) {
 		InputStream in = null;
 		OutputStream out = null;
 		try {
@@ -80,7 +80,7 @@ public class FileTransfertController {
 
 	@RequestMapping(value = "/file/download/{fileId}", method = RequestMethod.GET)
 	public void downloadFile(@PathVariable String fileId, HttpServletRequest request,
-			HttpServletResponse response) {
+		HttpServletResponse response) {
 		try {
 			FileDto fileBean = this.store.getFileBean(fileId);
 			if (fileBean == null) {
@@ -88,8 +88,8 @@ public class FileTransfertController {
 			}
 			InputStream is = this.store.read(fileId);
 			response.setContentType(fileBean.getMime());
-			response.setHeader("Content-Disposition", "attachment; filename=\"" + fileBean.getName()
-					+ "\"");
+			response.setHeader("Content-Disposition", "attachment; filename=\""
+				+ fileBean.getName() + "\"");
 			response.setContentLength((int) fileBean.getContentLength());
 			IOUtils.copy(is, response.getOutputStream());
 			response.flushBuffer();

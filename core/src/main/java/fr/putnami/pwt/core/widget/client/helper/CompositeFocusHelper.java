@@ -45,13 +45,6 @@ import fr.putnami.pwt.core.widget.client.util.FocusUtils;
 
 public final class CompositeFocusHelper implements HasAllFocusHandlers {
 
-	public static CompositeFocusHelper createFocusHelper(IsWidget containerWidget,
-		HasFocusHandlers... focusContents) {
-		assert containerWidget != null : "containerWidget cannot be null";
-		assert containerWidget.asWidget() != null : "containerWidget.asWidget() cannot be null";
-		return new CompositeFocusHelper(containerWidget.asWidget(), focusContents);
-	}
-
 	private final KeyDownHandler keyDownHandler = new KeyDownHandler() {
 		@Override
 		public void onKeyDown(KeyDownEvent event) {
@@ -61,8 +54,7 @@ public final class CompositeFocusHelper implements HasAllFocusHandlers {
 					@Override
 					public void execute() {
 						Element activeElement = FocusUtils.getActiveElement();
-						if (activeElement != null
-							&& !CompositeFocusHelper.this.isOrHasChildOfContainerOrPartner(activeElement)) {
+						if (activeElement != null && !CompositeFocusHelper.this.isOrHasChildOfContainerOrPartner(activeElement)) {
 							CompositeFocusHelper.this.blur();
 						}
 					}
@@ -207,4 +199,11 @@ public final class CompositeFocusHelper implements HasAllFocusHandlers {
 	public void fireEvent(GwtEvent<?> event) {
 		this.handlerManager.fireEvent(event);
 	}
+
+	public static CompositeFocusHelper createFocusHelper(IsWidget containerWidget, HasFocusHandlers... focusContents) {
+		assert containerWidget != null : "containerWidget cannot be null";
+		assert containerWidget.asWidget() != null : "containerWidget.asWidget() cannot be null";
+		return new CompositeFocusHelper(containerWidget.asWidget(), focusContents);
+	}
+
 }

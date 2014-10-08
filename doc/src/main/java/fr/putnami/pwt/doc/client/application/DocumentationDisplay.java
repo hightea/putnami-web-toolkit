@@ -81,8 +81,7 @@ public class DocumentationDisplay extends Composite implements AcceptsOneWidget 
 		int height = this.getWidget().getElement().getClientHeight();
 
 		if (height < Window.getClientHeight()) {
-			this.viewContainer.getElement().getStyle().setHeight(Window.getClientHeight() - height,
-					Unit.PX);
+			this.viewContainer.getElement().getStyle().setHeight(Window.getClientHeight() - height, Unit.PX);
 		}
 		if (autoScroll) {
 			String historyToken = History.getToken();

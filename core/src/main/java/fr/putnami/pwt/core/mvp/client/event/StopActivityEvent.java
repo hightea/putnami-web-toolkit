@@ -78,8 +78,7 @@ public final class StopActivityEvent extends GwtEvent<StopActivityEvent.Handler>
 		return this.cancelActivity;
 	}
 
-	public static StopActivityEvent fire(Activity activity, Place place, IsWidget view,
-		boolean cancelActivity) {
+	public static StopActivityEvent fire(Activity activity, Place place, IsWidget view, boolean cancelActivity) {
 		StopActivityEvent event = new StopActivityEvent(activity, place, view, cancelActivity);
 		EventBus.get().fireEventFromSource(event, place);
 		return event;

@@ -38,32 +38,32 @@ public final class JavaConfiguration implements CodeEditorConfiguration {
 		TextRendererAspect renderAspect = new TextRendererAspect();
 
 		KeywordsTokenEvaluator wordTokenEvaluator =
-				new KeywordsTokenEvaluator(CssRendererTokenContent.DEFAULT_CSS_TOKEN_CONTENT);
+			new KeywordsTokenEvaluator(CssRendererTokenContent.DEFAULT_CSS_TOKEN_CONTENT);
 		wordTokenEvaluator.addWords(new CssRendererTokenContent("code-editor-java-keyword"),
-				"abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class",
-				"const", "continue", "default", "do", "double", "else", "enum", "extends", "false",
-				"final", "finally", "float", "for", "goto", "if", "implements", "import", "instanceof",
-				"int", "interface", "long", "native", "new", "null", "package", "private", "protected",
-				"public", "return", "short", "static", "strictfp", "super", "switch", "synchronized",
-				"this", "throw", "throws", "transient", "true", "try", "void", "volatile", "while");
+			"abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class",
+			"const", "continue", "default", "do", "double", "else", "enum", "extends", "false",
+			"final", "finally", "float", "for", "goto", "if", "implements", "import", "instanceof",
+			"int", "interface", "long", "native", "new", "null", "package", "private", "protected",
+			"public", "return", "short", "static", "strictfp", "super", "switch", "synchronized",
+			"this", "throw", "throws", "transient", "true", "try", "void", "volatile", "while");
 
 		renderAspect.registerEvaluator(new SingleLineTokenEvaluator("\"", "\"",
-				new CssRendererTokenContent("code-editor-java-string"), '\\'));
+			new CssRendererTokenContent("code-editor-java-string"), '\\'));
 		renderAspect.registerEvaluator(new SingleLineTokenEvaluator("'", "'",
-				new CssRendererTokenContent("code-editor-java-string"), '\\'));
+			new CssRendererTokenContent("code-editor-java-string"), '\\'));
 		renderAspect.registerEvaluator(new MultiLineTokenEvaluator("/**", "*/",
-				new CssRendererTokenContent("code-editor-java-doc"), '\\', true));
+			new CssRendererTokenContent("code-editor-java-doc"), '\\', true));
 		renderAspect.registerEvaluator(new MultiLineTokenEvaluator("/*", "*/",
-				new CssRendererTokenContent("code-editor-java-multi-line-comment"), '\\', true));
-		renderAspect.registerEvaluator(new EndOfLineTokenEvaluator("//", new CssRendererTokenContent(
-				"code-editor-java-single-line-comment")));
-		renderAspect.registerEvaluator(new EndOfLineTokenEvaluator("@", new CssRendererTokenContent(
-				"code-editor-java-annotation")));
+			new CssRendererTokenContent("code-editor-java-multi-line-comment"), '\\', true));
+		renderAspect.registerEvaluator(new EndOfLineTokenEvaluator("//",
+			new CssRendererTokenContent("code-editor-java-single-line-comment")));
+		renderAspect.registerEvaluator(new EndOfLineTokenEvaluator("@",
+			new CssRendererTokenContent("code-editor-java-annotation")));
 		renderAspect.registerEvaluator(wordTokenEvaluator);
 		this.aspects.add(renderAspect);
 
 		CodeContentAssistAspect assistAspect =
-				new CodeContentAssistAspect(new JavaKeywordAssistHandler());
+			new CodeContentAssistAspect(new JavaKeywordAssistHandler());
 		this.aspects.add(assistAspect);
 	}
 

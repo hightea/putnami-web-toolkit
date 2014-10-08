@@ -35,8 +35,7 @@ public class ServiceBinderGenerator extends Generator {
 
 		JClassType remoteServiceType = typeOracle.findType(remoteServiceClassName);
 		if (remoteServiceType == null) {
-			logger.log(TreeLogger.ERROR, "Unable to find metadata for type '" + remoteServiceClassName
-				+ "'", null);
+			logger.log(TreeLogger.ERROR, "Unable to find metadata for type '" + remoteServiceClassName + "'", null);
 			throw new UnableToCompleteException();
 		}
 
@@ -51,13 +50,12 @@ public class ServiceBinderGenerator extends Generator {
 			}
 		}
 		if (serviceType == null) {
-			logger.log(TreeLogger.ERROR, remoteServiceType.getQualifiedSourceName() + " must implement "
-				+ ServiceProxy.class.getCanonicalName(), null);
+			logger.log(TreeLogger.ERROR,
+				remoteServiceType.getQualifiedSourceName() + " must implement " + ServiceProxy.class.getCanonicalName(), null);
 			throw new UnableToCompleteException();
 		}
 
-		ServiceBinderCreator serviceBinderCreator =
-			new ServiceBinderCreator(remoteServiceType, serviceType, handlerType);
+		ServiceBinderCreator serviceBinderCreator = new ServiceBinderCreator(remoteServiceType, serviceType, handlerType);
 		try {
 			return serviceBinderCreator.create(logger, context);
 		} catch (NotFoundException e) {

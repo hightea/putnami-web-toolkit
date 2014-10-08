@@ -32,7 +32,9 @@ import fr.putnami.pwt.core.widget.client.TableEditor;
 public class TablesView extends Composite implements View {
 
 	public static enum Gender {
-		MALE, FEMALE, UNKNOWN
+			MALE,
+			FEMALE,
+			UNKNOWN
 	}
 
 	public static class Address {
@@ -110,8 +112,8 @@ public class TablesView extends Composite implements View {
 		result.add(new Bean(Gender.MALE, "Roger Waren", "roger.waren@waren.org", "Chicago"));
 		result.add(new Bean(Gender.FEMALE, "Irene Waren", "irene.waren@waren.org", "Chicago"));
 		result.add(new Bean(Gender.MALE, "Fred Stone", "fredstone@stone-family.com", "Springfield"));
-		result
-				.add(new Bean(Gender.FEMALE, "Amber Stone", "amber.stone@stone-family.com", "Springfield"));
+		result.add(
+			new Bean(Gender.FEMALE, "Amber Stone", "amber.stone@stone-family.com", "Springfield"));
 		return result;
 	}
 

@@ -22,7 +22,8 @@ import fr.putnami.pwt.doc.client.application.SummaryDecorator;
 
 @Templated
 public class ComponentsPage extends Page {
-	@ActivityDescription(view = ComponentsPage.class, aliases = {"Tables", "Forms"}, viewDecorator = SummaryDecorator.class)
+	@ActivityDescription(view = ComponentsPage.class,
+		aliases = {"Tables", "Forms"}, viewDecorator = SummaryDecorator.class)
 	public static class ComponentsPlace extends ViewPlace {
 	}
 }

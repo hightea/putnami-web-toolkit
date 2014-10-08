@@ -150,8 +150,7 @@ public abstract class AbstractInputBox<T extends TextBoxBase, I> extends Abstrac
 	@Override
 	public HandlerRegistration addDirtyHandler(Handler handler) {
 		if (this.valueChangeRegistration == null) {
-			this.valueChangeRegistration =
-				this.input.addValueChangeHandler(new ChangeEvent<String>(this));
+			this.valueChangeRegistration = this.input.addValueChangeHandler(new ChangeEvent<String>(this));
 		}
 		return super.addDirtyHandler(handler);
 	}
@@ -168,8 +167,7 @@ public abstract class AbstractInputBox<T extends TextBoxBase, I> extends Abstrac
 				this.setValue(value);
 			}
 		} catch (ParseException e) {
-			this.addError(ValidationUtils.createError(this, AbstractInputBox.ERROR_PARSING, this
-				.getValue(), strValue));
+			this.addError(ValidationUtils.createError(this, AbstractInputBox.ERROR_PARSING, this.getValue(), strValue));
 		}
 		return this.getValue();
 	}
@@ -216,8 +214,7 @@ public abstract class AbstractInputBox<T extends TextBoxBase, I> extends Abstrac
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addValueChangeHandler(
-		ValueChangeHandler<I> handler) {
+	public com.google.gwt.event.shared.HandlerRegistration addValueChangeHandler(ValueChangeHandler<I> handler) {
 		return this.input.addHandler(handler, ValueChangeEvent.getType());
 	}
 

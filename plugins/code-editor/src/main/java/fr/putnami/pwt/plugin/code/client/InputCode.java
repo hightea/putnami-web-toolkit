@@ -47,14 +47,14 @@ import fr.putnami.pwt.plugin.code.client.output.CodeOutput;
 import fr.putnami.pwt.plugin.code.client.output.CodeOutputImpl;
 
 public class InputCode extends AbstractInput<String> implements CodeEditor, HasPlaceholder,
-FocusHandler, ClickHandler, BlurHandler, HasHTML {
+	FocusHandler, ClickHandler, BlurHandler, HasHTML {
 
 	private final FlowPanel content;
 
 	private final CodeInput codeInput = new CodeInputImpl();
 	private final CodeOutput codeOutput = new CodeOutputImpl();
 	private final CodeEditorDriver codeDriver = new CodeEditorDriverImpl(this.codeInput,
-			this.codeOutput);
+		this.codeOutput);
 
 	private HandlerRegistration valueChangeRegistration;
 
@@ -120,14 +120,14 @@ FocusHandler, ClickHandler, BlurHandler, HasHTML {
 		if (this.valueChangeRegistration == null) {
 			// Hook to prevent blur on click on suggestion popup
 			this.valueChangeRegistration =
-					this.codeInput.addValueChangeHandler(new ChangeEvent<String>(InputCode.this));
+				this.codeInput.addValueChangeHandler(new ChangeEvent<String>(InputCode.this));
 		}
 		return super.addDirtyHandler(handler);
 	}
 
 	@Override
 	public com.google.gwt.event.shared.HandlerRegistration addValueChangeHandler(
-			ValueChangeHandler<String> handler) {
+		ValueChangeHandler<String> handler) {
 		return this.codeInput.addValueChangeHandler(handler);
 	}
 
@@ -152,8 +152,7 @@ FocusHandler, ClickHandler, BlurHandler, HasHTML {
 		this.codeDriver.applyConfiguration(configuration);
 		for (CodeEditorAspect aspect : this.codeDriver.getAspects()) {
 			if (aspect instanceof ContentAssistAspect) {
-				this.compositeFocus.addFocusPartner(((ContentAssistAspect) aspect).getSuggestionWidget()
-						.getElement());
+				this.compositeFocus.addFocusPartner(((ContentAssistAspect) aspect).getSuggestionWidget().getElement());
 			}
 		}
 	}
@@ -182,7 +181,7 @@ FocusHandler, ClickHandler, BlurHandler, HasHTML {
 		if (!this.displayInput) {
 			this.displayInput = true;
 			this.codeInput.asWidget().getElement().getStyle().setHeight(
-					this.codeOutput.asWidget().getElement().getOffsetHeight(), Unit.PX);
+				this.codeOutput.asWidget().getElement().getOffsetHeight(), Unit.PX);
 			this.codeOutput.asWidget().removeFromParent();
 			this.content.add(this.codeInput);
 			this.codeInput.setFocus(true);

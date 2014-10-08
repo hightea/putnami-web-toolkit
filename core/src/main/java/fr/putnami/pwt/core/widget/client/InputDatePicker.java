@@ -103,20 +103,15 @@ public class InputDatePicker extends FocusWidget
 
 	private static final int YEAR_OFFSET = 1900;
 
-	private static final DateTimeFormatInfo DATE_TIME_FORMAT_INFO = LocaleInfo.getCurrentLocale()
-		.getDateTimeFormatInfo();
-	private static final String[] DAYS = InputDatePicker.DATE_TIME_FORMAT_INFO
-		.weekdaysShortStandalone();
+	private static final DateTimeFormatInfo DATE_TIME_FORMAT_INFO = LocaleInfo.getCurrentLocale().getDateTimeFormatInfo();
+	private static final String[] DAYS = InputDatePicker.DATE_TIME_FORMAT_INFO.weekdaysShortStandalone();
 
-	private static final DateTimeFormat MONTH_YEAR_FORMAT = DateTimeFormat
-		.getFormat(InputDatePicker.WIDGET_PARAMS
-			.inputDatePickerMonthYearFormat());
-	private static final DateTimeFormat MONTH_ABBR_FORMAT = DateTimeFormat
-		.getFormat(InputDatePicker.WIDGET_PARAMS
-			.inputDatePickerMonthFormat());
+	private static final DateTimeFormat MONTH_YEAR_FORMAT = DateTimeFormat.getFormat(InputDatePicker.WIDGET_PARAMS
+		.inputDatePickerMonthYearFormat());
+	private static final DateTimeFormat MONTH_ABBR_FORMAT = DateTimeFormat.getFormat(InputDatePicker.WIDGET_PARAMS
+		.inputDatePickerMonthFormat());
 
-	private static final DateTimeFormat ATTRIBUTE_DATE_FORMAT = DateTimeFormat
-		.getFormat("yyyy-MM-dd");
+	private static final DateTimeFormat ATTRIBUTE_DATE_FORMAT = DateTimeFormat.getFormat("yyyy-MM-dd");
 
 	private final DivElement datepickerHeader = Document.get().createDivElement();
 
@@ -189,17 +184,13 @@ public class InputDatePicker extends FocusWidget
 		for (int i = 0; i < 7; i++) {
 			TableCellElement th = Document.get().createTHElement();
 			headRow.appendChild(th);
-			int dayToDisplay =
-				(i + InputDatePicker.DATE_TIME_FORMAT_INFO.firstDayOfTheWeek())
-					% InputDatePicker.DAYS.length;
+			int dayToDisplay = (i + InputDatePicker.DATE_TIME_FORMAT_INFO.firstDayOfTheWeek()) % InputDatePicker.DAYS.length;
 			th.setInnerText(InputDatePicker.DAYS[dayToDisplay]);
 		}
 		/* DayPicker Body */
 		this.calendarTable.appendChild(this.calendatBody);
 
-		this.today =
-			InputDatePicker.ATTRIBUTE_DATE_FORMAT.parse(InputDatePicker.ATTRIBUTE_DATE_FORMAT
-				.format(new Date()));
+		this.today = InputDatePicker.ATTRIBUTE_DATE_FORMAT.parse(InputDatePicker.ATTRIBUTE_DATE_FORMAT.format(new Date()));
 		this.setValue(this.today);
 
 		Event.sinkEvents(this.getElement(), Event.ONKEYDOWN);
@@ -340,9 +331,8 @@ public class InputDatePicker extends FocusWidget
 				for (int month = 0; month < 12; month++) {
 					LIElement monthElement = (LIElement) this.monthPickerUlMonthElement.getChild(month);
 					monthButtonDate.setMonth(month);
-					monthElement.setAttribute(InputDatePicker.ATTRIBUTE_DATA_CURSOR,
-						InputDatePicker.ATTRIBUTE_DATE_FORMAT
-							.format(monthButtonDate));
+					monthElement.setAttribute(InputDatePicker.ATTRIBUTE_DATA_CURSOR, InputDatePicker.ATTRIBUTE_DATE_FORMAT
+						.format(monthButtonDate));
 				}
 				this.monthPicker.setScrollTop(child.getOffsetTop());
 				break;
@@ -357,8 +347,7 @@ public class InputDatePicker extends FocusWidget
 		this.calendatBody.removeAllChildren();
 
 		int firstDayOfWeek = InputDatePicker.DATE_TIME_FORMAT_INFO.firstDayOfTheWeek();
-		int lastDayOfWeek =
-			(firstDayOfWeek + InputDatePicker.DAYS_IN_WEEK) % InputDatePicker.DAYS_IN_WEEK;
+		int lastDayOfWeek = (firstDayOfWeek + InputDatePicker.DAYS_IN_WEEK) % InputDatePicker.DAYS_IN_WEEK;
 
 		/* Display month */
 		this.monthPickerButton.setInnerHTML(InputDatePicker.MONTH_YEAR_FORMAT.format(this.cursor)
@@ -366,17 +355,14 @@ public class InputDatePicker extends FocusWidget
 
 		Date lastMonth = new Date(this.cursor.getTime());
 		CalendarUtil.addMonthsToDate(lastMonth, -1);
-		this.pagePreviusMonthLi.setAttribute(InputDatePicker.ATTRIBUTE_DATA_CURSOR,
-			InputDatePicker.ATTRIBUTE_DATE_FORMAT
-				.format(lastMonth));
-		this.pageTodayLi.setAttribute(InputDatePicker.ATTRIBUTE_DATA_CURSOR,
-			InputDatePicker.ATTRIBUTE_DATE_FORMAT
-				.format(this.today));
+		this.pagePreviusMonthLi.setAttribute(InputDatePicker.ATTRIBUTE_DATA_CURSOR, InputDatePicker.ATTRIBUTE_DATE_FORMAT
+			.format(lastMonth));
+		this.pageTodayLi.setAttribute(InputDatePicker.ATTRIBUTE_DATA_CURSOR, InputDatePicker.ATTRIBUTE_DATE_FORMAT
+			.format(this.today));
 		Date nextMonth = new Date(this.cursor.getTime());
 		CalendarUtil.addMonthsToDate(nextMonth, 1);
-		this.pageNextMonthLi.setAttribute(InputDatePicker.ATTRIBUTE_DATA_CURSOR,
-			InputDatePicker.ATTRIBUTE_DATE_FORMAT
-				.format(nextMonth));
+		this.pageNextMonthLi.setAttribute(InputDatePicker.ATTRIBUTE_DATA_CURSOR, InputDatePicker.ATTRIBUTE_DATE_FORMAT
+			.format(nextMonth));
 
 		/* Draw daypicker */
 		Date dateToDrow = new Date(this.cursor.getTime());
@@ -400,8 +386,7 @@ public class InputDatePicker extends FocusWidget
 			DivElement div = Document.get().createDivElement();
 			td.appendChild(div);
 			div.setInnerText(String.valueOf(dateToDrow.getDate()));
-			div.setAttribute(InputDatePicker.ATTRIBUTE_DATA_DATE, InputDatePicker.ATTRIBUTE_DATE_FORMAT
-				.format(dateToDrow));
+			div.setAttribute(InputDatePicker.ATTRIBUTE_DATA_DATE, InputDatePicker.ATTRIBUTE_DATE_FORMAT.format(dateToDrow));
 			if (dateToDrow.getMonth() != selectedMonth) {
 				StyleUtils.addStyle(td, InputDatePicker.STYLE_MUTED);
 			}

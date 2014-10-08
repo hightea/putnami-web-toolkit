@@ -40,22 +40,6 @@ public abstract class ThemeController {
 	private static ThemeController instance;
 
 	/**
-	 * Gets the singleton.
-	 * <p>
-	 * The singleton is instantiated with GWT.create(ThemeController.class), so you can customize your
-	 * implementation in your module .gwt.xml
-	 * </p>
-	 *
-	 * @return the theme controller
-	 */
-	public static ThemeController get() {
-		if (ThemeController.instance == null) {
-			ThemeController.instance = GWT.create(ThemeController.class);
-		}
-		return ThemeController.instance;
-	}
-
-	/**
 	 * protected theme controller constructor.
 	 * <p>
 	 * This constructor is protected you must get the ThemeController via the static get() method.
@@ -111,5 +95,21 @@ public abstract class ThemeController {
 	 * @return the css icon style name
 	 */
 	public abstract CssStyle getIconStyle(String iconName);
+
+	/**
+	 * Gets the singleton.
+	 * <p>
+	 * The singleton is instantiated with GWT.create(ThemeController.class), so you can customize your
+	 * implementation in your module .gwt.xml
+	 * </p>
+	 *
+	 * @return the theme controller
+	 */
+	public static ThemeController get() {
+		if (ThemeController.instance == null) {
+			ThemeController.instance = GWT.create(ThemeController.class);
+		}
+		return ThemeController.instance;
+	}
 
 }

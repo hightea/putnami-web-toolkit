@@ -50,8 +50,8 @@ public class EditorFactoryVisitor extends AbstractVisitor {
 		private Map<Integer, Editor> inputEditors;
 		private Map<Integer, Editor> outputEditors;
 
-		private InternalEditorProvider(Context<?> parentContext, Class<?> propertyType,
-			CloneableWidget inputFactory, CloneableWidget outputFactory) {
+		private InternalEditorProvider(Context<?> parentContext, Class<?> propertyType, CloneableWidget inputFactory,
+			CloneableWidget outputFactory) {
 			super();
 			this.parentContext = parentContext;
 			this.propertyType = propertyType;
@@ -96,8 +96,7 @@ public class EditorFactoryVisitor extends AbstractVisitor {
 
 		private CloneableWidget getOutputFacoty() {
 			if (this.outputFactory == null) {
-				this.outputFactory =
-					EditorFactoryManager.get().createOutputForType(this.propertyType, this.parentContext);
+				this.outputFactory = EditorFactoryManager.get().createOutputForType(this.propertyType, this.parentContext);
 			}
 			assert this.outputFactory != null : "output factory is null, can not create an output editor for "
 				+ this.propertyType;
@@ -106,8 +105,7 @@ public class EditorFactoryVisitor extends AbstractVisitor {
 
 		private CloneableWidget getInputFacoty() {
 			if (this.inputFactory == null) {
-				this.inputFactory =
-					EditorFactoryManager.get().createInputForType(this.propertyType, this.parentContext);
+				this.inputFactory = EditorFactoryManager.get().createInputForType(this.propertyType, this.parentContext);
 			}
 			assert this.inputFactory != null : "intput factory is null, can not create an input editor for "
 				+ this.propertyType;
@@ -120,8 +118,7 @@ public class EditorFactoryVisitor extends AbstractVisitor {
 				editor.setPath(path);
 			}
 			ModelDriver<?> driver = this.parentContext.getDriver();
-			Context<?> context =
-				ContextFactory.Util.get().createContext(driver, this.parentContext, editor);
+			Context<?> context = ContextFactory.Util.get().createContext(driver, this.parentContext, editor);
 			driver.accept(new BinderVisitor(driver, driver.getValue()), context);
 		}
 	}
@@ -158,8 +155,8 @@ public class EditorFactoryVisitor extends AbstractVisitor {
 			}
 
 			EditorProvider provider =
-				new InternalEditorProvider(context, propertyType, inputFactory == null ? widgetFactory
-					: inputFactory, outputFactory == null ? widgetFactory : outputFactory);
+				new InternalEditorProvider(context, propertyType, inputFactory == null ? widgetFactory : inputFactory,
+					outputFactory == null ? widgetFactory : outputFactory);
 
 			((HasEditorProvider) editor).setEditorProvider(provider);
 		}

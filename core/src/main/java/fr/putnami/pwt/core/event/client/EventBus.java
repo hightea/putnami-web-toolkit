@@ -29,6 +29,9 @@ public final class EventBus extends SimpleEventBus {
 
 	private static EventBus instance;
 
+	private EventBus() {
+	}
+
 	/**
 	 * Get the singleton.
 	 *
@@ -39,8 +42,5 @@ public final class EventBus extends SimpleEventBus {
 			EventBus.instance = new EventBus();
 		}
 		return EventBus.instance;
-	}
-
-	private EventBus() {
 	}
 }

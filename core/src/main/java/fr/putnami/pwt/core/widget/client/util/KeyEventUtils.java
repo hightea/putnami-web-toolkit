@@ -22,19 +22,16 @@ import java.util.List;
 
 public final class KeyEventUtils {
 
-	public static final List<Integer> KEYS_SYSTEM = Lists.newArrayList(KeyCodes.KEY_ALT,
-		KeyCodes.KEY_BACKSPACE,
-		KeyCodes.KEY_CTRL, KeyCodes.KEY_DELETE, KeyCodes.KEY_DOWN, KeyCodes.KEY_END,
-		KeyCodes.KEY_ENTER,
-		KeyCodes.KEY_ESCAPE, KeyCodes.KEY_HOME, KeyCodes.KEY_LEFT, KeyCodes.KEY_PAGEDOWN,
-		KeyCodes.KEY_PAGEUP,
+	public static final List<Integer> KEYS_SYSTEM = Lists.newArrayList(KeyCodes.KEY_ALT, KeyCodes.KEY_BACKSPACE,
+		KeyCodes.KEY_CTRL, KeyCodes.KEY_DELETE, KeyCodes.KEY_DOWN, KeyCodes.KEY_END, KeyCodes.KEY_ENTER,
+		KeyCodes.KEY_ESCAPE, KeyCodes.KEY_HOME, KeyCodes.KEY_LEFT, KeyCodes.KEY_PAGEDOWN, KeyCodes.KEY_PAGEUP,
 		KeyCodes.KEY_RIGHT, KeyCodes.KEY_SHIFT, KeyCodes.KEY_TAB, KeyCodes.KEY_UP);
+
+	private KeyEventUtils() {
+	}
 
 	public static boolean isModifierKeyDown(NativeEvent currentEvent) {
 		return currentEvent.getCtrlKey() || currentEvent.getShiftKey() || currentEvent.getMetaKey()
 			|| currentEvent.getAltKey();
-	}
-
-	private KeyEventUtils() {
 	}
 }

@@ -22,10 +22,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface AsyncHandler {
+	String DEFAULT_METHOD_NAME = "__FROM_HANDLER_NAME__";
 
 	String method() default AsyncHandler.DEFAULT_METHOD_NAME;
 
 	Class<?>[] argTypes() default {};
 
-	String DEFAULT_METHOD_NAME = "__FROM_HANDLER_NAME__";
 }

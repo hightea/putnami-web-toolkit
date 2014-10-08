@@ -69,8 +69,7 @@ public final class DefaultCommandController extends CommandController {
 				for (Request request : this.requests) {
 					if (request.requestId == response.getRequestId()) {
 						if (!request.param.isQuiet()) {
-							DefaultCommandController.this.fireEvent(new CommandResponseEvent(request.requestId,
-								request.command,
+							DefaultCommandController.this.fireEvent(new CommandResponseEvent(request.requestId, request.command,
 								response));
 						}
 						if (response.getThrown() == null) {
@@ -135,11 +134,7 @@ public final class DefaultCommandController extends CommandController {
 	private static final String REMOTE_SERVICE_INTERFACE_NAME = CommandService.class.getName();
 	private static final String METHOD_NAME = "executeCommands";
 
-	private static final DefaultCommandController INSTANCE = new DefaultCommandController();
-
-	public static DefaultCommandController get() {
-		return DefaultCommandController.INSTANCE;
-	}
+	private static DefaultCommandController instance;
 
 	private final RpcRequestBuilder rpcRequestBuilder = new RpcRequestBuilder();
 	private final String moduleBaseURL;
@@ -233,8 +228,7 @@ public final class DefaultCommandController extends CommandController {
 			}
 
 			ServiceCallback serviceCallback = new ServiceCallback(requests, callback);
-			CommandServiceCompositeSerializer compositeSerializer =
-				new CommandServiceCompositeSerializer(serializers);
+			CommandServiceCompositeSerializer compositeSerializer = new CommandServiceCompositeSerializer(serializers);
 
 			SerializationStreamFactory streamFactory =
 				new CommandSerializationStreamFactory(compositeSerializer, this.moduleBaseURL);
@@ -251,8 +245,7 @@ public final class DefaultCommandController extends CommandController {
 			RpcStatsContext statsContext = new RpcStatsContext();
 
 			RequestCallback responseHandler =
-				new RequestCallbackAdapter<List<CommandResponse>>(streamFactory,
-					DefaultCommandController.METHOD_NAME,
+				new RequestCallbackAdapter<List<CommandResponse>>(streamFactory, DefaultCommandController.METHOD_NAME,
 					statsContext, serviceCallback, null, ResponseReader.OBJECT);
 
 			this.rpcRequestBuilder.create(this.remoteServiceURL);
@@ -286,4 +279,12 @@ public final class DefaultCommandController extends CommandController {
 	public HandlerRegistration addCommandResponseHandler(CommandResponseEvent.Handler handler) {
 		return EventBus.get().addHandlerToSource(CommandResponseEvent.TYPE, this, handler);
 	}
+
+	public static DefaultCommandController get() {
+		if (instance == null) {
+			instance = new DefaultCommandController();
+		}
+		return instance;
+	}
+
 }

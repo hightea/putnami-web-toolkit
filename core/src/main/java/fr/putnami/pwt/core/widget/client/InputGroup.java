@@ -136,6 +136,7 @@ public class InputGroup<T> extends AbstractPanel implements EditorInput<T> {
 
 	@Override
 	public void addValidator(Validator<T> validator) {
+		// no validator required for input group
 	}
 
 	@Override

@@ -27,12 +27,14 @@ import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 
 public final class WidgetUtils {
 
+	private WidgetUtils() {
+	}
+
 	public static <W extends IsWidget> W cloneWidget(W widget) {
 		if (widget == null) {
 			return null;
 		}
-		assert widget instanceof CloneableWidget : widget.getClass()
-			+ " does not implement CloneableWidget";
+		assert widget instanceof CloneableWidget : widget.getClass() + " does not implement CloneableWidget";
 		CloneableWidget cloneableWidget = (CloneableWidget) widget;
 		return (W) cloneableWidget.cloneWidget();
 	}
@@ -62,8 +64,5 @@ public final class WidgetUtils {
 				WidgetUtils.collectChildren(widget, children);
 			}
 		}
-	}
-
-	private WidgetUtils() {
 	}
 }

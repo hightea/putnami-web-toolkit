@@ -28,8 +28,7 @@ import fr.putnami.pwt.core.inject.rebind.util.InjectCreatorUtil;
 public class InitializeFormCreatorFactory implements InjectorDelegateFactorty {
 
 	@Override
-	public void createDelegates(JClassType injectableType,
-		Collection<InjectorCreatorDelegate> delegates) {
+	public void createDelegates(JClassType injectableType, Collection<InjectorCreatorDelegate> delegates) {
 		Collection<JField> fields = InjectCreatorUtil.listFields(injectableType, Initialize.class);
 		for (JField field : fields) {
 			delegates.add(new InitializeFormCreator(field));

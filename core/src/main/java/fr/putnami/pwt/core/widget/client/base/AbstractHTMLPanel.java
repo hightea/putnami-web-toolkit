@@ -59,8 +59,7 @@ public abstract class AbstractHTMLPanel extends HTMLPanel
 		this(source.tag, source.html);
 		this.path = source.path;
 		for (Map.Entry<Widget, String> widgetEntry : source.children.entrySet()) {
-			this.addAndReplaceElement(WidgetUtils.cloneWidget(widgetEntry.getKey()), widgetEntry
-				.getValue());
+			this.addAndReplaceElement(WidgetUtils.cloneWidget(widgetEntry.getKey()), widgetEntry.getValue());
 		}
 		this.handlerManager = new HandlerManager(source.handlerManager, this);
 		this.handlerManager.resetSinkEvents();

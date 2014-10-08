@@ -37,8 +37,7 @@ import fr.putnami.pwt.core.widget.client.helper.PaginationHelper;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class TableEditor<T> extends Table<T>
-	implements HasDriver<Collection<T>, ModelDriver<Collection<T>>>, EditorLeaf,
-	EditorOutput<Collection<T>>,
+	implements HasDriver<Collection<T>, ModelDriver<Collection<T>>>, EditorLeaf, EditorOutput<Collection<T>>,
 	EditorInput<Collection<T>>, EditorModel<T> {
 
 	private MessageHelper messageHelper;
@@ -178,6 +177,7 @@ public class TableEditor<T> extends Table<T>
 
 	@Override
 	public void addValidator(Validator<Collection<T>> validator) {
+		// TODO check if the validator must not be added to the driver.
 	}
 
 }

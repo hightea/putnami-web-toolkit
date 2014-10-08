@@ -30,20 +30,17 @@ import fr.putnami.pwt.core.inject.rebind.delegate.InjectThemeCreator;
 public class ModuleCreatorFactory implements InjectorDelegateFactorty {
 
 	@Override
-	public void createDelegates(JClassType injectableType,
-		Collection<InjectorCreatorDelegate> delegates) {
+	public void createDelegates(JClassType injectableType, Collection<InjectorCreatorDelegate> delegates) {
 		if (injectableType.getAnnotation(MvpDescription.class) != null) {
-			delegates
-				.add(new InjectMvpDescriptionCreator(injectableType, injectableType
-					.getAnnotation(MvpDescription.class)));
+			delegates.add(
+				new InjectMvpDescriptionCreator(injectableType, injectableType.getAnnotation(MvpDescription.class)));
 		}
 		if (injectableType.getAnnotation(ThemeDescription.class) != null) {
-			delegates.add(new InjectThemeCreator(injectableType, injectableType
-				.getAnnotation(ThemeDescription.class)));
+			delegates.add(new InjectThemeCreator(injectableType, injectableType.getAnnotation(ThemeDescription.class)));
 		}
 		if (injectableType.getAnnotation(ErrorManagmentDescription.class) != null) {
-			delegates.add(new InjectErrorManagerCreator(injectableType, injectableType
-				.getAnnotation(ErrorManagmentDescription.class)));
+			delegates.add(
+				new InjectErrorManagerCreator(injectableType, injectableType.getAnnotation(ErrorManagmentDescription.class)));
 		}
 	}
 

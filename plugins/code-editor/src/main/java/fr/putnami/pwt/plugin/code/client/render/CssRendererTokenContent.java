@@ -21,7 +21,7 @@ import fr.putnami.pwt.plugin.code.client.token.TokenContent;
 public class CssRendererTokenContent implements TokenContent {
 
 	public static final CssRendererTokenContent DEFAULT_CSS_TOKEN_CONTENT =
-			new CssRendererTokenContent(null);
+		new CssRendererTokenContent(null);
 
 	private String cssStyle;
 

@@ -56,8 +56,7 @@ public class ProxyViewCreator {
 		this.placeType = placeType;
 		this.packageName = this.placeType.getPackage().getName();
 		String qualifiedName = this.placeType.getQualifiedSourceName() + ProxyViewCreator.PROXY_SUFFIX;
-		this.viewProxyQualifiedName =
-			qualifiedName.replace(placeType.getName(), placeType.getName().replace('.', '_'));
+		this.viewProxyQualifiedName = qualifiedName.replace(placeType.getName(), placeType.getName().replace('.', '_'));
 		this.viewProxySimpleName = this.viewProxyQualifiedName.replace(this.packageName + ".", "");
 		this.activityDescrition = placeType.getAnnotation(ActivityDescription.class);
 		this.placeTokenizerClass = this.activityDescrition.placeTokenizer();
@@ -121,8 +120,7 @@ public class ProxyViewCreator {
 		boolean hasTokeConstructor = false;
 		for (JConstructor constructor : this.placeType.getConstructors()) {
 			if (constructor.getParameters().length == 1
-				&& constructor.getParameters()[0].getType().getSimpleSourceName().equals(
-					String.class.getSimpleName())) {
+				&& constructor.getParameters()[0].getType().getSimpleSourceName().equals(String.class.getSimpleName())) {
 				hasTokeConstructor = true;
 			}
 		}
@@ -132,9 +130,8 @@ public class ProxyViewCreator {
 		if (hasTokeConstructor) {
 			srcWriter.println("return new %s(token);", this.placeType.getSimpleSourceName());
 		} else {
-			srcWriter.println("%s place = new %s();", this.placeType.getSimpleSourceName(),
-				this.placeType
-					.getSimpleSourceName());
+			srcWriter.println("%s place = new %s();",
+				this.placeType.getSimpleSourceName(), this.placeType.getSimpleSourceName());
 			srcWriter.println("place.setToken(token);");
 			srcWriter.println("return place;");
 		}
@@ -197,8 +194,8 @@ public class ProxyViewCreator {
 			srcWriter.indent();
 			srcWriter.println("public void onFailure(Throwable reason) {");
 			srcWriter.indent();
-			srcWriter
-				.println("if (ApplicationUnreachableException.HTTP_DOWNLOAD_FAILURE_EXCEPTION.equals(reason.getClass().getSimpleName())) {");
+			srcWriter.println("if (ApplicationUnreachableException.HTTP_DOWNLOAD_FAILURE_EXCEPTION"
+				+ ".equals(reason.getClass().getSimpleName())) {");
 			srcWriter.indent();
 			srcWriter.println("reason = new ApplicationUnreachableException(reason);");
 			srcWriter.outdent();
@@ -208,8 +205,7 @@ public class ProxyViewCreator {
 			srcWriter.println("}");
 			srcWriter.println("public void onSuccess() {");
 			srcWriter.indent();
-			srcWriter.println("if(view == null || %s){",
-				this.activityDescrition.scope() == Scope.PROTOTYPE);
+			srcWriter.println("if(view == null || %s){", this.activityDescrition.scope() == Scope.PROTOTYPE);
 			srcWriter.indent();
 			srcWriter.println("view = GWT.create(%s.class);", viewName);
 			srcWriter.outdent();
@@ -220,8 +216,7 @@ public class ProxyViewCreator {
 			srcWriter.outdent();
 			srcWriter.println("});");
 		} else {
-			srcWriter.println("if(view == null || %s){",
-				this.activityDescrition.scope() == Scope.PROTOTYPE);
+			srcWriter.println("if(view == null || %s){", this.activityDescrition.scope() == Scope.PROTOTYPE);
 			srcWriter.indent();
 			srcWriter.println("view = GWT.create(%s.class);", viewName);
 			srcWriter.outdent();
@@ -266,8 +261,8 @@ public class ProxyViewCreator {
 			composerFactory.addImport(this.viewDecoratorClass.getCanonicalName());
 		}
 
-		composerFactory.addImplementedInterface(ViewProxy.class.getSimpleName() + "<"
-			+ this.placeType.getSimpleSourceName() + ">");
+		composerFactory.addImplementedInterface(
+			ViewProxy.class.getSimpleName() + "<" + this.placeType.getSimpleSourceName() + ">");
 
 		return composerFactory.createSourceWriter(ctx, printWriter);
 	}

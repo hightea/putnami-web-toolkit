@@ -49,13 +49,6 @@ public class MvpController extends PlaceController
 
 	private static MvpController instance;
 
-	public static MvpController get() {
-		if (MvpController.instance == null) {
-			MvpController.instance = new MvpController();
-		}
-		return MvpController.instance;
-	}
-
 	private static final String PLACE_CROWLER_DELIMITER = "!";
 	private static final String PLACE_SEPARATOR = "/";
 	private static final char PLACE_TOKEN_SEPARATOR = '=';
@@ -212,8 +205,7 @@ public class MvpController extends PlaceController
 		if (this.historyRegistration != null) {
 			this.historyRegistration.removeHandler();
 		}
-		this.historyRegistration =
-			this.historyHandler.register(this, EventBus.get(), this.defaultPlace);
+		this.historyRegistration = this.historyHandler.register(this, EventBus.get(), this.defaultPlace);
 	}
 
 	private void doGo(Place newPlace) {
@@ -242,4 +234,12 @@ public class MvpController extends PlaceController
 		fr.putnami.pwt.core.mvp.client.event.MayStopActivityEvent.Handler handler) {
 		return EventBus.get().addHandler(MayStopActivityEvent.TYPE, handler);
 	}
+
+	public static MvpController get() {
+		if (MvpController.instance == null) {
+			MvpController.instance = new MvpController();
+		}
+		return MvpController.instance;
+	}
+
 }

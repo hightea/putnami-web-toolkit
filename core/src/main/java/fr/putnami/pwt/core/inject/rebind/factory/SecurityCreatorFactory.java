@@ -26,8 +26,7 @@ import fr.putnami.pwt.core.inject.rebind.delegate.InjectSecuritedCreator;
 public class SecurityCreatorFactory implements InjectorDelegateFactorty {
 
 	@Override
-	public void createDelegates(JClassType injectableType,
-		Collection<InjectorCreatorDelegate> delegates) {
+	public void createDelegates(JClassType injectableType, Collection<InjectorCreatorDelegate> delegates) {
 		Secured securedAnnotation = injectableType.getAnnotation(Secured.class);
 		if (securedAnnotation != null) {
 			delegates.add(new InjectSecuritedCreator(securedAnnotation));

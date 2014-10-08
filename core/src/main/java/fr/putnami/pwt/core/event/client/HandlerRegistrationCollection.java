@@ -24,8 +24,7 @@ import java.util.Collection;
  *
  * @since 1.0
  */
-public class HandlerRegistrationCollection
-	implements com.google.gwt.event.shared.HandlerRegistration {
+public class HandlerRegistrationCollection implements com.google.gwt.event.shared.HandlerRegistration {
 
 	private final Collection<HandlerRegistration> handlers = Lists.newArrayList();
 

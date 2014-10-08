@@ -28,8 +28,7 @@ import fr.putnami.pwt.core.inject.rebind.util.InjectCreatorUtil;
 public class PostconstructCreatorFactory implements InjectorDelegateFactorty {
 
 	@Override
-	public void createDelegates(JClassType injectableType,
-		Collection<InjectorCreatorDelegate> delegates) {
+	public void createDelegates(JClassType injectableType, Collection<InjectorCreatorDelegate> delegates) {
 		Collection<JMethod> methods = InjectCreatorUtil.listMethod(injectableType, PostConstruct.class);
 		for (JMethod postConstructMethod : methods) {
 			delegates.add(new InjectPostconstructCreator(postConstructMethod));

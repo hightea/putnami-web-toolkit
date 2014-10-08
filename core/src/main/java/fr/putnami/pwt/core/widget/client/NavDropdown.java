@@ -24,8 +24,7 @@ import fr.putnami.pwt.core.widget.client.Nav.LinkStyle;
 import fr.putnami.pwt.core.widget.client.base.SimpleDropdown;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public class NavDropdown extends SimpleDropdown
-	implements Nav.IsNavContent, ValueChangeHandler<String> {
+public class NavDropdown extends SimpleDropdown implements Nav.IsNavContent, ValueChangeHandler<String> {
 
 	private boolean active = false;
 
@@ -47,8 +46,7 @@ public class NavDropdown extends SimpleDropdown
 	public void setActive(boolean active) {
 		this.active = active;
 		StyleUtils.toggleStyle(this, LinkStyle.ACTIVE, active);
-		if (active && this.getParent() != null
-			&& this.getParent().getParent() instanceof Nav.IsNavContent) {
+		if (active && this.getParent() != null && this.getParent().getParent() instanceof Nav.IsNavContent) {
 			// if dropdown is in dropdown => parent is container and parent.parent is dropdown
 			((Nav.IsNavContent) this.getParent().getParent()).setActive(true);
 		}

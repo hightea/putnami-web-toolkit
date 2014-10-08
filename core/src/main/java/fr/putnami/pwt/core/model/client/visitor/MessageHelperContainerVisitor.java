@@ -26,8 +26,7 @@ public class MessageHelperContainerVisitor extends AbstractVisitor {
 	@Override
 	public <A, B extends Editor> boolean visit(Context<B> context) {
 		B editor = context.getEditor();
-		if (editor instanceof HasMessageHelper
-			&& ((HasMessageHelper) editor).getMessageHelper() == null) {
+		if (editor instanceof HasMessageHelper && ((HasMessageHelper) editor).getMessageHelper() == null) {
 			ModelDriver<?> driver = context.getDriver();
 			((HasMessageHelper) editor).setMessageHelper(driver.getMessageHelper());
 		}

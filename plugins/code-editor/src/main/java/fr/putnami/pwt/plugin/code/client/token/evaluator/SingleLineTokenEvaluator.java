@@ -19,17 +19,17 @@ import fr.putnami.pwt.plugin.code.client.token.TokenContent;
 public class SingleLineTokenEvaluator extends PatternTokenEvaluator {
 
 	public SingleLineTokenEvaluator(String startSequence, String endSequence,
-			TokenContent tokenContent) {
+		TokenContent tokenContent) {
 		this(startSequence, endSequence, tokenContent, (char) 0);
 	}
 
 	public SingleLineTokenEvaluator(String startSequence, String endSequence,
-			TokenContent tokenContent, char escapeCharacter) {
+		TokenContent tokenContent, char escapeCharacter) {
 		this(startSequence, endSequence, tokenContent, escapeCharacter, false);
 	}
 
 	public SingleLineTokenEvaluator(String startSequence, String endSequence,
-			TokenContent tokenContent, char escapeCharacter, boolean breaksOnEOF) {
+		TokenContent tokenContent, char escapeCharacter, boolean breaksOnEOF) {
 		super(startSequence, endSequence, tokenContent, escapeCharacter, true, breaksOnEOF);
 	}
 

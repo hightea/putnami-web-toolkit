@@ -39,8 +39,7 @@ import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
 import fr.putnami.pwt.core.widget.client.base.AbstractTableCell;
 
 public class TableRow<T> extends AbstractPanel
-	implements EditorOutput<T>, EditorInput<T>, EditorLeaf, EditorModel<T>, HasReadonly,
-	HasClickHandlers {
+	implements EditorOutput<T>, EditorInput<T>, EditorLeaf, EditorModel<T>, HasReadonly, HasClickHandlers {
 
 	private MessageHelper messageHelper;
 	private Model<T> model;
@@ -143,6 +142,7 @@ public class TableRow<T> extends AbstractPanel
 
 	@Override
 	public void addValidator(Validator<T> validator) {
+		// TODO check if the validator must not be added to the driver.
 	}
 
 }

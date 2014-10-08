@@ -80,8 +80,8 @@ public class CodeContentAssistAspect extends ContentAssistAspect implements Code
 			CodeInput codeInput = (CodeInput) textInput;
 			String oldText = codeInput.getText();
 			String newText =
-					suggestion.getReplacementString()
-							+ oldText.substring(codeInput.getCursorPosition(), oldText.length());
+				suggestion.getReplacementString()
+					+ oldText.substring(codeInput.getCursorPosition(), oldText.length());
 			codeInput.setText(newText);
 			codeInput.setCursorPosition(suggestion.getReplacementString().length());
 		}

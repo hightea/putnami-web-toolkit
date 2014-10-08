@@ -52,7 +52,7 @@ public class AddressBookView extends Composite implements View<AddressBookPlace>
 	}
 
 	interface Constants extends SampleCommonConstants, ContactConstants, AddressConstants,
-			GenderConstants {
+		GenderConstants {
 	}
 
 	public interface GroupModel extends Model<Group> {
@@ -254,7 +254,7 @@ public class AddressBookView extends Composite implements View<AddressBookPlace>
 		editContactButton.setDisabled(true);
 
 		cancelContactButton.setDisabled(false);
-		//		saveContactButton.setDisabled(false);
+		// saveContactButton.setDisabled(false);
 
 		editNameRow.setVisible(true);
 		viewNameRow.setVisible(false);

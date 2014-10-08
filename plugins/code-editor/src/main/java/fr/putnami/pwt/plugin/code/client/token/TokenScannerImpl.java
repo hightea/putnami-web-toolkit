@@ -73,7 +73,7 @@ public class TokenScannerImpl implements TokenScanner {
 		// Default
 		this.charScanner.read();
 		return new SimpleToken<TokenContent>(this.charScanner.getMark(), Character
-				.toString((char) charScanned), this.defaultReturnTokenContent);
+			.toString((char) charScanned), this.defaultReturnTokenContent);
 	}
 
 	@Override

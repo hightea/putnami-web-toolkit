@@ -74,5 +74,6 @@ public class Form<T> extends AbstractForm<T> implements HasHeader, HasFooter {
 
 	@Override
 	public void addValidator(Validator<T> validator) {
+		// TODO check if the validator must not be added to the driver.
 	}
 }

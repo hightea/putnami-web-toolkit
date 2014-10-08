@@ -34,7 +34,7 @@ public class LiveValueChangeEvent extends GwtEvent<LiveValueChangeEvent.Handler>
 	public static final Type<Handler> TYPE = new Type<Handler>();
 
 	public static void fireIfNotEqual(HasLiveValueChangeHandlers source, String oldValue,
-			String newValue) {
+		String newValue) {
 		if (LiveValueChangeEvent.shouldFire(oldValue, newValue)) {
 			LiveValueChangeEvent event = new LiveValueChangeEvent(newValue);
 			source.fireEvent(event);

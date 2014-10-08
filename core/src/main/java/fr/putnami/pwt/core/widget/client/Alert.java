@@ -43,10 +43,10 @@ public class Alert<T> extends AbstractForm<T> implements HasAlertDismissHandlers
 	private static final CssStyle STYLE_CLOSE = new SimpleStyle("close");
 
 	public enum Type implements CssStyle {
-		SUCCESS("alert-success"),
-		INFO("alert-info"),
-		WARNING("alert-warning"),
-		DANGER("alert-danger");
+			SUCCESS("alert-success"),
+			INFO("alert-info"),
+			WARNING("alert-warning"),
+			DANGER("alert-danger");
 
 		private final String style;
 

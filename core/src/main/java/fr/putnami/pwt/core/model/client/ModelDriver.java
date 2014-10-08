@@ -61,8 +61,7 @@ public class ModelDriver<T> implements Driver<T> {
 
 	public static class DefaultContextFactory implements ContextFactory {
 		@Override
-		public <B extends Editor> Context<B> createContext(ModelDriver<?> driver,
-			Context<?> parentContext, B editor) {
+		public <B extends Editor> Context<B> createContext(ModelDriver<?> driver, Context<?> parentContext, B editor) {
 			Context<B> context = (Context<B>) driver.getContext(editor);
 			if (context != null) {
 				return context;
@@ -105,8 +104,7 @@ public class ModelDriver<T> implements Driver<T> {
 				driver.accept(visitor, context);
 			}
 
-			if (editor instanceof EditorComposite
-				&& (parentContext == null || !(editor instanceof EditorLeaf))) {
+			if (editor instanceof EditorComposite && (parentContext == null || !(editor instanceof EditorLeaf))) {
 				for (Editor child : ((EditorComposite) editor).getEditors()) {
 					this.createContext(driver, context, child);
 				}
@@ -190,8 +188,7 @@ public class ModelDriver<T> implements Driver<T> {
 
 	@Override
 	public Iterable<Error> getErrors() {
-		return this.errors == null ? Collections.<Error> emptyList() : Iterables
-			.unmodifiableIterable(this.errors);
+		return this.errors == null ? Collections.<Error> emptyList() : Iterables.unmodifiableIterable(this.errors);
 	}
 
 	@Override

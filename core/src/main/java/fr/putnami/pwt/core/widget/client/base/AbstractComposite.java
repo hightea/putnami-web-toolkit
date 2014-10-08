@@ -21,8 +21,7 @@ import com.google.gwt.user.client.ui.Widget;
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public abstract class AbstractComposite extends Composite
-	implements HasResponsiveVisibility, CloneableWidget {
+public abstract class AbstractComposite extends Composite implements HasResponsiveVisibility, CloneableWidget {
 
 	private HandlerManager handlerManager;
 
