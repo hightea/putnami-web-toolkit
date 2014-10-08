@@ -28,6 +28,9 @@ public class MaxValidator extends AbstractValidator<Number> {
 
 	@Override
 	protected final boolean isValid(Number value) {
+		if (value == null) {
+			return true;
+		}
 		if (value instanceof BigDecimal) {
 			return ((BigDecimal) value).compareTo(BigDecimal.valueOf(this.max)) <= 0;
 		} else if (value instanceof BigInteger) {

@@ -30,6 +30,9 @@ public class SizeValidator<T> extends AbstractValidator<T> {
 
 	@Override
 	protected boolean isValid(T value) {
+		if (value == null) {
+			return true;
+		}
 		if (value instanceof String) {
 			return this.isLengthValid(((String) value).length());
 		}
