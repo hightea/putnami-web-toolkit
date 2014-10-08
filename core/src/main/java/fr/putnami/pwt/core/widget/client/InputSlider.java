@@ -301,6 +301,7 @@ public class InputSlider<T> extends AbstractInput<T> implements ValueChangeHandl
 
 	@Override
 	public T flush() {
+		this.clearErrors();
 		T value = this.handleWidget.getValue();
 		this.validate(value);
 		if (!this.hasErrors()) {
@@ -311,6 +312,7 @@ public class InputSlider<T> extends AbstractInput<T> implements ValueChangeHandl
 
 	@Override
 	public void edit(T value) {
+		this.clearErrors();
 		this.setValue(value);
 		if (this.isStateValid()) {
 			this.handleWidget.setValue(value, false);

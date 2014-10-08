@@ -142,6 +142,7 @@ public class InputBoolean extends AbstractInput<Boolean> implements HasText, Has
 
 	@Override
 	public Boolean flush() {
+		this.clearErrors();
 		Boolean value = this.getInputValue();
 		this.validate(value);
 		if (!this.hasErrors()) {
@@ -152,6 +153,7 @@ public class InputBoolean extends AbstractInput<Boolean> implements HasText, Has
 
 	@Override
 	public void edit(Boolean value) {
+		this.clearErrors();
 		boolean boolValue = Boolean.TRUE.equals(value);
 		this.setValue(boolValue);
 		this.setInputValue(boolValue);

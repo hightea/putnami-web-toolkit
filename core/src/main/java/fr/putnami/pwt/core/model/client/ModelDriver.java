@@ -275,13 +275,14 @@ public class ModelDriver<T> implements Driver<T> {
 	@Override
 	public void edit(T value) {
 		this.value = value;
-		this.errors.clear();
-		this.accept(new ErrorBinderVisitor(this.model, this.messageHelper, this.errors));
 		this.resetDisplay();
 	}
 
 	@Override
 	public void resetDisplay() {
+		this.errors.clear();
+		this.accept(new ErrorBinderVisitor(this.model, this.messageHelper, this.errors));
+
 		this.displayedValue = this.value;
 
 		for (Visitor visitor : Iterables.filter(this.visitors, Visitor.VisitorTrigger.BEFORE_EDIT)) {

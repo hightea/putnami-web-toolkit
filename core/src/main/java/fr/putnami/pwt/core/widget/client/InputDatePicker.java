@@ -526,6 +526,7 @@ public class InputDatePicker extends FocusWidget
 
 	@Override
 	public void edit(Date value) {
+		this.errors.clear();
 		this.setValue(value);
 	}
 

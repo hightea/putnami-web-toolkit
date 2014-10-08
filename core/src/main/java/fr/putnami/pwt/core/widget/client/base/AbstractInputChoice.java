@@ -242,6 +242,7 @@ public abstract class AbstractInputChoice<T, U> extends AbstractInput<U>
 
 	@Override
 	public void edit(U value) {
+		this.clearErrors();
 		this.redrawInternal();
 		this.setValue(value);
 		this.getSelectionHandler().setSelection(this.getValue(), false);

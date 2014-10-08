@@ -320,6 +320,10 @@ public class InputList<T> extends List
 
 	@Override
 	public void edit(Collection<T> value) {
+		if (this.errors != null) {
+			this.errors.clear();
+			this.errors = null;
+		}
 		this.value = value;
 		this.clear();
 		this.items.clear();

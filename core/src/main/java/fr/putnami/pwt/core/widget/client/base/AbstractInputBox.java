@@ -174,6 +174,7 @@ public abstract class AbstractInputBox<T extends TextBoxBase, I> extends Abstrac
 
 	@Override
 	public void edit(I value) {
+		this.clearErrors();
 		this.setValue(value);
 		String rendered = this.renderer.render(value);
 		this.input.setValue(rendered);

@@ -53,8 +53,7 @@ public class InputCode extends AbstractInput<String> implements CodeEditor, HasP
 
 	private final CodeInput codeInput = new CodeInputImpl();
 	private final CodeOutput codeOutput = new CodeOutputImpl();
-	private final CodeEditorDriver codeDriver = new CodeEditorDriverImpl(this.codeInput,
-		this.codeOutput);
+	private final CodeEditorDriver codeDriver = new CodeEditorDriverImpl(this.codeInput, this.codeOutput);
 
 	private HandlerRegistration valueChangeRegistration;
 
@@ -119,20 +118,19 @@ public class InputCode extends AbstractInput<String> implements CodeEditor, HasP
 	public HandlerRegistration addDirtyHandler(Handler handler) {
 		if (this.valueChangeRegistration == null) {
 			// Hook to prevent blur on click on suggestion popup
-			this.valueChangeRegistration =
-				this.codeInput.addValueChangeHandler(new ChangeEvent<String>(InputCode.this));
+			this.valueChangeRegistration = this.codeInput.addValueChangeHandler(new ChangeEvent<String>(InputCode.this));
 		}
 		return super.addDirtyHandler(handler);
 	}
 
 	@Override
-	public com.google.gwt.event.shared.HandlerRegistration addValueChangeHandler(
-		ValueChangeHandler<String> handler) {
+	public com.google.gwt.event.shared.HandlerRegistration addValueChangeHandler(ValueChangeHandler<String> handler) {
 		return this.codeInput.addValueChangeHandler(handler);
 	}
 
 	@Override
 	public String flush() {
+		this.clearErrors();
 		String value = this.codeDriver.flush();
 		this.validate(value);
 		if (!this.hasErrors()) {
@@ -143,6 +141,7 @@ public class InputCode extends AbstractInput<String> implements CodeEditor, HasP
 
 	@Override
 	public void edit(String value) {
+		this.clearErrors();
 		this.setValue(value);
 		this.codeDriver.edit(value);
 	}
