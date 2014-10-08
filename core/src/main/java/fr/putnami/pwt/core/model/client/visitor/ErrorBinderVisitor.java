@@ -60,7 +60,7 @@ public class ErrorBinderVisitor extends AbstractVisitor {
 
 			List<Error> toDisplay = Lists.newArrayList();
 			for (Error error : this.errors) {
-				if (path.equals(error.getPath())) {
+				if (path.equals(error.getPath()) && !error.isConsumed()) {
 					String messageKey = error.getMessageKey();
 					messageKey = this.fixMessageKey(messageKey);
 					String message = this.messageHelper.findMessage(propertyType, messageKey);

@@ -25,10 +25,8 @@ import com.google.web.bindery.event.shared.HandlerRegistration;
 
 import java.util.Date;
 
-import fr.putnami.pwt.core.editor.client.Error;
 import fr.putnami.pwt.core.editor.client.event.DirtyEvent;
 import fr.putnami.pwt.core.editor.client.event.DirtyEvent.Handler;
-import fr.putnami.pwt.core.editor.client.validator.Validator;
 import fr.putnami.pwt.core.model.client.base.HasPlaceholder;
 import fr.putnami.pwt.core.theme.client.IconFont;
 import fr.putnami.pwt.core.widget.client.Button.Type;
@@ -121,21 +119,6 @@ public class InputDate extends InputGroup<Date>
 	@Override
 	public Date getValue() {
 		return this.dateBox.getValue();
-	}
-
-	@Override
-	public boolean hasErrors() {
-		return this.dateBox.hasErrors();
-	}
-
-	@Override
-	public Iterable<Error> getErrors() {
-		return this.dateBox.getErrors();
-	}
-
-	@Override
-	public void addValidator(Validator<Date> validator) {
-		this.dateBox.addValidator(validator);
 	}
 
 	private void toggleDatePicker() {
