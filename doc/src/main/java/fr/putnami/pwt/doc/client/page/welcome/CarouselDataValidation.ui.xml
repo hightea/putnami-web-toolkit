@@ -1,0 +1,54 @@
+<!--
+
+    This file is part of pwt.
+
+    pwt is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    pwt is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with pwt.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client"
+	xmlns:c="urn:import:fr.putnami.pwt.plugin.code.client"
+	>
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.java.JavaConfiguration.JAVA_CONFIGURATION" />
+	<ui:import field="fr.putnami.pwt.plugin.code.client.configuration.xml.XmlConfiguration.XML_CONFIGURATION" />
+
+	<w:HTMLPanel styleName="carouselService">
+		<w:Heading level="1">Annotated Data Validation</w:Heading>
+		<w:GridRow xsVisibility="HIDDEN">
+			<w:GridColumn size="12">
+				<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+public class BeanToValidate {
+	@Past
+	@NotNull
+	private Date birthday;
+
+	@Max(12)
+	private Integer monthNumber;
+
+	@AssertTrue
+	private Boolean agree;
+
+	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$")
+	private String email;
+	
+	...
+}
+]]></pre>
+				</c:StaticCode>
+			</w:GridColumn>
+		</w:GridRow>
+	</w:HTMLPanel>
+</ui:UiBinder>

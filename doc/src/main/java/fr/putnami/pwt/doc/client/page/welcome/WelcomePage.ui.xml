@@ -41,13 +41,16 @@ h2{
 						<c:CarouselIntro />
 					</w:CarouselItem>
 					<w:CarouselItem>
+						<c:CarouselBuildService />
+					</w:CarouselItem>
+					<w:CarouselItem>
 						<c:CarouselBuildForm />
 					</w:CarouselItem>
 					<w:CarouselItem>
 						<c:CarouselBuildTable />
 					</w:CarouselItem>
 					<w:CarouselItem>
-						<c:CarouselBuildService />
+						<c:CarouselDataValidation />
 					</w:CarouselItem>
 				</w:Carousel>
 			</div>			

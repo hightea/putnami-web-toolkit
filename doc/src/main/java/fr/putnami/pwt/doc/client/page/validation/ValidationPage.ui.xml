@@ -28,7 +28,7 @@
 	<w:HTMLPanel title="PWT - Bean validation">
 		<w:Header ui:field="header">
 			<w:Heading level="1">
-				Bean Validation
+				Data Validation
 			</w:Heading>
 			<p class="lead">
 				<strong title="Putnami Web Toolkit">PWT</strong>'s bean model is compliant with commons JSR303 bean validation annotations.
@@ -62,7 +62,7 @@
 			<p>We use the following bean definition :</p>
 			<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
-public class BeanToValidate implements Serializable {
+public class BeanToValidate {
 
 	@Past
 	@NotNull
