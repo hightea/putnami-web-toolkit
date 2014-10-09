@@ -234,8 +234,8 @@ public class ModelCreator {
 	private void appendPatternValidator(SourceWriter w, JField field) {
 		Pattern patternAnnotation = field.getAnnotation(Pattern.class);
 		if (patternAnnotation != null) {
-			w.println(", new PatternValidator(\"%s\", \"%s\")", patternAnnotation.message(), patternAnnotation.regexp(),
-				patternAnnotation.flags());
+			w.println(", new PatternValidator(\"%s\", \"%s\")", patternAnnotation.message(), patternAnnotation.regexp()
+				.replace("\\", "\\\\"), patternAnnotation.flags());
 		}
 	}
 

@@ -51,7 +51,7 @@ public class ValidationPage extends Page {
 		@AssertTrue
 		public Boolean agree;
 
-		@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,4}$")
+		@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$")
 		public String email;
 	}
 
