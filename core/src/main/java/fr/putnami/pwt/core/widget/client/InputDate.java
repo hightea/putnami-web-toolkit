@@ -95,7 +95,11 @@ public class InputDate extends InputGroup<Date>
 
 	@Override
 	public void edit(Date value) {
-		this.dateBox.edit(value);
+		edit(value, false);
+	}
+
+	public void edit(Date value, boolean fireEvents) {
+		this.dateBox.edit(value, fireEvents);
 		if (this.datePicker != null) {
 			this.datePicker.hide();
 		}
@@ -128,8 +132,7 @@ public class InputDate extends InputGroup<Date>
 
 				@Override
 				public void onValueChange(ValueChangeEvent<Date> event) {
-					InputDate.this.edit(event.getValue());
-					InputDate.this.datePicker.hide();
+					InputDate.this.edit(event.getValue(), true);
 					InputDate.this.dateBox.setFocus(true);
 				}
 			});

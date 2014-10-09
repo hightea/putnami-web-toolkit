@@ -311,7 +311,7 @@ public class MaskValueBoxHelper
 		for (TokenHelper helper : this.helpers) {
 			sb.append(helper.flush());
 		}
-		this.valueBox.setValue(sb.toString());
+		this.valueBox.setValue(sb.toString(), true);
 		this.highlightHelper();
 	}
 

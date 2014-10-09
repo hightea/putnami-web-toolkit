@@ -174,10 +174,14 @@ public abstract class AbstractInputBox<T extends TextBoxBase, I> extends Abstrac
 
 	@Override
 	public void edit(I value) {
+		this.edit(value, false);
+	}
+
+	public void edit(I value, boolean fireChangeEvents) {
 		this.clearErrors();
 		this.setValue(value);
 		String rendered = this.renderer.render(value);
-		this.input.setValue(rendered);
+		this.input.setValue(rendered, fireChangeEvents);
 	}
 
 	@Override
