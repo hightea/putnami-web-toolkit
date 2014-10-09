@@ -15,9 +15,12 @@
 package fr.putnami.pwt.core.widget.client.base;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Strings;
 import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.text.shared.Parser;
@@ -28,6 +31,7 @@ import com.google.web.bindery.event.shared.HandlerRegistration;
 
 import java.text.ParseException;
 
+import fr.putnami.pwt.core.editor.client.event.DirtyEvent;
 import fr.putnami.pwt.core.editor.client.event.DirtyEvent.Handler;
 import fr.putnami.pwt.core.editor.client.util.ValidationUtils;
 import fr.putnami.pwt.core.editor.client.validator.SizeValidator;
@@ -59,11 +63,28 @@ public abstract class AbstractInputBox<T extends TextBoxBase, I> extends Abstrac
 		}
 	}
 
+	private class KeyUpDirtyHandler implements KeyUpHandler {
+
+		@Override
+		public void onKeyUp(KeyUpEvent event) {
+			boolean fireDirty = false;
+			if (AbstractInputBox.this.currentStringValue == null) {
+				fireDirty = !Strings.isNullOrEmpty(AbstractInputBox.this.input.getText());
+			} else {
+				fireDirty = !AbstractInputBox.this.currentStringValue.equals(AbstractInputBox.this.input.getText());
+			}
+			if (fireDirty) {
+				DirtyEvent.fire(AbstractInputBox.this);
+			}
+		}
+	}
+
 	private static final String ERROR_PARSING = "inputParsing";
 
 	private final T input;
 
 	private HandlerRegistration valueChangeRegistration;
+	private HandlerRegistration keyupChangeRegistration;
 
 	private String inputType;
 
@@ -72,6 +93,8 @@ public abstract class AbstractInputBox<T extends TextBoxBase, I> extends Abstrac
 	private String placeholder;
 
 	private Size size;
+
+	private String currentStringValue;
 
 	public AbstractInputBox(T input) {
 		super(input);
@@ -152,6 +175,9 @@ public abstract class AbstractInputBox<T extends TextBoxBase, I> extends Abstrac
 		if (this.valueChangeRegistration == null) {
 			this.valueChangeRegistration = this.input.addValueChangeHandler(new ChangeEvent<String>(this));
 		}
+		if (this.keyupChangeRegistration == null) {
+			this.keyupChangeRegistration = this.input.addKeyUpHandler(new KeyUpDirtyHandler());
+		}
 		return super.addDirtyHandler(handler);
 	}
 
@@ -177,11 +203,16 @@ public abstract class AbstractInputBox<T extends TextBoxBase, I> extends Abstrac
 		this.edit(value, false);
 	}
 
+	@Override
+	public void setValue(I value) {
+		super.setValue(value);
+		this.currentStringValue = this.renderer.render(value);
+	}
+
 	public void edit(I value, boolean fireChangeEvents) {
 		this.clearErrors();
 		this.setValue(value);
-		String rendered = this.renderer.render(value);
-		this.input.setValue(rendered, fireChangeEvents);
+		this.input.setValue(currentStringValue, fireChangeEvents);
 	}
 
 	@Override
