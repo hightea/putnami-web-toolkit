@@ -9,10 +9,10 @@ tasks.withType(FindBugs) {
  }
 
 findbugs {
-    ignoreFailures = false
+    ignoreFailures = true
     excludeFilter = file("$rootProject.projectDir/settings/findbugs/excludeFilter.xml")
 }
 
 pmd{
-    ignoreFailures = false
+    ignoreFailures = true
 }
