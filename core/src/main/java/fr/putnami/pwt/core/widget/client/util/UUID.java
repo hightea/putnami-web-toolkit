@@ -14,45 +14,48 @@
  */
 package fr.putnami.pwt.core.widget.client.util;
 
-public final class UUID {
-	private static final char[] CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".toCharArray();
+import java.util.Random;
 
+/**
+ * The Class UUID helps to generate a dummy UUID looking like RFC4122 v4.
+ */
+public final class UUID {
+	private static final char[] CHARS = "0123456789ABCDEF".toCharArray();
+
+	private static final Random RANDOM = new Random();
+
+	/**
+	 * Instantiates a new uuid.
+	 */
 	private UUID() {
 	}
 
-	public static String uuid(int len) {
-		return UUID.uuid(len, UUID.CHARS.length);
-	}
-
-	public static String uuid(int len, int radix) {
-		if (radix > UUID.CHARS.length) {
-			throw new IllegalArgumentException();
-		}
-		char[] uuid = new char[len];
-		// Compact form
-		for (int i = 0; i < len; i++) {
-			uuid[i] = UUID.CHARS[UUID.randomInt(radix)];
-		}
-		return new String(uuid);
-	}
-
+	/**
+	 * Generate an UUID looks like RFC4122 v4.
+	 * <p>
+	 * <strong>Example : </strong>D8DA62A2-9844-D4F6-0120-73D61116ED45
+	 * </p>
+	 *
+	 * @return the unique id string
+	 */
 	public static String uuid() {
 		char[] uuid = new char[36];
-		int r;
-
 		uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
-		uuid[14] = '4';
-
 		for (int i = 0; i < 36; i++) {
 			if (uuid[i] == 0) {
-				r = UUID.randomInt(16);
-				uuid[i] = UUID.CHARS[i == 19 ? r & 0x3 | 0x8 : r & 0xf];
+				uuid[i] = UUID.CHARS[UUID.randomInt(16)];
 			}
 		}
 		return new String(uuid);
 	}
 
+	/**
+	 * Random int.
+	 *
+	 * @param radix the radix
+	 * @return the int
+	 */
 	private static int randomInt(int radix) {
-		return (int) (Math.random() * radix);
+		return Math.abs(RANDOM.nextInt() % radix);
 	}
 }
