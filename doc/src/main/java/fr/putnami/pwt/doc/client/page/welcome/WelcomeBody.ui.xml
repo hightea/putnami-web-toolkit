@@ -41,5 +41,21 @@
 		<p class="lead">
 			<strong>Easy to start</strong>, <strong>PWT</strong> is a serious alternative for your next webapp.
 		</p>
+		
+		<w:Heading level="2">How to Help</w:Heading>
+			<p>
+				If you like it, and want to help us, that's wonderful! We'll be delighted if you choose to...
+			</p>
+			<ul>
+				<li>Follow us on <a href="https://twitter.com/PutnamiTeam" class="btn btn-default btn-xs btn-info" target="_BLANK"><i class="icon icon-twitter" alt="Twitter" />Twitter</a></li>
+				<li>Join the community on <a href="https://groups.google.com/forum/#!forum/putnami-web-toolkit" target="_BLANK"><i class="icon icon-coffee" />Google Group</a></li>
+				<li>Talk, blog and tweet about <strong title="Putnami Web Toolkit">PWT</strong>. Spread the word!</li>
+				<li>Why not try and use it on your next web app?</li>
+				<li><a href="https://github.com/putnami/putnami-pwt/issues"><i class="icon icon-extinguisher" />Report issues</a> to make it better.</li>
+				<li>Submit ideas to get new amazing features.</li>
+			</ul>
+			<p>
+				All your feedback is really precious and will be given careful consideration.
+			</p>
 	</w:HTMLPanel>
 </ui:UiBinder>

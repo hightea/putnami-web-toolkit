@@ -24,6 +24,15 @@
 	<w:Panel>
 		<w:Header><strong>Materials</strong></w:Header>
 		<w:HTMLPanel>
+			<strong>Samples</strong>
+			<w:List tag="ol">
+				<w:ListItem>
+					<a href="#!AddressBook">Address book</a>
+				</w:ListItem>
+				<w:ListItem>
+					<a href="#!ContactsTable">Contact tables</a>
+				</w:ListItem>
+			</w:List>
 			<strong>Quick start</strong>
 			<w:List tag="ol">
 				<w:ListItem>
@@ -64,15 +73,6 @@
 				</w:ListItem>
 				<w:ListItem>
 					<a href="#!Tuto10Security">Secure your webapp</a>
-				</w:ListItem>
-			</w:List>
-			<strong>Samples</strong>
-			<w:List tag="ol">
-				<w:ListItem>
-					<a href="#!AddressBook">Address book</a>
-				</w:ListItem>
-				<w:ListItem>
-					<a href="#!ContactsTable">Contact tables</a>
 				</w:ListItem>
 			</w:List>
 		</w:HTMLPanel>

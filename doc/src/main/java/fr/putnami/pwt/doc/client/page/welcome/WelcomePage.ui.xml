@@ -44,6 +44,9 @@ h2{
 						<c:CarouselBuildService />
 					</w:CarouselItem>
 					<w:CarouselItem>
+						<c:CarouselSecurity />
+					</w:CarouselItem>
+					<w:CarouselItem>
 						<c:CarouselBuildForm />
 					</w:CarouselItem>
 					<w:CarouselItem>
