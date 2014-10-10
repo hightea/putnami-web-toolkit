@@ -1,10 +1,10 @@
 buildscript {
 	repositories {
-		maven (){ url 'http://repo.putnami.org' }
+		maven (){ url 'http://dl.bintray.com/steffenschaefer/maven' }
 		mavenCentral()
 	}
 	dependencies {
-		classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.4-PWT_patched'
+		classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.5'
 		classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.7.0'
 	}
 }
