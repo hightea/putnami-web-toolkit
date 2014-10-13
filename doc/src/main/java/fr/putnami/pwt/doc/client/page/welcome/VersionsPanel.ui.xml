@@ -25,12 +25,12 @@
 		<w:Header><strong>Versions</strong></w:Header>
 		<w:List tag="ul" type="LIST">
 			<w:ListItem>
-				<span class="pull-right label label-primary">last stable</span>
-				1.0.0
+				<span class="pull-right label label-primary">current stable</span>
+				<a href="http://pwt.putnami.org/">1.1.0</a>
 			</w:ListItem>
 			<w:ListItem>
-				<span class="pull-right label label-default">dev</span>
-				<a href="http://pwt.putnami.org/1.1.x/">1.1.0-RC1</a>
+				<span class="pull-right label label-default">maintenance</span>
+				1.0.1
 			</w:ListItem>
 		</w:List>
 	</w:Panel>

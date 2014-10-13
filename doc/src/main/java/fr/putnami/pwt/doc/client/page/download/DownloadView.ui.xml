@@ -33,7 +33,67 @@
 			</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
-			<w:Heading level="2" navSpy="{tableOfContent}">Current stable <small>@releaseVersion@</small></w:Heading>
+			<w:Heading level="2" navSpy="{tableOfContent}">Current 1.0.x Maintenance version <small>1.0.1</small></w:Heading>
+			
+			<w:Table>
+				<w:TableHead>
+						<w:TableTH><w:Label>Package</w:Label></w:TableTH>
+						<w:TableTH><w:Label>Name</w:Label></w:TableTH>
+						<w:TableTH><w:Label>Version</w:Label></w:TableTH>
+						<w:TableTH></w:TableTH>
+						<w:TableTH></w:TableTH>
+				</w:TableHead>
+				<w:TableBody bodyId="main">
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.0.1</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt/1.0.1/pwt-1.0.1.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt/1.0.1/pwt-1.0.1.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt-code-editor</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.0.1</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-code-editor/1.0.1/pwt-code-editor-1.0.1.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-code-editor/1.0.1/pwt-code-editor-1.0.1.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt-google-analytics</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.0.1</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/1.0.1/pwt-google-analytics-1.0.1.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/1.0.1/pwt-google-analytics-1.0.1.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt-ajax-bot-indexing</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.0.1</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-ajax-bot-indexing/1.0.1/pwt-ajax-bot-indexing-1.0.1.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-ajax-bot-indexing/1.0.1/pwt-ajax-bot-indexing-1.0.1.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+				</w:TableBody>
+			</w:Table>			
+			<w:Panel color="SUCCESS" collapsible="true" collapse="true">
+				<w:Header>Release notes</w:Header>
+				<w:HTMLPanel>
+					<strong>Main fixed issues :</strong>
+					<ul>
+						<li>UI - InputDate clone</li>
+						<li>UI - InputList fix</li>
+						<li>UI - Suggestion not displayed if InputSuggest is part of Modal</li>
+					</ul>
+				</w:HTMLPanel>
+			</w:Panel>
+			<w:Alert type="SUCCESS">
+				<strong>Curent Maintenance Snapshots <span class="label label-info">@snapshotVersion@</span></strong>
+			</w:Alert>
+			<w:Alert type="INFO">
+				<strong>Gradle and Maven usage</strong>
+				<p>Find more details on the maven and gradle usage with <w:Anchor link="#!GettingStarted" text="Getting started guide" /></p>
+			</w:Alert>
+			
+			<w:Heading level="2" navSpy="{tableOfContent}">Version <strong>1.0.0</strong></w:Heading>
 			
 			<w:Table>
 				<w:TableHead>
@@ -96,13 +156,6 @@
 					</ul>
 				</w:HTMLPanel>
 			</w:Panel>
-			<w:Alert type="SUCCESS">
-				<strong>Curent Snapshots <span class="label label-info">@snapshotVersion@</span></strong>
-			</w:Alert>
-			<w:Alert type="INFO">
-				<strong>Gradle and Maven usage</strong>
-				<p>Find more details on the maven and gradle usage with <w:Anchor link="#!GettingStarted" text="Getting started guide" /></p>
-			</w:Alert>
 			
 			<w:Header><w:Heading level="2" navSpy="{tableOfContent}">Version <strong>1.0.0-RC2</strong></w:Heading></w:Header>
 			<w:Table>
