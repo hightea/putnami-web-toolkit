@@ -1,5 +1,5 @@
 ext {
-	releaseVersion = '1.1.0-RC2'
+	releaseVersion = '1.1.0'
 	snapshotVersion = '1.1.0-SNAPSHOT'
 	gwtVersion = '2.6.1'
 	guavaVersion = '17.0'
@@ -22,7 +22,7 @@ if (applyLicense) {
 }
 
 group = 'fr.putnami.pwt'
-version = project.snapshotVersion
+version = project.releaseVersion
 ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
 sourceCompatibility = 1.7
@@ -144,15 +144,15 @@ uploadArchives {
 			beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
 			//Local Repository
-			repository(url : new File(rootProject.buildDir, 'repoTest').toURI())
+			//repository(url : new File(rootProject.buildDir, 'repoTest').toURI())
 
 			//Putnami Repository
-			/*
+			
 			configuration = configurations.deployerSsh
 	        repository(url: "scp://repo.putnami.org/putnamiRepo") {
 	            authentication(userName: "putnami_repo")
 	        }
-			*/
+			
 
 			//OSS Repository
 			/*
