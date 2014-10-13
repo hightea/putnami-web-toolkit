@@ -24,22 +24,21 @@
 	<w:HTMLPanel>
 		<w:Heading level="2">Putnami Web Toolkit</w:Heading>
 		<p class="lead">
-			<strong title="Putnami Web Toolkit">PWT</strong> is a modern and powerful UI framework. 
+			<strong title="Putnami Web Toolkit">PWT</strong> is a powerful <a href="http://www.gwtproject.org/" >GWT</a> framework. 
 			<br/>
-			Built upon <a href="http://www.gwtproject.org/" >GWT</a>, <strong>PWT</strong> is robust, lightweight and efficient.
-			Made for ourself, we designed it to increase our productivity, focusing on removing the useless code.
-			<strong>Free</strong> and Open source, <strong>PWT</strong> is published under <a href="#" >LGPL v 3.0</a>.
+			It's open source (published under <a target="_BLANK" href="https://www.gnu.org/licenses/lgpl-3.0.html" >LGPL v 3.0</a>) and built to be lightweight and efficient.
+			Made for ourself first, we designed it to increase our productivity, focusing on removing the useless code.
 		</p>
 		<ul class="lead">
-			<li>Thanks to <a href="http://getbootstrap.com/" target="_BLANK">Twitter 's Bootstrap</a>, your webapp is <strong>responsive</strong> and easily <strong>themable</strong>.</li>
-			<li>The nice <a href="#!Components">widgets</a> are easy to extend and to customize.</li>
-			<li>The <a href="#!DataBinding">data binding</a> is a pushover, build forms and dynamic tables is so simple.</li>
-			<li><a href="#!ServerCalls">Server calls</a> are optimized and simplified. Multiplex your queries, and bind the callbacks with annotations.</li>
-			<li>The <a href="#!Navigation">Navigation</a> is done to simplify MVP. <strong>Split</strong> and <strong>scale</strong> your webapp without even taking care about it.</li>
-			<li>Neither third librairies nor external JS are required. Providing <strong>security</strong> and serenity for your achievements and your future.</li>
+			<li>Thanks to <a href="http://getbootstrap.com/" target="_BLANK">Twitter 's Bootstrap</a>, your webapp are <strong>responsive</strong> and can be easily <strong>themed</strong>.</li>
+			<li>Its attractive <a href="#!Components">graphic components</a> are easy to expand and to customize.</li>
+			<li><a href="#!DataBinding">data binding</a> is a cinch, building forms and dynamic tables is now simple.</li>
+			<li><a href="#!ServerCalls">Server calls</a> are simplified and optimized. Multiplex your queries, and bind the callbacks with annotations.</li>
+			<li><a href="#!Navigation">Navigation</a> uses simplified MVP. You can <strong>split</strong> and <strong>scale</strong> your webapp without even knowing your doing it.</li>
+			<li>Neither third librairies nor external JS are required, providing <strong>security</strong> and peace of mind for your achievements and your future.</li>
 		</ul>
 		<p class="lead">
-			<strong>Easy to start</strong>, <strong>PWT</strong> is a serious alternative for your next webapp.
+			<strong>Easy to get started</strong>, we offer <strong>PWT</strong> as a a serious alternative for your next webapp developments.
 		</p>
 		
 		<w:Heading level="2">How to Help</w:Heading>
