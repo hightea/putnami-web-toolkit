@@ -29,8 +29,8 @@
 				1.1.0
 			</w:ListItem>
 			<w:ListItem>
-				<span class="pull-right label label-default">previous release</span>
-				<a href="http://pwt.putnami.org">1.0.0</a>
+				<span class="pull-right label label-default">maintenance</span>
+				<a href="http://pwt.putnami.org/1.0.x/">1.0.1</a>
 			</w:ListItem>
 		</w:List>
 	</w:Panel>

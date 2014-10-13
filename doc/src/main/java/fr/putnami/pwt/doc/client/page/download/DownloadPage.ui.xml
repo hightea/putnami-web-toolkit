@@ -161,7 +161,7 @@
 				</w:HTMLPanel>
 			</w:Panel>
 			
-			<w:Header><w:Heading level="2" summary="docSummary">Version <strong>1.0.0</strong></w:Heading></w:Header>
+			<w:Header><w:Heading level="2" summary="docSummary">Maintenance Version <strong>1.0.1</strong></w:Heading></w:Header>
 			<w:Table>
 				<w:TableHead>
 						<w:TableTH><w:Label>Package</w:Label></w:TableTH>
@@ -174,30 +174,30 @@
 					<w:TableRow>
 						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
 						<w:TableTD><w:Label>pwt</w:Label></w:TableTD>
-						<w:TableTD><w:Label>1.0.0</w:Label></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt/1.0.0/pwt-1.0.0.pom" text="pom.xml" /></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt/1.0.0/pwt-1.0.0.jar" text="jar" /></w:TableTD>
+						<w:TableTD><w:Label>1.0.1</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt/1.0.1/pwt-1.0.1.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt/1.0.1/pwt-1.0.1.jar" text="jar" /></w:TableTD>
 					</w:TableRow>
 					<w:TableRow>
 						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
 						<w:TableTD><w:Label>pwt-code-editor</w:Label></w:TableTD>
-						<w:TableTD><w:Label>1.0.0</w:Label></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-code-editor/1.0.0/pwt-code-editor-1.0.0.pom" text="pom.xml" /></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-code-editor/1.0.0/pwt-code-editor-1.0.0.jar" text="jar" /></w:TableTD>
+						<w:TableTD><w:Label>1.0.1</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-code-editor/1.0.1/pwt-code-editor-1.0.1.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-code-editor/1.0.1/pwt-code-editor-1.0.1.jar" text="jar" /></w:TableTD>
 					</w:TableRow>
 					<w:TableRow>
 						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
 						<w:TableTD><w:Label>pwt-google-analytics</w:Label></w:TableTD>
-						<w:TableTD><w:Label>1.0.0</w:Label></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/1.0.0/pwt-google-analytics-1.0.0.pom" text="pom.xml" /></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/1.0.0/pwt-google-analytics-1.0.0.jar" text="jar" /></w:TableTD>
+						<w:TableTD><w:Label>1.0.1</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/1.0.1/pwt-google-analytics-1.0.1.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/1.0.1/pwt-google-analytics-1.0.1.jar" text="jar" /></w:TableTD>
 					</w:TableRow>
 					<w:TableRow>
 						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
 						<w:TableTD><w:Label>pwt-ajax-bot-indexing</w:Label></w:TableTD>
-						<w:TableTD><w:Label>1.0.0</w:Label></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-ajax-bot-indexing/1.0.0/pwt-ajax-bot-indexing-1.0.0.pom" text="pom.xml" /></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-ajax-bot-indexing/1.0.0/pwt-ajax-bot-indexing-1.0.0.jar" text="jar" /></w:TableTD>
+						<w:TableTD><w:Label>1.0.1</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-ajax-bot-indexing/1.0.1/pwt-ajax-bot-indexing-1.0.1.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-ajax-bot-indexing/1.0.1/pwt-ajax-bot-indexing-1.0.1.jar" text="jar" /></w:TableTD>
 					</w:TableRow>
 				</w:TableBody>
 			</w:Table>

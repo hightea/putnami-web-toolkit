@@ -32,7 +32,7 @@
 		<ul class="lead">
 			<li>Thanks to <a href="http://getbootstrap.com/" target="_BLANK">Twitter 's Bootstrap</a>, your webapp are <strong>responsive</strong> and can be easily <strong>themed</strong>.</li>
 			<li>Its attractive <a href="#!Components">graphic components</a> are easy to expand and to customize.</li>
-			<li><a href="#!DataBinding">data binding</a> is a cinch, building forms and dynamic tables is now simple.</li>
+			<li><a href="#!DataBinding">Data binding</a> is a cinch, building forms and dynamic tables is now simple.</li>
 			<li><a href="#!ServerCalls">Server calls</a> are simplified and optimized. Multiplex your queries, and bind the callbacks with annotations.</li>
 			<li><a href="#!Navigation">Navigation</a> uses simplified MVP. You can <strong>split</strong> and <strong>scale</strong> your webapp without even knowing your doing it.</li>
 			<li>Neither third librairies nor external JS are required, providing <strong>security</strong> and peace of mind for your achievements and your future.</li>

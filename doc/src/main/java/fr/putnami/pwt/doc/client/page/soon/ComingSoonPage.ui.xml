@@ -32,65 +32,26 @@
 			<strong>PWT</strong> is not over. Some good stuff is in the pipe. 
 			</p>
 			<p class="lead">
-			The version 1.0.0 has been released! See the <a href="#!Download">release notes</a>. 
+			The version 1.1.0 has been released with a lot of new amazing stuff (Injection framework and others...)! See the <a href="#!Download">release notes</a>. 
 			</p>
-			<p class="lead">
-			We're now working on the 1.1.0.  Those amazing features will change your coder life : 
-			</p>
-			<ul class="lead">
-				<li>Documentation improvements</li>			
-				<li>New widgets</li>			
-				<li>New plugins</li>			
-			</ul>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
 		
-			<w:Heading level="2" summary="docSummary">Documentation</w:Heading>
-			<p>We're continuing our efforts to complete and correct the documentation. 
-			As you may have noticed we are not native english speakers, so any help in correcting typos is welcome. </p>
-			<p>Due to the non quality of the actual javadoc, we voluntarily withdrew it from the sources. 
-				We will provide the necessary efforts to deliver a good Javadoc in next releases.</p>
-				
-				
+			<p>We're still working on new features and improvements, but we think and we know that today, <strong>PWT</strong> can help you to build powerful applications easily.</p>
 			
-				
-			<w:Heading level="2" summary="docSummary">Components</w:Heading>
-			<p>We will keep on our efforts to provide rich components. 
-				We know that some important components are missing, such as the followings and for sure many others are required. 
-				Any other suggestions are welcome and will be discussed.
-			</p>
-				
-			<w:Heading level="3" summary="docSummary">Drag and Drop support</w:Heading>
-			<p>We're going to provide  an easy  drag and drop support. We don't know how yet, but we will find a solution.</p>
+			<p>If you think something is missing, don't hesitate to tell us ! We did build PWT to simplify our work, but yours too !!</p>
 			
-			<w:Heading level="3" summary="docSummary">Template logic</w:Heading>
-			<p>Based on data binding, the template logic will help to make easily dynamic forms.
-				All needs hasn't been fixed, but we're  thinking about it.
-			</p>
-			<div class="showcase-sample-block">
-				<c:StaticCode configuration="{XML_CONFIGURATION}">
-<pre><![CDATA[
-<l:ConditionTrue path="valid" >
-	<!-- display a widget if the valid property is true -->
-</l:ConditionTrue>
-<l:ConditionEquals value="user.name" other="otherValue" >
-	<!-- display a widget -->
-</l:ConditionEquals>
-...	
-]]></pre>
-				</c:StaticCode>
-			</div>
-	
-			<w:Heading level="2" summary="docSummary">New plugins</w:Heading>
-			<p>Those plugin's are ideas of what we'll maybe need a close day.</p>
+			<p>So you may want to...</p>
 			<ul>
-				<li><strong>Social plugins :</strong> Make easy the integration with the most common social networks.</li>
-				<li><strong>MarkDown / RichText editor :</strong> Make easy to write and read markdown text.</li>
+				<li>Follow us on <a href="https://twitter.com/PutnamiTeam" class="btn btn-default btn-xs btn-info" target="_BLANK"><i class="icon icon-twitter" alt="Twitter" />Twitter</a></li>
+				<li>Join the community on <a href="https://groups.google.com/forum/#!forum/putnami-web-toolkit" target="_BLANK"><i class="icon icon-coffee" />Google Group</a></li>
+				<li>Talk, blog and tweet about <strong title="Putnami Web Toolkit">PWT</strong>. Spread the word!</li>
+				<li>Why not try and use it on your next web app?</li>
+				<li><a href="https://github.com/putnami/putnami-pwt/issues"><i class="icon icon-extinguisher" />Report issues</a> to make it better.</li>
+				<li>Submit ideas to get new amazing features.</li>
 			</ul>
-	
-			<w:Heading level="2" summary="docSummary">Conclusions</w:Heading>
-			<p>Yes there are still months of works. Implementing new features, fixing bugs.
-				But we're pretty sure that PWT will help you tomorrow to build great web apps, it already helps us every days.
+			<p>
+				All your feedback is really precious and will be given careful consideration.
 			</p>
 	
 		</w:HTMLPanel>
