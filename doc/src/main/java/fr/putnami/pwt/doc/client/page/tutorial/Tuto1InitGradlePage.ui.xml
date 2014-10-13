@@ -38,7 +38,7 @@
 			<w:Alert ><h4>Note :</h4><p>In this tutorial, we use Gradle to build the project. If you use Maven, you should see the Maven version <a href="#!Tuto1InitMaven">here</a></p></w:Alert>
 			
 			<w:Heading level="2" summary="docSummary">Gradle and GWT notice</w:Heading>
-			<p>Gradle does not support any official GWT plugin yet. However, there is a very nice one hosted on Github : <a href="https://github.com/steffenschaefer/gwt-gradle-plugin" target="_BLANK">Steffen Schäffer's gwt-gradle-plugin</a>.</p>
+			<p>Gradle does not support any official GWT plugin yet. However, there is a very nice one hosted on Github : <a href="https://github.com/steffenschaefer/gwt-gradle-plugin" target="_BLANK">Steffen Schäffer's gwt-gradle-plugin</a>, which is available on <a href="http://bintray.com" target="_BLANK">Bintray</a>'s JCenter repository.</p>
 				
 			<p>On this tutorial, we only explains the bases of the plugin. You can refer to the <a href="http://steffenschaefer.github.io/gwt-gradle-plugin/" target="_BLANK">official doc</a> to go furher.</p>
 			
@@ -56,7 +56,7 @@
 					<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
 buildscript {
-	repositories.maven (){ url 'http://dl.bintray.com/steffenschaefer/maven' }
+	repositories.jcenter()
 	dependencies{ classpath = 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.5' }
 }]]></pre>
 					</c:StaticCode>

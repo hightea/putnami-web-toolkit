@@ -1,6 +1,6 @@
 buildscript {
 	repositories {
-		maven (){ url 'http://dl.bintray.com/steffenschaefer/maven' }
+		jcenter()
 		mavenCentral()
 	}
 	dependencies {

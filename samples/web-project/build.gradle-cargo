@@ -13,7 +13,6 @@ targetCompatibility = 1.7
 
 buildscript {
 	repositories {
-		maven (){ url 'http://dl.bintray.com/steffenschaefer/maven' }
 		jcenter()
 	}
 	dependencies {
