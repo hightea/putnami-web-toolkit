@@ -40,15 +40,8 @@
 			<w:Alert ><h4>Note :</h4><p>In this tutorial, we use Gradle to build the project. If you use Maven, you should see the Maven version <a href="#!Tuto1InitMaven">here</a></p></w:Alert>
 			
 			<w:Heading level="2" navSpy="{tableOfContent}">Gradle and GWT notice</w:Heading>
-			<p>Gradle does not support any official GWT plugin yet. However, there is a very nice one hosted on Github : <a href="https://github.com/steffenschaefer/gwt-gradle-plugin" target="_BLANK">Steffen Schäffer's gwt-gradle-plugin</a>.
-			Unfortunately, today there is a little typo in the source code making impossible to define different modules between production tasks (like compile) and dev tasks (like GWT's SuperDevMode).</p>
-	
-			<p>To work, the GWT's SuperDevMode needs some specific configuration in the module gwt.xml file (like a specific linker, etc...). So it is necessary to have the ability to define different modules between dev and production.</p>
-			
-			<p>Therefore we've forked it and fixed it. 
-				We've submited the issue and we wait for the next release. 
-				Waiting we host a patch on our repository : *0.4-PWT_patched*.</p>
-			
+			<p>Gradle does not support any official GWT plugin yet. However, there is a very nice one hosted on Github : <a href="https://github.com/steffenschaefer/gwt-gradle-plugin" target="_BLANK">Steffen Schäffer's gwt-gradle-plugin</a> which is available on <a href="http://bintray.com">Bintray</a>'s JCenter repository.
+						
 			<p>On this tutorial, we only explains the bases of the plugin. You can refer to the <a href="http://steffenschaefer.github.io/gwt-gradle-plugin/" target="_BLANK">official doc</a> to go furher.</p>
 			
 	
@@ -66,10 +59,10 @@
 <pre><![CDATA[
 buildscript {
     repositories {
-		maven (){ url 'http://repo.putnami.org' }
+		jcenter()
 	}
 	dependencies {
-		classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.4-PWT_patched'
+		classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.5'
 	}
 }]]></pre>
 					</c:StaticCode>

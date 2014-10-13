@@ -13,12 +13,11 @@ targetCompatibility = 1.7
 
 buildscript {
 	repositories {
-		maven (){ url 'http://repo.putnami.org' }
 		jcenter()
 	}
 	dependencies {
 		classpath 'org.gradle.api.plugins:gradle-cargo-plugin:1.5'
-		classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.4-PWT_patched'
+		classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.5'
 	}
 }
 

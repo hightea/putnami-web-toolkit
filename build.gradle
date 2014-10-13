@@ -2,11 +2,11 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 buildscript {
 	repositories {
-		maven (){ url 'http://repo.putnami.org' }
+		jcenter()
 		mavenCentral()
 	}
 	dependencies {
-		classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.4-PWT_patched'
+		classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.5'
 		classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.7.0'
 	}
 }

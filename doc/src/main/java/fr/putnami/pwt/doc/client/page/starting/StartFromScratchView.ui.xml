@@ -29,7 +29,7 @@
 	<w:HTMLPanel>
 		<w:Heading level="2" navSpy="{navSpy}">Start from scratch</w:Heading>
 		<p>
-			From our point of view, Gradle is the best build automation ever made. We realy advice to use Gradle for your next accomplishments.
+			From our point of view, Gradle is the best build automation ever made. We realy advice you to use Gradle for your next accomplishments.
 		</p>
 		
 		<div class="clearfix"></div>
@@ -45,8 +45,8 @@ apply plugin: 'gwt'
 apply plugin: 'jetty'
 
 buildscript {
-	repositories.maven (){ url 'http://repo.putnami.org' }
-	dependencies{ classpath = 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.4-PWT_patched' }
+	repositories{ jcenter()}
+	dependencies{ classpath = 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.5' }
 }
 
 repositories {
