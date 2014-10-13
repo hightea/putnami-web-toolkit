@@ -28,6 +28,7 @@ ext {
 subprojects {
 	apply plugin: 'java'
 	apply plugin: 'maven'
+	apply plugin: 'signing'
 	apply plugin: 'eclipse'
 	apply plugin: 'license'
 	apply plugin: 'gwt-base'
@@ -35,6 +36,7 @@ subprojects {
 
 	group = 'fr.putnami.pwt'
 	version = rootProject.snapshotVersion
+	ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
 	sourceCompatibility = 1.7
 	targetCompatibility = 1.7
@@ -87,12 +89,40 @@ subprojects {
 	uploadArchives {
 	    repositories {
 	        mavenDeployer {
-		        configuration = configurations.deployerSsh
+		        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+				//Local Repository
+				/*
+				repository(url : new File(rootProject.buildDir, 'repoTest').toURI())
+				*/
+				
+				//Putnami Repository
+				configuration = configurations.deployerSsh
 		        repository(url: "scp://repo.putnami.org/putnamiRepo") {
 		            authentication(userName: "putnami_repo")
 		        }
-	            //repository(url : new File(rootProject.buildDir, 'repoTest').toURI())
+		        
+				//OSS Repository
+				/*
+				repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+					authentication(userName: ossrhUsername, password: ossrhPassword)
+				}
+	
+				snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+					authentication(userName: ossrhUsername, password: ossrhPassword)
+				}
+				*/
+	
 	            pom.project {
+					url 'http://pwt.putnami.org'
+	
+					scm {
+						connection 'scm:git:git@github.com:Putnami/putnami-web-toolkit.git'
+	                    developerConnection 'scm:git:git@github.com:Putnami/putnami-web-toolkit.git'
+	                    url 'git@github.com:Putnami/putnami-web-toolkit.git'
+	                }
+	
+	
 	                licenses {
 	                    license {
 	                        name 'GNU Lesser General Public License'
@@ -100,7 +130,20 @@ subprojects {
 	                        distribution 'repo'
 	                    }
 	                }
-	            }
+	
+					 developers {
+						developer {
+							id 'fdumay'
+							name 'Fabien Dumay'
+							email 'fabien.dumay@putnami.com'
+						}
+						developer {
+							id 'tcharbonnier'
+							name 'Théophane Charbonnier'
+							email 'theophane.charbonnier@putnami.com'
+						}
+			        }
+		        }
 	        }
 	    }
 	}
@@ -120,6 +163,30 @@ configure(subprojects.findAll { it.name != 'pwt-doc' } ){
 	// Add all sources in jar (needed for GWT compilation using this library
 	jar {
 		from sourceSets.main.allJava
+	}
+	
+	task javadocJar(type: Jar) {
+	    classifier = 'javadoc'
+	    from javadoc
+	}
+
+	task sourcesJar(type: Jar) {
+	    classifier = 'sources'
+	    from sourceSets.main.allSource
+	}
+
+	artifacts {
+	    archives javadocJar, sourcesJar
+	}
+
+	javadoc  {
+		classpath += configurations.gwtSdk
+	    options.addStringOption("sourcepath", "")
+	}
+
+	signing {
+		required { isReleaseVersion && gradle.taskGraph.hasTask("uploadArchives") }
+	    sign configurations.archives
 	}
 
 	rootProject.tasks.publishAllLibs.dependsOn project.tasks.uploadArchives
