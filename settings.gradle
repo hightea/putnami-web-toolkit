@@ -3,7 +3,7 @@ include 'doc'
 
 // Add all the plugins projects
 include new File(settingsDir, 'plugins').listFiles().findAll { 
-     it.isDirectory() 
+     it.isDirectory() && 'spring' != it.getName() 
     }.collect { 
         it.getName() 
     }.toArray(new java.lang.String[0])

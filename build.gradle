@@ -97,13 +97,15 @@ subprojects {
 				*/
 				
 				//Putnami Repository
+				/*
 				configuration = configurations.deployerSsh
-		        repository(url: "scp://repo.putnami.org/putnamiRepo") {
-		            authentication(userName: "putnami_repo")
-		        }
+				repository(url: "scp://repo.putnami.org/putnamiRepo") {
+					authentication(userName: "putnami_repo")
+				}
+		        */
 		        
 				//OSS Repository
-				/*
+				
 				repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
 					authentication(userName: ossrhUsername, password: ossrhPassword)
 				}
@@ -111,7 +113,7 @@ subprojects {
 				snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
 					authentication(userName: ossrhUsername, password: ossrhPassword)
 				}
-				*/
+				
 	
 	            pom.project {
 					url 'http://pwt.putnami.org'
