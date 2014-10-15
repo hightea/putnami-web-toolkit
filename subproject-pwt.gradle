@@ -23,7 +23,6 @@ if (applyLicense) {
 
 group = 'fr.putnami.pwt'
 version = project.snapshotVersion
-ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
@@ -125,7 +124,7 @@ if (project.name != 'pwt-doc'){
 	}
 
 	signing {
-		required { isReleaseVersion && gradle.taskGraph.hasTask("uploadArchives") }
+		required { gradle.taskGraph.hasTask("uploadArchives") }
 	    sign configurations.archives
 	}
 
@@ -156,6 +155,7 @@ uploadArchives {
 			}
 			*/
 
+			
 			//OSS Repository
 			if (project.hasProperty('ossrhUsername') && project.hasProperty('ossrhPassword')) {
 				repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
@@ -169,10 +169,11 @@ uploadArchives {
 			else {
 				repository(url : new File(rootProject.buildDir, 'repoRelease').toURI())
 			}
-
+			
             pom.project {
 				url 'http://pwt.putnami.org'
-
+				name project.name
+				description 'Putnami Web Toolkit plugin'
 				scm {
 					connection 'scm:git:git@github.com:Putnami/putnami-web-toolkit.git'
                     developerConnection 'scm:git:git@github.com:Putnami/putnami-web-toolkit.git'
