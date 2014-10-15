@@ -1,0 +1,9 @@
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            pom.project {
+            	description 'Putnami Web Toolkit core framework'
+        	}
+    	}
+	}
+}

@@ -36,7 +36,6 @@ subprojects {
 
 	group = 'fr.putnami.pwt'
 	version = rootProject.snapshotVersion
-	ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
 	sourceCompatibility = 1.7
 	targetCompatibility = 1.7
@@ -121,7 +120,9 @@ subprojects {
 	
 	            pom.project {
 					url 'http://pwt.putnami.org'
-	
+					name project.name
+					description 'Putnami Web Toolkit plugin'
+				
 					scm {
 						connection 'scm:git:git@github.com:Putnami/putnami-web-toolkit.git'
 	                    developerConnection 'scm:git:git@github.com:Putnami/putnami-web-toolkit.git'
@@ -191,7 +192,7 @@ configure(subprojects.findAll { it.name != 'pwt-doc' } ){
 	}
 
 	signing {
-		required { isReleaseVersion && gradle.taskGraph.hasTask("uploadArchives") }
+		required { gradle.taskGraph.hasTask("uploadArchives") }
 	    sign configurations.archives
 	}
 
