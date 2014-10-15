@@ -144,26 +144,31 @@ uploadArchives {
 			beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
 			//Local Repository
-			//repository(url : new File(rootProject.buildDir, 'repoTest').toURI())
-
-			//Putnami Repository
-			
-			configuration = configurations.deployerSsh
-	        repository(url: "scp://repo.putnami.org/putnamiRepo") {
-	            authentication(userName: "putnami_repo")
-	        }
-			
-
-			//OSS Repository
 			/*
-			repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-				authentication(userName: ossrhUsername, password: ossrhPassword)
-			}
-
-			snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-				authentication(userName: ossrhUsername, password: ossrhPassword)
+			repository(url : new File(rootProject.buildDir, 'repoTest').toURI())
+			*/
+			
+			//Putnami Repository
+			/*
+			configuration = configurations.deployerSsh
+			repository(url: "scp://repo.putnami.org/putnamiRepo") {
+				authentication(userName: "putnami_repo")
 			}
 			*/
+
+			//OSS Repository
+			if (project.hasProperty('ossrhUsername') && project.hasProperty('ossrhPassword')) {
+				repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+					authentication(userName: ossrhUsername, password: ossrhPassword)
+				}
+	
+				snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+					authentication(userName: ossrhUsername, password: ossrhPassword)
+				}
+			}
+			else {
+				repository(url : new File(rootProject.buildDir, 'repoRelease').toURI())
+			}
 
             pom.project {
 				url 'http://pwt.putnami.org'
