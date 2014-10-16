@@ -53,7 +53,6 @@ buildscript {
 
 repositories {
 	mavenCentral()
-	maven(){ url 'http://repo.putnami.org' }
 }
 
 dependencies {
@@ -83,13 +82,6 @@ gwt {
      <packaging>war</packaging>
      <version>1.0-SNAPSHOT</version>
      <name>Putnami Web Toolkit Hello world</name>
-
-     <repositories>
-         <repository>
-             <id>putnami.org</id>
-             <url>http://repo.putnami.org/</url>
-         </repository>
-     </repositories>
 
      <properties>
          <pwt.version>1.1.0-SNAPSHOT</pwt.version>

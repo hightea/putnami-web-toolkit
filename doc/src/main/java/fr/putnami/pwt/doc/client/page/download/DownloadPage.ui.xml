@@ -46,36 +46,36 @@
 						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
 						<w:TableTD><w:Label>pwt</w:Label></w:TableTD>
 						<w:TableTD><w:Label>1.1.0</w:Label></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt/1.1.0/pwt-1.1.0.pom" text="pom.xml" /></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt/1.1.0/pwt-1.1.0.jar" text="jar" /></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt/1.1.0/pwt-1.1.0.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt/1.1.0/pwt-1.1.0.jar" text="jar" /></w:TableTD>
 					</w:TableRow>
 					<w:TableRow>
 						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
 						<w:TableTD><w:Label>pwt-code-editor</w:Label></w:TableTD>
 						<w:TableTD><w:Label>1.1.0</w:Label></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-code-editor/1.1.0/pwt-code-editor-1.1.0.pom" text="pom.xml" /></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-code-editor/1.1.0/pwt-code-editor-1.1.0.jar" text="jar" /></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt-code-editor/1.1.0/pwt-code-editor-1.1.0.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt-code-editor/1.1.0/pwt-code-editor-1.1.0.jar" text="jar" /></w:TableTD>
 					</w:TableRow>
 					<w:TableRow>
 						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
 						<w:TableTD><w:Label>pwt-google-analytics</w:Label></w:TableTD>
 						<w:TableTD><w:Label>1.1.0</w:Label></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/1.1.0/pwt-google-analytics-1.1.0.pom" text="pom.xml" /></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/1.1.0/pwt-google-analytics-1.1.0.jar" text="jar" /></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt-google-analytics/1.1.0/pwt-google-analytics-1.1.0.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt-google-analytics/1.1.0/pwt-google-analytics-1.1.0.jar" text="jar" /></w:TableTD>
 					</w:TableRow>
 					<w:TableRow>
 						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
 						<w:TableTD><w:Label>pwt-ajax-bot-indexing</w:Label></w:TableTD>
 						<w:TableTD><w:Label>1.1.0</w:Label></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-ajax-bot-indexing/1.1.0/pwt-ajax-bot-indexing-1.1.0.pom" text="pom.xml" /></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-ajax-bot-indexing/1.1.0/pwt-ajax-bot-indexing-1.1.0.jar" text="jar" /></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt-ajax-bot-indexing/1.1.0/pwt-ajax-bot-indexing-1.1.0.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt-ajax-bot-indexing/1.1.0/pwt-ajax-bot-indexing-1.1.0.jar" text="jar" /></w:TableTD>
 					</w:TableRow>
 					<w:TableRow>
 						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
 						<w:TableTD><w:Label>pwt-spring</w:Label></w:TableTD>
 						<w:TableTD><w:Label>1.1.0</w:Label></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-spring/1.1.0/pwt-spring-1.1.0.pom" text="pom.xml" /></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-spring/1.1.0/pwt-spring-1.1.0.jar" text="jar" /></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt-spring/1.1.0/pwt-spring-1.1.0.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt-spring/1.1.0/pwt-spring-1.1.0.jar" text="jar" /></w:TableTD>
 					</w:TableRow>
 				</w:TableBody>
 			</w:Table>			
@@ -175,29 +175,29 @@
 						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
 						<w:TableTD><w:Label>pwt</w:Label></w:TableTD>
 						<w:TableTD><w:Label>1.0.1</w:Label></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt/1.0.1/pwt-1.0.1.pom" text="pom.xml" /></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt/1.0.1/pwt-1.0.1.jar" text="jar" /></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt/1.0.1/pwt-1.0.1.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt/1.0.1/pwt-1.0.1.jar" text="jar" /></w:TableTD>
 					</w:TableRow>
 					<w:TableRow>
 						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
 						<w:TableTD><w:Label>pwt-code-editor</w:Label></w:TableTD>
 						<w:TableTD><w:Label>1.0.1</w:Label></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-code-editor/1.0.1/pwt-code-editor-1.0.1.pom" text="pom.xml" /></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-code-editor/1.0.1/pwt-code-editor-1.0.1.jar" text="jar" /></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt-code-editor/1.0.1/pwt-code-editor-1.0.1.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt-code-editor/1.0.1/pwt-code-editor-1.0.1.jar" text="jar" /></w:TableTD>
 					</w:TableRow>
 					<w:TableRow>
 						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
 						<w:TableTD><w:Label>pwt-google-analytics</w:Label></w:TableTD>
 						<w:TableTD><w:Label>1.0.1</w:Label></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/1.0.1/pwt-google-analytics-1.0.1.pom" text="pom.xml" /></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-google-analytics/1.0.1/pwt-google-analytics-1.0.1.jar" text="jar" /></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt-google-analytics/1.0.1/pwt-google-analytics-1.0.1.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt-google-analytics/1.0.1/pwt-google-analytics-1.0.1.jar" text="jar" /></w:TableTD>
 					</w:TableRow>
 					<w:TableRow>
 						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
 						<w:TableTD><w:Label>pwt-ajax-bot-indexing</w:Label></w:TableTD>
 						<w:TableTD><w:Label>1.0.1</w:Label></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-ajax-bot-indexing/1.0.1/pwt-ajax-bot-indexing-1.0.1.pom" text="pom.xml" /></w:TableTD>
-						<w:TableTD><w:Anchor link="http://repo.putnami.org/fr/putnami/pwt/pwt-ajax-bot-indexing/1.0.1/pwt-ajax-bot-indexing-1.0.1.jar" text="jar" /></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt-ajax-bot-indexing/1.0.1/pwt-ajax-bot-indexing-1.0.1.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt-ajax-bot-indexing/1.0.1/pwt-ajax-bot-indexing-1.0.1.jar" text="jar" /></w:TableTD>
 					</w:TableRow>
 				</w:TableBody>
 			</w:Table>
