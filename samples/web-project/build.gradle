@@ -7,7 +7,7 @@ apply plugin: 'eclipse'
 
 
 group = 'fr.putnami.pwt'
-version = '1.0.0-RC2'
+version = '1.1.0'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
@@ -22,7 +22,7 @@ buildscript {
 }
 
 ext {
-	pwtVersion = '1.0.0'
+	pwtVersion = '1.1.0'
 }
 	
 configurations {
@@ -30,7 +30,6 @@ configurations {
 }
 
 repositories {
-	maven(){ url 'http://repo.putnami.org' }
 	mavenLocal()
 	mavenCentral()
 }

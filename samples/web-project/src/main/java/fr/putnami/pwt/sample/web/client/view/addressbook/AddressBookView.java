@@ -3,26 +3,25 @@ package fr.putnami.pwt.sample.web.client.view.addressbook;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.KeyPressEvent;
-import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 import java.util.Collection;
 import java.util.List;
 
 import fr.putnami.pwt.core.editor.client.event.DirtyEvent;
-import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
-import fr.putnami.pwt.core.model.client.model.Model;
+import fr.putnami.pwt.core.inject.client.annotation.Initialize;
+import fr.putnami.pwt.core.inject.client.annotation.InjectService;
+import fr.putnami.pwt.core.inject.client.annotation.PresentHandler;
+import fr.putnami.pwt.core.inject.client.annotation.Templated;
 import fr.putnami.pwt.core.mvp.client.View;
-import fr.putnami.pwt.core.service.client.ServiceProxy;
+import fr.putnami.pwt.core.mvp.client.ViewPlace;
+import fr.putnami.pwt.core.mvp.client.annotation.ActivityDescription;
 import fr.putnami.pwt.core.service.client.annotation.AsyncHandler;
 import fr.putnami.pwt.core.widget.client.Anchor;
 import fr.putnami.pwt.core.widget.client.Button;
@@ -31,7 +30,6 @@ import fr.putnami.pwt.core.widget.client.GridRow;
 import fr.putnami.pwt.core.widget.client.InputMultiSelect;
 import fr.putnami.pwt.core.widget.client.InputText;
 import fr.putnami.pwt.core.widget.client.OutputList;
-import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.sample.web.shared.constant.AddressConstants;
 import fr.putnami.pwt.sample.web.shared.constant.ContactConstants;
@@ -41,47 +39,34 @@ import fr.putnami.pwt.sample.web.shared.domain.Contact;
 import fr.putnami.pwt.sample.web.shared.domain.Group;
 import fr.putnami.pwt.sample.web.shared.service.ContactService;
 
-public class AddressBookView extends Composite implements View<AddressBookPlace> {
+@Templated
+public class AddressBookView extends Composite implements View {
 
-	interface Binder extends UiBinderLocalized<Widget, AddressBookView> {
-
-		UiBinderLocalized<Widget, AddressBookView> BINDER = GWT.create(Binder.class);
-	}
-
-	interface ContactRemote extends ServiceProxy<AddressBookView, ContactService>, ContactService {
+	@ActivityDescription(view = AddressBookView.class)
+	public static class AddressBookPlace extends ViewPlace {
 	}
 
 	interface Constants extends SampleCommonConstants, ContactConstants, AddressConstants,
 		GenderConstants {
 	}
 
-	public interface GroupModel extends Model<Group> {
+	@InjectService
+	ContactService contactService;
 
-		Model<Group> MODEL = GWT.create(GroupModel.class);
-	}
-
-	public interface ContactModel extends Model<Contact> {
-
-		Model<Contact> MODEL = GWT.create(ContactModel.class);
-	}
-
-	private final ContactRemote contactService = GWT.create(ContactRemote.class);
-	private final Constants constants = GWT.create(Constants.class);
 
 	@UiField
 	InputText searchBox;
 
 	@UiField
+	@Initialize(constantsClass = Constants.class)
 	OutputList<Group> groupsList;
-	@UiField
-	Form<Group> groupItemTemplate;
 
 	@UiField
+	@Initialize(constantsClass = Constants.class)
 	OutputList<Contact> contactsList;
 	@UiField
+	@Initialize(constantsClass = Constants.class)
 	Form<Contact> contactDetails;
-	@UiField
-	Form<Contact> contactItemTemplate;
 	@UiField
 	InputMultiSelect<String> groupSelect;
 	@UiField
@@ -102,28 +87,8 @@ public class AddressBookView extends Composite implements View<AddressBookPlace>
 	private Group displayedGroup;
 	private List<Contact> displayedList;
 
-	public AddressBookView() {
-		initWidget(((UiBinder<HTMLPanel, AddressBookView>) GWT.create(Binder.class)).createAndBindUi(this));
-		contactService.bindService(this);
-
-		MessageHelper messageHelper = new MessageHelper(constants);
-
-		contactDetails.setMessageHelper(messageHelper);
-		contactDetails.initialize(ContactModel.MODEL);
-
-		contactsList.setMessageHelper(messageHelper);
-		contactsList.initialize(ContactModel.MODEL);
-		contactItemTemplate.setMessageHelper(messageHelper);
-		contactItemTemplate.initialize(ContactModel.MODEL);
-
-		groupsList.setMessageHelper(messageHelper);
-		groupsList.initialize(GroupModel.MODEL);
-		groupItemTemplate.setMessageHelper(messageHelper);
-		groupItemTemplate.initialize(GroupModel.MODEL);
-	}
-
-	@Override
-	public void present(AddressBookPlace place) {
+	@PresentHandler
+	public void present() {
 		contactService.getGroups();
 	}
 
@@ -211,7 +176,7 @@ public class AddressBookView extends Composite implements View<AddressBookPlace>
 
 	@AsyncHandler
 	void onSavePerson(Contact result) {
-		present(null);
+		present();
 	}
 
 	private void displayGroup(Group group) {

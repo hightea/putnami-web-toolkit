@@ -7,6 +7,7 @@
 	<inherits name="fr.putnami.pwt.core.mvp.Mvp"/>
 	<inherits name="fr.putnami.pwt.core.widget.Widget"/>
 	<inherits name="fr.putnami.pwt.core.error.DefaultErrorDisplayer"/>
+	<inherits name="fr.putnami.pwt.core.inject.Inject"/>
 
 	<entry-point class="fr.putnami.pwt.sample.web.client.SampleWebApp"/>
 

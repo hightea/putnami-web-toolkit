@@ -30,7 +30,6 @@ configurations {
 }
 
 repositories {
-	maven (){ url 'http://repo.putnami.org' }
 	mavenLocal()
 	mavenCentral()
 }
