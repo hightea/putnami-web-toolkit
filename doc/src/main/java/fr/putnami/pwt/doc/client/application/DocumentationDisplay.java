@@ -18,7 +18,6 @@ import com.google.common.base.Strings;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.uibinder.client.UiField;
@@ -30,7 +29,6 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
 import fr.putnami.pwt.core.widget.client.Affix;
-import fr.putnami.pwt.core.widget.client.HTMLPanel;
 import fr.putnami.pwt.core.widget.client.OneWidgetPanel;
 import fr.putnami.pwt.core.widget.client.binder.UiBinderLocalized;
 
@@ -42,8 +40,6 @@ public class DocumentationDisplay extends Composite implements AcceptsOneWidget 
 
 	@UiField
 	Affix affixMenu;
-	@UiField
-	HTMLPanel viewContainer;
 
 	@UiField
 	OneWidgetPanel container;
@@ -77,12 +73,6 @@ public class DocumentationDisplay extends Composite implements AcceptsOneWidget 
 	}
 
 	private void redraw(boolean autoScroll) {
-		this.viewContainer.getElement().getStyle().clearHeight();
-		int height = this.getWidget().getElement().getClientHeight();
-
-		if (height < Window.getClientHeight()) {
-			this.viewContainer.getElement().getStyle().setHeight(Window.getClientHeight() - height, Unit.PX);
-		}
 		if (autoScroll) {
 			String historyToken = History.getToken();
 			if (!Strings.isNullOrEmpty(historyToken)) {
