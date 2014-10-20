@@ -8,7 +8,6 @@
         <w:GridRow>
 			<w:GridColumn size="10" offset="1">
 				<p>This application is the result of a step-by-step tutorial demonstrating the <strong title="Putnami Web Toolkit">PWT</strong> features.</p>
-				<p>For more informations go to the <a href="https://github.com/putnami/putnami-pwt-tutorial" target="_blank"><i class="icon icon-github-squared" />repo hosting this tutorial</a></p>
 			</w:GridColumn>
 		</w:GridRow>
 		
