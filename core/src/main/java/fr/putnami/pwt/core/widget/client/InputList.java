@@ -18,6 +18,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -43,6 +44,7 @@ import fr.putnami.pwt.core.editor.client.Visitor;
 import fr.putnami.pwt.core.editor.client.factory.InputFactory;
 import fr.putnami.pwt.core.editor.client.factory.OutputFactory;
 import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
+import fr.putnami.pwt.core.editor.client.helper.TakesValueEditorWrapper;
 import fr.putnami.pwt.core.editor.client.util.ValidationUtils;
 import fr.putnami.pwt.core.editor.client.validator.Validator;
 import fr.putnami.pwt.core.event.client.HandlerRegistrationCollection;
@@ -156,6 +158,11 @@ public class InputList<T> extends List
 			this.itemValue = value;
 			StyleUtils.toggleStyle(this.container, InputList.STYLE_ERROR, false);
 			this.redraw();
+		}
+
+		@Override
+		public LeafValueEditor<T> asEditor() {
+			return new TakesValueEditorWrapper<T>(this);
 		}
 
 		@Override
@@ -329,6 +336,11 @@ public class InputList<T> extends List
 		this.items.clear();
 		this.addListItem(this.nextItem);
 		this.driver.edit(value);
+	}
+
+	@Override
+	public LeafValueEditor<Collection<T>> asEditor() {
+		return new TakesValueEditorWrapper<Collection<T>>(this);
 	}
 
 	@Override

@@ -32,6 +32,7 @@ import com.google.gwt.dom.client.TableElement;
 import com.google.gwt.dom.client.TableRowElement;
 import com.google.gwt.dom.client.TableSectionElement;
 import com.google.gwt.dom.client.UListElement;
+import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
@@ -56,6 +57,7 @@ import java.util.List;
 import fr.putnami.pwt.core.editor.client.EditorInput;
 import fr.putnami.pwt.core.editor.client.EditorLeaf;
 import fr.putnami.pwt.core.editor.client.Error;
+import fr.putnami.pwt.core.editor.client.helper.TakesValueEditorWrapper;
 import fr.putnami.pwt.core.editor.client.util.ValidationUtils;
 import fr.putnami.pwt.core.editor.client.validator.Validator;
 import fr.putnami.pwt.core.event.client.EventBus;
@@ -528,6 +530,11 @@ public class InputDatePicker extends FocusWidget
 	public void edit(Date value) {
 		this.errors.clear();
 		this.setValue(value);
+	}
+
+	@Override
+	public LeafValueEditor<Date> asEditor() {
+		return new TakesValueEditorWrapper<Date>(this);
 	}
 
 	@Override

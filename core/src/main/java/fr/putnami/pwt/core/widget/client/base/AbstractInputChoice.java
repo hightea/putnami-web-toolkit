@@ -16,6 +16,7 @@ package fr.putnami.pwt.core.widget.client.base;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
+import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.text.shared.Renderer;
@@ -27,6 +28,7 @@ import java.util.List;
 
 import fr.putnami.pwt.core.editor.client.event.DirtyEvent.Handler;
 import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
+import fr.putnami.pwt.core.editor.client.helper.TakesValueEditorWrapper;
 import fr.putnami.pwt.core.event.client.EventBus;
 import fr.putnami.pwt.core.model.client.base.HasMessageHelper;
 import fr.putnami.pwt.core.widget.client.event.AskFocusEvent;
@@ -246,6 +248,11 @@ public abstract class AbstractInputChoice<T, U> extends AbstractInput<U>
 		this.redrawInternal();
 		this.setValue(value);
 		this.getSelectionHandler().setSelection(this.getValue(), false);
+	}
+
+	@Override
+	public LeafValueEditor<U> asEditor() {
+		return new TakesValueEditorWrapper<U>(this);
 	}
 
 	@Override

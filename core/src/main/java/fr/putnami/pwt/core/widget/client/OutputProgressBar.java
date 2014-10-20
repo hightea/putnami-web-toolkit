@@ -18,11 +18,13 @@ import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.user.client.ui.IsWidget;
 
 import fr.putnami.pwt.core.editor.client.EditorOutput;
+import fr.putnami.pwt.core.editor.client.helper.TakesValueEditorWrapper;
 import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractWidget;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
@@ -113,6 +115,11 @@ public class OutputProgressBar<T extends Number> extends AbstractWidget implemen
 	@Override
 	public void edit(T value) {
 		this.setValue(value);
+	}
+
+	@Override
+	public LeafValueEditor<T> asEditor() {
+		return new TakesValueEditorWrapper<T>(this);
 	}
 
 	public void setValue(T value) {

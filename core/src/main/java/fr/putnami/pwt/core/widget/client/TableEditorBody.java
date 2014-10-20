@@ -16,6 +16,7 @@ package fr.putnami.pwt.core.widget.client;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
+import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.user.client.ui.IsWidget;
 
@@ -30,6 +31,7 @@ import fr.putnami.pwt.core.editor.client.EditorValue;
 import fr.putnami.pwt.core.editor.client.Error;
 import fr.putnami.pwt.core.editor.client.Visitor;
 import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
+import fr.putnami.pwt.core.editor.client.helper.TakesValueEditorWrapper;
 import fr.putnami.pwt.core.editor.client.validator.Validator;
 import fr.putnami.pwt.core.model.client.ModelDriver;
 import fr.putnami.pwt.core.model.client.base.EditorModel;
@@ -137,6 +139,11 @@ public class TableEditorBody<T> extends TableBody<T>
 			row.setVisible(false);
 		}
 		this.driver.edit(value);
+	}
+
+	@Override
+	public LeafValueEditor<Collection<T>> asEditor() {
+		return new TakesValueEditorWrapper<Collection<T>>(this);
 	}
 
 	@Override

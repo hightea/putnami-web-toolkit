@@ -18,6 +18,7 @@ import com.google.common.collect.Lists;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.dom.client.TableCellElement;
+import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.GwtEvent;
@@ -30,6 +31,7 @@ import java.util.Collections;
 import java.util.List;
 
 import fr.putnami.pwt.core.editor.client.EditorValue;
+import fr.putnami.pwt.core.editor.client.helper.TakesValueEditorWrapper;
 import fr.putnami.pwt.core.model.client.base.HasDrawable;
 import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractTableCell;
@@ -85,6 +87,11 @@ public class TableSelecter<T> extends AbstractTableColumn<T> implements HasSelec
 		public void edit(T value) {
 			this.value = value;
 			this.redraw();
+		}
+
+		@Override
+		public LeafValueEditor<T> asEditor() {
+			return new TakesValueEditorWrapper<T>(this);
 		}
 
 		@Override

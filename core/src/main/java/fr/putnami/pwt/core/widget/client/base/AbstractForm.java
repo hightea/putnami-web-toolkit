@@ -14,6 +14,7 @@
  */
 package fr.putnami.pwt.core.widget.client.base;
 
+import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
@@ -37,6 +38,7 @@ import fr.putnami.pwt.core.editor.client.event.FlushSuccessEvent.HasFlushSuccess
 import fr.putnami.pwt.core.editor.client.event.ResetDisplayEvent;
 import fr.putnami.pwt.core.editor.client.event.ResetDisplayEvent.HasResetDisplayHandlers;
 import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
+import fr.putnami.pwt.core.editor.client.helper.TakesValueEditorWrapper;
 import fr.putnami.pwt.core.editor.client.validator.Validator;
 import fr.putnami.pwt.core.event.client.EventBus;
 import fr.putnami.pwt.core.model.client.ModelDriver;
@@ -131,6 +133,11 @@ public abstract class AbstractForm<T> extends AbstractHTMLPanel
 	@Override
 	public void edit(T object) {
 		this.driver.edit(object);
+	}
+
+	@Override
+	public LeafValueEditor<T> asEditor() {
+		return new TakesValueEditorWrapper<T>(this);
 	}
 
 	@Override

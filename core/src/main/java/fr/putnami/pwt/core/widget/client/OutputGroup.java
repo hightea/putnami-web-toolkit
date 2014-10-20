@@ -15,11 +15,13 @@
 package fr.putnami.pwt.core.widget.client;
 
 import com.google.gwt.dom.client.DivElement;
+import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
 import fr.putnami.pwt.core.editor.client.EditorOutput;
+import fr.putnami.pwt.core.editor.client.helper.TakesValueEditorWrapper;
 import fr.putnami.pwt.core.widget.client.base.AbstractHTMLPanel;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
@@ -50,6 +52,11 @@ public class OutputGroup<T> extends AbstractHTMLPanel implements EditorOutput<T>
 	@Override
 	public void edit(T value) {
 		this.value = value;
+	}
+
+	@Override
+	public LeafValueEditor<T> asEditor() {
+		return new TakesValueEditorWrapper<T>(this);
 	}
 
 	@Override

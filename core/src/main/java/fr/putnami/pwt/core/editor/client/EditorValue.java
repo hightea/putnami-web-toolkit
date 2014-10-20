@@ -14,7 +14,10 @@
  */
 package fr.putnami.pwt.core.editor.client;
 
-public interface EditorValue<T> extends Editor {
+import com.google.gwt.editor.client.IsEditor;
+import com.google.gwt.editor.client.LeafValueEditor;
+
+public interface EditorValue<T> extends Editor, IsEditor<LeafValueEditor<T>> {
 
 	T getValue();
 

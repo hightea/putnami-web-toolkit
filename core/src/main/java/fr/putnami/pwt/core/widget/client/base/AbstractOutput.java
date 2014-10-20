@@ -16,12 +16,14 @@ package fr.putnami.pwt.core.widget.client.base;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ParagraphElement;
+import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Widget;
 
 import fr.putnami.pwt.core.editor.client.EditorLeaf;
 import fr.putnami.pwt.core.editor.client.EditorOutput;
+import fr.putnami.pwt.core.editor.client.helper.TakesValueEditorWrapper;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public abstract class AbstractOutput<T> extends Widget implements EditorLeaf, EditorOutput<T>, HasResponsiveVisibility {
@@ -111,6 +113,11 @@ public abstract class AbstractOutput<T> extends Widget implements EditorLeaf, Ed
 	public void edit(T value) {
 		this.value = value;
 		this.renderValue(value);
+	}
+
+	@Override
+	public LeafValueEditor<T> asEditor() {
+		return new TakesValueEditorWrapper<T>(this);
 	}
 
 	protected abstract void renderValue(T value);

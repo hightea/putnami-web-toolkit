@@ -17,6 +17,7 @@ package fr.putnami.pwt.core.widget.client;
 import com.google.gwt.dom.client.AnchorElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Text;
+import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -33,6 +34,7 @@ import com.google.web.bindery.event.shared.HandlerRegistration;
 
 import fr.putnami.pwt.core.editor.client.EditorLabel;
 import fr.putnami.pwt.core.editor.client.EditorValue;
+import fr.putnami.pwt.core.editor.client.helper.TakesValueEditorWrapper;
 import fr.putnami.pwt.core.event.client.HandlerRegistrationCollection;
 import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractWidget;
@@ -290,6 +292,11 @@ public class Button<T> extends AbstractWidget
 	@Override
 	public void edit(T value) {
 		this.value = value;
+	}
+
+	@Override
+	public LeafValueEditor<T> asEditor() {
+		return new TakesValueEditorWrapper<T>(this);
 	}
 
 	@Override

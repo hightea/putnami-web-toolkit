@@ -14,6 +14,7 @@
  */
 package fr.putnami.pwt.core.widget.client;
 
+import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.user.client.ui.IsWidget;
 
 import java.util.Collection;
@@ -24,6 +25,7 @@ import fr.putnami.pwt.core.editor.client.EditorValue;
 import fr.putnami.pwt.core.editor.client.Visitor;
 import fr.putnami.pwt.core.editor.client.factory.OutputFactory;
 import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
+import fr.putnami.pwt.core.editor.client.helper.TakesValueEditorWrapper;
 import fr.putnami.pwt.core.model.client.ModelDriver;
 import fr.putnami.pwt.core.model.client.base.EditorModel;
 import fr.putnami.pwt.core.model.client.base.EditorProvider;
@@ -111,6 +113,11 @@ public class OutputList<T> extends List
 	public void edit(Collection<T> value) {
 		this.clear();
 		this.driver.edit(value);
+	}
+
+	@Override
+	public LeafValueEditor<Collection<T>> asEditor() {
+		return new TakesValueEditorWrapper<Collection<T>>(this);
 	}
 
 	@Override

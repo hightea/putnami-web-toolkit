@@ -17,9 +17,11 @@ package fr.putnami.pwt.core.widget.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.dom.client.Style;
+import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.user.client.ui.IsWidget;
 
 import fr.putnami.pwt.core.editor.client.EditorOutput;
+import fr.putnami.pwt.core.editor.client.helper.TakesValueEditorWrapper;
 import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractWidget;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
@@ -112,6 +114,11 @@ public class Image extends AbstractWidget implements EditorOutput<String> {
 	@Override
 	public void edit(String value) {
 		this.setSrc(value);
+	}
+
+	@Override
+	public LeafValueEditor<String> asEditor() {
+		return new TakesValueEditorWrapper<String>(this);
 	}
 
 	public Type getType() {

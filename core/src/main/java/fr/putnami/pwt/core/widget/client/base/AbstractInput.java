@@ -16,6 +16,7 @@ package fr.putnami.pwt.core.widget.client.base;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -92,6 +93,7 @@ import fr.putnami.pwt.core.editor.client.EditorLeaf;
 import fr.putnami.pwt.core.editor.client.Error;
 import fr.putnami.pwt.core.editor.client.event.DirtyEvent;
 import fr.putnami.pwt.core.editor.client.event.DirtyEvent.Handler;
+import fr.putnami.pwt.core.editor.client.helper.TakesValueEditorWrapper;
 import fr.putnami.pwt.core.editor.client.util.ValidationUtils;
 import fr.putnami.pwt.core.editor.client.validator.Validator;
 import fr.putnami.pwt.core.event.client.EventBus;
@@ -197,6 +199,11 @@ public abstract class AbstractInput<I> extends AbstractComposite
 
 	public void setValue(I value) {
 		this.value = value;
+	}
+
+	@Override
+	public LeafValueEditor<I> asEditor() {
+		return new TakesValueEditorWrapper<I>(this);
 	}
 
 	@Override

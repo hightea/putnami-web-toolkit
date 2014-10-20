@@ -14,10 +14,12 @@
  */
 package fr.putnami.pwt.plugin.code.client;
 
+import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.user.client.ui.IsWidget;
 
 import fr.putnami.pwt.core.editor.client.EditorLeaf;
 import fr.putnami.pwt.core.editor.client.EditorOutput;
+import fr.putnami.pwt.core.editor.client.helper.TakesValueEditorWrapper;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class OutputCode extends StaticCode implements EditorLeaf, EditorOutput<String> {
@@ -45,6 +47,11 @@ public class OutputCode extends StaticCode implements EditorLeaf, EditorOutput<S
 	@Override
 	public void edit(String value) {
 		super.edit(value);
+	}
+
+	@Override
+	public LeafValueEditor<String> asEditor() {
+		return new TakesValueEditorWrapper<String>(this);
 	}
 
 	@Override

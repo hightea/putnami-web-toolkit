@@ -16,6 +16,7 @@ package fr.putnami.pwt.core.widget.client;
 
 import com.google.gwt.dom.client.AnchorElement;
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -84,6 +85,7 @@ import com.google.gwt.user.client.ui.impl.FocusImpl;
 
 import fr.putnami.pwt.core.editor.client.EditorValue;
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
+import fr.putnami.pwt.core.editor.client.helper.TakesValueEditorWrapper;
 import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
 import fr.putnami.pwt.core.widget.client.util.AnchorUtils;
 import fr.putnami.pwt.core.widget.client.util.HTMLUtils;
@@ -157,6 +159,11 @@ public class Anchor<T> extends AbstractPanel
 	@Override
 	public T getValue() {
 		return this.value;
+	}
+
+	@Override
+	public LeafValueEditor<T> asEditor() {
+		return new TakesValueEditorWrapper<T>(this);
 	}
 
 	public int getTabIndex() {

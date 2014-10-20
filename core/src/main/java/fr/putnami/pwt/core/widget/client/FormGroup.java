@@ -15,6 +15,7 @@
 package fr.putnami.pwt.core.widget.client;
 
 import com.google.gwt.dom.client.DivElement;
+import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -26,6 +27,7 @@ import fr.putnami.pwt.core.editor.client.Error;
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
 import fr.putnami.pwt.core.editor.client.factory.InputFactory;
 import fr.putnami.pwt.core.editor.client.factory.OutputFactory;
+import fr.putnami.pwt.core.editor.client.helper.TakesValueEditorWrapper;
 import fr.putnami.pwt.core.model.client.base.EditorProvider;
 import fr.putnami.pwt.core.model.client.base.HasEditorProvider;
 import fr.putnami.pwt.core.model.client.base.HasInputEditorFactory;
@@ -258,6 +260,11 @@ public class FormGroup<T> extends AbstractPanel
 	@Override
 	public void edit(T value) {
 		this.value = value;
+	}
+
+	@Override
+	public LeafValueEditor<T> asEditor() {
+		return new TakesValueEditorWrapper<T>(this);
 	}
 
 }
