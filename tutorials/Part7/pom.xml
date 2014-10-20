@@ -9,15 +9,8 @@
      <version>1.0-SNAPSHOT</version>
      <name>Putnami Web Toolkit tutorial web app</name>
 
-     <repositories>
-         <repository>
-             <id>putnami.org</id>
-             <url>http://repo.putnami.org/</url>
-         </repository>
-     </repositories>
-
      <properties>
-         <pwt.version>1.0.0-SNAPSHOT</pwt.version>
+         <pwt.version>1.0.1</pwt.version>
          <gwt.version>2.6.1</gwt.version>
          <jetty.plugin.version>9.2.0.v20140526</jetty.plugin.version>
          <project.compiler.source>1.7</project.compiler.source>

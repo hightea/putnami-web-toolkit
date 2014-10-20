@@ -47,7 +47,7 @@
 			<p>In the project folder, create the maven build file (<code>pom.xml</code>).</p>
 			<p>We will configure the maven build :</p>
 			<ol>
-				<li>Init the build script by adding our maven repository :
+				<li>Init the build script :
 					<c:StaticCode configuration="{XML_CONFIGURATION}">
 <pre><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
@@ -60,13 +60,6 @@
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
 	<name>Putnami Web Toolkit tutorial web app</name>
-
-	<repositories>
-		<repository>
-			<id>putnami.org</id>
-			<url>http://repo.putnami.org/</url>
-		</repository>
-	</repositories>
 </project>]]></pre>
 					</c:StaticCode>
 				</li>

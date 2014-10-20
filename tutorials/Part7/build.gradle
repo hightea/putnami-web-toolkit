@@ -13,12 +13,11 @@ buildscript {
 
 repositories {
 	mavenCentral()
-	maven (){ url 'http://repo.putnami.org' }
 }
 
 dependencies {
-	compile 'fr.putnami.pwt:pwt:1.0.0-SNAPSHOT'
-	compile 'fr.putnami.pwt:pwt-google-analytics:1.0.0-SNAPSHOT'
+	compile 'fr.putnami.pwt:pwt:1.0.1'
+	compile 'fr.putnami.pwt:pwt-google-analytics:1.0.1'
 	providedCompile 'javax.validation:validation-api:1.0.0.GA'
 }
 

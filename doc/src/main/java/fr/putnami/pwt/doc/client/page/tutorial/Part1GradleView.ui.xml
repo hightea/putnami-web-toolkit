@@ -67,12 +67,11 @@ buildscript {
 }]]></pre>
 					</c:StaticCode>
 				</li>
-				<li>Add the Maven central repository to download common dependencies and the Putnami maven repository to download the PWT artifacts :
+				<li>PWT is available on maven central, so you just have to add the mavenCentral repository. :
 					<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
 repositories {
 	mavenCentral()
-	maven (){ url 'http://repo.putnami.org' }
 }]]></pre>
 				</c:StaticCode>
 				</li>
