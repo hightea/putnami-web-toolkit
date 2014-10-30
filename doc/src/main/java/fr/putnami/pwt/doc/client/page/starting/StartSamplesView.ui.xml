@@ -42,14 +42,14 @@
 		<br/>
 		<w:HTMLPanel ui:field="gradlePanel">
 <pre><![CDATA[
-git clone git@github.com:Putnami/putnami-pwt.git
+git clone https://github.com/Putnami/putnami-pwt.git
 cd putnami-pwt/samples/web-project
 gradle jettyRunWar
 ]]></pre>
 		</w:HTMLPanel>
 		<w:HTMLPanel ui:field="mavenPanel">
 <pre><![CDATA[
-git clone git@github.com:Putnami/putnami-pwt.git
+git clone https://github.com/Putnami/putnami-pwt.git
 cd putnami-pwt/samples/web-project
 mvn -Pdev jetty:run
 ]]></pre>
