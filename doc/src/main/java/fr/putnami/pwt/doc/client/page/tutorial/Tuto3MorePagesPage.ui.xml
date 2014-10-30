@@ -171,7 +171,7 @@ public class TutorialApp implements Module {
 <pre><![CDATA[
 @UiHandler("aboutButton")
 public void onAboutButton(ButtonEvent event) {
-	MvpController.get().goTo(AboutPlace.INSTANCE);
+	MvpController.get().goTo(new AboutPlace());
 }
 ]]></pre>
 			</c:StaticCode>
