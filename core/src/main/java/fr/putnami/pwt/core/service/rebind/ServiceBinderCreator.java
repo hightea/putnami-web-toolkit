@@ -18,6 +18,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.gwt.core.ext.GeneratorContext;
+import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -39,6 +40,8 @@ import com.google.gwt.user.rebind.rpc.SerializableTypeOracleBuilder;
 import com.google.gwt.user.rebind.rpc.TypeSerializerCreator;
 
 import java.io.PrintWriter;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Set;
@@ -99,11 +102,42 @@ public class ServiceBinderCreator {
 	private String createSerializer(TreeLogger logger, GeneratorContext context) throws UnableToCompleteException,
 		NotFoundException {
 
-		SerializableTypeOracleBuilder typesSentFromBrowser =
-			new SerializableTypeOracleBuilder(logger, context.getPropertyOracle(), context);
-		SerializableTypeOracleBuilder typesSentToBrowser =
-			new SerializableTypeOracleBuilder(logger, context.getPropertyOracle(), context);
+		/* Hack because SerializableTypeOracleBuilder constructor has only two arguments since GWT 2.7 */
 
+		SerializableTypeOracleBuilder typesSentFromBrowser = null;
+		SerializableTypeOracleBuilder typesSentToBrowser = null;
+		try {
+			try {
+				Constructor<SerializableTypeOracleBuilder> constructor =
+					SerializableTypeOracleBuilder.class.getConstructor(TreeLogger.class, PropertyOracle.class,
+						GeneratorContext.class);
+				typesSentFromBrowser = constructor.newInstance(logger, context.getPropertyOracle(), context);
+				typesSentToBrowser = constructor.newInstance(logger, context.getPropertyOracle(), context);
+			} catch (NoSuchMethodException exc) {
+				try {
+					Constructor<SerializableTypeOracleBuilder> constructor =
+						SerializableTypeOracleBuilder.class.getConstructor(TreeLogger.class, GeneratorContext.class);
+					typesSentFromBrowser = constructor.newInstance(logger, context);
+					typesSentToBrowser = constructor.newInstance(logger, context);
+				} catch (NoSuchMethodException ex) {
+					logger.branch(TreeLogger.ERROR, "Unable to find a SerializableTypeOracleBuilder constructor", null);
+					throw new UnableToCompleteException();
+				}
+			}
+		} catch (InstantiationException e) {
+			logger.branch(TreeLogger.ERROR, "Unable to invoke SerializableTypeOracleBuilder constructor", null);
+			throw new UnableToCompleteException();
+		} catch (IllegalAccessException e) {
+			logger.branch(TreeLogger.ERROR, "Unable to invoke SerializableTypeOracleBuilder constructor", null);
+			throw new UnableToCompleteException();
+		} catch (IllegalArgumentException e) {
+			logger.branch(TreeLogger.ERROR, "Unable to invoke SerializableTypeOracleBuilder constructor", null);
+			throw new UnableToCompleteException();
+		} catch (InvocationTargetException e) {
+			logger.branch(TreeLogger.ERROR, "Unable to invoke SerializableTypeOracleBuilder constructor", null);
+			throw new UnableToCompleteException();
+		}
+		/* End of Hack */
 		JMethod[] methods = this.serviceType.getOverridableMethods();
 		TypeOracle typeOracle = context.getTypeOracle();
 
