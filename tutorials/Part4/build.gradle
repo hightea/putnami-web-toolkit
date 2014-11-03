@@ -13,10 +13,11 @@ buildscript {
 
 repositories {
 	mavenCentral()
+	maven{ url 'https://oss.sonatype.org/content/repositories/snapshots/'}
 }
 
 dependencies {
-	compile 'fr.putnami.pwt:pwt:1.1.0-SNAPSHOT'
+	compile 'fr.putnami.pwt:pwt:1.1.1-SNAPSHOT'
 }
 
 gwt {

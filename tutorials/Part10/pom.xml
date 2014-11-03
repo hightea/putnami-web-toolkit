@@ -10,7 +10,7 @@
      <name>Putnami Web Toolkit tutorial web app</name>
 
      <properties>
-         <pwt.version>1.1.0-SNAPSHOT</pwt.version>
+         <pwt.version>1.1.1-SNAPSHOT</pwt.version>
          <gwt.version>2.6.1</gwt.version>
          <spring.security.version>3.2.5.RELEASE</spring.security.version>
          <jetty.plugin.version>9.2.0.v20140526</jetty.plugin.version>
@@ -19,6 +19,13 @@
          <project.sourceEncoding>UTF-8</project.sourceEncoding>
          <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
      </properties>
+     
+     <repositories>
+		<repository>
+			<id>sonatype-snapshot</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</repository>
+	 </repositories>
 
      <dependencies>
          <dependency>
