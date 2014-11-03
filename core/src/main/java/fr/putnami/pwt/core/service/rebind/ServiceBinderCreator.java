@@ -77,7 +77,7 @@ public class ServiceBinderCreator {
 	}
 
 	public String create(TreeLogger logger, GeneratorContext context) throws UnableToCompleteException, NotFoundException {
-		PrintWriter printWriter = this.getPrintWriter(logger, context, this.proxyModelQualifiedName);
+		PrintWriter printWriter = this.getPrintWriter(logger, context);
 		if (printWriter == null) {
 			return this.proxyModelQualifiedName;
 		}
@@ -89,7 +89,7 @@ public class ServiceBinderCreator {
 
 		srcWriter.indent();
 		srcWriter.println();
-		this.generateSerializer(logger, srcWriter);
+		this.generateSerializer(srcWriter);
 		srcWriter.println();
 		this.generateServiceImplementation(logger, srcWriter);
 		this.generateServiceImplementationWithCallback(logger, srcWriter);
@@ -198,7 +198,7 @@ public class ServiceBinderCreator {
 		return tsc.realize(logger);
 	}
 
-	private void generateSerializer(TreeLogger logger, SourceWriter srcWriter) {
+	private void generateSerializer(SourceWriter srcWriter) {
 		srcWriter.println("private final %s serializer = new %s();", this.serializerTypeName, this.serializerTypeName);
 	}
 
@@ -271,30 +271,32 @@ public class ServiceBinderCreator {
 		return callbackMethods;
 	}
 
-	private void generateServiceImplementationWithCallback(TreeLogger logger, SourceWriter srcWriter) {
+	private void generateServiceImplementationWithCallback(TreeLogger logger, SourceWriter srcWriter)
+		throws UnableToCompleteException {
 		for (JMethod method : this.serviceBinderType.getMethods()) {
 			JParameter[] methodParams = method.getParameters();
-			JParameter callcakParam = null;
+			JParameter callbackParam = null;
 			if (methodParams != null && methodParams.length > 0) {
-				callcakParam = methodParams[methodParams.length - 1];
+				callbackParam = methodParams[methodParams.length - 1];
 			}
-			if (callcakParam == null) {
+			if (callbackParam == null) {
 				break;
 			}
 			this.writeStartMethod(srcWriter, method);
-			this.writeCommandDefinition(srcWriter, method);
-			this.writeCommandParam(srcWriter, method, null, callcakParam.getName());
+			this.writeCommandDefinition(logger, srcWriter, method, callbackParam);
+			this.writeCommandParam(srcWriter, method, null, callbackParam);
 			this.writeEndMethod(srcWriter, method);
 		}
 	}
 
-	private void generateServiceImplementation(TreeLogger logger, SourceWriter srcWriter) {
+	private void generateServiceImplementation(TreeLogger logger, SourceWriter srcWriter)
+		throws UnableToCompleteException {
 		Set<String> addedMethods = Sets.newHashSet();
 		for (JMethod method : this.serviceType.getOverridableMethods()) {
 			if (!addedMethods.contains(method.getName())) {
 				addedMethods.add(method.getName());
 				this.writeStartMethod(srcWriter, method);
-				this.writeCommandDefinition(srcWriter, method);
+				this.writeCommandDefinition(logger, srcWriter, method, null);
 				this.writeCommandParam(srcWriter, method, this.listCallbackMethods(logger, method), null);
 				this.writeEndMethod(srcWriter, method);
 			}
@@ -308,7 +310,7 @@ public class ServiceBinderCreator {
 			if (i++ > 0) {
 				srcWriter.print(", ");
 			}
-			srcWriter.print("%s %s", this.typeAsString(parameter.getType(), false), parameter.getName());
+			srcWriter.print("%s $%d_%s", this.typeAsString(parameter.getType(), false), i, parameter.getName());
 		}
 		srcWriter.println("){");
 		srcWriter.indent();
@@ -330,19 +332,34 @@ public class ServiceBinderCreator {
 		srcWriter.println("}");
 	}
 
-	private void writeCommandDefinition(SourceWriter srcWriter, JMethod method) {
+	private void writeCommandDefinition(TreeLogger logger, SourceWriter srcWriter, JMethod method,
+		JParameter callbackParameter) throws UnableToCompleteException {
 		srcWriter.print("CommandDefinition commandDefinition  = new CommandDefinition(");
 		srcWriter.print("\"%s\", ", this.serviceType.getQualifiedSourceName());
 		srcWriter.print("\"%s\", ", method.getName());
-		srcWriter.print("\"%s\" ", method.getReturnType().getQualifiedSourceName());
+		if (callbackParameter != null) {
+			JParameterizedType parameterizedCallback = callbackParameter.getType().isParameterized();
+			if (parameterizedCallback != null) {
+				srcWriter.print("\"%s\" ", parameterizedCallback.getTypeArgs()[0].getQualifiedSourceName());
+			} else {
+				logger.branch(TreeLogger.ERROR, "Callback argument type for method " + method.getName()
+					+ " is not parametrized", null);
+				throw new UnableToCompleteException();
+			}
+
+		} else {
+			srcWriter.print("\"%s\" ", method.getReturnType().getQualifiedSourceName());
+		}
 		for (JParameter parameter : method.getParameters()) {
-			srcWriter.print(", \"%s\"", parameter.getType().getQualifiedSourceName());
+			if (!parameter.equals(callbackParameter)) {
+				srcWriter.print(", \"%s\"", parameter.getType().getQualifiedSourceName());
+			}
 		}
 		srcWriter.println(");");
 	}
 
 	private void writeCommandParam(SourceWriter srcWriter, JMethod method, Collection<CallbackMethod> callbackSuccess,
-		String callbackParam) {
+		JParameter callbackParameter) {
 		boolean lazy = method.getAnnotation(LazyCommand.class) != null;
 		boolean quiet = method.getAnnotation(QuietCommand.class) != null;
 
@@ -353,18 +370,20 @@ public class ServiceBinderCreator {
 		srcWriter.print("Lists.newArrayList(Arrays.asList(");
 		int i = 0;
 		for (JParameter parameter : method.getParameters()) {
-			if (i++ > 0) {
-				srcWriter.print(", ");
+			if (!parameter.equals(callbackParameter)) {
+				if (i++ > 0) {
+					srcWriter.print(", ");
+				}
+				srcWriter.print("$%d_%s", i, parameter.getName());
 			}
-			srcWriter.print("%s", parameter.getName());
 		}
 		srcWriter.println(")), ");
 		srcWriter.indent();
 		srcWriter.println("Lists.newArrayList(");
 		srcWriter.indent();
 		i = 0;
-		if (callbackParam != null) {
-			srcWriter.print(callbackParam);
+		if (callbackParameter != null) {
+			srcWriter.print("$%d_%s", method.getParameters().length, callbackParameter.getName());
 			i++;
 		}
 
@@ -480,7 +499,7 @@ public class ServiceBinderCreator {
 		return composerFactory.createSourceWriter(ctx, printWriter);
 	}
 
-	private PrintWriter getPrintWriter(TreeLogger logger, GeneratorContext ctx, String targetQualifiedName) {
+	private PrintWriter getPrintWriter(TreeLogger logger, GeneratorContext ctx) {
 		String packageName =
 			this.proxyModelQualifiedName.indexOf('.') == -1 ? "" : this.proxyModelQualifiedName.substring(0,
 				this.proxyModelQualifiedName.lastIndexOf('.'));
