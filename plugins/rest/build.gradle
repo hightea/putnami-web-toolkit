@@ -1,0 +1,9 @@
+ext {
+	restyVersion = '1.4'
+}
+
+dependencies {
+	compile project(':pwt')
+
+	compile "org.fusesource.restygwt:restygwt:$restyVersion"
+}

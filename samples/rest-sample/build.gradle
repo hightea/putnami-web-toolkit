@@ -1,0 +1,53 @@
+apply plugin: 'java'
+apply plugin: 'gwt'
+apply plugin: 'jetty'
+
+buildscript {
+	repositories {
+		jcenter()
+	}
+	dependencies {
+		classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.5'
+	}
+}
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+	maven{ url 'https://oss.sonatype.org/content/repositories/snapshots/'}
+}
+
+dependencies {
+	compile 'fr.putnami.pwt:pwt:1.1.1-SNAPSHOT'
+	compile 'fr.putnami.pwt:pwt-rest:1.1.1-SNAPSHOT'
+	
+	providedCompile 'javax.ws.rs:jsr311-api:1.1'
+	providedCompile 'javax.validation:validation-api:1.0.0.GA'
+}
+
+gwt {
+	gwtVersion = '2.6.1'
+
+	// Modules used in production
+	modules = ['fr.putnami.pwt.sample.rest.RestSample']
+	// Modules used in dev mode and super dev mode.
+	devModules = ['fr.putnami.pwt.sample.rest.RestSampleDev']
+
+	superDev {
+	noPrecompile=true
+	}
+
+	// You can skip it if you won't use it
+	// If you add it, you'll have to apply the jetty plugin first.
+	gwtDev {
+		// Allows to debug with the standard Dev mode
+		// ( no more supported on Chrome for Linux or on Firefox)
+		jvmArgs('-Xdebug',  '-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000')
+	}
+}
+
+task jettyDraftWar(type: JettyRunWar) {
+	dependsOn draftWar
+	dependsOn.remove('war')
+	webApp=draftWar.archivePath
+}

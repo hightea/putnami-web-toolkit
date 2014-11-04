@@ -1,0 +1,37 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w="urn:import:fr.putnami.pwt.core.widget.client">
+
+    <w:HTMLPanel styleName="container">
+		<w:Heading level="1" text="Rest sample using reqr.es" subtext="REST made easy" styleName="page-header"/>
+        <w:Container tag="div" styleName="jumbotron text-center">
+            <w:GridRow>
+				<w:GridColumn size="10" offset="1">
+					<p>Welcome to the user list</p>
+					<w:Button ui:field="addUser" iconType="ADD" text="Add a user" type="LINK"/>
+					<w:TableEditor ui:field="usersTable" readonly="true">
+						<w:TableColumn path="id" />
+						<w:TableColumn path="firstname">
+						</w:TableColumn>
+						<w:TableColumn path="lastname" />
+						<w:TableColumn path="avatar" >
+							<w:Image type="THUMBNAIL" keepPropertions="true" heightPx="75" widthPx="75"/>
+						</w:TableColumn>
+					</w:TableEditor>
+				</w:GridColumn>
+			</w:GridRow>
+        </w:Container>
+        
+        <w:Modal ui:field="modal" title="Add a user" dismissable="true">
+			<w:Form ui:field="userEditor" layout="HORIZONTAL">
+				<w:FormGroup path="id" readonly="true" />
+				<w:FormGroup path="lastname" />
+				<w:FormGroup path="job" />
+				<w:Footer>
+					<w:FormResetButton text="Reset" />
+					<w:FormSubmitButton text="Save" />
+				</w:Footer>
+			</w:Form>
+ 		</w:Modal>
+    </w:HTMLPanel>
+</ui:UiBinder>
