@@ -55,7 +55,7 @@ dependencies {
 	compile "com.google.guava:guava-gwt:$guavaVersion"
 	runtime configurations.log4j
 
-	testCompile 'junit:junit:4.+'
+	testCompile 'junit:junit:4.11'
 
 }
 

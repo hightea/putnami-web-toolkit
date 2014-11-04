@@ -45,7 +45,7 @@ dependencies {
 	compile "fr.putnami.pwt:pwt:$pwtVersion"
 	compile "javax.validation:validation-api:1.0.0.GA"
 	
-	testCompile 'junit:junit:4.+'
+	testCompile 'junit:junit:4.11'
 	
 }
 

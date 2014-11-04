@@ -43,7 +43,7 @@ dependencies {
 
 	compile "fr.putnami.pwt:pwt:$pwtVersion"
 	
-	testCompile 'junit:junit:4.+'
+	testCompile 'junit:junit:4.11'
 }
 
 //Include all non java (like *.gwt.xml) files from 'src/main/java' folder in resources
