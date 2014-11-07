@@ -91,7 +91,7 @@ public class Image extends AbstractWidget implements EditorOutput<String> {
 
 	public void setSrc(String src) {
 		this.src = src;
-		if (this.src.startsWith("/")) {
+		if (this.src != null && this.src.startsWith("/")) {
 			this.src = GWT.getModuleName() + this.src;
 		}
 		this.imgElement.setSrc(this.src);
