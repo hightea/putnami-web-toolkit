@@ -217,7 +217,8 @@ public class FormGroup<T> extends AbstractPanel
 		StyleUtils
 			.toggleStyle(Widget.asWidgetOrNull(this.label), FormGroup.STYLE_SCREAN_READER, this.type == Layout.INLINE);
 		this.addIfNotNull(this.label, 3, 0, false);
-		Editor editor = this.editorProvider.getEditor(this.readonly);
+		boolean ro = this.readonly == null ? false : this.readonly;
+		Editor editor = this.editorProvider.getEditor(ro);
 		if (!Boolean.FALSE.equals(this.readonly)) {
 			this.addIfNotNull(editor, 9, 0, true);
 		} else {
