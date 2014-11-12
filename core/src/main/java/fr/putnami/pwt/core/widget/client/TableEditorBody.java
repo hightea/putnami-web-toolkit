@@ -36,6 +36,7 @@ import fr.putnami.pwt.core.editor.client.validator.Validator;
 import fr.putnami.pwt.core.model.client.ModelDriver;
 import fr.putnami.pwt.core.model.client.base.EditorModel;
 import fr.putnami.pwt.core.model.client.base.HasDriver;
+import fr.putnami.pwt.core.model.client.exception.EditorModelNotInitializedException;
 import fr.putnami.pwt.core.model.client.model.Model;
 import fr.putnami.pwt.core.model.client.model.ModelCollection;
 import fr.putnami.pwt.core.model.client.visitor.ReadonlyVisitor;
@@ -125,7 +126,7 @@ public class TableEditorBody<T> extends TableBody<T>
 	@Override
 	public Collection<T> flush() {
 		// FIXME flush is not called from the drivers, but from TableEditor
-		List<T> values = (List<T>) this.driver.getValue();
+		List<T> values = (List<T>) getDriverOrThrow().getValue();
 		values.clear();
 		for (TableRow<T> row : this.getRowList()) {
 			values.add(row.getValue());
@@ -138,7 +139,7 @@ public class TableEditorBody<T> extends TableBody<T>
 		for (TableRow<T> row : this.getRowList()) {
 			row.setVisible(false);
 		}
-		this.driver.edit(value);
+		getDriverOrThrow().edit(value);
 	}
 
 	@Override
@@ -220,7 +221,7 @@ public class TableEditorBody<T> extends TableBody<T>
 
 	@Override
 	public Collection<T> getValue() {
-		return this.driver == null ? null : this.driver.getValue();
+		return getDriverOrThrow().getValue();
 	}
 
 	@Override
@@ -238,4 +239,10 @@ public class TableEditorBody<T> extends TableBody<T>
 		// TODO check if the validator must not be added to the driver.
 	}
 
+	private ModelDriver<Collection<T>> getDriverOrThrow() {
+		if (this.driver == null) {
+			throw new EditorModelNotInitializedException(this);
+		}
+		return this.driver;
+	}
 }

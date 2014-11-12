@@ -55,6 +55,7 @@ import fr.putnami.pwt.core.model.client.base.HasDrawable;
 import fr.putnami.pwt.core.model.client.base.HasEditorProvider;
 import fr.putnami.pwt.core.model.client.base.HasInputEditorFactory;
 import fr.putnami.pwt.core.model.client.base.HasOutputEditorFactory;
+import fr.putnami.pwt.core.model.client.exception.EditorModelNotInitializedException;
 import fr.putnami.pwt.core.model.client.model.Model;
 import fr.putnami.pwt.core.model.client.model.ModelCollection;
 import fr.putnami.pwt.core.model.client.visitor.ReadonlyVisitor;
@@ -335,7 +336,7 @@ public class InputList<T> extends List
 		this.clear();
 		this.items.clear();
 		this.addListItem(this.nextItem);
-		this.driver.edit(value);
+		getDriverOrThrow().edit(value);
 	}
 
 	@Override
@@ -381,7 +382,7 @@ public class InputList<T> extends List
 			this.errors = null;
 		}
 
-		Collection<T> result = this.driver.getModel().newInstance();
+		Collection<T> result = getDriverOrThrow().getModel().newInstance();
 		for (InternalListItem itemEditor : this.items) {
 			result.add(itemEditor.flush());
 			if (itemEditor.hasErrors()) {
@@ -417,7 +418,7 @@ public class InputList<T> extends List
 
 	@Override
 	public Collection<T> getValue() {
-		return this.driver.getValue();
+		return getDriverOrThrow().getValue();
 	}
 
 	@Override
@@ -456,6 +457,13 @@ public class InputList<T> extends List
 	@Override
 	public void redraw() {
 		// NoOp
+	}
+
+	private ModelDriver<Collection<T>> getDriverOrThrow() {
+		if (this.driver == null) {
+			throw new EditorModelNotInitializedException(this);
+		}
+		return this.driver;
 	}
 
 }

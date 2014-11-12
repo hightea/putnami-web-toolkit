@@ -35,6 +35,7 @@ import fr.putnami.pwt.core.editor.client.validator.Validator;
 import fr.putnami.pwt.core.model.client.ModelDriver;
 import fr.putnami.pwt.core.model.client.base.EditorModel;
 import fr.putnami.pwt.core.model.client.base.HasReadonly;
+import fr.putnami.pwt.core.model.client.exception.EditorModelNotInitializedException;
 import fr.putnami.pwt.core.model.client.model.Model;
 import fr.putnami.pwt.core.model.client.visitor.ReadonlyVisitor;
 import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
@@ -106,12 +107,12 @@ public class TableRow<T> extends AbstractPanel
 
 	@Override
 	public T flush() {
-		return this.driver.flush();
+		return getDriverOrThrow().flush();
 	}
 
 	@Override
 	public void edit(T value) {
-		this.driver.edit(value);
+		getDriverOrThrow().edit(value);
 	}
 
 	@Override
@@ -129,7 +130,7 @@ public class TableRow<T> extends AbstractPanel
 
 	@Override
 	public T getValue() {
-		return this.driver.getValue();
+		return getDriverOrThrow().getValue();
 	}
 
 	@Override
@@ -150,6 +151,13 @@ public class TableRow<T> extends AbstractPanel
 	@Override
 	public void addValidator(Validator<T> validator) {
 		// TODO check if the validator must not be added to the driver.
+	}
+
+	private ModelDriver<T> getDriverOrThrow() {
+		if (this.driver == null) {
+			throw new EditorModelNotInitializedException(this);
+		}
+		return this.driver;
 	}
 
 }

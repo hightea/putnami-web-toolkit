@@ -32,6 +32,7 @@ import fr.putnami.pwt.core.model.client.base.EditorProvider;
 import fr.putnami.pwt.core.model.client.base.HasDrawable;
 import fr.putnami.pwt.core.model.client.base.HasEditorProvider;
 import fr.putnami.pwt.core.model.client.base.HasOutputEditorFactory;
+import fr.putnami.pwt.core.model.client.exception.EditorModelNotInitializedException;
 import fr.putnami.pwt.core.model.client.model.Model;
 import fr.putnami.pwt.core.model.client.model.ModelCollection;
 import fr.putnami.pwt.core.model.client.visitor.ReadonlyVisitor;
@@ -112,7 +113,7 @@ public class OutputList<T> extends List
 	@Override
 	public void edit(Collection<T> value) {
 		this.clear();
-		this.driver.edit(value);
+		getDriverOrThrow().edit(value);
 	}
 
 	@Override
@@ -137,7 +138,7 @@ public class OutputList<T> extends List
 
 	@Override
 	public Collection<T> getValue() {
-		return this.driver.getValue();
+		return getDriverOrThrow().getValue();
 	}
 
 	@Override
@@ -153,6 +154,13 @@ public class OutputList<T> extends List
 	@Override
 	public void redraw() {
 		// NoOp
+	}
+
+	private ModelDriver<Collection<T>> getDriverOrThrow() {
+		if (this.driver == null) {
+			throw new EditorModelNotInitializedException(this);
+		}
+		return this.driver;
 	}
 
 }

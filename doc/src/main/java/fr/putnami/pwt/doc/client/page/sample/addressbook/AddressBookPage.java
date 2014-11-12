@@ -138,7 +138,7 @@ public class AddressBookPage extends Composite implements View, HasSources {
 	@UiHandler("saveContactButton")
 	void onSaveContact(ButtonEvent event) {
 		Contact contactToSave = this.contactDetails.flush();
-		if (!this.contactDetails.hasError()) {
+		if (!this.contactDetails.hasErrors()) {
 			ContactService.get().savePerson(contactToSave);
 			this.presentAddressBook(null);
 		}

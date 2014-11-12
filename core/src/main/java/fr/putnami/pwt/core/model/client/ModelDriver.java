@@ -38,6 +38,7 @@ import fr.putnami.pwt.core.editor.client.event.ResetDisplayEvent;
 import fr.putnami.pwt.core.editor.client.helper.MessageHelper;
 import fr.putnami.pwt.core.editor.client.impl.SimpleEditorContext;
 import fr.putnami.pwt.core.editor.client.util.PathUtils;
+import fr.putnami.pwt.core.model.client.exception.ModelNotSetException;
 import fr.putnami.pwt.core.model.client.factory.ContextFactory;
 import fr.putnami.pwt.core.model.client.model.Model;
 import fr.putnami.pwt.core.model.client.visitor.BinderVisitor;
@@ -147,6 +148,9 @@ public class ModelDriver<T> implements Driver<T> {
 
 	public ModelDriver(Model<T> model) {
 		this.model = model;
+		if (model == null) {
+			throw new ModelNotSetException();
+		}
 	}
 
 	public Model<T> getModel() {

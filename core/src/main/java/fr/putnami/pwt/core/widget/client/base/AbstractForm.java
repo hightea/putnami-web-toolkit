@@ -46,6 +46,7 @@ import fr.putnami.pwt.core.model.client.base.EditorModel;
 import fr.putnami.pwt.core.model.client.base.HasDrawable;
 import fr.putnami.pwt.core.model.client.base.HasDriver;
 import fr.putnami.pwt.core.model.client.base.HasReadonly;
+import fr.putnami.pwt.core.model.client.exception.EditorModelNotInitializedException;
 import fr.putnami.pwt.core.model.client.model.Model;
 import fr.putnami.pwt.core.model.client.visitor.ReadonlyVisitor;
 import fr.putnami.pwt.core.theme.client.CssStyle;
@@ -127,12 +128,12 @@ public abstract class AbstractForm<T> extends AbstractHTMLPanel
 
 	@Override
 	public T flush() {
-		return this.driver.flush();
+		return getDriverOrThrow().flush();
 	}
 
 	@Override
 	public void edit(T object) {
-		this.driver.edit(object);
+		getDriverOrThrow().edit(object);
 	}
 
 	@Override
@@ -160,11 +161,15 @@ public abstract class AbstractForm<T> extends AbstractHTMLPanel
 
 	@Override
 	public T getValue() {
-		return this.driver.getValue();
+		return getDriverOrThrow().getValue();
 	}
 
+	/**
+	 * @deprecated use {@link #hasErrors()} instead
+	 */
+	@Deprecated
 	public boolean hasError() {
-		return this.driver.hasErrors();
+		return hasErrors();
 	}
 
 	@Override
@@ -236,5 +241,12 @@ public abstract class AbstractForm<T> extends AbstractHTMLPanel
 	@Override
 	public HandlerRegistration addValidationHandler(DataValidationEvent.Handler handler) {
 		return EventBus.get().addHandlerToSource(DataValidationEvent.TYPE, this, handler);
+	}
+
+	private ModelDriver<T> getDriverOrThrow() {
+		if (this.driver == null) {
+			throw new EditorModelNotInitializedException(this);
+		}
+		return this.driver;
 	}
 }
