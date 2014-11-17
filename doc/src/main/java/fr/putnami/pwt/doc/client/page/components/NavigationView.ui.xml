@@ -662,31 +662,31 @@
 		<div class="showcase-sample-block">
 			<div class="showcase-sample">
 				<w:Breadcrumb>
-					<w:NavLink label="Home" active="true"/>
+					<w:BreadcrumbLink label="Home" active="true"/>
 				</w:Breadcrumb>
 				<w:Breadcrumb>
-					<w:NavLink label="Home"/>
-					<w:NavLink label="Library" active="true" />
+					<w:BreadcrumbLink label="Home"/>
+					<w:BreadcrumbLink label="Library" active="true" />
 				</w:Breadcrumb>
 				<w:Breadcrumb>
-					<w:NavLink label="Home"/>
-					<w:NavLink label="Library"/>
-					<w:NavLink label="Data" active="true" />
+					<w:BreadcrumbLink label="Home"/>
+					<w:BreadcrumbLink label="Library"/>
+					<w:BreadcrumbLink label="Data" active="true" />
 				</w:Breadcrumb>
 			</div>
 			<c:StaticCode configuration="{XML_CONFIGURATION}">
 <pre><![CDATA[
 <w:Breadcrumb>
-	<w:NavLink label="Home" active="true"/>
+	<w:BreadcrumbLink label="Home" active="true"/>
 </w:Breadcrumb>
 <w:Breadcrumb>
-	<w:NavLink label="Home"/>
-	<w:NavLink label="Library" active="true" />
+	<w:BreadcrumbLink label="Home"/>
+	<w:BreadcrumbLink label="Library" active="true" />
 </w:Breadcrumb>
 <w:Breadcrumb>
-	<w:NavLink label="Home"/>
-	<w:NavLink label="Library"/>
-	<w:NavLink label="Data" active="true" />
+	<w:BreadcrumbLink label="Home"/>
+	<w:BreadcrumbLink label="Library"/>
+	<w:BreadcrumbLink label="Data" active="true" />
 </w:Breadcrumb>]]></pre>
 			</c:StaticCode>
 		</div>

@@ -49,7 +49,7 @@ public class Breadcrumb extends AbstractPanel implements CloneableWidget {
 
 	@Override
 	public void add(IsWidget w) {
-		if (w instanceof Nav.IsNavContent) {
+		if (w instanceof BreadcrumbLink) {
 			this.append(w);
 		}
 	}
