@@ -35,6 +35,8 @@ public class PaginationHelper<T>
 	private String path;
 	private ModelDriver<Collection<T>> driver;
 
+	private Collection<T> collection;
+
 	public PaginationHelper(Pagination pagination) {
 		this.pagination = pagination;
 		this.pagination.addPageChangeHandler(this);
@@ -47,6 +49,10 @@ public class PaginationHelper<T>
 
 	@Override
 	public <A, B extends Editor> boolean beforeVisit() {
+		if (collection != driver.getValue()) {
+			collection = driver.getValue();
+			pagination.setCurrentPage(0);
+		}
 		Collection<T> list = this.driver.getDisplayedValue();
 		int nbItems = list.size();
 		int fromIndex = this.pagination.getPageSize() * this.pagination.getCurrentPage();
