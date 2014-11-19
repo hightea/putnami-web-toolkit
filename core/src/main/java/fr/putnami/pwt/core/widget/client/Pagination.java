@@ -31,6 +31,7 @@ import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.event.PageChangeEvent;
 import fr.putnami.pwt.core.widget.client.event.PageChangeEvent.Handler;
 import fr.putnami.pwt.core.widget.client.event.PageChangeEvent.HasPageChangeHandlers;
+import fr.putnami.pwt.core.widget.client.helper.PaginationHelper;
 import fr.putnami.pwt.core.widget.client.util.AnchorUtils;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
@@ -141,11 +142,13 @@ public class Pagination extends AbstractComposite implements HasPageChangeHandle
 	private int currentStartPage;
 
 	private boolean hideOnSinglePage = true;
+	private PaginationHelper<?> paginationHelper;
 
 	public Pagination() {
 		this.initWidget(this.content);
 		this.setStyle(this.style);
 		this.setSize(this.size);
+
 	}
 
 	protected Pagination(Pagination source) {
@@ -167,6 +170,17 @@ public class Pagination extends AbstractComposite implements HasPageChangeHandle
 	@Override
 	public HandlerRegistration addPageChangeHandler(Handler handler) {
 		return EventBus.get().addHandlerToSource(PageChangeEvent.TYPE, this, handler);
+	}
+
+	public <T> PaginationHelper<T> getPaginationHelper() {
+		if (paginationHelper == null) {
+			paginationHelper = new PaginationHelper<>(this);
+		}
+		return (PaginationHelper<T>) paginationHelper;
+	}
+
+	public <T> void setPaginationHelper(PaginationHelper<T> paginationHelper) {
+		this.paginationHelper = paginationHelper;
 	}
 
 	public Style getStyle() {

@@ -36,7 +36,6 @@ import fr.putnami.pwt.core.model.client.model.Model;
 import fr.putnami.pwt.core.model.client.model.ModelCollection;
 import fr.putnami.pwt.core.model.client.visitor.ReadonlyVisitor;
 import fr.putnami.pwt.core.widget.client.base.AbstractTableColumn;
-import fr.putnami.pwt.core.widget.client.helper.PaginationHelper;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class TableEditor<T> extends Table<T>
@@ -47,7 +46,7 @@ public class TableEditor<T> extends Table<T>
 	private Model<T> model;
 	private ModelDriver<Collection<T>> driver;
 
-	private PaginationHelper<T> pagination;
+	private Pagination pagination;
 
 	public TableEditor() {
 		super();
@@ -55,7 +54,8 @@ public class TableEditor<T> extends Table<T>
 
 	protected TableEditor(TableEditor<T> source) {
 		super(source);
-		this.setPaginationHelper(WidgetUtils.cloneWidget(source.pagination));
+		this.setPagination(WidgetUtils.cloneWidget(source.pagination));
+		this.append(source.pagination);
 	}
 
 	@Override
@@ -88,6 +88,7 @@ public class TableEditor<T> extends Table<T>
 		super.add(w);
 		if (w instanceof Pagination) {
 			this.setPagination((Pagination) w);
+			this.append(w);
 		}
 		if (w instanceof AbstractTableColumn) {
 			this.addColumn((AbstractTableColumn) w);
@@ -108,7 +109,8 @@ public class TableEditor<T> extends Table<T>
 		this.driver.initialize(this, visitors);
 		this.driver.accept(new ReadonlyVisitor(this, this.getReadonly(), true));
 		if (this.pagination != null) {
-			this.driver.registerVisitor(this.pagination);
+			this.pagination.<T> getPaginationHelper().setDriver(driver);
+			this.driver.registerVisitor(this.pagination.<T> getPaginationHelper());
 		}
 	}
 
@@ -151,15 +153,11 @@ public class TableEditor<T> extends Table<T>
 		return true;
 	}
 
-	private void setPagination(Pagination pagination) {
-		this.setPaginationHelper(new PaginationHelper<T>(pagination));
-	}
-
-	private void setPaginationHelper(PaginationHelper<T> paginationHelper) {
-		this.pagination = paginationHelper;
-		this.append(this.pagination);
+	public void setPagination(Pagination pagination) {
+		this.pagination = pagination;
 		if (this.driver != null) {
-			this.driver.registerVisitor(this.pagination);
+			this.pagination.<T> getPaginationHelper().setDriver(driver);
+			this.driver.registerVisitor(this.pagination.<T> getPaginationHelper());
 		}
 	}
 

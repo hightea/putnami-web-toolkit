@@ -15,7 +15,6 @@
 package fr.putnami.pwt.core.widget.client.helper;
 
 import com.google.common.collect.Lists;
-import com.google.gwt.user.client.ui.IsWidget;
 
 import java.util.Collection;
 
@@ -26,11 +25,9 @@ import fr.putnami.pwt.core.editor.client.Visitor;
 import fr.putnami.pwt.core.model.client.ModelDriver;
 import fr.putnami.pwt.core.model.client.base.HasDriver;
 import fr.putnami.pwt.core.widget.client.Pagination;
-import fr.putnami.pwt.core.widget.client.base.AbstractComposite;
 import fr.putnami.pwt.core.widget.client.event.PageChangeEvent;
-import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
-public class PaginationHelper<T> extends AbstractComposite
+public class PaginationHelper<T>
 	implements PageChangeEvent.Handler, Editor, HasDriver<Collection<T>, ModelDriver<Collection<T>>>, Visitor {
 
 	private final Pagination pagination;
@@ -40,25 +37,7 @@ public class PaginationHelper<T> extends AbstractComposite
 
 	public PaginationHelper(Pagination pagination) {
 		this.pagination = pagination;
-		this.endConstruct();
-	}
-
-	protected PaginationHelper(PaginationHelper<T> source) {
-		super(source);
-
-		this.path = source.path;
-		this.pagination = WidgetUtils.cloneWidget(source.pagination);
-		this.endConstruct();
-	}
-
-	private void endConstruct() {
-		this.initWidget(this.pagination);
 		this.pagination.addPageChangeHandler(this);
-	}
-
-	@Override
-	public IsWidget cloneWidget() {
-		return new PaginationHelper<T>(this);
 	}
 
 	@Override
