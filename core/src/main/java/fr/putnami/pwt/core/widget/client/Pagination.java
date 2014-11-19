@@ -140,6 +140,8 @@ public class Pagination extends AbstractComposite implements HasPageChangeHandle
 
 	private int currentStartPage;
 
+	private boolean hideOnSinglePage = true;
+
 	public Pagination() {
 		this.initWidget(this.content);
 		this.setStyle(this.style);
@@ -221,6 +223,14 @@ public class Pagination extends AbstractComposite implements HasPageChangeHandle
 		this.redraw();
 	}
 
+	public boolean isHideOnSinglePage() {
+		return hideOnSinglePage;
+	}
+
+	public void setHideOnSinglePage(boolean hideOnSinglePage) {
+		this.hideOnSinglePage = hideOnSinglePage;
+	}
+
 	@Override
 	public void redraw() {
 		int nbPageToDraw = Math.min(this.nbPageMax, this.nbPage);
@@ -230,6 +240,7 @@ public class Pagination extends AbstractComposite implements HasPageChangeHandle
 
 	public void redrawFromCurrentStart() {
 		this.content.clear();
+		this.setVisible(!hideOnSinglePage || this.nbPage > 1);
 		int nbPageToDraw = Math.min(this.nbPageMax, this.nbPage);
 		this.currentStartPage = Math.max(0, this.currentStartPage);
 		this.currentStartPage = Math.min(this.nbPage - nbPageToDraw, this.currentStartPage);
