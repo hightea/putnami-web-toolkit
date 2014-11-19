@@ -148,7 +148,6 @@ public class Pagination extends AbstractComposite implements HasPageChangeHandle
 		this.initWidget(this.content);
 		this.setStyle(this.style);
 		this.setSize(this.size);
-
 	}
 
 	protected Pagination(Pagination source) {
