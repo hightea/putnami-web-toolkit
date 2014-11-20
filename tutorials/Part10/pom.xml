@@ -10,7 +10,7 @@
      <name>Putnami Web Toolkit tutorial web app</name>
 
      <properties>
-         <pwt.version>1.1.1</pwt.version>
+         <pwt.version>1.2.0-SNAPSHOT</pwt.version>
          <gwt.version>2.6.1</gwt.version>
          <spring.security.version>3.2.5.RELEASE</spring.security.version>
          <jetty.plugin.version>9.2.0.v20140526</jetty.plugin.version>

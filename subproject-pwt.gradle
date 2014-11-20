@@ -22,7 +22,7 @@ if (applyLicense) {
 }
 
 group = 'fr.putnami.pwt'
-version = project.releaseVersion
+version = project.snapshotVersion
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7

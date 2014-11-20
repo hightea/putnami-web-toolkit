@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-	compile 'fr.putnami.pwt:pwt:1.1.1'
+	compile 'fr.putnami.pwt:pwt:1.2.0-SNAPSHOT'
 }
 
 gwt {

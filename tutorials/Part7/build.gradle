@@ -17,8 +17,8 @@ repositories {
 }
 
 dependencies {
-	compile 'fr.putnami.pwt:pwt:1.1.1'
-	compile 'fr.putnami.pwt:pwt-google-analytics:1.1.1'
+	compile 'fr.putnami.pwt:pwt:1.2.0-SNAPSHOT'
+	compile 'fr.putnami.pwt:pwt-google-analytics:1.2.0-SNAPSHOT'
 	providedCompile 'javax.validation:validation-api:1.0.0.GA'
 }
 
