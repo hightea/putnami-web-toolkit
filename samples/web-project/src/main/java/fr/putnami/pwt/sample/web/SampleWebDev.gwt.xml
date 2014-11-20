@@ -10,7 +10,6 @@
 	<collapse-property name="dragEventSupport" values="*" />
 	<collapse-property name="audioElementSupport" values="*" />
 	<collapse-property name="videoElementSupport" values="*" />
-	<collapse-property name="storageSupport" values="*" />
 
 	<set-configuration-property name="devModeRedirectEnabled" value="true" />
 </module>

@@ -25,7 +25,7 @@ dependencies {
 }
 
 gwt {
-	gwtVersion = '2.6.1'
+	gwtVersion = '2.7.0'
 
 	// Modules used in production
 	modules = ['fr.putnami.pwt.tutorial.Tutorial']
