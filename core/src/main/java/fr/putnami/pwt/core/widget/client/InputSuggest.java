@@ -19,6 +19,7 @@ import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
+import com.google.gwt.user.client.ui.SuggestOracle;
 import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 import com.google.gwt.user.client.ui.TextBox;
 
@@ -34,7 +35,7 @@ import fr.putnami.pwt.core.widget.client.helper.StringRenderer;
 
 public class InputSuggest extends AbstractInputBox<TextBox, String> {
 
-	private MultiWordSuggestOracle oracle;
+	private final SuggestOracleWrapper oracle;
 	private ContentAssistHandler assistHandler;
 	private ContentAssistAspect assistAspect;
 
@@ -42,11 +43,9 @@ public class InputSuggest extends AbstractInputBox<TextBox, String> {
 
 	public InputSuggest() {
 		super(new TextBox());
-
+		this.oracle = new SuggestOracleWrapper();
 		this.setParser(StringParser.get());
 		this.setRenderer(StringRenderer.get());
-
-		this.oracle = new MultiWordSuggestOracle();
 		this.init();
 	}
 
@@ -71,9 +70,14 @@ public class InputSuggest extends AbstractInputBox<TextBox, String> {
 	}
 
 	public void setSuggestions(Collection<String> suggestions) {
-		this.oracle.clear();
-		this.oracle.setDefaultSuggestionsFromText(suggestions);
-		this.oracle.addAll(suggestions);
+		MultiWordSuggestOracle wordSuggestOracle = new MultiWordSuggestOracle();
+		wordSuggestOracle.setDefaultSuggestionsFromText(suggestions);
+		wordSuggestOracle.addAll(suggestions);
+		oracle.setDelagate(wordSuggestOracle);
+	}
+
+	public void setOracle(SuggestOracle oracle) {
+		this.oracle.setDelagate(oracle);
 	}
 
 	public void setSuggestionsLimit(int limit) {
@@ -92,7 +96,7 @@ public class InputSuggest extends AbstractInputBox<TextBox, String> {
 
 	static class TextBoxContentAssistHandler extends AbstractContentAssistHandler {
 
-		public TextBoxContentAssistHandler(MultiWordSuggestOracle oracle) {
+		public TextBoxContentAssistHandler(SuggestOracle oracle) {
 			super(oracle);
 		}
 
@@ -107,6 +111,23 @@ public class InputSuggest extends AbstractInputBox<TextBox, String> {
 			TextBox input = (TextBox) textInput;
 			input.setText(suggestion.getReplacementString());
 			input.setCursorPos(suggestion.getReplacementString().length());
+		}
+	}
+
+	static class SuggestOracleWrapper extends SuggestOracle {
+		private SuggestOracle delagate;
+
+		@Override
+		public void requestSuggestions(Request request, Callback callback) {
+			delagate.requestSuggestions(request, callback);
+		}
+
+		public SuggestOracle getDelagate() {
+			return delagate;
+		}
+
+		public void setDelagate(SuggestOracle delagate) {
+			this.delagate = delagate;
 		}
 	}
 }
