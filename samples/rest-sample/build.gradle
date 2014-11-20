@@ -18,8 +18,7 @@ repositories {
 }
 
 dependencies {
-	compile 'fr.putnami.pwt:pwt:1.1.1-SNAPSHOT'
-	compile 'fr.putnami.pwt:pwt-rest:1.1.1-SNAPSHOT'
+	compile 'fr.putnami.pwt:pwt-rest:1.1.1'
 	
 	providedCompile 'javax.ws.rs:jsr311-api:1.1'
 	providedCompile 'javax.validation:validation-api:1.0.0.GA'

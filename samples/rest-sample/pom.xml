@@ -10,7 +10,7 @@
      <name>Putnami Web Toolkit tutorial web app</name>
 
      <properties>
-         <pwt.version>1.1.1-SNAPSHOT</pwt.version>
+         <pwt.version>1.1.1</pwt.version>
          <gwt.version>2.6.1</gwt.version>
          <spring.security.version>3.2.5.RELEASE</spring.security.version>
          <jetty.plugin.version>9.2.0.v20140526</jetty.plugin.version>
@@ -29,23 +29,8 @@
 
      <dependencies>
          <dependency>
-             <groupId>fr.putnami.pwt</groupId>
-             <artifactId>pwt</artifactId>
-             <version>${pwt.version}</version>
-         </dependency>
-         <dependency>
             <groupId>fr.putnami.pwt</groupId>
-            <artifactId>pwt-google-analytics</artifactId>
-            <version>${pwt.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>fr.putnami.pwt</groupId>
-            <artifactId>pwt-ajax-bot-indexing</artifactId>
-            <version>${pwt.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>fr.putnami.pwt</groupId>
-            <artifactId>pwt-spring</artifactId>
+            <artifactId>pwt-rest</artifactId>
             <version>${pwt.version}</version>
         </dependency>
          <dependency>
@@ -65,15 +50,11 @@
             <version>1.0.0.GA</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
-            <version>${spring.security.version}</version>
-        </dependency>
-		<dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-            <version>${spring.security.version}</version>
+         <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>jsr311-api</artifactId>
+            <version>1.1</version>
+            <scope>provided</scope>
         </dependency>
      </dependencies>
 

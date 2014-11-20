@@ -31,7 +31,83 @@
 			</p>
 		</w:Header>
 		<w:HTMLPanel ui:field="content">
-			<w:Heading level="2" summary="docSummary">Current stable <small>1.1.0</small></w:Heading>
+			<w:Heading level="2" summary="docSummary">Current stable <small>1.1.1</small></w:Heading>
+			
+			<w:Table>
+				<w:TableHead>
+						<w:TableTH><w:Label>Package</w:Label></w:TableTH>
+						<w:TableTH><w:Label>Name</w:Label></w:TableTH>
+						<w:TableTH><w:Label>Version</w:Label></w:TableTH>
+						<w:TableTH></w:TableTH>
+						<w:TableTH></w:TableTH>
+				</w:TableHead>
+				<w:TableBody bodyId="main">
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.1.1</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt/1.1.1/pwt-1.1.1.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt/1.1.1/pwt-1.1.1.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt-code-editor</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.1.1</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt-code-editor/1.1.1/pwt-code-editor-1.1.1.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt-code-editor/1.1.1/pwt-code-editor-1.1.1.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt-google-analytics</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.1.1</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt-google-analytics/1.1.1/pwt-google-analytics-1.1.1.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt-google-analytics/1.1.1/pwt-google-analytics-1.1.1.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt-ajax-bot-indexing</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.1.1</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt-ajax-bot-indexing/1.1.1/pwt-ajax-bot-indexing-1.1.1.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt-ajax-bot-indexing/1.1.1/pwt-ajax-bot-indexing-1.1.1.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+					<w:TableRow>
+						<w:TableTD><w:Label>fr.putnami.pwt</w:Label></w:TableTD>
+						<w:TableTD><w:Label>pwt-spring</w:Label></w:TableTD>
+						<w:TableTD><w:Label>1.1.1</w:Label></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt-spring/1.1.1/pwt-spring-1.1.1.pom" text="pom.xml" /></w:TableTD>
+						<w:TableTD><w:Anchor link="https://repo1.maven.org/maven2/fr/putnami/pwt/pwt-spring/1.1.1/pwt-spring-1.1.1.jar" text="jar" /></w:TableTD>
+					</w:TableRow>
+				</w:TableBody>
+			</w:Table>			
+			<w:Panel color="SUCCESS" collapsible="true" collapse="true">
+				<w:Header>Release notes</w:Header>
+				<w:HTMLPanel>
+					<strong>Main enhancements :</strong>
+					<ul>
+						<li>PWT Widget compatible with GWT Editor Framework</li>
+						<li>EditorModel throw an exception when not properly initialized</li>
+						<li>Dedicated BreadcrumbLink widgets</li>
+						<li>Pagination can now be defined outside a TableEditor</li>
+					</ul>
+					<strong>Minor bug fixes :</strong>
+					<ul>
+						<li>fix Service rebind issues</li>
+						<li>fix Image widget clone issue</li>
+						<li>fix Pagination issues</li>
+						<li>Use explicit version of external libraries</li>
+					</ul>
+				</w:HTMLPanel>
+			</w:Panel>
+			<w:Alert type="SUCCESS">
+				<strong>Curent Snapshots <span class="label label-info">@snapshotVersion@</span></strong>
+			</w:Alert>
+			<w:Alert type="INFO">
+				<strong>Gradle and Maven usage</strong>
+				<p>Find more details on the maven and gradle usage with <w:Anchor link="#!GettingStarted" text="Getting started guide" /></p>
+			</w:Alert>
+			
+			
+			<w:Heading level="2" summary="docSummary">Version <strong>1.1.0</strong></w:Heading>
 			
 			<w:Table>
 				<w:TableHead>
@@ -94,13 +170,6 @@
 					</ul>
 				</w:HTMLPanel>
 			</w:Panel>
-			<w:Alert type="SUCCESS">
-				<strong>Curent Snapshots <span class="label label-info">@snapshotVersion@</span></strong>
-			</w:Alert>
-			<w:Alert type="INFO">
-				<strong>Gradle and Maven usage</strong>
-				<p>Find more details on the maven and gradle usage with <w:Anchor link="#!GettingStarted" text="Getting started guide" /></p>
-			</w:Alert>
 			
 			<w:Heading level="2" summary="docSummary">Version <strong>1.1.0-RC1</strong></w:Heading>
 			
