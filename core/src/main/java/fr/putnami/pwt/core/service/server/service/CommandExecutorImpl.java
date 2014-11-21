@@ -41,10 +41,10 @@ public class CommandExecutorImpl extends AbstractCommandExecutor {
 		String[] paramTypes = new String[method.getParameterTypes().length];
 
 		for (int i = 0; i < method.getParameterTypes().length; i++) {
-			paramTypes[i] = method.getParameterTypes()[i].getName();
+			paramTypes[i] = method.getParameterTypes()[i].getCanonicalName();
 		}
 		CommandDefinition definition = new CommandDefinition(
-			method.getDeclaringClass().getName(), method.getName(), method.getReturnType().getName(), paramTypes);
+			method.getDeclaringClass().getName(), method.getName(), method.getReturnType().getCanonicalName(), paramTypes);
 		this.setCommandDefinition(definition);
 
 		this.executorLogger = LogFactory.getLog(method.getDeclaringClass().getCanonicalName());
