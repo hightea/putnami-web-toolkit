@@ -26,20 +26,18 @@ public class MultiWordMatcher<T> {
 		if (normalizedSuggestion.equals(normalizedQuery)) {
 			return 10;
 		}
-		else if (normalizedSuggestion.startsWith(normalizedQuery)) {
+		if (normalizedSuggestion.startsWith(normalizedQuery)) {
 			return 9;
 		}
-		else{
-			for (String word : spitter.split(normalizedSuggestion)) {
-				if (word.equals(normalizedQuery)) {
-					return 5;
-				}
-				else if (word.startsWith(normalizedQuery)) {
-					return 4;
-				}
-				else if (word.contains(normalizedQuery)) {
-					return 3;
-				}
+		for (String word : spitter.split(normalizedSuggestion)) {
+			if (word.equals(normalizedQuery)) {
+				return 5;
+			}
+			if (word.startsWith(normalizedQuery)) {
+				return 4;
+			}
+			if (word.contains(normalizedQuery)) {
+				return 3;
 			}
 		}
 		return 0;

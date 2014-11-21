@@ -16,7 +16,6 @@ public interface Oracle<T> {
 		String getReplacementString();
 
 		T getValue();
-
 	}
 
 	class Request implements Serializable {

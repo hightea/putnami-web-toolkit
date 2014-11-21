@@ -20,14 +20,14 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 
 import fr.putnami.pwt.core.widget.client.assist.AbstractContentAssistHandler;
-import fr.putnami.pwt.core.widget.client.assist.MultiWordOracle;
-import fr.putnami.pwt.core.widget.client.assist.Oracle;
+import fr.putnami.pwt.core.widget.client.assist.SimpleOracle;
+import fr.putnami.pwt.core.widget.shared.assist.Oracle;
 import fr.putnami.pwt.plugin.code.client.input.CodeInput;
 
 public class JavaKeywordAssistHandler extends AbstractContentAssistHandler<String> {
 
 	public JavaKeywordAssistHandler() {
-		super(new MultiWordOracle<String>());
+		super(new SimpleOracle<String>());
 		MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) this.getOracle();
 		oracle.addAll(Lists.newArrayList("abstract", "assert", "boolean", "break", "byte", "case",
 			"catch", "char", "class", "const", "continue", "default", "do", "double", "else", "enum",

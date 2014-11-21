@@ -7,6 +7,7 @@ import java.io.Serializable;
 import fr.putnami.pwt.core.widget.client.assist.SimpleOracle;
 
 public class SimpleSuggestion<T> implements Oracle.Suggestion<T>, Serializable {
+
 	private T value;
 	private String replacementString;
   private String displayString;
@@ -21,7 +22,6 @@ public class SimpleSuggestion<T> implements Oracle.Suggestion<T>, Serializable {
     this.displayString = displayString;
 		this.relevance = relevance;
   }
-
 
 	@Override
 	public T getValue() {
@@ -57,7 +57,6 @@ public class SimpleSuggestion<T> implements Oracle.Suggestion<T>, Serializable {
 	public void setRelevance(int relevance) {
 		this.relevance = relevance;
 	}
-
 
 	@Override
 	public int hashCode() {

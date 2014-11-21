@@ -70,12 +70,10 @@ public abstract class AsyncOracle<T> extends AbstractOracle<T> {
 				if (relevance > 0) {
 					addToSuggestion(query, suggestions, value, relevance);
 				}
-
 			}
 			Response<T> response = new Response<T>(suggestions);
 			callback.onSuggestionsReady(request, response);
-		}
-		else {
+		} else {
 			asyncRequest(request, new DelegateCallback(callback));
 		}
 	}

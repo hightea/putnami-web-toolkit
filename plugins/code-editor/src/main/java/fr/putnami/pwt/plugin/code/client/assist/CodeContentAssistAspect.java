@@ -22,8 +22,8 @@ import java.util.List;
 import fr.putnami.pwt.core.widget.client.assist.AbstractContentAssistHandler;
 import fr.putnami.pwt.core.widget.client.assist.ContentAssistAspect;
 import fr.putnami.pwt.core.widget.client.assist.ContentAssistHandler;
-import fr.putnami.pwt.core.widget.client.assist.MultiWordOracle;
-import fr.putnami.pwt.core.widget.client.assist.Oracle;
+import fr.putnami.pwt.core.widget.client.assist.SimpleOracle;
+import fr.putnami.pwt.core.widget.shared.assist.Oracle;
 import fr.putnami.pwt.plugin.code.client.aspect.CodeEditorAspect;
 import fr.putnami.pwt.plugin.code.client.base.CodeEditorDriver;
 import fr.putnami.pwt.plugin.code.client.event.LiveValueChangeEvent;
@@ -66,7 +66,7 @@ public class CodeContentAssistAspect extends ContentAssistAspect<String> impleme
 	static class CodeDefaultContentAssistHandler extends AbstractContentAssistHandler<String> {
 
 		public CodeDefaultContentAssistHandler() {
-			super(new MultiWordOracle<String>());
+			super(new SimpleOracle<String>());
 		}
 
 		@Override
