@@ -15,8 +15,6 @@
 package fr.putnami.pwt.plugin.code.client.assist;
 
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
-import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,23 +22,25 @@ import java.util.List;
 import fr.putnami.pwt.core.widget.client.assist.AbstractContentAssistHandler;
 import fr.putnami.pwt.core.widget.client.assist.ContentAssistAspect;
 import fr.putnami.pwt.core.widget.client.assist.ContentAssistHandler;
+import fr.putnami.pwt.core.widget.client.assist.MultiWordOracle;
+import fr.putnami.pwt.core.widget.client.assist.Oracle;
 import fr.putnami.pwt.plugin.code.client.aspect.CodeEditorAspect;
 import fr.putnami.pwt.plugin.code.client.base.CodeEditorDriver;
 import fr.putnami.pwt.plugin.code.client.event.LiveValueChangeEvent;
 import fr.putnami.pwt.plugin.code.client.input.CodeInput;
 
-public class CodeContentAssistAspect extends ContentAssistAspect implements CodeEditorAspect {
+public class CodeContentAssistAspect extends ContentAssistAspect<String> implements CodeEditorAspect {
 
 	public CodeContentAssistAspect() {
 		this(new CodeDefaultContentAssistHandler());
 	}
 
-	public CodeContentAssistAspect(ContentAssistHandler assistHandler) {
+	public CodeContentAssistAspect(ContentAssistHandler<String> assistHandler) {
 		super(assistHandler);
 	}
 
 	@Override
-	protected void setNewSelection(Suggestion curSuggestion) {
+	protected void setNewSelection(Oracle.Suggestion<String> curSuggestion) {
 		CodeInput codeInput = (CodeInput) this.getInput();
 		String oldText = codeInput.getText();
 		super.setNewSelection(curSuggestion);
@@ -63,10 +63,10 @@ public class CodeContentAssistAspect extends ContentAssistAspect implements Code
 		return new CodeContentAssistAspect(this.assistHandler.copy());
 	}
 
-	static class CodeDefaultContentAssistHandler extends AbstractContentAssistHandler {
+	static class CodeDefaultContentAssistHandler extends AbstractContentAssistHandler<String> {
 
 		public CodeDefaultContentAssistHandler() {
-			super(new MultiWordSuggestOracle());
+			super(new MultiWordOracle<String>());
 		}
 
 		@Override
@@ -76,7 +76,7 @@ public class CodeContentAssistAspect extends ContentAssistAspect implements Code
 		}
 
 		@Override
-		public void handleSuggestionSelected(IsWidget textInput, Suggestion suggestion) {
+		public void handleSuggestionSelected(IsWidget textInput, Oracle.Suggestion<String> suggestion) {
 			CodeInput codeInput = (CodeInput) textInput;
 			String oldText = codeInput.getText();
 			String newText =
@@ -87,7 +87,7 @@ public class CodeContentAssistAspect extends ContentAssistAspect implements Code
 		}
 
 		@Override
-		public ContentAssistHandler copy() {
+		public ContentAssistHandler<String> copy() {
 			return new CodeDefaultContentAssistHandler();
 		}
 	}

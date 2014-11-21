@@ -15,27 +15,27 @@
 package fr.putnami.pwt.core.widget.client.assist;
 
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.SuggestOracle;
-import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 
-public abstract class AbstractContentAssistHandler implements ContentAssistHandler {
+import fr.putnami.pwt.core.widget.shared.assist.Oracle;
+
+public abstract class AbstractContentAssistHandler<T> implements ContentAssistHandler<T> {
 
 	private static final int DEFAULT_LIMIT = 20;
 
-	private SuggestOracle oracle;
+	private Oracle<T> oracle;
 	private int limit;
 
-	public AbstractContentAssistHandler(SuggestOracle oracle) {
+	public AbstractContentAssistHandler(Oracle<T> oracle) {
 		this(oracle, AbstractContentAssistHandler.DEFAULT_LIMIT);
 	}
 
-	public AbstractContentAssistHandler(SuggestOracle oracle, int limit) {
+	public AbstractContentAssistHandler(Oracle<T> oracle, int limit) {
 		this.oracle = oracle;
 		this.limit = limit;
 	}
 
 	@Override
-	public SuggestOracle getOracle() {
+	public Oracle<T> getOracle() {
 		return this.oracle;
 	}
 
@@ -50,7 +50,7 @@ public abstract class AbstractContentAssistHandler implements ContentAssistHandl
 	}
 
 	@Override
-	public ContentAssistHandler copy() {
+	public ContentAssistHandler<T> copy() {
 		return this;
 	}
 
@@ -58,6 +58,6 @@ public abstract class AbstractContentAssistHandler implements ContentAssistHandl
 	public abstract String getQueryText(IsWidget textInput);
 
 	@Override
-	public abstract void handleSuggestionSelected(IsWidget textInput, Suggestion suggestion);
+	public abstract void handleSuggestionSelected(IsWidget textInput, Oracle.Suggestion<T> suggestion);
 
 }

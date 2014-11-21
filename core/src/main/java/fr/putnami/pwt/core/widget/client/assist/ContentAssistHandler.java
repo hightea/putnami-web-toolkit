@@ -15,12 +15,12 @@
 package fr.putnami.pwt.core.widget.client.assist;
 
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.SuggestOracle;
-import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 
-public interface ContentAssistHandler {
+import fr.putnami.pwt.core.widget.shared.assist.Oracle;
 
-	SuggestOracle getOracle();
+public interface ContentAssistHandler<T> {
+
+	Oracle<T> getOracle();
 
 	int getLimit();
 
@@ -28,8 +28,8 @@ public interface ContentAssistHandler {
 
 	String getQueryText(IsWidget textInput);
 
-	void handleSuggestionSelected(IsWidget textInput, Suggestion suggestion);
+	void handleSuggestionSelected(IsWidget textInput, Oracle.Suggestion<T> suggestion);
 
-	ContentAssistHandler copy();
+	ContentAssistHandler<T> copy();
 
 }

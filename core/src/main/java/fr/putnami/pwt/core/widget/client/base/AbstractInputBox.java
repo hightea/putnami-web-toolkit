@@ -89,7 +89,7 @@ public abstract class AbstractInputBox<T extends TextBoxBase, I> extends Abstrac
 	private String inputType;
 
 	private Parser<I> parser;
-	private Renderer<I> renderer = (Renderer<I>) ToStringRenderer.get();
+	private Renderer<I> renderer = ToStringRenderer.<I> get();
 	private String placeholder;
 
 	private Size size;

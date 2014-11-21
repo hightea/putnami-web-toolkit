@@ -29,12 +29,7 @@ import com.google.gwt.event.dom.client.MouseUpHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.PopupPanel;
-import com.google.gwt.user.client.ui.SuggestOracle;
-import com.google.gwt.user.client.ui.SuggestOracle.Request;
-import com.google.gwt.user.client.ui.SuggestOracle.Response;
-import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 import com.google.gwt.user.client.ui.Widget;
 
 import java.util.Collection;
@@ -45,8 +40,10 @@ import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
 import fr.putnami.pwt.core.widget.client.base.SimpleStyle;
 import fr.putnami.pwt.core.widget.client.util.AnchorUtils;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
+import fr.putnami.pwt.core.widget.shared.assist.Oracle;
+import fr.putnami.pwt.core.widget.shared.assist.Oracle.Suggestion;
 
-public class ContentAssistAspect {
+public class ContentAssistAspect<T> {
 
 	private static final CssStyle STYLE_DROPDOWN = new SimpleStyle("dropdown");
 	private static final CssStyle STYLE_SCROLLABLE = new SimpleStyle("scrollable-dropdown");
@@ -55,32 +52,31 @@ public class ContentAssistAspect {
 	private static final CssStyle STYLE_POPUP = new SimpleStyle("dropdown-popup");
 
 	protected IsWidget textInput;
-	protected SuggestionDisplay suggestionDisplay;
-	protected ContentAssistHandler assistHandler;
+	protected SuggestionDisplay<T> suggestionDisplay;
+	protected ContentAssistHandler<T> assistHandler;
 
-	private SuggestOracle.Callback oracleCallback = new SuggestOracle.Callback() {
-
+	private Oracle.Callback<T> oracleCallback = new Oracle.Callback<T>() {
 		@Override
-		public void onSuggestionsReady(Request request, Response response) {
+		public void onSuggestionsReady(Oracle.Request request, Oracle.Response<T> response) {
 			ContentAssistAspect.this.suggestionDisplay.showSuggestions(
 				ContentAssistAspect.this.textInput, response.getSuggestions(), ContentAssistAspect.this.suggestionCallback);
 		}
 	};
 
-	private SuggestionCallback suggestionCallback = new SuggestionCallback() {
+	private SuggestionCallback<T> suggestionCallback = new SuggestionCallback<T>() {
 
 		@Override
-		public void onSuggestionSelected(Suggestion suggestion) {
+		public void onSuggestionSelected(Oracle.Suggestion<T> suggestion) {
 			ContentAssistAspect.this.setNewSelection(suggestion);
 		}
 	};
 
 	public ContentAssistAspect() {
-		this(new DefaultContentAssistHandler());
+		this(new DefaultContentAssistHandler<T>());
 	}
 
-	public ContentAssistAspect(ContentAssistHandler assistHandler) {
-		this.suggestionDisplay = new SuggestionDisplayImpl();
+	public ContentAssistAspect(ContentAssistHandler<T> assistHandler) {
+		this.suggestionDisplay = new SuggestionDisplayImpl<T>();
 		this.assistHandler = assistHandler;
 	}
 
@@ -99,16 +95,16 @@ public class ContentAssistAspect {
 		return this.suggestionDisplay.getSuggestionWidget();
 	}
 
-	interface SuggestionCallback {
-		void onSuggestionSelected(Suggestion suggestion);
+	interface SuggestionCallback<T> {
+		void onSuggestionSelected(Oracle.Suggestion<T> suggestion);
 	}
 
-	public interface SuggestionDisplay {
+	public interface SuggestionDisplay<T> {
 
 		boolean isSuggestionListShowing();
 
-		void showSuggestions(IsWidget textInput, Collection<? extends Suggestion> suggestions,
-			SuggestionCallback suggestionCallback);
+		void showSuggestions(IsWidget textInput,
+			Collection<? extends Oracle.Suggestion<T>> suggestions, SuggestionCallback<T> suggestionCallback);
 
 		void hideSuggestions();
 
@@ -116,12 +112,12 @@ public class ContentAssistAspect {
 
 		void moveSelectionUp();
 
-		Suggestion getSelectedSelection();
+		Oracle.Suggestion<T> getSelectedSelection();
 
 		Widget getSuggestionWidget();
 	}
 
-	static class SuggestionDisplayImpl implements SuggestionDisplay {
+	static class SuggestionDisplayImpl<T> implements SuggestionDisplay<T> {
 
 		private static class DropdownMenu extends AbstractPanel {
 			public DropdownMenu() {
@@ -134,7 +130,7 @@ public class ContentAssistAspect {
 		private final DropdownMenu suggestionsContainer = new DropdownMenu();
 		private final PopupPanel suggestionPopup;
 
-		private SuggestionItem selectedItem;
+		private SuggestionItem<T> selectedItem;
 
 		private IsWidget lastTextInput = null;
 
@@ -163,7 +159,7 @@ public class ContentAssistAspect {
 		}
 
 		@Override
-		public Suggestion getSelectedSelection() {
+		public Oracle.Suggestion<T> getSelectedSelection() {
 			if (this.selectedItem != null) {
 				return this.selectedItem.suggestion;
 			}
@@ -175,7 +171,7 @@ public class ContentAssistAspect {
 			if (this.isSuggestionListShowing() && this.selectedItem != null) {
 				int currentIndex = this.suggestionsContainer.getWidgetIndex(this.selectedItem);
 				if (this.suggestionsContainer.getWidgetCount() > currentIndex + 1) {
-					this.setSuggestionItemSelected((SuggestionItem) this.suggestionsContainer.getWidget(currentIndex + 1));
+					this.setSuggestionItemSelected((SuggestionItem<T>) this.suggestionsContainer.getWidget(currentIndex + 1));
 				}
 			}
 		}
@@ -185,14 +181,38 @@ public class ContentAssistAspect {
 			if (this.isSuggestionListShowing() && this.selectedItem != null) {
 				int currentIndex = this.suggestionsContainer.getWidgetIndex(this.selectedItem);
 				if (currentIndex >= 1) {
-					this.setSuggestionItemSelected((SuggestionItem) this.suggestionsContainer.getWidget(currentIndex - 1));
+					this.setSuggestionItemSelected((SuggestionItem<T>) this.suggestionsContainer.getWidget(currentIndex - 1));
 				}
 			}
 		}
 
+
 		@Override
-		public void showSuggestions(final IsWidget textInput, Collection<? extends Suggestion> suggestions,
-			final SuggestionCallback callback) {
+		public Widget getSuggestionWidget() {
+			return this.suggestionPopup;
+		}
+
+		private void setSuggestionItemSelected(SuggestionItem<T> newSelection) {
+			if (this.selectedItem != null) {
+				StyleUtils.removeStyle(this.selectedItem, LinkStyle.ACTIVE);
+			}
+			this.selectedItem = newSelection;
+			if (newSelection != null) {
+				StyleUtils.addStyle(this.selectedItem, LinkStyle.ACTIVE);
+			}
+			this.scrollToSelected();
+		}
+
+		private void scrollToSelected() {
+			if (this.isSuggestionListShowing() && this.selectedItem != null) {
+				this.selectedItem.getElement().scrollIntoView();
+			}
+		}
+
+		@Override
+		public void showSuggestions(
+			final IsWidget textInput, Collection<? extends Suggestion<T>> suggestions, final SuggestionCallback<T> callback) {
+
 			boolean anySuggestions = suggestions != null && !suggestions.isEmpty();
 			if (!anySuggestions && this.hideWhenEmpty) {
 				this.hideSuggestions();
@@ -205,9 +225,9 @@ public class ContentAssistAspect {
 
 			this.suggestionsContainer.clear();
 
-			SuggestionItem selected = null;
-			for (final Suggestion currentSuggestion : suggestions) {
-				final SuggestionItem suggestionItem = new SuggestionItem(currentSuggestion);
+			SuggestionItem<T> selected = null;
+			for (final Oracle.Suggestion<T> currentSuggestion : suggestions) {
+				final SuggestionItem<T> suggestionItem = new SuggestionItem<T>(currentSuggestion);
 				if (selected == null) {
 					selected = suggestionItem;
 				}
@@ -243,35 +263,13 @@ public class ContentAssistAspect {
 			this.suggestionPopup.showRelativeTo(this.lastTextInput.asWidget());
 			this.scrollToSelected();
 		}
-
-		@Override
-		public Widget getSuggestionWidget() {
-			return this.suggestionPopup;
-		}
-
-		private void setSuggestionItemSelected(SuggestionItem newSelection) {
-			if (this.selectedItem != null) {
-				StyleUtils.removeStyle(this.selectedItem, LinkStyle.ACTIVE);
-			}
-			this.selectedItem = newSelection;
-			if (newSelection != null) {
-				StyleUtils.addStyle(this.selectedItem, LinkStyle.ACTIVE);
-			}
-			this.scrollToSelected();
-		}
-
-		private void scrollToSelected() {
-			if (this.isSuggestionListShowing() && this.selectedItem != null) {
-				this.selectedItem.getElement().scrollIntoView();
-			}
-		}
 	}
 
-	static class SuggestionItem extends Widget {
+	static class SuggestionItem<T> extends Widget {
 
-		private final Suggestion suggestion;
+		private final Oracle.Suggestion<T> suggestion;
 
-		public SuggestionItem(Suggestion suggestion) {
+		public SuggestionItem(Oracle.Suggestion<T> suggestion) {
 			this.setElement(Document.get().createLIElement());
 			this.suggestion = suggestion;
 			AnchorElement anchor = Document.get().createAnchorElement();
@@ -281,10 +279,10 @@ public class ContentAssistAspect {
 		}
 	}
 
-	static class DefaultContentAssistHandler extends AbstractContentAssistHandler {
+	static class DefaultContentAssistHandler<T> extends AbstractContentAssistHandler<T> {
 
 		public DefaultContentAssistHandler() {
-			super(new MultiWordSuggestOracle());
+			super(new SimpleOracle<T>());
 		}
 
 		@Override
@@ -293,13 +291,13 @@ public class ContentAssistAspect {
 		}
 
 		@Override
-		public void handleSuggestionSelected(IsWidget textInput, Suggestion suggestion) {
+		public void handleSuggestionSelected(IsWidget textInput, Oracle.Suggestion<T> suggestion) {
 			// DoNothing
 		}
 
 		@Override
-		public ContentAssistHandler copy() {
-			return new DefaultContentAssistHandler();
+		public ContentAssistHandler<T> copy() {
+			return new DefaultContentAssistHandler<T>();
 		}
 	}
 
@@ -321,7 +319,7 @@ public class ContentAssistAspect {
 							break;
 						case KeyCodes.KEY_ENTER:
 						case KeyCodes.KEY_TAB:
-							Suggestion suggestion = ContentAssistAspect.this.suggestionDisplay.getSelectedSelection();
+							Oracle.Suggestion<T> suggestion = ContentAssistAspect.this.suggestionDisplay.getSelectedSelection();
 							if (suggestion == null) {
 								ContentAssistAspect.this.suggestionDisplay.hideSuggestions();
 							} else {
@@ -372,13 +370,8 @@ public class ContentAssistAspect {
 
 	protected void showSuggestions(String query) {
 		if (this.assistHandler.getOracle() != null) {
-			if (query.length() == 0) {
-				this.assistHandler.getOracle().requestDefaultSuggestions(new Request(null, this.assistHandler.getLimit()),
-					this.oracleCallback);
-			} else {
-				this.assistHandler.getOracle().requestSuggestions(new Request(query, this.assistHandler.getLimit()),
-					this.oracleCallback);
-			}
+			this.assistHandler.getOracle().request(
+				new Oracle.Request(query, this.assistHandler.getLimit()), this.oracleCallback);
 		}
 	}
 
@@ -386,12 +379,12 @@ public class ContentAssistAspect {
 		this.showSuggestions(this.assistHandler.getQueryText(this.textInput));
 	}
 
-	protected void setNewSelection(Suggestion curSuggestion) {
+	protected void setNewSelection(Oracle.Suggestion<T> curSuggestion) {
 		this.assistHandler.handleSuggestionSelected(this.textInput, curSuggestion);
 		this.suggestionDisplay.hideSuggestions();
 	}
 
-	public ContentAssistHandler getContentAssistHandler() {
+	public ContentAssistHandler<T> getContentAssistHandler() {
 		return this.assistHandler;
 	}
 }

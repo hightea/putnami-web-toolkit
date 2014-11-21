@@ -17,10 +17,9 @@ package fr.putnami.pwt.core.widget.client;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.text.shared.Parser;
+import com.google.gwt.text.shared.Renderer;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
-import com.google.gwt.user.client.ui.SuggestOracle;
-import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 import com.google.gwt.user.client.ui.TextBox;
 
 import java.util.Collection;
@@ -28,28 +27,33 @@ import java.util.Collection;
 import fr.putnami.pwt.core.widget.client.assist.AbstractContentAssistHandler;
 import fr.putnami.pwt.core.widget.client.assist.ContentAssistAspect;
 import fr.putnami.pwt.core.widget.client.assist.ContentAssistHandler;
+import fr.putnami.pwt.core.widget.client.assist.OracleWrapper;
+import fr.putnami.pwt.core.widget.client.assist.SimpleOracle;
 import fr.putnami.pwt.core.widget.client.base.AbstractInputBox;
 import fr.putnami.pwt.core.widget.client.helper.CompositeFocusHelper;
 import fr.putnami.pwt.core.widget.client.helper.StringParser;
-import fr.putnami.pwt.core.widget.client.helper.StringRenderer;
+import fr.putnami.pwt.core.widget.client.helper.ToStringRenderer;
+import fr.putnami.pwt.core.widget.shared.assist.Oracle;
 
-public class InputSuggest extends AbstractInputBox<TextBox, String> {
+public class InputSuggest<T> extends AbstractInputBox<TextBox, T> {
 
-	private final SuggestOracleWrapper oracle;
-	private ContentAssistHandler assistHandler;
+	private final OracleWrapper<T> oracle;
+	private ContentAssistHandler<T> assistHandler;
 	private ContentAssistAspect assistAspect;
 
 	private CompositeFocusHelper compositeFocus;
 
+	private T currentValue;
+
 	public InputSuggest() {
 		super(new TextBox());
-		this.oracle = new SuggestOracleWrapper();
-		this.setParser(StringParser.get());
-		this.setRenderer(StringRenderer.get());
+		this.oracle = new OracleWrapper<T>();
+		this.setParser((Parser<T>) StringParser.get());
+		this.setRenderer(ToStringRenderer.<T> get());
 		this.init();
 	}
 
-	protected InputSuggest(InputSuggest source) {
+	protected InputSuggest(InputSuggest<T> source) {
 		super(new TextBox(), source);
 		this.oracle = source.oracle;
 		this.init();
@@ -69,19 +73,43 @@ public class InputSuggest extends AbstractInputBox<TextBox, String> {
 		this.compositeFocus.addFocusPartner(this.assistAspect.getSuggestionWidget().getElement());
 	}
 
-	public void setSuggestions(Collection<String> suggestions) {
-		MultiWordSuggestOracle wordSuggestOracle = new MultiWordSuggestOracle();
-		wordSuggestOracle.setDefaultSuggestionsFromText(suggestions);
+	public void setSuggestions(Collection<T> suggestions) {
+		SimpleOracle<T> wordSuggestOracle = new SimpleOracle<T>();
 		wordSuggestOracle.addAll(suggestions);
+		wordSuggestOracle.setRenderer(getRenderer());
 		oracle.setDelagate(wordSuggestOracle);
 	}
 
-	public void setOracle(SuggestOracle oracle) {
+	@Override
+	public void setRenderer(Renderer<T> renderer) {
+		super.setRenderer(renderer);
+		if (oracle.getDelagate() instanceof SimpleOracle) {
+			SimpleOracle<T> simpleOracle = (SimpleOracle<T>) oracle.getDelagate();
+			simpleOracle.setRenderer(renderer);
+		}
+	}
+
+	public void setOracle(Oracle<T> oracle) {
 		this.oracle.setDelagate(oracle);
 	}
 
 	public void setSuggestionsLimit(int limit) {
 		this.assistHandler.setLimit(limit);
+	}
+
+	@Override
+	public void setValue(T value) {
+		super.setValue(value);
+		currentValue = value;
+	}
+
+	@Override
+	public T flush() {
+		this.validate(currentValue);
+		if (!this.hasErrors()) {
+			this.setValue(currentValue);
+		}
+		return this.getValue();
 	}
 
 	@Override
@@ -94,9 +122,9 @@ public class InputSuggest extends AbstractInputBox<TextBox, String> {
 		return this.compositeFocus.addFocusHandler(handler);
 	}
 
-	static class TextBoxContentAssistHandler extends AbstractContentAssistHandler {
+	class TextBoxContentAssistHandler extends AbstractContentAssistHandler<T> {
 
-		public TextBoxContentAssistHandler(SuggestOracle oracle) {
+		public TextBoxContentAssistHandler(Oracle<T> oracle) {
 			super(oracle);
 		}
 
@@ -107,27 +135,12 @@ public class InputSuggest extends AbstractInputBox<TextBox, String> {
 		}
 
 		@Override
-		public void handleSuggestionSelected(IsWidget textInput, Suggestion suggestion) {
+		public void handleSuggestionSelected(IsWidget textInput, Oracle.Suggestion<T> suggestion) {
 			TextBox input = (TextBox) textInput;
 			input.setText(suggestion.getReplacementString());
 			input.setCursorPos(suggestion.getReplacementString().length());
-		}
-	}
 
-	static class SuggestOracleWrapper extends SuggestOracle {
-		private SuggestOracle delagate;
-
-		@Override
-		public void requestSuggestions(Request request, Callback callback) {
-			delagate.requestSuggestions(request, callback);
-		}
-
-		public SuggestOracle getDelagate() {
-			return delagate;
-		}
-
-		public void setDelagate(SuggestOracle delagate) {
-			this.delagate = delagate;
+			InputSuggest.this.currentValue = suggestion.getValue();
 		}
 	}
 }

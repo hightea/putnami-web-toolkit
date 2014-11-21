@@ -16,15 +16,13 @@ package fr.putnami.pwt.core.widget.client.helper;
 
 import com.google.gwt.text.shared.AbstractRenderer;
 
-public final class ToStringRenderer extends AbstractRenderer<Object> {
+public final class ToStringRenderer<T> extends AbstractRenderer<T> {
 
-	private static ToStringRenderer instance;
-
-	public ToStringRenderer() {
+	private ToStringRenderer() {
 	}
 
 	@Override
-	public String render(Object object) {
+	public String render(T object) {
 		if (object == null) {
 			return "";
 		}
@@ -32,10 +30,7 @@ public final class ToStringRenderer extends AbstractRenderer<Object> {
 		return object.toString();
 	}
 
-	public static ToStringRenderer get() {
-		if (ToStringRenderer.instance == null) {
-			ToStringRenderer.instance = new ToStringRenderer();
-		}
-		return ToStringRenderer.instance;
+	public static <T> ToStringRenderer<T> get() {
+		return new ToStringRenderer<T>();
 	}
 }

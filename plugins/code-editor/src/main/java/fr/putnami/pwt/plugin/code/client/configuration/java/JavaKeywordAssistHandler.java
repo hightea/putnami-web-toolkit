@@ -18,15 +18,16 @@ import com.google.common.base.CharMatcher;
 import com.google.common.collect.Lists;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
-import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 
 import fr.putnami.pwt.core.widget.client.assist.AbstractContentAssistHandler;
+import fr.putnami.pwt.core.widget.client.assist.MultiWordOracle;
+import fr.putnami.pwt.core.widget.client.assist.Oracle;
 import fr.putnami.pwt.plugin.code.client.input.CodeInput;
 
-public class JavaKeywordAssistHandler extends AbstractContentAssistHandler {
+public class JavaKeywordAssistHandler extends AbstractContentAssistHandler<String> {
 
 	public JavaKeywordAssistHandler() {
-		super(new MultiWordSuggestOracle());
+		super(new MultiWordOracle<String>());
 		MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) this.getOracle();
 		oracle.addAll(Lists.newArrayList("abstract", "assert", "boolean", "break", "byte", "case",
 			"catch", "char", "class", "const", "continue", "default", "do", "double", "else", "enum",
@@ -54,7 +55,7 @@ public class JavaKeywordAssistHandler extends AbstractContentAssistHandler {
 	}
 
 	@Override
-	public void handleSuggestionSelected(IsWidget textInput, Suggestion suggestion) {
+	public void handleSuggestionSelected(IsWidget textInput, Oracle.Suggestion<String> suggestion) {
 		CodeInput codeInput = (CodeInput) textInput;
 		String currentText = codeInput.getText();
 		int cursorPos = codeInput.getCursorPosition();
