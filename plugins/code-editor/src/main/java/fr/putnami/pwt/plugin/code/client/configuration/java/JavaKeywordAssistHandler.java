@@ -17,7 +17,6 @@ package fr.putnami.pwt.plugin.code.client.configuration.java;
 import com.google.common.base.CharMatcher;
 import com.google.common.collect.Lists;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 
 import fr.putnami.pwt.core.widget.client.assist.AbstractContentAssistHandler;
 import fr.putnami.pwt.core.widget.client.assist.SimpleOracle;
@@ -28,7 +27,7 @@ public class JavaKeywordAssistHandler extends AbstractContentAssistHandler<Strin
 
 	public JavaKeywordAssistHandler() {
 		super(new SimpleOracle<String>());
-		MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) this.getOracle();
+		SimpleOracle<String> oracle = (SimpleOracle<String>) this.getOracle();
 		oracle.addAll(Lists.newArrayList("abstract", "assert", "boolean", "break", "byte", "case",
 			"catch", "char", "class", "const", "continue", "default", "do", "double", "else", "enum",
 			"extends", "false", "final", "finally", "float", "for", "goto", "if", "implements",
@@ -36,13 +35,6 @@ public class JavaKeywordAssistHandler extends AbstractContentAssistHandler<Strin
 			"private", "protected", "public", "return", "short", "static", "strictfp", "super",
 			"switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "void",
 			"volatile", "while"));
-		oracle.setDefaultSuggestionsFromText(Lists.newArrayList("abstract", "assert", "boolean",
-			"break", "byte", "case", "catch", "char", "class", "const", "continue", "default", "do",
-			"double", "else", "enum", "extends", "false", "final", "finally", "float", "for", "goto",
-			"if", "implements", "import", "instanceof", "int", "interface", "long", "native", "new",
-			"null", "package", "private", "protected", "public", "return", "short", "static",
-			"strictfp", "super", "switch", "synchronized", "this", "throw", "throws", "transient",
-			"true", "try", "void", "volatile", "while"));
 	}
 
 	@Override
