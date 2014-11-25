@@ -83,8 +83,8 @@ public class InputSuggest<T> extends AbstractInputBox<TextBox, T> {
 	@Override
 	public void setRenderer(Renderer<T> renderer) {
 		super.setRenderer(renderer);
-		if (oracle.getDelagate() instanceof SimpleOracle) {
-			SimpleOracle<T> simpleOracle = (SimpleOracle<T>) oracle.getDelagate();
+		if (oracle.getDelegate() instanceof SimpleOracle) {
+			SimpleOracle<T> simpleOracle = (SimpleOracle<T>) oracle.getDelegate();
 			simpleOracle.setRenderer(renderer);
 		}
 	}
