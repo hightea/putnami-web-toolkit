@@ -14,7 +14,9 @@
  */
 package fr.putnami.pwt.core.model.client.visitor;
 
+
 import com.google.common.collect.Lists;
+import com.google.gwt.user.client.ui.Focusable;
 
 import java.util.List;
 
@@ -40,6 +42,7 @@ public class ErrorBinderVisitor extends AbstractVisitor {
 	private final MessageHelper messageHelper;
 	private final Model<?> model;
 	private final List<Error> errors;
+	private boolean focused = false;
 
 	public ErrorBinderVisitor(Model<?> model, MessageHelper messageHelper, List<Error> errors) {
 		this.messageHelper = messageHelper;
@@ -78,6 +81,10 @@ public class ErrorBinderVisitor extends AbstractVisitor {
 			if (!toDisplay.isEmpty() && editorError instanceof HasDrawable) {
 				editorError.displayErrors(toDisplay);
 				((HasDrawable) editorError).redraw();
+				if (!focused && editorError instanceof Focusable) {
+					focused = true;
+					((Focusable) editorError).setFocus(true);
+				}
 			}
 		}
 		return true;
