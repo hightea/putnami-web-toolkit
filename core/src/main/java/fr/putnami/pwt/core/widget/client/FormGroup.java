@@ -16,6 +16,7 @@ package fr.putnami.pwt.core.widget.client;
 
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.editor.client.LeafValueEditor;
+import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -45,7 +46,7 @@ import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class FormGroup<T> extends AbstractPanel
 	implements HasFormType, CloneableWidget, EditorValue<T>, HasLabelEditor, HasEditorProvider, HasWidgetFactory,
-	HasOutputEditorFactory, HasInputEditorFactory, HasReadonly, EditorLabel, EditorError {
+	HasOutputEditorFactory, HasInputEditorFactory, HasReadonly, EditorLabel, EditorError, Focusable {
 
 	private static final CssStyle STYLE_FORM_GROUP = new SimpleStyle("form-group");
 	private static final CssStyle STYLE_ERROR = new SimpleStyle("has-error");
@@ -63,8 +64,12 @@ public class FormGroup<T> extends AbstractPanel
 	private Help help;
 	private ErrorGroup error;
 
+	private Integer tabIndex;
+	private Character accessKey;
 	private Boolean readonly;
 	private T value;
+
+	private Editor editor;
 
 	public FormGroup() {
 		super(DivElement.TAG);
@@ -81,6 +86,8 @@ public class FormGroup<T> extends AbstractPanel
 		this.help = WidgetUtils.cloneWidget(source.help);
 		this.error = WidgetUtils.cloneWidget(source.error);
 		this.readonly = source.readonly;
+		this.tabIndex = source.tabIndex;
+		this.accessKey = source.accessKey;
 	}
 
 	@Override
@@ -217,8 +224,9 @@ public class FormGroup<T> extends AbstractPanel
 		StyleUtils
 			.toggleStyle(Widget.asWidgetOrNull(this.label), FormGroup.STYLE_SCREAN_READER, this.type == Layout.INLINE);
 		this.addIfNotNull(this.label, 3, 0, false);
-		boolean ro = this.readonly == null ? false : this.readonly;
-		Editor editor = this.editorProvider.getEditor(ro);
+		boolean ro = isReadOnly();
+		this.editor = this.editorProvider.getEditor(ro);
+		initFocusableEditor();
 		if (!Boolean.FALSE.equals(this.readonly)) {
 			this.addIfNotNull(editor, 9, 0, true);
 		} else {
@@ -226,6 +234,60 @@ public class FormGroup<T> extends AbstractPanel
 			this.addIfNotNull(this.error, 9, 3, true);
 			this.addIfNotNull(this.help, 9, 3, true);
 		}
+	}
+
+	@Override
+	public T getValue() {
+		return this.value;
+	}
+
+	@Override
+	public void edit(T value) {
+		this.value = value;
+	}
+
+	@Override
+	public LeafValueEditor<T> asEditor() {
+		return new TakesValueEditorWrapper<T>(this);
+	}
+
+	@Override
+	public void setTabIndex(int tabIndex) {
+		this.tabIndex = tabIndex;
+	}
+
+	@Override
+	public int getTabIndex() {
+		return tabIndex;
+	}
+
+	@Override
+	public void setAccessKey(char accessKey) {
+		this.accessKey = accessKey;
+	}
+
+	@Override
+	public void setFocus(boolean focused) {
+		if (editor instanceof Focusable) {
+			Focusable focusable = (Focusable) editor;
+			focusable.setFocus(focused);
+		}
+	}
+
+	private void initFocusableEditor() {
+		if (editor instanceof Focusable) {
+			Focusable focusable = (Focusable) editor;
+			if (accessKey != null) {
+				focusable.setAccessKey(accessKey);
+			}
+			if (tabIndex != null) {
+				focusable.setTabIndex(tabIndex);
+			}
+		}
+	}
+
+	private boolean isReadOnly() {
+		return this.readonly == null ? false : this.readonly;
 	}
 
 	private void addIfNotNull(Editor e, int size, int offset, boolean wrap) {
@@ -251,21 +313,6 @@ public class FormGroup<T> extends AbstractPanel
 			}
 			this.append(toAdd);
 		}
-	}
-
-	@Override
-	public T getValue() {
-		return this.value;
-	}
-
-	@Override
-	public void edit(T value) {
-		this.value = value;
-	}
-
-	@Override
-	public LeafValueEditor<T> asEditor() {
-		return new TakesValueEditorWrapper<T>(this);
 	}
 
 }
