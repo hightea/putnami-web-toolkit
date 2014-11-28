@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'gwt'
 apply plugin: 'jetty'
+apply plugin: 'eclipse'
 
 buildscript {
 	repositories {
@@ -42,6 +43,24 @@ gwt {
 		// Allows to debug with the standard Dev mode
 		// ( no more supported on Chrome for Linux or on Firefox)
 		jvmArgs('-Xdebug',  '-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000')
+	}
+	
+	// The following is only needed if you don't use the Google Plugin for Eclipse.
+	eclipse{
+		addGwtContainer=false // Default set to true
+	}
+}
+
+//Tweak to move the GWT container classpath entry to the end
+// Must be defined after the gwt-plugin configuration
+if (gwt.eclipse.addGwtContainer) {
+	eclipse.classpath.file{
+		whenMerged{ classpath ->
+			def projectRefs = classpath.entries.findAll{entry -> entry.kind =='con' && entry.path.equals('com.google.gwt.eclipse.core.GWT_CONTAINER')}
+			//move the project references to the end of the list:
+			classpath.entries.removeAll(projectRefs)
+			classpath.entries.addAll(projectRefs)
+		}
 	}
 }
 
