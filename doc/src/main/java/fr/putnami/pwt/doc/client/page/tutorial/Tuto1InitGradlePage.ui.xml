@@ -104,6 +104,39 @@ gwt {
 }]]></pre>
 					</c:StaticCode>
 				</li>
+				<li>If you want to use the gradle eclipse plugin (genrate eclipse configuration files with gradle), apply the plugin :
+					<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+apply plugin: 'eclipse'
+]]></pre>
+					</c:StaticCode>
+					<p>Now you have two options : use the GPE or not. If you use the GPE, you have to hadd the following tweak :</p>
+					<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+//Tweak to move the GWT container classpath entry to the end
+// Must be defined after the gwt-plugin configuration
+if (gwt.eclipse.addGwtContainer) {
+	eclipse.classpath.file{
+		whenMerged{ classpath ->
+			def projectRefs = classpath.entries.findAll{entry -> entry.kind =='con' && entry.path.equals('com.google.gwt.eclipse.core.GWT_CONTAINER')}
+			//move the project references to the end of the list:
+			classpath.entries.removeAll(projectRefs)
+			classpath.entries.addAll(projectRefs)
+		}
+	}
+}]]></pre>
+					</c:StaticCode>
+					<p> else you have to configure the gradle-gwt-plugin in order to use the GWT jars dependencies :</p>
+					<c:StaticCode configuration="{JAVA_CONFIGURATION}">
+<pre><![CDATA[
+gwt {
+	// The following is only needed if you don't use the Google Plugin for Eclipse.
+	eclipse{
+		addGwtContainer=false // Default set to true
+	}
+}]]></pre>
+					</c:StaticCode>
+				</li>
 				<li>Finally, we apply the jetty plugin to launch the web app, and configure a custom task to run the application with draft GWT compilation :
 					<c:StaticCode configuration="{JAVA_CONFIGURATION}">
 <pre><![CDATA[
