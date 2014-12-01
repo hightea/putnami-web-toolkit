@@ -23,8 +23,6 @@ import fr.putnami.pwt.core.editor.client.Editor;
 import fr.putnami.pwt.core.editor.client.EditorCollection;
 import fr.putnami.pwt.core.editor.client.Path;
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
-import fr.putnami.pwt.core.editor.client.factory.InputFactory;
-import fr.putnami.pwt.core.editor.client.factory.OutputFactory;
 import fr.putnami.pwt.core.editor.client.visitor.AbstractVisitor;
 import fr.putnami.pwt.core.model.client.ModelDriver;
 import fr.putnami.pwt.core.model.client.base.EditorProvider;
@@ -70,50 +68,66 @@ public class EditorFactoryVisitor extends AbstractVisitor {
 		}
 
 		private <E extends Editor> E ensureEditor(Boolean readonly, Integer index) {
+			// provide output if readonly
 			if (!Boolean.FALSE.equals(readonly)) {
-				if (this.outputEditors == null) {
-					this.outputEditors = Maps.newHashMap();
-				}
-				Editor editor = this.outputEditors.get(index);
-				if (editor == null) {
-					editor = (Editor) this.getOutputFacoty().cloneWidget();
-					this.outputEditors.put(index, editor);
-					this.initEditor(editor, index);
-				}
-				return (E) editor;
+				return this.newOutput(index);
 			}
+			// provide input if not readonly
+			return this.newInput(index);
+		}
+
+		private <E extends Editor> E newOutput(Integer index) {
+			if (this.outputEditors == null) {
+				this.outputEditors = Maps.newHashMap();
+			}
+			E editor = (E) outputEditors.get(index);
+			if (editor != null) {
+				return editor;
+			}
+
+			if (this.outputFactory == null) {
+				editor = (E) EditorFactoryManager.get()
+					.createOutputForType(this.propertyType, this.parentContext).cloneWidget();
+			} else if (index == null) {
+				editor = (E) this.outputFactory;
+			} else {
+				editor = (E) this.outputFactory.cloneWidget();
+			}
+
+			assert editor != null : "outputEditor can not create for " + this.propertyType;
+
+			this.outputEditors.put(index, editor);
+			this.initEditor(editor, index);
+			return editor;
+		}
+
+		private <E extends Editor> E newInput(Integer index) {
 			if (this.inputEditors == null) {
 				this.inputEditors = Maps.newHashMap();
 			}
-			Editor editor = this.inputEditors.get(index);
-			if (editor == null) {
-				editor = (Editor) this.getInputFacoty().cloneWidget();
-				this.inputEditors.put(index, editor);
-				this.initEditor(editor, index);
+			E editor = (E) inputEditors.get(index);
+			if (editor != null) {
+				return editor;
 			}
-			return (E) editor;
-		}
 
-		private CloneableWidget getOutputFacoty() {
-			if (this.outputFactory == null) {
-				this.outputFactory = EditorFactoryManager.get().createOutputForType(this.propertyType, this.parentContext);
-			}
-			assert this.outputFactory != null : "output factory is null, can not create an output editor for "
-				+ this.propertyType;
-			return this.outputFactory;
-		}
-
-		private CloneableWidget getInputFacoty() {
 			if (this.inputFactory == null) {
-				this.inputFactory = EditorFactoryManager.get().createInputForType(this.propertyType, this.parentContext);
+				editor = (E) EditorFactoryManager.get()
+					.createInputForType(this.propertyType, this.parentContext).cloneWidget();
+			} else if (index == null) {
+				editor = (E) this.inputFactory;
+			} else {
+				editor = (E) this.inputFactory.cloneWidget();
 			}
-			assert this.inputFactory != null : "intput factory is null, can not create an input editor for "
-				+ this.propertyType;
-			return this.inputFactory;
+
+			assert editor != null : "inputEditor can not create for " + this.propertyType;
+
+			this.inputEditors.put(index, editor);
+			this.initEditor(editor, index);
+			return editor;
 		}
 
 		void initEditor(Editor editor, Integer index) {
-			if (index != null) {
+			if (index != null && !index.equals(-1)) {
 				String path = "[" + index + "]";
 				editor.setPath(path);
 			}
@@ -139,8 +153,8 @@ public class EditorFactoryVisitor extends AbstractVisitor {
 			}
 
 			CloneableWidget widgetFactory = null;
-			InputFactory inputFactory = null;
-			OutputFactory outputFactory = null;
+			CloneableWidget inputFactory = null;
+			CloneableWidget outputFactory = null;
 
 			if (editor instanceof HasWidgetFactory) {
 				widgetFactory = ((HasWidgetFactory) editor).getWidgetFactory();
@@ -149,14 +163,18 @@ public class EditorFactoryVisitor extends AbstractVisitor {
 			if (editor instanceof HasInputEditorFactory) {
 				inputFactory = ((HasInputEditorFactory) editor).getInputFactory();
 			}
+			if (inputFactory == null) {
+				inputFactory = widgetFactory;
+			}
 
 			if (editor instanceof HasOutputEditorFactory) {
 				outputFactory = ((HasOutputEditorFactory) editor).getOutputFactory();
 			}
+			if (outputFactory == null) {
+				outputFactory = widgetFactory;
+			}
 
-			EditorProvider provider =
-				new InternalEditorProvider(context, propertyType, inputFactory == null ? widgetFactory : inputFactory,
-					outputFactory == null ? widgetFactory : outputFactory);
+			EditorProvider provider = new InternalEditorProvider(context, propertyType, inputFactory, outputFactory);
 
 			((HasEditorProvider) editor).setEditorProvider(provider);
 		}

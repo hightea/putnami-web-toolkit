@@ -22,12 +22,12 @@ import com.google.gwt.user.client.ui.Widget;
 
 import fr.putnami.pwt.core.editor.client.Editor;
 import fr.putnami.pwt.core.editor.client.EditorError;
+import fr.putnami.pwt.core.editor.client.EditorInput;
 import fr.putnami.pwt.core.editor.client.EditorLabel;
+import fr.putnami.pwt.core.editor.client.EditorOutput;
 import fr.putnami.pwt.core.editor.client.EditorValue;
 import fr.putnami.pwt.core.editor.client.Error;
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
-import fr.putnami.pwt.core.editor.client.factory.InputFactory;
-import fr.putnami.pwt.core.editor.client.factory.OutputFactory;
 import fr.putnami.pwt.core.editor.client.helper.TakesValueEditorWrapper;
 import fr.putnami.pwt.core.model.client.base.EditorProvider;
 import fr.putnami.pwt.core.model.client.base.HasEditorProvider;
@@ -35,7 +35,6 @@ import fr.putnami.pwt.core.model.client.base.HasInputEditorFactory;
 import fr.putnami.pwt.core.model.client.base.HasLabelEditor;
 import fr.putnami.pwt.core.model.client.base.HasOutputEditorFactory;
 import fr.putnami.pwt.core.model.client.base.HasReadonly;
-import fr.putnami.pwt.core.model.client.base.HasWidgetFactory;
 import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractForm.Layout;
 import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
@@ -45,7 +44,7 @@ import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.WidgetUtils;
 
 public class FormGroup<T> extends AbstractPanel
-	implements HasFormType, CloneableWidget, EditorValue<T>, HasLabelEditor, HasEditorProvider, HasWidgetFactory,
+	implements HasFormType, CloneableWidget, EditorValue<T>, HasLabelEditor, HasEditorProvider,
 	HasOutputEditorFactory, HasInputEditorFactory, HasReadonly, EditorLabel, EditorError, Focusable {
 
 	private static final CssStyle STYLE_FORM_GROUP = new SimpleStyle("form-group");
@@ -54,9 +53,8 @@ public class FormGroup<T> extends AbstractPanel
 
 	private Layout type;
 
-	private InputFactory inputFactory;
-	private OutputFactory outputFactory;
-	private CloneableWidget widgetFactory;
+	private EditorInput<T> inputFactory;
+	private EditorOutput<T> outputFactory;
 
 	private EditorProvider editorProvider;
 
@@ -79,9 +77,8 @@ public class FormGroup<T> extends AbstractPanel
 	protected FormGroup(FormGroup<T> source) {
 		super(source);
 		this.type = source.type;
-		this.inputFactory = source.inputFactory;
-		this.outputFactory = source.outputFactory;
-		this.widgetFactory = source.widgetFactory;
+		this.inputFactory = WidgetUtils.cloneWidget(source.inputFactory);
+		this.outputFactory = WidgetUtils.cloneWidget(source.outputFactory);
 		this.label = WidgetUtils.cloneWidget(source.label);
 		this.help = WidgetUtils.cloneWidget(source.help);
 		this.error = WidgetUtils.cloneWidget(source.error);
@@ -106,17 +103,12 @@ public class FormGroup<T> extends AbstractPanel
 	}
 
 	@Override
-	public CloneableWidget getWidgetFactory() {
-		return this.widgetFactory;
-	}
-
-	@Override
-	public InputFactory getInputFactory() {
+	public EditorInput<T> getInputFactory() {
 		return this.inputFactory;
 	}
 
 	@Override
-	public OutputFactory getOutputFactory() {
+	public EditorOutput<T> getOutputFactory() {
 		return this.outputFactory;
 	}
 
@@ -147,13 +139,13 @@ public class FormGroup<T> extends AbstractPanel
 
 	@Override
 	public void add(IsWidget child) {
-		if (child instanceof InputFactory) {
+		if (child instanceof EditorInput) {
 			assert this.inputFactory == null : "inputFactory may only be set once";
-			this.inputFactory = (InputFactory) child;
+			this.inputFactory = (EditorInput<T>) child;
 		}
-		if (child instanceof OutputFactory) {
+		if (child instanceof EditorOutput) {
 			assert this.outputFactory == null : "outputFactory may only be set once";
-			this.outputFactory = (OutputFactory) child;
+			this.outputFactory = (EditorOutput) child;
 		}
 
 		if (child instanceof Label) {
@@ -161,8 +153,6 @@ public class FormGroup<T> extends AbstractPanel
 			this.addEditor(child);
 		} else if (child instanceof Help) {
 			this.help = (Help) child;
-		} else if (this.inputFactory == null && this.outputFactory == null && child instanceof CloneableWidget) {
-			this.widgetFactory = (CloneableWidget) child;
 		}
 	}
 

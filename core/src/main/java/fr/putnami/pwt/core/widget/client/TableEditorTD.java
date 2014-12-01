@@ -87,7 +87,7 @@ public class TableEditorTD<T> extends TableTD<T>
 		super.redraw();
 		this.clear();
 		if (this.editorProvider != null) {
-			this.append((IsWidget) this.editorProvider.getEditor(this.getReadonly()));
+			this.append((IsWidget) this.editorProvider.getEditorForTraversal(this.getReadonly(), -1));
 		}
 	}
 
