@@ -15,16 +15,15 @@
 package fr.putnami.pwt.core.widget.client;
 
 import com.google.gwt.dom.client.LIElement;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.user.client.History;
+import com.google.gwt.place.shared.PlaceChangeEvent;
 import com.google.gwt.user.client.ui.IsWidget;
 
+import fr.putnami.pwt.core.event.client.EventBus;
 import fr.putnami.pwt.core.widget.client.Nav.LinkStyle;
 import fr.putnami.pwt.core.widget.client.base.SimpleCollapse;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
-public class NavCollapse extends SimpleCollapse implements Nav.IsNavContent, ValueChangeHandler<String> {
+public class NavCollapse extends SimpleCollapse implements Nav.IsNavContent, PlaceChangeEvent.Handler {
 
 	private boolean active = false;
 
@@ -39,7 +38,7 @@ public class NavCollapse extends SimpleCollapse implements Nav.IsNavContent, Val
 	}
 
 	private void initHandler() {
-		History.addValueChangeHandler(this);
+		EventBus.get().addHandler(PlaceChangeEvent.TYPE, this);
 	}
 
 	@Override
@@ -61,7 +60,7 @@ public class NavCollapse extends SimpleCollapse implements Nav.IsNavContent, Val
 	}
 
 	@Override
-	public void onValueChange(ValueChangeEvent<String> event) {
+	public void onPlaceChange(PlaceChangeEvent event) {
 		this.setActive(false);
 	}
 

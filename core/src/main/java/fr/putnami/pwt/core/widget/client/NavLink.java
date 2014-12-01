@@ -19,21 +19,22 @@ import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.LIElement;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.place.shared.PlaceChangeEvent;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
 import fr.putnami.pwt.core.editor.client.factory.CloneableWidget;
+import fr.putnami.pwt.core.event.client.EventBus;
 import fr.putnami.pwt.core.model.client.base.HasDrawable;
+import fr.putnami.pwt.core.mvp.client.MvpController;
 import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.widget.client.Nav.LinkStyle;
 import fr.putnami.pwt.core.widget.client.base.AbstractPanel;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 
 public class NavLink extends AbstractPanel
-	implements Nav.IsNavContent, CloneableWidget, ClickHandler, ValueChangeHandler<String>, HasDrawable {
+	implements Nav.IsNavContent, CloneableWidget, ClickHandler, PlaceChangeEvent.Handler, HasDrawable {
 
 	private final Anchor<?> anchor = new Anchor<>();
 
@@ -47,7 +48,7 @@ public class NavLink extends AbstractPanel
 	private String name;
 	private String label;
 
-	private HandlerRegistration historyChangeHandlerRegistration;
+	private HandlerRegistration placeChangeHandlerRegistration;
 
 	public NavLink() {
 		super(LIElement.TAG);
@@ -155,8 +156,8 @@ public class NavLink extends AbstractPanel
 	}
 
 	private void ensureHistoryChangeHandler() {
-		if (this.historyChangeHandlerRegistration == null) {
-			this.historyChangeHandlerRegistration = History.addValueChangeHandler(this);
+		if (this.placeChangeHandlerRegistration == null) {
+			this.placeChangeHandlerRegistration = EventBus.get().addHandler(PlaceChangeEvent.TYPE, this);
 		}
 	}
 
@@ -171,15 +172,19 @@ public class NavLink extends AbstractPanel
 	}
 
 	@Override
-	public void onValueChange(ValueChangeEvent<String> event) {
-		this.redraw();
+	public void onPlaceChange(PlaceChangeEvent event) {
+		this.redraw(MvpController.get().getToken(event.getNewPlace()));
 	}
 
 	@Override
 	public void redraw() {
+		redraw(History.getToken());
+	}
+
+	public void redraw(String token) {
 		if (this.link != null) {
 			String tokenLink = this.link.replaceAll("^#", "");
-			if (tokenLink.equals(History.getToken())) {
+			if (tokenLink.equals(token)) {
 				this.active = true;
 			} else {
 				this.active = false;
