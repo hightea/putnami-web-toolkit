@@ -17,6 +17,8 @@ public abstract class AbstractOracle<T> implements Oracle<T> {
 	private char[] whitespaceChars;
 	private static final char WHITESPACE_CHAR = ' ';
 
+	private Matcher<T> matcher;
+
 	public AbstractOracle() {
 		this(WHITESPACE_CHAR);
 	}
@@ -50,6 +52,17 @@ public abstract class AbstractOracle<T> implements Oracle<T> {
 
 	public void setQueryLengthToRequest(int queryLengthToRequest) {
 		this.queryLengthToRequest = queryLengthToRequest;
+	}
+
+	public Matcher<T> getMatcher() {
+		if (matcher == null) {
+			matcher = new MultiWordMatcher<T>(getRenderer(), getWhitespaceChars());
+		}
+		return matcher;
+	}
+
+	public void setMatcher(Matcher<T> matcher) {
+		this.matcher = matcher;
 	}
 
 	@Override

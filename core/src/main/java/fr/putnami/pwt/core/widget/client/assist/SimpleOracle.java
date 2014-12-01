@@ -58,9 +58,8 @@ public class SimpleOracle<T> extends AbstractOracle<T> {
 		List<SimpleSuggestion<T>> suggestions = Lists.newArrayList();
 
 		String query = request.getQuery();
-		MultiWordMatcher<T> matcher = new MultiWordMatcher<T>(getRenderer(), getWhitespaceChars());
 		for (T value : allSuggestions) {
-			int relevance = matcher.match(value, query);
+			int relevance = getMatcher().match(value, query);
 			if (relevance > 0) {
 				addToSuggestion(query, suggestions, value, relevance);
 			}

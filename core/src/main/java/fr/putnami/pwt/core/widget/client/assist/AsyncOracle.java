@@ -52,7 +52,16 @@ public abstract class AsyncOracle<T> extends AbstractOracle<T> {
 	}
 
 	public AsyncOracle(Renderer<T> renderer) {
+		this();
 		setRenderer(renderer);
+	}
+
+	public Oracle.Request getLastRequest() {
+		return lastRequest;
+	}
+
+	public Oracle.Response<T> getLastResponse() {
+		return lastResponse;
 	}
 
 	@Override
@@ -63,10 +72,9 @@ public abstract class AsyncOracle<T> extends AbstractOracle<T> {
 
 			List<SimpleSuggestion<T>> suggestions = Lists.newArrayList();
 
-			MultiWordMatcher<T> matcher = new MultiWordMatcher<T>(getRenderer(), getWhitespaceChars());
 			for (Suggestion<T> suggestion : lastResponse.getSuggestions()) {
 				T value = suggestion.getValue();
-				int relevance = matcher.match(value, request.getQuery());
+				int relevance = getMatcher().match(value, request.getQuery());
 				if (relevance > 0) {
 					addToSuggestion(query, suggestions, value, relevance);
 				}
@@ -79,4 +87,5 @@ public abstract class AsyncOracle<T> extends AbstractOracle<T> {
 	}
 
 	public abstract void asyncRequest(Oracle.Request request, Oracle.Callback<T> callback);
+
 }
