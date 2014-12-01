@@ -66,7 +66,10 @@ public class ErrorBinderVisitor extends AbstractVisitor {
 				if (path.equals(error.getPath()) && !error.isConsumed()) {
 					String messageKey = error.getMessageKey();
 					messageKey = this.fixMessageKey(messageKey);
-					String message = this.messageHelper.findMessage(propertyType, messageKey);
+					String message = messageHelper.getMessage(propertyType, path, messageKey);
+					if (message == null) {
+						message = messageHelper.findMessage(propertyType, messageKey);
+					}
 					if (error.getParameters() != null) {
 						message = MessageHelper.replaceParams(message, error.getParameters());
 					}

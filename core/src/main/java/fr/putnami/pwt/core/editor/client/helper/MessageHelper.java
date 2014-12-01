@@ -15,6 +15,7 @@
 package fr.putnami.pwt.core.editor.client.helper;
 
 import com.google.common.base.CaseFormat;
+import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
 import com.google.gwt.regexp.shared.RegExp;
@@ -91,8 +92,8 @@ public class MessageHelper {
 		String labelKey = path.toString().replaceAll("\\.", "_").replaceAll("\\[", "").replaceAll("]", "").toUpperCase();
 
 		labelKey = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, String.valueOf(labelKey));
-		if (suffix != null) {
-			labelKey += suffix;
+		if (!Strings.isNullOrEmpty(suffix)) {
+			labelKey += suffix.substring(0, 1).toUpperCase() + suffix.substring(1);
 		}
 		return labelKey;
 	}
