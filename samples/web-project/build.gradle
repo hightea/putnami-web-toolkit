@@ -22,7 +22,7 @@ buildscript {
 }
 
 ext {
-	pwtVersion = '1.1.1'
+	pwtVersion = '1.2.0-SNAPSHOT'
 }
 	
 configurations {
@@ -50,7 +50,8 @@ dependencies {
 }
 
 gwt {
-	gwtVersion='2.6.1'
+	gwtVersion='2.7.0'
+	maxHeapSize = "2G";
 
 	gwtDev {
 		jvmArgs('-Xdebug',  '-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000')
