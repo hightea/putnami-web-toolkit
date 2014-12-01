@@ -159,9 +159,7 @@ public class GoogleAnalyticsImpl extends GoogleAnalytics implements StartActivit
 	@Override
 	public native void trackSocial(String socialNetwork, String socialAction, String socialtarget)
 	/*-{
-		$wnd.ga('send', 'social', socialNetwork, socialAction, socialtarget, {
-			'page': page
-		});
+		$wnd.ga('send', 'social', socialNetwork, socialAction, socialtarget);
 	}-*/;
 
 }
