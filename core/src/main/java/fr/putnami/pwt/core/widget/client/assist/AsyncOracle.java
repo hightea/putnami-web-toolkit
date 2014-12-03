@@ -7,7 +7,6 @@ import java.util.List;
 
 import fr.putnami.pwt.core.service.client.CallbackAdapter;
 import fr.putnami.pwt.core.widget.shared.assist.Oracle;
-import fr.putnami.pwt.core.widget.shared.assist.SimpleSuggestion;
 
 public abstract class AsyncOracle<T> extends AbstractOracle<T> {
 
@@ -70,13 +69,13 @@ public abstract class AsyncOracle<T> extends AbstractOracle<T> {
 		if (lastResponse != null && !lastResponse.hasMoreSuggestions()
 			&& query != null && query.startsWith(lastRequest.getQuery())) {
 
-			List<SimpleSuggestion<T>> suggestions = Lists.newArrayList();
+			List<Suggestion<T>> suggestions = Lists.newArrayList();
 
 			for (Suggestion<T> suggestion : lastResponse.getSuggestions()) {
 				T value = suggestion.getValue();
 				int relevance = getMatcher().match(value, request.getQuery());
 				if (relevance > 0) {
-					addToSuggestion(query, suggestions, value, relevance);
+					suggestions.add(newSuggestion(query, value, relevance));
 				}
 			}
 			Response<T> response = new Response<T>(suggestions);

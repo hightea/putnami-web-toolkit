@@ -52,10 +52,11 @@ public class JavaKeywordAssistHandler extends AbstractContentAssistHandler<Strin
 		String currentText = codeInput.getText();
 		int cursorPos = codeInput.getCursorPosition();
 		int tokenStartIndex = this.getCurrentTokenStartIndex(currentText, cursorPos);
+		String replacementString = suggestion.getValue();
 		String newText =
-			currentText.substring(0, tokenStartIndex) + suggestion.getReplacementString()
+			currentText.substring(0, tokenStartIndex) + replacementString
 				+ currentText.substring(codeInput.getCursorPosition(), currentText.length());
-		int newCursorPos = tokenStartIndex + suggestion.getReplacementString().length();
+		int newCursorPos = tokenStartIndex + replacementString.length();
 		codeInput.setText(newText);
 		codeInput.setCursorPosition(newCursorPos);
 	}

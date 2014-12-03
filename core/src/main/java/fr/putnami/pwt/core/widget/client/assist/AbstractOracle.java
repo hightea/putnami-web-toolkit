@@ -2,8 +2,6 @@ package fr.putnami.pwt.core.widget.client.assist;
 
 import com.google.gwt.text.shared.Renderer;
 
-import java.util.Collection;
-
 import fr.putnami.pwt.core.widget.client.helper.ToStringRenderer;
 import fr.putnami.pwt.core.widget.shared.assist.Oracle;
 import fr.putnami.pwt.core.widget.shared.assist.SimpleSuggestion;
@@ -74,14 +72,8 @@ public abstract class AbstractOracle<T> implements Oracle<T> {
 		}
 	}
 
-	protected void addToSuggestion(String query, Collection<SimpleSuggestion<T>> result, T suggestionValue, int relevance) {
-		String replacement = renderer.render(suggestionValue);
-		String display = replacement.replaceFirst(query, "<strong>" + query + "</strong>");
-
-		SimpleSuggestion<T> suggestion = new SimpleSuggestion<T>(suggestionValue, replacement, display, relevance);
-		if (!result.contains(suggestion)) {
-			result.add(suggestion);
-		}
+	protected <S extends Suggestion<T>> S newSuggestion(String query, T value, int relevance) {
+		return (S) new SimpleSuggestion<T>(value, relevance);
 	}
 
 	protected abstract void doRequest(Oracle.Request request, Oracle.Callback<T> callback);

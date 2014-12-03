@@ -79,11 +79,10 @@ public class CodeContentAssistAspect extends ContentAssistAspect<String> impleme
 		public void handleSuggestionSelected(IsWidget textInput, Oracle.Suggestion<String> suggestion) {
 			CodeInput codeInput = (CodeInput) textInput;
 			String oldText = codeInput.getText();
-			String newText =
-				suggestion.getReplacementString()
-					+ oldText.substring(codeInput.getCursorPosition(), oldText.length());
+			String replacementString = suggestion.getValue();
+			String newText = replacementString + oldText.substring(codeInput.getCursorPosition(), oldText.length());
 			codeInput.setText(newText);
-			codeInput.setCursorPosition(suggestion.getReplacementString().length());
+			codeInput.setCursorPosition(replacementString.length());
 		}
 
 		@Override

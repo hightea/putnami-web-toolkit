@@ -11,11 +11,13 @@ public interface Oracle<T> {
 	}
 
 	interface Suggestion<T> {
-		String getDisplayString();
-
-		String getReplacementString();
-
 		T getValue();
+
+		int getRelevance();
+	}
+
+	interface Highlighter<T> {
+		String highlight(T value, String query);
 	}
 
 	class Request implements Serializable {

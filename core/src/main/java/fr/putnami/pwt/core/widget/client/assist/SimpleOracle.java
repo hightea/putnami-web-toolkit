@@ -8,8 +8,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import fr.putnami.pwt.core.widget.shared.assist.SimpleSuggestion;
-
 public class SimpleOracle<T> extends AbstractOracle<T> {
 
 
@@ -55,19 +53,19 @@ public class SimpleOracle<T> extends AbstractOracle<T> {
   @Override
 	public void doRequest(Request request, Callback<T> callback) {
 
-		List<SimpleSuggestion<T>> suggestions = Lists.newArrayList();
+		List<Suggestion<T>> suggestions = Lists.newArrayList();
 
 		String query = request.getQuery();
 		for (T value : allSuggestions) {
 			int relevance = getMatcher().match(value, query);
 			if (relevance > 0) {
-				addToSuggestion(query, suggestions, value, relevance);
+				suggestions.add(newSuggestion(query, value, relevance));
 			}
 		}
 
-		Collections.sort(suggestions, new Comparator<SimpleSuggestion<T>>() {
+		Collections.sort(suggestions, new Comparator<Suggestion<T>>() {
 			@Override
-			public int compare(SimpleSuggestion<T> o1, SimpleSuggestion<T> o2) {
+			public int compare(Suggestion<T> o1, Suggestion<T> o2) {
 				return Longs.compare(o2.getRelevance(), o1.getRelevance());
 			}
 		});

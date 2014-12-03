@@ -17,6 +17,7 @@ package fr.putnami.pwt.core.widget.client;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.text.shared.Parser;
 import com.google.gwt.text.shared.Renderer;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -39,11 +40,20 @@ public class InputSuggest<T> extends AbstractInputBox<TextBox, T> {
 
 	private final OracleWrapper<T> oracle;
 	private ContentAssistHandler<T> assistHandler;
-	private ContentAssistAspect assistAspect;
+	private ContentAssistAspect<T> assistAspect;
 
 	private CompositeFocusHelper compositeFocus;
 
 	private T currentValue;
+
+	private Oracle.Highlighter<T> highlighter = new Oracle.Highlighter<T>() {
+
+		@Override
+		public String highlight(T value, String query) {
+			RegExp pattern = RegExp.compile("(" + query + ")", "ig");
+			return pattern.replace(getRenderer().render(value), "<strong>$1</strong>");
+		}
+	};
 
 	public InputSuggest() {
 		super(new TextBox());
@@ -56,21 +66,32 @@ public class InputSuggest<T> extends AbstractInputBox<TextBox, T> {
 	protected InputSuggest(InputSuggest<T> source) {
 		super(new TextBox(), source);
 		this.oracle = source.oracle;
+		this.highlighter = source.highlighter;
 		this.init();
 	}
 
 	@Override
 	public IsWidget cloneWidget() {
-		return new InputSuggest(this);
+		return new InputSuggest<T>(this);
 	}
 
 	private void init() {
 		this.assistHandler = new TextBoxContentAssistHandler(this.oracle);
-		this.assistAspect = new ContentAssistAspect(this.assistHandler);
+		this.assistAspect = new ContentAssistAspect<T>(this.assistHandler);
 		this.assistAspect.setInput(this.getInput());
+		this.assistAspect.setHighlighter(highlighter);
 
 		this.compositeFocus = CompositeFocusHelper.createFocusHelper(this, this.getInput());
 		this.compositeFocus.addFocusPartner(this.assistAspect.getSuggestionWidget().getElement());
+	}
+
+	public Oracle.Highlighter<T> getHighlighter() {
+		return highlighter;
+	}
+
+	public void setHighlighter(Oracle.Highlighter<T> highlighter) {
+		this.highlighter = highlighter;
+		this.assistAspect.setHighlighter(highlighter);
 	}
 
 	public void setSuggestions(Collection<T> suggestions) {
@@ -137,10 +158,12 @@ public class InputSuggest<T> extends AbstractInputBox<TextBox, T> {
 		@Override
 		public void handleSuggestionSelected(IsWidget textInput, Oracle.Suggestion<T> suggestion) {
 			TextBox input = (TextBox) textInput;
-			input.setText(suggestion.getReplacementString());
-			input.setCursorPos(suggestion.getReplacementString().length());
+			T value = suggestion.getValue();
+			String replacementString = getRenderer().render(value);
+			input.setText(replacementString);
+			input.setCursorPos(replacementString.length());
 
-			InputSuggest.this.currentValue = suggestion.getValue();
+			InputSuggest.this.currentValue = value;
 		}
 	}
 }
