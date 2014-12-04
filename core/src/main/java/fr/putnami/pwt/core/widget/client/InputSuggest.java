@@ -126,6 +126,7 @@ public class InputSuggest<T> extends AbstractInputBox<TextBox, T> {
 
 	@Override
 	public T flush() {
+		this.clearErrors();
 		this.validate(currentValue);
 		if (!this.hasErrors()) {
 			this.setValue(currentValue);
