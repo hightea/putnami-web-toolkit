@@ -22,6 +22,7 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasOneWidget;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -312,7 +313,7 @@ public class Modal extends AbstractPanel implements HasOneWidget, CloneableWidge
 		if (containerWidget == null) {
 			if (getParent() instanceof HasWidgets) {
 				containerWidget = this;
-			} else if (getParent() != null && getParent().getParent() instanceof HasWidgets) {
+			} else if (getParent() instanceof Composite) {
 				containerWidget = getParent();
 			}
 		}
