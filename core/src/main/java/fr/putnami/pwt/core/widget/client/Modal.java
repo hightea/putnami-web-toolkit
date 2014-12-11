@@ -23,6 +23,7 @@ import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.HasOneWidget;
+import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -107,6 +108,8 @@ public class Modal extends AbstractPanel implements HasOneWidget, CloneableWidge
 	private final Container contentContainer = new Container(DivElement.TAG);
 	private final Container bodyContainer = new Container(DivElement.TAG);
 
+	private Widget containerWidget;
+
 	private Anchor<?> dismissButton;
 	private Header header;
 	private Widget widget;
@@ -190,15 +193,20 @@ public class Modal extends AbstractPanel implements HasOneWidget, CloneableWidge
 		this.ensureDismissButton();
 		this.redraw();
 		this.visible = true;
-		Modal.MODAL_BACKDROP.show();
-		if (this.getParent() != null) {
-			this.removeFromParent();
-		}
-		RootPanel.get().add(this);
-		this.getElement().getStyle().setDisplay(Display.BLOCK);
-		StyleUtils.addStyle(RootPanel.get(), Modal.STYLE_MODAL_OPEN);
-		Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
 
+		Widget modal = getContainerWidget();
+
+		if (modal.isAttached()) {
+			modal.removeFromParent();
+		}
+
+		Modal.MODAL_BACKDROP.show();
+		this.getElement().getStyle().setDisplay(Display.BLOCK);
+		RootPanel rootPanel = RootPanel.get();
+		rootPanel.add(modal);
+		StyleUtils.addStyle(rootPanel, Modal.STYLE_MODAL_OPEN);
+
+		Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
 			@Override
 			public boolean execute() {
 				StyleUtils.addStyle(Modal.this, Modal.STYLE_VISIBLE);
@@ -207,19 +215,21 @@ public class Modal extends AbstractPanel implements HasOneWidget, CloneableWidge
 		}, 150);
 	}
 
+
 	public void hide() {
+		final RootPanel rootPanel = RootPanel.get();
+
 		this.visible = false;
 		StyleUtils.removeStyle(Modal.this, Modal.STYLE_VISIBLE);
-		Modal.MODAL_BACKDROP.hide();
-		StyleUtils.removeStyle(RootPanel.get(), Modal.STYLE_MODAL_OPEN);
-		Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
+		StyleUtils.removeStyle(rootPanel, Modal.STYLE_MODAL_OPEN);
 
+		Modal.MODAL_BACKDROP.hide();
+
+		Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
 			@Override
 			public boolean execute() {
 				Modal.this.getElement().getStyle().clearDisplay();
-				if (Modal.this.getParent() != null) {
-					Modal.this.removeFromParent();
-				}
+				rootPanel.remove(getContainerWidget());
 				return false;
 			}
 		}, 150);
@@ -296,6 +306,17 @@ public class Modal extends AbstractPanel implements HasOneWidget, CloneableWidge
 		this.contentContainer.append(this.headerContainer);
 		this.contentContainer.append(this.bodyContainer);
 		this.contentContainer.append(this.footer);
+	}
+
+	private Widget getContainerWidget() {
+		if (containerWidget == null) {
+			if (getParent() instanceof HasWidgets) {
+				containerWidget = this;
+			} else if (getParent() != null && getParent().getParent() instanceof HasWidgets) {
+				containerWidget = getParent();
+			}
+		}
+		return containerWidget;
 	}
 
 	private Anchor<?> ensureDismissButton() {
