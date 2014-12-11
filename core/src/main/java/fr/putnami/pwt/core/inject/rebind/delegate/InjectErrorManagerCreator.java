@@ -61,7 +61,8 @@ public class InjectErrorManagerCreator extends InjectorCreatorDelegate
 
 	@Override
 	public void writeEntryPoint(SourceWriter srcWriter) {
-		if (this.errorDisplay != null) {
+		srcWriter.println("ErrorManager.get();");
+		if (!ErrorDisplayer.class.equals(this.errorDisplay)) {
 			srcWriter.println("ErrorManager.get().setErrorDisplayer(GWT.<ErrorDisplayer> create(%s.class));",
 				InjectCreatorUtil.toClassName(this.errorDisplay));
 		}
