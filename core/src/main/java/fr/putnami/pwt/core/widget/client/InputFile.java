@@ -39,17 +39,16 @@ import com.google.gwt.http.client.Response;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.rpc.StatusCodeException;
 import com.google.gwt.user.client.ui.FileUpload;
-import com.google.gwt.user.client.ui.FormPanel;
-import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
-import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteHandler;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import fr.putnami.pwt.core.event.client.HandlerRegistrationCollection;
 import fr.putnami.pwt.core.model.client.base.HasDrawable;
+import fr.putnami.pwt.core.service.client.CsrfController;
 import fr.putnami.pwt.core.theme.client.CssStyle;
 import fr.putnami.pwt.core.theme.client.IconFont;
 import fr.putnami.pwt.core.widget.client.Button.Type;
@@ -62,7 +61,10 @@ import fr.putnami.pwt.core.widget.client.util.UUID;
 import fr.putnami.pwt.core.widget.shared.domain.FileDto;
 import fr.putnami.pwt.core.widget.shared.domain.UploadStatus;
 
+
 public class InputFile extends InputGroup<FileDto> implements HasDrawable {
+
+	private static final CssStyle STYLE_ERROR = new SimpleStyle("has-error");
 
 	private static final String MULTIPART_BOUNDARY = "x-x-x-x-x";
 	private static final String EOL = "\r\n";
@@ -83,14 +85,12 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 
 	private class UploadForm {
 
-		private final FormPanel formPanel = new FormPanel();
+		private final FlowPanel formPanel = new FlowPanel();
 		private final FileUpload fileUpload = new FileUpload();
 
 		private final HandlerRegistrationCollection handlerRegistrations = new HandlerRegistrationCollection();
 
 		public UploadForm() {
-			this.formPanel.setMethod("post");
-			this.formPanel.setEncoding("multipart/form-data");
 			this.formPanel.getElement().getStyle().setHeight(0, Unit.PX);
 			this.formPanel.getElement().getStyle().setWidth(0, Unit.PX);
 			this.formPanel.getElement().getStyle().setOverflow(Overflow.HIDDEN);
@@ -101,23 +101,7 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 			this.handlerRegistrations.add(this.fileUpload.addChangeHandler(new ChangeHandler() {
 				@Override
 				public void onChange(ChangeEvent event) {
-					UploadForm.this.handlerRegistrations.add(UploadForm.this.formPanel
-						.addSubmitCompleteHandler(new SubmitCompleteHandler() {
-
-							@Override
-							public void onSubmitComplete(SubmitCompleteEvent event) {
-								// Hook to strip <pre> on some brothers
-								Element label = DOM.createLabel();
-								label.setInnerHTML(event.getResults());
-								InputFile.this.handleCompleteJson(label.getInnerText());
-							}
-						}));
-
-					InputFile.this.fileId = UUID.uuid();
-					UploadForm.this.formPanel.setAction(InputFile.URL_UPLOAD + InputFile.this.fileId);
-					UploadForm.this.formPanel.submit();
-					int fileSize = InputFile.getFileSize(UploadForm.this.fileUpload.getElement());
-					InputFile.this.initProgressBar(fileSize);
+					nativeUploadData(fileUpload.getElement(), InputFile.this);
 				}
 			}));
 		}
@@ -126,7 +110,6 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 			InputElement.as(this.fileUpload.getElement()).setValue(null);
 			this.handlerRegistrations.removeHandler();
 			this.formPanel.removeFromParent();
-
 			return null;
 		}
 
@@ -214,7 +197,7 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 				event.stopPropagation();
 
 				DataTransfer data = event.getNativeEvent().getDataTransfer();
-				InputFile.nativeUploadData(data, InputFile.this);
+				nativeUploadData(data, InputFile.this);
 			}
 		}, DropEvent.getType());
 
@@ -306,12 +289,14 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 			public void onResponseReceived(Request request, Response response) {
 				if (200 == response.getStatusCode()) {
 					InputFile.this.handleStatusJson(response.getText());
+				} else {
+					handleError(response.getStatusCode(), response.getStatusText());
 				}
 			}
 
 			@Override
 			public void onError(Request request, Throwable exception) {
-				// TODO to implement
+				handleError(500, exception.getMessage());
 			}
 		};
 
@@ -331,31 +316,35 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 				if (200 == response.getStatusCode()) {
 					InputFile.this.handleCompleteJson(response.getText());
 				} else {
-					InputFile.this.displayError("Couldn't retrieve JSON (" + response.getStatusText() + ")");
+					handleError(response.getStatusCode(), response.getText());
 				}
 			}
 
 			@Override
 			public void onError(Request request, Throwable exception) {
-				InputFile.this.displayError("Couldn't retrieve JSON");
+				handleError(500, "Couldn't retrieve JSON");
 			}
 
 		};
+		StyleUtils.removeStyle(this, STYLE_ERROR);
 
 		this.fileId = UUID.uuid();
 		this.initProgressBar(size);
 
 		StringBuilder requestBody = new StringBuilder();
-		requestBody.append("--").append(InputFile.MULTIPART_BOUNDARY).append(InputFile.EOL).append(
-			"Content-Disposition: form-data; name=\"data\"; filename=\"").append(fileName).append("\"").append(InputFile.EOL)
-			.append("Content-Type: ").append(type).append(InputFile.EOL).append(InputFile.EOL).append(base64data).append(
-				InputFile.EOL).append("--").append(InputFile.MULTIPART_BOUNDARY).append("--");
+		requestBody.append("--").append(InputFile.MULTIPART_BOUNDARY).append(InputFile.EOL)
+			.append("Content-Disposition: form-data; name=\"data\"; filename=\"")
+			.append(fileName).append("\"").append(InputFile.EOL)
+			.append("Content-Type: ").append(type).append(InputFile.EOL).append(InputFile.EOL)
+			.append(base64data)
+			.append(InputFile.EOL).append("--").append(InputFile.MULTIPART_BOUNDARY).append("--");
 
 		try {
-			RequestBuilder requestBuilder = new RequestBuilder(RequestBuilder.POST, InputFile.URL_UPLOAD + this.fileId);
-			requestBuilder.setHeader("content-type", "multipart/form-data; boundary=" + InputFile.MULTIPART_BOUNDARY);
-			requestBuilder.setHeader("Cache-Control", "max-age=0");
-			this.sendRequest = requestBuilder.sendRequest(requestBody.toString(), callback);
+			RequestBuilder rb = new RequestBuilder(RequestBuilder.POST, InputFile.URL_UPLOAD + this.fileId);
+			rb.setHeader("content-type", "multipart/form-data; boundary=" + InputFile.MULTIPART_BOUNDARY);
+			rb.setHeader("Cache-Control", "max-age=0");
+			CsrfController.get().securize(rb);
+			this.sendRequest = rb.sendRequest(requestBody.toString(), callback);
 		} catch (RequestException e) {
 			throw new RuntimeException("Couldn't send request", e);
 		}
@@ -381,6 +370,10 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 	}
 
 	private void handleCompleteJson(String reponseData) {
+		if (Strings.isNullOrEmpty(reponseData)) {
+			handleError(500, "Unable to post data");
+		}
+
 		JSONObject jsObject = JSONParser.parseLenient(reponseData).isObject();
 
 		final FileDto file = new FileDto();
@@ -408,15 +401,17 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 		}, this.params.inputFileProgressHideDelay());
 	}
 
-	private void displayError(String error) {
-		// TODO to implement display error
+	private void handleError(int statusCode, String encodedResponse) {
+		this.fileId = null;
+		timer.cancel();
+		progressBar.setValue(0);
+		StyleUtils.addStyle(this, STYLE_ERROR);
+		throw new StatusCodeException(statusCode, encodedResponse);
 	}
 
-	private static native void nativeUploadData(DataTransfer dataTransfer, InputFile inputFile)
+	private static native void nativeUploadData(Element fileElem, InputFile inputFile)
 	/*-{
-		var files = dataTransfer.files;
-		for (var i = 0; i < files.length; i++ ) {
-			var file = files[i];
+			var file = fileElem.files[0];
 			var b64reader = new FileReader();
 			b64reader.onloadend = (function(file) {
 					return function(base64) {
@@ -426,16 +421,20 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 					};
 				})(file);
 			b64reader.readAsBinaryString(file);
-	   }
 	}-*/;
 
-	private static native int getFileSize(Element fileElement)
+	private static native void nativeUploadData(DataTransfer dataTransfer, InputFile inputFile)
 	/*-{
-		var files = fileElement.files;
-		for (var i = 0; i < files.length; i++ ) {
-			return files[i].size;
-		}
-		return 0;
+			var file = dataTransfer.files[0];
+			var b64reader = new FileReader();
+			b64reader.onloadend = (function(file) {
+					return function(base64) {
+						file.base64data = base64.target.result;
+						inputFile.@fr.putnami.pwt.core.widget.client.InputFile::uploadSendRequest(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;I)
+							(file.base64data, file.name, file.type, file.size);
+					};
+				})(file);
+			b64reader.readAsBinaryString(file);
 	}-*/;
 
 	private static native void nativeClick(Element elem)
