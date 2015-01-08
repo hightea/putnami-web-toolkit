@@ -2,7 +2,6 @@ package fr.putnami.pwt.core.widget.client.assist;
 
 import fr.putnami.pwt.core.widget.shared.assist.Oracle;
 
-
 public class OracleWrapper<T> implements Oracle<T> {
 	private Oracle<T> delegate;
 

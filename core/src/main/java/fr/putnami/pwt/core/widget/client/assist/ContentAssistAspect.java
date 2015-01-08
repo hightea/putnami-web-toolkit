@@ -173,7 +173,6 @@ public class ContentAssistAspect<T> {
 			}
 		}
 
-
 		@Override
 		public Widget getSuggestionWidget() {
 			return this.suggestionPopup;

@@ -216,7 +216,6 @@ public class Modal extends AbstractPanel implements HasOneWidget, CloneableWidge
 		}, 150);
 	}
 
-
 	public void hide() {
 		final RootPanel rootPanel = RootPanel.get();
 

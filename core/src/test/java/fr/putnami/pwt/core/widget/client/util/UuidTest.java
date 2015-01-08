@@ -1,12 +1,12 @@
 package fr.putnami.pwt.core.widget.client.util;
 
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import java.util.regex.Pattern;
-
 
 /**
  * The test Class for the UUID helper.

@@ -61,7 +61,6 @@ import fr.putnami.pwt.core.widget.client.util.UUID;
 import fr.putnami.pwt.core.widget.shared.domain.FileDto;
 import fr.putnami.pwt.core.widget.shared.domain.UploadStatus;
 
-
 public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 
 	private static final CssStyle STYLE_ERROR = new SimpleStyle("has-error");

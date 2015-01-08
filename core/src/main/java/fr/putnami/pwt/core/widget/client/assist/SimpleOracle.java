@@ -10,8 +10,6 @@ import java.util.List;
 
 public class SimpleOracle<T> extends AbstractOracle<T> {
 
-
-
 	private final List<T> allSuggestions = Lists.newArrayList();
 
 	private char[] whitespaceChars;

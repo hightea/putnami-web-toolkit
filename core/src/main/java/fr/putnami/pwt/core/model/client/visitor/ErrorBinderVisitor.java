@@ -14,7 +14,6 @@
  */
 package fr.putnami.pwt.core.model.client.visitor;
 
-
 import com.google.common.collect.Lists;
 import com.google.gwt.user.client.ui.Focusable;
 
