@@ -255,6 +255,7 @@ public final class DefaultCommandController extends CommandController {
 			this.rpcRequestBuilder.setRequestId(statsContext.getRequestId());
 
 			RequestBuilder rb = this.rpcRequestBuilder.finish();
+			CsrfController.get().securize(rb);
 			rb.send();
 
 			return requests.size();
