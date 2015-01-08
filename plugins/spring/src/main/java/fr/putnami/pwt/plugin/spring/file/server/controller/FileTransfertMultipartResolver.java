@@ -29,7 +29,7 @@ import fr.putnami.pwt.core.inject.client.annotation.PostConstruct;
 @Controller
 public class FileTransfertMultipartResolver extends CommonsMultipartResolver {
 
-	private static ThreadLocal<FileTransfertProgressListener> tlUploadId =
+	private static final ThreadLocal<FileTransfertProgressListener> TL_LISTENERS =
 		new ThreadLocal<FileTransfertProgressListener>();
 
 	@Value("${filetransfertcontroller.maxUploadSize}")
@@ -44,29 +44,29 @@ public class FileTransfertMultipartResolver extends CommonsMultipartResolver {
 	}
 
 	@Override
-	public void cleanupMultipart(MultipartHttpServletRequest request) {
-		this.fileTransfertController.completeUpload(this.getUploadId(request));
-		FileTransfertMultipartResolver.tlUploadId.remove();
-		super.cleanupMultipart(request);
-	}
-
-	@Override
 	protected FileUpload newFileUpload(FileItemFactory fileItemFactory) {
 		FileUpload fileUpload = super.newFileUpload(fileItemFactory);
-		fileUpload.setProgressListener(FileTransfertMultipartResolver.tlUploadId.get());
+		fileUpload.setProgressListener(TL_LISTENERS.get());
+		TL_LISTENERS.remove();
 		return fileUpload;
 	}
+
 
 	@Override
 	public MultipartHttpServletRequest resolveMultipart(HttpServletRequest request) {
 		FileTransfertProgressListener progress = new FileTransfertProgressListener();
-		FileTransfertMultipartResolver.tlUploadId.set(progress);
-		this.fileTransfertController.startUpload(this.getUploadId(request),
-			FileTransfertMultipartResolver.tlUploadId.get());
+		TL_LISTENERS.set(progress);
+		this.fileTransfertController.startUpload(this.getUploadId(request), progress);
 		return super.resolveMultipart(request);
 	}
 
+	@Override
+	public void cleanupMultipart(MultipartHttpServletRequest request) {
+		this.fileTransfertController.completeUpload(this.getUploadId(request));
+		super.cleanupMultipart(request);
+	}
+
 	private String getUploadId(HttpServletRequest request) {
-		return request.getPathInfo().replace("/file/upload/", "");
+		return request.getRequestURI().replace("/file/upload/", "");
 	}
 }
