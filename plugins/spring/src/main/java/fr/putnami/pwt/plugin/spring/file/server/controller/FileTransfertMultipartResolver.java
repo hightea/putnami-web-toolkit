@@ -51,7 +51,6 @@ public class FileTransfertMultipartResolver extends CommonsMultipartResolver {
 		return fileUpload;
 	}
 
-
 	@Override
 	public MultipartHttpServletRequest resolveMultipart(HttpServletRequest request) {
 		FileTransfertProgressListener progress = new FileTransfertProgressListener();

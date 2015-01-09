@@ -1,6 +1,5 @@
 package fr.putnami.pwt.core.widget.client.util;
 
-
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 

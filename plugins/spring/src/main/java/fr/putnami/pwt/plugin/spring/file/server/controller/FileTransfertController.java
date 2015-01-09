@@ -53,11 +53,11 @@ public class FileTransfertController {
 	public FileDto upload(@PathVariable String uploadId,
 		@RequestParam("data") CommonsMultipartFile multipart, HttpServletRequest request,
 		HttpServletResponse response) {
-		InputStream in = null;
 		OutputStream out = null;
+		InputStream in = null;
 		try {
-			in = multipart.getInputStream();
 			out = this.store.write(uploadId, multipart.getOriginalFilename(), multipart.getContentType());
+			in = multipart.getInputStream();
 			IOUtils.copy(in, out);
 			return this.store.getFileBean(uploadId);
 		} catch (IOException e) {
