@@ -16,6 +16,7 @@ package fr.putnami.pwt.core.widget.client;
 
 import com.google.common.base.Strings;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.dom.client.DataTransfer;
@@ -100,7 +101,7 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 			this.handlerRegistrations.add(this.fileUpload.addChangeHandler(new ChangeHandler() {
 				@Override
 				public void onChange(ChangeEvent event) {
-					nativeUploadData(fileUpload.getElement(), InputFile.this);
+					uploadData(fileUpload.getElement());
 				}
 			}));
 		}
@@ -196,7 +197,7 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 				event.stopPropagation();
 
 				DataTransfer data = event.getNativeEvent().getDataTransfer();
-				nativeUploadData(data, InputFile.this);
+				uploadData(data);
 			}
 		}, DropEvent.getType());
 
@@ -264,11 +265,10 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 		this.redraw();
 	}
 
-	private void initProgressBar(int size) {
+	private void initProgressBar() {
 		this.progressBar.edit(0);
 		this.redraw();
 		if (this.params.inputFileProgressEnable()) {
-			this.progressBar.setMax(size);
 			this.progressBar.edit(0);
 			this.timer.schedule(10);
 		} else {
@@ -289,61 +289,20 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 				if (200 == response.getStatusCode()) {
 					InputFile.this.handleStatusJson(response.getText());
 				} else {
-					handleError(response.getStatusCode(), response.getStatusText());
+					handleError("" + response.getStatusCode(), response.getStatusText());
 				}
 			}
-
 			@Override
 			public void onError(Request request, Throwable exception) {
-				handleError(500, exception.getMessage());
+				handleError("" + 500, exception.getMessage());
 			}
 		};
 
 		try {
-			RequestBuilder requestBuilder = new RequestBuilder(RequestBuilder.GET, InputFile.URL_STATUS + this.fileId);
-			requestBuilder.setHeader("Cache-Control", "max-age=0");
-			requestBuilder.sendRequest("", callback);
-		} catch (RequestException e) {
-			throw new RuntimeException("Couldn't send request", e);
-		}
-	}
-
-	protected void uploadSendRequest(String base64data, String fileName, String type, int size) {
-		RequestCallback callback = new RequestCallback() {
-			@Override
-			public void onResponseReceived(Request request, Response response) {
-				if (200 == response.getStatusCode()) {
-					InputFile.this.handleCompleteJson(response.getText());
-				} else {
-					handleError(response.getStatusCode(), response.getText());
-				}
-			}
-
-			@Override
-			public void onError(Request request, Throwable exception) {
-				handleError(500, "Couldn't retrieve JSON");
-			}
-
-		};
-		StyleUtils.removeStyle(this, STYLE_ERROR);
-
-		this.fileId = UUID.uuid();
-		this.initProgressBar(size);
-
-		StringBuilder requestBody = new StringBuilder();
-		requestBody.append("--").append(InputFile.MULTIPART_BOUNDARY).append(InputFile.EOL)
-			.append("Content-Disposition: form-data; name=\"data\"; filename=\"")
-			.append(fileName).append("\"").append(InputFile.EOL)
-			.append("Content-Type: ").append(type).append(InputFile.EOL).append(InputFile.EOL)
-			.append(base64data)
-			.append(InputFile.EOL).append("--").append(InputFile.MULTIPART_BOUNDARY).append("--");
-
-		try {
-			RequestBuilder rb = new RequestBuilder(RequestBuilder.POST, InputFile.URL_UPLOAD + this.fileId);
-			rb.setHeader("content-type", "multipart/form-data; boundary=" + InputFile.MULTIPART_BOUNDARY);
+			RequestBuilder rb = new RequestBuilder(RequestBuilder.GET, InputFile.URL_STATUS + this.fileId);
 			rb.setHeader("Cache-Control", "max-age=0");
+			rb.sendRequest("", callback);
 			CsrfController.get().securize(rb);
-			this.sendRequest = rb.sendRequest(requestBody.toString(), callback);
 		} catch (RequestException e) {
 			throw new RuntimeException("Couldn't send request", e);
 		}
@@ -370,7 +329,7 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 
 	private void handleCompleteJson(String reponseData) {
 		if (Strings.isNullOrEmpty(reponseData)) {
-			handleError(500, "Unable to post data");
+			handleError("500", "Unable to post data");
 		}
 
 		JSONObject jsObject = JSONParser.parseLenient(reponseData).isObject();
@@ -400,40 +359,41 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 		}, this.params.inputFileProgressHideDelay());
 	}
 
-	private void handleError(int statusCode, String encodedResponse) {
+	private void handleError(String statusCode, String encodedResponse) {
 		this.fileId = null;
 		timer.cancel();
 		progressBar.setValue(0);
 		StyleUtils.addStyle(this, STYLE_ERROR);
-		throw new StatusCodeException(statusCode, encodedResponse);
+		throw new StatusCodeException(Integer.parseInt(statusCode), encodedResponse);
 	}
 
-	private static native void nativeUploadData(Element fileElem, InputFile inputFile)
-	/*-{
-			var file = fileElem.files[0];
-			var b64reader = new FileReader();
-			b64reader.onloadend = (function(file) {
-					return function(base64) {
-						file.base64data = base64.target.result;
-						inputFile.@fr.putnami.pwt.core.widget.client.InputFile::uploadSendRequest(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;I)
-							(file.base64data, file.name, file.type, file.size);
-					};
-				})(file);
-			b64reader.readAsBinaryString(file);
-	}-*/;
 
-	private static native void nativeUploadData(DataTransfer dataTransfer, InputFile inputFile)
+	private void uploadData(JavaScriptObject object) {
+		StyleUtils.removeStyle(this, STYLE_ERROR);
+		this.fileId = UUID.uuid();
+		this.initProgressBar();
+		nativeUploadData(object, this, URL_UPLOAD + this.fileId,
+			CsrfController.get().getHeader(), CsrfController.get().getToken());
+	}
+
+	private static native void nativeUploadData(JavaScriptObject file, InputFile inputFile, String url,
+		String csrfHeader, String csrfToken)
 	/*-{
-			var file = dataTransfer.files[0];
-			var b64reader = new FileReader();
-			b64reader.onloadend = (function(file) {
-					return function(base64) {
-						file.base64data = base64.target.result;
-						inputFile.@fr.putnami.pwt.core.widget.client.InputFile::uploadSendRequest(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;I)
-							(file.base64data, file.name, file.type, file.size);
-					};
-				})(file);
-			b64reader.readAsBinaryString(file);
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", url, true);
+			if(csrfToken != null){
+						xhr.setRequestHeader(csrfHeader, csrfToken);
+			}
+			var formData = new FormData();
+			formData.append("data", file.files[0]);
+			xhr.send(formData);
+			xhr.onreadystatechange=function(){
+			  if (xhr.readyState==4 && xhr.status==200) {
+						inputFile.@fr.putnami.pwt.core.widget.client.InputFile::handleCompleteJson(Ljava/lang/String;)(xhr.responseText);
+			  } else if (xhr.readyState==4){
+						inputFile.@fr.putnami.pwt.core.widget.client.InputFile::handleError(Ljava/lang/String;Ljava/lang/String;)(xhr.status, xhr.responseText);
+				}
+		  }
 	}-*/;
 
 	private static native void nativeClick(Element elem)

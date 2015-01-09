@@ -62,4 +62,12 @@ public final class CsrfController {
 			rb.setHeader(header, token);
 		}
 	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public String getHeader() {
+		return header;
+	}
 }
