@@ -1,3 +1,9 @@
+ext {
+	springVersion = '4.0.7.RELEASE'
+}
+
 dependencies {
+	compile "org.springframework:spring-webmvc:$springVersion"
 	compile 'net.sourceforge.htmlunit:htmlunit:2.15'
+	compile 'org.apache.ant:ant:1.8.2'
 }
