@@ -30,7 +30,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.putnami.pwt.core.service.server.service.AbstractCommandService;
-import fr.putnami.pwt.plugin.spring.rpc.server.util.RequestThreadLocalUtils;
 
 @Controller
 public class CommandServiceController extends AbstractCommandService implements BeanPostProcessor {
@@ -48,11 +47,7 @@ public class CommandServiceController extends AbstractCommandService implements 
 	@RequestMapping(value = "/commandService", method = RequestMethod.POST)
 	public void processPostRpc(HttpServletRequest request, HttpServletResponse response)
 		throws Throwable {
-		try {
 			this.processPost(request, response);
-		} finally {
-			RequestThreadLocalUtils.resetContext();
-		}
 	}
 
 	@Override

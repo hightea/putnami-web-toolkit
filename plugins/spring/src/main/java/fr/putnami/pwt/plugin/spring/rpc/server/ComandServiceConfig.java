@@ -20,6 +20,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 
 import fr.putnami.pwt.plugin.spring.rpc.server.controller.CommandServiceController;
+import fr.putnami.pwt.plugin.spring.rpc.server.filter.RequestContextFilter;
 
 @Configuration
 public class ComandServiceConfig {
@@ -28,4 +29,10 @@ public class ComandServiceConfig {
 	public CommandServiceController commandServiceController() {
 		return new CommandServiceController();
 	}
+
+	@Bean
+	public RequestContextFilter requestContextInterceptor() {
+		return new RequestContextFilter();
+	}
+
 }

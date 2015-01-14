@@ -14,19 +14,29 @@
  */
 package fr.putnami.pwt.plugin.spring.rpc.server.filter;
 
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.filter.GenericFilterBean;
 
+import java.io.IOException;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.putnami.pwt.plugin.spring.rpc.server.util.RequestThreadLocalUtils;
 
-public class RequestContextInterceptor extends HandlerInterceptorAdapter {
+public class RequestContextFilter extends GenericFilterBean {
 
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-		throws Exception {
-		RequestThreadLocalUtils.initContext(request, response);
-		return true;
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
+		ServletException {
+		try {
+			RequestThreadLocalUtils.initContext((HttpServletRequest) request, (HttpServletResponse) response);
+			chain.doFilter(request, response);
+		} finally {
+			RequestThreadLocalUtils.resetContext();
+		}
 	}
 }
