@@ -28,14 +28,14 @@ public @interface MvpDescription {
 	/**
 	 * The display is a <code>AcceptsOneWidget</code> which will receive the view when presented.
 	 *
-	 * @return
+	 * @return displayer
 	 */
 	Class<? extends AcceptsOneWidget> display() default AcceptsOneWidget.class;
 
 	/**
 	 * The place to present when no place are presented
 	 *
-	 * @return
+	 * @return the default place to go
 	 */
 	Class<? extends Place> defaultPlace() default Place.class;
 
@@ -43,14 +43,14 @@ public @interface MvpDescription {
 	 * Each activity class will be registered in the MvpController with the following :
 	 * GWT.<ActivityFactory> create(class)
 	 *
-	 * @return
+	 * @return activities to register
 	 */
 	Class<?>[] activities() default {};
 
 	/**
 	 * Add the MvpController.get().handleCurrentHistory() instruction at the end of the module load
 	 *
-	 * @return
+	 * @return handle the current history token
 	 */
 	boolean handleCurrentHistory() default true;
 }

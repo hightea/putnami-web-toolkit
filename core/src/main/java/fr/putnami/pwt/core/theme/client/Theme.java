@@ -73,7 +73,7 @@ public class Theme {
 	}
 
 	/**
-	 * Sets the {@ling IconFont} to the theme.
+	 * Sets the {@link fr.putnami.pwt.core.theme.client.IconFont} to the theme.
 	 *
 	 * @param iconFont the new icon font
 	 */

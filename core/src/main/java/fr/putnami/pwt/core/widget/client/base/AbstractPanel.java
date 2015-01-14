@@ -118,7 +118,7 @@ public abstract class AbstractPanel extends ComplexPanel implements EditorCompos
 
 	/**
 	 * This method should not be called and only be overriden to use with UiBinder. In other cases,
-	 * use {@link AbstractEditablePanel#append(IsWidget)}.
+	 * use {@link AbstractPanel#append(IsWidget)}.
 	 */
 	@Override
 	public void add(IsWidget child) {
@@ -126,9 +126,8 @@ public abstract class AbstractPanel extends ComplexPanel implements EditorCompos
 	}
 
 	/**
-	 * This method should not be overriden nor called. Override
-	 * {@link AbstractEditablePanel#add(IsWidget)} instead or call
-	 * {@link AbstractEditablePanel#append(IsWidget)} instead.
+	 * This method should not be overriden nor called. Override {@link AbstractPanel#add(IsWidget)}
+	 * instead or call {@link AbstractPanel#append(IsWidget)} instead.
 	 */
 	@Override
 	public void add(Widget child) {
