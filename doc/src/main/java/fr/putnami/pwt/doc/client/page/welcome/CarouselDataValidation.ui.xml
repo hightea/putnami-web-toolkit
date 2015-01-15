@@ -34,16 +34,12 @@ public class BeanToValidate {
 	@Past
 	@NotNull
 	private Date birthday;
-
 	@Max(12)
 	private Integer monthNumber;
-
 	@AssertTrue
 	private Boolean agree;
-
 	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$")
 	private String email;
-	
 	...
 }
 ]]></pre>
