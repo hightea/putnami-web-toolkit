@@ -28,7 +28,6 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -41,14 +40,6 @@ public class DelegatingChainFilter extends GenericFilterBean implements BeanPost
 
 	@Autowired
 	private WebApplicationContext webApplicationContext;
-
-
-	@PostConstruct
-	public void afterPropertySet() {
-		for (String beanName : webApplicationContext.getBeanDefinitionNames()) {
-			scanBean(webApplicationContext.getBean(beanName), beanName);
-		}
-	}
 
 	@Override
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
@@ -82,7 +73,6 @@ public class DelegatingChainFilter extends GenericFilterBean implements BeanPost
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
 		ServletException {
-		logger.debug("doFilter");
 		new IteratableFilterChain(filters, chain).doFilter(req, res);
 	}
 
@@ -107,8 +97,7 @@ public class DelegatingChainFilter extends GenericFilterBean implements BeanPost
 			if (filterIterator.hasNext()) {
 				Filter filter = filterIterator.next();
 				filter.doFilter(req, res, this);
-			}
-			else {
+			} else {
 				defaultChain.doFilter(req, res);
 			}
 		}
