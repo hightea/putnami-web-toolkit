@@ -67,7 +67,6 @@ h2{
 				</w:GridColumn>
 				<w:GridColumn size="4" >
 					<s:SocialBar />
-					<c:VersionsPanel />
 					<c:MaterialsPanel />
 				</w:GridColumn>
 			</w:GridRow>
