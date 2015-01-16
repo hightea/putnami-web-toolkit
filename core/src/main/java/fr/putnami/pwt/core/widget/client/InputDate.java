@@ -138,8 +138,12 @@ public class InputDate extends InputGroup<Date>
 			});
 			this.compositeFocusHelper.addFocusPartner(this.datePicker.getElement());
 		}
-		this.datePicker.setValue(this.flush());
 		this.datePicker.togglePopup(this, this.calendarButton);
+		try {
+			this.datePicker.setValue(this.flush());
+		} catch (IllegalArgumentException e) {
+			this.datePicker.setValue(new Date());
+		}
 	}
 
 	@Override
