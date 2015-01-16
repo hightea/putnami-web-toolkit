@@ -26,7 +26,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 			.addResourceLocations("/assets/").setCachePeriod(RESOURCE_CACHE_PERIOD);
 		registry.addResourceHandler("/Documentation/**")
 			.addResourceLocations("/Documentation/").setCachePeriod(RESOURCE_CACHE_PERIOD);
-
 	}
 
 	@Bean

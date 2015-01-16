@@ -367,7 +367,6 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 		throw new StatusCodeException(Integer.parseInt(statusCode), encodedResponse);
 	}
 
-
 	private void uploadData(JavaScriptObject object) {
 		StyleUtils.removeStyle(this, STYLE_ERROR);
 		this.fileId = UUID.uuid();

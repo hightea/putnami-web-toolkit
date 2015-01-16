@@ -78,7 +78,6 @@ public class AjaxPageRenderer {
 			}
 		}
 
-
 		// remove all javascript from the header, the bot will not try process them.
 		for (DomElement elem : page.getHead().getElementsByTagName(HtmlScript.TAG_NAME)) {
 			HtmlScript scriptElem = (HtmlScript) elem;

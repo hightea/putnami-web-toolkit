@@ -34,7 +34,6 @@ public class SiteMapController {
 		} catch (IOException ex) {
 			throw new RuntimeException("IOError writing file to output stream", ex);
 		}
-
 	}
 
 	@RequestMapping(value = "/seo/deleteAjaxCache", method = RequestMethod.GET)

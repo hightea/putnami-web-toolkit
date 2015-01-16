@@ -101,7 +101,6 @@ public class DelegatingChainFilter extends GenericFilterBean implements BeanPost
 				defaultChain.doFilter(req, res);
 			}
 		}
-
 	}
 
 }
