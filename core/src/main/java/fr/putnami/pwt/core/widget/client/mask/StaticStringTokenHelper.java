@@ -15,6 +15,7 @@
 package fr.putnami.pwt.core.widget.client.mask;
 
 import com.google.common.collect.Lists;
+import com.google.gwt.event.dom.client.KeyPressEvent;
 
 import java.util.List;
 
@@ -57,6 +58,16 @@ public class StaticStringTokenHelper extends TokenHelper {
 	@Override
 	protected boolean handleKeyDown(int keyDown) {
 		return this.value.equals(this.token);
+	}
+
+	@Override
+	protected boolean handleKeyPress(KeyPressEvent event) {
+		boolean b = handleKeyPress(event.getCharCode());
+		if (b) {
+			event.preventDefault();
+			event.stopPropagation();
+		}
+		return b;
 	}
 
 	@Override

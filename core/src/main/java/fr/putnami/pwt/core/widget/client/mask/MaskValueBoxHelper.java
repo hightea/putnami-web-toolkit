@@ -37,7 +37,7 @@ import java.util.List;
 public class MaskValueBoxHelper
 	implements KeyUpHandler, KeyDownHandler, KeyPressHandler, FocusHandler, BlurHandler, MouseUpHandler {
 
-	public abstract static class TokenHelper extends Timer implements KeyPressHandler, KeyDownHandler {
+	public abstract static class TokenHelper extends Timer {
 
 		protected MaskValueBoxHelper maskHelper;
 
@@ -64,26 +64,11 @@ public class MaskValueBoxHelper
 		}
 
 		private boolean internalRun() {
-
 			boolean r = this.handleKeyDown(this.keyDown);
 			this.maskHelper.refreshValueBox();
 			return r;
 		}
 
-		@Override
-		public void onKeyPress(KeyPressEvent event) {
-			if (this.handleKeyPress(event.getCharCode())) {
-				this.maskHelper.refreshValueBox();
-				event.preventDefault();
-			} else {
-				this.maskHelper.focusNext();
-				if (this.maskHelper.currentHelper != this) {
-					this.maskHelper.currentHelper.onKeyPress(event);
-				}
-			}
-		}
-
-		@Override
 		public void onKeyDown(KeyDownEvent event) {
 			this.keyDown = event.getNativeKeyCode();
 			boolean preventDefault = false;
@@ -143,9 +128,11 @@ public class MaskValueBoxHelper
 			return true;
 		}
 
-		protected boolean handleKeyPress(char charPressed) {
-			return false;
+		protected boolean handleKeyPress(KeyPressEvent event) {
+			return handleKeyPress(event.getCharCode());
 		}
+
+		protected abstract boolean handleKeyPress(char charCode);
 	}
 
 	private final List<TokenHelper> helpers = Lists.newArrayList();
@@ -216,8 +203,22 @@ public class MaskValueBoxHelper
 
 	@Override
 	public void onKeyPress(KeyPressEvent event) {
-		if (this.currentHelper != null) {
-			this.currentHelper.onKeyPress(event);
+		int i = helpers.indexOf(currentHelper);
+		if (currentHelper != null) {
+			if (currentHelper.handleKeyPress(event)) {
+				refreshValueBox();
+				event.preventDefault();
+			} else if (1 + i < helpers.size()) {
+				if (!helpers.get(1 + i).handleKeyPress(event)
+					&& 2 + i < helpers.size()) {
+					focus(i + 1);
+					helpers.get(2 + i).handleKeyPress(event);
+				} else {
+					focus(i + 1);
+				}
+			} else {
+				event.preventDefault();
+			}
 		}
 	}
 
@@ -287,13 +288,17 @@ public class MaskValueBoxHelper
 			boolean forward = index > this.helpers.indexOf(this.currentHelper);
 			this.currentHelper = helper;
 			helper.focus(forward);
-			this.highlightHelper();
+			this.highlight();
 		}
 		return true;
 	}
 
-	private void highlightHelper() {
+	private void highlight() {
 		if (this.currentHelper == null) {
+			return;
+		}
+		String tbVal = this.valueBox.getValue();
+		if (tbVal.length() == 0) {
 			return;
 		}
 		int start = 0;
@@ -303,7 +308,10 @@ public class MaskValueBoxHelper
 				start += this.helpers.get(i - 1).flush().length();
 			}
 		}
-		this.valueBox.setSelectionRange(start, this.currentHelper.flush().length());
+		int end = this.currentHelper.flush().length();
+		// end = tbVal != null && tbVal.length() >= end ? end : tbVal.length();
+		// start = end > start ? start : end;
+		this.valueBox.setSelectionRange(start, end);
 	}
 
 	private void refreshValueBox() {
@@ -312,7 +320,7 @@ public class MaskValueBoxHelper
 			sb.append(helper.flush());
 		}
 		this.valueBox.setValue(sb.toString(), true);
-		this.highlightHelper();
+		this.highlight();
 	}
 
 }
