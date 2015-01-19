@@ -1,27 +1,35 @@
 Putnami Web Toolkit
 ===================
 
-[![Build Status](https://travis-ci.org/Putnami/putnami-web-toolkit.svg?branch=master)](https://travis-ci.org/Putnami/putnami-web-toolkit)
+Travis build status [![Build Status](https://travis-ci.org/Putnami/putnami-web-toolkit.svg?branch=master)](https://travis-ci.org/Putnami/putnami-web-toolkit)
 
-Putnami Web Toolkit is a [GWT](http://www.gwtproject.org/) based framework, providing nice graphical components (based on [Bootstrap](http://www.getbootstrap.com/)), and a bunch of nice features like data binding, unified server calls, etc.
+===================
 
-The **main goal** of this framework is to improve your productivity by removing unnecessary, useless code. The framework will then generate what's necessary.
+Putnami Web Toolkit (alias PWT) is a web framework made to boost your productivity, and keep your code maintanable.
 
-# Resources
-Useful links :
+Based on GWT, PWT provides a strong framework coupled with a nice widget set. With PWT you are a kind of super hero, more productive than ever, you build amazing webapps will be amazing.
 
-* [Documentation](http://pwt.putnami.org/)
-* [Getting started with the framework](http://pwt.putnami.org/#!GettingStarted)
-* [Download page](http://pwt.putnami.org/#!Download)
+The key features of PWT are :
+
+* No more **boilerplate** code, use code is generated
+* Efficient **DataBinding**, Define complex view in a single template
+* Easy **navigation** with a lightweight MVP framework
+* RPC over a native command pattern, for unified the server calls
+* Widgets based on [Bootstrap](http://www.getbootstrap.com/) for a clean HTML5
+
+Discover all features on http://pwt.putnami.org
 
 # Usage #
-To use PWT please have a look at [http://pwt.putnami.org/#!GettingStarted](http://pwt.putnami.org/#!GettingStarted). The documentation provides a full step by step tutorials covering all the key features of PWT.
 
-All our released artifacts are available on the maven central repository.
+To use PWT please have a look at http://pwt.putnami.org/#!GettingStarted. The documentation provides a full step by step tutorials covering all the key features of PWT.
 
-If use need to use the snapshots you need to install the sonatype snapshot repository [https://oss.sonatype.org/content/repositories/snapshots/](https://oss.sonatype.org/content/repositories/snapshots/)
+##Releases##
+All our released artifacts are available on the maven central repository. 
 
-**gradle :**
+[putnami on maven central](http://search.maven.org/#search%7Cga%7C1%7Cfr.putnami).
+
+##Snapshot##
+If use need to use the snapshots you need to install the sonatype snapshot repository https://oss.sonatype.org/content/repositories/snapshots/
 
 ```
 repositories {
@@ -29,6 +37,8 @@ repositories {
 	maven{ url 'https://oss.sonatype.org/content/repositories/snapshots/'}
 }
 ```
+
+##Samples##
 
 We provide samples in this repo in the [samples](https://github.com/Putnami/putnami-web-toolkit/tree/master/samples) folder :
 
@@ -44,14 +54,12 @@ gradle jettyRunWar
 
 Then browse the sample on http://localhost:8080/pwt-sample-web.
 
-Gradle users please have a look on this [page](https://github.com/Putnami/putnami-web-toolkit/wiki/GradleUsage).
-
-Maven users please have a look on this [page](https://github.com/Putnami/putnami-web-toolkit/wiki/MavenUsage).
+You can have more info on the build tools on the wiki [gradle doc](https://github.com/Putnami/putnami-web-toolkit/wiki/GradleUsage) or [maven doc](https://github.com/Putnami/putnami-web-toolkit/wiki/MavenUsage).
 
 
 # Build PWT #
 
-**Note : ** To build PWT you need gradle. If computer is not gradle ready please refer to [https://www.gradle.org/](https://www.gradle.org/) to install it.
+**Note :** To build PWT you need gradle. If you are ready to use gradle, please refer to https://www.gradle.org/ to install it.
 
 ## Project structure ##
 
@@ -85,7 +93,7 @@ gradle build
 
 Then all the built artifacts are available in the build/libs of each sub projects
 
-**Note : ** All the commands can be lunch from on specific sub project eg. ./core
+**Note :** All the commands can be lunch from on specific sub project eg. ./core
 
 Useful gradle tasks:
 
@@ -121,6 +129,7 @@ To report an issue, please use the project [issue tracker](https://github.com/Pu
 You'd love to contribute your code, nice :)
 First be sure that your code respect the project code style and formating. 
 All the documentation is [here](https://github.com/Putnami/putnami-web-toolkit/blob/master/settings/README.md)
+
 If you are an eclipse user, it could be nice if you follow the workspace setup instructions.
 
 Every pullrequest will be review with a great consideration, and with a full open mind. 
@@ -132,9 +141,9 @@ The framework is delivered under LGPL v 3.0.
 The LGPL v 3.0 allows a free usage of PWT for commercial and open source projects.
 We equally guarantees that PWT is and will open source for ever.
 
-PWT doesn't affect the license of you application. Using PWT is free of charge so fill free to use and integrate it.
+PWT doesn't affect the license of your application. Using PWT is free of charge so fill free to use and integrate it.
 
-You can have a look at the licence details on a [https://www.gnu.org/licenses/lgpl-3.0.txt](https://www.gnu.org/licenses/lgpl-3.0.txt).
+You can have a look at the licence details on a https://www.gnu.org/licenses/lgpl-3.0.txt.
 
 
 ---
