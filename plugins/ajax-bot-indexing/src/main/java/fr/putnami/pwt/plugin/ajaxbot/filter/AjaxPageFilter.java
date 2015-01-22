@@ -39,6 +39,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
 import static fr.putnami.pwt.plugin.ajaxbot.util.AjaxBotUtils.FILTER_PARAM_CACHE_FOLDER;
+import static fr.putnami.pwt.plugin.ajaxbot.util.AjaxBotUtils.FILTER_PARAM_SERVER_URL;
 import static fr.putnami.pwt.plugin.ajaxbot.util.AjaxBotUtils.QUERY_PARAM_ESCAPED_FRAGMENT;
 
 import fr.putnami.pwt.plugin.ajaxbot.helper.AjaxPageRenderer;
@@ -62,6 +63,11 @@ public class AjaxPageFilter implements Filter {
 		if (!Strings.isNullOrEmpty(paramCacheFolder)) {
 			this.cacheFolder = new File(paramCacheFolder);
 			this.cacheFolder.mkdirs();
+		}
+		String serverUrl =
+			config.getInitParameter(FILTER_PARAM_SERVER_URL);
+		if (!Strings.isNullOrEmpty(paramCacheFolder)) {
+			this.serverUrl = serverUrl;
 		}
 	}
 

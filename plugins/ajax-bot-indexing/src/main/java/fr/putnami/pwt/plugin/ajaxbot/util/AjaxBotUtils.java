@@ -19,6 +19,7 @@ import java.io.File;
 public final class AjaxBotUtils {
 
 	public static final String FILTER_PARAM_CACHE_FOLDER = "cacheFolder";
+	public static final String FILTER_PARAM_SERVER_URL = "serverUrl";
 
 	public static final String QUERY_PARAM_ESCAPED_FRAGMENT = "_escaped_fragment_";
 	public static final String QUERY_PARAM_RESET_FILTER = "_ajaxbotfilter_cache_reset_";
