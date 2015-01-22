@@ -33,14 +33,9 @@ import com.google.gwt.event.dom.client.DragOverHandler;
 import com.google.gwt.event.dom.client.DropEvent;
 import com.google.gwt.event.dom.client.DropHandler;
 import com.google.gwt.http.client.Request;
-import com.google.gwt.http.client.RequestBuilder;
-import com.google.gwt.http.client.RequestCallback;
-import com.google.gwt.http.client.RequestException;
-import com.google.gwt.http.client.Response;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.StatusCodeException;
 import com.google.gwt.user.client.ui.FileUpload;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -60,7 +55,6 @@ import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 import fr.putnami.pwt.core.widget.client.util.StyleUtils;
 import fr.putnami.pwt.core.widget.client.util.UUID;
 import fr.putnami.pwt.core.widget.shared.domain.FileDto;
-import fr.putnami.pwt.core.widget.shared.domain.UploadStatus;
 
 public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 
@@ -75,13 +69,6 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 
 	private static final CssStyle STYLE_DRAGOVER = new SimpleStyle("file-dragover");
 	private static final CssStyle STYLE_MUTTED = new SimpleStyle("text-muted");
-
-	final Timer timer = new Timer() {
-		@Override
-		public void run() {
-			InputFile.this.statusSendRequest();
-		}
-	};
 
 	private class UploadForm {
 
@@ -261,7 +248,6 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 	@Override
 	public void edit(FileDto object) {
 		super.edit(object);
-		this.timer.cancel();
 		this.redraw();
 	}
 
@@ -270,7 +256,6 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 		this.redraw();
 		if (this.params.inputFileProgressEnable()) {
 			this.progressBar.edit(0);
-			this.timer.schedule(10);
 		} else {
 			this.progressBar.setDisplayValue(false);
 			this.progressBar.setMax(100);
@@ -278,53 +263,10 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 		}
 	}
 
-	private void statusSendRequest() {
-		if (this.fileId == null) {
-			return;
-		}
+	private void handleProgress(int total, int loaded) {
+		this.progressBar.setMax(total);
+		this.progressBar.edit(loaded);
 
-		RequestCallback callback = new RequestCallback() {
-			@Override
-			public void onResponseReceived(Request request, Response response) {
-				if (200 == response.getStatusCode()) {
-					InputFile.this.handleStatusJson(response.getText());
-				} else {
-					handleError("" + response.getStatusCode(), response.getStatusText());
-				}
-			}
-			@Override
-			public void onError(Request request, Throwable exception) {
-				handleError("" + 500, exception.getMessage());
-			}
-		};
-
-		try {
-			RequestBuilder rb = new RequestBuilder(RequestBuilder.GET, InputFile.URL_STATUS + this.fileId);
-			rb.setHeader("Cache-Control", "max-age=0");
-			rb.sendRequest("", callback);
-			CsrfController.get().securize(rb);
-		} catch (RequestException e) {
-			throw new RuntimeException("Couldn't send request", e);
-		}
-	}
-
-	private void handleStatusJson(String reponseData) {
-
-		if (!Strings.isNullOrEmpty(reponseData)) {
-			JSONObject jsObject = JSONParser.parseLenient(reponseData).isObject();
-			UploadStatus status = new UploadStatus();
-			status.setBytesRead((long) jsObject.get("bytesRead").isNumber().doubleValue());
-			status.setContentLength((long) jsObject.get("contentLength").isNumber().doubleValue());
-			status.setUploadId(jsObject.get("uploadId").isString().stringValue());
-
-			this.progressBar.setMax(Long.valueOf(status.getContentLength()).intValue());
-			this.progressBar.edit((int) status.getBytesRead());
-		} else {
-			this.progressBar.setValue(this.progressBar.getMax());
-		}
-		if (this.fileId != null) {
-			this.timer.schedule(100);
-		}
 	}
 
 	private void handleCompleteJson(String reponseData) {
@@ -361,7 +303,6 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 
 	private void handleError(String statusCode, String encodedResponse) {
 		this.fileId = null;
-		timer.cancel();
 		progressBar.setValue(0);
 		StyleUtils.addStyle(this, STYLE_ERROR);
 		throw new StatusCodeException(Integer.parseInt(statusCode), encodedResponse);
@@ -378,14 +319,19 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 	private static native void nativeUploadData(JavaScriptObject file, InputFile inputFile, String url,
 		String csrfHeader, String csrfToken)
 	/*-{
+			if(file.files.length === 0){
+				return;
+			}
+
+	  	var data = new FormData();
+			data.append("data", file.files[0]);
+
 			var xhr = new XMLHttpRequest();
 			xhr.open("POST", url, true);
 			if(csrfToken != null){
 						xhr.setRequestHeader(csrfHeader, csrfToken);
 			}
-			var formData = new FormData();
-			formData.append("data", file.files[0]);
-			xhr.send(formData);
+
 			xhr.onreadystatechange=function(){
 			  if (xhr.readyState==4 && xhr.status==200) {
 						inputFile.@fr.putnami.pwt.core.widget.client.InputFile::handleCompleteJson(Ljava/lang/String;)(xhr.responseText);
@@ -393,6 +339,12 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 						inputFile.@fr.putnami.pwt.core.widget.client.InputFile::handleError(Ljava/lang/String;Ljava/lang/String;)(xhr.status, xhr.responseText);
 				}
 		  }
+			xhr.upload.addEventListener('progress', function(e){
+						inputFile.@fr.putnami.pwt.core.widget.client.InputFile::handleProgress(II)(e.total, e.loaded);
+				}, false);
+
+			xhr.send(data);
+
 	}-*/;
 
 	private static native void nativeClick(Element elem)

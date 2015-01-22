@@ -14,8 +14,6 @@
  */
 package fr.putnami.pwt.plugin.spring.file.server.controller;
 
-import com.google.common.collect.Maps;
-
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,13 +28,11 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.putnami.pwt.core.widget.shared.domain.FileDto;
-import fr.putnami.pwt.core.widget.shared.domain.UploadStatus;
 import fr.putnami.pwt.plugin.spring.file.server.support.FileTransfertStore;
 
 @Service
@@ -45,8 +41,6 @@ public class FileTransfertController {
 
 	@Autowired
 	private FileTransfertStore store;
-
-	private Map<String, FileTransfertProgressListener> progresses = Maps.newConcurrentMap();
 
 	@RequestMapping(value = "/file/upload/{uploadId}", method = RequestMethod.POST)
 	@ResponseBody
@@ -68,16 +62,6 @@ public class FileTransfertController {
 		}
 	}
 
-	@RequestMapping(value = "/file/status/{uploadId}", method = RequestMethod.GET)
-	@ResponseBody
-	public UploadStatus getUploadStatus(@PathVariable String uploadId) {
-		FileTransfertProgressListener progress = this.progresses.get(uploadId);
-		if (progress != null) {
-			return new UploadStatus(uploadId, progress.getBytesRead(), progress.getContentLength());
-		}
-		return null;
-	}
-
 	@RequestMapping(value = "/file/download/{fileId}", method = RequestMethod.GET)
 	public void downloadFile(@PathVariable String fileId, HttpServletRequest request,
 		HttpServletResponse response) {
@@ -96,14 +80,6 @@ public class FileTransfertController {
 		} catch (IOException ex) {
 			throw new RuntimeException("IOError writing file to output stream", ex);
 		}
-	}
-
-	public void startUpload(String uploadId, FileTransfertProgressListener progress) {
-		this.progresses.put(uploadId, progress);
-	}
-
-	public void completeUpload(String uploadId) {
-		this.progresses.remove(uploadId);
 	}
 
 }

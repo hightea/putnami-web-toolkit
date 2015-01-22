@@ -16,9 +16,9 @@ package fr.putnami.pwt.plugin.spring.file.server;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import fr.putnami.pwt.plugin.spring.file.server.controller.FileTransfertController;
-import fr.putnami.pwt.plugin.spring.file.server.controller.FileTransfertMultipartResolver;
 import fr.putnami.pwt.plugin.spring.file.server.support.DefaultFileTransfertStore;
 import fr.putnami.pwt.plugin.spring.file.server.support.FileTransfertStore;
 
@@ -31,8 +31,8 @@ public class FileTransfertConfig {
 	}
 
 	@Bean
-	public FileTransfertMultipartResolver multipartResolver() {
-		return new FileTransfertMultipartResolver();
+	public CommonsMultipartResolver multipartResolver() {
+		return new CommonsMultipartResolver();
 	}
 
 	@Bean
