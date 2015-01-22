@@ -26,10 +26,12 @@ dependencies {
 	compile 'org.springframework.security:spring-security-web:3.2.5.RELEASE'
 	
 	providedCompile 'javax.validation:validation-api:1.0.0.GA'
+	providedCompile "javax.servlet:servlet-api:2.5"
 }
 
 gwt {
 	gwtVersion = '2.7.0'
+	maxHeapSize = "2G";
 
 	// Modules used in production
 	modules = ['fr.putnami.pwt.tutorial.Tutorial']

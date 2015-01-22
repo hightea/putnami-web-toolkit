@@ -1,45 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE web-app
-    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-    "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	      http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
 
-<web-app>
-	<!-- AjaxBotFilter Filter -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:/META-INF/spring/web-context.xml</param-value>
+	</context-param>
+	
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
 	<filter>
-		<filter-name>ajax-bot-indexing-filter</filter-name>
-		<description>Filter making passible to render ajax page as HTML.</description>
-		<filter-class>fr.putnami.pwt.ajaxbot.AjaxBotIndexingFilter</filter-class>
-		<init-param>
-			<param-name>cacheFolder</param-name>
-			<!-- Use a valid temp file -->
-			<param-value>/tmp/cacheRenderedAjaxPage</param-value>
-			<description>Rendered html cache folder</description>
-		</init-param>
-		<init-param>
-			<param-name>cacheResetOnStartup</param-name>
-			<param-value>true</param-value>
-			<description>Clear the html cache on server startup</description>
-		</init-param>
+		<filter-name>delegatingChainFilter</filter-name>
+		<filter-class>fr.putnami.pwt.plugin.spring.web.filter.DelegatingChainFilter</filter-class>
 	</filter>
 	<filter-mapping>
-		<filter-name>ajax-bot-indexing-filter</filter-name>
+		<filter-name>delegatingChainFilter</filter-name>
 		<url-pattern>*</url-pattern>
 	</filter-mapping>
 	
-	<!-- Spring configuration -->
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
-			<param-name>contextClass</param-name>
-			<param-value>
-				org.springframework.web.context.support.AnnotationConfigWebApplicationContext
-			</param-value>
-		</init-param>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>fr.putnami.pwt.tutorial.server.config</param-value>
-		</init-param>
+        	<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:/META-INF/spring/web-context.xml</param-value>
+		</init-param>	
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>

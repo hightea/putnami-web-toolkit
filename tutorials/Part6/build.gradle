@@ -23,6 +23,7 @@ dependencies {
 
 gwt {
 	gwtVersion = '2.7.0'
+	maxHeapSize = "2G";
 
 	// Modules used in production
 	modules = ['fr.putnami.pwt.tutorial.Tutorial']

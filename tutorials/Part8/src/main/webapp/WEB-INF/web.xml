@@ -8,7 +8,7 @@
 	<filter>
 		<filter-name>ajax-bot-indexing-filter</filter-name>
 		<description>Filter making passible to render ajax page as HTML.</description>
-		<filter-class>fr.putnami.pwt.ajaxbot.AjaxBotIndexingFilter</filter-class>
+		<filter-class>fr.putnami.pwt.plugin.ajaxbot.filter.AjaxPageFilter</filter-class>
 		<init-param>
 			<param-name>cacheFolder</param-name>
 			<!-- Use a valid temp file -->
@@ -16,9 +16,8 @@
 			<description>Rendered html cache folder</description>
 		</init-param>
 		<init-param>
-			<param-name>cacheResetOnStartup</param-name>
-			<param-value>true</param-value>
-			<description>Clear the html cache on server startup</description>
+			<param-name>serverUrl</param-name>
+			<param-value>http://localhost:8888/</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>

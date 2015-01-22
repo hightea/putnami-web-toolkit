@@ -1,6 +1,5 @@
 package fr.putnami.pwt.tutorial.client.user;
 
-import com.google.gwt.i18n.client.ConstantsWithLookup;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -20,15 +19,13 @@ import fr.putnami.pwt.core.security.shared.domain.SessionDto;
 import fr.putnami.pwt.core.security.shared.domain.SigninDto;
 import fr.putnami.pwt.core.security.shared.service.SessionService;
 import fr.putnami.pwt.core.service.client.annotation.AsyncHandler;
-import fr.putnami.pwt.core.widget.client.Alert.Type;
 import fr.putnami.pwt.core.widget.client.Form;
-import fr.putnami.pwt.core.widget.client.event.ButtonEvent;
 
 @Templated
 public class SigninPage extends Composite implements View {
 
 
-	public interface Constants extends ConstantsWithLookup, ValidationConstants {
+	public interface Constants extends ValidationConstants {
 		@DefaultStringValue("Username (admin)")
 		String username();
 
@@ -56,7 +53,7 @@ public class SigninPage extends Composite implements View {
 	@UiField
 	@Initialize(constantsClass = Constants.class)
 	Form<SigninDto> signinForm;
-	
+
 	private Place fallback;
 
 	@PresentHandler
