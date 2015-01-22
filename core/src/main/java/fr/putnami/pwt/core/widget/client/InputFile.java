@@ -266,7 +266,6 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 	private void handleProgress(int total, int loaded) {
 		this.progressBar.setMax(total);
 		this.progressBar.edit(loaded);
-
 	}
 
 	private void handleCompleteJson(String reponseData) {
@@ -344,7 +343,6 @@ public class InputFile extends InputGroup<FileDto> implements HasDrawable {
 				}, false);
 
 			xhr.send(data);
-
 	}-*/;
 
 	private static native void nativeClick(Element elem)
