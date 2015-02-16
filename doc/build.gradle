@@ -1,7 +1,6 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
-apply plugin: 'gwt'
-apply plugin: 'jetty'
+apply plugin: 'fr.putnami.gwt'
 
 sourceSets.main.resources.srcDir 'src/main/java'
 
@@ -18,24 +17,17 @@ dependencies {
 	compile 'org.springframework.security:spring-security-web:3.2.5.RELEASE'
 }
 
-gwt {
-	maxHeapSize = "2G";
+uploadArchives.enabled = false
 
-	modules = ['fr.putnami.pwt.doc.Documentation']
-	devModules = ['fr.putnami.pwt.doc.DocumentationDev']
-
-	compiler {
-		localWorkers = 2
+putnami {
+	module 'fr.putnami.pwt.doc.Documentation'
+	
+	jetty{
+		maxHeapSize = "512m"
+		debugJava = true
 	}
-	compileGwt {
-		// We just invert the order of the sources files to use the processed ressources first in GWT compilation
-		src =  files(sourceSets.main.output.resourcesDir, sourceSets.main.java.srcDirs)
-	}
-	gwtDev {
-		jvmArgs('-Xdebug',  '-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000')
-	}
-	superDev {
-		noPrecompile=true
+	dev{
+		maxHeapSize = "2g"
 	}
 }
 
@@ -60,20 +52,4 @@ war {
 	from(webAppDirName) {
 		exclude '**/*.html'
 	}
-}
-
-draftWar {
-	from(webAppDirName) {
-		include '**/*.html'
-		filter(ReplaceTokens, tokens: project.ext.getProperties())
-	}
-	from(webAppDirName) {
-		exclude '**/*.html'
-	}
-}
-
-task jettyDraftWar(type: JettyRunWar) {
-	dependsOn draftWar
-	dependsOn.remove('war')
-	webApp=draftWar.archivePath
 }

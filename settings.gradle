@@ -1,24 +1,24 @@
+// Include pwt core
 include 'core'
+project(":core").name = "pwt"
+
+// Include plugins
+include 'plugins/spring'
+project(":plugins/spring").name = "pwt-spring"
+
+include 'plugins/ajax-bot-indexing'
+project(":plugins/ajax-bot-indexing").name = "pwt-ajax-bot-indexing"
+
+include 'plugins/google-analytics'
+project(":plugins/google-analytics").name = "pwt-google-analytics"
+
+include 'plugins/rest'
+project(":plugins/rest").name = "pwt-rest"
+
+include 'plugins/code-editor'
+project(":plugins/code-editor").name = "pwt-code-editor"
+
+// Include doc
 include 'doc'
-
-// Add all the plugins projects
-include new File(settingsDir, 'plugins').listFiles().findAll { 
-     it.isDirectory() 
-    }.collect { 
-        it.getName() 
-    }.toArray(new java.lang.String[0])
-
-// Rename the projects
-rootProject.children.each {project ->
-	if ("${project.name}" == 'core') {
-		project.name = 'pwt'
-	} else if ("${project.name}" == 'doc') {
-		project.name = 'pwt-doc'
-	} else {
-		String projectDirName = "plugins/${project.name}"
-		project.projectDir = new File(settingsDir, projectDirName)
-		project.name = "pwt-${project.name}"
-		assert project.projectDir.isDirectory()
-	}
-}
+project(":doc").name = "pwt-doc"
 

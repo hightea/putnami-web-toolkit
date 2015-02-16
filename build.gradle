@@ -1,21 +1,159 @@
+ext {
+	releaseVersion = '1.1.1'
+	snapshotVersion = '1.2.0-SNAPSHOT'
+	gwtVersion = '2.7.0'
+	guavaVersion = '17.0'
+	junitVersion = '4.11'
+	log4jVersion = '1.6.1'
+	slf4jVersion = '1.2.14'
+	
+	licenceFile = rootProject.file('settings/LICENSE_LGPL_HEADER')
+	checkStyleConfig = rootProject.file('settings/checkstyle/pwt-checkstyle.xml')
+	findbugsConfig = rootProject.file('settings/findbugs/excludeFilter.xml')
+}
+
 buildscript {
 	repositories {
-		jcenter()
 		mavenCentral()
+		mavenLocal()
+		jcenter()
 	}
 	dependencies {
-		classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.5'
+		classpath 'fr.putnami.gwt:putnami-gradle-plugin:0.1.2'
 		classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.7.0'
 	}
 }
 
-task publishAll
-task publishAllToMavenLocal
-task publishAllLibs
-task publishAllLibsToMavenLocal
-task licenseAll
-task licenseFormatAll
+task license
+task licenseFormat
+
+allprojects {
+	group = 'fr.putnami.pwt'
+	version = project.snapshotVersion
+}
 
 subprojects {
-	apply from : new File(rootProject.projectDir, 'subproject-pwt.gradle').getAbsolutePath()
+	apply plugin: 'maven'
+	apply plugin: 'eclipse'
+	apply plugin: 'license'	
+	apply plugin: 'fr.putnami.gwt-lib'
+
+	sourceCompatibility = 1.7
+	targetCompatibility = 1.7
+
+
+	eclipse {
+		classpath {
+			downloadSources=true
+		}
+	}
+
+	configurations {
+		log4j
+	}
+
+	repositories {
+		mavenCentral()
+		mavenLocal()
+	}
+
+	dependencies {
+		log4j "org.slf4j:slf4j-api:$log4jVersion"
+		log4j "org.slf4j:jcl-over-slf4j:$log4jVersion"
+		log4j "org.slf4j:slf4j-log4j12:$log4jVersion"
+		log4j "log4j:log4j:$slf4jVersion"
+	}
+	
+	license {
+		skipExistingHeaders = true
+		header licenceFile;
+		ext.projectName = project.name
+	}
+	
+	putnami {
+		gwtVersion =  project.gwtVersion
+	}
+
+	project.tasks.jar.dependsOn project.tasks.licenseFormat
+}
+
+configure(subprojects.findAll {it.name != 'pwt-doc'}) {
+	apply plugin: 'checkstyle'
+	apply plugin: 'signing'
+
+	//Include all non java (like *.gwt.xml) files from 'src/main/java' folder in resources
+	sourceSets.main.resources.srcDir 'src/main/java'
+	
+	checkstyle{
+		configFile checkStyleConfig
+	}
+	// Add all sources in jar (needed for GWT compilation using this library
+	jar {
+		from sourceSets.main.allJava
+	}
+	task javadocJar(type: Jar) {
+    	classifier = 'javadoc'
+	    from javadoc
+	}
+	task sourcesJar(type: Jar) {
+    	classifier = 'sources'
+    	from sourceSets.main.allSource
+	}
+	artifacts {
+	    archives javadocJar, sourcesJar
+	}
+	javadoc  {
+		classpath += configurations.gwtSdk
+    	options.addStringOption("sourcepath", "")
+	}
+	signing {
+		required { gradle.taskGraph.hasTask("uploadArchives") }
+	    sign configurations.archives
+	}
+
+	uploadArchives {
+    	repositories {
+    	    mavenDeployer {
+				beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+				//OSS Repository
+				if (project.hasProperty('ossrhUsername') && project.hasProperty('ossrhPassword')) {
+					repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+						authentication(userName: ossrhUsername, password: ossrhPassword)
+					}
+					snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+						authentication(userName: ossrhUsername, password: ossrhPassword)
+					}
+				}
+				else {
+					repository(url : new File(rootProject.buildDir, 'repoRelease').toURI())
+				}
+        
+            	pom.project {
+					url 'http://pwt.putnami.org'
+					name project.name
+					description 'Putnami Web Toolkit plugin'
+					scm {
+						connection 'scm:git:git@github.com:Putnami/putnami-web-toolkit.git'
+        	            developerConnection 'scm:git:git@github.com:Putnami/putnami-web-toolkit.git'
+    	                url 'git@github.com:Putnami/putnami-web-toolkit.git'
+	                }
+	                licenses {
+                    	license {
+                	        name 'GNU Lesser General Public License'
+            	            url 'http://www.gnu.org/licenses/lgpl-3.0.html'
+        	                distribution 'repo'
+    	                }
+	                }
+				 	developers {
+						developer {
+							id 'fdumay'
+							name 'Fabien Dumay'
+							email 'fabien.dumay@putnami.com'
+						}
+		        	}
+            	}
+        	}
+    	}
+	}
 }
