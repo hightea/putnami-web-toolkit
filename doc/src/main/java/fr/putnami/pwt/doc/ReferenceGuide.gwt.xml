@@ -17,7 +17,7 @@
     along with pwt.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.5.1//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.5.1/distro-source/core/src/gwt-module.dtd">
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.7.0//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.7.0/distro-source/core/src/gwt-module.dtd">
 <module rename-to="ReferenceGuide">
 	<inherits name="fr.putnami.pwt.doc.DocumentationLib"/>
 	
