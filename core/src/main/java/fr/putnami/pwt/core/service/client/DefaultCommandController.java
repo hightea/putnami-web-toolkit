@@ -153,17 +153,17 @@ public final class DefaultCommandController extends CommandController {
 	}
 
 	@Override
-	public CommandRequest invokeCommand(CommandDefinition commandDefinition, CommandParam commanParam) {
+	public CommandRequest invokeCommand(CommandDefinition commandDefinition, CommandParam commandParam) {
 
 		long requestId = ++this.requestIdSequence;
 		CommandRequest command = new CommandRequest();
 		command.setRequestId(requestId);
 		command.setCommandDefinition(commandDefinition);
-		command.setArgs(commanParam.getParams());
+		command.setArgs(commandParam.getParams());
 
 		Request request = new Request();
 		request.requestId = requestId;
-		request.param = commanParam;
+		request.param = commandParam;
 		request.command = command;
 
 		if (this.suspended || request.param.isLazy()) {
