@@ -12,7 +12,9 @@
  * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
  * see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.plugin.spring.rpc.server.controller;
+package fr.putnami.pwt.plugin.spring.rpc.server.service;
+
+import com.google.common.collect.Lists;
 
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
@@ -20,22 +22,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.annotation.AnnotationUtils;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import fr.putnami.pwt.core.service.server.service.AbstractCommandService;
+import fr.putnami.pwt.core.service.server.service.CommandExecutor;
+import fr.putnami.pwt.core.service.server.service.CommandExecutorRegistry;
+import fr.putnami.pwt.core.service.server.service.CommandExecutorRegistryImpl;
+import fr.putnami.pwt.core.service.shared.domain.CommandRequest;
+import fr.putnami.pwt.core.service.shared.domain.CommandResponse;
+import fr.putnami.pwt.core.service.shared.service.CommandService;
 
-@Controller
-public class CommandServiceController extends AbstractCommandService implements BeanPostProcessor {
+
+public class CommandServiceImpl implements CommandService, BeanPostProcessor {
 
 	@Autowired
 	private ApplicationContext applicationContext;
+
+	private final CommandExecutorRegistry executorRegistry = new CommandExecutorRegistryImpl();
 
 	@PostConstruct
 	public void afterPropertySet() {
@@ -44,10 +50,14 @@ public class CommandServiceController extends AbstractCommandService implements 
 		}
 	}
 
-	@RequestMapping(value = "/commandService", method = RequestMethod.POST)
-	public void processPostRpc(HttpServletRequest request, HttpServletResponse response)
-		throws Throwable {
-			this.processPost(request, response);
+	@Override
+	public List<CommandResponse> executeCommands(List<CommandRequest> commands) {
+		List<CommandResponse> result = Lists.newArrayList();
+		for (CommandRequest request : commands) {
+			CommandExecutor executor = this.executorRegistry.resolveCommandExecutor(request.getCommandDefinition());
+			result.add(executor.executeCommand(request));
+		}
+		return result;
 	}
 
 	@Override
@@ -59,6 +69,10 @@ public class CommandServiceController extends AbstractCommandService implements 
 	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
 		this.scanBean(bean, beanName);
 		return bean;
+	}
+
+	protected void injectService(Class<?> serviceInterface, Object service) {
+		this.executorRegistry.injectService(serviceInterface, service);
 	}
 
 	private void scanBean(Object bean, String name) {

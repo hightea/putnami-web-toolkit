@@ -19,20 +19,27 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 
-import fr.putnami.pwt.plugin.spring.rpc.server.controller.CommandServiceController;
+import fr.putnami.pwt.core.service.shared.service.CommandService;
+import fr.putnami.pwt.plugin.spring.rpc.server.controller.CommandController;
 import fr.putnami.pwt.plugin.spring.rpc.server.filter.RequestContextFilter;
+import fr.putnami.pwt.plugin.spring.rpc.server.service.CommandServiceImpl;
 
 @Configuration
 public class ComandServiceConfig {
 	@Bean
 	@Order(Ordered.LOWEST_PRECEDENCE)
-	public CommandServiceController commandServiceController() {
-		return new CommandServiceController();
+	public CommandController commandServiceController() {
+		return new CommandController();
 	}
 
 	@Bean
 	public RequestContextFilter requestContextInterceptor() {
 		return new RequestContextFilter();
+	}
+
+	@Bean
+	public CommandService commandService() {
+		return new CommandServiceImpl();
 	}
 
 }

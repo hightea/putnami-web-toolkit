@@ -12,11 +12,9 @@
  * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
  * see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.core.service.server.service;
+package fr.putnami.pwt.plugin.spring.rpc.server.controller;
 
 import com.google.common.base.Throwables;
-import com.google.common.collect.Lists;
-import com.google.gwt.user.server.rpc.AbstractRemoteServiceServlet;
 import com.google.gwt.user.server.rpc.RPC;
 import com.google.gwt.user.server.rpc.RPCRequest;
 import com.google.gwt.user.server.rpc.RPCServletUtils;
@@ -25,52 +23,35 @@ import com.google.gwt.user.server.rpc.SerializationPolicyProvider;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.putnami.pwt.core.service.shared.domain.CommandRequest;
-import fr.putnami.pwt.core.service.shared.domain.CommandResponse;
+import fr.putnami.pwt.core.service.server.service.CommandSerializationPolicy;
 import fr.putnami.pwt.core.service.shared.service.CommandService;
 
-public abstract class AbstractCommandService extends AbstractRemoteServiceServlet
-	implements CommandService, SerializationPolicyProvider {
+@Controller
+public class CommandController implements SerializationPolicyProvider {
 
 	private final Log logger = LogFactory.getLog(this.getClass());
 
-	private final CommandExecutorRegistry executorRegistry = new CommandExecutorRegistryImpl();
+	@Autowired
+	private CommandService commandService;
 
-	protected void injectService(Class<?> serviceInterface, Object service) {
-		this.executorRegistry.injectService(serviceInterface, service);
-	}
-
-	@Override
-	public List<CommandResponse> executeCommands(List<CommandRequest> commands) {
-		List<CommandResponse> result = Lists.newArrayList();
-
-		for (CommandRequest request : commands) {
-			CommandExecutor executor = this.executorRegistry.resolveCommandExecutor(request.getCommandDefinition());
-			result.add(executor.executeCommand(request));
-		}
-
-		return result;
-	}
-
-	@Override
-	public SerializationPolicy getSerializationPolicy(String moduleBaseURL, String serializationPolicyStrongName) {
-		return CommandSerializationPolicy.get();
-	}
-
-	@Override
-	protected void processPost(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+	@RequestMapping(value = "/commandService", method = RequestMethod.POST)
+	public void processPostRpc(HttpServletRequest request, HttpServletResponse response)
+		throws Throwable {
 		try {
-			String requestPayload = this.readContent(request);
-			RPCRequest rpcRequest = RPC.decodeRequest(requestPayload, this.getClass(), this);
+			String requestPayload = RPCServletUtils.readContentAsGwtRpc(request);
+			RPCRequest rpcRequest = RPC.decodeRequest(requestPayload, CommandService.class, this);
 
 			String responsePayload =
-				RPC.invokeAndEncodeResponse(this, rpcRequest.getMethod(), rpcRequest.getParameters(),
+				RPC.invokeAndEncodeResponse(commandService,
+					rpcRequest.getMethod(), rpcRequest.getParameters(),
 					rpcRequest.getSerializationPolicy(), rpcRequest.getFlags());
 
 			boolean gzipEncode =
@@ -83,4 +64,10 @@ public abstract class AbstractCommandService extends AbstractRemoteServiceServle
 			throw Throwables.propagate(e);
 		}
 	}
+
+	@Override
+	public SerializationPolicy getSerializationPolicy(String moduleBaseURL, String serializationPolicyStrongName) {
+		return CommandSerializationPolicy.get();
+	}
+
 }
