@@ -14,12 +14,12 @@ ext {
 
 buildscript {
 	repositories {
-		mavenCentral()
 		mavenLocal()
+		mavenCentral()
 		jcenter()
 	}
 	dependencies {
-		classpath 'fr.putnami.gwt:putnami-gradle-plugin:0.1.2'
+		classpath 'fr.putnami.gwt:putnami-gradle-plugin:0.2.0'
 		classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.7.0'
 	}
 }
@@ -53,8 +53,8 @@ subprojects {
 	}
 
 	repositories {
-		mavenCentral()
 		mavenLocal()
+		mavenCentral()
 	}
 
 	dependencies {
