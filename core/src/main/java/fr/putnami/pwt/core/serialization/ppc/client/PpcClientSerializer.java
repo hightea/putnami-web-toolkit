@@ -12,37 +12,12 @@
  * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
  * see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.core.serialization.domain;
+package fr.putnami.pwt.core.serialization.ppc.client;
 
-import com.google.common.base.Objects;
+import fr.putnami.pwt.core.serialization.ppc.shared.PpcSerializer;
 
-import java.util.List;
+public class PpcClientSerializer extends PpcSerializer {
 
-public class Manager extends Person {
-
-	private List<Person> staff;
-
-	public List<Person> getStaff() {
-		return staff;
+	public PpcClientSerializer() {
 	}
-
-	public void setStaff(List<Person> staff) {
-		this.staff = staff;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hashCode(getName(), getGender(), staff);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Manager) {
-			Manager other = (Manager) obj;
-			return super.equals(obj)
-				&& Objects.equal(staff, other.staff);
-		}
-		return false;
-	}
-
 }

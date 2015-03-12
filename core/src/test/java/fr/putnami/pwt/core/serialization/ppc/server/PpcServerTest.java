@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
  * see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.core.serialization.ppc;
+package fr.putnami.pwt.core.serialization.ppc.server;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -49,12 +49,11 @@ import fr.putnami.pwt.core.serialization.domain.BeanSetters;
 import fr.putnami.pwt.core.serialization.domain.Gender;
 import fr.putnami.pwt.core.serialization.domain.Manager;
 import fr.putnami.pwt.core.serialization.domain.Person;
-import fr.putnami.pwt.core.serialization.ppc.server.PpcServerSerializer;
 import fr.putnami.pwt.core.serialization.ppc.shared.PpcReader;
 import fr.putnami.pwt.core.serialization.ppc.shared.PpcSerializer;
 import fr.putnami.pwt.core.serialization.ppc.shared.PpcWriter;
 
-public class PpcServerSerialisationTest {
+public class PpcServerTest {
 
 	private static PpcSerializer serializer;
 
@@ -113,7 +112,6 @@ public class PpcServerSerialisationTest {
 		// Byte object
 		assertEquals("0|D|--|C", createWriter().write(new Character('D')).flush());
 		assertEquals(new Character('C'), createReader("0|C|--|C").readObject());
-
 	}
 
 	@Test
@@ -275,7 +273,6 @@ public class PpcServerSerialisationTest {
 		l.add("a");
 
 		String serial = createWriter().write(l).flush();
-		assertEquals("0|2|1|2|1|3|--|HS@0|S|a|b", serial);
 		assertEquals(l, createReader(serial).readObject());
 		assertEquals(HashSet.class, createReader(serial).readObject().getClass());
 	}
@@ -495,6 +492,5 @@ public class PpcServerSerialisationTest {
 		read = createReader(serial).readObject();
 		assertEquals(bean, read);
 		assertSame(read.getStaff().get(0), read.getStaff().get(1));
-
 	}
 }

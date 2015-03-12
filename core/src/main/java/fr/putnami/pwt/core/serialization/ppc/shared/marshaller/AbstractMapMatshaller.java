@@ -22,7 +22,6 @@ import fr.putnami.pwt.core.serialization.ppc.shared.PpcWriter;
 
 public abstract class AbstractMapMatshaller<K, V, M extends Map<K, V>> extends AbstractMarshaller<M> {
 
-
 	@Override
 	public void marshal(M value, PpcWriter writer) {
 		writer.write(value.size());

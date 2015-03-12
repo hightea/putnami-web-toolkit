@@ -14,8 +14,6 @@
  */
 package fr.putnami.pwt.core.serialization.ppc.shared;
 
-
-
 public abstract class PpcSerializer {
 
 	private MarshallerRegistry marshallerRegistry;

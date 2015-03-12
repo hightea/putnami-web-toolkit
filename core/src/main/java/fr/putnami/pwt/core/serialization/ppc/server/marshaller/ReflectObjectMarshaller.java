@@ -37,7 +37,6 @@ public class ReflectObjectMarshaller<T> extends AbstractMarshaller<T> {
 		void marshal(Object bean, PpcWriter writer);
 
 		void unmarshal(Object bean, PpcReader reader);
-
 	}
 
 	public class GetterSetterMarshaller implements PropertyMarshaller {
@@ -122,15 +121,12 @@ public class ReflectObjectMarshaller<T> extends AbstractMarshaller<T> {
 					setterMethod.invoke(instance, marshaler.unmarshal(reader));
 				} else {
 					setterMethod.invoke(instance, reader.readObject());
-
 				}
 			} catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
 				throw new SerializationException("Fail to unmarshal " + objectClass, e);
 			}
 		}
-
 	}
-
 
 	private class PublicFieldMarshaller implements PropertyMarshaller {
 		private final Field field;
@@ -257,16 +253,16 @@ public class ReflectObjectMarshaller<T> extends AbstractMarshaller<T> {
 
 	@Override
 	public void marshal(T object, PpcWriter writer) {
-		for (PropertyMarshaller propertyMarshaller : propertyMarshaller.values()) {
-			propertyMarshaller.marshal(object, writer);
+		for (Map.Entry<String, PropertyMarshaller> entry : propertyMarshaller.entrySet()) {
+			entry.getValue().marshal(object, writer);
 		}
 	}
 
 	@Override
 	public T unmarshal(PpcReader reader) {
 		T instance = newInstance();
-		for (PropertyMarshaller propertyMarshaller : propertyMarshaller.values()) {
-			propertyMarshaller.unmarshal(instance, reader);
+		for (Map.Entry<String, PropertyMarshaller> entry : propertyMarshaller.entrySet()) {
+			entry.getValue().unmarshal(instance, reader);
 		}
 		return instance;
 	}
@@ -286,7 +282,7 @@ public class ReflectObjectMarshaller<T> extends AbstractMarshaller<T> {
 		for (Method method : type.getMethods()) {
 			String methodName = method.getName();
 			if (methodName.startsWith("get") || methodName.startsWith("is")
-				&& method.getParameters().length == 0
+				&& method.getParameterTypes().length == 0
 				&& !method.getReturnType().equals(void.class)) {
 
 				String propertyName = methodName.replaceFirst("is", "");
@@ -306,7 +302,7 @@ public class ReflectObjectMarshaller<T> extends AbstractMarshaller<T> {
 			String methodName = method.getName();
 			Class returnType = method.getReturnType();
 			if (methodName.startsWith("set")
-				&& method.getParameters().length == 1
+				&& method.getParameterTypes().length == 1
 				&& Void.class.equals(returnType) || void.class.equals(returnType)) {
 
 				String propertyName = methodName.replaceFirst("set", "");

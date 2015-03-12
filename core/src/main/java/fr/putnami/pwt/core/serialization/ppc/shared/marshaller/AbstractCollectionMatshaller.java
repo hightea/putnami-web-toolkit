@@ -21,7 +21,6 @@ import fr.putnami.pwt.core.serialization.ppc.shared.PpcWriter;
 
 public abstract class AbstractCollectionMatshaller<C extends Collection> extends AbstractMarshaller<C> {
 
-
 	@Override
 	public void marshal(C value, PpcWriter writer) {
 		writer.write(value.size());
@@ -46,5 +45,4 @@ public abstract class AbstractCollectionMatshaller<C extends Collection> extends
 		writer.write(getTypeName() + "@" + id);
 		return true;
 	}
-
 }

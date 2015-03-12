@@ -12,37 +12,20 @@
  * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
  * see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.core.serialization.domain;
+package fr.putnami.pwt.core.serialization.ppc.client;
 
-import com.google.common.base.Objects;
+import com.google.gwt.core.shared.GWT;
+import com.google.gwt.junit.client.GWTTestCase;
 
-import java.util.List;
-
-public class Manager extends Person {
-
-	private List<Person> staff;
-
-	public List<Person> getStaff() {
-		return staff;
-	}
-
-	public void setStaff(List<Person> staff) {
-		this.staff = staff;
-	}
+public class PpcGwtTest extends GWTTestCase {
 
 	@Override
-	public int hashCode() {
-		return Objects.hashCode(getName(), getGender(), staff);
+	public String getModuleName() {
+		return "fr.putnami.pwt.core.serialization.ppc.PpcTest";
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Manager) {
-			Manager other = (Manager) obj;
-			return super.equals(obj)
-				&& Objects.equal(staff, other.staff);
-		}
-		return false;
+	public void testCustomMarshaller() {
+		GWT.log("test");
 	}
 
 }

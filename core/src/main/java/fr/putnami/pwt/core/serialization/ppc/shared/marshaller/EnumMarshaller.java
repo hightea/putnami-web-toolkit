@@ -37,7 +37,6 @@ public class EnumMarshaller extends AbstractMarshaller<Enum> {
 			return null;
 		}
 
-
 		try {
 			Class enumClass = Class.forName(enumType);
 			for (Object constant : enumClass.getEnumConstants()) {

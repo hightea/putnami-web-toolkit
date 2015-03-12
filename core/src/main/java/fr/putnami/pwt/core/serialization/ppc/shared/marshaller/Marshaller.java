@@ -17,7 +17,6 @@ package fr.putnami.pwt.core.serialization.ppc.shared.marshaller;
 import fr.putnami.pwt.core.serialization.ppc.shared.PpcReader;
 import fr.putnami.pwt.core.serialization.ppc.shared.PpcWriter;
 
-
 public interface Marshaller<T> {
 
 	void marshal(T value, PpcWriter writer);
