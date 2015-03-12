@@ -30,6 +30,7 @@ import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.ByteMarshaller;
 import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.CharacterMarshaller;
 import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.DateMarshaller;
 import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.DoubleMarshaller;
+import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.EnumMarshaller;
 import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.FloatMarshaller;
 import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.HashMapMarshaller;
 import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.HashSetMarshaller;
@@ -64,6 +65,7 @@ public class MarshallerServerRegistry implements MarshallerRegistry {
 		// register(new EmptyMapMarshaller());
 		// register(new EmptySetMarshaller());
 		// register(new EnumMapMarshaller());
+		register(new EnumMarshaller());
 		register(new FloatMarshaller());
 		register(new HashMapMarshaller());
 		register(new HashSetMarshaller());
@@ -88,7 +90,12 @@ public class MarshallerServerRegistry implements MarshallerRegistry {
 
 	@Override
 	public <T> Marshaller<T> findMarshaller(Class<T> clazz) {
-		Marshaller<T> marshaller = (Marshaller<T>) registry.get(clazz);
+		Class type = clazz;
+		Marshaller<T> marshaller = null;
+		while (marshaller == null && type != null) {
+			marshaller = (Marshaller<T>) registry.get(type);
+			type = type.getSuperclass();
+		}
 		if (marshaller == null) {
 			if (!Serializable.class.isAssignableFrom(clazz)) {
 				throw new SerializationException(clazz + " does not implement Serializable.");

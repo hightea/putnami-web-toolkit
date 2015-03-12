@@ -45,6 +45,9 @@ import java.util.Vector;
 
 import fr.putnami.pwt.core.serialization.domain.BeanPublicFields;
 import fr.putnami.pwt.core.serialization.domain.BeanSetters;
+import fr.putnami.pwt.core.serialization.domain.Gender;
+import fr.putnami.pwt.core.serialization.domain.Manager;
+import fr.putnami.pwt.core.serialization.domain.Person;
 import fr.putnami.pwt.core.serialization.ppc.server.PpcServerSerializer;
 import fr.putnami.pwt.core.serialization.ppc.shared.PpcReader;
 import fr.putnami.pwt.core.serialization.ppc.shared.PpcSerializer;
@@ -368,6 +371,15 @@ public class PpcServerSerialisationTest {
 	}
 
 	@Test
+	public void testEnum() {
+		// write
+		assertEquals("0|1|2|--|E|com.google.gwt.i18n.server.testing.Gender|MALE", createWriter().write(Gender.MALE).flush());
+		// read
+		assertEquals(Gender.MALE, createReader("0|1|2|--|E|com.google.gwt.i18n.server.testing.Gender|MALE")
+			.<Gender> readObject());
+	}
+
+	@Test
 	public void testVoid() {
 		assertEquals(null, createReader("0|--|V").readObject());
 	}
@@ -434,6 +446,27 @@ public class PpcServerSerialisationTest {
 		bean.setIntObject(12);
 		bean.setLongObject(62L);
 		bean.setShortObject((short) 223);
+
+		serial = createWriter().write(bean).flush();
+		read = createReader(serial).readObject();
+		assertEquals(bean, read);
+	}
+
+	@Test
+	public void testComplexBean() {
+		Manager bean = new Manager();
+		String serial = createWriter().write(bean).flush();
+		Manager read = createReader(serial).readObject();
+		assertEquals(bean, read);
+
+		Person p = new Person();
+		p.setGender(Gender.FEMALE);
+		p.setName("empl");
+
+		bean = new Manager();
+		bean.setName("man");
+		bean.setGender(Gender.MALE);
+		bean.setStaff(Lists.newArrayList(p));
 
 		serial = createWriter().write(bean).flush();
 		read = createReader(serial).readObject();

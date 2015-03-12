@@ -101,12 +101,13 @@ public class SimpleWriter implements PpcWriter {
 	public <O> PpcWriter write(O value) {
 		if (value == null) {
 			append(null);
-		} else {
-			Class<O> valueClass = (Class<O>) value.getClass();
-			Marshaller<O> marshaller = marshallers.findMarshaller(valueClass);
-			write(marshaller.getClassName());
-			marshaller.marshal(value, this);
+			return this;
 		}
+
+		Class<O> valueClass = (Class<O>) value.getClass();
+		Marshaller<O> marshaller = marshallers.findMarshaller(valueClass);
+		write(marshaller.getClassName());
+		marshaller.marshal(value, this);
 		return this;
 	}
 
