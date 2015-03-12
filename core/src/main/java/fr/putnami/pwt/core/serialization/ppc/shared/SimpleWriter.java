@@ -16,7 +16,7 @@ package fr.putnami.pwt.core.serialization.ppc.shared;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.common.collect.Lists;
 
 import java.util.List;
 

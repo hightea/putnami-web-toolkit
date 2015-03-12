@@ -15,9 +15,9 @@
 package fr.putnami.pwt.core.serialization.ppc.shared;
 
 import com.google.common.base.Splitter;
+import com.google.common.base.Strings;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import com.google.gwt.thirdparty.guava.common.base.Strings;
 
 import java.util.List;
 

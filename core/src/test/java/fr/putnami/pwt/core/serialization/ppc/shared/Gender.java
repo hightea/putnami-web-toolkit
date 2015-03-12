@@ -12,17 +12,9 @@
  * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
  * see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.core.serialization.ppc.client;
+package fr.putnami.pwt.core.serialization.ppc.shared;
 
-import fr.putnami.pwt.core.serialization.ppc.shared.PpcSerializer;
-
-public class PpcClientSerializer extends PpcSerializer {
-
-	public PpcClientSerializer() {
-		setMarshallerRegistry(new MarshallerClientRegistry() {
-			{
-				registerDefault();
-			}
-		});
-	}
+public enum Gender {
+		MALE,
+		FEMALE;
 }

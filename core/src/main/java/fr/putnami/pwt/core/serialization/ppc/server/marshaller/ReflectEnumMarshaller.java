@@ -12,13 +12,20 @@
  * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
  * see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.core.serialization.ppc.shared.marshaller;
+package fr.putnami.pwt.core.serialization.ppc.server.marshaller;
 
 import fr.putnami.pwt.core.serialization.ppc.shared.PpcReader;
 import fr.putnami.pwt.core.serialization.ppc.shared.PpcWriter;
 import fr.putnami.pwt.core.serialization.ppc.shared.SerializationException;
+import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.AbstractMarshaller;
 
-public class EnumMarshaller extends AbstractMarshaller<Enum> {
+public class ReflectEnumMarshaller extends AbstractMarshaller<Enum> {
+
+	private ClassLoader classLoader;
+
+	public ReflectEnumMarshaller(ClassLoader classLoader) {
+		this.classLoader = classLoader;
+	}
 
 	@Override
 	public void marshal(Enum value, PpcWriter writer) {
@@ -38,7 +45,7 @@ public class EnumMarshaller extends AbstractMarshaller<Enum> {
 		}
 
 		try {
-			Class enumClass = Class.forName(enumType);
+			Class enumClass = classLoader.loadClass(enumType);
 			for (Object constant : enumClass.getEnumConstants()) {
 				if (enumVal.equals(constant.toString())) {
 					return (Enum) constant;

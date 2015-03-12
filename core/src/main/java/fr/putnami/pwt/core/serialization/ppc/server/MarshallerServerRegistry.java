@@ -14,90 +14,24 @@
  */
 package fr.putnami.pwt.core.serialization.ppc.server;
 
-import com.google.common.collect.Maps;
-
 import java.io.Serializable;
-import java.util.Map;
 
+import fr.putnami.pwt.core.serialization.ppc.server.marshaller.ReflectEnumMarshaller;
 import fr.putnami.pwt.core.serialization.ppc.server.marshaller.ReflectObjectMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.MarshallerRegistry;
 import fr.putnami.pwt.core.serialization.ppc.shared.SerializationException;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.ArrayListMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.BigDecimalMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.BigIntegerMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.BooleanMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.ByteMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.CharacterMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.DateMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.DoubleMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.EnumMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.FloatMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.HashMapMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.HashSetMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.IdentityHashMapMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.IntegerMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.LinkedHashMapMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.LinkedHashSetMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.LinkedListMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.LongMarshaller;
+import fr.putnami.pwt.core.serialization.ppc.shared.base.AbstractMarshallerRegistry;
 import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.Marshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.ShortMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.StringMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.TreeMapMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.TreeSetMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.VectorMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.VoidMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.util.PpcUtils;
 
-public class MarshallerServerRegistry implements MarshallerRegistry {
+public class MarshallerServerRegistry extends AbstractMarshallerRegistry {
 
-	private final Map<Object, Marshaller<?>> registry = Maps.newHashMap();
-	private ClassLoader classLoader = getClass().getClassLoader();
-
-	{
-		register(new ArrayListMarshaller());
-		register(new BigDecimalMarshaller());
-		register(new BigIntegerMarshaller());
-		register(new BooleanMarshaller());
-		register(new ByteMarshaller());
-		register(new CharacterMarshaller());
-		register(new DateMarshaller());
-		register(new DoubleMarshaller());
-		// register(new EmptyListMarshaller());
-		// register(new EmptyMapMarshaller());
-		// register(new EmptySetMarshaller());
-		// register(new EnumMapMarshaller());
-		register(new EnumMarshaller());
-		register(new FloatMarshaller());
-		register(new HashMapMarshaller());
-		register(new HashSetMarshaller());
-		register(new IdentityHashMapMarshaller());
-		register(new IntegerMarshaller());
-		register(new LinkedHashMapMarshaller());
-		register(new LinkedHashSetMarshaller());
-		register(new LinkedListMarshaller());
-		register(new LongMarshaller());
-		// register(new MathContextMarshaller());
-		register(new ShortMarshaller());
-		register(new StringMarshaller());
-		// register(new SingletonListMarshaller());
-		// register(new StackTraceElementMarshaller());
-		register(new TreeMapMarshaller());
-		register(new TreeSetMarshaller());
-		register(new VectorMarshaller());
-		register(new VoidMarshaller());
-
-		// TODO
+	public MarshallerServerRegistry() {
+		registerDefault();
+		register(new ReflectEnumMarshaller(getClass().getClassLoader()));
 	}
 
 	@Override
 	public <T> Marshaller<T> findMarshaller(Class<T> clazz) {
-		Class type = clazz;
-		Marshaller<T> marshaller = null;
-		while (marshaller == null && type != null) {
-			marshaller = (Marshaller<T>) registry.get(type);
-			type = type.getSuperclass();
-		}
+		Marshaller<T> marshaller = super.findMarshaller(clazz);
 		if (marshaller == null) {
 			if (!Serializable.class.isAssignableFrom(clazz)) {
 				throw new SerializationException(clazz + " does not implement Serializable.");
@@ -110,31 +44,4 @@ public class MarshallerServerRegistry implements MarshallerRegistry {
 
 		return marshaller;
 	}
-
-	@Override
-	public <T> Marshaller<T> findMarshaller(String className) {
-		Marshaller<T> marshaller = (Marshaller<T>) registry.get(className);
-		if (marshaller == null) {
-			try {
-				String typeName = PpcUtils.extractClassFromRef(className);
-				Class type = classLoader.loadClass(typeName);
-				marshaller = findMarshaller(type);
-			} catch (ClassNotFoundException e) {
-				throw new SerializationException(className + " can not be loaded.", e);
-			}
-		}
-		return marshaller;
-	}
-
-	private void register(Marshaller marshaller) {
-		if (registry.containsKey(marshaller.getTypeName())) {
-			throw new SerializationException(marshaller.getTypeName() + " already registered");
-		}
-		if (registry.containsKey(marshaller.getType())) {
-			throw new SerializationException(marshaller.getType() + " already registered");
-		}
-		registry.put(marshaller.getTypeName(), marshaller);
-		registry.put(marshaller.getType(), marshaller);
-	}
-
 }

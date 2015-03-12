@@ -44,11 +44,11 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
 
-import fr.putnami.pwt.core.serialization.domain.BeanPublicFields;
-import fr.putnami.pwt.core.serialization.domain.BeanSetters;
-import fr.putnami.pwt.core.serialization.domain.Gender;
-import fr.putnami.pwt.core.serialization.domain.Manager;
-import fr.putnami.pwt.core.serialization.domain.Person;
+import fr.putnami.pwt.core.serialization.ppc.shared.BeanPublicFields;
+import fr.putnami.pwt.core.serialization.ppc.shared.BeanSetters;
+import fr.putnami.pwt.core.serialization.ppc.shared.Gender;
+import fr.putnami.pwt.core.serialization.ppc.shared.Manager;
+import fr.putnami.pwt.core.serialization.ppc.shared.Person;
 import fr.putnami.pwt.core.serialization.ppc.shared.PpcReader;
 import fr.putnami.pwt.core.serialization.ppc.shared.PpcSerializer;
 import fr.putnami.pwt.core.serialization.ppc.shared.PpcWriter;
@@ -371,10 +371,10 @@ public class PpcServerTest {
 	@Test
 	public void testEnum() {
 		// write
-		assertEquals("0|1|2|--|E|fr.putnami.pwt.core.serialization.domain.Gender|MALE", createWriter().write(Gender.MALE)
-			.flush());
+		assertEquals("0|1|2|--|E|fr.putnami.pwt.core.serialization.ppc.shared.Gender|MALE",
+			createWriter().write(Gender.MALE).flush());
 		// read
-		assertEquals(Gender.MALE, createReader("0|1|2|--|E|fr.putnami.pwt.core.serialization.domain.Gender|MALE")
+		assertEquals(Gender.MALE, createReader("0|1|2|--|E|fr.putnami.pwt.core.serialization.ppc.shared.Gender|MALE")
 			.<Gender> readObject());
 	}
 
