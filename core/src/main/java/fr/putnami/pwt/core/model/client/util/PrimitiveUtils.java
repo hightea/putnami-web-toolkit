@@ -12,11 +12,11 @@
  * You should have received a copy of the GNU Lesser General Public License along with pwt. If not,
  * see <http://www.gnu.org/licenses/>.
  */
-package fr.putnami.pwt.core.model.client.model;
+package fr.putnami.pwt.core.model.client.util;
 
-public final class Primitives {
+public final class PrimitiveUtils {
 
-	private Primitives() {
+	private PrimitiveUtils() {
 	}
 
 	public static Boolean castToBoolean(Object value) {

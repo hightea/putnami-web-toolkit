@@ -52,8 +52,8 @@ import javax.validation.constraints.Size;
 import fr.putnami.pwt.core.model.client.model.AbstractModel;
 import fr.putnami.pwt.core.model.client.model.Model;
 import fr.putnami.pwt.core.model.client.model.ModelCollection;
-import fr.putnami.pwt.core.model.client.model.Primitives;
 import fr.putnami.pwt.core.model.client.model.PropertyDescription;
+import fr.putnami.pwt.core.model.client.util.PrimitiveUtils;
 
 public class ModelCreator {
 
@@ -340,7 +340,7 @@ public class ModelCreator {
 				if (primitiveType != null) {
 					String boxedName = primitiveType.getQualifiedBoxedSourceName();
 					boxedName = boxedName.substring(boxedName.lastIndexOf(".") + 1, boxedName.length());
-					srcWriter.println("if(\"%s\".equals(fieldName)){  return (P) Primitives.castTo%s(bean.%s()); }",
+					srcWriter.println("if(\"%s\".equals(fieldName)){  return (P) PrimitiveUtils.castTo%s(bean.%s()); }",
 						propertyName, boxedName, getter.getName());
 				} else {
 					srcWriter.println("if(\"%s\".equals(fieldName)){  return (P) bean.%s(); }", propertyName, getter.getName());
@@ -349,7 +349,7 @@ public class ModelCreator {
 				if (primitiveType != null) {
 					String boxedName = primitiveType.getQualifiedBoxedSourceName();
 					boxedName = boxedName.substring(boxedName.lastIndexOf(".") + 1, boxedName.length());
-					srcWriter.println("if(\"%s\".equals(fieldName)){  return (P) Primitives.castTo%s(bean.%s); }", propertyName,
+					srcWriter.println("if(\"%s\".equals(fieldName)){  return (P) PrimitiveUtils.castTo%s(bean.%s); }", propertyName,
 						boxedName, propertyName);
 				} else {
 					srcWriter.println("if(\"%s\".equals(fieldName)){  return (P) bean.%s; }", propertyName, propertyName);
@@ -372,7 +372,7 @@ public class ModelCreator {
 			JMethod setter = this.setters.get(propertyName);
 			if (setter != null) {
 				if (primitiveType != null) {
-					srcWriter.println("if(\"%s\".equals(fieldName)){  bean.%s((%s) Primitives.asPrimitive((%s)value)); }",
+					srcWriter.println("if(\"%s\".equals(fieldName)){  bean.%s((%s) PrimitiveUtils.asPrimitive((%s)value)); }",
 						propertyName, setter.getName(), propertyType.getSimpleSourceName(),
 						primitiveType.getQualifiedBoxedSourceName());
 				} else {
@@ -381,7 +381,7 @@ public class ModelCreator {
 				}
 			} else if (this.publicFields.containsKey(propertyName)) {
 				if (primitiveType != null) {
-					srcWriter.println("if(\"%s\".equals(fieldName)){ bean.%s = Primitives.asPrimitive((%s) value); }",
+					srcWriter.println("if(\"%s\".equals(fieldName)){ bean.%s = PrimitiveUtils.asPrimitive((%s) value); }",
 						propertyName, propertyName, primitiveType.getQualifiedBoxedSourceName());
 				} else {
 					srcWriter.println("if(\"%s\".equals(fieldName)){  bean.%s = (%s) value; }", propertyName, propertyName,
@@ -465,7 +465,7 @@ public class ModelCreator {
 		composerFactory.addImport(AbstractModel.class.getName());
 		composerFactory.addImport(ModelCollection.class.getName());
 		composerFactory.addImport(PropertyDescription.class.getName());
-		composerFactory.addImport(Primitives.class.getName());
+		composerFactory.addImport(PrimitiveUtils.class.getName());
 		composerFactory.addImport(this.beanType.getQualifiedSourceName());
 		composerFactory.addImport("fr.putnami.pwt.core.editor.client.validator.*");
 
