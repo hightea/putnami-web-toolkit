@@ -38,7 +38,7 @@ public class DateMarshaller extends AbstractMarshaller<Date> {
 	}
 
 	@Override
-	public String getClassName() {
+	public String getTypeName() {
 		return "DT";
 	}
 

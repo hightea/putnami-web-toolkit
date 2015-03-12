@@ -24,7 +24,7 @@ public class TreeMapMarshaller<K, V> extends AbstractMapMatshaller<K, V, TreeMap
 	}
 
 	@Override
-	public String getClassName() {
+	public String getTypeName() {
 		return "TM";
 	}
 

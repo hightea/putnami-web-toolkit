@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class ArrayListMarshaller extends AbstractCollectionMatshaller<ArrayList> {
 
 	@Override
-	public String getClassName() {
+	public String getTypeName() {
 		return "AL";
 	}
 

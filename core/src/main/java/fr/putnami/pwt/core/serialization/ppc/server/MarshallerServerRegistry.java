@@ -47,10 +47,12 @@ import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.TreeMapMarshaller
 import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.TreeSetMarshaller;
 import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.VectorMarshaller;
 import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.VoidMarshaller;
+import fr.putnami.pwt.core.serialization.ppc.shared.util.PpcUtils;
 
 public class MarshallerServerRegistry implements MarshallerRegistry {
 
 	private final Map<Object, Marshaller<?>> registry = Maps.newHashMap();
+	private ClassLoader classLoader = getClass().getClassLoader();
 
 	{
 		register(new ArrayListMarshaller());
@@ -114,7 +116,9 @@ public class MarshallerServerRegistry implements MarshallerRegistry {
 		Marshaller<T> marshaller = (Marshaller<T>) registry.get(className);
 		if (marshaller == null) {
 			try {
-				marshaller = (Marshaller<T>) findMarshaller(Class.forName(className));
+				String typeName = PpcUtils.extractClassFromRef(className);
+				Class type = classLoader.loadClass(typeName);
+				marshaller = findMarshaller(type);
 			} catch (ClassNotFoundException e) {
 				throw new SerializationException(className + " can not be loaded.", e);
 			}
@@ -123,13 +127,13 @@ public class MarshallerServerRegistry implements MarshallerRegistry {
 	}
 
 	private void register(Marshaller marshaller) {
-		if (registry.containsKey(marshaller.getClassName())) {
-			throw new SerializationException(marshaller.getClassName() + " already registered");
+		if (registry.containsKey(marshaller.getTypeName())) {
+			throw new SerializationException(marshaller.getTypeName() + " already registered");
 		}
 		if (registry.containsKey(marshaller.getType())) {
 			throw new SerializationException(marshaller.getType() + " already registered");
 		}
-		registry.put(marshaller.getClassName(), marshaller);
+		registry.put(marshaller.getTypeName(), marshaller);
 		registry.put(marshaller.getType(), marshaller);
 	}
 

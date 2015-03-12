@@ -32,7 +32,7 @@ public class BigDecimalMarshaller extends AbstractMarshaller<BigDecimal> {
 	}
 
 	@Override
-	public String getClassName() {
+	public String getTypeName() {
 		return "BD";
 	}
 

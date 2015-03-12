@@ -14,6 +14,7 @@
  */
 package fr.putnami.pwt.core.serialization.ppc.shared;
 
+
 public interface PpcReader {
 
 	PpcReader prepare(String payload);

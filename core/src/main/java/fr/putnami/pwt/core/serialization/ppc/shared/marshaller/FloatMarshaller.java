@@ -36,7 +36,7 @@ public class FloatMarshaller extends AbstractMarshaller<Float> {
 	}
 
 	@Override
-	public String getClassName() {
+	public String getTypeName() {
 		return "F";
 	}
 

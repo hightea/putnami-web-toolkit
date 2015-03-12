@@ -40,4 +40,11 @@ public abstract class AbstractCollectionMatshaller<C extends Collection> extends
 		}
 		return collect;
 	}
+
+	@Override
+	public boolean writeType(PpcWriter writer, Integer id) {
+		writer.write(getTypeName() + "@" + id);
+		return true;
+	}
+
 }

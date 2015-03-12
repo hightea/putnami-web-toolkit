@@ -36,7 +36,7 @@ public class DoubleMarshaller extends AbstractMarshaller<Double> {
 	}
 
 	@Override
-	public String getClassName() {
+	public String getTypeName() {
 		return "D";
 	}
 

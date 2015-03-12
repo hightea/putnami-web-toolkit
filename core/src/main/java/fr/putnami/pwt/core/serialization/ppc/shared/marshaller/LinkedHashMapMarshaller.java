@@ -26,7 +26,7 @@ public class LinkedHashMapMarshaller<K, V> extends AbstractMapMatshaller<K, V, L
 	}
 
 	@Override
-	public String getClassName() {
+	public String getTypeName() {
 		return "LHM";
 	}
 

@@ -29,7 +29,7 @@ public class VoidMarshaller extends AbstractMarshaller<Void> {
 	}
 
 	@Override
-	public String getClassName() {
+	public String getTypeName() {
 		return "V";
 	}
 

@@ -14,6 +14,8 @@
  */
 package fr.putnami.pwt.core.serialization.ppc.shared;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.util.List;
@@ -27,6 +29,8 @@ public class SimpleWriter implements PpcWriter {
 	private boolean hasContent = false;
 	private final StringBuffer sb = new StringBuffer();
 	private final List<String> strings = Lists.newArrayList();
+
+	private final BiMap<Object, Integer> cache = HashBiMap.create();
 
 	private final MarshallerRegistry marshallers;
 
@@ -106,8 +110,18 @@ public class SimpleWriter implements PpcWriter {
 
 		Class<O> valueClass = (Class<O>) value.getClass();
 		Marshaller<O> marshaller = marshallers.findMarshaller(valueClass);
-		write(marshaller.getClassName());
-		marshaller.marshal(value, this);
+
+		Integer index = cache.get(value);
+
+		if (index == null) {
+			index = cache.size();
+			if (marshaller.writeType(this, index)) {
+				cache.put(value, index);
+			}
+			marshaller.marshal(value, this);
+		} else {
+			marshaller.writeType(this, index);
+		}
 		return this;
 	}
 
@@ -119,7 +133,7 @@ public class SimpleWriter implements PpcWriter {
 	@Override
 	public String flush() {
 		if (!strings.isEmpty()) {
-			append(PpcSerializer.SEPARATOR_STRINGS);
+			append(PpcUtils.SEPARATOR_STRINGS);
 			for (String string : strings) {
 				append(string);
 			}
@@ -133,7 +147,7 @@ public class SimpleWriter implements PpcWriter {
 			throw new RuntimeException("Can not write on closed serializer.");
 		}
 		if (hasContent) {
-			sb.append(PpcSerializer.SEPARATOR);
+			sb.append(PpcUtils.SEPARATOR);
 		}
 		if (o instanceof String) {
 			sb.append(PpcUtils.encodeString((String) o));

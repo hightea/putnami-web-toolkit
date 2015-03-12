@@ -36,7 +36,7 @@ public class ShortMarshaller extends AbstractMarshaller<Short> {
 	}
 
 	@Override
-	public String getClassName() {
+	public String getTypeName() {
 		return "SH";
 	}
 

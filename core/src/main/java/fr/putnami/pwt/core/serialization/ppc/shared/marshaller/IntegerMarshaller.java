@@ -36,7 +36,7 @@ public class IntegerMarshaller extends AbstractMarshaller<Integer> {
 	}
 
 	@Override
-	public String getClassName() {
+	public String getTypeName() {
 		return "I";
 	}
 

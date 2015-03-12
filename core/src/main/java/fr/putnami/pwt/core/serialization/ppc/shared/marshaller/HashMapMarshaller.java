@@ -26,7 +26,7 @@ public class HashMapMarshaller<K, V> extends AbstractMapMatshaller<K, V, HashMap
 	}
 
 	@Override
-	public String getClassName() {
+	public String getTypeName() {
 		return "HM";
 	}
 

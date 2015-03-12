@@ -32,7 +32,7 @@ public class BigIntegerMarshaller extends AbstractMarshaller<BigInteger> {
 	}
 
 	@Override
-	public String getClassName() {
+	public String getTypeName() {
 		return "BI";
 	}
 

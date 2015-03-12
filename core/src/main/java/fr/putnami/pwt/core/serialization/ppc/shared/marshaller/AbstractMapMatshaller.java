@@ -43,4 +43,11 @@ public abstract class AbstractMapMatshaller<K, V, M extends Map<K, V>> extends A
 		}
 		return map;
 	}
+
+	@Override
+	public boolean writeType(PpcWriter writer, Integer id) {
+		writer.write(getTypeName() + "@" + id);
+		return true;
+	}
+
 }

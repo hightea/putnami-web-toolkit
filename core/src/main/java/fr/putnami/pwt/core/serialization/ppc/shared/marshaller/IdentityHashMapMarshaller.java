@@ -26,7 +26,7 @@ public class IdentityHashMapMarshaller<K, V> extends AbstractMapMatshaller<K, V,
 	}
 
 	@Override
-	public String getClassName() {
+	public String getTypeName() {
 		return "IHM";
 	}
 

@@ -14,6 +14,7 @@
  */
 package fr.putnami.pwt.core.serialization.ppc.shared.marshaller;
 
+import fr.putnami.pwt.core.serialization.ppc.shared.PpcWriter;
 import fr.putnami.pwt.core.serialization.ppc.shared.SerializationException;
 
 public abstract class AbstractMarshaller<T> implements Marshaller<T> {
@@ -22,4 +23,9 @@ public abstract class AbstractMarshaller<T> implements Marshaller<T> {
 		throw new SerializationException("can not instantiate " + getType());
 	}
 
+	@Override
+	public boolean writeType(PpcWriter writer, Integer index) {
+		writer.write(getTypeName());
+		return false;
+	}
 }

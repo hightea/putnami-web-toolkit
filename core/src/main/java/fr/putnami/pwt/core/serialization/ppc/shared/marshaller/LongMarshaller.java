@@ -36,7 +36,7 @@ public class LongMarshaller extends AbstractMarshaller<Long> {
 	}
 
 	@Override
-	public String getClassName() {
+	public String getTypeName() {
 		return "L";
 	}
 

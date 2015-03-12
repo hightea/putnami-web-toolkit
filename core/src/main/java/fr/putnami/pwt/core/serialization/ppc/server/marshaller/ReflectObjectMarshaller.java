@@ -272,7 +272,7 @@ public class ReflectObjectMarshaller<T> extends AbstractMarshaller<T> {
 	}
 
 	@Override
-	public String getClassName() {
+	public String getTypeName() {
 		return objectClass.getName();
 	}
 
@@ -317,6 +317,12 @@ public class ReflectObjectMarshaller<T> extends AbstractMarshaller<T> {
 			}
 		}
 		return map;
+	}
+
+	@Override
+	public boolean writeType(PpcWriter writer, Integer id) {
+		writer.write(getTypeName() + "@" + id);
+		return true;
 	}
 
 }

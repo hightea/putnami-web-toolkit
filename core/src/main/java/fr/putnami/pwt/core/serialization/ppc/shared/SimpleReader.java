@@ -15,6 +15,8 @@
 package fr.putnami.pwt.core.serialization.ppc.shared;
 
 import com.google.common.base.Splitter;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.google.gwt.thirdparty.guava.common.base.Strings;
 
 import java.util.List;
@@ -27,6 +29,8 @@ public class SimpleReader implements PpcReader {
 	private List<String> strings;
 	private int indexStringsDelimiter;
 	private int cursor;
+
+	private BiMap<Object, Integer> cache = HashBiMap.create();
 
 	private final MarshallerRegistry marshallers;
 
@@ -100,9 +104,26 @@ public class SimpleReader implements PpcReader {
 			return null;
 		}
 		int index = Integer.parseInt(token);
-		String className = getString(index);
+
+		String objectRef = getString(index);
+		Object val = null;
+
+		Integer instanceId = PpcUtils.extractInstanceIdFromRef(objectRef);
+		String className = PpcUtils.extractClassFromRef(objectRef);
+
+		if (instanceId != null) {
+			val = cache.inverse().get(instanceId);
+		}
+
+		if (val != null) {
+			return (O) val;
+		}
 		Marshaller<O> marshaller = marshallers.findMarshaller(className);
-		return marshaller.unmarshal(this);
+		O value = marshaller.unmarshal(this);
+		if (instanceId != null) {
+			cache.put(value, instanceId);
+		}
+		return value;
 	}
 
 	@Override

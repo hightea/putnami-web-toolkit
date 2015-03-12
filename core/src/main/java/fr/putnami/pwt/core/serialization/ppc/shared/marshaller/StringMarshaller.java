@@ -30,7 +30,7 @@ public class StringMarshaller extends AbstractMarshaller<String> {
 	}
 
 	@Override
-	public String getClassName() {
+	public String getTypeName() {
 		return "S";
 	}
 

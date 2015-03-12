@@ -19,7 +19,7 @@ import java.util.Vector;
 public class VectorMarshaller extends AbstractCollectionMatshaller<Vector> {
 
 	@Override
-	public String getClassName() {
+	public String getTypeName() {
 		return "VT";
 	}
 

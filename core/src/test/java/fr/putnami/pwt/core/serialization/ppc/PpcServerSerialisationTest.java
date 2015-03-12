@@ -21,6 +21,7 @@ import com.ibm.icu.text.SimpleDateFormat;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -248,7 +249,7 @@ public class PpcServerSerialisationTest {
 	public void testArrayList() {
 		List<String> l = Lists.newArrayList("a", "b", "c");
 		String serial = createWriter().write(l).flush();
-		assertEquals("0|3|1|2|1|3|1|4|--|AL|S|a|b|c", serial);
+		assertEquals("0|3|1|2|1|3|1|4|--|AL@0|S|a|b|c", serial);
 		assertEquals(l, createReader(serial).readObject());
 		assertEquals(ArrayList.class, createReader(serial).readObject().getClass());
 	}
@@ -261,7 +262,7 @@ public class PpcServerSerialisationTest {
 		l.add("a");
 
 		String serial = createWriter().write(l).flush();
-		assertEquals("0|3|1|2|1|3|1|2|--|LL|S|a|b", serial);
+		assertEquals("0|3|1|2|1|3|1|2|--|LL@0|S|a|b", serial);
 		assertEquals(l, createReader(serial).readObject());
 		assertEquals(LinkedList.class, createReader(serial).readObject().getClass());
 	}
@@ -274,7 +275,7 @@ public class PpcServerSerialisationTest {
 		l.add("a");
 
 		String serial = createWriter().write(l).flush();
-		assertEquals("0|2|1|2|1|3|--|HS|S|a|b", serial);
+		assertEquals("0|2|1|2|1|3|--|HS@0|S|a|b", serial);
 		assertEquals(l, createReader(serial).readObject());
 		assertEquals(HashSet.class, createReader(serial).readObject().getClass());
 	}
@@ -287,7 +288,7 @@ public class PpcServerSerialisationTest {
 		l.add("a");
 
 		String serial = createWriter().write(l).flush();
-		assertEquals("0|2|1|2|1|3|--|LHS|S|a|b", serial);
+		assertEquals("0|2|1|2|1|3|--|LHS@0|S|a|b", serial);
 		assertEquals(l, createReader(serial).readObject());
 		assertEquals(LinkedHashSet.class, createReader(serial).readObject().getClass());
 	}
@@ -300,7 +301,7 @@ public class PpcServerSerialisationTest {
 		l.add("a");
 
 		String serial = createWriter().write(l).flush();
-		assertEquals("0|2|1|2|1|3|--|TS|S|a|b", serial);
+		assertEquals("0|2|1|2|1|3|--|TS@0|S|a|b", serial);
 		assertEquals(l, createReader(serial).readObject());
 		assertEquals(TreeSet.class, createReader(serial).readObject().getClass());
 	}
@@ -313,7 +314,7 @@ public class PpcServerSerialisationTest {
 		l.add("a");
 
 		String serial = createWriter().write(l).flush();
-		assertEquals("0|3|1|2|1|3|1|2|--|VT|S|a|b", serial);
+		assertEquals("0|3|1|2|1|3|1|2|--|VT@0|S|a|b", serial);
 		assertEquals(l, createReader(serial).readObject());
 		assertEquals(Vector.class, createReader(serial).readObject().getClass());
 	}
@@ -326,7 +327,7 @@ public class PpcServerSerialisationTest {
 		m.put(4L, "a");
 
 		String serial = createWriter().write(m).flush();
-		assertEquals("0|3|1|2|2|3|1|3|2|4|1|4|2|3|--|HM|L|S|a|b", serial);
+		assertEquals("0|3|1|2|2|3|1|3|2|4|1|4|2|3|--|HM@0|L|S|a|b", serial);
 		assertEquals(m, createReader(serial).readObject());
 		assertEquals(HashMap.class, createReader(serial).readObject().getClass());
 	}
@@ -352,7 +353,7 @@ public class PpcServerSerialisationTest {
 		m.put(4L, "a");
 
 		String serial = createWriter().write(m).flush();
-		assertEquals("0|3|1|2|2|3|1|3|2|4|1|4|2|3|--|LHM|L|S|a|b", serial);
+		assertEquals("0|3|1|2|2|3|1|3|2|4|1|4|2|3|--|LHM@0|L|S|a|b", serial);
 		assertEquals(m, createReader(serial).readObject());
 		assertEquals(LinkedHashMap.class, createReader(serial).readObject().getClass());
 	}
@@ -365,7 +366,7 @@ public class PpcServerSerialisationTest {
 		m.put(4L, "a");
 
 		String serial = createWriter().write(m).flush();
-		assertEquals("0|3|1|2|2|3|1|3|2|4|1|4|2|3|--|TM|L|S|a|b", serial);
+		assertEquals("0|3|1|2|2|3|1|3|2|4|1|4|2|3|--|TM@0|L|S|a|b", serial);
 		assertEquals(m, createReader(serial).readObject());
 		assertEquals(TreeMap.class, createReader(serial).readObject().getClass());
 	}
@@ -373,9 +374,10 @@ public class PpcServerSerialisationTest {
 	@Test
 	public void testEnum() {
 		// write
-		assertEquals("0|1|2|--|E|com.google.gwt.i18n.server.testing.Gender|MALE", createWriter().write(Gender.MALE).flush());
+		assertEquals("0|1|2|--|E|fr.putnami.pwt.core.serialization.domain.Gender|MALE", createWriter().write(Gender.MALE)
+			.flush());
 		// read
-		assertEquals(Gender.MALE, createReader("0|1|2|--|E|com.google.gwt.i18n.server.testing.Gender|MALE")
+		assertEquals(Gender.MALE, createReader("0|1|2|--|E|fr.putnami.pwt.core.serialization.domain.Gender|MALE")
 			.<Gender> readObject());
 	}
 
@@ -466,10 +468,33 @@ public class PpcServerSerialisationTest {
 		bean = new Manager();
 		bean.setName("man");
 		bean.setGender(Gender.MALE);
-		bean.setStaff(Lists.newArrayList(p));
+		bean.setStaff(Lists.newArrayList(p, p));
 
 		serial = createWriter().write(bean).flush();
 		read = createReader(serial).readObject();
 		assertEquals(bean, read);
+	}
+
+	@Test
+	public void testComplexSameObject() {
+		Manager bean = new Manager();
+		String serial = createWriter().write(bean).flush();
+		Manager read = createReader(serial).readObject();
+		assertEquals(bean, read);
+
+		Person p = new Person();
+		p.setGender(Gender.FEMALE);
+		p.setName("empl");
+
+		bean = new Manager();
+		bean.setName("man");
+		bean.setGender(Gender.MALE);
+		bean.setStaff(Lists.newArrayList(p, p));
+
+		serial = createWriter().write(bean).flush();
+		read = createReader(serial).readObject();
+		assertEquals(bean, read);
+		assertSame(read.getStaff().get(0), read.getStaff().get(1));
+
 	}
 }

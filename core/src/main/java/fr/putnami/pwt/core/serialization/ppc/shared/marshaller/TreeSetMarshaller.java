@@ -21,7 +21,7 @@ import java.util.TreeSet;
 public class TreeSetMarshaller extends AbstractCollectionMatshaller<TreeSet> {
 
 	@Override
-	public String getClassName() {
+	public String getTypeName() {
 		return "TS";
 	}
 

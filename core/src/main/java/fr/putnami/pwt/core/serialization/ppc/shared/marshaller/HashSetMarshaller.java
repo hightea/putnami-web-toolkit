@@ -21,7 +21,7 @@ import java.util.HashSet;
 public class HashSetMarshaller extends AbstractCollectionMatshaller<HashSet> {
 
 	@Override
-	public String getClassName() {
+	public String getTypeName() {
 		return "HS";
 	}
 

@@ -36,7 +36,7 @@ public class CharacterMarshaller extends AbstractMarshaller<Character> {
 	}
 
 	@Override
-	public String getClassName() {
+	public String getTypeName() {
 		return "C";
 	}
 

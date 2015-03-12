@@ -24,9 +24,11 @@ public interface Marshaller<T> {
 
 	T unmarshal(PpcReader reader);
 
-	String getClassName();
+	String getTypeName();
 
 	Class<?> getType();
 
 	T newInstance();
+
+	boolean writeType(PpcWriter writer, Integer index);
 }

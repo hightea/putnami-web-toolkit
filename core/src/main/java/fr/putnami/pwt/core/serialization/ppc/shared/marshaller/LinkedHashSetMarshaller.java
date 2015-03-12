@@ -21,7 +21,7 @@ import java.util.LinkedHashSet;
 public class LinkedHashSetMarshaller extends AbstractCollectionMatshaller<LinkedHashSet> {
 
 	@Override
-	public String getClassName() {
+	public String getTypeName() {
 		return "LHS";
 	}
 

@@ -52,7 +52,7 @@ public class EnumMarshaller extends AbstractMarshaller<Enum> {
 	}
 
 	@Override
-	public String getClassName() {
+	public String getTypeName() {
 		return "E";
 	}
 

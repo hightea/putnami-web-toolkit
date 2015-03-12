@@ -21,7 +21,7 @@ import java.util.LinkedList;
 public class LinkedListMarshaller extends AbstractCollectionMatshaller<LinkedList> {
 
 	@Override
-	public String getClassName() {
+	public String getTypeName() {
 		return "LL";
 	}
 

@@ -18,9 +18,6 @@ package fr.putnami.pwt.core.serialization.ppc.shared;
 
 public abstract class PpcSerializer {
 
-	public static final String SEPARATOR = "|";
-	public static final String SEPARATOR_STRINGS = "--";
-
 	private MarshallerRegistry marshallerRegistry;
 
 	protected void setMarshallerRegistry(MarshallerRegistry marshallerRegistry) {
