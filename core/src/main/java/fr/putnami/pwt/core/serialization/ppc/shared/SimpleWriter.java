@@ -110,6 +110,9 @@ public class SimpleWriter implements PpcWriter {
 
 		Class<O> valueClass = (Class<O>) value.getClass();
 		Marshaller<O> marshaller = marshallers.findMarshaller(valueClass);
+		if (marshaller == null) {
+			throw new SerializationException("Can not resolve marsahller for " + valueClass);
+		}
 
 		Integer index = cache.get(value);
 

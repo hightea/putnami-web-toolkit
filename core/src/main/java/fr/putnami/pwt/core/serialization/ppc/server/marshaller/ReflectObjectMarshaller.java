@@ -14,12 +14,15 @@
  */
 package fr.putnami.pwt.core.serialization.ppc.server.marshaller;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import fr.putnami.pwt.core.serialization.ppc.server.MarshallerServerRegistry;
@@ -27,7 +30,7 @@ import fr.putnami.pwt.core.serialization.ppc.shared.PpcReader;
 import fr.putnami.pwt.core.serialization.ppc.shared.PpcWriter;
 import fr.putnami.pwt.core.serialization.ppc.shared.SerializationException;
 import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.AbstractMarshaller;
-import fr.putnami.pwt.core.serialization.ppc.shared.marshaller.Marshaller;
+import fr.putnami.pwt.core.serialization.ppc.shared.util.PpcUtils;
 
 public class ReflectObjectMarshaller<T> extends AbstractMarshaller<T> {
 
@@ -83,9 +86,10 @@ public class ReflectObjectMarshaller<T> extends AbstractMarshaller<T> {
 					Object value = getterMethod.invoke(bean);
 					if (value == null) {
 						writer.writeNull();
-					} else if (Modifier.isFinal(propertyType.getModifiers())) {
-						Marshaller<Object> marshaler = (Marshaller<Object>) marshallers.findMarshaller(propertyType);
-						marshaler.marshal(value, writer);
+						// } else if (Modifier.isFinal(propertyType.getModifiers())) {
+						// Marshaller<Object> marshaler = (Marshaller<Object>)
+						// marshallers.findMarshaller(propertyType);
+						// marshaler.marshal(value, writer);
 					} else {
 						writer.write(value);
 					}
@@ -116,9 +120,10 @@ public class ReflectObjectMarshaller<T> extends AbstractMarshaller<T> {
 					} else if (short.class.equals(propertyType)) {
 						setterMethod.invoke(instance, reader.readShort());
 					}
-				} else if (Modifier.isFinal(propertyType.getModifiers())) {
-					Marshaller<Object> marshaler = (Marshaller<Object>) marshallers.findMarshaller(propertyType);
-					setterMethod.invoke(instance, marshaler.unmarshal(reader));
+					// } else if (Modifier.isFinal(propertyType.getModifiers())) {
+					// Marshaller<Object> marshaler = (Marshaller<Object>)
+					// marshallers.findMarshaller(propertyType);
+					// setterMethod.invoke(instance, marshaler.unmarshal(reader));
 				} else {
 					setterMethod.invoke(instance, reader.readObject());
 				}
@@ -167,8 +172,9 @@ public class ReflectObjectMarshaller<T> extends AbstractMarshaller<T> {
 					if (value == null) {
 						writer.writeNull();
 					} else {
-						Marshaller<Object> marshaler = (Marshaller<Object>) marshallers.findMarshaller(type);
-						marshaler.marshal(value, writer);
+						writer.write(value);
+						// Marshaller<Object> marshaler = (Marshaller<Object>) marshallers.findMarshaller(type);
+						// marshaler.marshal(value, writer);
 					}
 				}
 			} catch (IllegalArgumentException | IllegalAccessException e) {
@@ -199,9 +205,10 @@ public class ReflectObjectMarshaller<T> extends AbstractMarshaller<T> {
 						field.setShort(instance, reader.readShort());
 					}
 				} else {
-					Marshaller<Object> marshaler = (Marshaller<Object>) marshallers.findMarshaller(type);
-					Object value = marshaler.unmarshal(reader);
-					field.set(instance, value);
+					// Marshaller<Object> marshaler = (Marshaller<Object>) marshallers.findMarshaller(type);
+					// Object value = marshaler.unmarshal(reader);
+					// field.set(instance, value);
+					field.set(instance, reader.readObject());
 				}
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				throw new SerializationException("Fail to unmarshal " + objectClass, e);
@@ -210,18 +217,21 @@ public class ReflectObjectMarshaller<T> extends AbstractMarshaller<T> {
 	}
 
 	private Map<String, PropertyMarshaller> propertyMarshaller = Maps.newHashMap();
+	private List<String> propertyNames = Lists.newArrayList();
 
 	private final Class<T> objectClass;
-	private final MarshallerServerRegistry marshallers;
+
+	// private final MarshallerServerRegistry marshallers;
 
 	public ReflectObjectMarshaller(Class<T> objectClass, MarshallerServerRegistry marshallers) {
 		this.objectClass = objectClass;
-		this.marshallers = marshallers;
+		// this.marshallers = marshallers;
 
 		try {
 			for (Field field : objectClass.getFields()) {
 				if (Modifier.isPublic(field.getModifiers())) {
 					propertyMarshaller.put(field.getName(), new PublicFieldMarshaller(field));
+					propertyNames.add(field.getName());
 				}
 			}
 
@@ -235,8 +245,10 @@ public class ReflectObjectMarshaller<T> extends AbstractMarshaller<T> {
 
 				if (getter != null && !propertyMarshaller.containsKey(propertyName)) {
 					propertyMarshaller.put(propertyName, new GetterSetterMarshaller(propertyName, getter, setter));
+					propertyNames.add(propertyName);
 				}
 			}
+			Collections.sort(propertyNames);
 		} catch (SecurityException e) {
 			throw new SerializationException("Fail to initialise marshaller " + objectClass, e);
 		}
@@ -253,16 +265,16 @@ public class ReflectObjectMarshaller<T> extends AbstractMarshaller<T> {
 
 	@Override
 	public void marshal(T object, PpcWriter writer) {
-		for (Map.Entry<String, PropertyMarshaller> entry : propertyMarshaller.entrySet()) {
-			entry.getValue().marshal(object, writer);
+		for (String property : propertyNames) {
+			propertyMarshaller.get(property).marshal(object, writer);
 		}
 	}
 
 	@Override
 	public T unmarshal(PpcReader reader) {
 		T instance = newInstance();
-		for (Map.Entry<String, PropertyMarshaller> entry : propertyMarshaller.entrySet()) {
-			entry.getValue().unmarshal(instance, reader);
+		for (String property : propertyNames) {
+			propertyMarshaller.get(property).unmarshal(instance, reader);
 		}
 		return instance;
 	}
@@ -317,7 +329,7 @@ public class ReflectObjectMarshaller<T> extends AbstractMarshaller<T> {
 
 	@Override
 	public boolean writeType(PpcWriter writer, Integer id) {
-		writer.write(getTypeName() + "@" + id);
+		writer.write(getTypeName() + PpcUtils.SEPARATOR_TYPE_REF + id);
 		return true;
 	}
 

@@ -15,11 +15,11 @@
 package fr.putnami.pwt.core.model.client.model;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import fr.putnami.pwt.core.editor.client.validator.Validator;
 
@@ -119,11 +119,11 @@ public abstract class AbstractModel<T> implements Model<T> {
 
 	@Override
 	public Iterable<String> getPropertyNames() {
-		Set<String> propertyNames = Sets.newLinkedHashSet();
+		List<String> propertyNames = null;
 		if (this.parentModel != null) {
-			propertyNames = Sets.newLinkedHashSet(this.parentModel.getPropertyNames());
+			propertyNames = Lists.newArrayList(this.parentModel.getPropertyNames());
 		} else {
-			propertyNames = Sets.newLinkedHashSet();
+			propertyNames = Lists.newArrayList();
 		}
 		propertyNames.addAll(this.getProperties().keySet());
 		return Iterables.unmodifiableIterable(propertyNames);

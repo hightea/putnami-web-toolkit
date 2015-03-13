@@ -69,6 +69,20 @@ public class AbstractMarshallerRegistry implements MarshallerRegistry {
 		return marshaller;
 	}
 
+	@Override
+	public void register(Marshaller marshaller) {
+		if (registry.containsKey(marshaller.getTypeName())) {
+			throw new SerializationException(marshaller.getTypeName() + " already registered");
+		}
+
+		if (registry.containsKey(marshaller.getType())) {
+			throw new SerializationException(marshaller.getType() + " already registered");
+		}
+		registry.put(marshaller.getType().getName(), marshaller);
+		registry.put(marshaller.getType(), marshaller);
+		registry.put(marshaller.getTypeName(), marshaller);
+	}
+
 	protected void registerDefault() {
 		register(new ArrayListMarshaller());
 		register(new BigDecimalMarshaller());
@@ -100,18 +114,6 @@ public class AbstractMarshallerRegistry implements MarshallerRegistry {
 		register(new TreeSetMarshaller());
 		register(new VectorMarshaller());
 		register(new VoidMarshaller());
-	}
-
-	protected void register(Marshaller marshaller) {
-		if (registry.containsKey(marshaller.getTypeName())) {
-			throw new SerializationException(marshaller.getTypeName() + " already registered");
-		}
-		if (registry.containsKey(marshaller.getType())) {
-			throw new SerializationException(marshaller.getType() + " already registered");
-		}
-		registry.put(marshaller.getType().getName(), marshaller);
-		registry.put(marshaller.getType(), marshaller);
-		registry.put(marshaller.getTypeName(), marshaller);
 	}
 
 }

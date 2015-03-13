@@ -21,4 +21,6 @@ public interface MarshallerRegistry {
 	<T> Marshaller<T> findMarshaller(Class<T> clazz);
 
 	<T> Marshaller<T> findMarshaller(String className);
+
+	void register(Marshaller marshaller);
 }

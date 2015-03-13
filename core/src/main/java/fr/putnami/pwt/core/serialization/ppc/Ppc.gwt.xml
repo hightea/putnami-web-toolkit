@@ -21,8 +21,12 @@
 <module>
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name="com.google.common.collect.Collect" />
+	<inherits name="fr.putnami.pwt.core.model.Model" />
 
 	<source path="client"/>
 	<source path="shared"/>
 	
+	<generate-with class="fr.putnami.pwt.core.serialization.ppc.rebind.PcpSerializerGenerator">
+		<when-type-assignable class="fr.putnami.pwt.core.serialization.ppc.shared.PpcSerializer" />
+	</generate-with>
 </module>

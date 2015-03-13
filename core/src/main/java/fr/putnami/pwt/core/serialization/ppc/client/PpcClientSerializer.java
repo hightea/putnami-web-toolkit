@@ -14,9 +14,9 @@
  */
 package fr.putnami.pwt.core.serialization.ppc.client;
 
-import fr.putnami.pwt.core.serialization.ppc.shared.PpcSerializer;
+import fr.putnami.pwt.core.serialization.ppc.shared.base.AbstractPpcSerializer;
 
-public class PpcClientSerializer extends PpcSerializer {
+public class PpcClientSerializer extends AbstractPpcSerializer {
 
 	public PpcClientSerializer() {
 		setMarshallerRegistry(new MarshallerClientRegistry() {
