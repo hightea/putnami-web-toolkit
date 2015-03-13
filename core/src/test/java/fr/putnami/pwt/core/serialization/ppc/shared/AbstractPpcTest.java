@@ -81,8 +81,8 @@ public abstract class AbstractPpcTest extends GWTTestCase {
 		assertEquals(Byte.MAX_VALUE, createReader("127").readByte());
 
 		// Byte object
-		assertEquals("0|127|--|O", createWriter().write(new Byte(Byte.MAX_VALUE)).flush());
-		assertEquals(new Byte(Byte.MIN_VALUE), createReader("0|-128|--|O").readObject());
+		assertEquals("0|127|--|O", createWriter().write((Byte) Byte.MAX_VALUE).flush());
+		assertEquals(Byte.MIN_VALUE, createReader("0|-128|--|O").readObject());
 	}
 
 	@Test
@@ -97,8 +97,8 @@ public abstract class AbstractPpcTest extends GWTTestCase {
 		assertEquals('b', reader.readChar());
 
 		// Byte object
-		assertEquals("0|D|--|C", createWriter().write(new Character('D')).flush());
-		assertEquals(new Character('C'), createReader("0|C|--|C").readObject());
+		assertEquals("0|D|--|C", createWriter().write((Character) 'D').flush());
+		assertEquals('C', createReader("0|C|--|C").readObject());
 	}
 
 	@Test
@@ -129,8 +129,8 @@ public abstract class AbstractPpcTest extends GWTTestCase {
 		assertEquals(2, reader.readInt());
 
 		// Float object
-		assertEquals("0|25|--|I", createWriter().write(new Integer(25)).flush());
-		assertEquals(new Integer(35), createReader("0|35|--|I").readObject());
+		assertEquals("0|25|--|I", createWriter().write((Integer) 25).flush());
+		assertEquals(Integer.valueOf(35), createReader("0|35|--|I").readObject());
 	}
 
 	@Test
@@ -145,8 +145,8 @@ public abstract class AbstractPpcTest extends GWTTestCase {
 		assertEquals(2L, reader.readLong());
 
 		// Long object
-		assertEquals("0|25|--|L", createWriter().write(new Long(25)).flush());
-		assertEquals(new Long(35), createReader("0|35|--|L").readObject());
+		assertEquals("0|25|--|L", createWriter().write((Long) 25L).flush());
+		assertEquals(Long.valueOf(35), createReader("0|35|--|L").readObject());
 	}
 
 	@Test

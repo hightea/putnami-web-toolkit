@@ -16,6 +16,8 @@ package fr.putnami.pwt.core.widget.client.assist;
 
 import com.google.gwt.text.shared.Renderer;
 
+import java.util.Arrays;
+
 import fr.putnami.pwt.core.widget.client.helper.ToStringRenderer;
 import fr.putnami.pwt.core.widget.shared.assist.Oracle;
 import fr.putnami.pwt.core.widget.shared.assist.SimpleSuggestion;
@@ -43,11 +45,13 @@ public abstract class AbstractOracle<T> implements Oracle<T> {
 	}
 
 	public char[] getWhitespaceChars() {
-		return whitespaceChars;
+		return whitespaceChars == null ? null
+			: Arrays.copyOf(whitespaceChars, whitespaceChars.length);
 	}
 
 	public void setWhitespaceChars(char[] whitespaceChars) {
-		this.whitespaceChars = whitespaceChars;
+		this.whitespaceChars = whitespaceChars == null ? null
+			: Arrays.copyOf(whitespaceChars, whitespaceChars.length);
 	}
 
 	public Renderer<T> getRenderer() {

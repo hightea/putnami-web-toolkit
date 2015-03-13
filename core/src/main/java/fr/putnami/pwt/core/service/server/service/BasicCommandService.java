@@ -42,9 +42,8 @@ public class BasicCommandService extends AbstractRemoteServiceServlet
 
 	private static final String PARAM_SERVICES = "services";
 
-	private final Log logger = LogFactory.getLog(this.getClass());
-
-	private final CommandExecutorRegistry executorRegistry = new CommandExecutorRegistryImpl();
+	private final transient Log logger = LogFactory.getLog(this.getClass());
+	private final transient CommandExecutorRegistry executorRegistry = new CommandExecutorRegistryImpl();
 
 	protected void injectService(Class<?> serviceInterface, Object service) {
 		this.executorRegistry.injectService(serviceInterface, service);

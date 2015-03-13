@@ -84,7 +84,7 @@ public class IntegerTokenHelper extends TokenHelper {
 		super.setToken(token);
 		if (!Strings.isNullOrEmpty(token)) {
 			try {
-				this.value = Integer.valueOf(token);
+				this.value = Integer.parseInt(token);
 			} catch (NumberFormatException e) {
 				this.value = this.defaultValue;
 			}
@@ -157,7 +157,7 @@ public class IntegerTokenHelper extends TokenHelper {
 				for (char c : this.characters) {
 					sb.append(c);
 				}
-				int val = Integer.valueOf(sb.toString());
+				int val = Integer.parseInt(sb.toString());
 				if (val <= this.max && val >= this.min) {
 					this.setValue(val);
 				} else {

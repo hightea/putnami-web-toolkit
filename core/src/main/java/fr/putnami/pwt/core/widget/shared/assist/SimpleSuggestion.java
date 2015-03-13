@@ -18,8 +18,6 @@ import com.google.common.base.Objects;
 
 import java.io.Serializable;
 
-import fr.putnami.pwt.core.widget.client.assist.SimpleOracle;
-
 public class SimpleSuggestion<T> implements Oracle.Suggestion<T>, Serializable {
 
 	private T value;
@@ -58,8 +56,9 @@ public class SimpleSuggestion<T> implements Oracle.Suggestion<T>, Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof SimpleOracle) {
-			return Objects.equal(value, value);
+		if (obj instanceof SimpleSuggestion) {
+			SimpleSuggestion other = (SimpleSuggestion) obj;
+			return Objects.equal(value, other.value);
 		}
 		return false;
 	}

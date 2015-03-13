@@ -37,11 +37,11 @@ public class ModelMarshaller<T> extends AbstractMarshaller<T> {
 			} else if (double.class.equals(propertyDescription.getClazz())) {
 				writer.write((double) (value == null ?  0 :  value));
 			} else if (float.class.equals(propertyDescription.getClazz())) {
-				writer.write((float)(value == null ? 0 :  value));
+				writer.write((float) (value == null ? 0 : value));
 			} else if (int.class.equals(propertyDescription.getClazz())) {
-				writer.write((int)(value == null ?  0 : value));
+				writer.write((int) (value == null ? 0 : value));
 			} else if (long.class.equals(propertyDescription.getClazz())) {
-				writer.write( (long) (value == null ?0 :value));
+				writer.write((long) (value == null ? 0 : value));
 			} else if (short.class.equals(propertyDescription.getClazz())) {
 				writer.write((short) (value == null ? 0 : value));
 			} else if (value == null) {

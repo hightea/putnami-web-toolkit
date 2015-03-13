@@ -57,7 +57,7 @@ public class InputTextArea extends AbstractInputBox<TextArea, String> {
 	public int getMaxLength() {
 		String maxLengthAtt = TextAreaElement.as(this.getElement()).getAttribute("maxLength");
 		if (maxLengthAtt != null && maxLengthAtt.length() > 0) {
-			return Integer.valueOf(maxLengthAtt);
+			return Integer.parseInt(maxLengthAtt);
 		}
 		return -1;
 	}

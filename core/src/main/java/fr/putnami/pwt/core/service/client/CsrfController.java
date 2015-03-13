@@ -15,6 +15,7 @@
 package fr.putnami.pwt.core.service.client;
 
 import com.google.common.base.Strings;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.MetaElement;
@@ -29,11 +30,11 @@ public final class CsrfController {
 	private static CsrfController instance;
 
 	public static CsrfController get() {
-		if (instance == null) {
-			instance = new CsrfController();
-			instance.init();
+		if (CsrfController.instance == null) {
+			CsrfController.instance = GWT.create(CsrfController.class);
+			CsrfController.instance.init();
 		}
-		return instance;
+		return CsrfController.instance;
 	}
 
 	private String token;

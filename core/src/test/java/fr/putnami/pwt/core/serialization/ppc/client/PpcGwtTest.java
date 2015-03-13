@@ -39,7 +39,7 @@ public class PpcGwtTest extends AbstractPpcTest {
 	public interface BeanSettersModel extends Model<BeanSetters> {
 	}
 
-	private static PpcSerializer serializer;
+	private PpcSerializer serializer;
 
 	@Override
 	protected Date parseDate(String text) {

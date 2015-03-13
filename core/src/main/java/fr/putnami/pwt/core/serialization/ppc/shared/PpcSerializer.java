@@ -14,5 +14,4 @@ public interface PpcSerializer {
 
 	String serialize(Object object);
 
-
 }

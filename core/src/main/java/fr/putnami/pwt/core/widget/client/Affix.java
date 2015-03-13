@@ -213,7 +213,7 @@ public class Affix extends OneWidgetPanel {
 				int docHeigth = Document.get().getScrollHeight();
 				int scrollTop = Window.getScrollTop();
 
-				int bottom = this.offsetBottom - (docHeigth - scrollTop - this.clientHeigth);
+				int bottom = this.offsetBottom - docHeigth - scrollTop - this.clientHeigth;
 				if (this.fixBottom != Integer.MIN_VALUE) {
 					bottom = Math.max(bottom, this.fixBottom);
 				}

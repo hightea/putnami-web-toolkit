@@ -14,7 +14,6 @@
  */
 package fr.putnami.pwt.core.serialization.ppc.shared.marshaller;
 
-
 import com.google.common.base.Strings;
 
 import fr.putnami.pwt.core.serialization.ppc.shared.PpcReader;

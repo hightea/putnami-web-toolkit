@@ -18,6 +18,8 @@ import com.google.common.base.Splitter;
 import com.google.gwt.core.shared.impl.StringCase;
 import com.google.gwt.text.shared.Renderer;
 
+import java.util.Arrays;
+
 public class MultiWordMatcher<T> implements Matcher<T> {
 
 	private static final char WHITESPACE_CHAR = ' ';
@@ -33,7 +35,8 @@ public class MultiWordMatcher<T> implements Matcher<T> {
 
 	public MultiWordMatcher(Renderer<T> renderer, char[] whitespaceChars) {
 		this.renderer = renderer;
-		this.whitespaceChars = whitespaceChars;
+		this.whitespaceChars = whitespaceChars == null ? null
+			: Arrays.copyOf(whitespaceChars, whitespaceChars.length);
 	}
 
 	public Renderer<T> getRenderer() {
@@ -45,11 +48,13 @@ public class MultiWordMatcher<T> implements Matcher<T> {
 	}
 
 	public char[] getWhitespaceChars() {
-		return whitespaceChars;
+		return whitespaceChars == null ? null
+			: Arrays.copyOf(whitespaceChars, whitespaceChars.length);
 	}
 
 	public void setWhitespaceChars(char[] whitespaceChars) {
-		this.whitespaceChars = whitespaceChars;
+		this.whitespaceChars = whitespaceChars == null ? null
+			: Arrays.copyOf(whitespaceChars, whitespaceChars.length);
 	}
 
 	public boolean isCaseSensitive() {

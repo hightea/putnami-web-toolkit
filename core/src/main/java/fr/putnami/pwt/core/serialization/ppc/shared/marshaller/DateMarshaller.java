@@ -34,7 +34,7 @@ public class DateMarshaller extends AbstractMarshaller<Date> {
 		if (Strings.isNullOrEmpty(token)) {
 			return null;
 		}
-		return new Date(Long.valueOf(token));
+		return new Date(Long.parseLong(token));
 	}
 
 	@Override

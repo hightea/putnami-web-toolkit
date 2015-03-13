@@ -177,11 +177,11 @@ public class BeanSetters implements Serializable {
 	}
 
 	public Date getDateObject() {
-		return dateObject;
+		return dateObject == null ? null : new Date(dateObject.getTime());
 	}
 
 	public void setDateObject(Date dateObject) {
-		this.dateObject = dateObject;
+		this.dateObject = dateObject == null ? null : new Date(dateObject.getTime());
 	}
 
 	@Override

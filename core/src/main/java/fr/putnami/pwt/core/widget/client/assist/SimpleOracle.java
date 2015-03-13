@@ -17,6 +17,7 @@ package fr.putnami.pwt.core.widget.client.assist;
 import com.google.common.collect.Lists;
 import com.google.common.primitives.Longs;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -37,7 +38,8 @@ public class SimpleOracle<T> extends AbstractOracle<T> {
 
 	@Override
 	public char[] getWhitespaceChars() {
-		return whitespaceChars;
+		return whitespaceChars == null ? null
+			: Arrays.copyOf(whitespaceChars, whitespaceChars.length);
 	}
 
 	@Override

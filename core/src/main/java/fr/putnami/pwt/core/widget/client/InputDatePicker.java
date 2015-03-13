@@ -264,7 +264,7 @@ public class InputDatePicker extends FocusWidget
 				this.cursor = InputDatePicker.ATTRIBUTE_DATE_FORMAT.parse(dataCursor);
 				this.redraw();
 			} else if (dataYear != null && dataYear.length() > 0) {
-				this.openMonthOfYear(Integer.valueOf(dataYear));
+				this.openMonthOfYear(Integer.parseInt(dataYear));
 			} else if (target == this.monthPickerButton) {
 				if (this.mode != Mode.MONTH) {
 					this.mode = Mode.MONTH;
