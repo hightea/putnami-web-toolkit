@@ -136,10 +136,18 @@ public class TableEditorBody<T> extends TableBody<T>
 
 	@Override
 	public void edit(Collection<T> value) {
-		for (TableRow<T> row : this.getRowList()) {
-			row.setVisible(false);
-		}
+		resetRows();
 		getDriverOrThrow().edit(value);
+	}
+
+	private void resetRows() {
+		Collections.sort(this.getRowList());
+		List<TableRow<T>> rows = this.getRowList();
+		int i = 0;
+		for (TableRow<T> row : rows) {
+			row.setVisible(false);
+			insert(row, ++i, true);
+		}
 	}
 
 	@Override
@@ -188,9 +196,6 @@ public class TableEditorBody<T> extends TableBody<T>
 			rows.remove(secondIndex);
 			rows.add(secondIndex, first);
 
-			first.setIndex(secondIndex);
-			second.setIndex(firstIndex);
-
 			if (values != null) {
 				values.remove(firstIndex);
 				values.add(firstIndex, secondVal);
@@ -204,9 +209,6 @@ public class TableEditorBody<T> extends TableBody<T>
 			rows.add(secondIndex, first);
 			rows.remove(firstIndex);
 			rows.add(firstIndex, second);
-
-			first.setIndex(secondIndex);
-			second.setIndex(firstIndex);
 
 			if (values != null) {
 				values.remove(secondIndex);
