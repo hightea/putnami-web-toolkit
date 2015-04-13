@@ -54,6 +54,8 @@ public class TableEditorBody<T> extends TableBody<T>
 	private Model<T> model;
 	private ModelDriver<Collection<T>> driver;
 
+	private boolean rowOrderDirty;
+
 	@UiConstructor
 	public TableEditorBody(String bodyId) {
 		super(bodyId);
@@ -142,13 +144,18 @@ public class TableEditorBody<T> extends TableBody<T>
 	}
 
 	private void resetRows() {
-		Collections.sort(this.getRowList());
+		if (rowOrderDirty) {
+			Collections.sort(this.getRowList());
+		}
 		List<TableRow<T>> rows = this.getRowList();
 		int i = 0;
 		for (TableRow<T> row : rows) {
 			row.setVisible(false);
-			insert(row, ++i, true);
+			if (rowOrderDirty) {
+				insert(row, ++i, true);
+			}
 		}
+		this.rowOrderDirty = false;
 	}
 
 	@Override
@@ -247,5 +254,9 @@ public class TableEditorBody<T> extends TableBody<T>
 			throw new EditorModelNotInitializedException(this);
 		}
 		return this.driver;
+	}
+
+	public void setRowOrderDirty(boolean rowOrderDirty) {
+		this.rowOrderDirty = rowOrderDirty;
 	}
 }
