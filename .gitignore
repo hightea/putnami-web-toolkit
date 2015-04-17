@@ -43,6 +43,7 @@ build/
 war/
 target/
 .idea
+*.iml
 .settings
 .classpath
 .gradle
